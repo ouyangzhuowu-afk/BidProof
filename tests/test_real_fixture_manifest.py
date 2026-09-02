@@ -2,7 +2,6 @@ import hashlib
 import json
 from pathlib import Path
 
-import pytest
 
 from app.extraction import extract_pdf
 from tests.conftest import requires_real_uploads

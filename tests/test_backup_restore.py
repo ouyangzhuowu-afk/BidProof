@@ -2,7 +2,7 @@ import sqlite3
 
 from fastapi.testclient import TestClient
 
-from app import main
+from app import config, main
 from work.backup_restore import create_backup, record_backup_verification, restore_backup, verify_backup
 
 
@@ -54,7 +54,7 @@ def test_backup_listing_and_health_use_verified_evidence(tmp_path, monkeypatch):
     verification = record_backup_verification(backup)
     assert verification["valid"] is True
 
-    monkeypatch.setattr(main, "BACKUP_ROOT", backup_root)
+    monkeypatch.setattr(config, "BACKUP_ROOT", backup_root)
     client = TestClient(main.app)
     owner = {"X-Workspace-ID": "backup-workspace", "X-User-ID": "backup-owner", "X-User-Role": "OWNER"}
     viewer = {"X-Workspace-ID": "backup-workspace", "X-User-ID": "backup-viewer", "X-User-Role": "VIEWER"}

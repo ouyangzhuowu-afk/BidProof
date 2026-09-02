@@ -2,8 +2,10 @@ import sqlite3
 
 from fastapi.testclient import TestClient
 
-from app import main
-from app.db import create_auth_session, create_scan_job, init_db, load_scan_job, start_scan_job, update_scan_job
+from app import config, main
+from app.security import password_hash
+from app.services import scan_service
+from app.db import cancel_scan_job, create_auth_session, create_scan_job, create_user, init_db, load_scan_job, start_scan_job, update_scan_job
 
 
 def _pdf_bytes(text: str) -> bytes:
@@ -19,7 +21,7 @@ def _pdf_bytes(text: str) -> bytes:
 
 def test_run_source_files_are_downloadable_only_with_workspace_scope(monkeypatch):
     client = TestClient(main.app)
-    monkeypatch.setattr(main, "extract_file", lambda _path: [{
+    monkeypatch.setattr(scan_service, "extract_file", lambda _path: [{
         "page": 1,
         "text": "资格要求",
         "has_text": True,
@@ -53,7 +55,7 @@ def test_run_source_files_are_downloadable_only_with_workspace_scope(monkeypatch
 
 
 def test_pending_scan_job_can_be_cancelled_and_is_not_recoverable():
-    database = main.DB_PATH
+    database = config.DB_PATH
     create_scan_job("cancel-me", "cancel-ws", None, "PENDING", {"tender_path": "pending.pdf"}, database)
     client = TestClient(main.app)
     owner = {"X-Workspace-ID": "cancel-ws", "X-User-ID": "owner", "X-User-Role": "OWNER"}
@@ -66,9 +68,9 @@ def test_pending_scan_job_can_be_cancelled_and_is_not_recoverable():
 
 
 def test_cancelled_scan_job_cannot_be_started_again():
-    database = main.DB_PATH
+    database = config.DB_PATH
     create_scan_job("already-cancelled", "cancel-ws-2", None, "PENDING", {}, database)
-    assert main.cancel_scan_job("already-cancelled", database)["status"] == "CANCELLED"
+    assert cancel_scan_job("already-cancelled", database)["status"] == "CANCELLED"
 
     assert start_scan_job("already-cancelled", database) is False
     update_scan_job("already-cancelled", "COMPLETED", progress_message="错误覆盖", path=database)
@@ -76,20 +78,14 @@ def test_cancelled_scan_job_cannot_be_started_again():
     assert load_scan_job("already-cancelled", database)["progress_message"] == "已取消"
 
 
-def test_password_change_revokes_existing_sessions(monkeypatch):
-    database = main.DB_PATH
+def test_password_change_revokes_existing_sessions():
+    database = config.DB_PATH
     init_db(database)
-    user = main.create_user("password-ws", "password-user", main._password_hash("old-password-123"), "OWNER", database)
+    user = create_user("password-ws", "password-user", password_hash("old-password-123"), "OWNER", database)
     token_hash = "existing-session-hash"
     create_auth_session(token_hash, user["user_id"], "2999-01-01T00:00:00+00:00", database)
 
     client = TestClient(main.app)
-    monkeypatch.setattr(main, "DB_PATH", database)
-    original_load_user = main.load_user_by_username
-    original_load_session = main.load_session_user
-    monkeypatch.setattr(main, "load_user_by_username", lambda username: original_load_user(username, database))
-    monkeypatch.setattr(main, "load_session_user", lambda token, now: original_load_session(token, now, database))
-    monkeypatch.setattr(main, "create_auth_session", lambda token, user_id, expires: create_auth_session(token, user_id, expires, database))
     try:
         login = client.post("/api/auth/login", json={"username": "password-user", "password": "old-password-123"})
         assert login.status_code == 200
@@ -108,7 +104,7 @@ def test_password_change_revokes_existing_sessions(monkeypatch):
 
 def test_task_reviewer_is_independent_from_assignee_and_persisted(monkeypatch):
     client = TestClient(main.app)
-    monkeypatch.setattr(main, "extract_file", lambda _path: [{"page": 1, "text": "资格要求", "has_text": True, "char_count": 4, "blocks": []}])
+    monkeypatch.setattr(scan_service, "extract_file", lambda _path: [{"page": 1, "text": "资格要求", "has_text": True, "char_count": 4, "blocks": []}])
     owner = {"X-Workspace-ID": "reviewer-ws", "X-User-ID": "owner", "X-User-Role": "OWNER"}
     created = client.post("/api/runs", headers=owner, files={"tender": ("reviewer.pdf", _pdf_bytes("资格要求"), "application/pdf")})
     assert created.status_code == 200
@@ -128,7 +124,7 @@ def test_task_reviewer_is_independent_from_assignee_and_persisted(monkeypatch):
 
 def test_run_list_supports_search_tag_favorite_and_reviewer_filters(monkeypatch):
     client = TestClient(main.app)
-    monkeypatch.setattr(main, "extract_file", lambda _path: [{"page": 1, "text": "资格要求", "has_text": True, "char_count": 4, "blocks": []}])
+    monkeypatch.setattr(scan_service, "extract_file", lambda _path: [{"page": 1, "text": "资格要求", "has_text": True, "char_count": 4, "blocks": []}])
     owner = {"X-Workspace-ID": "filter-ws", "X-User-ID": "owner", "X-User-Role": "OWNER"}
     other = {"X-Workspace-ID": "filter-other", "X-User-ID": "owner", "X-User-Role": "OWNER"}
     first = client.post("/api/runs", headers=owner, files={"tender": ("Alpha资格.pdf", _pdf_bytes("资格要求"), "application/pdf")}).json()

@@ -13,8 +13,10 @@ from pathlib import Path
 
 from fastapi.testclient import TestClient
 
-from app import main
+from app import identity, main
+from app.db import create_scan_job, load_scan_job
 from app.schemas import MIN_PASSWORD_LENGTH
+from app.services import scan_service
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -126,13 +128,13 @@ def test_health_detail_is_refused_anonymously_in_a_real_environment(tmp_path):
 def test_client_cannot_bind_a_run_to_an_arbitrary_scan_job(monkeypatch):
     client = TestClient(main.app)
     monkeypatch.setattr(
-        main,
+        scan_service,
         "extract_file",
         lambda _path: [{"page": 1, "text": "资格要求", "has_text": True, "char_count": 4, "blocks": []}],
     )
     victim = {"X-Workspace-ID": "job-victim", "X-User-ID": "victim", "X-User-Role": "OWNER"}
     attacker = {"X-Workspace-ID": "job-attacker", "X-User-ID": "attacker", "X-User-Role": "OWNER"}
-    main.create_scan_job("victim-job", "job-victim", None, "PENDING", {"tender_path": "victim.pdf"})
+    create_scan_job("victim-job", "job-victim", None, "PENDING", {"tender_path": "victim.pdf"})
 
     created = client.post(
         "/api/runs",
@@ -142,27 +144,27 @@ def test_client_cannot_bind_a_run_to_an_arbitrary_scan_job(monkeypatch):
 
     assert created.status_code == 200
     # The forged header must be ignored: the victim job stays PENDING and a fresh job is used.
-    assert main.load_scan_job("victim-job")["status"] == "PENDING"
+    assert load_scan_job("victim-job")["status"] == "PENDING"
     client.delete(f"/api/runs/{created.json()['run_id']}", headers=attacker)
     assert client.get("/api/jobs", headers=victim).json()["jobs"][0]["job_id"] == "victim-job"
 
 
 def test_internal_job_context_carries_verified_identity_not_headers():
-    context = main.InternalJobContext(
+    context = identity.InternalJobContext(
         workspace_id="queued-workspace",
         user_id="queued-user",
         role="REVIEWER",
         job_id="queued-job",
     )
 
-    assert main._principal(context) == {
+    assert identity.principal_of(context) == {
         "workspace_id": "queued-workspace",
         "user_id": "queued-user",
         "role": "REVIEWER",
     }
     # Identity is not reachable through headers, so it cannot be spoofed or replayed.
     assert context.headers == {}
-    assert main._job_id_from_request(context) == "queued-job"
+    assert identity.job_id_of(context) == "queued-job"
 
 
 def test_under_length_password_fails_as_unauthorized_not_validation_error():

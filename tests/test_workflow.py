@@ -1,5 +1,4 @@
 import copy
-import json
 
 from app.workflow import load_state, next_action, validate_state
 

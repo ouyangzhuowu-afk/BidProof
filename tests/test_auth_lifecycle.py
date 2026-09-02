@@ -5,7 +5,9 @@ from urllib.parse import parse_qs, urlparse
 import pytest
 from fastapi.testclient import TestClient
 
-from app import main
+from app import config, identity, main
+from app.repositories import accounts
+from app.security import password_hash
 from app.config import DB_PATH
 from app.db import create_user, ensure_workspace
 
@@ -27,7 +29,7 @@ def _owner_client() -> tuple[TestClient, str, dict]:
     workspace_id = f"auth-{uuid.uuid4().hex}"
     username = f"owner-{uuid.uuid4().hex[:12]}"
     password = "OwnerPass-2026!"
-    user = create_user(workspace_id, username, main._password_hash(password), "OWNER")
+    user = create_user(workspace_id, username, password_hash(password), "OWNER")
     ensure_workspace(workspace_id, user["user_id"], "OWNER", "认证测试企业")
     client = TestClient(main.app)
     assert client.post("/api/auth/login", json={"username": username, "password": password}).status_code == 200
@@ -39,9 +41,9 @@ def _token_from_path(path: str) -> str:
 
 
 def test_production_bootstrap_is_locked_without_operations_token(monkeypatch: pytest.MonkeyPatch):
-    monkeypatch.setattr(main, "ENVIRONMENT", "production", raising=False)
-    monkeypatch.setattr(main, "BOOTSTRAP_TOKEN", "", raising=False)
-    monkeypatch.setattr(main, "count_users", lambda: 0)
+    monkeypatch.setattr(config, "ENVIRONMENT", "production", raising=False)
+    monkeypatch.setattr(config, "BOOTSTRAP_TOKEN", "", raising=False)
+    monkeypatch.setattr(accounts, "count", lambda: 0)
     client = TestClient(main.app)
 
     status = client.get("/api/auth/status")
@@ -95,7 +97,7 @@ def test_owner_invites_member_and_member_sets_password_once():
 def test_owner_issues_one_time_member_password_reset():
     owner, workspace_id, _ = _owner_client()
     username = f"member-{uuid.uuid4().hex[:12]}"
-    member = create_user(workspace_id, username, main._password_hash("OldPassword-2026!"), "VIEWER")
+    member = create_user(workspace_id, username, password_hash("OldPassword-2026!"), "VIEWER")
     ensure_workspace(workspace_id, member["user_id"], "VIEWER")
     try:
         issued = owner.post(f"/api/members/{member['user_id']}/password-reset")
@@ -124,9 +126,9 @@ def test_owner_issues_one_time_member_password_reset():
 def test_repeated_login_failures_are_rate_limited(monkeypatch: pytest.MonkeyPatch):
     workspace_id = f"rate-{uuid.uuid4().hex}"
     username = f"limited-{uuid.uuid4().hex[:12]}"
-    user = create_user(workspace_id, username, main._password_hash("CorrectPass-2026!"), "OWNER")
+    user = create_user(workspace_id, username, password_hash("CorrectPass-2026!"), "OWNER")
     ensure_workspace(workspace_id, user["user_id"], "OWNER", "限速测试企业")
-    monkeypatch.setattr(main, "LOGIN_ATTEMPT_LIMIT", 3, raising=False)
+    monkeypatch.setattr(identity, "LOGIN_ATTEMPT_LIMIT", 3, raising=False)
     attempts = getattr(main, "_login_attempts", None)
     if attempts is not None:
         attempts.clear()
@@ -149,9 +151,9 @@ def test_repeated_login_failures_are_rate_limited(monkeypatch: pytest.MonkeyPatc
 def test_trial_join_creates_reviewer_when_code_configured(monkeypatch: pytest.MonkeyPatch):
     workspace_id = f"trial-{uuid.uuid4().hex}"
     owner_name = f"owner-{uuid.uuid4().hex[:12]}"
-    owner = create_user(workspace_id, owner_name, main._password_hash("OwnerPass-2026!"), "OWNER")
+    owner = create_user(workspace_id, owner_name, password_hash("OwnerPass-2026!"), "OWNER")
     ensure_workspace(workspace_id, owner["user_id"], "OWNER", "试用空间")
-    monkeypatch.setattr(main, "TRIAL_JOIN_CODE", "TeamTrial-2026", raising=False)
+    monkeypatch.setattr(config, "TRIAL_JOIN_CODE", "TeamTrial-2026", raising=False)
     client = TestClient(main.app)
     joiner = f"joiner-{uuid.uuid4().hex[:12]}"
     try:
@@ -181,9 +183,9 @@ def test_trial_join_creates_reviewer_when_code_configured(monkeypatch: pytest.Mo
 
 def test_trial_join_disabled_without_code(monkeypatch: pytest.MonkeyPatch):
     workspace_id = f"closed-{uuid.uuid4().hex}"
-    owner = create_user(workspace_id, f"owner-{uuid.uuid4().hex[:12]}", main._password_hash("OwnerPass-2026!"), "OWNER")
+    owner = create_user(workspace_id, f"owner-{uuid.uuid4().hex[:12]}", password_hash("OwnerPass-2026!"), "OWNER")
     ensure_workspace(workspace_id, owner["user_id"], "OWNER", "关闭试用")
-    monkeypatch.setattr(main, "TRIAL_JOIN_CODE", "", raising=False)
+    monkeypatch.setattr(config, "TRIAL_JOIN_CODE", "", raising=False)
     client = TestClient(main.app)
     try:
         assert client.get("/api/auth/status").json()["trial_join_enabled"] is False

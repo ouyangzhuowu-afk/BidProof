@@ -7,14 +7,41 @@ from typing import Any
 from .config import DB_PATH
 
 
+_schema_ready: set[str] = set()
+_schema_in_progress: set[str] = set()
+
+
 def connect(path: Path = DB_PATH) -> sqlite3.Connection:
+    """Open a connection, creating or migrating the schema on first use of this path.
+
+    Doing it here rather than at application import means every entrypoint -- the API, a
+    worker, a CLI or a test -- gets a ready database without importing the web app for its
+    side effects.
+    """
+    _ensure_schema(path)
+    return _open(path)
+
+
+def _open(path: Path) -> sqlite3.Connection:
     connection = sqlite3.connect(path)
     connection.row_factory = sqlite3.Row
     return connection
 
 
+def _ensure_schema(path: Path) -> None:
+    key = str(path)
+    if key in _schema_ready or key in _schema_in_progress:
+        return
+    _schema_in_progress.add(key)
+    try:
+        init_db(path)
+        _schema_ready.add(key)
+    finally:
+        _schema_in_progress.discard(key)
+
+
 def init_db(path: Path = DB_PATH) -> None:
-    with connect(path) as db:
+    with _open(path) as db:
         db.executescript(
             """
             CREATE TABLE IF NOT EXISTS runs (
