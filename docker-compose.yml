@@ -25,6 +25,11 @@ services:
       BIDPROOF_DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-bidproof}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-bidproof}
       BIDPROOF_TRIAL_JOIN_CODE: ${BIDPROOF_TRIAL_JOIN_CODE:-}
       BIDPROOF_BOOTSTRAP_TOKEN: ${BIDPROOF_BOOTSTRAP_TOKEN:-}
+      BIDPROOF_JOB_RUNNER: worker
+      BIDPROOF_JSON_LOGS: "1"
+      BIDPROOF_METRICS: ${BIDPROOF_METRICS:-0}
+      BIDPROOF_LICENSE_KEY: ${BIDPROOF_LICENSE_KEY:-}
+      BIDPROOF_LICENSE_REQUIRED: ${BIDPROOF_LICENSE_REQUIRED:-0}
     volumes:
       - bidproof-data:/data
     depends_on:
@@ -36,6 +41,24 @@ services:
       timeout: 3s
       retries: 3
       start_period: 20s
+    restart: unless-stopped
+
+  worker:
+    build: .
+    command: ["python", "-m", "app.worker"]
+    environment:
+      BIDPROOF_DATA_ROOT: /data
+      BIDPROOF_ENV: ${BIDPROOF_ENV:-production}
+      BIDPROOF_DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-bidproof}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-bidproof}
+      BIDPROOF_JOB_RUNNER: worker
+      BIDPROOF_JSON_LOGS: "1"
+      BIDPROOF_LICENSE_KEY: ${BIDPROOF_LICENSE_KEY:-}
+      BIDPROOF_LICENSE_REQUIRED: ${BIDPROOF_LICENSE_REQUIRED:-0}
+    volumes:
+      - bidproof-data:/data
+    depends_on:
+      postgres:
+        condition: service_healthy
     restart: unless-stopped
 
 volumes:

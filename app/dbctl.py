@@ -42,6 +42,21 @@ def baseline_revision() -> str:
     return bases[0]
 
 
+def head_revision() -> str:
+    heads = ScriptDirectory(str(MIGRATIONS_DIR)).get_heads()
+    if len(heads) != 1:
+        raise RuntimeError(f"expected exactly one migration head, found {heads}")
+    return heads[0]
+
+
+def current_revision(url: str | None = None) -> str | None:
+    from alembic.runtime.migration import MigrationContext
+
+    engine = engine_for(url or configured_url())
+    with engine.connect() as connection:
+        return MigrationContext.configure(connection).get_current_revision()
+
+
 def current_state(url: str) -> dict[str, bool]:
     inspector = sa.inspect(engine_for(url))
     tables = set(inspector.get_table_names())

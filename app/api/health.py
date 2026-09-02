@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 
-from fastapi import APIRouter, Query, Request
-from fastapi.responses import FileResponse
+from fastapi import APIRouter, HTTPException, Query, Request
+from fastapi.responses import FileResponse, PlainTextResponse
 
+from .. import config, observability
 from ..config import PROJECT_ROOT
 from ..authz import Permission, require
 from ..identity import principal_of
@@ -33,3 +34,12 @@ def healthz(request: Request, detail: bool = Query(default=False)) -> dict:
     principal = principal_of(request)
     require(principal, Permission.HEALTH_DETAIL_READ)
     return workspace_service.health_detail()
+
+
+@router.get("/metrics", include_in_schema=False)
+def metrics(request: Request) -> PlainTextResponse:
+    if not config.METRICS_ENABLED:
+        raise HTTPException(status_code=404, detail="Not Found")
+    principal = principal_of(request)
+    require(principal, Permission.METRICS_READ)
+    return PlainTextResponse(observability.prometheus_text(), media_type="text/plain; version=0.0.4")

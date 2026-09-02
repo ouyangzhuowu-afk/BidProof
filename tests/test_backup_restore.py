@@ -67,3 +67,24 @@ def test_backup_listing_and_health_use_verified_evidence(tmp_path, monkeypatch):
     assert health["backup_status"] == "verified"
     assert health["last_verified_backup_at"]
     assert isinstance(health["failed_jobs"], int)
+
+
+def test_postgres_backup_writes_a_dump_manifest(tmp_path, monkeypatch):
+    from work import backup_restore as module
+
+    monkeypatch.setattr(module, "backup_engine", lambda source_db=None: "postgresql")
+    monkeypatch.setattr(module, "configured_url", lambda: "postgresql+psycopg://bidproof:x@localhost/bidproof")
+
+    def fake_dump(_url, target):
+        target.write_bytes(b"PGDUMP")
+
+    monkeypatch.setattr(module, "_dump_postgres", fake_dump)
+    uploads = tmp_path / "uploads"
+    uploads.mkdir()
+    (uploads / "a.txt").write_text("a", encoding="utf-8")
+    backup = module.create_backup(tmp_path / "ignored.sqlite3", uploads, tmp_path / "backups")
+    manifest = (backup / "manifest.json").read_text(encoding="utf-8")
+
+    assert '"engine": "postgresql"' in manifest
+    assert (backup / "database.dump").read_bytes() == b"PGDUMP"
+    assert module.verify_backup(backup)["valid"] is True

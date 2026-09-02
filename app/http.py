@@ -2,12 +2,15 @@
 
 from __future__ import annotations
 
+import logging
 import os
 
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import JSONResponse
 
-from . import config, csrf, identity, ratelimit, request_context
+from . import config, csrf, identity, observability, ratelimit, request_context
+
+logger = logging.getLogger("bidproof.http")
 
 
 WRITE_METHODS = frozenset({"POST", "PUT", "PATCH", "DELETE"})
@@ -34,6 +37,7 @@ def install_middleware(app: FastAPI) -> None:
     async def request_guards(request: Request, call_next):
         context = request_context.from_request(request)
         with request_context.bind(context):
+            observability.bind_log_context()
             try:
                 _check_csrf(request)
                 _check_action_limits(request)
@@ -43,13 +47,28 @@ def install_middleware(app: FastAPI) -> None:
                     content={"detail": exc.detail},
                     headers=dict(exc.headers or {}),
                 )
-                response.headers[request_context.REQUEST_ID_HEADER] = context.request_id
+                _finalize_response(request, response, context)
                 return response
             response = await call_next(request)
-            response.headers[request_context.REQUEST_ID_HEADER] = context.request_id
             if request.method.upper() in csrf.SAFE_METHODS and csrf.COOKIE_NAME not in request.cookies:
                 csrf.issue(response, secure=identity.request_is_secure(request))
+            _finalize_response(request, response, context)
             return response
+
+
+def _finalize_response(request: Request, response, context) -> None:
+    response.headers[request_context.REQUEST_ID_HEADER] = context.request_id
+    observability.record_http(request.method, response.status_code)
+    path = request.url.path
+    if path.startswith("/static/") or path == "/metrics":
+        return
+    logger.info(
+        "%s %s %s",
+        request.method,
+        path,
+        response.status_code,
+        extra={"request_id": context.request_id},
+    )
 
 
 def _check_csrf(request: Request) -> None:

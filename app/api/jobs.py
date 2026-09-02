@@ -8,6 +8,7 @@ from fastapi import APIRouter, BackgroundTasks, File, Form, HTTPException, Query
 
 from ..authz import Permission, require
 from ..identity import principal_of
+from ..queue import dispatch
 from ..repositories import audit, jobs
 from ..services import scan_service
 
@@ -56,7 +57,7 @@ async def enqueue_scan_job(
         evidence_metadata=evidence_metadata,
         project_id=project_id,
     )
-    background_tasks.add_task(scan_service.process_job, job_id)
+    dispatch(job_id, background_tasks)
     return {"job_id": job_id, "status": "PENDING"}
 
 
@@ -68,7 +69,7 @@ def retry_scan_job(request: Request, job_id: str, background_tasks: BackgroundTa
     if job["status"] not in {"FAILED", "PENDING"}:
         raise HTTPException(status_code=409, detail="当前作业状态不可重试")
     jobs.update(job_id, "PENDING", attempts=int(job.get("attempts", 0)), error=None, cancel_requested=False, progress_message="已重新排队")
-    background_tasks.add_task(scan_service.process_job, job_id)
+    dispatch(job_id, background_tasks)
     return {"job_id": job_id, "status": "PENDING"}
 
 

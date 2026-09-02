@@ -18,5 +18,24 @@ BOOTSTRAP_TOKEN = os.environ.get("BIDPROOF_BOOTSTRAP_TOKEN", "").strip()
 # When set, unauthenticated users may self-join the primary workspace as REVIEWER.
 TRIAL_JOIN_CODE = os.environ.get("BIDPROOF_TRIAL_JOIN_CODE", "").strip()
 
+
+def _flag(name: str, default: str = "0") -> bool:
+    return os.environ.get(name, default).strip().lower() in {"1", "true", "yes"}
+
+
+# Tests and local development run jobs in-process so a POST /api/jobs is finished when the
+# request returns. Production compose runs `python -m app.worker` against the same database.
+JOB_RUNNER = os.environ.get(
+    "BIDPROOF_JOB_RUNNER",
+    "inline" if ENVIRONMENT != "production" else "worker",
+).strip().lower()
+JOB_STALE_SECONDS = int(os.environ.get("BIDPROOF_JOB_STALE_SECONDS", "900"))
+JOB_POLL_SECONDS = float(os.environ.get("BIDPROOF_JOB_POLL_SECONDS", "1"))
+JSON_LOGS = _flag("BIDPROOF_JSON_LOGS", "1" if ENVIRONMENT == "production" else "0")
+METRICS_ENABLED = _flag("BIDPROOF_METRICS")
+OTEL_ENABLED = _flag("BIDPROOF_OTEL")
+LICENSE_KEY = os.environ.get("BIDPROOF_LICENSE_KEY", "").strip()
+LICENSE_REQUIRED = _flag("BIDPROOF_LICENSE_REQUIRED")
+
 for directory in (DATA_DIR, UPLOAD_DIR, JOB_STAGING_DIR, BACKUP_ROOT):
     directory.mkdir(parents=True, exist_ok=True)

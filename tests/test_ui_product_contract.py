@@ -139,7 +139,7 @@ def test_jobs_view_exposes_progress_and_failure_recovery_controls():
 
 def test_source_download_and_password_rotation_are_connected_to_api_contracts():
     script = (PROJECT_ROOT / "static" / "app.js").read_text(encoding="utf-8")
-    assert "/api/runs/${encodeURIComponent(currentRun.run_id)}/files/" in script
+    assert "/api/runs/${encodeURIComponent(store.currentRun.run_id)}/files/" in script or "/api/runs/${encodeURIComponent(currentRun.run_id)}/files/" in script
     assert "/api/auth/password" in script
     assert "/api/runs/bulk/report.zip" in script
 

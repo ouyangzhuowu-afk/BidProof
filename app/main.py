@@ -6,7 +6,6 @@ Routes live in `app.api`, workflows in `app.services`, and data access in
 
 from __future__ import annotations
 
-import asyncio
 import logging
 from contextlib import asynccontextmanager
 
@@ -16,29 +15,28 @@ from fastapi.staticfiles import StaticFiles
 from . import config
 from .api import register_routers
 from .http import install_middleware
-from .repositories import jobs
-from .services import scan_service
 
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("bidproof")
 
-VERSION = "0.3.0"
+VERSION = "0.4.0"
 
 
 @asynccontextmanager
 async def lifespan(_app: FastAPI):
+    from . import license, observability, queue
+
+    observability.configure()
+    license.check_on_startup()
     if config.TRUSTED_HEADERS_IGNORED:
         logger.warning(
             "BIDPROOF_ALLOW_TRUSTED_HEADERS is set but ignored because BIDPROOF_ENV=%s; "
             "self-asserted identity headers are only honoured under BIDPROOF_ENV=test",
             config.ENVIRONMENT,
         )
-    # Jobs left PENDING or RUNNING by a previous process are re-driven here. P4 replaces this
-    # in-process recovery with a durable queue consumed by a separate worker.
-    tasks = [asyncio.create_task(scan_service.process_job(job["job_id"])) for job in jobs.recoverable()]
+    tasks = await queue.start_inline_recovery()
     yield
-    if tasks:
-        await asyncio.gather(*tasks, return_exceptions=True)
+    await queue.stop_inline_recovery(tasks)
 
 
 def create_app() -> FastAPI:

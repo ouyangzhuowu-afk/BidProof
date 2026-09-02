@@ -68,6 +68,8 @@ python -m app.dbctl upgrade
 - 查看当前版本：`python -m app.dbctl current`
 - 生成新迁移：`python -m app.dbctl revision --message "描述"`
 - SQLite 连接自动启用 WAL、`busy_timeout` 与外键；即便如此它仍是单写入模型，只适合开发与单机小规模部署。
+- 生产 compose 将扫描作业放到独立 `worker` 进程（`python -m app.worker`），API 只入队。
+- 私有化交付：`python scripts/preflight.py` 做升级前校验；离线包见 `scripts/pack-offline.sh`；升级回滚见 [`docs/upgrade.md`](docs/upgrade.md)。
 
 ## 云端 / GitHub 运行（Cursor Cloud Agent）
 

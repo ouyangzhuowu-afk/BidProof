@@ -1,0 +1,35 @@
+replicaCount: 1
+workerReplicaCount: 1
+
+image:
+  repository: bidproof
+  tag: "0.4.0"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 8080
+
+env:
+  BIDPROOF_ENV: production
+  BIDPROOF_JOB_RUNNER: worker
+  BIDPROOF_JSON_LOGS: "1"
+  BIDPROOF_METRICS: "0"
+  BIDPROOF_LICENSE_REQUIRED: "0"
+
+persistence:
+  enabled: true
+  size: 20Gi
+  storageClass: ""
+
+postgresql:
+  enabled: true
+  auth:
+    username: bidproof
+    password: ""
+    database: bidproof
+
+resources:
+  requests:
+    cpu: 250m
+    memory: 512Mi

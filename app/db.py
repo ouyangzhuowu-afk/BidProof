@@ -592,6 +592,57 @@ def _jobs_from_rows(rows: Iterable[dict[str, Any]]) -> list[dict[str, Any]]:
     return jobs
 
 
+def requeue_stale_scan_jobs(max_age_seconds: int, path: Path | str | None = None) -> int:
+    """Return crashed RUNNING jobs to PENDING so another worker can claim them.
+
+    `updated_at` is an ISO timestamp; jobs newer than the cutoff are assumed to still be live.
+    """
+    cutoff = datetime.fromtimestamp(
+        datetime.now(timezone.utc).timestamp() - max_age_seconds, timezone.utc
+    ).isoformat()
+    with connect(path) as connection:
+        result = connection.execute(
+            sa.update(scan_jobs)
+            .where(
+                scan_jobs.c.status == "RUNNING",
+                scan_jobs.c.cancel_requested == 0,
+                scan_jobs.c.updated_at < cutoff,
+            )
+            .values(status="PENDING", progress_message="工作进程中断，已重新排队", updated_at=_now())
+        )
+    return int(result.rowcount or 0)
+
+
+def claim_next_scan_job(path: Path | str | None = None) -> dict[str, Any] | None:
+    """Atomically take the oldest PENDING job.
+
+    PostgreSQL uses SKIP LOCKED so two workers never claim the same row. SQLite has no skip
+    locked; the follow-up UPDATE ... WHERE status='PENDING' is the exclusion.
+    """
+    bound = engine(path)
+    pending = (
+        sa.select(scan_jobs)
+        .where(scan_jobs.c.status == "PENDING", scan_jobs.c.cancel_requested == 0)
+        .order_by(scan_jobs.c.created_at, scan_jobs.c.job_id)
+        .limit(1)
+    )
+    with bound.begin() as connection:
+        if bound.dialect.name == "postgresql":
+            pending = pending.with_for_update(skip_locked=True)
+        row = _row(connection.execute(pending))
+        if row is None:
+            return None
+        claimed = connection.execute(
+            sa.update(scan_jobs)
+            .where(scan_jobs.c.job_id == row["job_id"], scan_jobs.c.status == "PENDING")
+            .values(status="RUNNING", updated_at=_now())
+        )
+        if claimed.rowcount != 1:
+            return None
+    loaded = load_scan_job(row["job_id"], path)
+    return loaded
+
+
 def list_recoverable_jobs(path: Path | str | None = None) -> list[dict[str, Any]]:
     statement = (
         sa.select(scan_jobs)

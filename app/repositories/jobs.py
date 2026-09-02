@@ -33,6 +33,14 @@ def start(job_id: str, **fields: Any) -> bool:
     return db.start_scan_job(job_id, **fields)
 
 
+def claim_next() -> dict[str, Any] | None:
+    return db.claim_next_scan_job()
+
+
+def requeue_stale(max_age_seconds: int) -> int:
+    return db.requeue_stale_scan_jobs(max_age_seconds)
+
+
 def cancel(job_id: str) -> dict[str, Any] | None:
     return db.cancel_scan_job(job_id)
 

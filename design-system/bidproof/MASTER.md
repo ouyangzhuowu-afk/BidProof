@@ -17,6 +17,14 @@
 
 ### Color Palette
 
+The shipping product uses the light teal workbench in `static/style.css` (`--primary: #087f72`).
+The dark Fira palette below is a rejected draft and must not be reintroduced without a
+deliberate visual redesign and a contract-test change.
+
+| Role | Hex | CSS Variable | Status |
+|------|-----|--------------|--------|
+| Primary (shipping) | `#087f72` | `--primary` | **canonical** |
+
 | Role | Hex | CSS Variable |
 |------|-----|--------------|
 | Primary | `#0F172A` | `--color-primary` |
