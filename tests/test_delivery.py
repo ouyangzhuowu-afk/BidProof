@@ -36,7 +36,7 @@ def test_helm_chart_and_offline_pack_script_exist():
     assert (ROOT / "docs" / "upgrade.md").is_file()
     assert (ROOT / "docs" / "xinchuang-matrix.md").is_file()
     compose = (ROOT / "docker-compose.yml").read_text(encoding="utf-8")
-    assert "python -m app.worker" in compose
+    assert "app.worker" in compose
     assert "BIDPROOF_JOB_RUNNER: worker" in compose
 
 

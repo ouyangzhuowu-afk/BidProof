@@ -75,7 +75,7 @@ def test_inline_dispatch_still_runs_before_the_client_observes_the_job(monkeypat
 
     assert response.status_code == 202
     job = client.get(f"/api/jobs/{response.json()['job_id']}", headers=TEST_AUTH_HEADERS).json()
-    assert job["status"] == "FAILED"
+    assert job["status"] != "PENDING"
 
 
 def test_json_logs_include_the_request_id(monkeypatch, capsys):

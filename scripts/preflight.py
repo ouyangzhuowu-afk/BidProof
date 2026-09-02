@@ -13,6 +13,9 @@ from pathlib import Path
 
 MINIMUM_PYTHON = (3, 11)
 MINIMUM_FREE_BYTES = 512 * 1024 * 1024
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
 
 def _ok(name: str, detail: str) -> dict:
