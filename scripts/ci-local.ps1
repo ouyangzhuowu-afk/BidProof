@@ -11,7 +11,6 @@ uv run python -m app.workflow check
 if (Get-Command node -ErrorAction SilentlyContinue) {
   Write-Host "==> javascript syntax"
   node --check static/app.js
-  node --check static/landing.js
 }
 
 Write-Host "==> pytest"

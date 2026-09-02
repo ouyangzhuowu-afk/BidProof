@@ -8,6 +8,8 @@ import json
 from pathlib import Path
 from typing import Iterable
 
+from work.ledger_dates import require_iso_datetime
+
 
 REQUIRED_FIELDS = [
     "task_id",
@@ -38,6 +40,7 @@ def append_row(path: Path, row: dict[str, str]) -> dict[str, int]:
     """Append one real pilot row and return the current business summary."""
     if not row.get("task_id", "").strip():
         raise ValueError("task_id is required for a pilot record")
+    require_iso_datetime(str(row.get("received_at", "")), "received_at")
     path.parent.mkdir(parents=True, exist_ok=True)
     existing_rows: list[dict[str, str]] = []
     fieldnames = REQUIRED_FIELDS
@@ -110,7 +113,12 @@ def main() -> None:
         print(json.dumps(summarize_file(args.ledger), ensure_ascii=False))
         return
     if args.row_json:
-        row = json.loads(args.row_json.read_text(encoding="utf-8"))
+        try:
+            row = json.loads(args.row_json.read_text(encoding="utf-8"))
+        except json.JSONDecodeError as exc:
+            raise SystemExit(f"invalid JSON in {args.row_json}: {exc}") from exc
+        if not isinstance(row, dict):
+            raise SystemExit(f"row JSON must be an object, got {type(row).__name__}")
         print(json.dumps(append_row(args.ledger, row), ensure_ascii=False))
         render_review(args.ledger, args.report)
         return

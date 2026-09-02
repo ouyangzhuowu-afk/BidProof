@@ -1,6 +1,8 @@
 import csv
 from pathlib import Path
 
+import pytest
+
 from work.pilot_ledger import REQUIRED_FIELDS, append_row, summarize_file, validate_ledger
 
 
@@ -49,9 +51,24 @@ def test_append_row_rejects_missing_task_identity(tmp_path):
     ledger = tmp_path / "pilot-ledger.csv"
     row = {field: "" for field in REQUIRED_FIELDS}
 
-    try:
+    with pytest.raises(ValueError, match="task_id"):
         append_row(ledger, row)
-    except ValueError as exc:
-        assert "task_id" in str(exc)
-    else:
-        raise AssertionError("missing task_id should be rejected")
+
+
+def test_append_row_rejects_missing_received_at(tmp_path):
+    ledger = tmp_path / "pilot-ledger.csv"
+    row = {field: "" for field in REQUIRED_FIELDS} | {"task_id": "REAL-001"}
+
+    with pytest.raises(ValueError, match="received_at"):
+        append_row(ledger, row)
+
+
+def test_append_row_rejects_invalid_received_at(tmp_path):
+    ledger = tmp_path / "pilot-ledger.csv"
+    row = {field: "" for field in REQUIRED_FIELDS} | {
+        "task_id": "REAL-001",
+        "received_at": "not-a-datetime",
+    }
+
+    with pytest.raises(ValueError, match="ISO 8601"):
+        append_row(ledger, row)

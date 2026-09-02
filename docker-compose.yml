@@ -10,6 +10,12 @@ services:
       BIDPROOF_ENV: ${BIDPROOF_ENV:-development}
     volumes:
       - bidproof-data:/data
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/healthz')"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 10s
     restart: unless-stopped
 
 volumes:

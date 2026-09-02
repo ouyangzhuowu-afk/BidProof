@@ -1,6 +1,8 @@
 import csv
 from pathlib import Path
 
+import pytest
+
 from work.icp_ledger import REQUIRED_FIELDS, append_row, render_review, summarize_file, validate_ledger
 
 
@@ -45,9 +47,18 @@ def test_append_row_and_render_review(tmp_path):
 def test_append_row_rejects_missing_contact_id(tmp_path):
     ledger = tmp_path / "icp-outreach.csv"
     row = {field: "" for field in REQUIRED_FIELDS}
-    try:
+
+    with pytest.raises(ValueError, match="contact_id"):
         append_row(ledger, row)
-    except ValueError as exc:
-        assert "contact_id" in str(exc)
-    else:
-        raise AssertionError("missing contact_id should be rejected")
+
+
+def test_append_row_rejects_invalid_next_step_due(tmp_path):
+    ledger = tmp_path / "icp-outreach.csv"
+    row = {field: "" for field in REQUIRED_FIELDS} | {
+        "contact_id": "ICP-002",
+        "contacted_at": "2026-09-02T10:00:00+08:00",
+        "next_step_due": "09/09/2026",
+    }
+
+    with pytest.raises(ValueError, match="YYYY-MM-DD"):
+        append_row(ledger, row)
