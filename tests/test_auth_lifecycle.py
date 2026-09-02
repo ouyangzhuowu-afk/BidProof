@@ -295,11 +295,11 @@ def test_personal_register_works_when_production_bootstrap_is_locked(monkeypatch
     monkeypatch.setattr(config, "ENVIRONMENT", "production", raising=False)
     monkeypatch.setattr(config, "BOOTSTRAP_TOKEN", "", raising=False)
     monkeypatch.setattr(config, "PERSONAL_SIGNUP", True, raising=False)
+    assert identity.bootstrap_locked() is True
     client = TestClient(main.app)
     username = f"locked-{uuid.uuid4().hex[:12]}"
     workspace_id = None
     try:
-        assert client.get("/api/auth/status").json()["bootstrap_locked"] is True
         created = client.post(
             "/api/auth/register",
             json={"username": username, "password": "PersonalPass-2026!"},
