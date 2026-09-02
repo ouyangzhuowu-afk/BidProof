@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Project-025 Persistent State",
+  "type": "object",
+  "required": ["schema_version", "project_id", "goal", "success_criteria", "current_stage", "stage_status", "completed", "in_progress", "backlog", "dependencies", "decisions", "open_questions", "risks", "artifacts", "next_best_action", "updated_at"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "project_id": {"const": "project-025-bid-evidence-agent"},
+    "goal": {"type": "string", "minLength": 1},
+    "current_stage": {"type": "string", "minLength": 1},
+    "stage_status": {"enum": ["pending", "in_progress", "completed", "blocked", "needs_verification"]},
+    "success_criteria": {"type": "object", "required": ["engineering", "business"]},
+    "completed": {"type": "array"},
+    "in_progress": {"type": "array"},
+    "backlog": {"type": "array"},
+    "dependencies": {"type": "array"},
+    "decisions": {"type": "array"},
+    "open_questions": {"type": "array"},
+    "risks": {"type": "array"},
+    "artifacts": {"type": "array"},
+    "next_best_action": {"type": "object", "required": ["task_id", "title", "reason", "blocked_by", "fallback"]},
+    "updated_at": {"type": "string", "minLength": 1}
+  }
+}

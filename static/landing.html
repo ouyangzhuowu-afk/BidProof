@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="description" content="BidProof 帮助企业定位投标资格、废标风险与证据缺口，输出可复核的原文定位和整改报告。">
+  <title>BidProof 投标资格与废标风险扫描</title>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/landing.css?v=20260827-2">
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="BidProof 首页"><span class="brand-symbol" aria-hidden="true">B</span><span><strong>BidProof</strong><small>企业投标证据工作台</small></span></a>
+    <nav aria-label="产品导航"><a href="#workflow">工作方式</a><a href="#security">数据边界</a><a class="login-link" href="/app">登录</a></nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <canvas id="hero-evidence-canvas" class="hero-scene" aria-hidden="true"></canvas>
+      <div class="hero-overlay" aria-hidden="true"></div>
+      <div class="hero-content">
+        <p class="eyebrow">BidProof 企业投标证据工作台</p>
+        <h1 id="hero-title">投标资格与废标风险扫描</h1>
+        <p>从招标文件与企业材料中定位要求、证据和缺口，保留原文位置与人工复核链路，让投标判断有依据、整改有负责人。</p>
+        <div class="hero-actions"><a class="button primary" href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=contact%40marketcase.net&amp;subject=申请%20BidProof%20企业试用" target="_blank" rel="noopener noreferrer">申请企业试用</a><a class="button secondary" href="/app">进入工作台</a></div>
+        <p class="scope-note">支持 PDF、Word、Excel、PowerPoint 与文本材料。扫描结果用于辅助复核，不替代企业最终决策。</p>
+      </div>
+    </section>
+
+    <section class="value-band" aria-label="产品价值">
+      <div><strong>要求有出处</strong><span>每项风险保留招标原文定位</span></div>
+      <div><strong>证据可追溯</strong><span>企业材料与要求逐项关联</span></div>
+      <div><strong>不确定即复核</strong><span>冲突、缺证和 OCR 风险不强行通过</span></div>
+      <div><strong>整改能落地</strong><span>关联负责人、截止日期和人工决策</span></div>
+    </section>
+
+    <section class="section workflow" id="workflow">
+      <div class="section-heading"><p class="eyebrow">工作方式</p><h2>从材料到决策，保留完整复核路径</h2><p>BidProof 聚焦风险定位与证据组织，不自动替企业做法律判断或投标决定。</p></div>
+      <ol class="process-list">
+        <li><span>01</span><div><strong>上传任务材料</strong><p>招标文件与营业执照、资质、业绩、人员证书等企业证据可批量提交。</p></div></li>
+        <li><span>02</span><div><strong>定位资格和废标风险</strong><p>按文件原始结构保留页码、段落、工作表或幻灯片定位。</p></div></li>
+        <li><span>03</span><div><strong>复核证据和缺口</strong><p>负责人和独立复核人分别处理，不确定结论保持待复核。</p></div></li>
+        <li><span>04</span><div><strong>导出整改与决策报告</strong><p>按任务归档、批量导出，并保留评论、整改和人工决定。</p></div></li>
+      </ol>
+    </section>
+
+    <section class="product-proof" aria-labelledby="proof-title">
+      <div class="proof-copy"><p class="eyebrow">真实产品界面</p><h2 id="proof-title">为高频投标工作设计的企业工作台</h2><p>任务筛选、批量管理、风险摘要、复核分工和报告导出集中在同一条工作流中。当前版本为企业试点版，准确率仍需通过真实企业任务持续验证。</p><a class="text-link" href="/app">查看工作台登录入口</a></div>
+      <img src="/static/assets/bidproof-workspace.png" width="1440" height="1000" loading="lazy" alt="BidProof 扫描任务工作台，展示任务统计、筛选和证据闸门">
+    </section>
+
+    <section class="security-band" id="security">
+      <div class="section-heading"><p class="eyebrow">数据与部署</p><h2>企业可以明确选择数据边界</h2></div>
+      <div class="security-columns"><div><strong>邀请制访问</strong><p>企业管理员创建空间并邀请成员，角色、停用和会话撤销可审计。</p></div><div><strong>可选本地部署</strong><p>支持企业内网单节点方案；严格离线环境需关闭外部 OCR 或接入企业批准的本地 OCR。</p></div><div><strong>结论保持边界</strong><p>无完整证据链的结果不标记为通过，系统输出不构成法律意见。</p></div></div>
+    </section>
+
+    <section class="final-cta"><div><p class="eyebrow">企业试点</p><h2>先用一份真实任务验证价值</h2><p>以人工复核结果、漏报与误报、处理耗时和最终整改闭环作为验收依据。</p></div><div class="hero-actions"><a class="button primary" href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=contact%40marketcase.net&amp;subject=申请%20BidProof%20企业试用" target="_blank" rel="noopener noreferrer">申请企业试用</a><a class="button secondary dark" href="/app">企业账号登录</a></div></section>
+  </main>
+
+  <footer><span>BidProof by MarketCase</span><span>辅助风险复核，不提供法律意见</span></footer>
+  <script src="/static/landing.js?v=20260827-3" defer></script>
+</body>
+</html>

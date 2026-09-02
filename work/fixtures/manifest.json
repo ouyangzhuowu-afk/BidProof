@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0",
+  "purpose": "Project-025 中文招标 PDF fixture 来源登记",
+  "downloaded_at": "2026-08-24",
+  "license_note": "公开采购文件仅作为内部测试数据保存；不得将其当作产品承诺或对外再分发授权。",
+  "fixtures": [
+    {
+      "document_id": "fixture-001",
+      "source_type": "provincial_public_resource_platform",
+      "filename": "source2-nanjing.pdf",
+      "title": "招标投标交易系统第三方软件测评服务采购文件",
+      "publisher": "南京市公共资源交易中心",
+      "issuing_date": "2024-07-30",
+      "source_url": "https://njggzy.nanjing.gov.cn/njweb/tz/20240730/676b45b5-113e-4aff-b074-1e6fd738090e.html",
+      "file_url": "https://njggzy.nanjing.gov.cn/njweb/uploadfile/676b45b5-113e-4aff-b074-1e6fd738090e/%E6%8B%9B%E6%A0%87%E6%8A%95%E6%A0%87%E4%BA%A4%E6%98%93%E7%B3%BB%E7%BB%9F%E7%AC%AC%E4%B8%89%E6%96%B9%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%84%E6%9C%8D%E5%8A%A1%E9%87%87%E8%B4%AD%E6%96%87%E4%BB%B6.pdf",
+      "pages": 33,
+      "sha256": "b90b22d14736992e3a5ad8fa2c29c4d23a603654faa3fffbead330c6615defd2",
+      "internal_test_allowed": true,
+      "redaction_status": "not_applicable_public_document",
+      "ground_truth": "work/ground-truth/fixture-001.md"
+    },
+    {
+      "document_id": "fixture-002",
+      "source_type": "provincial_public_resource_platform",
+      "filename": "source2-shaanxi.pdf",
+      "title": "陕西省统计局国产化计算机终端及应用软件采购项目",
+      "publisher": "陕西省省级单位政府采购中心",
+      "issuing_date": "2024-10-21",
+      "source_url": "https://www.ccgp-shaanxi.gov.cn/gpx-bid-file/ZF_JGBM_000003/610001/2024/10/21/8a69c58e90e72f300192ac9d3d5b467b/gpx-template/8a69c2509211dc7a0192adb56a814416.pdf?accessCode=9b3feae299491ee3179981e5e497afd4",
+      "file_url": "same_as_source_url",
+      "pages": 67,
+      "sha256": "a6c1f042b077ecbacf5877ac682415ede3dcd64980490eb9d9379867e4fd2b7d",
+      "internal_test_allowed": true,
+      "redaction_status": "not_applicable_public_document",
+      "ground_truth": "work/ground-truth/fixture-002.md"
+    },
+    {
+      "document_id": "fixture-003",
+      "source_type": "tender_agent_public_download",
+      "filename": "source4-zbtb.pdf",
+      "title": "信息化项目预算评估和效能考核",
+      "publisher": "商务部；代理机构：北京数字支点国际项目管理有限公司",
+      "issuing_date": "2024-10",
+      "source_url": "https://weekly.zbtb.org.cn/2024/1b3441f1ffc3d22.pdf",
+      "file_url": "same_as_source_url",
+      "pages": 66,
+      "sha256": "e233f7b45ec3eb26ea8e41c542fcf37b3601cfdf7243bfe1c7956e641eecebf3",
+      "internal_test_allowed": true,
+      "redaction_status": "not_applicable_public_document",
+      "ground_truth": "work/ground-truth/fixture-003.md"
+    }
+  ],
+  "excluded_candidates": [
+    {
+      "filename": "source2-fujian.pdf",
+      "reason": "福建省信息化项目招标文件示例文本，明确为模板/示例，不是真实采购项目。",
+      "source_url": "https://scjgj.fujian.gov.cn/zw/tzgg/202102/P020210218595822024080.pdf"
+    }
+  ],
+  "missing_input": {
+    "source_type": "enterprise_historical_bid_material",
+    "status": "waiting_for_user",
+    "reason": "企业历史投标材料通常不公开，不能伪造或用公开文件替代。需要用户提供已脱敏的成功、失败或补正案例。"
+  }
+}

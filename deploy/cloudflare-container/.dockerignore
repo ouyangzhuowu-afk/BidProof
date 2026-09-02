@@ -1,0 +1,7 @@
+work/data
+work/uploads
+outputs
+tests
+.venv
+__pycache__
+*.pyc

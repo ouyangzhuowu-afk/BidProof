@@ -1,0 +1,14 @@
+{
+  "name": "bidproof-marketcase-deploy",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/worker-contract.test.mjs"
+  },
+  "dependencies": {
+    "@cloudflare/containers": "^0.0.26"
+  },
+  "devDependencies": {
+    "wrangler": "^4.112.0"
+  }
+}

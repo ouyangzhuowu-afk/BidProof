@@ -1,0 +1,16 @@
+services:
+  bidproof:
+    build: .
+    ports:
+      - "8016:8080"
+    environment:
+      BIDPROOF_DATA_ROOT: /data
+      BIDPROOF_TRIAL_JOIN_CODE: ${BIDPROOF_TRIAL_JOIN_CODE:-}
+      BIDPROOF_BOOTSTRAP_TOKEN: ${BIDPROOF_BOOTSTRAP_TOKEN:-}
+      BIDPROOF_ENV: ${BIDPROOF_ENV:-development}
+    volumes:
+      - bidproof-data:/data
+    restart: unless-stopped
+
+volumes:
+  bidproof-data:
