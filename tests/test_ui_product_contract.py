@@ -141,7 +141,20 @@ def test_source_download_and_password_rotation_are_connected_to_api_contracts():
     script = (PROJECT_ROOT / "static" / "app.js").read_text(encoding="utf-8")
     assert "/api/runs/${encodeURIComponent(store.currentRun.run_id)}/files/" in script or "/api/runs/${encodeURIComponent(currentRun.run_id)}/files/" in script
     assert "/api/auth/password" in script
+    assert "/api/auth/register" in script
     assert "/api/runs/bulk/report.zip" in script
+
+
+def test_auth_dialog_exposes_personal_register_and_enterprise_modes():
+    html = (PROJECT_ROOT / "static" / "index.html").read_text(encoding="utf-8")
+    script = (PROJECT_ROOT / "static" / "app.js").read_text(encoding="utf-8")
+    assert 'data-auth-mode="setup"' in html
+    assert 'data-auth-mode="login"' in html
+    assert 'data-auth-mode="register"' in html
+    assert 'data-auth-mode="trial"' in html
+    assert 'id="register-fields"' in html
+    assert 'id="auth-display-name"' in html
+    assert "store.authMode === 'register'" in script or 'store.authMode === "register"' in script
 
 
 def test_task_management_exposes_search_filters_and_independent_reviewer():

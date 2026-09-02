@@ -34,7 +34,7 @@ const store = {
   rescanParentId: null,
   selectedRunIds: /* @__PURE__ */ new Set(),
   authSetupRequired: false,
-  authTrialMode: false,
+  authMode: "login",
   authStatus: null,
   accountAction: null,
   currentUser: null,
@@ -76,7 +76,7 @@ document.querySelector("#nav-admin").addEventListener("click", showAdmin);
 document.querySelector("#refresh-jobs").addEventListener("click", loadJobs);
 document.querySelector("#member-form").addEventListener("submit", createMember);
 document.querySelectorAll("[data-member-mode]").forEach((button) => button.addEventListener("click", () => setMemberCreateMode(button.dataset.memberMode)));
-document.querySelectorAll("[data-auth-mode]").forEach((button) => button.addEventListener("click", () => setAuthMode(button.dataset.authMode === "trial")));
+document.querySelectorAll("[data-auth-mode]").forEach((button) => button.addEventListener("click", () => setAuthMode(button.dataset.authMode)));
 document.querySelector("#project-form").addEventListener("submit", createProject);
 document.querySelector("#retention-form").addEventListener("submit", saveRetention);
 document.querySelector("#purge-retention").addEventListener("click", purgeRetention);
@@ -208,41 +208,55 @@ async function initializeApp() {
   }
 }
 function showAuth(setup, message = "") {
-  var _a, _b;
+  var _a, _b, _c;
   store.authSetupRequired = setup;
-  if (setup) store.authTrialMode = false;
-  const trialEnabled = !setup && Boolean((_a = store.authStatus) == null ? void 0 : _a.trial_join_enabled);
-  document.querySelector("#auth-mode-wrap").hidden = !trialEnabled;
-  if (!trialEnabled) store.authTrialMode = false;
+  store.authMode = setup ? "setup" : "login";
+  const personalEnabled = Boolean((_a = store.authStatus) == null ? void 0 : _a.personal_signup_enabled);
+  const trialEnabled = !setup && Boolean((_b = store.authStatus) == null ? void 0 : _b.trial_join_enabled);
+  const showModes = personalEnabled || trialEnabled || setup;
+  document.querySelector("#auth-mode-wrap").hidden = !showModes;
+  document.querySelector('[data-auth-mode="setup"]').hidden = !setup;
+  document.querySelector('[data-auth-mode="login"]').hidden = setup;
+  document.querySelector('[data-auth-mode="register"]').hidden = !personalEnabled;
+  document.querySelector('[data-auth-mode="trial"]').hidden = !trialEnabled;
   applyAuthMode(message);
-  document.querySelector('#auth-form button[type="submit"]').disabled = Boolean((_b = store.authStatus) == null ? void 0 : _b.bootstrap_locked);
+  const lockedSetup = Boolean((_c = store.authStatus) == null ? void 0 : _c.bootstrap_locked) && store.authMode === "setup";
+  document.querySelector('#auth-form button[type="submit"]').disabled = lockedSetup;
   if (!authDialog.open) authDialog.showModal();
   setTimeout(() => {
     var _a2;
-    const focusId = store.pendingMfaToken ? "#auth-mfa-code" : setup ? "#auth-workspace" : store.authTrialMode ? "#auth-join-code" : "#auth-username";
+    const focusId = store.pendingMfaToken ? "#auth-mfa-code" : store.authMode === "setup" ? "#auth-workspace" : store.authMode === "trial" ? "#auth-join-code" : "#auth-username";
     (_a2 = document.querySelector(focusId)) == null ? void 0 : _a2.focus();
   }, 0);
   refreshIcons();
 }
-function setAuthMode(trial) {
-  var _a;
-  store.authTrialMode = Boolean(trial) && Boolean((_a = store.authStatus) == null ? void 0 : _a.trial_join_enabled) && !store.authSetupRequired;
+function setAuthMode(mode) {
+  var _a, _b;
+  const personalEnabled = Boolean((_a = store.authStatus) == null ? void 0 : _a.personal_signup_enabled);
+  const trialEnabled = Boolean((_b = store.authStatus) == null ? void 0 : _b.trial_join_enabled) && !store.authSetupRequired;
+  if (mode === "register" && !personalEnabled) mode = store.authSetupRequired ? "setup" : "login";
+  if (mode === "trial" && !trialEnabled) mode = "login";
+  if (mode === "setup" && !store.authSetupRequired) mode = "login";
+  if (mode === "login" && store.authSetupRequired) mode = "setup";
+  store.authMode = mode;
   applyAuthMode("");
+  const focusId = mode === "setup" ? "#auth-workspace" : mode === "trial" ? "#auth-join-code" : "#auth-username";
   setTimeout(() => {
     var _a2;
-    return (_a2 = document.querySelector(store.authTrialMode ? "#auth-join-code" : "#auth-username")) == null ? void 0 : _a2.focus();
+    return (_a2 = document.querySelector(focusId)) == null ? void 0 : _a2.focus();
   }, 0);
   refreshIcons();
 }
 function applyAuthMode(message = "") {
-  var _a, _b, _c;
-  const setup = store.authSetupRequired;
-  const trial = !setup && store.authTrialMode;
+  var _a, _b, _c, _d, _e;
+  const setup = store.authMode === "setup";
+  const trial = store.authMode === "trial";
+  const register = store.authMode === "register";
   document.querySelectorAll("[data-auth-mode]").forEach((button) => {
-    button.classList.toggle("is-active", button.dataset.authMode === "trial" === trial);
+    button.classList.toggle("is-active", button.dataset.authMode === store.authMode);
   });
-  document.querySelector("#auth-title").textContent = setup ? "初始化企业管理员" : trial ? "试用加入企业空间" : "登录企业空间";
-  document.querySelector("#auth-subtitle").textContent = setup ? "使用运维令牌创建首个企业空间和所有者账号。" : trial ? "输入组织者提供的试用加入码，自助创建复核人账号。" : "使用企业账号进入任务与证据数据。";
+  document.querySelector("#auth-title").textContent = setup ? "初始化企业管理员" : trial ? "试用加入企业空间" : register ? "注册个人账号" : "登录工作台";
+  document.querySelector("#auth-subtitle").textContent = setup ? "使用运维令牌创建首个企业空间和所有者账号。" : trial ? "输入组织者提供的试用加入码，自助创建复核人账号。" : register ? "自行创建个人工作区，与企业空间隔离，注册后即可登录使用。" : "使用个人或企业账号进入任务与证据数据。";
   document.querySelector("#setup-fields").hidden = !setup;
   document.querySelector("#auth-workspace").required = setup;
   const tokenRequired = setup && Boolean((_a = store.authStatus) == null ? void 0 : _a.bootstrap_token_required);
@@ -250,26 +264,30 @@ function applyAuthMode(message = "") {
   document.querySelector("#auth-bootstrap-token").required = tokenRequired;
   document.querySelector("#trial-join-fields").hidden = !trial;
   document.querySelector("#auth-join-code").required = trial;
-  document.querySelector("#auth-confirm-wrap").hidden = !(setup || trial);
-  document.querySelector("#auth-password-confirm").required = setup || trial;
-  document.querySelector("#auth-password").minLength = setup || trial ? 12 : 1;
-  document.querySelector("#auth-password").autocomplete = setup || trial ? "new-password" : "current-password";
-  document.querySelector("#auth-password-hint").hidden = !(setup || trial);
+  document.querySelector("#register-fields").hidden = !register;
+  const needsConfirm = setup || trial || register;
+  document.querySelector("#auth-confirm-wrap").hidden = !needsConfirm;
+  document.querySelector("#auth-password-confirm").required = needsConfirm;
+  document.querySelector("#auth-password").minLength = needsConfirm ? 12 : 1;
+  document.querySelector("#auth-password").autocomplete = needsConfirm ? "new-password" : "current-password";
+  document.querySelector("#auth-password-hint").hidden = !needsConfirm;
   document.querySelector("#auth-help").hidden = setup;
-  document.querySelector("#auth-help").textContent = trial ? "已有账号？切换到「登录」。忘记密码仍需管理员重置。" : ((_b = store.authStatus) == null ? void 0 : _b.trial_join_enabled) ? "没有账号？切换到「试用加入」。无法登录可联系管理员重置密码。" : "无法登录？请联系企业管理员生成一次性密码重置链接。";
-  document.querySelector("#auth-submit-label").textContent = store.pendingMfaToken ? "完成验证" : setup ? "创建并进入" : trial ? "加入并进入" : "登录";
+  document.querySelector("#auth-help").textContent = register ? "已有账号？切换到「登录」。企业成员也可由管理员邀请加入。" : trial ? "已有账号？切换到「登录」。忘记密码仍需管理员重置。" : ((_b = store.authStatus) == null ? void 0 : _b.personal_signup_enabled) ? "没有账号？切换到「个人注册」。企业成员也可使用试用加入码或联系管理员。" : ((_c = store.authStatus) == null ? void 0 : _c.trial_join_enabled) ? "没有账号？切换到「试用加入」。无法登录可联系管理员重置密码。" : "无法登录？请联系企业管理员生成一次性密码重置链接。";
+  document.querySelector("#auth-submit-label").textContent = store.pendingMfaToken ? "完成验证" : setup ? "创建并进入" : trial ? "加入并进入" : register ? "注册并进入" : "登录";
   document.querySelector("#mfa-fields").hidden = !store.pendingMfaToken;
   document.querySelector("#auth-mfa-code").required = Boolean(store.pendingMfaToken);
   document.querySelector("#auth-username").disabled = Boolean(store.pendingMfaToken);
   document.querySelector("#auth-password").disabled = Boolean(store.pendingMfaToken);
-  document.querySelector("#oidc-login-wrap").hidden = setup || trial || Boolean(store.pendingMfaToken) || !((_c = store.authStatus) == null ? void 0 : _c.oidc_enabled);
+  document.querySelector("#oidc-login-wrap").hidden = setup || trial || register || Boolean(store.pendingMfaToken) || !((_d = store.authStatus) == null ? void 0 : _d.oidc_enabled);
   document.querySelector("#auth-message").textContent = message || (store.pendingMfaToken ? "请输入身份验证器中的 6 位验证码。" : "");
+  const lockedSetup = Boolean((_e = store.authStatus) == null ? void 0 : _e.bootstrap_locked) && store.authMode === "setup";
+  document.querySelector('#auth-form button[type="submit"]').disabled = lockedSetup || Boolean(store.pendingMfaToken);
 }
 async function submitAuth(event) {
   event.preventDefault();
   const form = event.currentTarget;
   const button = form.querySelector('button[type="submit"]');
-  const loadingLabel = store.pendingMfaToken ? "正在验证" : store.authSetupRequired ? "正在初始化" : store.authTrialMode ? "正在加入" : "正在登录";
+  const loadingLabel = store.pendingMfaToken ? "正在验证" : store.authMode === "setup" ? "正在初始化" : store.authMode === "trial" ? "正在加入" : store.authMode === "register" ? "正在注册" : "正在登录";
   setButtonLoading(button, true, loadingLabel);
   try {
     if (store.pendingMfaToken) {
@@ -288,15 +306,20 @@ async function submitAuth(event) {
     }
     const payload = { username: document.querySelector("#auth-username").value.trim(), password: document.querySelector("#auth-password").value };
     let endpoint = "/api/auth/login";
-    if (store.authSetupRequired) {
+    if (store.authMode === "setup") {
       if (payload.password !== document.querySelector("#auth-password-confirm").value) throw new Error("两次输入的密码不一致");
       payload.workspace_name = document.querySelector("#auth-workspace").value.trim();
       payload.bootstrap_token = document.querySelector("#auth-bootstrap-token").value || null;
       endpoint = "/api/auth/bootstrap";
-    } else if (store.authTrialMode) {
+    } else if (store.authMode === "trial") {
       if (payload.password !== document.querySelector("#auth-password-confirm").value) throw new Error("两次输入的密码不一致");
       payload.join_code = document.querySelector("#auth-join-code").value;
       endpoint = "/api/auth/trial-join";
+    } else if (store.authMode === "register") {
+      if (payload.password !== document.querySelector("#auth-password-confirm").value) throw new Error("两次输入的密码不一致");
+      const displayName = document.querySelector("#auth-display-name").value.trim();
+      if (displayName) payload.display_name = displayName;
+      endpoint = "/api/auth/register";
     }
     const result = await request(endpoint, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
     if (result.mfa_required) {
@@ -308,13 +331,13 @@ async function submitAuth(event) {
     store.currentUser = result;
     authDialog.close();
     form.reset();
-    store.authTrialMode = false;
     renderCurrentUser();
     await loadProjects();
     await loadRuns();
   } catch (error) {
     document.querySelector("#auth-message").textContent = error.message;
-    document.querySelector(store.pendingMfaToken ? "#auth-mfa-code" : store.authTrialMode ? "#auth-join-code" : "#auth-password").focus();
+    const confirmMismatch = String(error.message).includes("两次");
+    document.querySelector(store.pendingMfaToken ? "#auth-mfa-code" : store.authMode === "trial" ? "#auth-join-code" : confirmMismatch ? "#auth-password-confirm" : "#auth-password").focus();
   } finally {
     setButtonLoading(button, false);
   }

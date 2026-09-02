@@ -106,6 +106,12 @@ class TrialJoinRequest(BaseModel):
     join_code: str = Field(min_length=4, max_length=120)
 
 
+class PersonalRegisterRequest(BaseModel):
+    username: str = Field(min_length=3, max_length=80)
+    password: str = Field(min_length=MIN_PASSWORD_LENGTH, max_length=MAX_PASSWORD_LENGTH)
+    display_name: str | None = Field(default=None, max_length=120)
+
+
 class PasswordChangeRequest(BaseModel):
     current_password: str = Field(min_length=1, max_length=MAX_PASSWORD_LENGTH)
     new_password: str = Field(min_length=MIN_PASSWORD_LENGTH, max_length=MAX_PASSWORD_LENGTH)

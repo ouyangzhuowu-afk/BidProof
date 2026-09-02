@@ -23,6 +23,11 @@ def _flag(name: str, default: str = "0") -> bool:
     return os.environ.get(name, default).strip().lower() in {"1", "true", "yes"}
 
 
+# Personal signup creates an isolated workspace owned by the new account. Enterprise-only
+# installs that only want invite / bootstrap / SSO can turn it off.
+PERSONAL_SIGNUP = _flag("BIDPROOF_PERSONAL_SIGNUP", "1")
+
+
 # Tests and local development run jobs in-process so a POST /api/jobs is finished when the
 # request returns. Production compose runs `python -m app.worker` against the same database.
 JOB_RUNNER = os.environ.get(

@@ -15,6 +15,7 @@ from ..schemas import (
     LoginRequest,
     MfaCodeRequest,
     PasswordChangeRequest,
+    PersonalRegisterRequest,
     TrialJoinRequest,
 )
 from ..services import auth_service
@@ -36,6 +37,11 @@ def bootstrap_auth(request: Request, response: Response, payload: AuthBootstrapR
 @router.post("/login")
 def login(request: Request, response: Response, payload: LoginRequest) -> dict:
     return auth_service.login(request, response, payload)
+
+
+@router.post("/register", status_code=201)
+def register_personal(request: Request, response: Response, payload: PersonalRegisterRequest) -> dict:
+    return auth_service.register_personal(request, response, payload)
 
 
 @router.post("/trial-join", status_code=201)

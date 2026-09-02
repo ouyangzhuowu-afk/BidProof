@@ -23,6 +23,7 @@ from ..schemas import (
     MemberUpdateRequest,
     MfaCodeRequest,
     PasswordChangeRequest,
+    PersonalRegisterRequest,
     TrialJoinRequest,
 )
 from ..security import UNUSABLE_PASSWORD, new_action_token, password_hash, password_is_usable, token_hash, verify_password
@@ -48,6 +49,7 @@ def _account_response(user: dict, workspace_id: str) -> dict:
 def status(request: Request) -> dict:
     users = accounts.count()
     trial_join_enabled = bool(config.TRIAL_JOIN_CODE) and users > 0
+    personal_signup_enabled = bool(config.PERSONAL_SIGNUP)
     if users == 0:
         return {
             "setup_required": True,
@@ -55,6 +57,7 @@ def status(request: Request) -> dict:
             "bootstrap_token_required": config.ENVIRONMENT == "production",
             "bootstrap_locked": identity.bootstrap_locked(),
             "trial_join_enabled": False,
+            "personal_signup_enabled": personal_signup_enabled,
             "oidc_enabled": oidc.settings_from_env().enabled,
             "mfa_enabled": False,
         }
@@ -65,6 +68,7 @@ def status(request: Request) -> dict:
         "setup_required": False,
         "authenticated": bool(user),
         "trial_join_enabled": trial_join_enabled,
+        "personal_signup_enabled": personal_signup_enabled,
         "oidc_enabled": oidc.settings_from_env().enabled,
         "user": _account_response(user, user["workspace_id"]) if user else None,
         "mfa_enabled": mfa_enabled,
@@ -213,6 +217,37 @@ def trial_join(request: Request, response: Response, payload: TrialJoinRequest) 
     identity.clear_login_attempts(attempt_key)
     identity.issue_session(response, user["user_id"], identity.request_is_secure(request))
     audit.record(workspace_id, user["user_id"], "AUTH_TRIAL_JOINED", None, {"username": user["username"], "role": "REVIEWER"})
+    return _account_response(user, workspace_id)
+
+
+def register_personal(request: Request, response: Response, payload: PersonalRegisterRequest) -> dict:
+    """Create an isolated personal workspace. This does not join an existing enterprise tenant."""
+    if not config.PERSONAL_SIGNUP:
+        raise HTTPException(status_code=403, detail="个人注册未开放")
+    now = identity.monotonic_now()
+    attempt_key = identity.login_attempt_key(request, f"register:{payload.username}")
+    identity.enforce_login_rate_limit(attempt_key, now)
+    username = payload.username.strip()
+    if accounts.by_username(username):
+        identity.record_failed_login(attempt_key, now)
+        raise HTTPException(status_code=409, detail="用户名已存在，请直接登录")
+    display = (payload.display_name or "").strip() or f"个人空间 · {username}"
+    workspace_id = uuid.uuid4().hex
+    try:
+        user = accounts.create(workspace_id, username, password_hash(payload.password), "OWNER")
+    except sqlite3.IntegrityError as exc:
+        identity.record_failed_login(attempt_key, now)
+        raise HTTPException(status_code=409, detail="用户名已存在，请直接登录") from exc
+    workspaces.ensure(workspace_id, user["user_id"], "OWNER", display)
+    identity.clear_login_attempts(attempt_key)
+    identity.issue_session(response, user["user_id"], identity.request_is_secure(request))
+    audit.record(
+        workspace_id,
+        user["user_id"],
+        "AUTH_PERSONAL_REGISTERED",
+        None,
+        {"username": user["username"], "workspace_name": display},
+    )
     return _account_response(user, workspace_id)
 
 

@@ -12,7 +12,7 @@
  * @property {string | null} rescanParentId
  * @property {Set<string>} selectedRunIds
  * @property {boolean} authSetupRequired
- * @property {boolean} authTrialMode
+ * @property {string} authMode
  * @property {object | null} authStatus
  * @property {object | null} accountAction
  * @property {object | null} currentUser
@@ -41,7 +41,7 @@ export const store = {
   rescanParentId: null,
   selectedRunIds: new Set(),
   authSetupRequired: false,
-  authTrialMode: false,
+  authMode: 'login',
   authStatus: null,
   accountAction: null,
   currentUser: null,

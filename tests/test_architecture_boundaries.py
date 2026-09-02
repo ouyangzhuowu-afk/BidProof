@@ -65,10 +65,11 @@ def test_registered_route_surface_is_stable():
         if method in {"get", "post", "patch", "delete", "put"}
     }
 
-    assert len(operations) == 69
+    assert len(operations) == 70
     assert "POST /api/runs" in operations
     # A literal path registered after its parameterised sibling would be shadowed by it.
     assert "POST /api/auth/mfa/verify" in operations
+    assert "POST /api/auth/register" in operations
     assert "POST /api/runs/bulk/report.zip" in operations
     assert "POST /api/runs/{run_id}/rescan" in operations
 

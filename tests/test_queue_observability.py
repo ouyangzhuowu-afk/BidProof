@@ -141,4 +141,5 @@ def test_metrics_are_not_in_the_public_openapi_surface():
         if method in {"get", "post", "patch", "delete", "put"}
     }
     assert "GET /metrics" not in operations
-    assert len(operations) == 69
+    assert "POST /api/auth/register" in operations
+    assert len(operations) == 70

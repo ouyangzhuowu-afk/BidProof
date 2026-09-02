@@ -190,3 +190,123 @@ def test_trial_join_disabled_without_code(monkeypatch: pytest.MonkeyPatch):
         ).status_code == 403
     finally:
         _remove_workspace(workspace_id)
+
+
+def test_personal_register_creates_isolated_owner_workspace(monkeypatch: pytest.MonkeyPatch):
+    monkeypatch.setattr(config, "PERSONAL_SIGNUP", True, raising=False)
+    owner, enterprise_id, _ = _owner_client()
+    client = TestClient(main.app)
+    username = f"solo-{uuid.uuid4().hex[:12]}"
+    personal_id = None
+    try:
+        status = client.get("/api/auth/status")
+        assert status.status_code == 200
+        assert status.json()["personal_signup_enabled"] is True
+
+        created = client.post(
+            "/api/auth/register",
+            json={"username": username, "password": "PersonalPass-2026!"},
+        )
+        assert created.status_code == 201
+        body = created.json()
+        personal_id = body["workspace_id"]
+        assert body["role"] == "OWNER"
+        assert body["username"] == username
+        assert personal_id != enterprise_id
+
+        members = client.get("/api/members")
+        assert members.status_code == 200
+        assert [item["username"] for item in members.json()["members"]] == [username]
+        enterprise_names = [item["username"] for item in owner.get("/api/members").json()["members"]]
+        assert username not in enterprise_names
+
+        assert client.post("/api/auth/logout").status_code == 200
+        assert client.post(
+            "/api/auth/login",
+            json={"username": username, "password": "PersonalPass-2026!"},
+        ).status_code == 200
+    finally:
+        _remove_workspace(enterprise_id)
+        if personal_id:
+            _remove_workspace(personal_id)
+
+
+def test_two_personal_accounts_cannot_see_each_other(monkeypatch: pytest.MonkeyPatch):
+    monkeypatch.setattr(config, "PERSONAL_SIGNUP", True, raising=False)
+    first_client = TestClient(main.app)
+    second_client = TestClient(main.app)
+    user_a = f"alpha-{uuid.uuid4().hex[:12]}"
+    user_b = f"beta-{uuid.uuid4().hex[:12]}"
+    workspace_ids: list[str] = []
+    try:
+        first = first_client.post(
+            "/api/auth/register",
+            json={"username": user_a, "password": "PersonalPass-2026!"},
+        )
+        second = second_client.post(
+            "/api/auth/register",
+            json={"username": user_b, "password": "PersonalPass-2026!", "display_name": "独立顾问"},
+        )
+        assert first.status_code == 201
+        assert second.status_code == 201
+        workspace_ids = [first.json()["workspace_id"], second.json()["workspace_id"]]
+        assert workspace_ids[0] != workspace_ids[1]
+        assert [item["username"] for item in first_client.get("/api/members").json()["members"]] == [user_a]
+        assert [item["username"] for item in second_client.get("/api/members").json()["members"]] == [user_b]
+    finally:
+        for workspace_id in workspace_ids:
+            _remove_workspace(workspace_id)
+
+
+def test_personal_register_rejects_duplicate_username(monkeypatch: pytest.MonkeyPatch):
+    monkeypatch.setattr(config, "PERSONAL_SIGNUP", True, raising=False)
+    client = TestClient(main.app)
+    username = f"dup-{uuid.uuid4().hex[:12]}"
+    workspace_id = None
+    try:
+        first = client.post(
+            "/api/auth/register",
+            json={"username": username, "password": "PersonalPass-2026!"},
+        )
+        assert first.status_code == 201
+        workspace_id = first.json()["workspace_id"]
+        second = TestClient(main.app).post(
+            "/api/auth/register",
+            json={"username": username, "password": "AnotherPass-2026!"},
+        )
+        assert second.status_code == 409
+    finally:
+        if workspace_id:
+            _remove_workspace(workspace_id)
+
+
+def test_personal_register_can_be_disabled(monkeypatch: pytest.MonkeyPatch):
+    monkeypatch.setattr(config, "PERSONAL_SIGNUP", False, raising=False)
+    client = TestClient(main.app)
+    assert client.get("/api/auth/status").json()["personal_signup_enabled"] is False
+    denied = client.post(
+        "/api/auth/register",
+        json={"username": "anyone123", "password": "AnyonePass-2026!"},
+    )
+    assert denied.status_code == 403
+
+
+def test_personal_register_works_when_production_bootstrap_is_locked(monkeypatch: pytest.MonkeyPatch):
+    monkeypatch.setattr(config, "ENVIRONMENT", "production", raising=False)
+    monkeypatch.setattr(config, "BOOTSTRAP_TOKEN", "", raising=False)
+    monkeypatch.setattr(config, "PERSONAL_SIGNUP", True, raising=False)
+    client = TestClient(main.app)
+    username = f"locked-{uuid.uuid4().hex[:12]}"
+    workspace_id = None
+    try:
+        assert client.get("/api/auth/status").json()["bootstrap_locked"] is True
+        created = client.post(
+            "/api/auth/register",
+            json={"username": username, "password": "PersonalPass-2026!"},
+        )
+        assert created.status_code == 201
+        workspace_id = created.json()["workspace_id"]
+        assert created.json()["role"] == "OWNER"
+    finally:
+        if workspace_id:
+            _remove_workspace(workspace_id)

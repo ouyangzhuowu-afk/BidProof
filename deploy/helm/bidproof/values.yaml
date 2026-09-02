@@ -16,6 +16,7 @@ env:
   BIDPROOF_JSON_LOGS: "1"
   BIDPROOF_METRICS: "0"
   BIDPROOF_LICENSE_REQUIRED: "0"
+  BIDPROOF_PERSONAL_SIGNUP: "1"
 
 persistence:
   enabled: true

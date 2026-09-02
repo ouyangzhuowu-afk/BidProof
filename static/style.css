@@ -321,7 +321,7 @@ textarea { resize: vertical; }
 .intake-dialog::backdrop { background: rgba(16,24,40,.55); backdrop-filter: blur(3px); }
 .auth-dialog { width: min(430px, calc(100vw - 32px)); }
 .auth-dialog form { gap: 12px; }
-.auth-mode-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 2px; }
+.auth-mode-wrap { display: grid; grid-template-columns: repeat(auto-fit, minmax(5.5rem, 1fr)); gap: 8px; margin-bottom: 2px; }
 .auth-mode-button {
   border: 1px solid var(--line);
   background: transparent;
