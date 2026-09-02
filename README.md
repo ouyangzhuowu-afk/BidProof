@@ -57,6 +57,8 @@ OCR 请求失败、超时或返回空文本时，页面会保留 `ocr_status=FAI
 
 仓库：<https://github.com/ouyangzhuowu-afk/BidProof>
 
+Agent 协作说明见 [`AGENTS.md`](AGENTS.md)。平板/云端开任务前先读该文件与 `workflow/project-state.json`。
+
 在 Cursor 云端任务里克隆该仓库后：
 
 ```bash
