@@ -132,6 +132,17 @@ class MemberUpdateRequest(BaseModel):
     active: bool | None = None
 
 
+class MfaCodeRequest(BaseModel):
+    code: str = Field(min_length=1, max_length=64)
+    mfa_token: str | None = Field(default=None, max_length=200)
+
+
+class ApiTokenCreateRequest(BaseModel):
+    name: str = Field(min_length=1, max_length=80)
+    expires_days: int | None = Field(default=None, ge=1, le=3650)
+    permissions: list[str] = Field(default_factory=list, max_length=40)
+
+
 class WorkspaceSettingsRequest(BaseModel):
     retention_days: int = Field(ge=1, le=3650)
 

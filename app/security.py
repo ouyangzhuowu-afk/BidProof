@@ -22,6 +22,13 @@ def password_hash(password: str, salt: bytes | None = None, iterations: int = PB
     return f"pbkdf2_sha256${iterations}${base64.urlsafe_b64encode(salt).decode()}${base64.urlsafe_b64encode(digest).decode()}"
 
 
+UNUSABLE_PASSWORD = "!"
+
+
+def password_is_usable(encoded: str | None) -> bool:
+    return bool(encoded) and encoded.startswith("pbkdf2_sha256$")
+
+
 def verify_password(password: str, encoded: str) -> bool:
     try:
         algorithm, iterations, salt, expected = encoded.split("$", 3)

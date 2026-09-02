@@ -66,7 +66,7 @@ def bulk_pdf_archive(principal: dict[str, str], run_ids: list[str], report_forma
     return archive_buffer.getvalue()
 
 
-AUDIT_EXPORT_COLUMNS = ["event_id", "created_at", "event_type", "run_id", "user_id", "payload"]
+AUDIT_EXPORT_COLUMNS = ["event_id", "created_at", "event_type", "run_id", "user_id", "outcome", "actor_ip", "request_id", "payload"]
 
 
 def audit_csv(workspace_id: str) -> bytes:
@@ -80,6 +80,9 @@ def audit_csv(workspace_id: str) -> bytes:
             "event_type": event.get("event_type", ""),
             "run_id": event.get("run_id", "") or "",
             "user_id": event.get("user_id", ""),
+            "outcome": event.get("outcome", ""),
+            "actor_ip": event.get("actor_ip", "") or "",
+            "request_id": event.get("request_id", "") or "",
             "payload": json.dumps(event.get("payload", {}), ensure_ascii=False),
         })
     return output.getvalue().encode("utf-8-sig")

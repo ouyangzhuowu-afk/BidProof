@@ -7,7 +7,8 @@ import uuid
 
 from fastapi import APIRouter, HTTPException, Query, Request
 
-from ..identity import ADMIN_ROLES, principal_of, require_role
+from ..authz import Permission, require
+from ..identity import principal_of
 from ..repositories import audit, projects
 from ..schemas import ProjectCreateRequest, ProjectUpdateRequest
 
@@ -18,6 +19,7 @@ router = APIRouter(prefix="/api/projects", tags=["projects"])
 @router.get("")
 def get_projects(request: Request, include_archived: bool = Query(default=False)) -> dict:
     principal = principal_of(request)
+    require(principal, Permission.WORKSPACE_READ)
     projects.ensure_default(principal["workspace_id"])
     return {
         "workspace_id": principal["workspace_id"],
@@ -28,7 +30,7 @@ def get_projects(request: Request, include_archived: bool = Query(default=False)
 @router.post("", status_code=201)
 def add_project(request: Request, payload: ProjectCreateRequest) -> dict:
     principal = principal_of(request)
-    require_role(principal, ADMIN_ROLES)
+    require(principal, Permission.PROJECT_MANAGE)
     code = (payload.code or f"PRJ-{uuid.uuid4().hex[:8]}").upper()
     try:
         project = projects.create(principal["workspace_id"], payload.name.strip(), code)
@@ -47,7 +49,7 @@ def add_project(request: Request, payload: ProjectCreateRequest) -> dict:
 @router.patch("/{project_id}")
 def patch_project(request: Request, project_id: str, payload: ProjectUpdateRequest) -> dict:
     principal = principal_of(request)
-    require_role(principal, ADMIN_ROLES)
+    require(principal, Permission.PROJECT_MANAGE)
     projects.require_scoped(project_id, principal)
     updated = projects.update(project_id, payload.name.strip() if payload.name else None, payload.archived)
     audit.record(

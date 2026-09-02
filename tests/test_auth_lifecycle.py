@@ -129,9 +129,6 @@ def test_repeated_login_failures_are_rate_limited(monkeypatch: pytest.MonkeyPatc
     user = create_user(workspace_id, username, password_hash("CorrectPass-2026!"), "OWNER")
     ensure_workspace(workspace_id, user["user_id"], "OWNER", "限速测试企业")
     monkeypatch.setattr(identity, "LOGIN_ATTEMPT_LIMIT", 3, raising=False)
-    attempts = getattr(main, "_login_attempts", None)
-    if attempts is not None:
-        attempts.clear()
     client = TestClient(main.app)
     try:
         assert client.post("/api/auth/login", json={"username": username, "password": "wrong-pass-1"}).status_code == 401
@@ -143,8 +140,6 @@ def test_repeated_login_failures_are_rate_limited(monkeypatch: pytest.MonkeyPatc
             "/api/auth/login", json={"username": username, "password": "CorrectPass-2026!"}
         ).status_code == 429
     finally:
-        if attempts is not None:
-            attempts.clear()
         _remove_workspace(workspace_id)
 
 

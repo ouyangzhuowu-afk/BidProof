@@ -6,7 +6,8 @@ from typing import Annotated
 
 from fastapi import APIRouter, BackgroundTasks, File, Form, HTTPException, Query, Request, UploadFile
 
-from ..identity import principal_of, require_role
+from ..authz import Permission, require
+from ..identity import principal_of
 from ..repositories import audit, jobs
 from ..services import scan_service
 
@@ -21,6 +22,7 @@ def _without_payload(job: dict) -> dict:
 @router.get("")
 def get_scan_jobs(request: Request, limit: int = Query(default=100, ge=1, le=500)) -> dict:
     principal = principal_of(request)
+    require(principal, Permission.JOB_READ)
     return {
         "workspace_id": principal["workspace_id"],
         "jobs": [_without_payload(job) for job in jobs.list_for_workspace(principal["workspace_id"], limit)],
@@ -29,7 +31,9 @@ def get_scan_jobs(request: Request, limit: int = Query(default=100, ge=1, le=500
 
 @router.get("/{job_id}")
 def get_scan_job(request: Request, job_id: str) -> dict:
-    return _without_payload(jobs.require_scoped(job_id, principal_of(request)))
+    principal = principal_of(request)
+    require(principal, Permission.JOB_READ)
+    return _without_payload(jobs.require_scoped(job_id, principal))
 
 
 @router.post("", status_code=202)
@@ -43,7 +47,7 @@ async def enqueue_scan_job(
     project_id: Annotated[str | None, Form()] = None,
 ) -> dict:
     principal = principal_of(request)
-    require_role(principal)
+    require(principal, Permission.JOB_MANAGE)
     job_id = await scan_service.stage_job(
         principal=principal,
         tender=tender,
@@ -59,7 +63,7 @@ async def enqueue_scan_job(
 @router.post("/{job_id}/retry", status_code=202)
 def retry_scan_job(request: Request, job_id: str, background_tasks: BackgroundTasks) -> dict:
     principal = principal_of(request)
-    require_role(principal)
+    require(principal, Permission.JOB_MANAGE)
     job = jobs.require_scoped(job_id, principal)
     if job["status"] not in {"FAILED", "PENDING"}:
         raise HTTPException(status_code=409, detail="当前作业状态不可重试")
@@ -71,7 +75,7 @@ def retry_scan_job(request: Request, job_id: str, background_tasks: BackgroundTa
 @router.post("/{job_id}/cancel")
 def cancel_job(request: Request, job_id: str) -> dict:
     principal = principal_of(request)
-    require_role(principal)
+    require(principal, Permission.JOB_MANAGE)
     job = jobs.require_scoped(job_id, principal)
     if job["status"] not in {"PENDING", "RUNNING"}:
         raise HTTPException(status_code=409, detail="当前作业状态不可取消")

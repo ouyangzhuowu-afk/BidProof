@@ -92,6 +92,11 @@ def test_enterprise_operations_are_exposed_as_complete_views():
         "run-sort",
         "run-favorite-filter",
         "clear-run-filters",
+        "mfa-form",
+        "mfa-code",
+        "token-form",
+        "token-name",
+        "tokens-list",
         "bulk-export",
         "run-reviewer",
     ):

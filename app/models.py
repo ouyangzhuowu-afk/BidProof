@@ -149,8 +149,92 @@ audit_events = sa.Table(
     sa.Column("event_type", sa.Text, nullable=False),
     sa.Column("payload_json", json_column(), nullable=False),
     sa.Column("created_at", sa.Text, nullable=False),
+    # Who and from where, so an event can be tied to a session during an investigation.
+    sa.Column("actor_ip", sa.Text),
+    sa.Column("user_agent", sa.Text),
+    sa.Column("request_id", sa.Text),
+    sa.Column("outcome", sa.Text, nullable=False, server_default="SUCCESS"),
     sa.Index("idx_audit_workspace_created", "workspace_id", "created_at"),
     sa.Index("idx_audit_workspace_run", "workspace_id", "run_id"),
+    sa.Index("idx_audit_request", "request_id"),
+    sa.Index("idx_audit_type_created", "event_type", "created_at"),
+)
+
+
+api_tokens = sa.Table(
+    "api_tokens",
+    metadata,
+    sa.Column("token_id", sa.Text, primary_key=True),
+    # Only the digest is stored; the plaintext is shown once at creation.
+    sa.Column("token_hash", sa.Text, nullable=False, unique=True),
+    sa.Column("workspace_id", sa.Text, nullable=False),
+    sa.Column("user_id", sa.Text, nullable=False),
+    sa.Column("name", sa.Text, nullable=False),
+    sa.Column("role", sa.Text, nullable=False),
+    # Empty means the token inherits the full role; otherwise it is intersected with the role.
+    sa.Column("permissions_json", json_column(), nullable=False, server_default="[]"),
+    sa.Column("token_prefix", sa.Text, nullable=False, server_default=""),
+    sa.Column("expires_at", sa.Text),
+    sa.Column("revoked_at", sa.Text),
+    sa.Column("last_used_at", sa.Text),
+    sa.Column("created_by", sa.Text, nullable=False),
+    sa.Column("created_at", sa.Text, nullable=False),
+    sa.Index("idx_api_tokens_workspace", "workspace_id"),
+)
+
+
+user_mfa = sa.Table(
+    "user_mfa",
+    metadata,
+    sa.Column("user_id", sa.Text, primary_key=True),
+    sa.Column("secret", sa.Text, nullable=False),
+    sa.Column("confirmed_at", sa.Text),
+    # Highest TOTP counter already accepted, so a captured code cannot be replayed.
+    sa.Column("last_counter", sa.Integer, nullable=False, server_default="0"),
+    sa.Column("recovery_codes_json", json_column(), nullable=False, server_default="[]"),
+    sa.Column("created_at", sa.Text, nullable=False),
+)
+
+
+identity_bindings = sa.Table(
+    "identity_bindings",
+    metadata,
+    sa.Column("binding_id", sa.Text, primary_key=True),
+    sa.Column("user_id", sa.Text, nullable=False),
+    # "OIDC" or "LDAP", plus the issuer or directory URL that vouched for the subject.
+    sa.Column("provider", sa.Text, nullable=False),
+    sa.Column("issuer", sa.Text, nullable=False),
+    sa.Column("subject", sa.Text, nullable=False),
+    sa.Column("created_at", sa.Text, nullable=False),
+    sa.Column("last_seen_at", sa.Text),
+    sa.UniqueConstraint("provider", "issuer", "subject", name="uq_identity_binding_subject"),
+    sa.Index("idx_identity_bindings_user", "user_id"),
+)
+
+
+login_flows = sa.Table(
+    "login_flows",
+    metadata,
+    sa.Column("state", sa.Text, primary_key=True),
+    sa.Column("provider", sa.Text, nullable=False),
+    sa.Column("code_verifier", sa.Text, nullable=False),
+    sa.Column("redirect_uri", sa.Text, nullable=False),
+    sa.Column("nonce", sa.Text, nullable=False),
+    sa.Column("expires_at", sa.Text, nullable=False),
+    sa.Column("consumed_at", sa.Text),
+    sa.Column("created_at", sa.Text, nullable=False),
+)
+
+
+rate_limit_hits = sa.Table(
+    "rate_limit_hits",
+    metadata,
+    sa.Column("hit_id", sa.Text, primary_key=True),
+    # Scope names the protected action; bucket is the client identity within it.
+    sa.Column("scope", sa.Text, nullable=False),
+    sa.Column("bucket", sa.Text, nullable=False),
+    sa.Column("occurred_at", sa.Text, nullable=False),
+    sa.Index("idx_rate_limit_scope_bucket", "scope", "bucket", "occurred_at"),
 )
 
 
@@ -260,4 +344,6 @@ JSON_COLUMNS: dict[str, tuple[str, ...]] = {
     ),
     "scan_jobs": ("payload_json",),
     "audit_events": ("payload_json",),
+    "user_mfa": ("recovery_codes_json",),
+    "api_tokens": ("permissions_json",),
 }

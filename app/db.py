@@ -20,14 +20,18 @@ from sqlalchemy.engine import Connection, Engine
 from .database import create_schema, engine_for
 from .models import (
     accuracy_feedback,
+    api_tokens,
     audit_events,
     auth_action_tokens,
     auth_sessions,
     comments,
+    identity_bindings,
+    login_flows,
     projects,
     remediations,
     runs as runs_table,
     scan_jobs,
+    user_mfa,
     users,
     workspace_members,
     workspaces,
@@ -413,7 +417,12 @@ def record_audit_event(
     run_id: str | None = None,
     payload: dict[str, Any] | None = None,
     path: Path | str | None = None,
+    *,
+    outcome: str = "SUCCESS",
 ) -> str:
+    from .request_context import current
+
+    context = current()
     event_id = _new_id()
     with connect(path) as connection:
         connection.execute(
@@ -425,6 +434,10 @@ def record_audit_event(
                 event_type=event_type,
                 payload_json=payload or {},
                 created_at=_now(),
+                actor_ip=context.client_ip,
+                user_agent=context.user_agent,
+                request_id=context.request_id or None,
+                outcome=outcome,
             )
         )
     return event_id
@@ -1095,3 +1108,270 @@ def consume_auth_action_token(token_hash: str, consumed_at: str, path: Path | st
             .values(used_at=consumed_at)
         )
     return bool(result.rowcount)
+
+
+# --------------------------------------------------------------------------------------
+# API tokens, MFA, identity bindings and login flows
+# --------------------------------------------------------------------------------------
+
+def create_api_token(
+    *,
+    token_hash: str,
+    token_prefix: str,
+    workspace_id: str,
+    user_id: str,
+    name: str,
+    role: str,
+    created_by: str,
+    permissions: list[str] | None = None,
+    expires_at: str | None = None,
+    path: Path | str | None = None,
+) -> dict[str, Any]:
+    row = {
+        "token_id": _new_id(),
+        "token_hash": token_hash,
+        "token_prefix": token_prefix,
+        "workspace_id": workspace_id,
+        "user_id": user_id,
+        "name": name,
+        "role": role,
+        "permissions_json": permissions or [],
+        "expires_at": expires_at,
+        "revoked_at": None,
+        "last_used_at": None,
+        "created_by": created_by,
+        "created_at": _now(),
+    }
+    with connect(path) as connection:
+        connection.execute(sa.insert(api_tokens).values(**row))
+    return _public_api_token(row)
+
+
+def _public_api_token(row: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "token_id": row["token_id"],
+        "token_prefix": row.get("token_prefix", ""),
+        "name": row["name"],
+        "role": row["role"],
+        "permissions": row.get("permissions_json") or [],
+        "workspace_id": row["workspace_id"],
+        "user_id": row["user_id"],
+        "expires_at": row.get("expires_at"),
+        "revoked_at": row.get("revoked_at"),
+        "last_used_at": row.get("last_used_at"),
+        "created_by": row["created_by"],
+        "created_at": row["created_at"],
+    }
+
+
+def list_api_tokens(workspace_id: str, path: Path | str | None = None) -> list[dict[str, Any]]:
+    statement = (
+        sa.select(api_tokens)
+        .where(api_tokens.c.workspace_id == workspace_id)
+        .order_by(api_tokens.c.created_at.desc())
+    )
+    with engine(path).connect() as connection:
+        return [_public_api_token(row) for row in _rows(connection.execute(statement))]
+
+
+def load_api_token_by_hash(token_digest: str, now: str, path: Path | str | None = None) -> dict[str, Any] | None:
+    statement = (
+        sa.select(api_tokens, users.c.active, users.c.username)
+        .select_from(api_tokens.join(users, users.c.user_id == api_tokens.c.user_id))
+        .where(
+            api_tokens.c.token_hash == token_digest,
+            api_tokens.c.revoked_at.is_(None),
+            users.c.active == 1,
+        )
+    )
+    with engine(path).connect() as connection:
+        row = _row(connection.execute(statement))
+    if row is None:
+        return None
+    expires_at = row.get("expires_at")
+    if expires_at and expires_at <= now:
+        return None
+    return row
+
+
+def touch_api_token(token_id: str, path: Path | str | None = None) -> None:
+    with connect(path) as connection:
+        connection.execute(sa.update(api_tokens).where(api_tokens.c.token_id == token_id).values(last_used_at=_now()))
+
+
+def revoke_api_token(workspace_id: str, token_id: str, path: Path | str | None = None) -> dict[str, Any] | None:
+    now = _now()
+    with connect(path) as connection:
+        row = _row(
+            connection.execute(
+                sa.select(api_tokens).where(
+                    api_tokens.c.workspace_id == workspace_id,
+                    api_tokens.c.token_id == token_id,
+                )
+            )
+        )
+        if row is None:
+            return None
+        connection.execute(sa.update(api_tokens).where(api_tokens.c.token_id == token_id).values(revoked_at=now))
+    return _public_api_token({**row, "revoked_at": now})
+
+
+def load_user_mfa(user_id: str, path: Path | str | None = None) -> dict[str, Any] | None:
+    with engine(path).connect() as connection:
+        return _row(connection.execute(sa.select(user_mfa).where(user_mfa.c.user_id == user_id)))
+
+
+def upsert_user_mfa(
+    user_id: str,
+    secret: str,
+    recovery_codes: list[str],
+    path: Path | str | None = None,
+) -> dict[str, Any]:
+    row = {
+        "user_id": user_id,
+        "secret": secret,
+        "confirmed_at": None,
+        "last_counter": 0,
+        "recovery_codes_json": recovery_codes,
+        "created_at": _now(),
+    }
+    bound = engine(path)
+    with connect(path) as connection:
+        connection.execute(
+            _upsert_for(
+                user_mfa,
+                row,
+                ("user_id",),
+                ("secret", "confirmed_at", "last_counter", "recovery_codes_json"),
+                bound,
+            )
+        )
+    return row
+
+
+def confirm_user_mfa(user_id: str, last_counter: int, path: Path | str | None = None) -> None:
+    with connect(path) as connection:
+        connection.execute(
+            sa.update(user_mfa)
+            .where(user_mfa.c.user_id == user_id)
+            .values(confirmed_at=_now(), last_counter=last_counter)
+        )
+
+
+def update_user_mfa_counter(
+    user_id: str,
+    last_counter: int,
+    recovery_codes: list[str] | None = None,
+    path: Path | str | None = None,
+) -> None:
+    values: dict[str, Any] = {"last_counter": last_counter}
+    if recovery_codes is not None:
+        values["recovery_codes_json"] = recovery_codes
+    with connect(path) as connection:
+        connection.execute(sa.update(user_mfa).where(user_mfa.c.user_id == user_id).values(**values))
+
+
+def delete_user_mfa(user_id: str, path: Path | str | None = None) -> None:
+    with connect(path) as connection:
+        connection.execute(sa.delete(user_mfa).where(user_mfa.c.user_id == user_id))
+
+
+def load_identity_binding(provider: str, issuer: str, subject: str, path: Path | str | None = None) -> dict[str, Any] | None:
+    with engine(path).connect() as connection:
+        return _row(
+            connection.execute(
+                sa.select(identity_bindings).where(
+                    identity_bindings.c.provider == provider,
+                    identity_bindings.c.issuer == issuer,
+                    identity_bindings.c.subject == subject,
+                )
+            )
+        )
+
+
+def upsert_identity_binding(
+    user_id: str,
+    provider: str,
+    issuer: str,
+    subject: str,
+    path: Path | str | None = None,
+) -> dict[str, Any]:
+    existing = load_identity_binding(provider, issuer, subject, path)
+    now = _now()
+    if existing:
+        with connect(path) as connection:
+            connection.execute(
+                sa.update(identity_bindings)
+                .where(identity_bindings.c.binding_id == existing["binding_id"])
+                .values(last_seen_at=now)
+            )
+        return {**existing, "last_seen_at": now}
+    row = {
+        "binding_id": _new_id(),
+        "user_id": user_id,
+        "provider": provider,
+        "issuer": issuer,
+        "subject": subject,
+        "created_at": now,
+        "last_seen_at": now,
+    }
+    with connect(path) as connection:
+        connection.execute(sa.insert(identity_bindings).values(**row))
+    return row
+
+
+def create_login_flow(
+    state: str,
+    provider: str,
+    *,
+    code_verifier: str = "",
+    redirect_uri: str = "",
+    nonce: str = "",
+    expires_at: str,
+    path: Path | str | None = None,
+) -> dict[str, Any]:
+    row = {
+        "state": state,
+        "provider": provider,
+        "code_verifier": code_verifier,
+        "redirect_uri": redirect_uri,
+        "nonce": nonce,
+        "expires_at": expires_at,
+        "consumed_at": None,
+        "created_at": _now(),
+    }
+    with connect(path) as connection:
+        connection.execute(sa.insert(login_flows).values(**row))
+    return row
+
+
+def load_login_flow(state: str, provider: str, now: str, path: Path | str | None = None) -> dict[str, Any] | None:
+    with engine(path).connect() as connection:
+        return _row(
+            connection.execute(
+                sa.select(login_flows).where(
+                    login_flows.c.state == state,
+                    login_flows.c.provider == provider,
+                    login_flows.c.consumed_at.is_(None),
+                    login_flows.c.expires_at > now,
+                )
+            )
+        )
+
+
+def consume_login_flow(state: str, provider: str, now: str, path: Path | str | None = None) -> dict[str, Any] | None:
+    with connect(path) as connection:
+        row = _row(
+            connection.execute(
+                sa.select(login_flows).where(
+                    login_flows.c.state == state,
+                    login_flows.c.provider == provider,
+                    login_flows.c.consumed_at.is_(None),
+                    login_flows.c.expires_at > now,
+                )
+            )
+        )
+        if row is None:
+            return None
+        connection.execute(sa.update(login_flows).where(login_flows.c.state == state).values(consumed_at=now))
+    return row

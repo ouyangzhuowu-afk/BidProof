@@ -22,6 +22,7 @@ let authTrialMode = false;
 let authStatus = null;
 let accountAction = null;
 let currentUser = null;
+let pendingMfaToken = '';
 let memberCreateMode = 'invite';
 let membersCache = [];
 let projectsCache = [];
@@ -51,6 +52,13 @@ document.querySelector('#retention-form').addEventListener('submit', saveRetenti
 document.querySelector('#purge-retention').addEventListener('click', purgeRetention);
 document.querySelector('#create-backup').addEventListener('click', createBackup);
 document.querySelector('#password-form').addEventListener('submit', changePassword);
+document.querySelector('#mfa-form').addEventListener('submit', submitMfaSettings);
+document.querySelector('#mfa-enroll').addEventListener('click', enrollMfa);
+document.querySelector('#token-form').addEventListener('submit', createApiToken);
+document.querySelector('#tokens-list').addEventListener('click', (event) => {
+  const button = event.target.closest('[data-revoke-token]');
+  if (button) revokeApiToken(button.dataset.revokeToken);
+});
 document.querySelectorAll('[data-mobile-view]').forEach((button) => button.addEventListener('click', () => {
   if (button.dataset.mobileView === 'home') showHome();
   if (button.dataset.mobileView === 'jobs') showJobs();
@@ -121,6 +129,11 @@ async function initializeApp() {
     if (await initializeAccountAction()) return;
     const status = await request('/api/auth/status');
     authStatus = status;
+    const mfaToken = new URLSearchParams(window.location.search).get('mfa_token');
+    if (mfaToken && !status.authenticated) {
+      pendingMfaToken = mfaToken;
+      return showAuth(false);
+    }
     if (!status.authenticated && !status.setup_required) return showAuth(false);
     if (status.setup_required) return showAuth(true, status.bootstrap_locked ? '生产环境尚未配置初始化令牌，请联系运维人员。' : '');
     currentUser = status.user;
@@ -140,7 +153,7 @@ function showAuth(setup, message = '') {
   document.querySelector('#auth-form button[type="submit"]').disabled = Boolean(authStatus?.bootstrap_locked);
   if (!authDialog.open) authDialog.showModal();
   setTimeout(() => {
-    const focusId = setup ? '#auth-workspace' : (authTrialMode ? '#auth-join-code' : '#auth-username');
+    const focusId = pendingMfaToken ? '#auth-mfa-code' : (setup ? '#auth-workspace' : (authTrialMode ? '#auth-join-code' : '#auth-username'));
     document.querySelector(focusId)?.focus();
   }, 0);
   refreshIcons();
@@ -181,17 +194,36 @@ function applyAuthMode(message = '') {
     : (authStatus?.trial_join_enabled
       ? '没有账号？切换到「试用加入」。无法登录可联系管理员重置密码。'
       : '无法登录？请联系企业管理员生成一次性密码重置链接。');
-  document.querySelector('#auth-submit-label').textContent = setup ? '创建并进入' : (trial ? '加入并进入' : '登录');
-  document.querySelector('#auth-message').textContent = message;
+  document.querySelector('#auth-submit-label').textContent = pendingMfaToken ? '完成验证' : (setup ? '创建并进入' : (trial ? '加入并进入' : '登录'));
+  document.querySelector('#mfa-fields').hidden = !pendingMfaToken;
+  document.querySelector('#auth-mfa-code').required = Boolean(pendingMfaToken);
+  document.querySelector('#auth-username').disabled = Boolean(pendingMfaToken);
+  document.querySelector('#auth-password').disabled = Boolean(pendingMfaToken);
+  document.querySelector('#oidc-login-wrap').hidden = setup || trial || Boolean(pendingMfaToken) || !authStatus?.oidc_enabled;
+  document.querySelector('#auth-message').textContent = message || (pendingMfaToken ? '请输入身份验证器中的 6 位验证码。' : '');
 }
 
 async function submitAuth(event) {
   event.preventDefault();
   const form = event.currentTarget;
   const button = form.querySelector('button[type="submit"]');
-  const loadingLabel = authSetupRequired ? '正在初始化' : (authTrialMode ? '正在加入' : '正在登录');
+  const loadingLabel = pendingMfaToken ? '正在验证' : (authSetupRequired ? '正在初始化' : (authTrialMode ? '正在加入' : '正在登录'));
   setButtonLoading(button, true, loadingLabel);
   try {
+    if (pendingMfaToken) {
+      currentUser = await request('/api/auth/mfa/verify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ code: document.querySelector('#auth-mfa-code').value, mfa_token: pendingMfaToken }),
+      });
+      pendingMfaToken = '';
+      authDialog.close();
+      form.reset();
+      renderCurrentUser();
+      await loadProjects();
+      await loadRuns();
+      return;
+    }
     const payload = { username: document.querySelector('#auth-username').value.trim(), password: document.querySelector('#auth-password').value };
     let endpoint = '/api/auth/login';
     if (authSetupRequired) {
@@ -204,7 +236,14 @@ async function submitAuth(event) {
       payload.join_code = document.querySelector('#auth-join-code').value;
       endpoint = '/api/auth/trial-join';
     }
-    currentUser = await request(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+    const result = await request(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+    if (result.mfa_required) {
+      pendingMfaToken = result.mfa_token;
+      applyAuthMode('请输入身份验证器中的 6 位验证码。');
+      document.querySelector('#auth-mfa-code').focus();
+      return;
+    }
+    currentUser = result;
     authDialog.close();
     form.reset();
     authTrialMode = false;
@@ -213,7 +252,7 @@ async function submitAuth(event) {
     await loadRuns();
   } catch (error) {
     document.querySelector('#auth-message').textContent = error.message;
-    document.querySelector(authTrialMode ? '#auth-join-code' : '#auth-password').focus();
+    document.querySelector(pendingMfaToken ? '#auth-mfa-code' : (authTrialMode ? '#auth-join-code' : '#auth-password')).focus();
   }
   finally { setButtonLoading(button, false); }
 }
@@ -748,7 +787,7 @@ async function updateMember(userId, payload) {
 }
 
 async function loadOperations() {
-  await Promise.all([loadMembers(), loadProjects()]);
+  await Promise.all([loadMembers(), loadProjects(), loadMfaStatus(), loadApiTokens()]);
   const healthTarget = document.querySelector('#operations-health');
   const backupTarget = document.querySelector('#backups-list');
   try {
@@ -815,6 +854,91 @@ async function changePassword(event) {
     window.location.replace('/app');
   } catch (error) { message.textContent = `${error.message}，密码未更新。`; }
   finally { setButtonLoading(button, false); }
+}
+
+async function loadMfaStatus() {
+  const status = document.querySelector('#mfa-status');
+  const secret = document.querySelector('#mfa-secret');
+  if (!status) return;
+  secret.hidden = true;
+  secret.textContent = '';
+  try {
+    const payload = await request('/api/auth/status');
+    status.innerHTML = payload.mfa_enabled
+      ? '<strong>已启用。</strong><span>登录时需要验证器或恢复码。</span>'
+      : '<span>尚未启用二次验证。</span>';
+  } catch (error) {
+    status.innerHTML = `<div class="empty-state error-text">${escapeHtml(error.message)}</div>`;
+  }
+}
+
+async function enrollMfa() {
+  const message = document.querySelector('#mfa-message');
+  const secret = document.querySelector('#mfa-secret');
+  message.textContent = '';
+  try {
+    const payload = await request('/api/auth/mfa/enroll', { method: 'POST' });
+    secret.hidden = false;
+    secret.textContent = `密钥：${payload.secret}\n恢复码（仅显示一次）：\n${payload.recovery_codes.join('\n')}`;
+    message.textContent = '请用验证器扫描或录入密钥，然后输入一个验证码确认。';
+  } catch (error) { message.textContent = error.message; }
+}
+
+async function submitMfaSettings(event) {
+  event.preventDefault();
+  const message = document.querySelector('#mfa-message');
+  const code = document.querySelector('#mfa-code').value.trim();
+  message.textContent = '';
+  try {
+    const status = await request('/api/auth/status');
+    if (status.mfa_enabled) {
+      await request('/api/auth/mfa/disable', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ code }) });
+      showToast('二次验证已关闭。');
+    } else {
+      await request('/api/auth/mfa/confirm', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ code }) });
+      showToast('二次验证已启用。');
+    }
+    document.querySelector('#mfa-code').value = '';
+    await loadMfaStatus();
+  } catch (error) { message.textContent = error.message; }
+}
+
+async function loadApiTokens() {
+  const target = document.querySelector('#tokens-list');
+  try {
+    const payload = await request('/api/auth/tokens');
+    target.innerHTML = payload.tokens.length
+      ? payload.tokens.map((token) => `<article class="backup-row"><span class="operation-main"><strong>${escapeHtml(token.name)}</strong><small>${escapeHtml(token.token_prefix)} · ${token.revoked_at ? '已撤销' : '有效'}</small></span>${token.revoked_at ? '' : `<button class="button secondary" type="button" data-revoke-token="${escapeHtml(token.token_id)}">撤销</button>`}</article>`).join('')
+      : '<div class="empty-state">还没有 API 令牌。</div>';
+    document.querySelector('#token-form').hidden = false;
+  } catch (error) {
+    target.innerHTML = '<div class="empty-state">当前角色不能管理 API 令牌。</div>';
+    document.querySelector('#token-form').hidden = true;
+  }
+}
+
+async function createApiToken(event) {
+  event.preventDefault();
+  const message = document.querySelector('#token-message');
+  message.textContent = '';
+  try {
+    const created = await request('/api/auth/tokens', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: document.querySelector('#token-name').value.trim() }),
+    });
+    document.querySelector('#token-name').value = '';
+    message.textContent = `请立即保存令牌：${created.token}`;
+    await loadApiTokens();
+  } catch (error) { message.textContent = error.message; }
+}
+
+async function revokeApiToken(tokenId) {
+  try {
+    await request(`/api/auth/tokens/${encodeURIComponent(tokenId)}`, { method: 'DELETE' });
+    showToast('令牌已撤销。');
+    await loadApiTokens();
+  } catch (error) { showToast(`${error.message}，令牌未撤销。`); }
 }
 
 function showDetail() {
@@ -1243,7 +1367,7 @@ async function reviewRequirement(requirementId, decision, button) {
 }
 
 async function request(url, options = {}) {
-  const response = await fetch(url, options);
+  const response = await fetch(url, withCsrf(options));
   const contentType = response.headers.get('content-type') || '';
   const payload = contentType.includes('application/json') ? await response.json() : { detail: await response.text() };
   if (!response.ok) {
@@ -1255,7 +1379,7 @@ async function request(url, options = {}) {
 
 // Same session handling as request(), for endpoints whose success path is a binary download.
 async function requestBlobResponse(url, options = {}) {
-  const response = await fetch(url, options);
+  const response = await fetch(url, withCsrf(options));
   if (!response.ok) {
     if (response.status === 401 && !url.startsWith('/api/auth/')) showAuth(false);
     const contentType = response.headers.get('content-type') || '';
@@ -1263,6 +1387,16 @@ async function requestBlobResponse(url, options = {}) {
     throw new Error(payload.detail || '请求失败');
   }
   return response;
+}
+
+function csrfHeaders() {
+  const match = document.cookie.split('; ').find((row) => row.startsWith('bidproof_csrf='));
+  if (!match) return {};
+  return { 'X-CSRF-Token': decodeURIComponent(match.slice('bidproof_csrf='.length)) };
+}
+
+function withCsrf(options = {}) {
+  return { credentials: 'same-origin', ...options, headers: { ...csrfHeaders(), ...(options.headers || {}) } };
 }
 
 function setButtonLoading(button, loading, label = '') {

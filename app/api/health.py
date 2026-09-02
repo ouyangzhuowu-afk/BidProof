@@ -6,6 +6,7 @@ from fastapi import APIRouter, Query, Request
 from fastapi.responses import FileResponse
 
 from ..config import PROJECT_ROOT
+from ..authz import Permission, require
 from ..identity import principal_of
 from ..services import workspace_service
 
@@ -29,5 +30,6 @@ def healthz(request: Request, detail: bool = Query(default=False)) -> dict:
         # Liveness stays anonymous for load balancers and carries no operational state.
         return {"status": "ok", "service": "bid-evidence-agent"}
     # Detail names the database, backup recency and failed job counts.
-    principal_of(request)
+    principal = principal_of(request)
+    require(principal, Permission.HEALTH_DETAIL_READ)
     return workspace_service.health_detail()

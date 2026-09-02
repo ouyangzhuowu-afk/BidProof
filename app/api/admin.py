@@ -7,7 +7,8 @@ from pathlib import Path
 from fastapi import APIRouter, HTTPException, Query, Request
 
 from .. import config
-from ..identity import ADMIN_ROLES, principal_of, require_role
+from ..authz import Permission, require
+from ..identity import principal_of
 from ..repositories import audit, workspaces
 from ..schemas import WorkspaceSettingsRequest
 from ..services import workspace_service
@@ -19,13 +20,15 @@ router = APIRouter(tags=["admin"])
 
 @router.get("/api/workspace/settings")
 def workspace_settings(request: Request) -> dict:
-    return workspaces.settings(principal_of(request)["workspace_id"])
+    principal = principal_of(request)
+    require(principal, Permission.WORKSPACE_READ)
+    return workspaces.settings(principal["workspace_id"])
 
 
 @router.patch("/api/workspace/settings")
 def save_workspace_settings(request: Request, payload: WorkspaceSettingsRequest) -> dict:
     principal = principal_of(request)
-    require_role(principal, ADMIN_ROLES)
+    require(principal, Permission.WORKSPACE_MANAGE)
     settings = workspaces.update_settings(principal["workspace_id"], payload.retention_days)
     audit.record(
         principal["workspace_id"],
@@ -40,27 +43,35 @@ def save_workspace_settings(request: Request, payload: WorkspaceSettingsRequest)
 @router.get("/api/workspace/usage")
 def get_workspace_usage(request: Request) -> dict:
     principal = principal_of(request)
+    require(principal, Permission.WORKSPACE_READ)
     return {"workspace_id": principal["workspace_id"], **workspaces.usage(principal["workspace_id"])}
 
 
 @router.get("/api/workspace/privacy")
 def get_workspace_privacy(request: Request) -> dict:
-    return workspace_service.privacy(principal_of(request)["workspace_id"])
+    principal = principal_of(request)
+    require(principal, Permission.WORKSPACE_READ)
+    return workspace_service.privacy(principal["workspace_id"])
 
 
 @router.get("/api/notifications")
 def get_notifications(request: Request) -> dict:
-    return workspace_service.notifications(principal_of(request)["workspace_id"])
+    principal = principal_of(request)
+    require(principal, Permission.WORKSPACE_READ)
+    return workspace_service.notifications(principal["workspace_id"])
 
 
 @router.get("/api/accuracy/metrics")
 def get_accuracy_metrics(request: Request, include_test: bool = Query(default=False)) -> dict:
-    return workspace_service.accuracy(principal_of(request)["workspace_id"], include_test)
+    principal = principal_of(request)
+    require(principal, Permission.METRICS_READ)
+    return workspace_service.accuracy(principal["workspace_id"], include_test)
 
 
 @router.get("/api/retention/preview")
 def retention_preview(request: Request) -> dict:
     principal = principal_of(request)
+    require(principal, Permission.WORKSPACE_READ)
     cutoff, run_ids = workspace_service.retention_candidates(principal["workspace_id"])
     return {"workspace_id": principal["workspace_id"], "cutoff": cutoff, "count": len(run_ids), "run_ids": run_ids}
 
@@ -68,7 +79,7 @@ def retention_preview(request: Request) -> dict:
 @router.post("/api/retention/purge")
 def purge_retention(request: Request) -> dict:
     principal = principal_of(request)
-    require_role(principal, ADMIN_ROLES)
+    require(principal, Permission.RETENTION_MANAGE)
     return workspace_service.purge_retention(principal)
 
 
@@ -80,12 +91,13 @@ def list_evidence(
     valid_before: str | None = Query(default=None),
 ) -> dict:
     principal = principal_of(request)
+    require(principal, Permission.RUN_READ)
     return workspace_service.evidence_index(principal["workspace_id"], category, q, valid_before)
 
 
 @router.get("/api/backups")
 def get_backups(request: Request) -> dict:
-    require_role(principal_of(request), ADMIN_ROLES)
+    require(principal_of(request), Permission.BACKUP_MANAGE)
     return {
         "backups": list_backup_records(config.BACKUP_ROOT),
         "restore_boundary": "恢复会替换运行中数据，仅允许离线运维命令执行。",
@@ -95,7 +107,7 @@ def get_backups(request: Request) -> dict:
 @router.post("/api/backups", status_code=201)
 def create_project_backup(request: Request) -> dict:
     principal = principal_of(request)
-    require_role(principal, ADMIN_ROLES)
+    require(principal, Permission.BACKUP_MANAGE)
     backup = create_backup(backup_root=config.BACKUP_ROOT)
     verification = record_backup_verification(backup)
     audit.record(
@@ -111,7 +123,7 @@ def create_project_backup(request: Request) -> dict:
 @router.post("/api/backups/{backup_id}/verify")
 def verify_project_backup(request: Request, backup_id: str) -> dict:
     principal = principal_of(request)
-    require_role(principal, ADMIN_ROLES)
+    require(principal, Permission.BACKUP_MANAGE)
     if Path(backup_id).name != backup_id:
         raise HTTPException(status_code=400, detail="备份编号无效")
     backup = config.BACKUP_ROOT / backup_id

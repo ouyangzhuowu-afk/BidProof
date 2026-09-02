@@ -15,6 +15,7 @@ from fastapi.staticfiles import StaticFiles
 
 from . import config
 from .api import register_routers
+from .http import install_middleware
 from .repositories import jobs
 from .services import scan_service
 
@@ -42,6 +43,7 @@ async def lifespan(_app: FastAPI):
 
 def create_app() -> FastAPI:
     app = FastAPI(title="Bid Evidence Agent", version=VERSION, lifespan=lifespan)
+    install_middleware(app)
     app.mount("/static", StaticFiles(directory=config.PROJECT_ROOT / "static"), name="static")
     register_routers(app)
     return app
