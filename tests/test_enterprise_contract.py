@@ -89,7 +89,13 @@ def test_viewer_cannot_mutate_or_delete_run(monkeypatch):
 def test_pdf_report_is_a_real_pdf(monkeypatch):
     client = TestClient(main.app)
     monkeypatch.setattr(main, "extract_file", lambda _path: [{"page": 1, "text": "资格要求", "has_text": True, "char_count": 4, "blocks": []}])
-    run = client.post("/api/runs", files={"tender": ("tender.pdf", _pdf_bytes("资格要求"), "application/pdf")}).json()
+    from tests.conftest import TEST_AUTH_HEADERS
+
+    run = client.post(
+        "/api/runs",
+        headers=TEST_AUTH_HEADERS,
+        files={"tender": ("tender.pdf", _pdf_bytes("资格要求"), "application/pdf")},
+    ).json()
     stored = main.load_run(run["run_id"])
     base_requirement = stored["requirements"][0]
     stored["requirements"] = [
@@ -97,7 +103,7 @@ def test_pdf_report_is_a_real_pdf(monkeypatch):
         for index in range(1, 46)
     ]
     main.save_run(stored)
-    report = client.get(f"/api/runs/{run['run_id']}/report.pdf")
+    report = client.get(f"/api/runs/{run['run_id']}/report.pdf", headers=TEST_AUTH_HEADERS)
     assert report.status_code == 200
     assert report.content.startswith(b"%PDF")
     document = fitz.open(stream=report.content, filetype="pdf")
@@ -106,7 +112,7 @@ def test_pdf_report_is_a_real_pdf(monkeypatch):
     assert "REQ-0045" in extracted
     assert "45" in extracted
     document.close()
-    client.delete(f"/api/runs/{run['run_id']}")
+    client.delete(f"/api/runs/{run['run_id']}", headers=TEST_AUTH_HEADERS)
 
 
 def test_database_has_audit_and_job_tables():
@@ -118,20 +124,27 @@ def test_database_has_audit_and_job_tables():
 def test_rescan_creates_version_and_diff(monkeypatch):
     client = TestClient(main.app)
     monkeypatch.setattr(main, "extract_file", lambda _path: [{"page": 1, "text": "资格要求：提供营业执照。", "has_text": True, "char_count": 12, "blocks": []}])
-    first = client.post("/api/runs", files={"tender": ("tender.pdf", _pdf_bytes("资格要求"), "application/pdf")}).json()
+    from tests.conftest import TEST_AUTH_HEADERS
+
+    first = client.post(
+        "/api/runs",
+        headers=TEST_AUTH_HEADERS,
+        files={"tender": ("tender.pdf", _pdf_bytes("资格要求"), "application/pdf")},
+    ).json()
     second_response = client.post(
         f"/api/runs/{first['run_id']}/rescan",
+        headers=TEST_AUTH_HEADERS,
         files={"tender": ("tender-v2.pdf", _pdf_bytes("资格要求"), "application/pdf")},
     )
     assert second_response.status_code == 200
     second = second_response.json()
     assert second["parent_run_id"] == first["run_id"]
     assert second["version_number"] == 2
-    diff = client.get(f"/api/runs/{second['run_id']}/diff/{first['run_id']}")
+    diff = client.get(f"/api/runs/{second['run_id']}/diff/{first['run_id']}", headers=TEST_AUTH_HEADERS)
     assert diff.status_code == 200
     assert set(diff.json()) >= {"added", "removed", "changed"}
-    client.delete(f"/api/runs/{second['run_id']}")
-    client.delete(f"/api/runs/{first['run_id']}")
+    client.delete(f"/api/runs/{second['run_id']}", headers=TEST_AUTH_HEADERS)
+    client.delete(f"/api/runs/{first['run_id']}", headers=TEST_AUTH_HEADERS)
 
 
 def test_assignment_tags_comments_and_health_detail(monkeypatch):
@@ -160,30 +173,49 @@ def test_assignment_tags_comments_and_health_detail(monkeypatch):
 def test_upload_size_limit_is_enforced(monkeypatch):
     client = TestClient(main.app)
     monkeypatch.setattr(main, "MAX_UPLOAD_BYTES", 8)
-    response = client.post("/api/runs", files={"tender": ("large.txt", b"123456789", "text/plain")})
+    from tests.conftest import TEST_AUTH_HEADERS
+
+    response = client.post(
+        "/api/runs",
+        headers=TEST_AUTH_HEADERS,
+        files={"tender": ("large.txt", b"123456789", "text/plain")},
+    )
     assert response.status_code == 413
 
 
 def test_file_signature_must_match_extension():
     client = TestClient(main.app)
-    response = client.post("/api/runs", files={"tender": ("fake.pdf", b"MZ executable", "application/pdf")})
+    from tests.conftest import TEST_AUTH_HEADERS
+
+    response = client.post(
+        "/api/runs",
+        headers=TEST_AUTH_HEADERS,
+        files={"tender": ("fake.pdf", b"MZ executable", "application/pdf")},
+    )
     assert response.status_code == 422
 
 
 def test_persistent_scan_job_accepts_upload_and_links_run(monkeypatch):
     client = TestClient(main.app)
     monkeypatch.setattr(main, "extract_file", lambda _path: [{"page": 1, "text": "资格要求", "has_text": True, "char_count": 4, "blocks": []}])
-    response = client.post("/api/jobs", files={"tender": ("queued.pdf", _pdf_bytes("资格要求"), "application/pdf")})
+    from tests.conftest import TEST_AUTH_HEADERS
+
+    response = client.post(
+        "/api/jobs",
+        headers=TEST_AUTH_HEADERS,
+        files={"tender": ("queued.pdf", _pdf_bytes("资格要求"), "application/pdf")},
+    )
     assert response.status_code == 202
-    job = client.get(f"/api/jobs/{response.json()['job_id']}").json()
+    job = client.get(f"/api/jobs/{response.json()['job_id']}", headers=TEST_AUTH_HEADERS).json()
     assert job["status"] == "COMPLETED"
     assert job["run_id"]
-    client.delete(f"/api/runs/{job['run_id']}")
+    client.delete(f"/api/runs/{job['run_id']}", headers=TEST_AUTH_HEADERS)
 
 
 def test_background_scan_ignores_browser_empty_optional_evidence(monkeypatch):
     client = TestClient(main.app)
     monkeypatch.setattr(main, "extract_file", lambda _path: [{"page": 1, "text": "资格要求", "has_text": True, "char_count": 4, "blocks": []}])
+    from tests.conftest import TEST_AUTH_HEADERS
 
     boundary = "bidproof-empty-evidence"
     body = b"".join(
@@ -193,12 +225,16 @@ def test_background_scan_ignores_browser_empty_optional_evidence(monkeypatch):
             f"\r\n--{boundary}\r\nContent-Disposition: form-data; name=\"evidence\"; filename=\"\"\r\nContent-Type: application/octet-stream\r\n\r\n\r\n--{boundary}--\r\n".encode(),
         ]
     )
-    response = client.post("/api/jobs", content=body, headers={"Content-Type": f"multipart/form-data; boundary={boundary}"})
+    response = client.post(
+        "/api/jobs",
+        content=body,
+        headers={"Content-Type": f"multipart/form-data; boundary={boundary}", **TEST_AUTH_HEADERS},
+    )
 
     assert response.status_code == 202
-    job = client.get(f"/api/jobs/{response.json()['job_id']}").json()
+    job = client.get(f"/api/jobs/{response.json()['job_id']}", headers=TEST_AUTH_HEADERS).json()
     assert job["status"] == "COMPLETED"
-    client.delete(f"/api/runs/{job['run_id']}")
+    client.delete(f"/api/runs/{job['run_id']}", headers=TEST_AUTH_HEADERS)
 
 
 def test_job_list_is_workspace_scoped(monkeypatch):

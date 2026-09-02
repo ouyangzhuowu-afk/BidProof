@@ -3,6 +3,7 @@ from pathlib import Path
 
 import pytest
 
+from tests.conftest import requires_real_uploads
 from work.apply_independent_reviews import submit_reviews
 
 
@@ -32,6 +33,7 @@ def test_submit_reviews_rejects_partial_submission(tmp_path):
     assert not (tmp_path / "reviewed.json").exists()
 
 
+@requires_real_uploads
 def test_submit_reviews_writes_new_ledger_without_overwriting_source(tmp_path):
     source_path = ROOT / "outputs" / "ground-truth-review-ledger.json"
     source_before = source_path.read_bytes()

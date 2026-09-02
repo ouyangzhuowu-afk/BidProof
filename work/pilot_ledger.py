@@ -62,16 +62,59 @@ def summarize_file(path: Path) -> dict[str, int]:
         return validate_ledger(csv.DictReader(handle))
 
 
+def render_review(ledger_path: Path, report_path: Path, *, target_tasks: int = 10) -> None:
+    summary = summarize_file(ledger_path)
+    remaining = max(target_tasks - summary["rows"], 0)
+    business_status = "NOT_STARTED" if summary["rows"] == 0 else "IN_PROGRESS"
+    if summary["confirmed_tasks"] >= target_tasks and summary["payment_signals"] >= 2:
+        business_status = "TARGET_MET"
+    report_path.parent.mkdir(parents=True, exist_ok=True)
+    report_path.write_text(
+        "\n".join(
+            [
+                "# 真实任务验收台账",
+                "",
+                "## 当前状态",
+                "",
+                f"- 当前记录：{summary['rows']} / {target_tasks} 条真实任务",
+                f"- 已有人工确认任务：{summary['confirmed_tasks']} 条",
+                f"- 已记录付款意愿信号：{summary['payment_signals']} 条",
+                f"- 业务验收结论：`{business_status}`",
+                "",
+                "## 使用边界",
+                "",
+                "此台账只接受真实企业输入、真实人工确认、失败原因和付款意愿记录。历史演示任务、自动化测试和工程验收不计入业务任务数，也不填充为付款意愿。",
+                "",
+                "## 下一步",
+                "",
+                f"距离 10 个真实任务目标还差 {remaining} 条记录。",
+                "收到首个真实企业任务后，复制 `work/pilot-row.template.json` 并填写字段，运行：",
+                "`uv run python -m work.pilot_ledger --row-json work/pilot-row.json`",
+                "刷新本报告：`uv run python -m work.pilot_ledger --render-review`",
+                "",
+            ]
+        ),
+        encoding="utf-8",
+    )
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Append and summarize real Project-025 pilot tasks")
     parser.add_argument("--ledger", type=Path, default=Path("outputs/pilot-ledger.csv"))
+    parser.add_argument("--report", type=Path, default=Path("outputs/pilot-review.md"))
     parser.add_argument("--row-json", type=Path, help="JSON file containing one real task row")
+    parser.add_argument("--render-review", action="store_true", help="Regenerate the markdown review from the CSV")
     args = parser.parse_args()
+    if args.render_review:
+        render_review(args.ledger, args.report)
+        print(json.dumps(summarize_file(args.ledger), ensure_ascii=False))
+        return
     if args.row_json:
         row = json.loads(args.row_json.read_text(encoding="utf-8"))
         print(json.dumps(append_row(args.ledger, row), ensure_ascii=False))
-    else:
-        print(json.dumps(summarize_file(args.ledger), ensure_ascii=False))
+        render_review(args.ledger, args.report)
+        return
+    print(json.dumps(summarize_file(args.ledger), ensure_ascii=False))
 
 
 if __name__ == "__main__":

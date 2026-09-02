@@ -3,11 +3,13 @@ from pathlib import Path
 
 import pytest
 
+from tests.conftest import requires_real_uploads
 from work.ground_truth_review import apply_independent_reviews, build_ledger, metric_eligible_entries
 from work.ocr_batch import run
 from app.ocr import OCRResult
 
 
+@requires_real_uploads
 def test_ground_truth_ledger_keeps_machine_and_human_status_separate():
     ledger = build_ledger()
 
@@ -28,6 +30,7 @@ def test_rejected_candidates_are_excluded_from_metric_ground_truth():
     assert rejected["review_id"] not in {entry["review_id"] for entry in eligible}
 
 
+@requires_real_uploads
 def test_unreviewed_candidates_cannot_count_as_verified_ground_truth():
     ledger = build_ledger()
     confirmed = next(entry for entry in ledger["entries"] if entry["first_pass_status"] == "CONFIRMED")
@@ -65,6 +68,7 @@ def test_conflicting_independent_review_requires_adjudication():
     assert metric_eligible_entries(updated) == []
 
 
+@requires_real_uploads
 def test_ocr_batch_without_provider_writes_blocked_plan(tmp_path, monkeypatch):
     monkeypatch.delenv("BID_OCR_PROVIDER", raising=False)
     monkeypatch.delenv("QWEN_OCR_API_KEY", raising=False)

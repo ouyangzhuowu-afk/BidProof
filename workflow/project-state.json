@@ -210,8 +210,8 @@
       "priority": "P1",
       "status": "in_progress",
       "dependencies": ["T-002", "C-005"],
-      "deliverables": ["outputs/pilot-ledger.csv", "outputs/pilot-review.md"],
-      "validation": "已建立 14 字段空台账、fail-closed 校验和快速追加 CLI；当前 0 条真实任务、0 条人工确认、0 条付款意愿，等待首个真实企业输入"
+      "deliverables": ["outputs/pilot-ledger.csv", "outputs/pilot-review.md", "outputs/icp-outreach.csv", "outputs/icp-outreach-review.md", "work/pilot-row.template.json", "work/icp-row.template.json"],
+      "validation": "已建立 14 字段 pilot 台账、11 字段 ICP 触达台账、fail-closed 校验、快速追加 CLI 与 intake 模板；当前 0 条真实任务、0 条 ICP 触达、0 条付款意愿，等待首批真实企业输入"
     }
   ],
   "dependencies": [
@@ -278,14 +278,20 @@
     ,{"path": "outputs/bidproof-deployment-blocked-2026-08-26.md", "kind": "deployment-report", "status": "verified"}
     ,{"path": "outputs/management-and-format-acceptance-2026-08-26.md", "kind": "acceptance-report", "status": "verified"}
     ,{"path": "deploy/cloudflare-container/", "kind": "cloudflare-container-deployment-skeleton", "status": "verified"}
-    ,{"path": "outputs/product-auth-public-acceptance-2026-08-27.md", "kind": "acceptance-report", "status": "verified"}
+    ,{"path": "work/icp_ledger.py", "kind": "icp-outreach-contract", "status": "verified"}
+    ,{"path": "tests/test_icp_ledger.py", "kind": "icp-outreach-test", "status": "verified"}
+    ,{"path": "outputs/icp-outreach.csv", "kind": "icp-outreach-ledger", "status": "verified"}
+    ,{"path": "outputs/icp-outreach-review.md", "kind": "icp-outreach-report", "status": "verified"}
+    ,{"path": "work/pilot-row.template.json", "kind": "pilot-intake-template", "status": "verified"}
+    ,{"path": "work/icp-row.template.json", "kind": "icp-intake-template", "status": "verified"}
+    ,{"path": "scripts/sync-real-upload-fixtures.ps1", "kind": "fixture-sync-script", "status": "verified"}
   ],
   "next_best_action": {
     "task_id": "T-005",
     "title": "建立真实任务验收台账与 45 天 ICP 试运行",
     "reason": "工程栈、独立 ground truth 和 OCR fail-closed 验收已落账；下一项是用真实企业输入记录端到端任务与付款意愿",
     "blocked_by": ["尚无首批真实企业任务输入"],
-    "fallback": "先创建空台账与字段校验，不用 demo 或历史任务冒充业务验收"
+    "fallback": "ICP 触达台账与 pilot intake 模板已就绪；收到真实企业输入后追加 pilot-row 并关联 icp-outreach.linked_pilot_task_id"
   },
-  "updated_at": "2026-08-27T17:20:02+08:00"
+  "updated_at": "2026-09-02T18:45:00+08:00"
 }

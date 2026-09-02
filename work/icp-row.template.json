@@ -1,0 +1,13 @@
+{
+  "contact_id": "ICP-001",
+  "contacted_at": "2026-09-02T10:00:00+08:00",
+  "company_name": "目标企业名称",
+  "icp_segment": "IT服务/软件实施-50-300人",
+  "channel": "熟人介绍|行业群|cold-outreach",
+  "contact_role": "投标负责人",
+  "response_status": "pending",
+  "next_step": "约 30 分钟产品演示",
+  "next_step_due": "2026-09-09",
+  "linked_pilot_task_id": "",
+  "notes": "只记录真实触达；产生 pilot 任务后再关联 task_id"
+}

@@ -1,0 +1,16 @@
+{
+  "task_id": "REAL-001",
+  "received_at": "2026-09-02T10:00:00+08:00",
+  "tender_filename": "招标文件.pdf",
+  "enterprise_name": "首批试运行企业名称",
+  "input_scope": "资格与废标风险扫描",
+  "output_run_id": "",
+  "requirement_count": "",
+  "unresolved_count": "",
+  "human_confirmation": "pending",
+  "failure_reason": "",
+  "elapsed_minutes": "",
+  "payment_signal": "",
+  "payment_note": "",
+  "evidence_boundary": "真实企业输入；待人工确认；不得用 demo 或历史测试任务填充"
+}

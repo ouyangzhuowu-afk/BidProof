@@ -74,6 +74,21 @@ docker compose up -d --build
 
 环境变量见 `.env.example`。团队试用建议设置 `BIDPROOF_TRIAL_JOIN_CODE`。
 
+### T-005 业务验收台账（当前优先级）
+
+- 真实任务：`outputs/pilot-ledger.csv` + `work/pilot-row.template.json`
+- ICP 触达（45 天 / 30 个）：`outputs/icp-outreach.csv` + `work/icp-row.template.json`
+
+```bash
+uv run python -m work.pilot_ledger --render-review
+uv run python -m work.icp_ledger --render-review
+# 收到真实输入后：
+uv run python -m work.pilot_ledger --row-json work/pilot-row.json
+uv run python -m work.icp_ledger --row-json work/icp-row.json
+```
+
+GitHub 克隆默认不含 `work/uploads/` 大文件；本地完整回归可执行 `.\scripts\sync-real-upload-fixtures.ps1`（需完整 checkout 源路径）。
+
 ## 公网试点（本机 + Cloudflare Tunnel）
 
 Error 1033 / HTTP 530 表示 Tunnel 连不上本机 8016。在项目根目录执行：

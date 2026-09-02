@@ -2,7 +2,7 @@
 
 ## 当前状态
 
-- 当前记录：0 条
+- 当前记录：0 / 10 条真实任务
 - 已有人工确认任务：0 条
 - 已记录付款意愿信号：0 条
 - 业务验收结论：`NOT_STARTED`
@@ -13,4 +13,7 @@
 
 ## 下一步
 
-收到首个真实企业任务后，准备一份 UTF-8 JSON 行记录，运行 `uv run python -m work.pilot_ledger --row-json work/pilot-row.json` 追加到 `outputs/pilot-ledger.csv`；命令会立即返回当前任务、人工确认和付款信号计数。保留对应 run ID、人工确认和证据边界；缺少人工确认或付款信号时保持空值，不得推断为成功。
+距离 10 个真实任务目标还差 10 条记录。
+收到首个真实企业任务后，复制 `work/pilot-row.template.json` 并填写字段，运行：
+`uv run python -m work.pilot_ledger --row-json work/pilot-row.json`
+刷新本报告：`uv run python -m work.pilot_ledger --render-review`

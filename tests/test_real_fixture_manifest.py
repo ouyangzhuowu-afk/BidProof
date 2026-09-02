@@ -2,13 +2,17 @@ import hashlib
 import json
 from pathlib import Path
 
+import pytest
+
 from app.extraction import extract_pdf
+from tests.conftest import requires_real_uploads
 
 
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "tests" / "fixtures" / "real-upload" / "ground-truth-candidates.json"
 
 
+@requires_real_uploads
 def test_real_upload_fixture_manifest_has_traceable_candidates():
     records = json.loads(MANIFEST.read_text(encoding="utf-8"))
 
@@ -25,6 +29,7 @@ def test_real_upload_fixture_manifest_has_traceable_candidates():
             assert candidate["review_status"] == "PENDING_MANUAL_CONFIRMATION"
 
 
+@requires_real_uploads
 def test_real_upload_candidate_quotes_remain_page_locatable():
     records = json.loads(MANIFEST.read_text(encoding="utf-8"))
 
