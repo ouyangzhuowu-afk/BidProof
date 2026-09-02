@@ -45,8 +45,15 @@ $health = curl.exe -s -m 5 "http://127.0.0.1:$Port/healthz"
 if ($health -notmatch '"status":"ok"') { Write-Error "本机 healthz 失败: $health" }
 Write-Host "local healthz ok"
 
-$token = (& $Cf tunnel token bidproof-local 2>$null | Select-Object -Last 1).Trim()
-if (-not $token) { Write-Error "无法获取 bidproof-local tunnel token，请运行 cloudflared tunnel login" }
+# cloudflared may write version warnings to stderr; with $ErrorActionPreference=Stop that
+# would abort before the JWT is captured. Pull stdout via a file instead.
+$tokenOut = Join-Path $env:TEMP "bidproof-tunnel-token.out"
+$tokenErr = Join-Path $env:TEMP "bidproof-tunnel-token.err"
+$tokenProc = Start-Process -FilePath $Cf -ArgumentList "tunnel","token","bidproof-local" `
+  -NoNewWindow -Wait -PassThru -RedirectStandardOutput $tokenOut -RedirectStandardError $tokenErr
+$token = ((Get-Content $tokenOut -Raw -ErrorAction SilentlyContinue) -split "\s+" | Where-Object { $_ } | Select-Object -Last 1)
+Remove-Item $tokenOut, $tokenErr -Force -ErrorAction SilentlyContinue
+if (-not $token -or $tokenProc.ExitCode -ne 0) { Write-Error "无法获取 bidproof-local tunnel token，请运行 cloudflared tunnel login" }
 
 $CfLog = Join-Path $Root "work\bidproof-tunnel-live.log"
 $CfErr = Join-Path $Root "work\bidproof-tunnel-live.err.log"
