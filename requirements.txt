@@ -2,3 +2,5 @@ fastapi>=0.115
 uvicorn[standard]>=0.30
 pymupdf>=1.24
 python-multipart>=0.0.9
+sqlalchemy>=2.0
+alembic>=1.13

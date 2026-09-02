@@ -1,0 +1,4 @@
+# PostgreSQL driver. Install alongside requirements.txt when BIDPROOF_DATABASE_URL points at
+# PostgreSQL; SQLite-only installs do not need it.
+-r requirements.txt
+psycopg[binary]>=3.1

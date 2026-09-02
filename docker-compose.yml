@@ -1,22 +1,43 @@
 services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-bidproof}
+      POSTGRES_USER: ${POSTGRES_USER:-bidproof}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env}
+    volumes:
+      - bidproof-postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-bidproof} -d ${POSTGRES_DB:-bidproof}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+    restart: unless-stopped
+
   bidproof:
     build: .
     ports:
       - "8016:8080"
     environment:
       BIDPROOF_DATA_ROOT: /data
+      BIDPROOF_ENV: ${BIDPROOF_ENV:-production}
+      BIDPROOF_DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-bidproof}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-bidproof}
       BIDPROOF_TRIAL_JOIN_CODE: ${BIDPROOF_TRIAL_JOIN_CODE:-}
       BIDPROOF_BOOTSTRAP_TOKEN: ${BIDPROOF_BOOTSTRAP_TOKEN:-}
-      BIDPROOF_ENV: ${BIDPROOF_ENV:-development}
     volumes:
       - bidproof-data:/data
+    depends_on:
+      postgres:
+        condition: service_healthy
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/healthz')"]
       interval: 30s
       timeout: 3s
       retries: 3
-      start_period: 10s
+      start_period: 20s
     restart: unless-stopped
 
 volumes:
   bidproof-data:
+  bidproof-postgres:

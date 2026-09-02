@@ -53,6 +53,22 @@ $env:QWEN_OCR_MODEL = "qwen-vl-ocr"
 
 OCR 请求失败、超时或返回空文本时，页面会保留 `ocr_status=FAILED` 并按缺证据处理；不会因此生成 `PASS`。
 
+## 数据库与迁移
+
+- 架构定义只有一处：`app/models.py`（SQLAlchemy Core metadata）。Alembic 基线由它生成，两者一致性有测试守护。
+- `BIDPROOF_DATABASE_URL` 为空时使用 `BIDPROOF_DATA_ROOT` 下的 SQLite 文件；生产建议 PostgreSQL：
+
+```bash
+export BIDPROOF_DATABASE_URL="postgresql+psycopg://bidproof:PASSWORD@postgres:5432/bidproof"
+pip install -r requirements-postgres.txt
+python -m app.dbctl upgrade
+```
+
+- 升级用 `python -m app.dbctl upgrade`，不要直接 `alembic upgrade head`：试点期的 SQLite 库有表但没有版本行，需要先按基线纳管（adopt）再升级。
+- 查看当前版本：`python -m app.dbctl current`
+- 生成新迁移：`python -m app.dbctl revision --message "描述"`
+- SQLite 连接自动启用 WAL、`busy_timeout` 与外键；即便如此它仍是单写入模型，只适合开发与单机小规模部署。
+
 ## 云端 / GitHub 运行（Cursor Cloud Agent）
 
 仓库：<https://github.com/ouyangzhuowu-afk/BidProof>

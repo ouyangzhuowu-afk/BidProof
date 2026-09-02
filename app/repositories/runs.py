@@ -21,17 +21,13 @@ def delete(run_id: str) -> bool:
     return db.delete_run(run_id)
 
 
-def list_all() -> list[dict[str, Any]]:
-    """Every run in the database.
-
-    Callers must scope the result. `list_for_workspace` is the safe default; P2 pushes the
-    workspace predicate into SQL so cross-tenant rows are never loaded.
-    """
-    return db.list_runs()
-
-
 def list_for_workspace(workspace_id: str) -> list[dict[str, Any]]:
-    return [run for run in db.list_runs() if run.get("workspace_id", "local") == workspace_id]
+    """Runs belonging to one workspace, newest first.
+
+    The predicate is applied in SQL, so another tenant's documents are never loaded into this
+    request in the first place.
+    """
+    return db.list_runs(workspace_id=workspace_id)
 
 
 def require(run_id: str) -> dict[str, Any]:

@@ -50,6 +50,4 @@ def recoverable() -> list[dict[str, Any]]:
 
 
 def status_counts() -> dict[str, int]:
-    with db.connect() as connection:
-        rows = connection.execute("SELECT status, COUNT(*) AS count FROM scan_jobs GROUP BY status").fetchall()
-    return {row["status"]: int(row["count"]) for row in rows}
+    return db.scan_job_status_counts()

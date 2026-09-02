@@ -119,8 +119,7 @@ def accuracy(workspace_id: str, include_test: bool) -> dict:
 def health_detail() -> dict:
     response: dict = {"status": "ok", "service": "bid-evidence-agent"}
     try:
-        with db.connect() as connection:
-            connection.execute("SELECT 1").fetchone()
+        db.ping()
         response["database"] = "ok"
     except Exception:
         response["status"] = "degraded"
