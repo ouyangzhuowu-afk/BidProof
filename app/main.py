@@ -4,6 +4,7 @@ import csv
 import html
 import io
 import json
+import logging
 import os
 import secrets
 import base64
@@ -12,8 +13,8 @@ import sqlite3
 import time
 import uuid
 import zipfile
+from dataclasses import dataclass, field
 from pathlib import Path
-from types import SimpleNamespace
 from typing import Annotated
 from contextlib import asynccontextmanager
 from datetime import datetime, timedelta, timezone
@@ -22,19 +23,25 @@ from fastapi import BackgroundTasks, FastAPI, File, Form, HTTPException, Query, 
 from fastapi.responses import FileResponse, HTMLResponse, Response
 from fastapi.staticfiles import StaticFiles
 
-from .config import ALLOW_TRUSTED_HEADERS, BACKUP_ROOT, BOOTSTRAP_TOKEN, DB_PATH, ENVIRONMENT, JOB_STAGING_DIR, PROJECT_ROOT, TRIAL_JOIN_CODE, UPLOAD_DIR
+from .config import ALLOW_TRUSTED_HEADERS, BACKUP_ROOT, BOOTSTRAP_TOKEN, DB_PATH, ENVIRONMENT, JOB_STAGING_DIR, PROJECT_ROOT, TRIAL_JOIN_CODE, TRUSTED_HEADERS_IGNORED, UPLOAD_DIR
 from .db import accuracy_metrics, add_accuracy_feedback, add_comment, cancel_scan_job, connect, consume_auth_action_token, count_users, create_auth_action_token, create_auth_session, create_project, create_remediation, create_scan_job, create_user, delete_auth_session, delete_run, ensure_default_project, ensure_workspace, find_duplicate_run_ids, get_workspace_settings, init_db, link_scan_job, list_audit_events, list_comments, list_expired_archived_run_ids, list_projects, list_recoverable_jobs, list_remediations, list_scan_jobs, list_workspace_members, list_workspace_remediations, load_auth_action_token, load_project, load_remediation, load_run, load_scan_job, load_session_user, load_user_by_id, load_user_by_username, primary_workspace_id, record_audit_event, save_run, start_scan_job, update_project, update_remediation, update_scan_job, update_user_password, update_workspace_member, update_workspace_settings, workspace_usage
 from .extraction import ExtractionError, extract_file
 from .file_safety import scan_upload_safety
 from .reporting import build_pdf_report
 from .rules import extract_requirements, match_evidence
-from .schemas import AccuracyFeedbackRequest, AuthActionCompleteRequest, AuthBootstrapRequest, BulkReportRequest, BulkRunRequest, CommentRequest, DecisionRequest, EvidenceMetadata, InvitationCreateRequest, LoginRequest, MemberCreateRequest, MemberUpdateRequest, PasswordChangeRequest, ProjectCreateRequest, ProjectUpdateRequest, RemediationCreateRequest, RemediationUpdateRequest, ReviewRequest, RunMetadataRequest, TrialJoinRequest, WorkspaceSettingsRequest
+from .schemas import MIN_PASSWORD_LENGTH, AccuracyFeedbackRequest, AuthActionCompleteRequest, AuthBootstrapRequest, BulkReportRequest, BulkRunRequest, CommentRequest, DecisionRequest, EvidenceMetadata, InvitationCreateRequest, LoginRequest, MemberCreateRequest, MemberUpdateRequest, PasswordChangeRequest, ProjectCreateRequest, ProjectUpdateRequest, RemediationCreateRequest, RemediationUpdateRequest, ReviewRequest, RunMetadataRequest, TrialJoinRequest, WorkspaceSettingsRequest
 from .state import advance_state, initial_research_state, utc_now
 from work.backup_restore import create_backup, list_backup_records, record_backup_verification
 
 
 @asynccontextmanager
 async def lifespan(_app: FastAPI):
+    if TRUSTED_HEADERS_IGNORED:
+        logging.getLogger(__name__).warning(
+            "BIDPROOF_ALLOW_TRUSTED_HEADERS is set but ignored because BIDPROOF_ENV=%s; "
+            "self-asserted identity headers are only honoured under BIDPROOF_ENV=test",
+            ENVIRONMENT,
+        )
     tasks = [asyncio.create_task(_process_scan_job(job["job_id"])) for job in list_recoverable_jobs()]
     yield
     if tasks:
@@ -53,9 +60,30 @@ LOGIN_ATTEMPT_WINDOW_SECONDS = int(os.environ.get("BIDPROOF_LOGIN_ATTEMPT_WINDOW
 _login_attempts: dict[str, list[float]] = {}
 
 
-def _principal(request: Request) -> dict[str, str]:
-    if isinstance(request, SimpleNamespace):
-        return _trusted_header_principal(request)
+@dataclass(frozen=True)
+class InternalJobContext:
+    """Call context for a background scan job.
+
+    Identity is carried as already-verified fields rather than request headers, so a queued
+    job can never be used to replay or escalate a client-supplied identity.
+    """
+
+    workspace_id: str
+    user_id: str
+    role: str
+    job_id: str
+    headers: dict[str, str] = field(default_factory=dict)
+
+    def principal(self) -> dict[str, str]:
+        return {"workspace_id": self.workspace_id, "user_id": self.user_id, "role": self.role}
+
+
+CallContext = Request | InternalJobContext
+
+
+def _principal(request: CallContext) -> dict[str, str]:
+    if isinstance(request, InternalJobContext):
+        return request.principal()
     token = request.cookies.get("bidproof_session")
     if token:
         user = load_session_user(_token_hash(token), utc_now())
@@ -71,12 +99,21 @@ def _principal(request: Request) -> dict[str, str]:
     raise HTTPException(status_code=401, detail="请先登录")
 
 
-def _trusted_header_principal(request: Request | SimpleNamespace) -> dict[str, str]:
+def _trusted_header_principal(request: Request) -> dict[str, str]:
     workspace_id = request.headers.get("X-Workspace-ID", "local").strip() or "local"
     user_id = request.headers.get("X-User-ID", "local-owner").strip() or "local-owner"
     role = request.headers.get("X-User-Role", "OWNER").strip().upper() or "OWNER"
     ensure_workspace(workspace_id, user_id, role)
     return {"workspace_id": workspace_id, "user_id": user_id, "role": role}
+
+
+def _job_id_from_request(request: CallContext) -> str | None:
+    """Return the queued job this call belongs to, or None for a direct client request.
+
+    A client-supplied job id would let any caller drive another workspace's job state, so only
+    a server-constructed job context can bind a run to an existing job.
+    """
+    return request.job_id if isinstance(request, InternalJobContext) else None
 
 
 def _password_hash(password: str, salt: bytes | None = None, iterations: int = 240_000) -> str:
@@ -172,9 +209,12 @@ def index() -> FileResponse:
 
 
 @app.get("/healthz")
-def healthz(detail: bool = Query(default=False)) -> dict:
+def healthz(request: Request, detail: bool = Query(default=False)) -> dict:
     response: dict = {"status": "ok", "service": "bid-evidence-agent"}
     if detail:
+        # Liveness stays anonymous for load balancers; operational detail names the database,
+        # backup recency and failed job counts, so it requires an authenticated caller.
+        _principal(request)
         try:
             with connect() as db:
                 db.execute("SELECT 1").fetchone()
@@ -253,7 +293,10 @@ def login(request: Request, response: Response, payload: LoginRequest) -> dict:
     attempt_key = _login_attempt_key(request, payload.username)
     _enforce_login_rate_limit(attempt_key, now)
     user = load_user_by_username(payload.username.strip())
-    if not user or not bool(user.get("active", 1)) or not _verify_password(payload.password, user["password_hash"]):
+    # An under-length password cannot match a hash stored under the policy, so short-circuit
+    # before the PBKDF2 work while still answering with the same 401 as any bad credential.
+    meets_policy = len(payload.password) >= MIN_PASSWORD_LENGTH
+    if not user or not bool(user.get("active", 1)) or not meets_policy or not _verify_password(payload.password, user["password_hash"]):
         _record_failed_login(attempt_key, now)
         raise HTTPException(status_code=401, detail="用户名或密码错误")
     _login_attempts.pop(attempt_key, None)
@@ -532,6 +575,8 @@ def verify_project_backup(request: Request, backup_id: str) -> dict:
 
 @app.post("/api/runs")
 async def create_run(
+    # Annotated for FastAPI's signature inspection; background jobs pass an InternalJobContext,
+    # which the identity helpers accept. P1 replaces this with a service-layer call.
     request: Request,
     tender: Annotated[UploadFile, File(...)],
     evidence: Annotated[list[UploadFile] | None, File()] = None,
@@ -550,8 +595,9 @@ async def create_run(
         raise HTTPException(status_code=400, detail="招标文件支持 PDF、DOCX、XLSX、PPTX、TXT、MD")
     metadata = _parse_evidence_metadata(evidence_metadata)
     run_id = uuid.uuid4().hex
-    job_id = request.headers.get("X-BidProof-Job-ID") or uuid.uuid4().hex
-    if request.headers.get("X-BidProof-Job-ID"):
+    queued_job_id = _job_id_from_request(request)
+    job_id = queued_job_id or uuid.uuid4().hex
+    if queued_job_id:
         update_scan_job(job_id, "RUNNING")
     else:
         create_scan_job(job_id, principal["workspace_id"], run_id, "RUNNING")
@@ -1583,12 +1629,12 @@ async def _process_scan_job(job_id: str) -> None:
     if not start_scan_job(job_id, attempts=attempts, progress_total=progress_total, progress_message="准备解析文件"):
         return
     update_scan_job(job_id, "RUNNING", attempts=attempts, progress_current=0, progress_total=progress_total, progress_message="准备解析文件")
-    headers = {
-        "X-Workspace-ID": job["workspace_id"],
-        "X-User-ID": payload.get("user_id", "local-owner"),
-        "X-User-Role": payload.get("role", "OWNER"),
-        "X-BidProof-Job-ID": job_id,
-    }
+    context = InternalJobContext(
+        workspace_id=job["workspace_id"],
+        user_id=payload.get("user_id", "local-owner"),
+        role=payload.get("role", "OWNER"),
+        job_id=job_id,
+    )
     try:
         with ExitStack() as stack:
             tender_handle = stack.enter_context(Path(payload["tender_path"]).open("rb"))
@@ -1602,7 +1648,7 @@ async def _process_scan_job(job_id: str) -> None:
                 _remove_tree(Path(payload["tender_path"]).parent)
                 return
             result = await create_run(
-                SimpleNamespace(headers=headers),
+                context,
                 tender,
                 evidence_uploads,
                 payload.get("company_name", "未填写企业"),

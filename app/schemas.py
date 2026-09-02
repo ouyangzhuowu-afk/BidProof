@@ -3,6 +3,11 @@ from typing import Literal
 from pydantic import BaseModel, Field
 
 
+# Single source of truth for the account password policy. Applied wherever a password is set;
+# on login it is enforced in the handler so an under-length value still fails as a 401.
+MIN_PASSWORD_LENGTH = 12
+MAX_PASSWORD_LENGTH = 200
+
 ReviewDecision = Literal[
     "PASS",
     "FAIL",
@@ -84,24 +89,26 @@ class AccuracyFeedbackRequest(BaseModel):
 class AuthBootstrapRequest(BaseModel):
     workspace_name: str = Field(min_length=1, max_length=120)
     username: str = Field(min_length=3, max_length=80)
-    password: str = Field(min_length=12, max_length=200)
+    password: str = Field(min_length=MIN_PASSWORD_LENGTH, max_length=MAX_PASSWORD_LENGTH)
     bootstrap_token: str | None = Field(default=None, max_length=500)
 
 
 class LoginRequest(BaseModel):
     username: str = Field(min_length=1, max_length=80)
-    password: str = Field(min_length=1, max_length=200)
+    # Deliberately permissive: a credential that is too short must fail as a normal 401 in the
+    # login handler, not as a 422, so response codes cannot be used to probe password length.
+    password: str = Field(min_length=1, max_length=MAX_PASSWORD_LENGTH)
 
 
 class TrialJoinRequest(BaseModel):
     username: str = Field(min_length=3, max_length=80)
-    password: str = Field(min_length=12, max_length=200)
+    password: str = Field(min_length=MIN_PASSWORD_LENGTH, max_length=MAX_PASSWORD_LENGTH)
     join_code: str = Field(min_length=4, max_length=120)
 
 
 class PasswordChangeRequest(BaseModel):
-    current_password: str = Field(min_length=1, max_length=200)
-    new_password: str = Field(min_length=12, max_length=200)
+    current_password: str = Field(min_length=1, max_length=MAX_PASSWORD_LENGTH)
+    new_password: str = Field(min_length=MIN_PASSWORD_LENGTH, max_length=MAX_PASSWORD_LENGTH)
 
 
 class InvitationCreateRequest(BaseModel):
@@ -111,12 +118,12 @@ class InvitationCreateRequest(BaseModel):
 
 class AuthActionCompleteRequest(BaseModel):
     token: str = Field(min_length=20, max_length=500)
-    password: str = Field(min_length=12, max_length=200)
+    password: str = Field(min_length=MIN_PASSWORD_LENGTH, max_length=MAX_PASSWORD_LENGTH)
 
 
 class MemberCreateRequest(BaseModel):
     username: str = Field(min_length=3, max_length=80)
-    password: str = Field(min_length=12, max_length=200)
+    password: str = Field(min_length=MIN_PASSWORD_LENGTH, max_length=MAX_PASSWORD_LENGTH)
     role: Literal["ADMIN", "REVIEWER", "VIEWER"]
 
 

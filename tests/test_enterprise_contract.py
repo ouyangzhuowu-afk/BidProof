@@ -164,7 +164,7 @@ def test_assignment_tags_comments_and_health_detail(monkeypatch):
     assert comment.status_code == 200
     comments = client.get(f"/api/runs/{run['run_id']}/comments", headers=headers).json()["comments"]
     assert comments[0]["body"] == "请复核营业执照原件"
-    health = client.get("/healthz?detail=true").json()
+    health = client.get("/healthz?detail=true", headers=headers).json()
     assert health["database"] == "ok"
     assert "last_backup_at" in health
     client.delete(f"/api/runs/{run['run_id']}", headers=headers)

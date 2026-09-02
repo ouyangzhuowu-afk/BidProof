@@ -35,3 +35,6 @@ Thumbs.db
 
 # Playwright local captures (optional runtime artifacts)
 .playwright-cli/
+
+# Local virtualenv
+.venv/

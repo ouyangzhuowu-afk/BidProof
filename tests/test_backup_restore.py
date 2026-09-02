@@ -63,7 +63,7 @@ def test_backup_listing_and_health_use_verified_evidence(tmp_path, monkeypatch):
     assert listed.status_code == 200
     assert listed.json()["backups"][0]["valid"] is True
     assert client.post("/api/backups", headers=viewer).status_code == 403
-    health = client.get("/healthz?detail=true").json()
+    health = client.get("/healthz?detail=true", headers=owner).json()
     assert health["backup_status"] == "verified"
     assert health["last_verified_backup_at"]
     assert isinstance(health["failed_jobs"], int)

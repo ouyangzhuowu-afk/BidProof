@@ -498,12 +498,11 @@ async function bulkExportReports() {
   const button = document.querySelector('#bulk-export');
   setButtonLoading(button, true, '导出中');
   try {
-    const response = await fetch('/api/runs/bulk/report.zip', {
+    const response = await requestBlobResponse('/api/runs/bulk/report.zip', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ run_ids: [...selectedRunIds], format: 'pdf' }),
     });
-    if (!response.ok) throw new Error((await response.json()).detail || '报告导出失败');
     const blob = await response.blob();
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
@@ -1252,6 +1251,18 @@ async function request(url, options = {}) {
     throw new Error(payload.detail || '请求失败');
   }
   return payload;
+}
+
+// Same session handling as request(), for endpoints whose success path is a binary download.
+async function requestBlobResponse(url, options = {}) {
+  const response = await fetch(url, options);
+  if (!response.ok) {
+    if (response.status === 401 && !url.startsWith('/api/auth/')) showAuth(false);
+    const contentType = response.headers.get('content-type') || '';
+    const payload = contentType.includes('application/json') ? await response.json() : { detail: await response.text() };
+    throw new Error(payload.detail || '请求失败');
+  }
+  return response;
 }
 
 function setButtonLoading(button, loading, label = '') {
