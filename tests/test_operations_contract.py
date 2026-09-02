@@ -4,7 +4,8 @@ import sqlite3
 
 from fastapi.testclient import TestClient
 
-from app import main
+from app import config, main
+from app.services import scan_service
 from app.db import create_scan_job, init_db, list_recoverable_jobs, load_scan_job, record_audit_event, update_scan_job
 from app.extraction import ExtractionError
 from work.backup_restore import create_backup, record_backup_verification, restore_backup
@@ -29,7 +30,7 @@ def test_scan_job_persists_progress_and_recovery_state(tmp_path):
 def test_detailed_health_reports_degraded_reasons_and_queue_counts(tmp_path, monkeypatch):
     empty_backups = tmp_path / "backups"
     empty_backups.mkdir()
-    monkeypatch.setattr(main, "BACKUP_ROOT", empty_backups)
+    monkeypatch.setattr(config, "BACKUP_ROOT", empty_backups)
     create_scan_job("health-failed", "health", None, "FAILED", {})
     client = TestClient(main.app)
 
@@ -83,7 +84,7 @@ def test_failed_background_job_keeps_progress_and_recovery_reason(monkeypatch):
     def fail_extract(_path):
         raise ExtractionError("测试解析失败")
 
-    monkeypatch.setattr(main, "extract_file", fail_extract)
+    monkeypatch.setattr(scan_service, "extract_file", fail_extract)
     response = client.post("/api/jobs", files={"tender": ("broken.txt", "资格要求", "text/plain")})
     assert response.status_code == 202
     job = client.get(f"/api/jobs/{response.json()['job_id']}").json()

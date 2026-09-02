@@ -22,6 +22,12 @@ jobs:
           pip install -r requirements.txt pytest httpx
       - name: Workflow state check
         run: python -m app.workflow check
+      - name: Migrations apply to an empty database
+        env:
+          BIDPROOF_DATABASE_URL: sqlite+pysqlite:///${{ runner.temp }}/ci-migrations.sqlite3
+        run: |
+          python -m app.dbctl upgrade
+          python -m app.dbctl current
       - name: JavaScript syntax check
         run: |
           if command -v node >/dev/null 2>&1; then

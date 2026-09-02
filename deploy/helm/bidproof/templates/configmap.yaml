@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "bidproof.name" . }}
+  labels:
+    {{- include "bidproof.labels" . | nindent 4 }}
+data:
+  BIDPROOF_ENV: {{ .Values.env.BIDPROOF_ENV | quote }}
+  BIDPROOF_JOB_RUNNER: {{ .Values.env.BIDPROOF_JOB_RUNNER | quote }}
+  BIDPROOF_JSON_LOGS: {{ .Values.env.BIDPROOF_JSON_LOGS | quote }}
+  BIDPROOF_METRICS: {{ .Values.env.BIDPROOF_METRICS | quote }}
+  BIDPROOF_LICENSE_REQUIRED: {{ .Values.env.BIDPROOF_LICENSE_REQUIRED | quote }}
+  BIDPROOF_PERSONAL_SIGNUP: {{ .Values.env.BIDPROOF_PERSONAL_SIGNUP | quote }}
+  BIDPROOF_DATA_ROOT: /data

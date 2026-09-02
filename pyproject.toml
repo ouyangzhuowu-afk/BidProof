@@ -8,7 +8,14 @@ dependencies = [
   "uvicorn[standard]>=0.30",
   "pymupdf>=1.24",
   "python-multipart>=0.0.9",
+  "sqlalchemy>=2.0",
+  "alembic>=1.13",
+  "structlog>=24.1",
 ]
+
+[project.optional-dependencies]
+postgres = ["psycopg[binary]>=3.1"]
+ldap = ["ldap3>=2.9"]
 
 [dependency-groups]
 dev = [

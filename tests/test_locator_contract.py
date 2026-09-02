@@ -106,7 +106,7 @@ def test_non_page_locator_is_never_rendered_as_a_page():
 
 
 def test_report_columns_use_locator_language_for_non_page_sources():
-    source = (Path(__file__).resolve().parents[1] / "app" / "main.py").read_text(encoding="utf-8")
+    source = (Path(__file__).resolve().parents[1] / "app" / "presenters.py").read_text(encoding="utf-8")
     assert '"tender_locator"' in source
     assert '"evidence_locators"' in source
     assert "<th>招标定位</th>" in source

@@ -1,4 +1,3 @@
-import io
 import sqlite3
 import uuid
 from pathlib import Path
@@ -6,7 +5,9 @@ from pathlib import Path
 import fitz
 from fastapi.testclient import TestClient
 
-from app import main
+from app import main, uploads
+from app.repositories import runs as runs_repo
+from app.services import scan_service
 from app.config import DB_PATH
 
 
@@ -21,7 +22,7 @@ def _pdf_bytes(text: str) -> bytes:
 
 def test_run_is_scoped_and_audited_by_workspace(monkeypatch):
     client = TestClient(main.app)
-    monkeypatch.setattr(main, "extract_file", lambda _path: [{"page": 1, "text": "资格要求：提供营业执照。", "has_text": True, "char_count": 12, "blocks": []}])
+    monkeypatch.setattr(scan_service, "extract_file", lambda _path: [{"page": 1, "text": "资格要求：提供营业执照。", "has_text": True, "char_count": 12, "blocks": []}])
     headers = {"X-Workspace-ID": "acme", "X-User-ID": "reviewer-1", "X-User-Role": "OWNER"}
     response = client.post("/api/runs", headers=headers, files={"tender": ("tender.pdf", _pdf_bytes("资格要求"), "application/pdf")})
     assert response.status_code == 200
@@ -38,7 +39,7 @@ def test_run_is_scoped_and_audited_by_workspace(monkeypatch):
 
 def test_every_run_subresource_is_scoped_by_workspace(monkeypatch):
     client = TestClient(main.app)
-    monkeypatch.setattr(main, "extract_file", lambda _path: [{"page": 1, "text": "资格要求：提供营业执照。", "has_text": True, "char_count": 12, "blocks": []}])
+    monkeypatch.setattr(scan_service, "extract_file", lambda _path: [{"page": 1, "text": "资格要求：提供营业执照。", "has_text": True, "char_count": 12, "blocks": []}])
     owner = {"X-Workspace-ID": "tenant-alpha", "X-User-ID": "owner-alpha", "X-User-Role": "OWNER"}
     attacker = {"X-Workspace-ID": "tenant-beta", "X-User-ID": "reviewer-beta", "X-User-Role": "REVIEWER"}
     run = client.post(
@@ -76,7 +77,7 @@ def test_every_run_subresource_is_scoped_by_workspace(monkeypatch):
 
 def test_viewer_cannot_mutate_or_delete_run(monkeypatch):
     client = TestClient(main.app)
-    monkeypatch.setattr(main, "extract_file", lambda _path: [{"page": 1, "text": "资格要求", "has_text": True, "char_count": 4, "blocks": []}])
+    monkeypatch.setattr(scan_service, "extract_file", lambda _path: [{"page": 1, "text": "资格要求", "has_text": True, "char_count": 4, "blocks": []}])
     owner = {"X-Workspace-ID": "acme-view", "X-User-ID": "owner", "X-User-Role": "OWNER"}
     viewer = {"X-Workspace-ID": "acme-view", "X-User-ID": "viewer", "X-User-Role": "VIEWER"}
     run = client.post("/api/runs", headers=owner, files={"tender": ("tender.pdf", _pdf_bytes("资格要求"), "application/pdf")}).json()
@@ -88,7 +89,7 @@ def test_viewer_cannot_mutate_or_delete_run(monkeypatch):
 
 def test_pdf_report_is_a_real_pdf(monkeypatch):
     client = TestClient(main.app)
-    monkeypatch.setattr(main, "extract_file", lambda _path: [{"page": 1, "text": "资格要求", "has_text": True, "char_count": 4, "blocks": []}])
+    monkeypatch.setattr(scan_service, "extract_file", lambda _path: [{"page": 1, "text": "资格要求", "has_text": True, "char_count": 4, "blocks": []}])
     from tests.conftest import TEST_AUTH_HEADERS
 
     run = client.post(
@@ -96,13 +97,13 @@ def test_pdf_report_is_a_real_pdf(monkeypatch):
         headers=TEST_AUTH_HEADERS,
         files={"tender": ("tender.pdf", _pdf_bytes("资格要求"), "application/pdf")},
     ).json()
-    stored = main.load_run(run["run_id"])
+    stored = runs_repo.load(run["run_id"])
     base_requirement = stored["requirements"][0]
     stored["requirements"] = [
         {**base_requirement, "requirement_id": f"REQ-{index:04d}", "title": f"资格要求 {index}"}
         for index in range(1, 46)
     ]
-    main.save_run(stored)
+    runs_repo.save(stored)
     report = client.get(f"/api/runs/{run['run_id']}/report.pdf", headers=TEST_AUTH_HEADERS)
     assert report.status_code == 200
     assert report.content.startswith(b"%PDF")
@@ -123,7 +124,7 @@ def test_database_has_audit_and_job_tables():
 
 def test_rescan_creates_version_and_diff(monkeypatch):
     client = TestClient(main.app)
-    monkeypatch.setattr(main, "extract_file", lambda _path: [{"page": 1, "text": "资格要求：提供营业执照。", "has_text": True, "char_count": 12, "blocks": []}])
+    monkeypatch.setattr(scan_service, "extract_file", lambda _path: [{"page": 1, "text": "资格要求：提供营业执照。", "has_text": True, "char_count": 12, "blocks": []}])
     from tests.conftest import TEST_AUTH_HEADERS
 
     first = client.post(
@@ -149,7 +150,7 @@ def test_rescan_creates_version_and_diff(monkeypatch):
 
 def test_assignment_tags_comments_and_health_detail(monkeypatch):
     client = TestClient(main.app)
-    monkeypatch.setattr(main, "extract_file", lambda _path: [{"page": 1, "text": "资格要求", "has_text": True, "char_count": 4, "blocks": []}])
+    monkeypatch.setattr(scan_service, "extract_file", lambda _path: [{"page": 1, "text": "资格要求", "has_text": True, "char_count": 4, "blocks": []}])
     headers = {"X-Workspace-ID": "collab", "X-User-ID": "owner", "X-User-Role": "OWNER"}
     run = client.post("/api/runs", headers=headers, files={"tender": ("tender.pdf", _pdf_bytes("资格要求"), "application/pdf")}).json()
     metadata = client.patch(
@@ -164,7 +165,7 @@ def test_assignment_tags_comments_and_health_detail(monkeypatch):
     assert comment.status_code == 200
     comments = client.get(f"/api/runs/{run['run_id']}/comments", headers=headers).json()["comments"]
     assert comments[0]["body"] == "请复核营业执照原件"
-    health = client.get("/healthz?detail=true").json()
+    health = client.get("/healthz?detail=true", headers=headers).json()
     assert health["database"] == "ok"
     assert "last_backup_at" in health
     client.delete(f"/api/runs/{run['run_id']}", headers=headers)
@@ -172,7 +173,7 @@ def test_assignment_tags_comments_and_health_detail(monkeypatch):
 
 def test_upload_size_limit_is_enforced(monkeypatch):
     client = TestClient(main.app)
-    monkeypatch.setattr(main, "MAX_UPLOAD_BYTES", 8)
+    monkeypatch.setattr(uploads, "MAX_UPLOAD_BYTES", 8)
     from tests.conftest import TEST_AUTH_HEADERS
 
     response = client.post(
@@ -197,7 +198,7 @@ def test_file_signature_must_match_extension():
 
 def test_persistent_scan_job_accepts_upload_and_links_run(monkeypatch):
     client = TestClient(main.app)
-    monkeypatch.setattr(main, "extract_file", lambda _path: [{"page": 1, "text": "资格要求", "has_text": True, "char_count": 4, "blocks": []}])
+    monkeypatch.setattr(scan_service, "extract_file", lambda _path: [{"page": 1, "text": "资格要求", "has_text": True, "char_count": 4, "blocks": []}])
     from tests.conftest import TEST_AUTH_HEADERS
 
     response = client.post(
@@ -214,7 +215,7 @@ def test_persistent_scan_job_accepts_upload_and_links_run(monkeypatch):
 
 def test_background_scan_ignores_browser_empty_optional_evidence(monkeypatch):
     client = TestClient(main.app)
-    monkeypatch.setattr(main, "extract_file", lambda _path: [{"page": 1, "text": "资格要求", "has_text": True, "char_count": 4, "blocks": []}])
+    monkeypatch.setattr(scan_service, "extract_file", lambda _path: [{"page": 1, "text": "资格要求", "has_text": True, "char_count": 4, "blocks": []}])
     from tests.conftest import TEST_AUTH_HEADERS
 
     boundary = "bidproof-empty-evidence"
@@ -239,7 +240,7 @@ def test_background_scan_ignores_browser_empty_optional_evidence(monkeypatch):
 
 def test_job_list_is_workspace_scoped(monkeypatch):
     client = TestClient(main.app)
-    monkeypatch.setattr(main, "extract_file", lambda _path: [{"page": 1, "text": "资格要求", "has_text": True, "char_count": 4, "blocks": []}])
+    monkeypatch.setattr(scan_service, "extract_file", lambda _path: [{"page": 1, "text": "资格要求", "has_text": True, "char_count": 4, "blocks": []}])
     workspace = f"jobs-{uuid.uuid4().hex}"
     owner = {"X-Workspace-ID": workspace, "X-User-ID": "job-owner", "X-User-Role": "OWNER"}
     other = {"X-Workspace-ID": f"other-{uuid.uuid4().hex}", "X-User-ID": "other-owner", "X-User-Role": "OWNER"}
@@ -255,7 +256,7 @@ def test_job_list_is_workspace_scoped(monkeypatch):
 
 def test_duplicate_upload_and_retention_preview_are_auditable(monkeypatch):
     client = TestClient(main.app)
-    monkeypatch.setattr(main, "extract_file", lambda _path: [{"page": 1, "text": "资格要求", "has_text": True, "char_count": 4, "blocks": []}])
+    monkeypatch.setattr(scan_service, "extract_file", lambda _path: [{"page": 1, "text": "资格要求", "has_text": True, "char_count": 4, "blocks": []}])
     workspace = f"lifecycle-{uuid.uuid4().hex}"
     owner = {"X-Workspace-ID": workspace, "X-User-ID": "lifecycle-owner", "X-User-Role": "OWNER"}
     viewer = {"X-Workspace-ID": workspace, "X-User-ID": "lifecycle-viewer", "X-User-Role": "VIEWER"}
@@ -283,14 +284,14 @@ def test_duplicate_upload_and_retention_preview_are_auditable(monkeypatch):
 
 def test_permanent_delete_removes_run_owned_data_and_uploads(monkeypatch):
     client = TestClient(main.app)
-    monkeypatch.setattr(main, "extract_file", lambda _path: [{"page": 1, "text": "资格要求", "has_text": True, "char_count": 4, "blocks": []}])
+    monkeypatch.setattr(scan_service, "extract_file", lambda _path: [{"page": 1, "text": "资格要求", "has_text": True, "char_count": 4, "blocks": []}])
     headers = {"X-Workspace-ID": f"delete-{uuid.uuid4().hex}", "X-User-ID": "delete-owner", "X-User-Role": "OWNER"}
     run = client.post("/api/runs", headers=headers, files={"tender": ("delete.pdf", _pdf_bytes("资格要求"), "application/pdf")}).json()
     run_id = run["run_id"]
     requirement_id = run["requirements"][0]["requirement_id"]
     client.post(f"/api/runs/{run_id}/comments", headers=headers, json={"body": "删除前评论"})
     client.post(f"/api/runs/{run_id}/accuracy-feedback", headers=headers, json={"category": "QUALIFICATION", "predicted": "DETECTED", "actual": "RELEVANT", "requirement_id": requirement_id})
-    upload_dir = Path(main.load_run(run_id)["tender_path"]).parent
+    upload_dir = Path(runs_repo.load(run_id)["tender_path"]).parent
     assert upload_dir.exists()
 
     assert client.delete(f"/api/runs/{run_id}", headers=headers).status_code == 200
@@ -304,7 +305,7 @@ def test_permanent_delete_removes_run_owned_data_and_uploads(monkeypatch):
 
 def test_projects_group_runs_and_are_isolated_by_workspace(monkeypatch):
     client = TestClient(main.app)
-    monkeypatch.setattr(main, "extract_file", lambda _path: [{"page": 1, "text": "资格要求", "has_text": True, "char_count": 4, "blocks": []}])
+    monkeypatch.setattr(scan_service, "extract_file", lambda _path: [{"page": 1, "text": "资格要求", "has_text": True, "char_count": 4, "blocks": []}])
     workspace = f"projects-{uuid.uuid4().hex}"
     owner = {"X-Workspace-ID": workspace, "X-User-ID": "project-owner", "X-User-Role": "OWNER"}
     viewer = {"X-Workspace-ID": workspace, "X-User-ID": "project-viewer", "X-User-Role": "VIEWER"}
@@ -342,7 +343,7 @@ def test_projects_group_runs_and_are_isolated_by_workspace(monkeypatch):
 
 def test_accuracy_feedback_produces_category_metrics(monkeypatch):
     client = TestClient(main.app)
-    monkeypatch.setattr(main, "extract_file", lambda _path: [{"page": 1, "text": "资格要求", "has_text": True, "char_count": 4, "blocks": []}])
+    monkeypatch.setattr(scan_service, "extract_file", lambda _path: [{"page": 1, "text": "资格要求", "has_text": True, "char_count": 4, "blocks": []}])
     headers = {"X-Workspace-ID": f"metrics-{uuid.uuid4().hex}", "X-User-ID": "metrics-reviewer", "X-User-Role": "OWNER"}
     run = client.post("/api/runs", headers=headers, files={"tender": ("metrics.pdf", _pdf_bytes("资格要求"), "application/pdf")}).json()
     detected_payload = {"category": "QUALIFICATION", "predicted": "DETECTED", "actual": "RELEVANT", "requirement_id": run["requirements"][0]["requirement_id"]}

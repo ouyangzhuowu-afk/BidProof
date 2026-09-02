@@ -4,6 +4,7 @@ from datetime import datetime, timedelta, timezone
 from fastapi.testclient import TestClient
 
 from app import main
+from app.services import scan_service
 from app.db import create_scan_job
 
 
@@ -20,7 +21,7 @@ def _pdf_bytes(text: str) -> bytes:
 
 def test_remediation_lifecycle_is_scoped_and_audited(monkeypatch):
     client = TestClient(main.app)
-    monkeypatch.setattr(main, "extract_file", lambda _path: [{"page": 1, "text": "资格要求", "has_text": True, "char_count": 4, "blocks": []}])
+    monkeypatch.setattr(scan_service, "extract_file", lambda _path: [{"page": 1, "text": "资格要求", "has_text": True, "char_count": 4, "blocks": []}])
     workspace = f"remediation-{uuid.uuid4().hex}"
     owner = {"X-Workspace-ID": workspace, "X-User-ID": "owner", "X-User-Role": "OWNER"}
     other = {"X-Workspace-ID": f"other-{uuid.uuid4().hex}", "X-User-ID": "other", "X-User-Role": "OWNER"}
@@ -60,7 +61,7 @@ def test_usage_and_privacy_surfaces_are_workspace_scoped():
 
 def test_notifications_surface_overdue_remediations_and_failed_jobs(monkeypatch):
     client = TestClient(main.app)
-    monkeypatch.setattr(main, "extract_file", lambda _path: [{"page": 1, "text": "资格要求", "has_text": True, "char_count": 4, "blocks": []}])
+    monkeypatch.setattr(scan_service, "extract_file", lambda _path: [{"page": 1, "text": "资格要求", "has_text": True, "char_count": 4, "blocks": []}])
     workspace = f"notifications-{uuid.uuid4().hex}"
     headers = {"X-Workspace-ID": workspace, "X-User-ID": "owner", "X-User-Role": "OWNER"}
     run = client.post("/api/runs", headers=headers, files={"tender": ("tender.pdf", _pdf_bytes("资格要求"), "application/pdf")}).json()

@@ -44,10 +44,22 @@ def test_motion_scene_is_responsive_and_respects_reduced_motion():
     assert "pointermove" in script
 
 
-def test_container_static_bundle_matches_the_live_landing_assets():
-    deployed_static = PROJECT_ROOT / "deploy" / "cloudflare-container" / "static"
+def test_no_forked_copy_of_the_application_tree_is_vendored():
+    """A second copy of app/ or static/ silently drifts from the live one.
 
-    for filename in ("landing.html", "landing.css", "landing.js"):
-        assert (PROJECT_ROOT / "static" / filename).read_bytes() == (
-            deployed_static / filename
-        ).read_bytes()
+    The Cloudflare container skeleton previously vendored both and had already diverged, so
+    on-premise delivery keeps exactly one source of truth for application code and assets.
+    """
+    duplicates = [
+        path
+        for candidate in ("app", "static")
+        for path in PROJECT_ROOT.rglob(f"*/{candidate}/main.py")
+        if ".venv" not in path.parts and "node_modules" not in path.parts
+    ]
+    duplicates += [
+        path
+        for path in PROJECT_ROOT.rglob("*/static/app.js")
+        if ".venv" not in path.parts and "node_modules" not in path.parts
+    ]
+
+    assert duplicates == []

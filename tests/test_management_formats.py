@@ -5,6 +5,7 @@ import zipfile
 from fastapi.testclient import TestClient
 
 from app import main
+from app.services import scan_service
 from app.extraction import ExtractionError, extract_file
 
 
@@ -75,7 +76,7 @@ def test_bulk_archive_restore_and_report_exports(monkeypatch):
     def fake_extract(_path):
         return [{"page": 1, "text": "资格要求：提供营业执照。", "has_text": True, "char_count": 12, "blocks": []}]
 
-    monkeypatch.setattr(main, "extract_file", fake_extract)
+    monkeypatch.setattr(scan_service, "extract_file", fake_extract)
     created = []
     for name in ("one.pdf", "two.pdf"):
         response = client.post("/api/runs", files={"tender": (name, _pdf_bytes("资格要求"), "application/pdf")})
@@ -110,7 +111,7 @@ def test_bulk_archive_restore_and_report_exports(monkeypatch):
 
 def test_active_or_unsafe_document_content_is_rejected(monkeypatch):
     client = TestClient(main.app)
-    monkeypatch.setattr(main, "extract_file", lambda _path: [{"page": 1, "text": "资格要求", "has_text": True, "char_count": 4, "blocks": []}])
+    monkeypatch.setattr(scan_service, "extract_file", lambda _path: [{"page": 1, "text": "资格要求", "has_text": True, "char_count": 4, "blocks": []}])
 
     macro = client.post(
         "/api/runs",
@@ -132,7 +133,7 @@ def test_active_or_unsafe_document_content_is_rejected(monkeypatch):
 
 def test_bulk_pdf_report_zip_is_workspace_scoped(monkeypatch):
     client = TestClient(main.app)
-    monkeypatch.setattr(main, "extract_file", lambda _path: [{"page": 1, "text": "资格要求", "has_text": True, "char_count": 4, "blocks": []}])
+    monkeypatch.setattr(scan_service, "extract_file", lambda _path: [{"page": 1, "text": "资格要求", "has_text": True, "char_count": 4, "blocks": []}])
     owner = {"X-Workspace-ID": "report-ws", "X-User-ID": "owner", "X-User-Role": "OWNER"}
     foreign = {"X-Workspace-ID": "foreign-ws", "X-User-ID": "owner", "X-User-Role": "OWNER"}
     first = client.post("/api/runs", headers=owner, files={"tender": ("Alpha.pdf", _pdf_bytes("资格要求"), "application/pdf")}).json()

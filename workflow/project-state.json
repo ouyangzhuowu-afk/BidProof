@@ -23,21 +23,31 @@
       "id": "C-001",
       "title": "FastAPI + SQLite + PyMuPDF MVP",
       "status": "verified",
-      "artifacts": ["app/main.py", "app/db.py", "app/extraction.py"],
+      "artifacts": [
+        "app/main.py",
+        "app/db.py",
+        "app/extraction.py"
+      ],
       "validation": "uv run --group dev pytest -q: 10 passed; /healthz=200; /=200"
     },
     {
       "id": "C-002",
       "title": "Research OS 状态字段与人工复核接口",
       "status": "verified",
-      "artifacts": ["app/state.py", "app/main.py", "app/db.py"],
+      "artifacts": [
+        "app/state.py",
+        "app/main.py",
+        "app/db.py"
+      ],
       "validation": "API lifecycle test covers upload, review, delete and recovery lookup"
     },
     {
       "id": "C-003",
       "title": "GitHub 借鉴审查与许可证边界",
       "status": "verified",
-      "artifacts": ["outputs/github-code-audit.md"],
+      "artifacts": [
+        "outputs/github-code-audit.md"
+      ],
       "validation": "候选仓库逐项记录许可证、测试、维护和可借鉴范围"
     },
     {
@@ -45,63 +55,104 @@
       "title": "建立可恢复 Agent Workflow Package",
       "status": "verified",
       "dependencies": [],
-      "artifacts": ["workflow/"],
+      "artifacts": [
+        "workflow/"
+      ],
       "validation": "uv run --group dev pytest -q: 13 passed; workflow check=PASS; next-action 可输出 T-002"
     },
     {
       "id": "C-004",
       "title": "六步扫描闭环与三视图前端",
       "status": "verified",
-      "artifacts": ["static/index.html", "static/app.js", "static/style.css", "static/favicon.svg"],
+      "artifacts": [
+        "static/index.html",
+        "static/app.js",
+        "static/style.css",
+        "static/favicon.svg"
+      ],
       "validation": "现场服务 8015 验收主页/API/目标任务详情；Playwright 复测桌面与 390px 移动端，详情页横向溢出从 475 修复为 390；回归测试覆盖收缩和长文本换行"
     },
     {
       "id": "C-005",
       "title": "结构化证据契约与任务 API",
       "status": "verified",
-      "artifacts": ["app/main.py", "app/db.py", "app/schemas.py", "app/state.py", "app/rules.py"],
+      "artifacts": [
+        "app/main.py",
+        "app/db.py",
+        "app/schemas.py",
+        "app/state.py",
+        "app/rules.py"
+      ],
       "validation": "uv run --group dev pytest -q: 15 passed；覆盖来源文档、页索引、证据匹配、复核、决策、筛选和删除"
     },
     {
       "id": "C-006",
       "title": "Qwen-VL-OCR 可替换 adapter 与 fail-closed 降级",
       "status": "verified",
-      "artifacts": ["app/ocr.py", "app/extraction.py", "tests/test_ocr.py"],
+      "artifacts": [
+        "app/ocr.py",
+        "app/extraction.py",
+        "tests/test_ocr.py"
+      ],
       "validation": "uv run --group dev pytest -q: 19 passed；覆盖禁用、提供方失败、页级状态、持久化 OCR 元数据和 OpenAI-compatible 响应解析"
     },
     {
       "id": "C-007",
       "title": "真实上传材料盘点与 T-002 候选集",
       "status": "verified",
-      "artifacts": ["work/inspect_uploads.py", "outputs/upload-inventory.json", "outputs/upload-ground-truth.md", "tests/fixtures/real-upload/ground-truth-candidates.json"],
+      "artifacts": [
+        "work/inspect_uploads.py",
+        "outputs/upload-inventory.json",
+        "outputs/upload-ground-truth.md",
+        "tests/fixtures/real-upload/ground-truth-candidates.json"
+      ],
       "validation": "扫描 18 个上传文件；6 份可检索信息化 PDF 建立 33 条按类别候选；NFKC 归一化后 SHA、页码和 quote 可回归定位；第一轮确认 31 条、驳回 2 条；24 tests passed"
     },
     {
       "id": "C-008",
       "title": "Ground truth 审核台账与 OCR 断点计划",
       "status": "verified",
-      "artifacts": ["work/ground_truth_review.py", "outputs/ground-truth-review-ledger.json", "outputs/ground-truth-review.md", "work/ocr_batch.py", "work/ocr/akss-water-it/batch-summary.json", "outputs/ocr-readiness.md"],
+      "artifacts": [
+        "work/ground_truth_review.py",
+        "outputs/ground-truth-review-ledger.json",
+        "outputs/ground-truth-review.md",
+        "work/ocr_batch.py",
+        "work/ocr/akss-water-it/batch-summary.json",
+        "outputs/ocr-readiness.md"
+      ],
       "validation": "第一轮逐条复核 33 条候选：31 条待独立复核、2 条类别误报；Qwen-VL-OCR 已完成 78 页断点运行，77 页 EXTRACTED，第 52 页 FAILED，失败页保持 UNKNOWN/NEEDS_REVIEW"
     },
     {
       "id": "C-009",
       "title": "独立 ground truth 复核门禁与 OCR 失败页重试",
       "status": "verified",
-      "artifacts": ["work/ground_truth_review.py", "work/ocr_batch.py", "tests/test_ground_truth_workflow.py", "tests/test_rules.py"],
+      "artifacts": [
+        "work/ground_truth_review.py",
+        "work/ocr_batch.py",
+        "tests/test_ground_truth_workflow.py",
+        "tests/test_rules.py"
+      ],
       "validation": "独立复核必须使用不同 reviewer；冲突进入 NEEDS_ADJUDICATION；正式指标只接受 INDEPENDENTLY_CONFIRMED 且非首轮驳回项；--retry-failed 可单页恢复；全量 30 tests passed"
     },
     {
       "id": "C-010",
       "title": "Qwen-VL-OCR 失败页真实恢复",
       "status": "verified",
-      "artifacts": ["work/ocr/akss-water-it/page-0052.json", "work/ocr/akss-water-it/batch-summary.json", "outputs/ocr-readiness.md"],
+      "artifacts": [
+        "work/ocr/akss-water-it/page-0052.json",
+        "work/ocr/akss-water-it/batch-summary.json",
+        "outputs/ocr-readiness.md"
+      ],
       "validation": "新密钥仅通过环境变量注入；--retry-failed 成功恢复第 52 页，78/78 页 EXTRACTED；未把密钥写入项目、日志或结果文件"
     },
     {
       "id": "C-011",
       "title": "真实扫描闭环过夜验收",
       "status": "verified",
-      "artifacts": ["outputs/overnight-verification-2026-08-25.md", "work/data/bid_agent.sqlite3"],
+      "artifacts": [
+        "outputs/overnight-verification-2026-08-25.md",
+        "work/data/bid_agent.sqlite3"
+      ],
       "validation": "运行 934c0cc93ea847ad9180421367bcecb0 可从 SQLite 恢复；76 条要求、62 条 UNKNOWN/NEEDS_REVIEW、HOLD 决策和双页码 PASS 门禁均核验通过"
     },
     {
@@ -109,8 +160,14 @@
       "title": "建立中文真实招标 PDF fixture 与人工 ground truth",
       "priority": "P0",
       "status": "verified",
-      "dependencies": ["T-001"],
-      "artifacts": ["outputs/ground-truth-independent-reviewed.json", "outputs/ground-truth-independent-review.md", "outputs/independent-review-submission.json"],
+      "dependencies": [
+        "T-001"
+      ],
+      "artifacts": [
+        "outputs/ground-truth-independent-reviewed.json",
+        "outputs/ground-truth-independent-review.md",
+        "outputs/independent-review-submission.json"
+      ],
       "validation": "用户作为独立复核人提交 33 条决定；31 条 INDEPENDENTLY_CONFIRMED、2 条 INDEPENDENTLY_REJECTED、0 条 NEEDS_ADJUDICATION；源 PDF SHA-256 重验通过，原始 ledger 未覆盖"
     },
     {
@@ -118,88 +175,187 @@
       "title": "实现 OCR adapter 与扫描页 fail-closed 降级",
       "priority": "P1",
       "status": "verified",
-      "dependencies": ["T-002"],
-      "artifacts": ["app/ocr.py", "tests/test_ocr.py", "work/ocr/akss-water-it/batch-summary.json"],
+      "dependencies": [
+        "T-002"
+      ],
+      "artifacts": [
+        "app/ocr.py",
+        "tests/test_ocr.py",
+        "work/ocr/akss-water-it/batch-summary.json"
+      ],
       "validation": "全量测试 34 passed；真实 OCR 页级结果 78/78 EXTRACTED；缺证据仍保持 UNKNOWN/NEEDS_REVIEW，不生成无双引用 PASS"
     },
     {
       "id": "C-012",
       "title": "ui-ux-pro-max 前端成品化重构与多视口验收",
       "status": "verified",
-      "dependencies": ["C-004", "C-005"],
-      "artifacts": ["static/index.html", "static/style.css", "static/app.js", "static/vendor/lucide.min.js", "design-system/bid-evidence-agent/MASTER.md", "tests/test_ui_product_contract.py", "tests/test_mobile_layout.py", "outputs/ui-refactor-acceptance-2026-08-26.md"],
+      "dependencies": [
+        "C-004",
+        "C-005"
+      ],
+      "artifacts": [
+        "static/index.html",
+        "static/style.css",
+        "static/app.js",
+        "static/vendor/lucide.min.js",
+        "design-system/bid-evidence-agent/MASTER.md",
+        "tests/test_ui_product_contract.py",
+        "tests/test_mobile_layout.py",
+        "outputs/ui-refactor-acceptance-2026-08-26.md"
+      ],
       "validation": "node --check 通过；全量 pytest 38 passed；workflow check=PASS；Playwright 1440/768/390px 通过，分页、搜索、人工决策、上传对话框和控制台复核完成"
     },
     {
       "id": "C-013",
       "title": "真实任务台账快速追加与即时汇总",
       "status": "verified",
-      "dependencies": ["T-005"],
-      "artifacts": ["work/pilot_ledger.py", "tests/test_pilot_ledger.py", "outputs/pilot-ledger.csv", "outputs/pilot-review.md"],
+      "dependencies": [
+        "T-005"
+      ],
+      "artifacts": [
+        "work/pilot_ledger.py",
+        "tests/test_pilot_ledger.py",
+        "outputs/pilot-ledger.csv",
+        "outputs/pilot-review.md"
+      ],
       "validation": "新增 CLI 可追加真实任务并即时输出 rows/confirmed_tasks/payment_signals；缺少 task_id 或表头不匹配时拒绝写入；当前空台账保持 0/0/0"
     },
     {
       "id": "C-014",
       "title": "bidproof.marketcase.net 公网试点上线",
       "status": "verified",
-      "dependencies": ["C-001", "C-012"],
-      "artifacts": ["outputs/bidproof-deployment-blocked-2026-08-26.md", "deploy/cloudflare-container/"],
+      "dependencies": [
+        "C-001",
+        "C-012"
+      ],
+      "artifacts": [
+        "outputs/bidproof-deployment-blocked-2026-08-26.md"
+      ],
       "validation": "Cloudflare Tunnel 回源 127.0.0.1:8016；公网 /healthz 与首页 HTTP 200；Playwright 页面标题和工作台核心区域验收通过；明确标注为依赖本机进程的试点上线，不是生产级部署"
     },
     {
       "id": "C-015",
       "title": "批量任务管理、报告导出与多格式输入",
       "status": "verified",
-      "dependencies": ["C-005", "C-012"],
-      "artifacts": ["app/main.py", "app/db.py", "app/extraction.py", "app/schemas.py", "static/index.html", "static/app.js", "static/style.css", "tests/test_management_formats.py", "outputs/management-and-format-acceptance-2026-08-26.md"],
+      "dependencies": [
+        "C-005",
+        "C-012"
+      ],
+      "artifacts": [
+        "app/main.py",
+        "app/db.py",
+        "app/extraction.py",
+        "app/schemas.py",
+        "static/index.html",
+        "static/app.js",
+        "static/style.css",
+        "tests/test_management_formats.py",
+        "outputs/management-and-format-acceptance-2026-08-26.md"
+      ],
       "validation": "全量 pytest 44 passed；node --check 通过；公网浏览器验收批量勾选、导出入口、解释区块和 390px 无横向溢出；现代 Office OOXML 文件可抽取，旧版格式明确要求转换"
     },
     {
       "id": "C-016",
       "title": "企业协作整改行动与就绪度边界审计",
       "status": "verified",
-      "dependencies": ["C-015"],
-      "artifacts": ["static/app.js", "static/style.css", "static/index.html", "tests/test_ui_product_contract.py", "outputs/enterprise-readiness-audit-2026-08-26.md"],
+      "dependencies": [
+        "C-015"
+      ],
+      "artifacts": [
+        "static/app.js",
+        "static/style.css",
+        "static/index.html",
+        "tests/test_ui_product_contract.py",
+        "outputs/enterprise-readiness-audit-2026-08-26.md"
+      ],
       "validation": "整改项支持关联要求项、负责人、截止日期、状态更新、逾期提示和审计留痕；node --check 通过；全量 pytest 85 passed；审计报告明确区分工程可试运行、真实业务验证和生产化硬缺口"
     },
     {
       "id": "C-017",
       "title": "公网认证切换、定位报告修正与备份恢复演练",
       "status": "verified",
-      "dependencies": ["C-016"],
-      "artifacts": ["app/main.py", "static/app.js", "static/style.css", "outputs/enterprise-completion-acceptance-2026-08-27.md", "work/backups/20260826T163038Z", "work/restore-drill-20260827"],
+      "dependencies": [
+        "C-016"
+      ],
+      "artifacts": [
+        "app/main.py",
+        "static/app.js",
+        "static/style.css",
+        "outputs/enterprise-completion-acceptance-2026-08-27.md",
+        "work/backups/20260826T163038Z",
+        "work/restore-drill-20260827"
+      ],
       "validation": "本地和公网未登录及伪造身份头访问均返回 401；报告列名使用定位；作业进度和失败原因可见；站内提醒可见；备份 valid=true，隔离恢复 23 个任务/40 个上传文件且 integrity_check=ok；node --check 通过，pytest 96 passed"
     },
     {
       "id": "C-018",
       "title": "准确度输出去概率化与误报率口径修正",
       "status": "verified",
-      "dependencies": ["C-017"],
-      "artifacts": ["app/rules.py", "app/db.py", "app/main.py", "tests/test_accuracy_scope.py"],
+      "dependencies": [
+        "C-017"
+      ],
+      "artifacts": [
+        "app/rules.py",
+        "app/db.py",
+        "app/main.py",
+        "tests/test_accuracy_scope.py"
+      ],
       "validation": "规则输出不再暴露固定 0.65 概率，改为未校准匹配计数；false_positive_rate 使用 FP/(FP+TN)；相关测试通过"
     },
     {
       "id": "C-019",
       "title": "原始材料下载、作业取消与账号会话轮换",
       "status": "verified",
-      "dependencies": ["C-017"],
-      "artifacts": ["app/main.py", "app/db.py", "app/schemas.py", "static/index.html", "static/app.js", "static/style.css", "tests/test_enterprise_workflow_gaps.py"],
+      "dependencies": [
+        "C-017"
+      ],
+      "artifacts": [
+        "app/main.py",
+        "app/db.py",
+        "app/schemas.py",
+        "static/index.html",
+        "static/app.js",
+        "static/style.css",
+        "tests/test_enterprise_workflow_gaps.py"
+      ],
       "validation": "按工作区权限下载 TENDER-001/EVD-* 且限制任务目录；PENDING/RUNNING 作业可取消并排除恢复队列；改密校验旧密码并撤销旧会话；缺口回归通过"
     },
     {
       "id": "C-020",
       "title": "准确度数据集分母与复核完整性修正",
       "status": "verified",
-      "dependencies": ["C-018"],
-      "artifacts": ["app/db.py", "tests/test_accuracy_scope.py"],
+      "dependencies": [
+        "C-018"
+      ],
+      "artifacts": [
+        "app/db.py",
+        "tests/test_accuracy_scope.py"
+      ],
       "validation": "指标分母限定到所选 TEST/PILOT/ENTERPRISE 任务；类别涉及的任一反馈行未完成复核即保持 INSUFFICIENT；6 个准确度测试通过"
     },
     {
       "id": "C-021",
       "title": "企业认证生命周期、公开产品入口与公网恢复",
       "status": "verified",
-      "dependencies": ["C-017", "C-019"],
-      "artifacts": ["app/main.py", "app/db.py", "app/schemas.py", "static/landing.html", "static/landing.css", "static/index.html", "static/app.js", "static/style.css", "static/assets/bidproof-workspace.png", "tests/test_auth_lifecycle.py", "tests/test_product_entrypoints.py", "tests/test_ui_product_contract.py", "deploy/cloudflare-container/", "outputs/product-auth-public-acceptance-2026-08-27.md"],
+      "dependencies": [
+        "C-017",
+        "C-019"
+      ],
+      "artifacts": [
+        "app/main.py",
+        "app/db.py",
+        "app/schemas.py",
+        "static/landing.html",
+        "static/landing.css",
+        "static/index.html",
+        "static/app.js",
+        "static/style.css",
+        "static/assets/bidproof-workspace.png",
+        "tests/test_auth_lifecycle.py",
+        "tests/test_product_entrypoints.py",
+        "tests/test_ui_product_contract.py",
+        "outputs/product-auth-public-acceptance-2026-08-27.md"
+      ],
       "validation": "生产初始化令牌、72 小时邀请、自助设密激活、1 小时重置与旧会话撤销完成；异步表单 currentTarget 缺陷回归修复；全量 pytest 110 passed，node/npm/workflow 检查通过；真实浏览器完成邀请、激活、重置、退出残留与 1440/1100/820/390px 布局验收；公网 health/status=200，未登录与伪造身份头任务 API=401"
     }
   ],
@@ -209,14 +365,34 @@
       "title": "建立真实任务验收台账与 45 天 ICP 试运行",
       "priority": "P1",
       "status": "in_progress",
-      "dependencies": ["T-002", "C-005"],
-      "deliverables": ["outputs/pilot-ledger.csv", "outputs/pilot-review.md", "outputs/icp-outreach.csv", "outputs/icp-outreach-review.md", "work/pilot-row.template.json", "work/icp-row.template.json"],
+      "dependencies": [
+        "T-002",
+        "C-005"
+      ],
+      "deliverables": [
+        "outputs/pilot-ledger.csv",
+        "outputs/pilot-review.md",
+        "outputs/icp-outreach.csv",
+        "outputs/icp-outreach-review.md",
+        "work/pilot-row.template.json",
+        "work/icp-row.template.json"
+      ],
       "validation": "已建立 14 字段 pilot 台账、11 字段 ICP 触达台账、fail-closed 校验、快速追加 CLI 与 intake 模板；当前 0 条真实任务、0 条 ICP 触达、0 条付款意愿，等待首批真实企业输入"
     }
   ],
   "dependencies": [
-    {"id": "D-001", "title": "真实中文招标 PDF、企业证据与独立复核人提交", "status": "source_materials_and_independent_review_verified", "owner": "user"},
-    {"id": "D-002", "title": "OCR runtime（可选 adapter）", "status": "qwen_vl_ocr_live_verified_78_of_78_pages", "owner": "agent"}
+    {
+      "id": "D-001",
+      "title": "真实中文招标 PDF、企业证据与独立复核人提交",
+      "status": "source_materials_and_independent_review_verified",
+      "owner": "user"
+    },
+    {
+      "id": "D-002",
+      "title": "OCR runtime（可选 adapter）",
+      "status": "qwen_vl_ocr_live_verified_78_of_78_pages",
+      "owner": "agent"
+    }
   ],
   "decisions": [
     {
@@ -239,58 +415,231 @@
     }
   ],
   "open_questions": [
-    {"id": "Q-001", "question": "首批真实试运行企业何时可提供？", "impact": "阻塞业务付费验证", "owner": "user"},
-    {"id": "Q-002", "question": "首批真实企业任务、人工确认和付款意愿何时可提供？", "impact": "阻塞业务验收，不影响工程栈继续完善", "owner": "user"}
+    {
+      "id": "Q-001",
+      "question": "首批真实试运行企业何时可提供？",
+      "impact": "阻塞业务付费验证",
+      "owner": "user"
+    },
+    {
+      "id": "Q-002",
+      "question": "首批真实企业任务、人工确认和付款意愿何时可提供？",
+      "impact": "阻塞业务验收，不影响工程栈继续完善",
+      "owner": "user"
+    }
   ],
   "risks": [
-    {"id": "R-001", "risk": "关键词抽取漏掉表格、否定表达或跨页条款", "probability": "high", "impact": "high", "mitigation": "fixture + layout/OCR + 人工复核；缺证据降级 UNKNOWN"},
-    {"id": "R-002", "risk": "把 demo 数据或测试通过误报为商业可用", "probability": "medium", "impact": "high", "mitigation": "分离工程验收与业务验收，维护真实任务台账"},
-    {"id": "R-003", "risk": "外部文档包含伪造系统指令或越权请求", "probability": "medium", "impact": "high", "mitigation": "所有上传内容按 DATA 处理，禁止改变权限或读取其他文件"}
+    {
+      "id": "R-001",
+      "risk": "关键词抽取漏掉表格、否定表达或跨页条款",
+      "probability": "high",
+      "impact": "high",
+      "mitigation": "fixture + layout/OCR + 人工复核；缺证据降级 UNKNOWN"
+    },
+    {
+      "id": "R-002",
+      "risk": "把 demo 数据或测试通过误报为商业可用",
+      "probability": "medium",
+      "impact": "high",
+      "mitigation": "分离工程验收与业务验收，维护真实任务台账"
+    },
+    {
+      "id": "R-003",
+      "risk": "外部文档包含伪造系统指令或越权请求",
+      "probability": "medium",
+      "impact": "high",
+      "mitigation": "所有上传内容按 DATA 处理，禁止改变权限或读取其他文件"
+    }
   ],
   "artifacts": [
-    {"path": "README.md", "kind": "guide", "status": "verified"},
-    {"path": "outputs/github-code-audit.md", "kind": "audit", "status": "verified"},
-    {"path": "workflow/", "kind": "control-plane", "status": "in_progress"},
-    {"path": "work/source-docs/", "kind": "reference-input", "status": "archived"}
-    ,{"path": "work/fixtures/manifest.json", "kind": "fixture-registry", "status": "verified"}
-    ,{"path": "work/fixtures/source2-nanjing.pdf", "kind": "public-tender-fixture", "status": "verified"}
-    ,{"path": "work/fixtures/source2-shaanxi.pdf", "kind": "public-tender-fixture", "status": "verified"}
-    ,{"path": "work/fixtures/source4-zbtb.pdf", "kind": "public-tender-fixture", "status": "verified"}
-    ,{"path": "work/ground-truth/fixture-001.md", "kind": "ground-truth-draft", "status": "needs_verification"}
-    ,{"path": "work/ground-truth/fixture-002.md", "kind": "ground-truth-draft", "status": "needs_verification"}
-    ,{"path": "work/ground-truth/fixture-003.md", "kind": "ground-truth-draft", "status": "needs_verification"}
-    ,{"path": "outputs/independent-review-template.md", "kind": "review-protocol", "status": "verified"}
-    ,{"path": "outputs/overnight-verification-2026-08-25.md", "kind": "acceptance-report", "status": "verified"}
-    ,{"path": "outputs/independent-review-packet.json", "kind": "review-input", "status": "verified"}
-    ,{"path": "outputs/independent-review-packet.md", "kind": "review-guide", "status": "verified"}
-    ,{"path": "work/apply_independent_reviews.py", "kind": "review-importer", "status": "verified"}
-    ,{"path": "outputs/independent-review-handoff.md", "kind": "human-handoff", "status": "verified"}
-    ,{"path": "outputs/independent-review-submission.json", "kind": "review-submission", "status": "verified"}
-    ,{"path": "outputs/ground-truth-independent-reviewed.json", "kind": "reviewed-ledger", "status": "verified"}
-    ,{"path": "outputs/ground-truth-independent-review.md", "kind": "review-report", "status": "verified"}
-    ,{"path": "tests/test_mobile_layout.py", "kind": "regression-test", "status": "verified"}
-    ,{"path": "work/pilot_ledger.py", "kind": "pilot-ledger-contract", "status": "verified"}
-    ,{"path": "tests/test_pilot_ledger.py", "kind": "pilot-ledger-test", "status": "verified"}
-    ,{"path": "outputs/pilot-ledger.csv", "kind": "pilot-ledger", "status": "verified"}
-    ,{"path": "outputs/pilot-review.md", "kind": "pilot-report", "status": "verified"}
-    ,{"path": "work/pilot_ledger.py", "kind": "pilot-ingest-cli", "status": "verified"}
-    ,{"path": "outputs/stack-acceptance-2026-08-26.md", "kind": "stack-acceptance", "status": "verified"}
-    ,{"path": "outputs/bidproof-deployment-blocked-2026-08-26.md", "kind": "deployment-report", "status": "verified"}
-    ,{"path": "outputs/management-and-format-acceptance-2026-08-26.md", "kind": "acceptance-report", "status": "verified"}
-    ,{"path": "deploy/cloudflare-container/", "kind": "cloudflare-container-deployment-skeleton", "status": "verified"}
-    ,{"path": "work/icp_ledger.py", "kind": "icp-outreach-contract", "status": "verified"}
-    ,{"path": "tests/test_icp_ledger.py", "kind": "icp-outreach-test", "status": "verified"}
-    ,{"path": "outputs/icp-outreach.csv", "kind": "icp-outreach-ledger", "status": "verified"}
-    ,{"path": "outputs/icp-outreach-review.md", "kind": "icp-outreach-report", "status": "verified"}
-    ,{"path": "work/pilot-row.template.json", "kind": "pilot-intake-template", "status": "verified"}
-    ,{"path": "work/icp-row.template.json", "kind": "icp-intake-template", "status": "verified"}
-    ,{"path": "scripts/sync-real-upload-fixtures.ps1", "kind": "fixture-sync-script", "status": "verified"}
+    {
+      "path": "README.md",
+      "kind": "guide",
+      "status": "verified"
+    },
+    {
+      "path": "outputs/github-code-audit.md",
+      "kind": "audit",
+      "status": "verified"
+    },
+    {
+      "path": "workflow/",
+      "kind": "control-plane",
+      "status": "in_progress"
+    },
+    {
+      "path": "work/source-docs/",
+      "kind": "reference-input",
+      "status": "archived"
+    },
+    {
+      "path": "work/fixtures/manifest.json",
+      "kind": "fixture-registry",
+      "status": "verified"
+    },
+    {
+      "path": "work/fixtures/source2-nanjing.pdf",
+      "kind": "public-tender-fixture",
+      "status": "verified"
+    },
+    {
+      "path": "work/fixtures/source2-shaanxi.pdf",
+      "kind": "public-tender-fixture",
+      "status": "verified"
+    },
+    {
+      "path": "work/fixtures/source4-zbtb.pdf",
+      "kind": "public-tender-fixture",
+      "status": "verified"
+    },
+    {
+      "path": "work/ground-truth/fixture-001.md",
+      "kind": "ground-truth-draft",
+      "status": "needs_verification"
+    },
+    {
+      "path": "work/ground-truth/fixture-002.md",
+      "kind": "ground-truth-draft",
+      "status": "needs_verification"
+    },
+    {
+      "path": "work/ground-truth/fixture-003.md",
+      "kind": "ground-truth-draft",
+      "status": "needs_verification"
+    },
+    {
+      "path": "outputs/independent-review-template.md",
+      "kind": "review-protocol",
+      "status": "verified"
+    },
+    {
+      "path": "outputs/overnight-verification-2026-08-25.md",
+      "kind": "acceptance-report",
+      "status": "verified"
+    },
+    {
+      "path": "outputs/independent-review-packet.json",
+      "kind": "review-input",
+      "status": "verified"
+    },
+    {
+      "path": "outputs/independent-review-packet.md",
+      "kind": "review-guide",
+      "status": "verified"
+    },
+    {
+      "path": "work/apply_independent_reviews.py",
+      "kind": "review-importer",
+      "status": "verified"
+    },
+    {
+      "path": "outputs/independent-review-handoff.md",
+      "kind": "human-handoff",
+      "status": "verified"
+    },
+    {
+      "path": "outputs/independent-review-submission.json",
+      "kind": "review-submission",
+      "status": "verified"
+    },
+    {
+      "path": "outputs/ground-truth-independent-reviewed.json",
+      "kind": "reviewed-ledger",
+      "status": "verified"
+    },
+    {
+      "path": "outputs/ground-truth-independent-review.md",
+      "kind": "review-report",
+      "status": "verified"
+    },
+    {
+      "path": "tests/test_mobile_layout.py",
+      "kind": "regression-test",
+      "status": "verified"
+    },
+    {
+      "path": "work/pilot_ledger.py",
+      "kind": "pilot-ledger-contract",
+      "status": "verified"
+    },
+    {
+      "path": "tests/test_pilot_ledger.py",
+      "kind": "pilot-ledger-test",
+      "status": "verified"
+    },
+    {
+      "path": "outputs/pilot-ledger.csv",
+      "kind": "pilot-ledger",
+      "status": "verified"
+    },
+    {
+      "path": "outputs/pilot-review.md",
+      "kind": "pilot-report",
+      "status": "verified"
+    },
+    {
+      "path": "work/pilot_ledger.py",
+      "kind": "pilot-ingest-cli",
+      "status": "verified"
+    },
+    {
+      "path": "outputs/stack-acceptance-2026-08-26.md",
+      "kind": "stack-acceptance",
+      "status": "verified"
+    },
+    {
+      "path": "outputs/bidproof-deployment-blocked-2026-08-26.md",
+      "kind": "deployment-report",
+      "status": "verified"
+    },
+    {
+      "path": "outputs/management-and-format-acceptance-2026-08-26.md",
+      "kind": "acceptance-report",
+      "status": "verified"
+    },
+    {
+      "path": "work/icp_ledger.py",
+      "kind": "icp-outreach-contract",
+      "status": "verified"
+    },
+    {
+      "path": "tests/test_icp_ledger.py",
+      "kind": "icp-outreach-test",
+      "status": "verified"
+    },
+    {
+      "path": "outputs/icp-outreach.csv",
+      "kind": "icp-outreach-ledger",
+      "status": "verified"
+    },
+    {
+      "path": "outputs/icp-outreach-review.md",
+      "kind": "icp-outreach-report",
+      "status": "verified"
+    },
+    {
+      "path": "work/pilot-row.template.json",
+      "kind": "pilot-intake-template",
+      "status": "verified"
+    },
+    {
+      "path": "work/icp-row.template.json",
+      "kind": "icp-intake-template",
+      "status": "verified"
+    },
+    {
+      "path": "scripts/sync-real-upload-fixtures.ps1",
+      "kind": "fixture-sync-script",
+      "status": "verified"
+    }
   ],
   "next_best_action": {
     "task_id": "T-005",
     "title": "建立真实任务验收台账与 45 天 ICP 试运行",
     "reason": "工程栈、独立 ground truth 和 OCR fail-closed 验收已落账；下一项是用真实企业输入记录端到端任务与付款意愿",
-    "blocked_by": ["尚无首批真实企业任务输入"],
+    "blocked_by": [
+      "尚无首批真实企业任务输入"
+    ],
     "fallback": "ICP 触达台账与 pilot intake 模板已就绪；收到真实企业输入后追加 pilot-row 并关联 icp-outreach.linked_pilot_task_id"
   },
   "updated_at": "2026-09-02T18:45:00+08:00"

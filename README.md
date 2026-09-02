@@ -13,9 +13,10 @@
 
 ## 账号流程
 
-- 首个企业所有者由运维初始化令牌创建；生产环境缺少令牌时默认锁定初始化。
+- 个人可自行注册：创建独立个人工作区，角色为所有者，注册后即可登录使用。这与企业空间隔离，不会加入已有企业。仅允许邀请/SSO 的部署可设置 `BIDPROOF_PERSONAL_SIGNUP=0`。
+- 首个企业所有者由运维初始化令牌创建；生产环境缺少令牌时默认锁定初始化。个人注册在初始化锁定时仍可用（若未关闭）。
 - 所有者或管理员可「生成邀请」（72 小时激活链接）或「直接开户」（立刻设好用户名与密码）。
-- 团队试用可配置环境变量 `BIDPROOF_TRIAL_JOIN_CODE`：登录页出现「试用加入」，成员自助开户，默认角色为复核人。
+- 团队试用可配置环境变量 `BIDPROOF_TRIAL_JOIN_CODE`：登录页出现「试用加入」，成员自助开户并加入**主企业空间**，默认角色为复核人。这不是个人工作区。
 - 所有者或管理员可生成 1 小时密码重置链接；重置完成后旧会话全部撤销。
 - 登录失败会限速；退出登录后重新载入工作台，动态账号与成员数据不会保留在页面中。
 
@@ -53,6 +54,24 @@ $env:QWEN_OCR_MODEL = "qwen-vl-ocr"
 
 OCR 请求失败、超时或返回空文本时，页面会保留 `ocr_status=FAILED` 并按缺证据处理；不会因此生成 `PASS`。
 
+## 数据库与迁移
+
+- 架构定义只有一处：`app/models.py`（SQLAlchemy Core metadata）。Alembic 基线由它生成，两者一致性有测试守护。
+- `BIDPROOF_DATABASE_URL` 为空时使用 `BIDPROOF_DATA_ROOT` 下的 SQLite 文件；生产建议 PostgreSQL：
+
+```bash
+export BIDPROOF_DATABASE_URL="postgresql+psycopg://bidproof:PASSWORD@postgres:5432/bidproof"
+pip install -r requirements-postgres.txt
+python -m app.dbctl upgrade
+```
+
+- 升级用 `python -m app.dbctl upgrade`，不要直接 `alembic upgrade head`：试点期的 SQLite 库有表但没有版本行，需要先按基线纳管（adopt）再升级。
+- 查看当前版本：`python -m app.dbctl current`
+- 生成新迁移：`python -m app.dbctl revision --message "描述"`
+- SQLite 连接自动启用 WAL、`busy_timeout` 与外键；即便如此它仍是单写入模型，只适合开发与单机小规模部署。
+- 生产 compose 将扫描作业放到独立 `worker` 进程（`python -m app.worker`），API 只入队。
+- 私有化交付：`python scripts/preflight.py` 做升级前校验；离线包见 `scripts/pack-offline.sh`；升级回滚见 [`docs/upgrade.md`](docs/upgrade.md)。
+
 ## 云端 / GitHub 运行（Cursor Cloud Agent）
 
 仓库：<https://github.com/ouyangzhuowu-afk/BidProof>
@@ -74,7 +93,7 @@ docker compose up -d --build
 # 打开 http://localhost:8016/app
 ```
 
-环境变量见 `.env.example`。团队试用建议设置 `BIDPROOF_TRIAL_JOIN_CODE`。
+环境变量见 `.env.example`。个人注册默认开启；企业专属部署设 `BIDPROOF_PERSONAL_SIGNUP=0`。团队试用建议设置 `BIDPROOF_TRIAL_JOIN_CODE`。
 
 ### T-005 业务验收台账（当前优先级）
 

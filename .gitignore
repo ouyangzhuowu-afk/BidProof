@@ -25,7 +25,11 @@ work/*.err.log
 # Node (Cloudflare deploy skeleton)
 node_modules/
 deploy/cloudflare-container/node_modules/
+frontend/node_modules/
 .wrangler/
+
+# Offline pack output
+dist/
 
 # IDE / OS
 .DS_Store
@@ -35,3 +39,6 @@ Thumbs.db
 
 # Playwright local captures (optional runtime artifacts)
 .playwright-cli/
+
+# Local virtualenv
+.venv/
