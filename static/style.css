@@ -190,7 +190,8 @@ h3 { margin: 0; color: var(--ink-strong); font-size: 15px; font-weight: 650; lin
 /* 修复：全局 `label { display:flex; justify-content:space-between }` 让筛选栏里
    的标题文字被挤到输入框旁边并竖排折行（截图里的「标 签」「负 责 人」）。
    筛选栏和管理表单里的 label 一律改为纵向堆叠。 */
-.task-filter-bar { display: grid; grid-template-columns: minmax(240px, 2fr) repeat(4, minmax(132px, 1fr)) auto auto; gap: 10px; align-items: end; border-bottom: 1px solid var(--line); background: var(--surface-soft); padding: 12px 18px; }
+.task-filter-bar { display: grid; grid-template-columns: minmax(180px, 2fr) repeat(4, minmax(100px, 1fr)); gap: 10px; align-items: end; border-bottom: 1px solid var(--line); background: var(--surface-soft); padding: 12px 18px; }
+.task-filter-bar .filter-bottom-row { display: flex; align-items: center; gap: 12px; grid-column: 1 / -1; }
 .task-filter-bar label { display: block; min-width: 0; }
 .task-filter-bar label > span:first-child { display: block; margin-bottom: 5px; color: var(--muted); font-size: 12px; font-weight: 600; }
 .task-filter-bar input, .task-filter-bar select { min-height: 38px !important; padding: 7px 10px; font-size: 13px; }
@@ -198,10 +199,10 @@ h3 { margin: 0; color: var(--ink-strong); font-size: 15px; font-weight: 650; lin
 .search-input svg { position: absolute; z-index: 1; top: 50%; left: 10px; width: 16px; height: 16px; transform: translateY(-50%); color: var(--subtle); pointer-events: none; }
 .search-input input { padding-left: 34px; }
 /* 修复：checkbox 与文字被 space-between 拉到两端 */
-.favorite-filter { display: flex; min-height: 38px; align-items: center; justify-content: flex-start; gap: 8px; color: var(--ink-soft); font-size: 13px; white-space: nowrap; }
+.favorite-filter { display: flex; min-height: 34px; align-items: center; justify-content: flex-start; gap: 8px; color: var(--ink-soft); font-size: 13px; white-space: nowrap; }
 .favorite-filter input { width: 16px; min-height: 16px !important; height: 16px; margin: 0; accent-color: var(--primary); }
 .favorite-filter > span { margin: 0 !important; color: var(--ink-soft) !important; font-size: 13px !important; font-weight: 500 !important; }
-.filter-reset { min-height: 38px; align-self: end; }
+.filter-reset { min-height: 34px; align-self: center; }
 
 .bulk-toolbar { display: flex; min-height: 46px; align-items: center; flex-wrap: wrap; gap: 8px; border-bottom: 1px solid var(--line); padding: 7px 18px; }
 .check-wrap { display: inline-flex; align-items: center; justify-content: flex-start; gap: 7px; color: var(--muted); font-size: 13px; font-weight: 600; }
@@ -567,8 +568,8 @@ textarea { resize: vertical; line-height: 1.55; }
 
 /* ================================================================ 响应式 */
 @media (max-width: 1500px) {
-  .task-filter-bar { grid-template-columns: minmax(240px, 1.6fr) repeat(3, minmax(132px, 1fr)); }
-  .task-filter-bar .filter-field:nth-of-type(5), .favorite-filter, .filter-reset { grid-row: 2; }
+  .task-filter-bar { grid-template-columns: minmax(180px, 1.6fr) repeat(3, minmax(100px, 1fr)); }
+  .task-filter-bar .filter-field:nth-of-type(5) { grid-row: 2; }
 }
 
 @media (max-width: 1100px) {
@@ -579,8 +580,8 @@ textarea { resize: vertical; line-height: 1.55; }
   .run-table-head, .run-row { grid-template-columns: 26px minmax(200px, 1fr) 66px 78px 96px 24px; }
   .run-open { grid-template-columns: minmax(0,1fr) 66px 78px 96px 24px; }
   .ops-grid { grid-template-columns: 1fr; }
-  .task-filter-bar { grid-template-columns: minmax(240px, 1.6fr) repeat(3, minmax(132px, 1fr)); }
-  .task-filter-bar .filter-field:nth-of-type(5), .favorite-filter, .filter-reset { grid-row: 2; }
+  .task-filter-bar { grid-template-columns: minmax(180px, 1.6fr) repeat(3, minmax(100px, 1fr)); }
+  .task-filter-bar .filter-field:nth-of-type(5) { grid-row: 2; }
 }
 
 @media (max-width: 820px) {
@@ -617,7 +618,7 @@ textarea { resize: vertical; line-height: 1.55; }
   .inline-admin-form .button { min-height: 44px; }
   .task-filter-bar { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .task-search { grid-column: 1 / -1; }
-  .task-filter-bar .filter-field:nth-of-type(5), .favorite-filter, .filter-reset { grid-row: auto; }
+  .task-filter-bar .filter-field:nth-of-type(5) { grid-row: auto; }
 }
 
 @media (max-width: 560px) {

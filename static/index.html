@@ -53,8 +53,10 @@
                 <label class="filter-field" for="run-assignee-filter"><span>负责人</span><select id="run-assignee-filter"><option value="">全部负责人</option></select></label>
                 <label class="filter-field" for="run-reviewer-filter"><span>复核人</span><select id="run-reviewer-filter"><option value="">全部复核人</option></select></label>
                 <label class="filter-field" for="run-sort"><span>排序</span><select id="run-sort"><option value="updated_desc">最近更新</option><option value="filename">文件名</option></select></label>
-                <label class="favorite-filter"><input id="run-favorite-filter" type="checkbox"><span>只看收藏</span></label>
-                <button class="mini-button filter-reset" id="clear-run-filters" type="button"><i data-lucide="filter-x"></i><span>清除</span></button>
+                <div class="filter-bottom-row">
+                  <label class="favorite-filter"><input id="run-favorite-filter" type="checkbox"><span>只看收藏</span></label>
+                  <button class="mini-button filter-reset" id="clear-run-filters" type="button"><i data-lucide="filter-x"></i><span>清除</span></button>
+                </div>
               </div>
               <div class="bulk-toolbar" aria-label="批量任务操作"><label class="check-wrap"><input id="select-all-runs" type="checkbox"><span>全选</span></label><span id="selection-count" class="result-count">未选择任务</span><button class="mini-button" id="bulk-archive" type="button" disabled><i data-lucide="archive"></i><span>归档</span></button><button class="mini-button" id="bulk-restore" type="button" disabled hidden><i data-lucide="archive-restore"></i><span>恢复</span></button><button class="mini-button" id="bulk-export" type="button" disabled><i data-lucide="file-archive"></i><span>导出报告</span></button><button class="mini-button" id="bulk-delete" type="button" disabled><i data-lucide="trash-2"></i><span>删除</span></button></div>
               <div class="run-table-head" aria-hidden="true"><span>项目文件</span><span>风险</span><span>待复核</span><span>人工决定</span><span></span></div>
