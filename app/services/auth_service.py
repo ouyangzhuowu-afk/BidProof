@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import secrets
-import sqlite3
+import sqlalchemy.exc
 import uuid
 from datetime import datetime, timedelta, timezone
 
@@ -211,7 +211,7 @@ def trial_join(request: Request, response: Response, payload: TrialJoinRequest) 
         raise HTTPException(status_code=409, detail="用户名已存在，请直接登录")
     try:
         user = accounts.create(workspace_id, username, password_hash(payload.password), "REVIEWER")
-    except sqlite3.IntegrityError as exc:
+    except sqlalchemy.exc.IntegrityError as exc:
         raise HTTPException(status_code=409, detail="用户名已存在，请直接登录") from exc
     workspaces.ensure(workspace_id, user["user_id"], "REVIEWER")
     identity.clear_login_attempts(attempt_key)
@@ -235,7 +235,7 @@ def register_personal(request: Request, response: Response, payload: PersonalReg
     workspace_id = uuid.uuid4().hex
     try:
         user = accounts.create(workspace_id, username, password_hash(payload.password), "OWNER")
-    except sqlite3.IntegrityError as exc:
+    except sqlalchemy.exc.IntegrityError as exc:
         identity.record_failed_login(attempt_key, now)
         raise HTTPException(status_code=409, detail="用户名已存在，请直接登录") from exc
     workspaces.ensure(workspace_id, user["user_id"], "OWNER", display)
@@ -324,7 +324,7 @@ def activate_invitation(request: Request, response: Response, payload: AuthActio
         raise HTTPException(status_code=410, detail="链接无效、已使用或已过期")
     try:
         user = accounts.create(action["workspace_id"], action["username"], password_hash(payload.password), action["role"])
-    except sqlite3.IntegrityError as exc:
+    except sqlalchemy.exc.IntegrityError as exc:
         raise HTTPException(status_code=409, detail="用户名已存在，请直接登录") from exc
     workspaces.ensure(action["workspace_id"], user["user_id"], action["role"])
     identity.issue_session(response, user["user_id"], identity.request_is_secure(request))
@@ -377,7 +377,7 @@ def create_member(principal: dict[str, str], payload: MemberCreateRequest) -> di
         raise HTTPException(status_code=403, detail="只有所有者可以创建管理员")
     try:
         user = accounts.create(principal["workspace_id"], payload.username.strip(), password_hash(payload.password), payload.role)
-    except sqlite3.IntegrityError as exc:
+    except sqlalchemy.exc.IntegrityError as exc:
         raise HTTPException(status_code=409, detail="用户名已存在") from exc
     workspaces.ensure(principal["workspace_id"], user["user_id"], payload.role)
     audit.record(

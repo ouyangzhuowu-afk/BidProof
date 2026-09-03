@@ -8,6 +8,8 @@ from app import main
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
+SOURCE_JS = PROJECT_ROOT / "frontend" / "src" / "app.js"
+BUILT_JS = PROJECT_ROOT / "static" / "app.js"
 
 
 class LandmarkParser(HTMLParser):
@@ -155,7 +157,8 @@ def test_auth_dialog_exposes_personal_register_and_enterprise_modes():
     assert 'data-auth-mode="trial"' in html
     assert 'id="register-fields"' in html
     assert 'id="auth-display-name"' in html
-    assert "store.authMode === 'register'" in script or 'store.authMode === "register"' in script
+    source = SOURCE_JS.read_text(encoding="utf-8")
+    assert "store.authMode === 'register'" in source or 'store.authMode === "register"' in source
 
 
 def test_task_management_exposes_search_filters_and_independent_reviewer():
@@ -175,7 +178,7 @@ def test_task_management_exposes_search_filters_and_independent_reviewer():
 
 
 def test_async_form_handlers_preserve_the_form_across_await_boundaries():
-    script = (PROJECT_ROOT / "static" / "app.js").read_text(encoding="utf-8")
+    script = SOURCE_JS.read_text(encoding="utf-8")
 
     for function_name in ("submitAuth", "createProject", "createMember", "submitMissedFeedback"):
         match = re.search(

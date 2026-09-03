@@ -50,11 +50,11 @@ def listing(
     reviewer_id: str | None,
     sort: str,
 ) -> list[dict]:
-    scoped_runs = [
-        run for run in runs.list_for_workspace(principal["workspace_id"])
-        if (include_archived or not run.get("archived_at"))
-        and (not project_id or run.get("project_id") == project_id)
-    ]
+    scoped_runs = runs.list_for_workspace(
+        principal["workspace_id"],
+        include_archived=include_archived,
+        project_id=project_id or None,
+    )
     normalized_search = search.strip().casefold() if search else ""
     if normalized_search:
         scoped_runs = [

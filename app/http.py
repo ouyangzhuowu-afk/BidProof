@@ -32,7 +32,22 @@ def write_limits_enforced() -> bool:
     return config.ENVIRONMENT != "test"
 
 
+SECURITY_HEADERS = {
+    "X-Content-Type-Options": "nosniff",
+    "X-Frame-Options": "DENY",
+    "Referrer-Policy": "strict-origin-when-cross-origin",
+    "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
+    "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-ancestors 'none'",
+}
+
+
 def install_middleware(app: FastAPI) -> None:
+    @app.exception_handler(Exception)
+    async def unhandled_exception_handler(request: Request, exc: Exception):
+        rid = getattr(request.state, "request_id", "unknown")
+        logger.exception("Unhandled exception on %s %s [%s]", request.method, request.url.path, rid)
+        return JSONResponse(status_code=500, content={"detail": "服务器内部错误，请稍后重试"})
+
     @app.middleware("http")
     async def request_guards(request: Request, call_next):
         context = request_context.from_request(request)
@@ -57,6 +72,8 @@ def install_middleware(app: FastAPI) -> None:
 
 
 def _finalize_response(request: Request, response, context) -> None:
+    for hdr, val in SECURITY_HEADERS.items():
+        response.headers.setdefault(hdr, val)
     response.headers[request_context.REQUEST_ID_HEADER] = context.request_id
     observability.record_http(request.method, response.status_code)
     path = request.url.path

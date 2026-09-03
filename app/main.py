@@ -24,10 +24,15 @@ VERSION = "0.4.0"
 
 @asynccontextmanager
 async def lifespan(_app: FastAPI):
-    from . import license, observability, queue
+    from . import db, license, observability, queue
 
     observability.configure()
     license.check_on_startup()
+    try:
+        cleaned = db.cleanup_expired()
+        logger.info("Startup cleanup: %s", cleaned)
+    except Exception:
+        logger.warning("Startup cleanup skipped", exc_info=True)
     if config.TRUSTED_HEADERS_IGNORED:
         logger.warning(
             "BIDPROOF_ALLOW_TRUSTED_HEADERS is set but ignored because BIDPROOF_ENV=%s; "

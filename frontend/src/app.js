@@ -99,6 +99,17 @@ intakeDialog.addEventListener('click', (event) => {
 authDialog.addEventListener('cancel', (event) => event.preventDefault());
 accountActionDialog.addEventListener('cancel', (event) => event.preventDefault());
 
+document.querySelectorAll('.drop-zone').forEach((zone) => {
+  zone.addEventListener('dragover', (e) => { e.preventDefault(); zone.classList.add('drag-over'); });
+  zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+  zone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    zone.classList.remove('drag-over');
+    const input = zone.querySelector('input[type="file"]');
+    if (e.dataTransfer.files.length) input.files = e.dataTransfer.files;
+  });
+});
+
 refreshIcons();
 initializeApp();
 
@@ -118,6 +129,7 @@ async function initializeApp() {
     renderCurrentUser();
     await loadProjects();
     loadRuns();
+    navigateFromHash();
   } catch (error) { showAuth(false, error.message); }
 }
 
@@ -586,6 +598,8 @@ function exportCurrentRun(format) {
 }
 
 async function openRun(runId) {
+  const overlay = document.getElementById('loading-overlay');
+  if (overlay) overlay.hidden = false;
   try {
     store.currentRun = await request(`/api/runs/${encodeURIComponent(runId)}`);
     store.activeCategory = 'ALL';
@@ -595,6 +609,8 @@ async function openRun(runId) {
     showDetail();
   } catch (error) {
     showToast(`${error.message}，请刷新任务列表后重试。`);
+  } finally {
+    if (overlay) overlay.hidden = true;
   }
 }
 
@@ -991,9 +1007,14 @@ setHtml(document.querySelector('#decision-context-content'), html`<div class="co
   refreshIcons();
 }
 
-function showView(name, context) {
+function showView(name, context, pushHash = true) {
   Object.entries(views).forEach(([key, view]) => { view.hidden = key !== name; });
   document.querySelector('#page-context').textContent = context;
+  if (pushHash) {
+    const runId = store.currentRun?.run_id;
+    const hash = (name === 'detail' || name === 'decision') && runId ? `#${name}/${runId}` : `#${name}`;
+    if (location.hash !== hash) history.pushState(null, '', hash);
+  }
   document.querySelector('#nav-runs').classList.toggle('active', name === 'home');
   document.querySelector('#nav-runs').toggleAttribute('aria-current', name === 'home');
   for (const [navId, viewName] of [['nav-jobs', 'jobs'], ['nav-admin', 'admin']]) {
@@ -1006,6 +1027,18 @@ function showView(name, context) {
   document.querySelector('#app-main').focus({ preventScroll: true });
   refreshIcons();
 }
+
+function navigateFromHash() {
+  const hash = location.hash.replace(/^#/, '');
+  if (!hash) return;
+  const [view, id] = hash.split('/');
+  if (view === 'home') showHome();
+  else if (view === 'jobs') showJobs();
+  else if (view === 'admin') showAdmin();
+  else if ((view === 'detail' || view === 'decision') && id) openRun(id);
+}
+
+window.addEventListener('popstate', navigateFromHash);
 
 async function submitDecision(event) {
   event.preventDefault();

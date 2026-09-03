@@ -7,7 +7,10 @@ synthetic request, which is why identity had to be replayed through headers.
 
 from __future__ import annotations
 
+import logging
 import uuid
+
+logger = logging.getLogger("bidproof.scan")
 from contextlib import ExitStack
 from pathlib import Path
 
@@ -370,6 +373,7 @@ async def process_job(job_id: str) -> None:
         audit.record(job["workspace_id"], payload.get("user_id", "local-owner"), "SCAN_JOB_COMPLETED", result["run_id"], {"job_id": job_id, "attempts": attempts})
         remove_tree(Path(payload["tender_path"]).parent)
     except Exception as exc:
+        logger.exception("process_job %s failed: %s", job_id, exc)
         current_job = jobs.load(job_id) or {}
         if current_job.get("status") == "CANCELLED" or current_job.get("cancel_requested"):
             return

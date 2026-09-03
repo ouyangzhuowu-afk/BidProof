@@ -227,15 +227,31 @@ def load_run(run_id: str, path: Path | str | None = None) -> dict[str, Any] | No
     return _run_from_storage(row) if row else None
 
 
-def list_runs(path: Path | str | None = None, *, workspace_id: str | None = None) -> list[dict[str, Any]]:
-    """Load runs newest first, optionally restricted to one workspace.
+def list_runs(
+    path: Path | str | None = None,
+    *,
+    workspace_id: str | None = None,
+    include_archived: bool = True,
+    project_id: str | None = None,
+    limit: int | None = None,
+    offset: int = 0,
+) -> list[dict[str, Any]]:
+    """Load runs newest first, with optional SQL-level filtering.
 
-    The workspace predicate runs in SQL. Reading every tenant's rows and filtering them in
-    Python was both an N+1 and a way for one workspace's documents to reach another's request.
+    The workspace predicate runs in SQL. Archived and project filters also push down to SQL
+    to avoid loading the entire run table into Python memory.
     """
     statement = sa.select(runs_table).order_by(runs_table.c.created_at.desc())
     if workspace_id is not None:
         statement = statement.where(runs_table.c.workspace_id == workspace_id)
+    if not include_archived:
+        statement = statement.where(runs_table.c.archived_at.is_(None))
+    if project_id:
+        statement = statement.where(runs_table.c.project_id == project_id)
+    if offset:
+        statement = statement.offset(offset)
+    if limit is not None:
+        statement = statement.limit(limit)
     with engine(path).connect() as connection:
         return [_run_from_storage(row) for row in _rows(connection.execute(statement))]
 
@@ -961,15 +977,13 @@ def create_user(workspace_id: str, username: str, password_hash: str, role: str,
         with connect(path) as connection:
             connection.execute(sa.insert(users).values(**user))
     except sa.exc.IntegrityError as exc:
-        # Callers catch sqlite3.IntegrityError to answer 409 on a duplicate username.
+        # Callers catch sqlalchemy.exc.IntegrityError to answer 409 on duplicates.
         raise _integrity_error(exc) from exc
     return user
 
 
 def _integrity_error(exc: sa.exc.IntegrityError) -> Exception:
-    import sqlite3
-
-    return sqlite3.IntegrityError(str(exc.orig))
+    return sa.exc.IntegrityError(str(exc.orig), params=None, orig=exc.orig)
 
 
 def list_workspace_members(workspace_id: str, path: Path | str | None = None) -> list[dict[str, Any]]:
@@ -1426,3 +1440,24 @@ def consume_login_flow(state: str, provider: str, now: str, path: Path | str | N
             return None
         connection.execute(sa.update(login_flows).where(login_flows.c.state == state).values(consumed_at=now))
     return row
+
+
+def cleanup_expired(*, path: Path | str | None = None) -> dict[str, int]:
+    """Remove expired sessions, consumed/expired login flows, and stale rate-limit hits."""
+    import datetime as _dt
+
+    now = _dt.datetime.now(_dt.timezone.utc).isoformat()
+    cutoff = (_dt.datetime.now(_dt.timezone.utc) - _dt.timedelta(hours=1)).isoformat()
+    counts: dict[str, int] = {}
+    with connect(path) as connection:
+        r = connection.execute(sa.delete(auth_sessions).where(auth_sessions.c.expires_at < now))
+        counts["auth_sessions"] = r.rowcount  # type: ignore[assignment]
+        r = connection.execute(
+            sa.delete(login_flows).where(
+                sa.or_(login_flows.c.expires_at < now, login_flows.c.consumed_at.isnot(None))
+            )
+        )
+        counts["login_flows"] = r.rowcount  # type: ignore[assignment]
+        r = connection.execute(sa.delete(rate_limit_hits).where(rate_limit_hits.c.ts < cutoff))
+        counts["rate_limit_hits"] = r.rowcount  # type: ignore[assignment]
+    return counts

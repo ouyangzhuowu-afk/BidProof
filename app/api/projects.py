@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-import sqlite3
+import sqlalchemy.exc
 import uuid
 
 from fastapi import APIRouter, HTTPException, Query, Request
@@ -34,7 +34,7 @@ def add_project(request: Request, payload: ProjectCreateRequest) -> dict:
     code = (payload.code or f"PRJ-{uuid.uuid4().hex[:8]}").upper()
     try:
         project = projects.create(principal["workspace_id"], payload.name.strip(), code)
-    except sqlite3.IntegrityError as exc:
+    except sqlalchemy.exc.IntegrityError as exc:
         raise HTTPException(status_code=409, detail="项目编码已存在") from exc
     audit.record(
         principal["workspace_id"],

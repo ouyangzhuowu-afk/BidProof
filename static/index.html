@@ -6,9 +6,10 @@
   <meta name="theme-color" content="#eef1f5">
   <title>BidProof 企业证据工作台</title>
   <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/static/style.css?v=20260903-1">
+  <link rel="stylesheet" href="/static/style.css?v=20260904-1">
 </head>
 <body>
+<div id="loading-overlay" class="loading-overlay" hidden><div class="loading-spinner"></div></div>
   <a class="skip-link" href="#app-main">跳到主要内容</a>
   <div class="app-shell">
     <aside class="sidebar">
@@ -156,8 +157,10 @@
     <form id="scan-form">
       <label for="company-name">企业名称</label><input id="company-name" name="company_name" placeholder="例如：某某软件服务有限公司" autocomplete="organization">
       <label for="tender-project">所属项目</label><select id="tender-project" name="project_id" required><option value="">正在加载项目...</option></select>
-      <label for="tender-file">招标文件 <span class="required-mark">必填 · PDF / DOCX / XLSX / PPTX / TXT / MD</span></label><input id="tender-file" required type="file" name="tender" accept=".pdf,.docx,.xlsx,.pptx,.txt,.md">
-      <label for="evidence-files">企业证据 <span class="field-hint">PDF / DOCX / XLSX / PPTX / TXT / MD，可多选</span></label><input id="evidence-files" type="file" name="evidence" accept=".pdf,.docx,.xlsx,.pptx,.txt,.md" multiple>
+      <label for="tender-file">招标文件 <span class="required-mark">必填 · PDF / DOCX / XLSX / PPTX / TXT / MD</span></label>
+      <div class="drop-zone" data-target="tender-file"><span class="drop-zone-hint"><i data-lucide="upload-cloud" aria-hidden="true"></i> 拖拽文件到此处，或点击选择</span><input id="tender-file" required type="file" name="tender" accept=".pdf,.docx,.xlsx,.pptx,.txt,.md"></div>
+      <label for="evidence-files">企业证据 <span class="field-hint">PDF / DOCX / XLSX / PPTX / TXT / MD，可多选</span></label>
+      <div class="drop-zone" data-target="evidence-files"><span class="drop-zone-hint"><i data-lucide="upload-cloud" aria-hidden="true"></i> 拖拽文件到此处，或点击选择</span><input id="evidence-files" type="file" name="evidence" accept=".pdf,.docx,.xlsx,.pptx,.txt,.md" multiple></div>
       <details class="advanced-fields"><summary>高级设置</summary><div><label for="evidence-metadata">证据元数据 JSON</label><textarea id="evidence-metadata" name="evidence_metadata" rows="3" placeholder='{"证书.pdf":{"category":"CREDENTIAL","valid_until":"2027-12-31"}}'></textarea></div></details>
       <div class="form-actions dialog-actions"><button class="button secondary" id="cancel-intake" type="button">取消</button><button class="button primary" type="submit"><i data-lucide="scan-line"></i><span>开始扫描</span></button></div><span id="message" aria-live="polite"></span>
     </form>
@@ -167,6 +170,6 @@
   <dialog class="intake-dialog auth-dialog" id="account-action-panel" aria-labelledby="account-action-title"><div class="dialog-header"><div><p class="eyebrow">BidProof 账号安全</p><h2 id="account-action-title">设置账号密码</h2><p id="account-action-subtitle"></p></div></div><form id="account-action-form"><label for="account-action-username">用户名</label><input id="account-action-username" readonly autocomplete="username"><label for="account-action-password">新密码</label><span class="password-field"><input id="account-action-password" required type="password" minlength="12" autocomplete="new-password"><button class="password-toggle" type="button" data-password-toggle="account-action-password" aria-label="显示新密码"><i data-lucide="eye"></i></button></span><label for="account-action-confirm">确认密码</label><span class="password-field"><input id="account-action-confirm" required type="password" minlength="12" autocomplete="new-password"><button class="password-toggle" type="button" data-password-toggle="account-action-confirm" aria-label="显示确认密码"><i data-lucide="eye"></i></button></span><small class="password-hint">链接只能使用一次；完成后将直接进入企业工作台。</small><button class="button primary full-width" type="submit"><i data-lucide="key-round"></i><span id="account-action-submit">设置并进入</span></button><span id="account-action-message" class="error-text" role="alert" aria-live="assertive"></span></form></dialog>
   <div id="app-toast" class="toast" role="status" aria-live="polite" hidden></div>
   <script src="/static/vendor/lucide.min.js"></script>
-  <script src="/static/app.js?v=20260902-3"></script>
+  <script src="/static/app.js?v=20260904-1"></script>
 </body>
 </html>

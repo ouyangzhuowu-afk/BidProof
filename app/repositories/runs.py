@@ -21,13 +21,26 @@ def delete(run_id: str) -> bool:
     return db.delete_run(run_id)
 
 
-def list_for_workspace(workspace_id: str) -> list[dict[str, Any]]:
+def list_for_workspace(
+    workspace_id: str,
+    *,
+    include_archived: bool = True,
+    project_id: str | None = None,
+    limit: int | None = None,
+    offset: int = 0,
+) -> list[dict[str, Any]]:
     """Runs belonging to one workspace, newest first.
 
     The predicate is applied in SQL, so another tenant's documents are never loaded into this
     request in the first place.
     """
-    return db.list_runs(workspace_id=workspace_id)
+    return db.list_runs(
+        workspace_id=workspace_id,
+        include_archived=include_archived,
+        project_id=project_id,
+        limit=limit,
+        offset=offset,
+    )
 
 
 def require(run_id: str) -> dict[str, Any]:

@@ -18,9 +18,10 @@ function unindentIife() {
 
 export default defineConfig({
   plugins: [unindentIife()],
+  esbuild: { minifyIdentifiers: false },
   build: {
     emptyOutDir: false,
-    minify: false,
+    minify: 'esbuild',
     sourcemap: false,
     lib: {
       entry: resolve(__dirname, 'src/app.js'),
