@@ -1,0 +1,35 @@
+# BidProof public pilot on Render's free compute plan.
+# Cold start after ~15 minutes idle; Free Postgres expires 30 days after creation.
+# Connect this repo in the Render Dashboard: New → Blueprint.
+services:
+  - type: web
+    name: bidproof
+    runtime: docker
+    plan: free
+    region: singapore
+    healthCheckPath: /healthz
+    envVars:
+      - key: BIDPROOF_ENV
+        value: production
+      - key: BIDPROOF_DATA_ROOT
+        value: /data
+      - key: BIDPROOF_JOB_RUNNER
+        value: inline
+      - key: BIDPROOF_PERSONAL_SIGNUP
+        value: "1"
+      - key: BIDPROOF_JSON_LOGS
+        value: "1"
+      - key: BIDPROOF_TRIAL_JOIN_CODE
+        value: BidProof-Trial-2026
+      - key: BIDPROOF_BOOTSTRAP_TOKEN
+        generateValue: true
+      - key: DATABASE_URL
+        fromDatabase:
+          name: bidproof-db
+          property: connectionString
+databases:
+  - name: bidproof-db
+    plan: free
+    region: singapore
+    databaseName: bidproof
+    user: bidproof

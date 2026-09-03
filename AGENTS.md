@@ -39,7 +39,7 @@ uv run python -m work.icp_ledger --render-review
 
 - 测试：`BIDPROOF_ENV=test`，`BIDPROOF_ALLOW_TRUSTED_HEADERS=1`（见 `tests/conftest.py`）
 - 真实 upload PDF 不在 Git 中；完整回归：`.\scripts\sync-real-upload-fixtures.ps1`
-- 公网试点（仅 PC）：`.\scripts\start-pilot.ps1` → `https://bidproof.marketcase.net/app`
+- 公网试点：Render 免费 Web Service（`render.yaml`）；本机备用 `.\scripts\start-pilot.ps1`（Tunnel HTTP/2）
 - 试用加入码（试点）：`BIDPROOF_TRIAL_JOIN_CODE=BidProof-Trial-2026`
 
 ## 子任务分工（临时并行时）

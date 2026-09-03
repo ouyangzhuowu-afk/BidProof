@@ -9,7 +9,8 @@
 
 - 产品页：`https://bidproof.marketcase.net/`
 - 企业工作台：`https://bidproof.marketcase.net/app`
-- 当前公网形态为本机 FastAPI + Cloudflare Tunnel 试点，依赖本机服务和 tunnel 进程持续运行，不是高可用生产托管。
+- 公网目标形态：Render 免费 Web Service（本机关机仍可访问）。空闲约 15 分钟后会休眠，下次请求有约 1 分钟冷启动；配套 Free Postgres 自创建起 30 天到期。不是高可用生产托管。
+- 本机备用：`.\scripts\start-pilot.ps1`（Cloudflare Tunnel + HTTP/2），仅在 Render 不可用时使用。
 
 ## 账号流程
 
@@ -110,15 +111,21 @@ uv run python -m work.icp_ledger --row-json work/icp-row.json
 
 GitHub 克隆默认不含 `work/uploads/` 大文件；本地完整回归可执行 `.\scripts\sync-real-upload-fixtures.ps1`（需完整 checkout 源路径）。
 
-## 公网试点（本机 + Cloudflare Tunnel）
+## 公网试点（Render 免费档）
 
-Error 1033 / HTTP 530 表示 Tunnel 连不上本机 8016。在项目根目录执行：
+仓库根目录的 `render.yaml` 定义免费 Web Service + Free Postgres。在 [Render Dashboard](https://dashboard.render.com) 选择 **New → Blueprint**，连接 `ouyangzhuowu-afk/BidProof`。
+
+- 健康检查：`/healthz`。扫描作业使用 `BIDPROOF_JOB_RUNNER=inline`（免费档没有独立 worker）。
+- 自定义域名：把 `bidproof.marketcase.net` CNAME 到服务的 `*.onrender.com` 地址。Cloudflare 先用 **DNS only** 完成证书校验，再按需打开代理；SSL/TLS 模式用 **Full**。
+- 免费档限制：休眠冷启动、无持久磁盘、Postgres 30 天到期。不要把这套当作生产 SLA。
+
+本机 Tunnel 备用（Error 1033 / HTTP 530 表示 Tunnel 连不上本机 8016）：
 
 ```powershell
 .\scripts\start-pilot.ps1
 ```
 
-脚本会：启动 `127.0.0.1:8016` → 用 `bidproof-local` tunnel token 注册 Cloudflare → 验证 `https://bidproof.marketcase.net/healthz`。
+脚本会：启动 `127.0.0.1:8016` → 用 `bidproof-local` tunnel token 以 HTTP/2 注册 Cloudflare → 验证 `https://bidproof.marketcase.net/healthz`。
 
 ## 启动
 

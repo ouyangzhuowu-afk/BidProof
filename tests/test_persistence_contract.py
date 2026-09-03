@@ -241,6 +241,21 @@ def _run(run_id: str, workspace_id: str) -> dict:
     }
 
 
+def test_paas_postgres_urls_are_normalized_to_psycopg(monkeypatch):
+    assert database.normalize_database_url("postgres://u:p@db/bidproof") == (
+        "postgresql+psycopg://u:p@db/bidproof"
+    )
+    assert database.normalize_database_url("postgresql://u:p@db/bidproof?sslmode=require") == (
+        "postgresql+psycopg://u:p@db/bidproof?sslmode=require"
+    )
+    already = "postgresql+psycopg://u:p@db/bidproof"
+    assert database.normalize_database_url(already) == already
+
+    monkeypatch.setenv("DATABASE_URL", "postgres://u:p@db/bidproof")
+    monkeypatch.delenv("BIDPROOF_DATABASE_URL", raising=False)
+    assert database.configured_url() == "postgresql+psycopg://u:p@db/bidproof"
+
+
 def _captured_statements(url: str, action) -> list[str]:
     engine = database.engine_for(url)
     captured: list[str] = []

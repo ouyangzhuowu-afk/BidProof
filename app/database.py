@@ -33,10 +33,26 @@ def _json_dumps(value: object) -> str:
     return json.dumps(value, ensure_ascii=False)
 
 
+def normalize_database_url(url: str) -> str:
+    """Accept PaaS-style URLs and pin PostgreSQL to the installed psycopg3 driver.
+
+    Render and similar hosts inject `postgres://` or `postgresql://`. SQLAlchemy's default
+    `postgresql://` dialect expects psycopg2, which this image does not install.
+    """
+    url = url.strip()
+    if not url:
+        return url
+    if url.startswith("postgres://"):
+        url = "postgresql://" + url[len("postgres://") :]
+    if url.startswith("postgresql://") and not url.startswith("postgresql+"):
+        url = "postgresql+psycopg://" + url[len("postgresql://") :]
+    return url
+
+
 def configured_url() -> str:
     """The configured database URL, defaulting to the SQLite file under the data root."""
-    configured = os.environ.get(DATABASE_URL_ENV, "").strip()
-    return configured or url_for_path(config.DB_PATH)
+    configured = os.environ.get(DATABASE_URL_ENV, "").strip() or os.environ.get("DATABASE_URL", "").strip()
+    return normalize_database_url(configured) or url_for_path(config.DB_PATH)
 
 
 def url_for_path(path: Path | str) -> str:

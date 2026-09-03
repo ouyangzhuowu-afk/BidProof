@@ -57,8 +57,9 @@ if (-not $token -or $tokenProc.ExitCode -ne 0) { Write-Error "无法获取 bidpr
 
 $CfLog = Join-Path $Root "work\bidproof-tunnel-live.log"
 $CfErr = Join-Path $Root "work\bidproof-tunnel-live.err.log"
+# HTTP/2 avoids QUIC timeouts that surface as Cloudflare Error 1033 on this network.
 $tunnel = Start-Process -FilePath $Cf `
-  -ArgumentList "tunnel","--no-autoupdate","--logfile",$CfLog,"run","--token",$token `
+  -ArgumentList "tunnel","--no-autoupdate","--protocol","http2","--logfile",$CfLog,"run","--token",$token `
   -WorkingDirectory $Root -PassThru -WindowStyle Hidden -RedirectStandardError $CfErr
 Write-Host "cloudflared started pid $($tunnel.Id)"
 
