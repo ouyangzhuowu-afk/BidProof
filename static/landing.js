@@ -1,3 +1,17 @@
+/* ============================================================================
+   BidProof 产品页首屏底纹  —  直接替换 static/landing.js
+
+   与旧版的区别：
+   1. 旧版是常驻 requestAnimationFrame 循环（30fps 不停画整屏网格 + 三份文档 +
+      贝塞尔路径 + 脉冲节点），只要首屏在视口内就一直烧 CPU。新版只在加载时跑
+      一次约 1.9 秒的扫描，结束后主动 cancelAnimationFrame，之后只有指针移动
+      才会补一帧。
+   2. 旧版是深色科幻场景，和登录后的浅色工作台完全不是一个产品。新版画的是一页
+      招标文件：纸面、栏线、条款块，扫描线经过时留下两处定位标记（青绿=已匹配，
+      印章红=缺证据）。它说明的正是这个产品做的事。
+   3. 底纹对比度压到很低，首屏文字始终可读；它是背景不是主角。
+   ========================================================================== */
+
 (() => {
   "use strict";
 
@@ -5,236 +19,229 @@
   const hero = canvas?.closest(".hero");
   if (!canvas || !hero) return;
 
-  const context = canvas.getContext("2d", { alpha: true });
+  const context = canvas.getContext("2d", { alpha: false });
   if (!context) return;
 
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const pointer = { x: 0, y: 0, targetX: 0, targetY: 0 };
-  const viewport = { width: 0, height: 0, dpr: 1 };
-  let animationFrame = 0;
-  let startTime = performance.now();
-  let lastDrawTime = 0;
-  let heroIsVisible = true;
 
   const palette = {
-    paper: "rgba(224, 236, 244, 0.08)",
-    paperStroke: "rgba(155, 180, 199, 0.24)",
-    rule: "rgba(173, 197, 212, 0.16)",
-    grid: "rgba(131, 157, 178, 0.065)",
-    teal: "rgba(77, 214, 197, 0.92)",
-    tealSoft: "rgba(77, 214, 197, 0.18)",
-    amber: "rgba(247, 190, 87, 0.88)",
-    background: "#07111f",
+    paper: "#f5f7f6",
+    rule: "rgba(20, 32, 38, 0.055)",
+    ruleStrong: "rgba(20, 32, 38, 0.10)",
+    margin: "rgba(20, 32, 38, 0.09)",
+    matchFill: "rgba(8, 127, 114, 0.09)",
+    matchLine: "rgba(8, 127, 114, 0.38)",
+    missFill: "rgba(173, 33, 27, 0.08)",
+    missLine: "rgba(173, 33, 27, 0.34)",
+    beam: "rgba(8, 127, 114, 0.26)",
+    beamGlow: "rgba(8, 127, 114, 0.045)",
   };
 
+  const SWEEP_MS = 1500;
+  const SETTLE_MS = 420;
+
+  const viewport = { width: 0, height: 0, dpr: 1 };
+  const pointer = { x: 0, y: 0, targetX: 0, targetY: 0 };
+  const scene = { columnX: 0, columnWidth: 0, top: 0, bottom: 0, lines: [], marks: [] };
+
+  let animationFrame = 0;
+  let sweepStart = 0;
+  let pendingFrame = 0;
+
+  /* ------------------------------------------------------------ 场景构建 */
+
+  function buildScene() {
+    const { width, height } = viewport;
+    const compact = width < 900;
+
+    /* 纸面跟着证据卡片走：卡片就是压在这页纸上的。这样窄屏时纸面被卡片盖住，
+       不会铺到标题和正文底下去，只在四周留一点页边。 */
+    const card = hero.querySelector(".evidence-stack");
+    const heroBox = hero.getBoundingClientRect();
+    let top = height * 0.12;
+    let bottom = height - 24;
+
+    if (card) {
+      const box = card.getBoundingClientRect();
+      scene.columnX = box.left - heroBox.left - 34;
+      scene.columnWidth = width - scene.columnX + 40;
+      const bleed = compact ? 22 : 72;
+      top = Math.max(10, box.top - heroBox.top - bleed);
+      bottom = Math.min(height - 8, box.bottom - heroBox.top + bleed);
+    } else {
+      scene.columnX = compact ? width * 0.06 : width * 0.52;
+      scene.columnWidth = width - scene.columnX + 40;
+    }
+
+    scene.lines = [];
+    const lineGap = compact ? 21 : 24;
+    let index = 0;
+    for (let y = top; y < bottom; y += lineGap, index += 1) {
+      /* 每 9 行留一个空行，模拟条款之间的段落间隔 */
+      if (index % 9 === 8) continue;
+      const factor = 0.42 + ((index * 37) % 52) / 100;
+      scene.lines.push({
+        y: Math.round(y),
+        width: scene.columnWidth * factor,
+        heavy: index % 9 === 0,
+      });
+    }
+
+    /* 两处定位：一处匹配上了，一处没有。它们是扫描线经过后才出现的 */
+    const span = bottom - top;
+    const blockHeight = Math.max(44, Math.min(72, span * 0.16));
+    scene.marks = [
+      { y: top + span * 0.16, height: blockHeight, fill: palette.matchFill, line: palette.matchLine, at: 0.34 },
+      { y: top + span * 0.62, height: blockHeight, fill: palette.missFill, line: palette.missLine, at: 0.66 },
+    ].filter((mark) => mark.y + mark.height < bottom);
+
+    scene.top = top;
+    scene.bottom = bottom;
+  }
+
+  /* -------------------------------------------------------------- 绘制 */
+
   function roundedRect(x, y, width, height, radius) {
-    const safeRadius = Math.min(radius, width / 2, height / 2);
+    const safe = Math.max(0, Math.min(radius, width / 2, height / 2));
     context.beginPath();
-    context.roundRect(x, y, width, height, safeRadius);
+    context.roundRect(x, y, width, height, safe);
   }
 
-  function drawGrid(width, height, offsetX, offsetY) {
-    const gap = width < 600 ? 40 : 52;
-    context.strokeStyle = palette.grid;
-    context.lineWidth = 1;
-    context.beginPath();
-    for (let x = (offsetX % gap) - gap; x < width + gap; x += gap) {
-      context.moveTo(Math.round(x) + 0.5, 0);
-      context.lineTo(Math.round(x) + 0.5, height);
-    }
-    for (let y = (offsetY % gap) - gap; y < height + gap; y += gap) {
-      context.moveTo(0, Math.round(y) + 0.5);
-      context.lineTo(width, Math.round(y) + 0.5);
-    }
-    context.stroke();
-  }
-
-  function drawDocument(document, time, index) {
-    const drift = Math.sin(time * 0.34 + index * 1.7) * 5;
-    const x = document.x + pointer.x * document.depth;
-    const y = document.y + drift + pointer.y * document.depth;
-
-    context.save();
-    context.translate(x, y);
-    roundedRect(0, 0, document.width, document.height, 8);
-    context.fillStyle = palette.paper;
-    context.fill();
-    context.strokeStyle = palette.paperStroke;
-    context.lineWidth = 1;
-    context.stroke();
-
-    context.fillStyle = index === 1 ? palette.amber : palette.teal;
-    context.fillRect(18, 19, 28, 3);
-
-    const lineCount = Math.max(5, Math.floor(document.height / 25));
-    for (let line = 0; line < lineCount; line += 1) {
-      const top = 42 + line * 20;
-      if (top > document.height - 18) break;
-      const widthFactor = 0.52 + ((line * 37 + index * 19) % 36) / 100;
-      context.fillStyle = palette.rule;
-      context.fillRect(18, top, Math.max(36, (document.width - 36) * widthFactor), 2);
-    }
-
-    const locatorY = 72 + ((index * 53) % Math.max(30, document.height - 120));
-    roundedRect(12, locatorY, document.width - 24, 31, 4);
-    context.fillStyle = palette.tealSoft;
-    context.fill();
-    context.strokeStyle = index === 1 ? palette.amber : palette.teal;
-    context.globalAlpha = 0.76;
-    context.stroke();
-    context.restore();
-
-    return {
-      x: x + document.width - 13,
-      y: y + locatorY + 15,
-      color: index === 1 ? palette.amber : palette.teal,
-    };
-  }
-
-  function drawEvidencePath(from, to, time, index) {
-    const controlX = from.x + (to.x - from.x) * 0.48;
-    context.save();
-    context.strokeStyle = "rgba(106, 180, 175, 0.27)";
-    context.lineWidth = 1;
-    context.setLineDash([5, 7]);
-    context.beginPath();
-    context.moveTo(from.x, from.y);
-    context.bezierCurveTo(controlX, from.y, controlX, to.y, to.x, to.y);
-    context.stroke();
-    context.setLineDash([]);
-
-    const progress = (time * 0.16 + index * 0.28) % 1;
-    const inverse = 1 - progress;
-    const dotX = inverse ** 3 * from.x
-      + 3 * inverse ** 2 * progress * controlX
-      + 3 * inverse * progress ** 2 * controlX
-      + progress ** 3 * to.x;
-    const dotY = inverse ** 3 * from.y
-      + 3 * inverse ** 2 * progress * from.y
-      + 3 * inverse * progress ** 2 * to.y
-      + progress ** 3 * to.y;
-    context.fillStyle = from.color;
-    context.beginPath();
-    context.arc(dotX, dotY, 2.6, 0, Math.PI * 2);
-    context.fill();
-    context.restore();
-  }
-
-  function drawDecisionNode(x, y, time) {
-    const pulse = 1 + Math.sin(time * 1.9) * 0.08;
-    context.save();
-    context.translate(x + pointer.x * 0.3, y + pointer.y * 0.3);
-    context.scale(pulse, pulse);
-    context.fillStyle = "rgba(7, 17, 31, 0.86)";
-    context.strokeStyle = palette.teal;
-    context.lineWidth = 1.3;
-    context.beginPath();
-    context.arc(0, 0, 27, 0, Math.PI * 2);
-    context.fill();
-    context.stroke();
-    context.beginPath();
-    context.moveTo(-9, 0);
-    context.lineTo(-2, 7);
-    context.lineTo(11, -8);
-    context.strokeStyle = "rgba(194, 249, 240, 0.92)";
-    context.lineWidth = 2;
-    context.lineCap = "round";
-    context.lineJoin = "round";
-    context.stroke();
-    context.restore();
-  }
-
-  function drawScan(width, height, time) {
-    const sceneStart = width < 720 ? width * 0.08 : width * 0.46;
-    const sceneWidth = width - sceneStart;
-    const scanX = sceneStart + ((time * 42) % Math.max(1, sceneWidth));
-    context.fillStyle = "rgba(77, 214, 197, 0.028)";
-    context.fillRect(scanX - 34, 0, 68, height);
-    context.fillStyle = "rgba(77, 214, 197, 0.34)";
-    context.fillRect(Math.round(scanX), 0, 1, height);
-  }
-
-  function drawScene(milliseconds) {
-    const width = viewport.width;
-    const height = viewport.height;
+  function drawScene(progress) {
+    const { width, height } = viewport;
     if (!width || !height) return;
 
-    const time = (milliseconds - startTime) / 1000;
-    pointer.x += (pointer.targetX - pointer.x) * 0.035;
-    pointer.y += (pointer.targetY - pointer.y) * 0.035;
+    const shiftX = pointer.x;
+    const shiftY = pointer.y;
 
-    context.clearRect(0, 0, width, height);
-    context.fillStyle = palette.background;
+    context.fillStyle = palette.paper;
     context.fillRect(0, 0, width, height);
-    drawGrid(width, height, time * -2 + pointer.x * 0.12, time * 1.2 + pointer.y * 0.12);
 
-    const compact = width < 720;
-    const baseX = compact ? width * 0.46 : width * 0.58;
-    const documentWidth = Math.max(116, Math.min(compact ? 142 : 186, width * 0.22));
-    const documentHeight = compact ? 202 : 254;
-    const documents = [
-      { x: baseX, y: height * 0.12, width: documentWidth, height: documentHeight, depth: 0.14 },
-      { x: baseX + documentWidth * 0.73, y: height * 0.34, width: documentWidth * 0.9, height: documentHeight * 0.82, depth: 0.24 },
-      { x: baseX - documentWidth * 0.2, y: height * 0.61, width: documentWidth * 0.86, height: documentHeight * 0.72, depth: 0.1 },
-    ];
-    const sources = documents.map((document, index) => drawDocument(document, time, index));
-    const decision = {
-      x: compact ? width * 0.88 : width * 0.89,
-      y: compact ? height * 0.72 : height * 0.5,
-    };
-    sources.forEach((source, index) => drawEvidencePath(source, decision, time, index));
-    drawDecisionNode(decision.x, decision.y, time);
-    drawScan(width, height, time);
-  }
+    const left = scene.columnX + shiftX;
 
-  function animate(milliseconds) {
-    if (milliseconds - lastDrawTime >= 32) {
-      drawScene(milliseconds);
-      lastDrawTime = milliseconds;
+    /* 页边留白处的一条竖线，招标文件的装订边。只在纸面范围内出现 */
+    const pageTop = scene.top + shiftY;
+    const pageHeight = Math.max(0, scene.bottom - scene.top);
+    context.fillStyle = palette.margin;
+    context.fillRect(Math.round(left - 22) + 0.5, Math.round(pageTop), 1, Math.round(pageHeight));
+
+    /* 正文行。扫描线还没走到的部分不画，形成「逐页读过去」的效果 */
+    const revealX = left - 22 + (width - left + 22) * progress;
+    for (const line of scene.lines) {
+      const y = Math.round(line.y + shiftY);
+      const drawn = Math.min(line.width, Math.max(0, revealX - left));
+      if (drawn <= 0) continue;
+      context.fillStyle = line.heavy ? palette.ruleStrong : palette.rule;
+      context.fillRect(Math.round(left), y, Math.round(drawn), line.heavy ? 3 : 2);
     }
-    animationFrame = requestAnimationFrame(animate);
+
+    /* 定位标记：扫描线越过它的位置之后才浮现 */
+    for (const mark of scene.marks) {
+      if (progress <= mark.at) continue;
+      const alpha = Math.min(1, (progress - mark.at) / 0.16);
+      const y = mark.y + shiftY;
+      context.save();
+      context.globalAlpha = alpha;
+      roundedRect(left - 10, y, scene.columnWidth + 20, mark.height, 6);
+      context.fillStyle = mark.fill;
+      context.fill();
+      context.strokeStyle = mark.line;
+      context.lineWidth = 1;
+      context.stroke();
+      context.restore();
+    }
+
+    /* 扫描线本身，走完就不再出现 */
+    if (progress > 0 && progress < 1) {
+      const beamX = Math.round(revealX);
+      context.fillStyle = palette.beamGlow;
+      context.fillRect(beamX - 30, pageTop - 14, 60, pageHeight + 28);
+      context.fillStyle = palette.beam;
+      context.fillRect(beamX, pageTop - 14, 1, pageHeight + 28);
+    }
   }
 
-  function start() {
+  /* ------------------------------------------------------------ 动画调度 */
+
+  function easeOut(t) {
+    return 1 - Math.pow(1 - t, 3);
+  }
+
+  function step(now) {
+    const elapsed = now - sweepStart;
+    const raw = Math.min(1, elapsed / SWEEP_MS);
+    drawScene(easeOut(raw));
+    if (elapsed < SWEEP_MS + SETTLE_MS) {
+      animationFrame = requestAnimationFrame(step);
+    } else {
+      /* 扫描结束就停手，不留常驻循环 */
+      cancelAnimationFrame(animationFrame);
+      animationFrame = 0;
+      drawScene(1);
+    }
+  }
+
+  function play() {
     cancelAnimationFrame(animationFrame);
-    if (reduceMotion.matches || document.hidden || !heroIsVisible) {
-      drawScene(startTime + 1800);
+    animationFrame = 0;
+    if (reduceMotion.matches) {
+      drawScene(1);
       return;
     }
-    startTime = performance.now();
-    animationFrame = requestAnimationFrame(animate);
+    sweepStart = performance.now();
+    animationFrame = requestAnimationFrame(step);
+  }
+
+  /* 指针视差只补一帧，不开循环 */
+  function scheduleRepaint() {
+    if (animationFrame || pendingFrame) return;
+    pendingFrame = requestAnimationFrame(() => {
+      pendingFrame = 0;
+      pointer.x = pointer.targetX;
+      pointer.y = pointer.targetY;
+      drawScene(1);
+    });
   }
 
   function resize() {
     const bounds = hero.getBoundingClientRect();
     viewport.width = Math.max(1, Math.round(bounds.width));
     viewport.height = Math.max(1, Math.round(bounds.height));
-    viewport.dpr = Math.min(window.devicePixelRatio || 1, 1.35);
+    viewport.dpr = Math.min(window.devicePixelRatio || 1, 2);
     canvas.width = Math.round(viewport.width * viewport.dpr);
     canvas.height = Math.round(viewport.height * viewport.dpr);
     context.setTransform(viewport.dpr, 0, 0, viewport.dpr, 0, 0);
-    drawScene(performance.now());
+    buildScene();
+    if (!animationFrame) drawScene(1);
   }
 
   hero.addEventListener("pointermove", (event) => {
+    if (reduceMotion.matches) return;
     const bounds = hero.getBoundingClientRect();
-    pointer.targetX = ((event.clientX - bounds.left) / bounds.width - 0.5) * 14;
-    pointer.targetY = ((event.clientY - bounds.top) / bounds.height - 0.5) * 10;
+    pointer.targetX = ((event.clientX - bounds.left) / bounds.width - 0.5) * 10;
+    pointer.targetY = ((event.clientY - bounds.top) / bounds.height - 0.5) * 7;
+    scheduleRepaint();
   }, { passive: true });
+
   hero.addEventListener("pointerleave", () => {
     pointer.targetX = 0;
     pointer.targetY = 0;
+    scheduleRepaint();
   }, { passive: true });
-  document.addEventListener("visibilitychange", start);
-  reduceMotion.addEventListener("change", start);
+
+  reduceMotion.addEventListener("change", play);
 
   const resizeObserver = new ResizeObserver(resize);
   resizeObserver.observe(hero);
-  const visibilityObserver = new IntersectionObserver(([entry]) => {
-    heroIsVisible = entry.isIntersecting;
-    start();
-  }, { threshold: 0.02 });
-  visibilityObserver.observe(hero);
+
+  /* 首屏不在视口内（比如带锚点进来）就不放动画，直接给终态 */
+  const visibilityObserver = new IntersectionObserver(([entry], observer) => {
+    if (!entry.isIntersecting) return;
+    observer.disconnect();
+    play();
+  }, { threshold: 0.15 });
+
   resize();
-  start();
+  drawScene(0);
+  visibilityObserver.observe(hero);
 })();

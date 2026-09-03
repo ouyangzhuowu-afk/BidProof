@@ -33,6 +33,10 @@ def test_hero_uses_a_dedicated_evidence_motion_scene():
         for tag, attrs in parser.elements
     )
     assert "bidproof-workspace.png" not in css
+    assert "bidproof-workspace-v2.png" not in css
+    assert 'id="verdicts"' in html
+    assert 'class="login-link"' in html
+    assert "登录 / 注册" in html
 
 
 def test_motion_scene_is_responsive_and_respects_reduced_motion():

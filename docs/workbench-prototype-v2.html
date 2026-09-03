@@ -1,0 +1,543 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BidProof 工作台重构原型</title>
+<link rel="stylesheet" href="./style.v2.css">
+<style>
+  /* 仅原型用：顶部的方案切换条，不属于产品样式 */
+  .proto-bar { position: sticky; top: 0; z-index: 60; display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    border-bottom: 1px solid #26323f; background: #0a1420; color: #cbd5e1; padding: 10px 16px; font-size: 13px; }
+  .proto-bar strong { color: #fff; font-weight: 650; }
+  .proto-bar button { border: 1px solid #2f3d4c; border-radius: 6px; background: transparent; color: #9fb0c2;
+    padding: 6px 12px; font-size: 13px; font-weight: 600; }
+  .proto-bar button.on { border-color: #087f72; background: rgba(8,127,114,.25); color: #fff; }
+  .proto-bar span { color: #7f8ea0; }
+  .app-shell { min-height: calc(100vh - 44px); }
+  .sidebar { top: 44px; }
+  .topbar { top: 44px; }
+  .audit-aside, .decision-context { top: calc(var(--topbar-height) + 60px); }
+  svg.ic { width: 1em; height: 1em; stroke: currentColor; fill: none; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+</style>
+</head>
+<body>
+
+<div class="proto-bar">
+  <strong>BidProof 重构原型</strong>
+  <span>·</span>
+  <button class="on" data-screen="home">任务首页（有数据）</button>
+  <button data-screen="empty">任务首页（首次使用）</button>
+  <button data-screen="detail">扫描详情</button>
+  <span>· 缩窄浏览器窗口可查看移动端布局</span>
+</div>
+
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-inbox" viewBox="0 0 24 24"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.4 5.1 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.4-6.9A2 2 0 0 0 16.8 4H7.2a2 2 0 0 0-1.8 1.1z"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14M12 5v14"/></symbol>
+  <symbol id="i-jobs" viewBox="0 0 24 24"><path d="M21 6H8M21 12H8M21 18H8"/><path d="M3 6l1.5 1.5L7 5M3 12l1.5 1.5L7 11M3 18l1.5 1.5L7 17"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3 20a6 6 0 0 1 12 0"/><path d="M16 5.2a3.2 3.2 0 0 1 0 6M17.5 14.4A6 6 0 0 1 21 20"/></symbol>
+  <symbol id="i-scan" viewBox="0 0 24 24"><path d="M3 8V5a2 2 0 0 1 2-2h3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M8 21H5a2 2 0 0 1-2-2v-3"/><circle cx="11.5" cy="11.5" r="3"/><path d="m14 14 2.5 2.5"/></symbol>
+  <symbol id="i-out" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5M21 12H9"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.4"/><path d="M5 20a7 7 0 0 1 14 0"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></symbol>
+  <symbol id="i-right" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+  <symbol id="i-left" viewBox="0 0 24 24"><path d="m15 5-7 7 7 7"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="m5 9 7 7 7-7"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.4-3 8-7 9-4-1-7-4.6-7-9V6z"/><path d="M12 9v4M12 16h.01"/></symbol>
+  <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.6 2.6 0 0 1 5 .8c0 1.7-2.5 2-2.5 3.7M12 17h.01"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M9 4h6a1 1 0 0 1 1 1v1H8V5a1 1 0 0 1 1-1z"/><path d="M16 5h2a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></symbol>
+  <symbol id="i-files" viewBox="0 0 24 24"><path d="M14 3H8a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7z"/><path d="M14 3v4h4"/></symbol>
+  <symbol id="i-link" viewBox="0 0 24 24"><path d="M9.5 14.5a3.5 3.5 0 0 0 5 0l3-3a3.5 3.5 0 0 0-5-5l-1 1"/><path d="M14.5 9.5a3.5 3.5 0 0 0-5 0l-3 3a3.5 3.5 0 0 0 5 5l1-1"/></symbol>
+  <symbol id="i-warn" viewBox="0 0 24 24"><path d="M10.3 4.3 2.8 17a2 2 0 0 0 1.7 3h15a2 2 0 0 0 1.7-3l-7.5-12.7a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></symbol>
+  <symbol id="i-usercheck" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3 20a6 6 0 0 1 12 0"/><path d="m16 12 2 2 4-4"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 9a6 6 0 1 0-12 0c0 6-2 7-2 7h16s-2-1-2-7"/><path d="M10.3 20a2 2 0 0 0 3.4 0"/></symbol>
+  <symbol id="i-filter" viewBox="0 0 24 24"><path d="M3 5h18l-7 8v6l-4-2v-4z"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12M7 11l5 5 5-5"/><path d="M4 20h16"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 4 2.5 5 5.5.8-4 3.9.9 5.5-4.9-2.6-4.9 2.6.9-5.5-4-3.9L9.5 9z"/></symbol>
+  <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 17V5M7 9l5-5 5 5"/><path d="M4 20h16"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></symbol>
+</svg>
+
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand-mark">
+      <span class="brand-symbol"><svg class="ic" style="width:18px;height:18px"><use href="#i-scan"/></svg></span>
+      <span><strong>BidProof</strong><small>投标证据工作台</small></span>
+    </div>
+    <nav class="primary-nav">
+      <button class="nav-item active" type="button"><svg class="ic"><use href="#i-inbox"/></svg><span>扫描任务</span></button>
+      <button class="nav-item" type="button"><svg class="ic"><use href="#i-jobs"/></svg><span>扫描作业</span></button>
+      <button class="nav-item" type="button"><svg class="ic"><use href="#i-users"/></svg><span>成员与设置</span></button>
+      <button class="nav-item" id="nav-new-scan" type="button"><svg class="ic"><use href="#i-plus"/></svg><span>新建扫描</span></button>
+      <div class="current-user">
+        <span class="member-avatar"><svg class="ic"><use href="#i-user"/></svg></span>
+        <span><strong>陈立</strong><small>所有者</small></span>
+      </div>
+      <button class="nav-item" type="button"><svg class="ic"><use href="#i-out"/></svg><span>退出登录</span></button>
+    </nav>
+    <div class="sidebar-status">
+      <span class="live-dot"></span>
+      <span><strong>服务连接正常</strong><small>会话受企业权限保护</small></span>
+    </div>
+    <div class="sidebar-version">企业试点版 · v0.4.0</div>
+  </aside>
+
+  <div class="workspace">
+    <header class="topbar">
+      <div class="mobile-brand"><span class="brand-symbol"><svg class="ic" style="width:16px;height:16px"><use href="#i-scan"/></svg></span><strong>BidProof</strong></div>
+      <div class="topbar-context"><span>工作台</span><svg class="ic" style="width:14px;height:14px"><use href="#i-right"/></svg><strong id="crumb">扫描任务</strong></div>
+      <button class="button primary compact-action" type="button"><svg class="ic"><use href="#i-plus"/></svg><span>新建扫描</span></button>
+    </header>
+
+    <main class="content">
+
+      <!-- ============================== 任务首页：有数据 ============================== -->
+      <section class="view" id="screen-home">
+        <header class="page-header">
+          <div>
+            <h1>扫描任务</h1>
+            <p class="lede">按废标风险排序的在办投标项目。每一条结论都能追到招标原文和企业证据的具体页码。</p>
+          </div>
+          <button class="button primary desktop-primary-action" type="button"><svg class="ic"><use href="#i-plus"/></svg><span>新建扫描</span></button>
+        </header>
+
+        <section class="overview-grid">
+          <div class="overview-card danger">
+            <div class="overview-top"><span>高风险项</span><span class="overview-icon"><svg class="ic"><use href="#i-shield"/></svg></span></div>
+            <strong>7</strong><small>分布在 3 个项目，需优先核对</small>
+          </div>
+          <div class="overview-card warning">
+            <div class="overview-top"><span>待复核项</span><span class="overview-icon"><svg class="ic"><use href="#i-help"/></svg></span></div>
+            <strong>24</strong><small>系统已定位，等待人工确认</small>
+          </div>
+          <div class="overview-card">
+            <div class="overview-top"><span>在办任务</span><span class="overview-icon"><svg class="ic"><use href="#i-files"/></svg></span></div>
+            <strong>9</strong><small>另有 14 个已归档</small>
+          </div>
+          <div class="overview-card success">
+            <div class="overview-top"><span>已做决策</span><span class="overview-icon"><svg class="ic"><use href="#i-check"/></svg></span></div>
+            <strong>5</strong><small>覆盖 56% 在办任务</small>
+          </div>
+        </section>
+
+        <div class="home-layout">
+          <section class="surface recent-section">
+            <div class="surface-header">
+              <h2>扫描记录</h2>
+              <div class="surface-actions">
+                <select aria-label="按项目筛选"><option>全部项目</option><option>市政信息化</option></select>
+                <select aria-label="任务范围"><option>未归档</option><option>已归档</option></select>
+                <button class="icon-button" type="button" aria-label="刷新"><svg class="ic"><use href="#i-refresh"/></svg></button>
+              </div>
+            </div>
+
+            <div class="task-filter-bar">
+              <label class="task-search" for="p-search"><span>搜索任务</span>
+                <span class="search-input"><svg class="ic"><use href="#i-search"/></svg><input id="p-search" type="search" placeholder="文件名、标签或任务编号"></span>
+              </label>
+              <label class="filter-field" for="p-tag"><span>标签</span><input id="p-tag" type="text" placeholder="精确标签"></label>
+              <label class="filter-field" for="p-owner"><span>负责人</span><select id="p-owner"><option>全部负责人</option></select></label>
+              <label class="filter-field" for="p-rev"><span>复核人</span><select id="p-rev"><option>全部复核人</option></select></label>
+              <label class="filter-field" for="p-sort"><span>排序</span><select id="p-sort"><option>风险优先</option><option>最近更新</option></select></label>
+              <label class="favorite-filter"><input type="checkbox"><span>只看收藏</span></label>
+              <button class="mini-button filter-reset" type="button"><svg class="ic"><use href="#i-filter"/></svg><span>清除</span></button>
+            </div>
+
+            <div class="bulk-toolbar">
+              <label class="check-wrap"><input type="checkbox"><span>全选</span></label>
+              <span class="result-count">未选择任务</span>
+              <button class="mini-button" type="button" disabled>归档</button>
+              <button class="mini-button" type="button" disabled>导出报告</button>
+              <button class="mini-button" type="button" disabled>删除</button>
+            </div>
+
+            <div class="run-table-head"><span>项目文件</span><span>高风险</span><span>待复核</span><span>人工决定</span><span></span></div>
+
+            <div class="runs-list">
+              <div class="run-row">
+                <label class="run-select"><input type="checkbox"><span></span></label>
+                <button class="run-open" type="button">
+                  <span class="run-main"><strong>珠海市政务云平台运维服务采购招标文件.pdf</strong><small>今天 14:32 · 市政信息化 · a3f19c04e2b1</small></span>
+                  <span class="run-stat danger"><b>3</b><span>高风险</span></span>
+                  <span class="run-stat warning"><b>8</b><span>待复核</span></span>
+                  <span class="decision-pill STOP">停止投入</span>
+                  <span class="run-arrow"><svg class="ic"><use href="#i-right"/></svg></span>
+                </button>
+              </div>
+              <div class="run-row">
+                <label class="run-select"><input type="checkbox"><span></span></label>
+                <button class="run-open" type="button">
+                  <span class="run-main"><strong>某省税务局数据中台建设项目（二次）.docx</strong><small>今天 09:15 · 政务数据 · 7b2e4419dd60</small></span>
+                  <span class="run-stat danger"><b>2</b><span>高风险</span></span>
+                  <span class="run-stat warning"><b>11</b><span>待复核</span></span>
+                  <span class="decision-pill HOLD">暂缓处理</span>
+                  <span class="run-arrow"><svg class="ic"><use href="#i-right"/></svg></span>
+                </button>
+              </div>
+              <div class="run-row">
+                <label class="run-select"><input type="checkbox"><span></span></label>
+                <button class="run-open" type="button">
+                  <span class="run-main"><strong>高新区智慧园区一期软件开发服务.pdf</strong><small>昨天 18:40 · 智慧园区 · c81a0f337b95</small></span>
+                  <span class="run-stat danger"><b>2</b><span>高风险</span></span>
+                  <span class="run-stat warning"><b>5</b><span>待复核</span></span>
+                  <span class="decision-pill HOLD">暂缓处理</span>
+                  <span class="run-arrow"><svg class="ic"><use href="#i-right"/></svg></span>
+                </button>
+              </div>
+              <div class="run-row">
+                <label class="run-select"><input type="checkbox"><span></span></label>
+                <button class="run-open" type="button">
+                  <span class="run-main"><strong>市直机关办公自动化系统升级采购.pdf</strong><small>8 月 30 日 · 市政信息化 · 5d90b7e14a22</small></span>
+                  <span class="run-stat danger"><b data-zero="true">0</b><span>高风险</span></span>
+                  <span class="run-stat warning"><b data-zero="true">0</b><span>待复核</span></span>
+                  <span class="decision-pill CONTINUE">继续投入</span>
+                  <span class="run-arrow"><svg class="ic"><use href="#i-right"/></svg></span>
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <aside class="home-aside">
+            <section class="surface rule-panel notification-panel">
+              <div class="surface-header"><h2>待处理提醒</h2><span class="section-icon"><svg class="ic" style="width:18px;height:18px"><use href="#i-bell"/></svg></span></div>
+              <div class="notification-list">
+                <div class="notification-item danger">
+                  <span class="notification-icon"><svg class="ic"><use href="#i-warn"/></svg></span>
+                  <span><strong>投标保证金截止 2 天后</strong><small>珠海市政务云平台运维服务 · 尚未上传缴纳凭证</small></span>
+                </div>
+                <div class="notification-item">
+                  <span class="notification-icon"><svg class="ic"><use href="#i-help"/></svg></span>
+                  <span><strong>3 项整改已逾期</strong><small>某省税务局数据中台 · 负责人：王敏</small></span>
+                </div>
+                <div class="notification-item">
+                  <span class="notification-icon"><svg class="ic"><use href="#i-doc"/></svg></span>
+                  <small style="color:var(--muted)"><strong style="display:block;color:var(--ink)">2 页 OCR 失败</strong>高新区智慧园区一期 · 按缺证据处理</small>
+                </div>
+              </div>
+            </section>
+
+            <section class="surface rule-panel">
+              <div class="surface-header"><h2>判定原则</h2><span class="section-icon"><svg class="ic" style="width:18px;height:18px"><use href="#i-shield"/></svg></span></div>
+              <div class="rule-list">
+                <div><span class="rule-icon safe"><svg class="ic"><use href="#i-link"/></svg></span><span><strong>双页码引用</strong><small>招标原文和企业证据缺一不可</small></span></div>
+                <div><span class="rule-icon warning"><svg class="ic"><use href="#i-warn"/></svg></span><span><strong>不确定即降级</strong><small>冲突与 OCR 风险保留人工复核</small></span></div>
+                <div><span class="rule-icon neutral"><svg class="ic"><use href="#i-usercheck"/></svg></span><span><strong>人工最终决策</strong><small>系统不替你决定是否继续投标</small></span></div>
+              </div>
+            </section>
+          </aside>
+        </div>
+      </section>
+
+      <!-- ============================== 任务首页：首次使用 ============================== -->
+      <section class="view" id="screen-empty" hidden>
+        <header class="page-header">
+          <div>
+            <h1>扫描任务</h1>
+            <p class="lede">上传一份招标文件，BidProof 会逐页找出资格与废标要求，并把它们和你的企业证据对上。</p>
+          </div>
+        </header>
+
+        <section class="surface" style="padding:0;overflow:hidden">
+          <div class="empty-state" style="min-height:300px;padding:56px 24px">
+            <span class="file-icon" style="width:52px;height:52px;margin-bottom:6px"><svg class="ic" style="width:26px;height:26px"><use href="#i-upload"/></svg></span>
+            <strong style="font-size:18px">还没有扫描任务</strong>
+            <p style="margin:6px 0 0;max-width:44ch;color:var(--muted)">上传招标文件后大约 2 分钟出结果。同时上传营业执照、资质证书等企业证据，可以直接看到哪些要求已经有材料支撑。</p>
+            <button class="button primary" type="button" style="margin-top:16px"><svg class="ic"><use href="#i-plus"/></svg><span>上传第一份招标文件</span></button>
+            <p style="margin:14px 0 0;font-size:13px;color:var(--subtle)">支持 PDF / DOCX / XLSX / PPTX / TXT / MD，需为可检索文字版</p>
+          </div>
+        </section>
+
+        <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:16px">
+          <div class="surface" style="padding:16px 18px">
+            <strong style="display:block;font-size:14px;margin-bottom:5px">1 · 上传招标文件</strong>
+            <p style="margin:0;color:var(--muted);font-size:13px;line-height:1.55">按页抽取资格条件、废标条款、截止时间和保证金要求。</p>
+          </div>
+          <div class="surface" style="padding:16px 18px">
+            <strong style="display:block;font-size:14px;margin-bottom:5px">2 · 匹配企业证据</strong>
+            <p style="margin:0;color:var(--muted);font-size:13px;line-height:1.55">证书、业绩、财报逐项对位。找不到原文页码的一律不判通过。</p>
+          </div>
+          <div class="surface" style="padding:16px 18px">
+            <strong style="display:block;font-size:14px;margin-bottom:5px">3 · 记录人工决策</strong>
+            <p style="margin:0;color:var(--muted);font-size:13px;line-height:1.55">继续、暂缓还是停止由你决定，理由和依据留痕可审计。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================== 扫描详情 ============================== -->
+      <section class="view" id="screen-detail" hidden>
+        <div class="breadcrumb-bar">
+          <button class="text-button" type="button"><svg class="ic"><use href="#i-left"/></svg><span>扫描任务</span></button>
+          <span>更新于 今天 14:32</span>
+        </div>
+
+        <header class="page-header detail-header">
+          <div>
+            <div class="title-row">
+              <span class="file-icon"><svg class="ic" style="width:20px;height:20px"><use href="#i-doc"/></svg></span>
+              <div>
+                <h1>珠海市政务云平台运维服务采购</h1>
+                <p class="lede" style="margin-top:4px">a3f19c04e2b1 · 版本 2 · 46 项要求 · 5 份企业证据</p>
+              </div>
+            </div>
+          </div>
+          <div class="header-actions">
+            <button class="button secondary" type="button">报告漏项</button>
+            <button class="button secondary" type="button">重新扫描</button>
+            <button class="button secondary" id="export-pdf" type="button" title="导出 PDF"><svg class="ic"><use href="#i-download"/></svg></button>
+            <button class="button secondary" id="open-decision" type="button"><svg class="ic"><use href="#i-check"/></svg><span>记录人工决策</span></button>
+          </div>
+        </header>
+
+        <div class="inline-alert">
+          <svg class="ic"><use href="#i-warn"/></svg>
+          <span>本次扫描有 2 页需要 OCR 且识别失败，已按缺证据处理，不会因此判定为通过。失败页：第 18、19 页。</span>
+        </div>
+
+        <div class="metric-grid">
+          <div class="metric danger"><span class="metric-icon"><svg class="ic"><use href="#i-shield"/></svg></span><span><span>致命风险</span><strong>3</strong></span></div>
+          <div class="metric warning"><span class="metric-icon"><svg class="ic"><use href="#i-help"/></svg></span><span><span>待复核</span><strong>8</strong></span></div>
+          <div class="metric"><span class="metric-icon"><svg class="ic"><use href="#i-files"/></svg></span><span><span>要求项</span><strong>46</strong></span></div>
+          <div class="metric decision"><span class="metric-icon"><svg class="ic"><use href="#i-check"/></svg></span><span><span>人工决定</span><strong>停止投入</strong></span></div>
+        </div>
+
+        <div class="detail-layout">
+          <section class="surface priority-section">
+            <div class="surface-header">
+              <h2>高风险与证据缺口</h2>
+              <span class="guardrail"><svg class="ic"><use href="#i-shield"/></svg> 规则命中不自动通过</span>
+            </div>
+            <div class="risk-list">
+
+              <article class="risk-card is-fail">
+                <div class="requirement-top">
+                  <div>
+                    <span class="category-label">废标条款</span>
+                    <h3>近三年无重大违法记录承诺函须法定代表人签字并加盖公章</h3>
+                  </div>
+                  <span class="status FAIL">未通过</span>
+                </div>
+                <p class="requirement-title">投标人须提供近三年内无重大违法记录的书面声明，由法定代表人签署并加盖单位公章；未按格式提供或缺少签章的，其投标文件将被认定为无效。</p>
+                <div class="citation-grid">
+                  <div class="citation-block">
+                    <span>招标原文</span><strong>第 23 页 · 第 4.2.7 条</strong>
+                    <p>投标人须提供近三年内无重大违法记录的书面声明，由法定代表人签署并加盖单位公章，未按本条要求提供的按无效投标处理。</p>
+                  </div>
+                  <div class="citation-block">
+                    <span>企业证据</span><strong class="muted">未匹配，需人工复核</strong>
+                    <p style="color:var(--muted)">已上传的 5 份材料中没有找到可定位的承诺函。</p>
+                  </div>
+                </div>
+                <div class="explanation-grid">
+                  <div><span>证据缺口</span><strong>未定位到可核验的企业证据</strong></div>
+                  <div><span>风险影响</span><strong>可能直接导致废标</strong></div>
+                  <div><span>建议动作</span><strong>核对原文并制定风险处置方案</strong></div>
+                </div>
+                <div class="requirement-footer">
+                  <span>deterministic · BLOCKER</span>
+                  <div class="action-buttons">
+                    <button class="mini-button" type="button">确认结论</button>
+                    <button class="mini-button" type="button">驳回结论</button>
+                    <button class="mini-button" type="button">标记误报</button>
+                  </div>
+                </div>
+              </article>
+
+              <article class="risk-card">
+                <div class="requirement-top">
+                  <div>
+                    <span class="category-label">资格条件</span>
+                    <h3>具备 CMMI 三级及以上或同等软件能力成熟度认证</h3>
+                  </div>
+                  <span class="status NEEDS_REVIEW">待复核</span>
+                </div>
+                <p class="requirement-title">投标人须具备有效期内的 CMMI 三级及以上认证证书，或提供招标人认可的同等能力证明材料。</p>
+                <div class="citation-grid">
+                  <div class="citation-block">
+                    <span>招标原文</span><strong>第 11 页 · 第 2.3 条</strong>
+                    <p>投标人须具备有效期内的 CMMI 三级及以上认证证书，复印件加盖公章，原件备查。</p>
+                  </div>
+                  <div class="citation-block">
+                    <span>企业证据</span><strong>CMMI证书2024.pdf · 第 1 页</strong>
+                    <p>Capability Maturity Model Integration, Maturity Level 3, 有效期至 2026-11-30。</p>
+                  </div>
+                </div>
+                <div class="explanation-grid">
+                  <div><span>证据缺口</span><strong>证书有效期覆盖开标日，仍需确认原件与主体名称一致</strong></div>
+                  <div><span>风险影响</span><strong>可能导致资格审查不通过</strong></div>
+                  <div><span>建议动作</span><strong>补充证据并由人工复核</strong></div>
+                </div>
+                <div class="requirement-footer">
+                  <span>deterministic · REVIEW</span>
+                  <div class="action-buttons">
+                    <button class="mini-button" type="button">请求证据</button>
+                    <button class="mini-button" type="button">保留复核</button>
+                    <button class="mini-button" type="button">确认有效</button>
+                  </div>
+                </div>
+              </article>
+
+              <article class="risk-card">
+                <div class="requirement-top">
+                  <div>
+                    <span class="category-label">投标保证金</span>
+                    <h3>保证金 8 万元须于开标前 3 个工作日到账</h3>
+                  </div>
+                  <span class="status UNKNOWN">未找到证据</span>
+                </div>
+                <p class="requirement-title">投标保证金人民币捌万元整，须以电汇方式于 2026-09-12 17:00 前汇入指定账户，以银行到账时间为准。</p>
+                <div class="citation-grid">
+                  <div class="citation-block">
+                    <span>招标原文</span><strong>第 31 页 · 第 6.1 条</strong>
+                    <p>投标保证金人民币捌万元整，须于 2026-09-12 17:00 前汇入指定账户，以到账时间为准。</p>
+                  </div>
+                  <div class="citation-block">
+                    <span>企业证据</span><strong class="muted">未上传相关材料</strong>
+                    <p style="color:var(--muted)">缴纳凭证不在已上传材料中，系统无法判断是否已缴纳。</p>
+                  </div>
+                </div>
+                <div class="explanation-grid">
+                  <div><span>证据缺口</span><strong>未定位到可核验的企业证据</strong></div>
+                  <div><span>风险影响</span><strong>错过节点将导致投标文件不被接收</strong></div>
+                  <div><span>建议动作</span><strong>上传缴纳凭证后重新扫描</strong></div>
+                </div>
+                <div class="requirement-footer">
+                  <span>deterministic · BLOCKER</span>
+                  <div class="action-buttons">
+                    <button class="mini-button" type="button">请求证据</button>
+                    <button class="mini-button" type="button">保留复核</button>
+                  </div>
+                </div>
+              </article>
+
+            </div>
+          </section>
+
+          <aside class="surface audit-aside">
+            <h2>本次扫描</h2>
+            <div>
+              <div class="audit-metric"><span>企业证据</span><strong>5</strong></div>
+              <div class="audit-metric"><span>高风险项</span><strong>3</strong></div>
+              <div class="audit-metric"><span>待复核项</span><strong>8</strong></div>
+            </div>
+            <p class="audit-copy">只有招标原文与企业证据均有页码引用时，要求项才允许判定为通过。</p>
+            <div class="quality-summary">
+              <p style="font-weight:600">文本质量</p>
+              <p>48 页 · 6 页需 OCR · 2 页 OCR 失败</p>
+              <small>规则初筛结果，需人工复核。OCR 失败页按缺证据处理。</small>
+            </div>
+            <form class="compact-form" onsubmit="return false">
+              <label for="p-assignee">负责人</label>
+              <select id="p-assignee"><option>陈立</option></select>
+              <label for="p-reviewer">独立复核人</label>
+              <select id="p-reviewer"><option>王敏</option></select>
+              <label for="p-tags">标签</label>
+              <input id="p-tags" value="政务云, 高优先级">
+              <label class="toggle-row"><input type="checkbox" checked><span>收藏任务</span></label>
+              <button class="button secondary full-width" type="submit">保存协作信息</button>
+            </form>
+          </aside>
+        </div>
+
+        <section class="surface matrix-section">
+          <div class="surface-header matrix-heading">
+            <h2>逐项核验</h2>
+            <span class="result-count">共 46 项</span>
+          </div>
+          <div class="matrix-toolbar">
+            <label class="search-control" for="p-req-search">
+              <svg class="ic"><use href="#i-search"/></svg>
+              <span class="sr-only">搜索要求项</span>
+              <input id="p-req-search" type="search" placeholder="搜索类别、标题或原文">
+            </label>
+            <div class="filter-group">
+              <button class="filter-button active" type="button">全部 46</button>
+              <button class="filter-button" type="button">废标 4</button>
+              <button class="filter-button" type="button">资格 12</button>
+              <button class="filter-button" type="button">时限 6</button>
+              <button class="filter-button" type="button">保证金 2</button>
+              <button class="filter-button" type="button">签章 9</button>
+              <button class="filter-button" type="button">评分 13</button>
+            </div>
+          </div>
+          <div class="requirement-columns"><span>要求项</span><span>来源</span><span>状态</span><span></span></div>
+          <div class="requirements">
+            <details class="requirement-row" open>
+              <summary class="requirement-summary">
+                <span class="requirement-name"><strong>营业执照及经营范围</strong><small>资格条件 · REQ-0004</small></span>
+                <span class="source-page">第 9 页</span>
+                <span class="status PASS">通过</span>
+                <span class="expand-icon"><svg class="ic"><use href="#i-down"/></svg></span>
+              </summary>
+              <div class="requirement-detail">
+                <p class="requirement-title">投标人须为中华人民共和国境内注册的独立法人，经营范围涵盖信息系统运行维护服务。</p>
+                <div class="citation-grid">
+                  <div class="citation-block"><span>招标原文</span><strong>第 9 页 · 第 2.1 条</strong><p>投标人须为境内注册的独立法人，经营范围涵盖信息系统运行维护服务。</p></div>
+                  <div class="citation-block"><span>企业证据</span><strong>营业执照.pdf · 第 1 页</strong><p>统一社会信用代码 91440400MA5…，经营范围包含信息系统集成服务、信息系统运行维护服务。</p></div>
+                </div>
+              </div>
+            </details>
+            <details class="requirement-row">
+              <summary class="requirement-summary">
+                <span class="requirement-name"><strong>近三年类似项目业绩不少于 2 个</strong><small>评分项 · REQ-0018</small></span>
+                <span class="source-page">第 42 页</span>
+                <span class="status NEEDS_REVIEW">待复核</span>
+                <span class="expand-icon"><svg class="ic"><use href="#i-down"/></svg></span>
+              </summary>
+              <div class="requirement-detail"><p class="requirement-title">提供近三年内已完成的同类政务云运维项目合同复印件，每个得 3 分，最高 6 分。</p></div>
+            </details>
+            <details class="requirement-row">
+              <summary class="requirement-summary">
+                <span class="requirement-name"><strong>投标文件递交截止时间</strong><small>时限要求 · REQ-0031</small></span>
+                <span class="source-page">第 5 页</span>
+                <span class="status PASS">通过</span>
+                <span class="expand-icon"><svg class="ic"><use href="#i-down"/></svg></span>
+              </summary>
+              <div class="requirement-detail"><p class="requirement-title">2026 年 9 月 15 日 09:30 前递交至珠海市公共资源交易中心三楼开标室。</p></div>
+            </details>
+            <details class="requirement-row">
+              <summary class="requirement-summary">
+                <span class="requirement-name"><strong>项目负责人须具备信息系统项目管理师证书</strong><small>资格条件 · REQ-0007</small></span>
+                <span class="source-page">第 12 页</span>
+                <span class="status UNKNOWN">未找到证据</span>
+                <span class="expand-icon"><svg class="ic"><use href="#i-down"/></svg></span>
+              </summary>
+              <div class="requirement-detail"><p class="requirement-title">拟派项目负责人须持有信息系统项目管理师（高级）证书，并提供社保缴纳证明。</p></div>
+            </details>
+          </div>
+          <nav class="pagination">
+            <span class="pagination-info">显示 1-12，共 46 项</span>
+            <span class="pagination-actions">
+              <button class="page-button" type="button" disabled><svg class="ic"><use href="#i-left"/></svg><span>上一页</span></button>
+              <button class="page-button" type="button"><span>下一页</span><svg class="ic"><use href="#i-right"/></svg></button>
+            </span>
+          </nav>
+        </section>
+      </section>
+
+    </main>
+  </div>
+
+  <nav class="mobile-nav">
+    <button type="button" class="active"><svg class="ic"><use href="#i-inbox"/></svg><span>任务</span></button>
+    <button type="button"><svg class="ic"><use href="#i-jobs"/></svg><span>作业</span></button>
+    <button type="button"><svg class="ic"><use href="#i-users"/></svg><span>设置</span></button>
+  </nav>
+</div>
+
+<script>
+  const crumbs = { home: '扫描任务', empty: '扫描任务', detail: '扫描详情' };
+  document.querySelectorAll('.proto-bar [data-screen]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.proto-bar [data-screen]').forEach((b) => b.classList.toggle('on', b === btn));
+      ['home', 'empty', 'detail'].forEach((name) => {
+        document.querySelector('#screen-' + name).hidden = name !== btn.dataset.screen;
+      });
+      document.querySelector('#crumb').textContent = crumbs[btn.dataset.screen];
+      window.scrollTo({ top: 0 });
+    });
+  });
+</script>
+</body>
+</html>

@@ -135,6 +135,7 @@ def test_jobs_view_exposes_progress_and_failure_recovery_controls():
     assert "data-cancel-job" in script
     assert "function cancelJob" in script
     assert ".job-progress-track" in css
+    assert "--primary: #087f72" in css
 
 
 def test_source_download_and_password_rotation_are_connected_to_api_contracts():
