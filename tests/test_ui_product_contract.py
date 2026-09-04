@@ -95,13 +95,6 @@ def test_enterprise_operations_are_exposed_as_complete_views():
         "run-sort",
         "run-favorite-filter",
         "clear-run-filters",
-        "toggle-filters",
-        "filter-advanced",
-        "filter-badge",
-        "risk-summary",
-        "home-lede",
-        "notification-count",
-        "accuracy-summary",
         "mfa-form",
         "mfa-code",
         "token-form",
@@ -126,30 +119,8 @@ def test_enterprise_operations_are_exposed_as_complete_views():
         "renderRemediations",
         "loadNotifications",
         "loadSessions",
-        "renderRiskSummary",
-        "syncFilterDisclosure",
     ):
         assert f"function {function_name}" in script or f"async function {function_name}" in script
-
-
-def test_home_view_collapses_duplicate_scan_actions_and_empty_chrome():
-    html = (PROJECT_ROOT / "static" / "index.html").read_text(encoding="utf-8")
-    source = SOURCE_JS.read_text(encoding="utf-8")
-    css = (PROJECT_ROOT / "static" / "style.css").read_text(encoding="utf-8")
-
-    assert 'id="nav-new-scan"' not in html
-    assert 'id="new-scan-button"' not in html
-    assert 'id="top-new-scan"' in html
-    assert 'id="overview-grid"' not in html
-    assert 'id="risk-summary"' in html
-    assert 'vendor/lucide.min.js' not in html
-    assert 'id="empty-start-scan"' in source
-    assert 'id="empty-sample-scan"' in source
-    assert "is-first-run" in source
-    assert "#home-view.is-first-run .task-filter-bar" in css
-    assert ".risk-summary" in css
-    assert "from './icons.js'" in source or 'from "./icons.js"' in source
-    assert "#top-new-scan.button.compact-action { display: inline-flex; }" in css
 
 
 def test_ui_does_not_reference_missing_archived_clock_icon():
@@ -223,3 +194,19 @@ def test_async_form_handlers_preserve_the_form_across_await_boundaries():
 
         assert "const form = event.currentTarget;" in body[:first_await]
         assert "event.currentTarget" not in body[first_await:]
+
+
+def test_scan_tasks_home_keeps_aligned_workbench_landmarks():
+    html = (PROJECT_ROOT / "static" / "index.html").read_text(encoding="utf-8")
+    css = (PROJECT_ROOT / "static" / "style.css").read_text(encoding="utf-8")
+
+    assert 'id="nav-new-scan"' in html
+    assert 'id="new-scan-button"' in html
+    assert 'id="top-new-scan"' in html
+    assert 'id="overview-grid"' in html
+    assert 'class="task-filter-bar"' in html
+    assert 'id="accuracy-summary"' in html
+    assert 'id="risk-summary"' not in html
+    assert "/static/vendor/lucide.min.js" in html
+    assert ".overview-grid" in css
+    assert ".home-layout" in css

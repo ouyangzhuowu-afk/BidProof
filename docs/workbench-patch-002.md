@@ -1,5 +1,7 @@
 # BidProof 工作台补丁 · 002 —— 首页收敛
 
+> **未落地。** 2026-09-04 整页应用后扫描任务页与上一版网格/入口对不齐，已回退到 `4516b3f`（侧栏「新建扫描」、页头按钮、四张概览卡、完整筛选条、右栏四模块、`lucide.min.js`）。本文只作设计备忘，禁止再整页替换 DOM。
+
 针对 `static/index.html` 的 `#home-view`、`static/style.css`、`frontend/src/app.js`。
 
 **要解决的问题**（对照 `static/assets/bidproof-workspace.png`）：同一个「新建扫描」在一屏内出现三次；7 个筛选控件在空态下常驻展开且 label 竖排换行；四张 0 值统计卡占据首屏最大面积；右栏四个模块里三个是产品自述；原生 `<select>` 与其他控件风格断裂。

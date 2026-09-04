@@ -360,8 +360,8 @@
     },
     {
       "id": "C-022",
-      "title": "工作台补丁 002：首页收敛与 lucide tree-shake",
-      "status": "verified",
+      "title": "工作台补丁 002 已回退（布局回归）",
+      "status": "archived",
       "dependencies": [
         "C-021"
       ],
@@ -370,12 +370,10 @@
         "static/style.css",
         "static/app.js",
         "frontend/src/app.js",
-        "frontend/src/icons.js",
-        "frontend/src/state.js",
         "docs/workbench-patch-002.md",
         "tests/test_ui_product_contract.py"
       ],
-      "validation": "首页去掉重复「新建扫描」与空态四张 0 值卡，筛选默认收起，右栏只保留待处理提醒，准确度观测移到成员与设置；lucide 并入 Vite bundle 后删除 357KB vendor 脚本；pytest 覆盖新 DOM 契约。T-005 真实企业验收仍未完成。"
+      "validation": "002 整页替换打乱扫描任务页与上一版的网格/入口对齐，已回退到 4516b3f 工作台 DOM 与样式；zip 仅作设计参考，不再整页落地。T-005 仍未完成。"
     }
   ],
   "backlog": [
@@ -653,23 +651,18 @@
     },
     {
       "path": "docs/workbench-patch-002.md",
-      "kind": "workbench-patch",
-      "status": "verified"
-    },
-    {
-      "path": "frontend/src/icons.js",
-      "kind": "frontend-icons",
-      "status": "verified"
+      "kind": "workbench-design-notes",
+      "status": "archived"
     }
   ],
   "next_best_action": {
     "task_id": "T-005",
     "title": "建立真实任务验收台账与 45 天 ICP 试运行",
-    "reason": "工程栈、独立 ground truth、OCR fail-closed 和首页工作台收敛已落账；下一项是用真实企业输入记录端到端任务与付款意愿",
+    "reason": "工程栈、独立 ground truth、OCR fail-closed 已落账；工作台扫描任务页已回退到 4516b3f 布局。下一项是用真实企业输入记录端到端任务与付款意愿",
     "blocked_by": [
       "尚无首批真实企业任务输入"
     ],
     "fallback": "ICP 触达台账与 pilot intake 模板已就绪；收到真实企业输入后追加 pilot-row 并关联 icp-outreach.linked_pilot_task_id"
   },
-  "updated_at": "2026-09-04T13:40:00+08:00"
+  "updated_at": "2026-09-04T14:20:00+08:00"
 }
