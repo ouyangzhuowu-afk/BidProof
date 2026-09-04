@@ -5,6 +5,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from fastapi import APIRouter, HTTPException, Query, Request
+from fastapi.responses import FileResponse
 
 from .. import config
 from ..authz import Permission, require
@@ -145,3 +146,11 @@ def audit_chain(request: Request) -> dict:
     principal = principal_of(request)
     require(principal, Permission.AUDIT_READ)
     return audit.verify_chain(principal["workspace_id"])
+
+
+@router.get("/api/audit/export")
+def export_audit(request: Request) -> FileResponse:
+    principal = principal_of(request)
+    require(principal, Permission.AUDIT_EXPORT)
+    snapshot = audit.export_worm_snapshot(principal["workspace_id"])
+    return FileResponse(snapshot, media_type="application/json", filename=snapshot.name)

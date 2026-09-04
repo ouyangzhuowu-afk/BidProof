@@ -40,6 +40,11 @@ document.querySelector('#tokens-list').addEventListener('click', (event) => {
   const button = event.target.closest('[data-revoke-token]');
   if (button) revokeApiToken(button.dataset.revokeToken);
 });
+document.querySelector('#sessions-list')?.addEventListener('click', (event) => {
+  const button = event.target.closest('[data-revoke-session]');
+  if (button) revokeSession(button.dataset.revokeSession);
+});
+document.querySelector('#revoke-other-sessions')?.addEventListener('click', revokeOtherSessions);
 document.querySelectorAll('[data-mobile-view]').forEach((button) => button.addEventListener('click', () => {
   if (button.dataset.mobileView === 'home') showHome();
   if (button.dataset.mobileView === 'jobs') showJobs();
@@ -925,7 +930,7 @@ async function updateMember(userId, payload) {
 }
 
 async function loadOperations() {
-  await Promise.all([loadMembers(), loadProjects(), loadMfaStatus(), loadApiTokens()]);
+  await Promise.all([loadMembers(), loadProjects(), loadMfaStatus(), loadApiTokens(), loadSessions()]);
   const healthTarget = document.querySelector('#operations-health');
   const backupTarget = document.querySelector('#backups-list');
   try {
@@ -989,8 +994,56 @@ async function changePassword(event) {
     await request('/api/auth/password', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ current_password: document.querySelector('#current-password').value, new_password: document.querySelector('#new-password').value }) });
     form.reset();
     message.textContent = '密码已更新，当前会话继续有效。';
+    await loadSessions();
   } catch (error) { message.textContent = `${error.message}，密码未更新。`; }
   finally { setButtonLoading(button, false); }
+}
+
+async function loadSessions() {
+  const list = document.querySelector('#sessions-list');
+  if (!list) return;
+  try {
+    const payload = await request('/api/auth/sessions');
+    if (!payload.sessions.length) {
+      setHtml(list, html`<div class="empty-state">没有有效会话。</div>`);
+      return;
+    }
+    setHtml(list, html`${payload.sessions.map((session) => html`
+      <article class="operation-row">
+        <div>
+          <strong>${session.current ? '当前设备' : '其他设备'}</strong>
+          <span>登录于 ${session.created_at}，有效至 ${session.expires_at}</span>
+        </div>
+        ${session.current ? html`` : html`<button class="button secondary" type="button" data-revoke-session="${session.session_id}">踢出</button>`}
+      </article>
+    `)}`);
+  } catch (error) {
+    setHtml(list, html`<div class="empty-state error-text">${error.message}</div>`);
+  }
+}
+
+async function revokeSession(sessionId) {
+  try {
+    await request(`/api/auth/sessions/${encodeURIComponent(sessionId)}`, { method: 'DELETE' });
+    showToast('已踢出该设备。');
+    await loadSessions();
+  } catch (error) {
+    showToast(`${error.message}，未能踢出该设备。`);
+  }
+}
+
+async function revokeOtherSessions() {
+  const button = document.querySelector('#revoke-other-sessions');
+  setButtonLoading(button, true, '处理中');
+  try {
+    const result = await request('/api/auth/sessions/revoke-others', { method: 'POST' });
+    showToast(`已踢出 ${result.revoked} 台其他设备。`);
+    await loadSessions();
+  } catch (error) {
+    showToast(`${error.message}，未能踢出其他设备。`);
+  } finally {
+    setButtonLoading(button, false);
+  }
 }
 
 async function loadMfaStatus() {

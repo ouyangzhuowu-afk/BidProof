@@ -611,3 +611,35 @@ def revoke_token(principal: dict, token_id: str) -> dict:
         {"token_id": token_id},
     )
     return record
+
+
+def list_sessions(request: Request) -> dict:
+    principal = identity.principal_of(request)
+    token = identity.session_token(request)
+    current = token_hash(token) if token else ""
+    return {
+        "sessions": accounts.list_sessions(principal["user_id"], utc_now(), current),
+        "max_sessions": 10,
+    }
+
+
+def revoke_session(request: Request, session_id: str) -> dict:
+    principal = identity.principal_of(request)
+    token = identity.session_token(request)
+    current = token_hash(token) if token else ""
+    if session_id == current:
+        raise HTTPException(status_code=400, detail="当前会话请使用退出登录")
+    if not accounts.delete_session_for_user(principal["user_id"], session_id):
+        raise HTTPException(status_code=404, detail="会话不存在")
+    audit.record(principal["workspace_id"], principal["user_id"], "AUTH_SESSION_REVOKED", None, {"session_id": session_id[:12]})
+    return {"revoked": True}
+
+
+def revoke_other_sessions(request: Request) -> dict:
+    principal = identity.principal_of(request)
+    token = identity.session_token(request)
+    if not token:
+        raise HTTPException(status_code=401, detail="未登录")
+    removed = accounts.delete_other_sessions(principal["user_id"], token_hash(token))
+    audit.record(principal["workspace_id"], principal["user_id"], "AUTH_SESSIONS_REVOKED_OTHERS", None, {"removed": removed})
+    return {"revoked": removed}

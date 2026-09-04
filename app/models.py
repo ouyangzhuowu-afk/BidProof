@@ -4,17 +4,61 @@ Both the SQLite development/test databases and the PostgreSQL production databas
 from this metadata, and the Alembic baseline is generated from it, so there is no second place
 where columns can drift.
 
-Timestamps are stored as ISO-8601 strings rather than native timestamp types. That is what the
-existing pilot data contains, and changing it is a data migration in its own right.
+Python still sees UTC ISO-8601 strings. PostgreSQL stores TIMESTAMPTZ so range queries and
+future monthly partitions can use native time types; SQLite keeps TEXT for the same values.
 """
 
 from __future__ import annotations
 
+from datetime import datetime, timezone
+
 import sqlalchemy as sa
 from sqlalchemy.dialects import postgresql
+from sqlalchemy.types import TypeDecorator
 
 
 metadata = sa.MetaData()
+
+
+class IsoTimestamp(TypeDecorator):
+    """ISO-8601 strings in application code; TIMESTAMPTZ on PostgreSQL, TEXT on SQLite."""
+
+    impl = sa.Text
+    cache_ok = True
+
+    def load_dialect_impl(self, dialect):
+        if dialect.name == "postgresql":
+            return dialect.type_descriptor(sa.DateTime(timezone=True))
+        return dialect.type_descriptor(sa.Text())
+
+    def process_bind_param(self, value, dialect):
+        if value is None:
+            return None
+        if dialect.name == "postgresql":
+            if isinstance(value, datetime):
+                if value.tzinfo is None:
+                    return value.replace(tzinfo=timezone.utc)
+                return value
+            text = str(value).replace("Z", "+00:00")
+            parsed = datetime.fromisoformat(text)
+            if parsed.tzinfo is None:
+                parsed = parsed.replace(tzinfo=timezone.utc)
+            return parsed
+        if isinstance(value, datetime):
+            if value.tzinfo is None:
+                value = value.replace(tzinfo=timezone.utc)
+            return value.astimezone(timezone.utc).isoformat()
+        return value
+
+    def process_result_value(self, value, dialect):
+        if value is None:
+            return None
+        if isinstance(value, datetime):
+            if value.tzinfo is None:
+                value = value.replace(tzinfo=timezone.utc)
+            return value.astimezone(timezone.utc).isoformat()
+        return value
+
 
 
 def json_column() -> sa.types.TypeEngine:
@@ -33,7 +77,7 @@ workspaces = sa.Table(
     sa.Column("workspace_id", sa.Text, primary_key=True),
     sa.Column("name", sa.Text, nullable=False),
     sa.Column("retention_days", sa.Integer, nullable=False, server_default="365"),
-    sa.Column("created_at", sa.Text, nullable=False),
+    sa.Column("created_at", IsoTimestamp(), nullable=False),
     sa.Index("idx_workspaces_created_at", "created_at"),
 )
 
@@ -47,7 +91,7 @@ users = sa.Table(
     sa.Column("password_hash", sa.Text, nullable=False),
     sa.Column("role", sa.Text, nullable=False),
     sa.Column("active", sa.Integer, nullable=False, server_default="1"),
-    sa.Column("created_at", sa.Text, nullable=False),
+    sa.Column("created_at", IsoTimestamp(), nullable=False),
     sa.UniqueConstraint("workspace_id", "username", name="uq_users_workspace_username"),
     sa.Index("idx_users_workspace", "workspace_id"),
     sa.Index("idx_users_username", "username"),
@@ -60,7 +104,7 @@ workspace_members = sa.Table(
     sa.Column("workspace_id", sa.Text, sa.ForeignKey("workspaces.workspace_id", ondelete="CASCADE", name="fk_members_workspace"), primary_key=True),
     sa.Column("user_id", sa.Text, primary_key=True),
     sa.Column("role", sa.Text, nullable=False),
-    sa.Column("created_at", sa.Text, nullable=False),
+    sa.Column("created_at", IsoTimestamp(), nullable=False),
     sa.Index("idx_workspace_members_user", "user_id"),
 )
 
@@ -72,9 +116,9 @@ projects = sa.Table(
     sa.Column("workspace_id", sa.Text, sa.ForeignKey("workspaces.workspace_id", ondelete="CASCADE", name="fk_projects_workspace"), nullable=False),
     sa.Column("name", sa.Text, nullable=False),
     sa.Column("code", sa.Text, nullable=False),
-    sa.Column("archived_at", sa.Text),
-    sa.Column("created_at", sa.Text, nullable=False),
-    sa.Column("updated_at", sa.Text, nullable=False),
+    sa.Column("archived_at", IsoTimestamp()),
+    sa.Column("created_at", IsoTimestamp(), nullable=False),
+    sa.Column("updated_at", IsoTimestamp(), nullable=False),
     sa.UniqueConstraint("workspace_id", "code", name="uq_projects_workspace_code"),
     sa.Index("idx_projects_workspace", "workspace_id"),
 )
@@ -84,10 +128,10 @@ runs = sa.Table(
     "runs",
     metadata,
     sa.Column("run_id", sa.Text, primary_key=True),
-    sa.Column("created_at", sa.Text, nullable=False),
-    sa.Column("updated_at", sa.Text, nullable=False),
+    sa.Column("created_at", IsoTimestamp(), nullable=False),
+    sa.Column("updated_at", IsoTimestamp(), nullable=False),
     sa.Column("status", sa.Text, nullable=False),
-    sa.Column("archived_at", sa.Text),
+    sa.Column("archived_at", IsoTimestamp()),
     sa.Column("workspace_id", sa.Text, sa.ForeignKey("workspaces.workspace_id", ondelete="CASCADE", name="fk_runs_workspace"), nullable=False, server_default="local"),
     sa.Column("owner_id", sa.Text, nullable=False, server_default="local-owner"),
     sa.Column("parent_run_id", sa.Text, sa.ForeignKey("runs.run_id", ondelete="SET NULL", name="fk_runs_parent")),
@@ -138,8 +182,8 @@ scan_jobs = sa.Table(
     sa.Column("progress_message", sa.Text, nullable=False, server_default=""),
     sa.Column("cancel_requested", sa.Integer, nullable=False, server_default="0"),
     sa.Column("payload_json", json_column(), nullable=False, server_default="{}"),
-    sa.Column("created_at", sa.Text, nullable=False),
-    sa.Column("updated_at", sa.Text, nullable=False),
+    sa.Column("created_at", IsoTimestamp(), nullable=False),
+    sa.Column("updated_at", IsoTimestamp(), nullable=False),
     sa.Index("idx_scan_jobs_workspace_created", "workspace_id", "created_at"),
     # Startup recovery and, from P4, the queue claim both scan by status.
     sa.Index("idx_scan_jobs_status_created", "status", "created_at"),
@@ -156,7 +200,7 @@ audit_events = sa.Table(
     sa.Column("user_id", sa.Text, nullable=False),
     sa.Column("event_type", sa.Text, nullable=False),
     sa.Column("payload_json", json_column(), nullable=False),
-    sa.Column("created_at", sa.Text, nullable=False),
+    sa.Column("created_at", IsoTimestamp(), nullable=False),
     # Who and from where, so an event can be tied to a session during an investigation.
     sa.Column("actor_ip", sa.Text),
     sa.Column("user_agent", sa.Text),
@@ -184,11 +228,11 @@ api_tokens = sa.Table(
     # Empty means the token inherits the full role; otherwise it is intersected with the role.
     sa.Column("permissions_json", json_column(), nullable=False, server_default="[]"),
     sa.Column("token_prefix", sa.Text, nullable=False, server_default=""),
-    sa.Column("expires_at", sa.Text),
-    sa.Column("revoked_at", sa.Text),
-    sa.Column("last_used_at", sa.Text),
+    sa.Column("expires_at", IsoTimestamp()),
+    sa.Column("revoked_at", IsoTimestamp()),
+    sa.Column("last_used_at", IsoTimestamp()),
     sa.Column("created_by", sa.Text, nullable=False),
-    sa.Column("created_at", sa.Text, nullable=False),
+    sa.Column("created_at", IsoTimestamp(), nullable=False),
     sa.Index("idx_api_tokens_workspace", "workspace_id"),
 )
 
@@ -198,11 +242,11 @@ user_mfa = sa.Table(
     metadata,
     sa.Column("user_id", sa.Text, primary_key=True),
     sa.Column("secret", sa.Text, nullable=False),
-    sa.Column("confirmed_at", sa.Text),
+    sa.Column("confirmed_at", IsoTimestamp()),
     # Highest TOTP counter already accepted, so a captured code cannot be replayed.
     sa.Column("last_counter", sa.Integer, nullable=False, server_default="0"),
     sa.Column("recovery_codes_json", json_column(), nullable=False, server_default="[]"),
-    sa.Column("created_at", sa.Text, nullable=False),
+    sa.Column("created_at", IsoTimestamp(), nullable=False),
 )
 
 
@@ -215,8 +259,8 @@ identity_bindings = sa.Table(
     sa.Column("provider", sa.Text, nullable=False),
     sa.Column("issuer", sa.Text, nullable=False),
     sa.Column("subject", sa.Text, nullable=False),
-    sa.Column("created_at", sa.Text, nullable=False),
-    sa.Column("last_seen_at", sa.Text),
+    sa.Column("created_at", IsoTimestamp(), nullable=False),
+    sa.Column("last_seen_at", IsoTimestamp()),
     sa.UniqueConstraint("provider", "issuer", "subject", name="uq_identity_binding_subject"),
     sa.Index("idx_identity_bindings_user", "user_id"),
 )
@@ -230,9 +274,9 @@ login_flows = sa.Table(
     sa.Column("code_verifier", sa.Text, nullable=False),
     sa.Column("redirect_uri", sa.Text, nullable=False),
     sa.Column("nonce", sa.Text, nullable=False),
-    sa.Column("expires_at", sa.Text, nullable=False),
-    sa.Column("consumed_at", sa.Text),
-    sa.Column("created_at", sa.Text, nullable=False),
+    sa.Column("expires_at", IsoTimestamp(), nullable=False),
+    sa.Column("consumed_at", IsoTimestamp()),
+    sa.Column("created_at", IsoTimestamp(), nullable=False),
 )
 
 
@@ -243,7 +287,7 @@ rate_limit_hits = sa.Table(
     # Scope names the protected action; bucket is the client identity within it.
     sa.Column("scope", sa.Text, nullable=False),
     sa.Column("bucket", sa.Text, nullable=False),
-    sa.Column("occurred_at", sa.Text, nullable=False),
+    sa.Column("occurred_at", IsoTimestamp(), nullable=False),
     sa.Index("idx_rate_limit_scope_bucket", "scope", "bucket", "occurred_at"),
 )
 
@@ -256,7 +300,7 @@ comments = sa.Table(
     sa.Column("run_id", sa.Text, sa.ForeignKey("runs.run_id", ondelete="CASCADE", name="fk_comments_run"), nullable=False),
     sa.Column("user_id", sa.Text, nullable=False),
     sa.Column("body", sa.Text, nullable=False),
-    sa.Column("created_at", sa.Text, nullable=False),
+    sa.Column("created_at", IsoTimestamp(), nullable=False),
     sa.Index("idx_comments_workspace_run", "workspace_id", "run_id"),
 )
 
@@ -273,8 +317,8 @@ remediations = sa.Table(
     sa.Column("due_date", sa.Text),
     sa.Column("status", sa.Text, nullable=False, server_default="OPEN"),
     sa.Column("note", sa.Text, nullable=False, server_default=""),
-    sa.Column("created_at", sa.Text, nullable=False),
-    sa.Column("updated_at", sa.Text, nullable=False),
+    sa.Column("created_at", IsoTimestamp(), nullable=False),
+    sa.Column("updated_at", IsoTimestamp(), nullable=False),
     sa.Index("idx_remediations_workspace_run", "workspace_id", "run_id"),
     sa.Index("idx_remediations_workspace_due", "workspace_id", "due_date"),
 )
@@ -297,7 +341,7 @@ accuracy_feedback = sa.Table(
     sa.Column("reviewer_id", sa.Text, nullable=False),
     sa.Column("dataset_scope", sa.Text, nullable=False, server_default="TEST"),
     sa.Column("review_complete", sa.Integer, nullable=False, server_default="0"),
-    sa.Column("created_at", sa.Text, nullable=False),
+    sa.Column("created_at", IsoTimestamp(), nullable=False),
     # One label per reviewer per finding; re-submitting replaces it rather than double counting.
     sa.Index(
         "idx_accuracy_feedback_key",
@@ -316,8 +360,8 @@ auth_sessions = sa.Table(
     metadata,
     sa.Column("token_hash", sa.Text, primary_key=True),
     sa.Column("user_id", sa.Text, nullable=False),
-    sa.Column("expires_at", sa.Text, nullable=False),
-    sa.Column("created_at", sa.Text, nullable=False),
+    sa.Column("expires_at", IsoTimestamp(), nullable=False),
+    sa.Column("created_at", IsoTimestamp(), nullable=False),
     sa.Index("idx_auth_sessions_user", "user_id"),
 )
 
@@ -331,10 +375,10 @@ auth_action_tokens = sa.Table(
     sa.Column("username", sa.Text),
     sa.Column("user_id", sa.Text),
     sa.Column("role", sa.Text),
-    sa.Column("expires_at", sa.Text, nullable=False),
-    sa.Column("used_at", sa.Text),
+    sa.Column("expires_at", IsoTimestamp(), nullable=False),
+    sa.Column("used_at", IsoTimestamp()),
     sa.Column("created_by", sa.Text, nullable=False),
-    sa.Column("created_at", sa.Text, nullable=False),
+    sa.Column("created_at", IsoTimestamp(), nullable=False),
     sa.Index("idx_auth_action_tokens_invite", "purpose", "username"),
     sa.Index("idx_auth_action_tokens_reset", "purpose", "user_id"),
 )
@@ -346,7 +390,7 @@ project_members = sa.Table(
     sa.Column("project_id", sa.Text, sa.ForeignKey("projects.project_id", ondelete="CASCADE", name="fk_project_members_project"), primary_key=True),
     sa.Column("user_id", sa.Text, primary_key=True),
     sa.Column("role", sa.Text, nullable=False, server_default="REVIEWER"),
-    sa.Column("created_at", sa.Text, nullable=False),
+    sa.Column("created_at", IsoTimestamp(), nullable=False),
     sa.Index("idx_project_members_user", "user_id"),
 )
 
@@ -362,7 +406,7 @@ idempotency_keys = sa.Table(
     sa.Column("request_hash", sa.Text, nullable=False),
     sa.Column("status_code", sa.Integer, nullable=False),
     sa.Column("response_json", json_column(), nullable=False),
-    sa.Column("created_at", sa.Text, nullable=False),
+    sa.Column("created_at", IsoTimestamp(), nullable=False),
     sa.UniqueConstraint("workspace_id", "idempotency_key", name="uq_idempotency_workspace_key"),
     sa.Index("idx_idempotency_created", "created_at"),
 )

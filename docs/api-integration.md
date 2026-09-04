@@ -56,4 +56,7 @@ curl -sS -b cookies.txt "$HOST/api/runs"
 
 公开隐私页：`GET /privacy`（HTML）。机器可读：`GET /api/privacy`。
 作业进度：`GET /api/jobs/{id}/events`（SSE），或轮询 `GET /api/jobs/{id}`。
-API 版本：`/api/v1/*` 与 `/api/*` 等价。
+API 版本：`/api/v1/*` 与 `/api/*` 等价；`GET /api/v1/healthz` 映射到 `GET /healthz`。
+写接口可携带 `Idempotency-Key`（JSON 成功响应会被缓存）。
+登录设备：`GET /api/auth/sessions`、`DELETE /api/auth/sessions/{id}`、`POST /api/auth/sessions/revoke-others`。
+审计链：`GET /api/audit/chain`；只追加导出：`GET /api/audit/export`（OWNER/ADMIN）。

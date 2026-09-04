@@ -85,6 +85,7 @@ def test_enterprise_operations_are_exposed_as_complete_views():
         "notifications-list",
         "source-files",
         "password-form",
+        "sessions-list",
         "current-password",
         "new-password",
         "run-search",
@@ -117,6 +118,7 @@ def test_enterprise_operations_are_exposed_as_complete_views():
         "updateRemediation",
         "renderRemediations",
         "loadNotifications",
+        "loadSessions",
     ):
         assert f"function {function_name}" in script or f"async function {function_name}" in script
 

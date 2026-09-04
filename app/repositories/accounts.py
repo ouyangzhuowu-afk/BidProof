@@ -40,6 +40,18 @@ def delete_session(token_digest: str) -> None:
     db.delete_auth_session(token_digest)
 
 
+def list_sessions(user_id: str, now: str, current_digest: str) -> list[dict[str, Any]]:
+    return db.list_auth_sessions(user_id, now, current_digest)
+
+
+def delete_session_for_user(user_id: str, session_id: str) -> bool:
+    return db.delete_auth_session_for_user(user_id, session_id)
+
+
+def delete_other_sessions(user_id: str, keep_digest: str) -> int:
+    return db.delete_other_auth_sessions(user_id, keep_digest)
+
+
 def create_action_token(token_digest: str, workspace_id: str, purpose: str, expires_at: str, created_by: str, **fields: Any) -> None:
     db.create_auth_action_token(token_digest, workspace_id, purpose, expires_at, created_by, **fields)
 

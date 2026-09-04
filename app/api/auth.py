@@ -138,3 +138,18 @@ def revoke_token(request: Request, token_id: str) -> dict:
     principal = principal_of(request)
     require(principal, Permission.TOKEN_MANAGE)
     return auth_service.revoke_token(principal, token_id)
+
+
+@router.get("/sessions")
+def list_sessions(request: Request) -> dict:
+    return auth_service.list_sessions(request)
+
+
+@router.delete("/sessions/{session_id}")
+def revoke_session(request: Request, session_id: str) -> dict:
+    return auth_service.revoke_session(request, session_id)
+
+
+@router.post("/sessions/revoke-others")
+def revoke_other_sessions(request: Request) -> dict:
+    return auth_service.revoke_other_sessions(request)

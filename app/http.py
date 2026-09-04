@@ -74,7 +74,9 @@ def install_middleware(app: FastAPI) -> None:
     @app.middleware("http")
     async def api_v1_alias(request: Request, call_next):
         path = request.scope.get("path") or ""
-        if path.startswith("/api/v1/") or path == "/api/v1":
+        if path in {"/api/v1/healthz", "/api/v1/healthz/"}:
+            request.scope["path"] = "/healthz"
+        elif path.startswith("/api/v1/") or path == "/api/v1":
             request.scope["path"] = "/api/" + path[len("/api/v1/") :] if path.startswith("/api/v1/") else "/api"
         return await call_next(request)
 

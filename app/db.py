@@ -1331,6 +1331,48 @@ def delete_auth_session(token_hash: str, path: Path | str | None = None) -> None
         connection.execute(sa.delete(auth_sessions).where(auth_sessions.c.token_hash == token_hash))
 
 
+def list_auth_sessions(user_id: str, now: str, current_digest: str, path: Path | str | None = None) -> list[dict[str, Any]]:
+    with engine(path).connect() as connection:
+        rows = _rows(
+            connection.execute(
+                sa.select(auth_sessions)
+                .where(auth_sessions.c.user_id == user_id, auth_sessions.c.expires_at > now)
+                .order_by(auth_sessions.c.created_at.desc())
+            )
+        )
+    return [
+        {
+            "session_id": row["token_hash"],
+            "created_at": row["created_at"],
+            "expires_at": row["expires_at"],
+            "current": row["token_hash"] == current_digest,
+        }
+        for row in rows
+    ]
+
+
+def delete_auth_session_for_user(user_id: str, session_id: str, path: Path | str | None = None) -> bool:
+    with connect(path) as connection:
+        result = connection.execute(
+            sa.delete(auth_sessions).where(
+                auth_sessions.c.user_id == user_id,
+                auth_sessions.c.token_hash == session_id,
+            )
+        )
+    return bool(result.rowcount)
+
+
+def delete_other_auth_sessions(user_id: str, keep_digest: str, path: Path | str | None = None) -> int:
+    with connect(path) as connection:
+        result = connection.execute(
+            sa.delete(auth_sessions).where(
+                auth_sessions.c.user_id == user_id,
+                auth_sessions.c.token_hash != keep_digest,
+            )
+        )
+    return int(result.rowcount or 0)
+
+
 def create_auth_action_token(
     token_hash: str,
     workspace_id: str,

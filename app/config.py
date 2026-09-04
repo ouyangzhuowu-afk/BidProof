@@ -8,6 +8,7 @@ UPLOAD_DIR = DATA_DIR / "uploads" if _configured_root else (PROJECT_ROOT / "work
 DB_PATH = DATA_DIR / "bid_agent.sqlite3"
 JOB_STAGING_DIR = DATA_DIR / "job-staging" if _configured_root else (PROJECT_ROOT / "work" / "job-staging")
 BACKUP_ROOT = DATA_DIR / "backups" if _configured_root else (PROJECT_ROOT / "work" / "backups")
+AUDIT_WORM_ROOT = DATA_DIR / "audit-worm"
 ENVIRONMENT = os.environ.get("BIDPROOF_ENV", "development").strip().lower()
 _TRUSTED_HEADERS_REQUESTED = os.environ.get("BIDPROOF_ALLOW_TRUSTED_HEADERS", "0").strip().lower() in {"1", "true", "yes"}
 # Self-asserted identity headers let any caller claim any workspace and role, so they are a
@@ -43,5 +44,5 @@ LICENSE_KEY = os.environ.get("BIDPROOF_LICENSE_KEY", "").strip()
 LICENSE_REQUIRED = _flag("BIDPROOF_LICENSE_REQUIRED")
 DATA_REGION = os.environ.get("BIDPROOF_DATA_REGION", "singapore").strip() or "singapore"
 
-for directory in (DATA_DIR, UPLOAD_DIR, JOB_STAGING_DIR, BACKUP_ROOT):
+for directory in (DATA_DIR, UPLOAD_DIR, JOB_STAGING_DIR, BACKUP_ROOT, AUDIT_WORM_ROOT):
     directory.mkdir(parents=True, exist_ok=True)

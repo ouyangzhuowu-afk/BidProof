@@ -61,5 +61,6 @@ jobs:
           npm ci --prefix frontend
           npm run build --prefix frontend
           node --check static/app.js
+          git diff --exit-code -- static/app.js static/style.css
       - name: Run tests
         run: pytest -q

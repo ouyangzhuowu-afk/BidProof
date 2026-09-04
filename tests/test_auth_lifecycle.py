@@ -322,3 +322,24 @@ def test_personal_register_works_when_production_bootstrap_is_locked(monkeypatch
     finally:
         if workspace_id:
             _remove_workspace(workspace_id)
+
+
+def test_owner_can_list_and_revoke_other_sessions():
+    owner, workspace_id, user = _owner_client()
+    try:
+        other = TestClient(main.app)
+        assert other.post(
+            "/api/auth/login",
+            json={"username": user["username"], "password": "OwnerPass-2026!"},
+        ).status_code == 200
+        listed = owner.get("/api/auth/sessions")
+        assert listed.status_code == 200
+        others = [item for item in listed.json()["sessions"] if not item["current"]]
+        assert others
+        revoked = owner.delete(f"/api/auth/sessions/{others[0]['session_id']}")
+        assert revoked.status_code == 200
+        assert other.get("/api/runs").status_code == 401
+        remaining = owner.get("/api/auth/sessions").json()["sessions"]
+        assert all(item["current"] for item in remaining)
+    finally:
+        _remove_workspace(workspace_id)
