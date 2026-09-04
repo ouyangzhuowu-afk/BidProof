@@ -14,7 +14,7 @@
   <meta property="og:description" content="逐页定位招标文件里的资格条件与废标条款，并与企业材料逐项对证。找不到证据的要求，不判通过。">
   <meta property="og:image" content="https://bidproof.marketcase.net/static/assets/bidproof-workspace.png">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="stylesheet" href="/static/landing.css?v=20260903-1">
+  <link rel="stylesheet" href="/static/landing.css?v=20260904-8">
 </head>
 <body>
   <a class="skip-link" href="#main">跳到主要内容</a>
@@ -39,12 +39,18 @@
       <canvas id="hero-evidence-canvas" class="hero-ground" aria-hidden="true"></canvas>
       <div class="hero-inner">
         <div class="hero-claim">
+          <p class="hero-kicker">投标资格 · 废标条款 · 页码证据链</p>
           <h1 id="hero-title">让你废标的，往往只是招标文件里的三五句话</h1>
           <p class="hero-lede">BidProof 逐页读完招标文件，把资格条件和废标条款一条条挑出来，标上原文页码，再回到你上传的企业材料里找对应证据。找不到证据的要求，一律不判通过。</p>
           <div class="actions">
             <a class="button primary" href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=contact%40marketcase.net&amp;subject=申请%20BidProof%20企业试用" target="_blank" rel="noopener noreferrer">申请企业试用</a>
             <a class="button secondary" href="/app">进入工作台</a>
           </div>
+          <ul class="hero-trust">
+            <li>双页码引用才允许通过</li>
+            <li>邀请制企业空间</li>
+            <li>不生成标书、不报价</li>
+          </ul>
           <p class="hero-note">支持 PDF、Word、Excel、PowerPoint 与文本材料，需为可检索文字版。扫描结果用于辅助人工复核，不替代企业最终决策，也不构成法律意见。</p>
         </div>
 
@@ -69,6 +75,7 @@
               <span class="verdict-mark">未通过</span>
               <span>缺少必备材料，可能直接导致废标</span>
             </div>
+            <span class="evidence-stamp" aria-hidden="true">缺证据</span>
 
             <p class="evidence-foot">招标原文与企业证据都有页码引用时，一项要求才允许判为通过。这条结论仍需负责人确认后才会写进决策记录。</p>
           </figure>
@@ -152,7 +159,10 @@
           <a class="proof-link" href="/app">查看工作台登录入口</a>
         </div>
         <figure>
-          <img src="/static/assets/bidproof-workspace.png" width="1440" height="1000" loading="lazy" decoding="async" alt="BidProof 扫描任务首页：左侧为导航，主区为高风险与待复核统计、扫描记录列表，右侧为待处理提醒和判定原则">
+          <div class="proof-frame">
+            <div class="proof-chrome" aria-hidden="true"><span></span><span></span><span></span></div>
+            <img src="/static/assets/bidproof-workspace.png" width="1440" height="1000" loading="lazy" decoding="async" alt="BidProof 扫描任务首页：左侧为导航，主区为高风险与待复核统计、扫描记录列表，右侧为待处理提醒和判定原则">
+          </div>
           <figcaption>扫描任务首页。当前为邀请制企业试点版，准确率仍在用真实投标任务持续验证。</figcaption>
         </figure>
       </div>
@@ -203,6 +213,7 @@
         <a href="#verdicts">判定口径</a>
         <a href="#workflow">工作方式</a>
         <a href="#security">数据边界</a>
+        <a href="/privacy">隐私说明</a>
         <a href="/app">进入工作台</a>
       </nav>
     </div>

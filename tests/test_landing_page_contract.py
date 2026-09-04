@@ -37,6 +37,9 @@ def test_hero_uses_a_dedicated_evidence_motion_scene():
     assert 'id="verdicts"' in html
     assert 'class="login-link"' in html
     assert "登录 / 注册" in html
+    assert 'href="/privacy"' in html
+    assert 'class="hero-kicker"' in html
+    assert 'class="proof-frame"' in html
 
 
 def test_motion_scene_is_responsive_and_respects_reduced_motion():
