@@ -54,16 +54,24 @@ def test_no_forked_copy_of_the_application_tree_is_vendored():
     The Cloudflare container skeleton previously vendored both and had already diverged, so
     on-premise delivery keeps exactly one source of truth for application code and assets.
     """
+    def keep(path):
+        return (
+            ".venv" not in path.parts
+            and "node_modules" not in path.parts
+            and "_zip-sync" not in path.parts
+            and not any(part.startswith("_incoming") for part in path.parts)
+        )
+
     duplicates = [
         path
         for candidate in ("app", "static")
         for path in PROJECT_ROOT.rglob(f"*/{candidate}/main.py")
-        if ".venv" not in path.parts and "node_modules" not in path.parts
+        if keep(path)
     ]
     duplicates += [
         path
         for path in PROJECT_ROOT.rglob("*/static/app.js")
-        if ".venv" not in path.parts and "node_modules" not in path.parts
+        if keep(path)
     ]
 
     assert duplicates == []

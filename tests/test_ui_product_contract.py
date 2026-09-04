@@ -95,6 +95,13 @@ def test_enterprise_operations_are_exposed_as_complete_views():
         "run-sort",
         "run-favorite-filter",
         "clear-run-filters",
+        "toggle-filters",
+        "filter-advanced",
+        "filter-badge",
+        "risk-summary",
+        "home-lede",
+        "notification-count",
+        "accuracy-summary",
         "mfa-form",
         "mfa-code",
         "token-form",
@@ -119,8 +126,29 @@ def test_enterprise_operations_are_exposed_as_complete_views():
         "renderRemediations",
         "loadNotifications",
         "loadSessions",
+        "renderRiskSummary",
+        "syncFilterDisclosure",
     ):
         assert f"function {function_name}" in script or f"async function {function_name}" in script
+
+
+def test_home_view_collapses_duplicate_scan_actions_and_empty_chrome():
+    html = (PROJECT_ROOT / "static" / "index.html").read_text(encoding="utf-8")
+    source = SOURCE_JS.read_text(encoding="utf-8")
+    css = (PROJECT_ROOT / "static" / "style.css").read_text(encoding="utf-8")
+
+    assert 'id="nav-new-scan"' not in html
+    assert 'id="new-scan-button"' not in html
+    assert 'id="top-new-scan"' in html
+    assert 'id="overview-grid"' not in html
+    assert 'id="risk-summary"' in html
+    assert 'vendor/lucide.min.js' not in html
+    assert 'id="empty-start-scan"' in source
+    assert 'id="empty-sample-scan"' in source
+    assert "is-first-run" in source
+    assert "#home-view.is-first-run .task-filter-bar" in css
+    assert ".risk-summary" in css
+    assert "from './icons.js'" in source or 'from "./icons.js"' in source
 
 
 def test_ui_does_not_reference_missing_archived_clock_icon():

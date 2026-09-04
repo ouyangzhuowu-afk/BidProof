@@ -27,6 +27,7 @@
  * @property {string} runReviewerFilter
  * @property {boolean} runFavoriteOnly
  * @property {string} runSort
+ * @property {string} riskFilter
  * @property {ReturnType<typeof setTimeout> | null} runSearchTimer
  */
 
@@ -56,5 +57,6 @@ export const store = {
   runReviewerFilter: '',
   runFavoriteOnly: false,
   runSort: 'updated_desc',
+  riskFilter: '',
   runSearchTimer: null,
 };

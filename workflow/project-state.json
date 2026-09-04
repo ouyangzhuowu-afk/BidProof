@@ -357,6 +357,25 @@
         "outputs/product-auth-public-acceptance-2026-08-27.md"
       ],
       "validation": "生产初始化令牌、72 小时邀请、自助设密激活、1 小时重置与旧会话撤销完成；异步表单 currentTarget 缺陷回归修复；全量 pytest 110 passed，node/npm/workflow 检查通过；真实浏览器完成邀请、激活、重置、退出残留与 1440/1100/820/390px 布局验收；公网 health/status=200，未登录与伪造身份头任务 API=401"
+    },
+    {
+      "id": "C-022",
+      "title": "工作台补丁 002：首页收敛与 lucide tree-shake",
+      "status": "verified",
+      "dependencies": [
+        "C-021"
+      ],
+      "artifacts": [
+        "static/index.html",
+        "static/style.css",
+        "static/app.js",
+        "frontend/src/app.js",
+        "frontend/src/icons.js",
+        "frontend/src/state.js",
+        "docs/workbench-patch-002.md",
+        "tests/test_ui_product_contract.py"
+      ],
+      "validation": "首页去掉重复「新建扫描」与空态四张 0 值卡，筛选默认收起，右栏只保留待处理提醒，准确度观测移到成员与设置；lucide 并入 Vite bundle 后删除 357KB vendor 脚本；pytest 覆盖新 DOM 契约。T-005 真实企业验收仍未完成。"
     }
   ],
   "backlog": [
@@ -631,16 +650,26 @@
       "path": "scripts/sync-real-upload-fixtures.ps1",
       "kind": "fixture-sync-script",
       "status": "verified"
+    },
+    {
+      "path": "docs/workbench-patch-002.md",
+      "kind": "workbench-patch",
+      "status": "verified"
+    },
+    {
+      "path": "frontend/src/icons.js",
+      "kind": "frontend-icons",
+      "status": "verified"
     }
   ],
   "next_best_action": {
     "task_id": "T-005",
     "title": "建立真实任务验收台账与 45 天 ICP 试运行",
-    "reason": "工程栈、独立 ground truth 和 OCR fail-closed 验收已落账；下一项是用真实企业输入记录端到端任务与付款意愿",
+    "reason": "工程栈、独立 ground truth、OCR fail-closed 和首页工作台收敛已落账；下一项是用真实企业输入记录端到端任务与付款意愿",
     "blocked_by": [
       "尚无首批真实企业任务输入"
     ],
     "fallback": "ICP 触达台账与 pilot intake 模板已就绪；收到真实企业输入后追加 pilot-row 并关联 icp-outreach.linked_pilot_task_id"
   },
-  "updated_at": "2026-09-02T18:45:00+08:00"
+  "updated_at": "2026-09-04T13:40:00+08:00"
 }

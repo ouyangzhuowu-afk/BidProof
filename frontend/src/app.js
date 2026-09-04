@@ -1,4 +1,5 @@
 import { html, raw, setHtml } from './escape.js';
+import { refreshIcons } from './icons.js';
 import { store } from './state.js';
 import { applyTheme, currentTheme, t, toggleTheme } from './i18n.js';
 
@@ -18,7 +19,7 @@ const accountActionDialog = document.querySelector('#account-action-panel');
 
 const intakeDialog = document.querySelector('#intake-panel');
 const openIntakeButtons = ['#new-scan-button', '#top-new-scan', '#nav-new-scan'];
-openIntakeButtons.forEach((selector) => document.querySelector(selector).addEventListener('click', () => { store.rescanParentId = null; openIntake(); }));
+openIntakeButtons.forEach((selector) => document.querySelector(selector)?.addEventListener('click', () => { store.rescanParentId = null; openIntake(); }));
 document.querySelector('#close-intake').addEventListener('click', closeIntake);
 document.querySelector('#cancel-intake').addEventListener('click', closeIntake);
 document.querySelector('#nav-runs').addEventListener('click', showHome);
@@ -51,6 +52,19 @@ document.querySelectorAll('[data-mobile-view]').forEach((button) => button.addEv
   if (button.dataset.mobileView === 'admin') showAdmin();
 }));
 document.querySelector('#refresh-runs').addEventListener('click', loadRuns);
+document.querySelector('#toggle-filters')?.addEventListener('click', (event) => {
+  const panel = document.querySelector('#filter-advanced');
+  if (!panel) return;
+  panel.hidden = !panel.hidden;
+  event.currentTarget.setAttribute('aria-expanded', String(!panel.hidden));
+  refreshIcons();
+});
+document.querySelector('#risk-summary')?.addEventListener('click', (event) => {
+  const button = event.target.closest('[data-risk-filter]');
+  if (!button) return;
+  store.riskFilter = store.riskFilter === button.dataset.riskFilter ? '' : button.dataset.riskFilter;
+  loadRuns();
+});
 document.querySelector('#run-scope').addEventListener('change', (event) => { store.runScope = event.target.value; store.selectedRunIds.clear(); loadRuns(); });
 document.querySelector('#run-project-filter').addEventListener('change', (event) => { store.projectFilter = event.target.value; store.selectedRunIds.clear(); loadRuns(); });
 document.querySelector('#run-search').addEventListener('input', (event) => {
@@ -422,25 +436,50 @@ setHtml(list, html`<div class="run-skeleton"></div><div class="run-skeleton"></d
     if (store.runReviewerFilter) params.set('reviewer_id', store.runReviewerFilter);
     if (store.runFavoriteOnly) params.set('favorite', 'true');
     const runs = await request(`/api/runs?${params.toString()}`);
-    const visibleRuns = store.runScope === 'ARCHIVED' ? runs.filter((run) => run.archived_at) : store.runScope === 'ACTIVE' ? runs.filter((run) => !run.archived_at) : runs;
-    renderOverview(visibleRuns);
-    loadAccuracySummary();
+    let visibleRuns = store.runScope === 'ARCHIVED' ? runs.filter((run) => run.archived_at) : store.runScope === 'ACTIVE' ? runs.filter((run) => !run.archived_at) : runs;
+    if (store.riskFilter === 'blocker') visibleRuns = visibleRuns.filter((run) => Number(run.blocker_count) > 0);
+    if (store.riskFilter === 'unresolved') visibleRuns = visibleRuns.filter((run) => Number(run.unresolved_count) > 0);
+    renderRiskSummary(visibleRuns);
     loadNotifications();
     store.selectedRunIds.forEach((id) => { if (!visibleRuns.some((run) => run.run_id === id)) store.selectedRunIds.delete(id); });
     updateBulkControls(visibleRuns);
     if (!visibleRuns.length) {
-      const filtered = store.runSearch || store.runTagFilter || store.runAssigneeFilter || store.runReviewerFilter || store.runFavoriteOnly || store.projectFilter;
-setHtml(list, html`<div class="empty-state onboarding-empty"><span>${filtered ? t('emptyFiltered') : t('emptyRuns')}</span>${filtered ? '' : html`<button class="button primary" id="empty-start-scan" type="button"><i data-lucide="file-plus-2"></i><span>${t('trySample')}</span></button>`}</div>`);
-      document.querySelector('#empty-start-scan')?.addEventListener('click', startSampleScan);
+      const filtered = store.runSearch || store.runTagFilter || store.runAssigneeFilter
+        || store.runReviewerFilter || store.runFavoriteOnly || store.projectFilter || store.riskFilter;
+      document.querySelector('#home-view').classList.toggle('is-first-run', !filtered);
+      if (filtered) {
+        setHtml(list, html`<div class="empty-state"><span>${t('emptyFiltered')}</span></div>`);
+      } else {
+        setHtml(list, html`<div class="first-run">
+          <h2>先扫一份你手上正在投的招标文件</h2>
+          <p>BidProof 会逐页挑出资格条件和废标条款，再回到你上传的企业材料里找对应证据。第一次扫描大约需要 2–4 分钟。</p>
+          <div class="first-run-actions">
+            <button class="button primary" id="empty-start-scan" type="button"><i data-lucide="upload-cloud"></i><span>上传招标文件</span></button>
+            <button class="text-button" id="empty-sample-scan" type="button">${t('trySample')}</button>
+          </div>
+          <div class="first-run-gate">
+            <h3>扫描结果会怎么给你</h3>
+            <ol>
+              <li><b>只认双页码引用。</b>招标原文和企业证据都能定位到页码，一项要求才允许判通过。</li>
+              <li><b>不确定即降级。</b>证据冲突或 OCR 失败的页保持待复核，不会被悄悄放行。</li>
+              <li><b>人做最终决策。</b>系统记录继续、暂缓或停止的理由，不替你决定是否投标。</li>
+            </ol>
+          </div>
+        </div>`);
+        document.querySelector('#empty-start-scan')?.addEventListener('click', openIntake);
+        document.querySelector('#empty-sample-scan')?.addEventListener('click', startSampleScan);
+      }
       return;
     }
+    document.querySelector('#home-view').classList.remove('is-first-run');
     list.replaceChildren(...visibleRuns.map(renderRunRow));
     updateBulkControls(visibleRuns);
   } catch (error) {
 setHtml(list, html`<div class="empty-state error-text">${error.message}，请检查本地服务后重试。</div>`);
-    renderOverview([]);
+    renderRiskSummary([]);
   } finally {
     refresh.disabled = false;
+    syncFilterDisclosure();
     refreshIcons();
   }
 }
@@ -463,6 +502,7 @@ function clearRunFilters() {
   store.runReviewerFilter = '';
   store.runFavoriteOnly = false;
   store.runSort = 'updated_desc';
+  store.riskFilter = '';
   document.querySelector('#run-search').value = '';
   document.querySelector('#run-tag-filter').value = '';
   document.querySelector('#run-assignee-filter').value = '';
@@ -475,8 +515,14 @@ function clearRunFilters() {
 
 async function loadNotifications() {
   const target = document.querySelector('#notifications-list');
+  const countEl = document.querySelector('#notification-count');
   try {
     const payload = await request('/api/notifications');
+    const total = Number(payload.count || payload.notifications.length || 0);
+    if (countEl) {
+      countEl.hidden = total === 0;
+      countEl.textContent = String(total);
+    }
     if (!payload.notifications.length) {
 setHtml(target, html`<div class="empty-state success-text">暂无需要立即处理的提醒。</div>`);
       return;
@@ -487,22 +533,69 @@ setHtml(target, payload.notifications.slice(0, 6).map((item) => html`<article cl
   } catch (error) {setHtml(target, html`<div class="empty-state error-text">${error.message}，提醒加载失败。</div>`); }
 }
 
-function renderOverview(runs) {
-  const totalBlockers = runs.reduce((sum, run) => sum + Number(run.blocker_count || 0), 0);
-  const totalUnresolved = runs.reduce((sum, run) => sum + Number(run.unresolved_count || 0), 0);
+function renderRiskSummary(runs) {
+  const host = document.querySelector('#risk-summary');
+  if (!host) return;
+  if (!runs.length) {
+    host.hidden = true;
+    return;
+  }
+  const blockers = runs.reduce((sum, run) => sum + Number(run.blocker_count || 0), 0);
+  const unresolved = runs.reduce((sum, run) => sum + Number(run.unresolved_count || 0), 0);
+  const unknown = runs.reduce((sum, run) => sum + Number(run.unknown_count || 0), 0);
+  const total = runs.reduce((sum, run) => sum + Number(run.requirement_count || 0), 0);
+  const passed = Math.max(total - blockers - unresolved - unknown, 0);
   const decided = runs.filter((run) => run.decision?.decision).length;
-  const items = [
-    ['扫描任务', runs.length, '累计任务', 'files', 'neutral'],
-    ['高风险项', totalBlockers, '优先核对资格与废标项', 'shield-alert', 'danger'],
-    ['待复核项', totalUnresolved, '尚未形成确定证据链', 'circle-help', 'warning'],
-    ['已做决策', decided, `覆盖 ${runs.length ? Math.round(decided / runs.length * 100) : 0}% 任务`, 'clipboard-check', 'success'],
-  ];
-  document.querySelector('#overview-grid').replaceChildren(...items.map(([label, value, note, icon, tone]) => {
-    const card = document.createElement('div');
-    card.className = `overview-card ${tone}`;
-setHtml(card, html`<div class="overview-top"><span>${label}</span><span class="overview-icon"><i data-lucide="${icon}"></i></span></div><strong>${value}</strong><small>${note}</small>`);
-    return card;
-  }));
+  const pct = (value) => (total ? (value / total * 100).toFixed(1) : 0);
+  const active = (name) => store.riskFilter === name ? 'is-active' : '';
+
+  host.hidden = false;
+  setHtml(host, html`
+    <div class="risk-top">
+      <b>${total} 项要求</b>
+      <span>覆盖 ${runs.length} 份招标文件 · 已完成人工决策 ${decided} 份</span>
+    </div>
+    <div class="risk-bar" role="img" aria-label="废标风险 ${blockers} 项，待复核 ${unresolved} 项，未找到证据 ${unknown} 项，通过 ${passed} 项">
+      <i class="seg-fail" style="width:${pct(blockers)}%"></i>
+      <i class="seg-review" style="width:${pct(unresolved)}%"></i>
+      <i class="seg-unknown" style="width:${pct(unknown)}%"></i>
+      <i class="seg-pass" style="width:${pct(passed)}%"></i>
+    </div>
+    <div class="risk-legend">
+      <button type="button" data-risk-filter="blocker" class="lg-fail ${active('blocker')}" aria-pressed="${store.riskFilter === 'blocker'}"><i class="lg-dot lg-sq"></i><b>${blockers}</b> 废标风险</button>
+      <button type="button" data-risk-filter="unresolved" class="lg-review ${active('unresolved')}" aria-pressed="${store.riskFilter === 'unresolved'}"><i class="lg-dot lg-rc"></i><b>${unresolved}</b> 待复核</button>
+      <span class="lg-unknown"><i class="lg-dot lg-ho"></i><b>${unknown}</b> 未找到证据</span>
+      <span class="lg-pass"><i class="lg-dot"></i><b>${passed}</b> 通过</span>
+    </div>`);
+  const lede = document.querySelector('#home-lede');
+  if (lede) {
+    lede.textContent = blockers
+      ? `${runs.length} 份任务中，${runs.filter((run) => Number(run.blocker_count) > 0).length} 份存在废标风险待处理。`
+      : `${runs.length} 份任务，暂无废标风险项。`;
+  }
+}
+
+function syncFilterDisclosure() {
+  const active = [
+    store.runTagFilter, store.runAssigneeFilter, store.runReviewerFilter,
+    store.runFavoriteOnly ? '1' : '', store.runSort !== 'updated_desc' ? '1' : '',
+  ].filter(Boolean).length;
+
+  const badge = document.querySelector('#filter-badge');
+  if (badge) {
+    badge.hidden = !active;
+    badge.textContent = String(active);
+  }
+
+  const reset = document.querySelector('#clear-run-filters');
+  if (reset) reset.hidden = !active && !store.runSearch && !store.projectFilter && !store.riskFilter;
+
+  if (active) {
+    const panel = document.querySelector('#filter-advanced');
+    const toggle = document.querySelector('#toggle-filters');
+    if (panel) panel.hidden = false;
+    toggle?.setAttribute('aria-expanded', 'true');
+  }
 }
 
 async function submitScan(event) {
@@ -930,7 +1023,7 @@ async function updateMember(userId, payload) {
 }
 
 async function loadOperations() {
-  await Promise.all([loadMembers(), loadProjects(), loadMfaStatus(), loadApiTokens(), loadSessions()]);
+  await Promise.all([loadMembers(), loadProjects(), loadMfaStatus(), loadApiTokens(), loadSessions(), loadAccuracySummary()]);
   const healthTarget = document.querySelector('#operations-health');
   const backupTarget = document.querySelector('#backups-list');
   try {
@@ -1546,6 +1639,7 @@ async function submitMissedFeedback(event) {
 
 async function loadAccuracySummary() {
   const target = document.querySelector('#accuracy-summary');
+  if (!target) return;
   try {
     const metrics = await request('/api/accuracy/metrics');
 setHtml(target, metrics.categories.length ? metrics.categories.slice(0, 4).map((item) => {
@@ -1625,10 +1719,6 @@ function showToast(message) {
   store.toastTimer = setTimeout(() => { toast.hidden = true; }, 4000);
 }
 
-function refreshIcons() {
-  if (window.lucide) window.lucide.createIcons({ attrs: { 'aria-hidden': 'true' } });
-}
-
 function riskRank(item) {
   const severity = item.severity === 'HIGH' ? 0 : 1;
   const status = item.status === 'FAIL' ? 0 : item.status === 'UNKNOWN' ? 1 : 2;
@@ -1647,4 +1737,6 @@ function formatDate(value) {
   if (!value) return '—';
   return new Date(value).toLocaleString('zh-CN', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' });
 }
+
+refreshIcons();
 

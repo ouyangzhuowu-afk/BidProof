@@ -31,6 +31,10 @@ frontend/node_modules/
 # Offline pack output
 dist/
 
+# Incoming zip extracts (never commit)
+work/_incoming*/
+work/_zip-sync/
+
 # IDE / OS
 .DS_Store
 Thumbs.db

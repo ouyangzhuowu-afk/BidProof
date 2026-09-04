@@ -19,11 +19,12 @@
 3. `workflow/agent-operating-instructions.md` → 执行循环
 4. `uv run python -m app.workflow check`
 
-## 当前优先级（2026-09-02）
+## 当前优先级（2026-09-04）
 
 - **P1 / 进行中**：`T-005` 真实任务验收与 45 天 ICP 试运行
 - **阻塞**：尚无首批真实企业任务（不可用 demo 冒充）
 - **可做**：工程优化、CI、台账工具、文档；收到真实输入后追加 `pilot-row.json` / `icp-row.json`
+- **已落账（C-022）**：工作台首页收敛（重复入口、空态卡片、筛选收起、lucide 并入 bundle）
 
 ## 标准命令
 
