@@ -120,10 +120,11 @@ button { color: inherit; }
 .topbar-context strong { color: var(--ink); font-weight: 600; }
 .mobile-brand { display: none; }
 /* 桌面端此前同屏出现三个「新建扫描」（导航 / topbar / 页头）。
-   宽屏只保留页头那个主按钮，topbar 的收起来。
+   侧栏和页头入口已去掉，只留顶栏这一处——必须在宽屏也显示。
    注意必须写成 .button.compact-action：单独的 .compact-action 与后面的
    `.button { display: inline-flex }` 同优先级，会被源码顺序盖掉。 */
 .compact-action, .button.compact-action { display: none; }
+#top-new-scan.button.compact-action { display: inline-flex; }
 .content { width: min(1400px, 100%); margin: 0 auto; padding: 26px 30px 72px; }
 .view { min-width: 0; }
 
@@ -178,7 +179,7 @@ h3 { margin: 0; color: var(--ink-strong); font-size: 15px; font-weight: 650; lin
 .task-filter-bar .filter-field { flex: 1 1 100px; min-width: 0; }
 .task-filter-bar .filter-bottom-row { display: flex; align-items: center; gap: 10px; margin-left: auto; }
 .task-filter-bar label { display: block; min-width: 0; }
-.task-filter-bar label > span:first-child { display: block; margin-bottom: 5px; color: var(--muted); font-size: 12px; font-weight: 600; }
+.task-filter-bar label > span:first-child:not(.sr-only) { display: block; margin-bottom: 5px; color: var(--muted); font-size: 12px; font-weight: 600; }
 .task-filter-bar input, .task-filter-bar select { min-height: 38px !important; padding: 7px 10px; font-size: 13px; }
 .search-input { position: relative; display: block; }
 .search-input svg { position: absolute; z-index: 1; top: 50%; left: 10px; width: 16px; height: 16px; transform: translateY(-50%); color: var(--subtle); pointer-events: none; }

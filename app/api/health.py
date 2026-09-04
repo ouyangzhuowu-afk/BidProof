@@ -22,7 +22,10 @@ def landing() -> FileResponse:
 
 @router.get("/app", include_in_schema=False)
 def index() -> FileResponse:
-    return FileResponse(PROJECT_ROOT / "static" / "index.html")
+    return FileResponse(
+        PROJECT_ROOT / "static" / "index.html",
+        headers={"Cache-Control": "no-store"},
+    )
 
 
 @router.get("/privacy")

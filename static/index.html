@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#eef1f5">
   <title>BidProof 企业证据工作台</title>
   <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/static/style.css?v=20260904-5">
+  <link rel="stylesheet" href="/static/style.css?v=20260904-6">
 </head>
 <body>
 <div id="loading-overlay" class="loading-overlay" hidden><div class="loading-spinner"></div></div>
@@ -165,6 +165,6 @@
   <dialog class="intake-dialog" id="confirm-panel" aria-labelledby="confirm-title"><div class="dialog-header"><div><p class="eyebrow">危险操作</p><h2 id="confirm-title">确认删除</h2><p id="confirm-body"></p></div></div><div class="confirm-body"><label for="confirm-word" id="confirm-hint">输入 DELETE 以确认</label><input id="confirm-word" autocomplete="off"><div class="form-actions dialog-actions"><button class="button secondary" id="confirm-cancel" type="button">取消</button><button class="button primary" id="confirm-submit" type="button">确认</button></div></div></dialog>
   <dialog class="intake-dialog auth-dialog" id="account-action-panel" aria-labelledby="account-action-title"><div class="dialog-header"><div><p class="eyebrow">BidProof 账号安全</p><h2 id="account-action-title">设置账号密码</h2><p id="account-action-subtitle"></p></div></div><form id="account-action-form"><label for="account-action-username">用户名</label><input id="account-action-username" readonly autocomplete="username"><label for="account-action-password">新密码</label><span class="password-field"><input id="account-action-password" required type="password" minlength="12" autocomplete="new-password"><button class="password-toggle" type="button" data-password-toggle="account-action-password" aria-label="显示新密码"><i data-lucide="eye"></i></button></span><label for="account-action-confirm">确认密码</label><span class="password-field"><input id="account-action-confirm" required type="password" minlength="12" autocomplete="new-password"><button class="password-toggle" type="button" data-password-toggle="account-action-confirm" aria-label="显示确认密码"><i data-lucide="eye"></i></button></span><small class="password-hint">链接只能使用一次；完成后将直接进入企业工作台。</small><button class="button primary full-width" type="submit"><i data-lucide="key-round"></i><span id="account-action-submit">设置并进入</span></button><span id="account-action-message" class="error-text" role="alert" aria-live="assertive"></span></form></dialog>
   <div id="app-toast" class="toast" role="status" aria-live="polite" hidden></div>
-  <script src="/static/app.js?v=20260904-5"></script>
+  <script src="/static/app.js?v=20260904-6"></script>
 </body>
 </html>

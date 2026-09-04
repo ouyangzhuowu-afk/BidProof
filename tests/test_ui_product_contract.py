@@ -149,6 +149,7 @@ def test_home_view_collapses_duplicate_scan_actions_and_empty_chrome():
     assert "#home-view.is-first-run .task-filter-bar" in css
     assert ".risk-summary" in css
     assert "from './icons.js'" in source or 'from "./icons.js"' in source
+    assert "#top-new-scan.button.compact-action { display: inline-flex; }" in css
 
 
 def test_ui_does_not_reference_missing_archived_clock_icon():

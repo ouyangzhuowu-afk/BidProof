@@ -20,6 +20,7 @@ def test_app_entrypoint_contains_workspace_and_account_lifecycle_dialogs():
     response = TestClient(main.app).get("/app")
 
     assert response.status_code == 200
+    assert response.headers.get("cache-control") == "no-store"
     assert "BidProof 企业证据工作台" in response.text
     assert 'id="auth-panel"' in response.text
     assert 'id="account-action-panel"' in response.text
