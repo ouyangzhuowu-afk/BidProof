@@ -55,8 +55,8 @@ def logout(request: Request, response: Response) -> dict:
 
 
 @router.post("/password")
-def change_password(request: Request, payload: PasswordChangeRequest) -> dict:
-    return auth_service.change_password(principal_of(request), payload)
+def change_password(request: Request, response: Response, payload: PasswordChangeRequest) -> dict:
+    return auth_service.change_password(request, response, principal_of(request), payload)
 
 
 @router.post("/invitations", status_code=201)

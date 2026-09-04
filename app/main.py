@@ -32,7 +32,7 @@ async def lifespan(_app: FastAPI):
         cleaned = db.cleanup_expired()
         logger.info("Startup cleanup: %s", cleaned)
     except Exception:
-        logger.warning("Startup cleanup skipped", exc_info=True)
+        logger.exception("Startup cleanup failed")
     if config.TRUSTED_HEADERS_IGNORED:
         logger.warning(
             "BIDPROOF_ALLOW_TRUSTED_HEADERS is set but ignored because BIDPROOF_ENV=%s; "
@@ -45,7 +45,15 @@ async def lifespan(_app: FastAPI):
 
 
 def create_app() -> FastAPI:
-    app = FastAPI(title="Bid Evidence Agent", version=VERSION, lifespan=lifespan)
+    production = config.ENVIRONMENT == "production"
+    app = FastAPI(
+        title="Bid Evidence Agent",
+        version=VERSION,
+        lifespan=lifespan,
+        docs_url=None if production else "/docs",
+        redoc_url=None if production else "/redoc",
+        openapi_url=None if production else "/openapi.json",
+    )
     install_middleware(app)
     app.mount("/static", StaticFiles(directory=config.PROJECT_ROOT / "static"), name="static")
     register_routers(app)

@@ -7,6 +7,8 @@
 
 ## 在线入口
 
+- 使用手册（投标专员）：[docs/user-guide.md](docs/user-guide.md)
+- API 集成：[docs/api-integration.md](docs/api-integration.md)
 - 产品页：`https://bidproof.marketcase.net/`
 - 企业工作台：`https://bidproof.marketcase.net/app`
 - 公网目标形态：Render 免费 Web Service（本机关机仍可访问）。空闲约 15 分钟后会休眠，下次请求有约 1 分钟冷启动；配套 Free Postgres 自创建起 30 天到期。不是高可用生产托管。

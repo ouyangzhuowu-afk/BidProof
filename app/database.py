@@ -20,8 +20,8 @@ from .models import metadata
 
 
 DATABASE_URL_ENV = "BIDPROOF_DATABASE_URL"
-POOL_SIZE = int(os.environ.get("BIDPROOF_DB_POOL_SIZE", "5"))
-MAX_OVERFLOW = int(os.environ.get("BIDPROOF_DB_MAX_OVERFLOW", "10"))
+POOL_SIZE = int(os.environ.get("BIDPROOF_DB_POOL_SIZE", "20"))
+MAX_OVERFLOW = int(os.environ.get("BIDPROOF_DB_MAX_OVERFLOW", "20"))
 POOL_TIMEOUT_SECONDS = int(os.environ.get("BIDPROOF_DB_POOL_TIMEOUT", "30"))
 SQLITE_BUSY_TIMEOUT_MS = int(os.environ.get("BIDPROOF_SQLITE_BUSY_TIMEOUT_MS", "5000"))
 
@@ -117,12 +117,28 @@ def _apply_sqlite_pragmas(connection, _record) -> None:
         cursor.close()
 
 
+def runtime_ddl_allowed() -> bool:
+    """PostgreSQL production must migrate via `python -m app.dbctl upgrade`.
+
+    SQLite file installs (tests, air-gapped laptops) still create the schema on first
+    connect so a missing Alembic step cannot leave the process without tables.
+    """
+    if os.environ.get("BIDPROOF_ENV", "development").strip().lower() != "production":
+        return True
+    url = os.environ.get(DATABASE_URL_ENV, "").strip() or os.environ.get("DATABASE_URL", "").strip()
+    if not url:
+        return True
+    return is_sqlite(normalize_database_url(url))
+
+
 def create_schema(target: Path | str | None = None) -> None:
     """Create any missing tables and indexes from the metadata.
 
-    Used for development, tests and first install. Versioned changes to an existing deployment
-    go through Alembic, which is generated from the same metadata.
+    Used for development, tests and first install. Production containers run Alembic in the
+    entrypoint instead, so the application role does not need DDL.
     """
+    if not runtime_ddl_allowed():
+        return
     engine = engine_for(target)
     metadata.create_all(engine, checkfirst=True)
     _add_columns_missing_from_metadata(engine)

@@ -59,6 +59,8 @@ def list_runs(
     assignee_id: str | None = Query(default=None, max_length=120),
     reviewer_id: str | None = Query(default=None, max_length=120),
     sort: str = Query(default="updated_desc", pattern="^(updated_desc|filename)$"),
+    after_created_at: str | None = Query(default=None, max_length=40),
+    after_run_id: str | None = Query(default=None, max_length=64),
 ) -> list[dict]:
     principal = principal_of(request)
     require(principal, Permission.RUN_READ)
@@ -72,6 +74,8 @@ def list_runs(
         assignee_id=assignee_id,
         reviewer_id=reviewer_id,
         sort=sort,
+        after_created_at=after_created_at,
+        after_run_id=after_run_id,
     )
 
 

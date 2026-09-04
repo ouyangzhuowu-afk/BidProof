@@ -73,7 +73,26 @@ def test_listing_runs_does_not_issue_a_query_per_row(tmp_path):
 
     selects = [text for text in statements if text.lstrip().upper().startswith("SELECT")]
     assert len(selects) == 1
+    assert "state_json" not in selects[0]
+    assert "review_json" not in selects[0]
+    assert "evidence_assets_json" not in selects[0]
     assert len(db.list_runs(url, workspace_id="tenant")) == 12
+
+
+def test_cleanup_expired_removes_stale_sessions_and_rate_limit_hits(tmp_path):
+    url = _sqlite_url(tmp_path, "cleanup.sqlite3")
+    db.init_db(url)
+    db.create_auth_session("expired-session", "user-1", "2000-01-01T00:00:00+00:00", url)
+    db.create_auth_session("live-session", "user-1", "2999-01-01T00:00:00+00:00", url)
+
+    counts = db.cleanup_expired(path=url)
+
+    assert counts["auth_sessions"] >= 1
+    remaining = db.engine(url)
+    with remaining.connect() as connection:
+        hashes = [row[0] for row in connection.execute(sa.text("SELECT token_hash FROM auth_sessions")).all()]
+    assert "expired-session" not in hashes
+    assert "live-session" in hashes
 
 
 def test_run_documents_round_trip_with_chinese_text(tmp_path):

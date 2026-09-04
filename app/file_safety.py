@@ -12,12 +12,22 @@ def scan_upload_safety(path: Path) -> list[str]:
     issues: list[str] = []
     suffix = path.suffix.lower()
     if suffix == ".pdf":
-        payload = path.read_bytes()
-        if any(token in payload for token in PDF_ACTIVE_TOKENS):
+        if _pdf_contains_active_content(path):
             issues.append("PDF 包含 JavaScript、自动打开动作或嵌入文件等活动内容")
     if suffix in {".docx", ".xlsx", ".pptx"}:
         issues.extend(_scan_ooxml(path))
     return issues
+
+
+def _pdf_contains_active_content(path: Path) -> bool:
+    with path.open("rb") as handle:
+        leftover = b""
+        while chunk := handle.read(65536):
+            window = leftover + chunk
+            if any(token in window for token in PDF_ACTIVE_TOKENS):
+                return True
+            leftover = window[-32:]
+    return False
 
 
 def _scan_ooxml(path: Path) -> list[str]:

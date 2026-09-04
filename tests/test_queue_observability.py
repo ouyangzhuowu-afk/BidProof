@@ -142,4 +142,4 @@ def test_metrics_are_not_in_the_public_openapi_surface():
     }
     assert "GET /metrics" not in operations
     assert "POST /api/auth/register" in operations
-    assert len(operations) == 70
+    assert len(operations) == 75

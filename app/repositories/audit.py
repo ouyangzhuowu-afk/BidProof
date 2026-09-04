@@ -24,3 +24,7 @@ def record(
 
 def events(workspace_id: str, run_id: str | None = None) -> list[dict[str, Any]]:
     return db.list_audit_events(workspace_id, run_id)
+
+
+def verify_chain(workspace_id: str) -> dict[str, Any]:
+    return db.verify_audit_chain(workspace_id)

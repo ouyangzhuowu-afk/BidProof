@@ -26,7 +26,15 @@ from ..schemas import (
     PersonalRegisterRequest,
     TrialJoinRequest,
 )
-from ..security import UNUSABLE_PASSWORD, new_action_token, password_hash, password_is_usable, token_hash, verify_password
+from ..security import (
+    UNUSABLE_PASSWORD,
+    new_action_token,
+    password_hash,
+    password_is_usable,
+    password_needs_rehash,
+    token_hash,
+    verify_password,
+)
 from ..state import utc_now
 
 
@@ -95,13 +103,16 @@ def login(request: Request, response: Response, payload: LoginRequest) -> dict:
     attempt_key = identity.login_attempt_key(request, payload.username)
     identity.enforce_login_rate_limit(attempt_key, now)
     username = payload.username.strip()
-    user = accounts.by_username(username)
+    workspace_hint = (payload.workspace_id or "").strip() or None
+    user = accounts.by_username(username, workspace_hint)
     meets_policy = len(payload.password) >= MIN_PASSWORD_LENGTH
     if user and not bool(user.get("active", 1)):
         _fail_login(attempt_key, user, username)
     if user and password_is_usable(user.get("password_hash")):
         if not meets_policy or not verify_password(payload.password, user["password_hash"]):
             _fail_login(attempt_key, user, username)
+        if password_needs_rehash(user["password_hash"]):
+            accounts.set_password(user["user_id"], password_hash(payload.password), revoke_sessions=False)
     else:
         federated = _directory_login(username, payload.password) if meets_policy else None
         if federated is None:
@@ -207,7 +218,7 @@ def trial_join(request: Request, response: Response, payload: TrialJoinRequest) 
     if not workspace_id:
         raise HTTPException(status_code=503, detail="企业空间尚未初始化，请先完成管理员开通")
     username = payload.username.strip()
-    if accounts.by_username(username):
+    if accounts.by_username(username, workspace_id):
         raise HTTPException(status_code=409, detail="用户名已存在，请直接登录")
     try:
         user = accounts.create(workspace_id, username, password_hash(payload.password), "REVIEWER")
@@ -228,9 +239,6 @@ def register_personal(request: Request, response: Response, payload: PersonalReg
     attempt_key = identity.login_attempt_key(request, f"register:{payload.username}")
     identity.enforce_login_rate_limit(attempt_key, now)
     username = payload.username.strip()
-    if accounts.by_username(username):
-        identity.record_failed_login(attempt_key, now)
-        raise HTTPException(status_code=409, detail="用户名已存在，请直接登录")
     display = (payload.display_name or "").strip() or f"个人空间 · {username}"
     workspace_id = uuid.uuid4().hex
     try:
@@ -259,7 +267,7 @@ def logout(request: Request, response: Response) -> dict:
     return {"logged_out": True}
 
 
-def change_password(principal: dict[str, str], payload: PasswordChangeRequest) -> dict:
+def change_password(request: Request, response: Response, principal: dict[str, str], payload: PasswordChangeRequest) -> dict:
     user = accounts.by_id(principal["user_id"])
     if user is None or user.get("workspace_id") != principal["workspace_id"] or not bool(user.get("active", 1)):
         raise HTTPException(status_code=401, detail="当前账号无效")
@@ -269,6 +277,7 @@ def change_password(principal: dict[str, str], payload: PasswordChangeRequest) -
         raise HTTPException(status_code=400, detail="新密码不能与当前密码相同")
     if not accounts.set_password(user["user_id"], password_hash(payload.new_password)):
         raise HTTPException(status_code=404, detail="账号不存在")
+    identity.issue_session(response, user["user_id"], identity.request_is_secure(request))
     audit.record(principal["workspace_id"], principal["user_id"], "AUTH_PASSWORD_CHANGED")
     return {"changed": True, "sessions_revoked": True}
 
@@ -277,7 +286,7 @@ def create_invitation(principal: dict[str, str], payload: InvitationCreateReques
     if payload.role == "ADMIN" and principal["role"] != "OWNER":
         raise HTTPException(status_code=403, detail="只有所有者可以邀请管理员")
     username = payload.username.strip()
-    if accounts.by_username(username):
+    if accounts.by_username(username, principal["workspace_id"]):
         raise HTTPException(status_code=409, detail="用户名已存在")
     raw_token = new_action_token()
     expires_at = (datetime.now(timezone.utc) + timedelta(hours=INVITATION_VALID_HOURS)).isoformat()
@@ -318,7 +327,7 @@ def inspect_action(token: str) -> dict:
 
 def activate_invitation(request: Request, response: Response, payload: AuthActionCompleteRequest) -> dict:
     action = identity.active_auth_action(payload.token, "INVITE")
-    if accounts.by_username(action["username"]):
+    if accounts.by_username(action["username"], action["workspace_id"]):
         raise HTTPException(status_code=409, detail="用户名已存在，请直接登录")
     if not accounts.consume_action_token(token_hash(payload.token), utc_now()):
         raise HTTPException(status_code=410, detail="链接无效、已使用或已过期")

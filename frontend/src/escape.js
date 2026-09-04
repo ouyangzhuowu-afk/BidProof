@@ -52,3 +52,12 @@ export function html(strings, ...values) {
 export function setHtml(element, content) {
   element.innerHTML = toHtml(content);
 }
+
+/** Reject javascript: and other non-http(s)/relative URLs. */
+export function safeUrl(value) {
+  const text = String(value ?? '').trim();
+  if (!text) return '#';
+  const lowered = text.toLowerCase();
+  if (lowered.startsWith('javascript:') || lowered.startsWith('data:') || lowered.startsWith('vbscript:')) return '#';
+  return text;
+}

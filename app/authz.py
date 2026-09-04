@@ -40,7 +40,6 @@ class Permission(StrEnum):
 
 VIEWER_PERMISSIONS = frozenset({
     Permission.RUN_READ,
-    Permission.REPORT_EXPORT,
     Permission.JOB_READ,
     Permission.MEMBER_READ,
     Permission.WORKSPACE_READ,
@@ -52,6 +51,7 @@ REVIEWER_PERMISSIONS = VIEWER_PERMISSIONS | {
     Permission.RUN_UPDATE,
     Permission.RUN_REVIEW,
     Permission.RUN_DECIDE,
+    Permission.REPORT_EXPORT,
     Permission.EVIDENCE_DOWNLOAD,
     Permission.JOB_MANAGE,
     Permission.AUDIT_READ,

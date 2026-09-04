@@ -138,3 +138,10 @@ def verify_project_backup(request: Request, backup_id: str) -> dict:
         {"backup_id": backup_id, "valid": verification["valid"]},
     )
     return verification
+
+
+@router.get("/api/audit/chain")
+def audit_chain(request: Request) -> dict:
+    principal = principal_of(request)
+    require(principal, Permission.AUDIT_READ)
+    return audit.verify_chain(principal["workspace_id"])

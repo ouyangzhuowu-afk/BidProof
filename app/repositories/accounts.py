@@ -15,17 +15,17 @@ def create(workspace_id: str, username: str, password_hash: str, role: str) -> d
     return db.create_user(workspace_id, username, password_hash, role)
 
 
-def by_username(username: str) -> dict[str, Any] | None:
-    return db.load_user_by_username(username)
+def by_username(username: str, workspace_id: str | None = None) -> dict[str, Any] | None:
+    return db.load_user_by_username(username, workspace_id=workspace_id)
 
 
 def by_id(user_id: str) -> dict[str, Any] | None:
     return db.load_user_by_id(user_id)
 
 
-def set_password(user_id: str, password_hash: str) -> bool:
-    """Replace the stored hash. Revokes existing sessions for the account."""
-    return db.update_user_password(user_id, password_hash)
+def set_password(user_id: str, password_hash: str, *, revoke_sessions: bool = True) -> bool:
+    """Replace the stored hash. Revokes existing sessions unless upgrading an old hash."""
+    return db.update_user_password(user_id, password_hash, revoke_sessions=revoke_sessions)
 
 
 def session_user(token_digest: str, now: str) -> dict[str, Any] | None:

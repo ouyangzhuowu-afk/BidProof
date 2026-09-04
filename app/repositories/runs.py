@@ -13,8 +13,8 @@ def load(run_id: str) -> dict[str, Any] | None:
     return db.load_run(run_id)
 
 
-def save(run: dict[str, Any]) -> None:
-    db.save_run(run)
+def save(run: dict[str, Any], *, expected_revision: int | None = None) -> None:
+    db.save_run(run, expected_revision=expected_revision)
 
 
 def delete(run_id: str) -> bool:
@@ -28,6 +28,8 @@ def list_for_workspace(
     project_id: str | None = None,
     limit: int | None = None,
     offset: int = 0,
+    after_created_at: str | None = None,
+    after_run_id: str | None = None,
 ) -> list[dict[str, Any]]:
     """Runs belonging to one workspace, newest first.
 
@@ -40,6 +42,8 @@ def list_for_workspace(
         project_id=project_id,
         limit=limit,
         offset=offset,
+        after_created_at=after_created_at,
+        after_run_id=after_run_id,
     )
 
 
@@ -59,11 +63,21 @@ def require_scoped(run_id: str, principal: dict[str, str]) -> dict[str, Any]:
     run = require(run_id)
     if run.get("workspace_id", "local") != principal["workspace_id"]:
         raise HTTPException(status_code=404, detail="扫描任务不存在")
+    if not db.user_can_access_project(principal, run.get("project_id")):
+        raise HTTPException(status_code=404, detail="扫描任务不存在")
     return run
+
+
+def can_access_project(principal: dict[str, str], project_id: str | None) -> bool:
+    return db.user_can_access_project(principal, project_id)
 
 
 def find_duplicates(workspace_id: str, tender_sha256: str) -> list[str]:
     return db.find_duplicate_run_ids(workspace_id, tender_sha256)
+
+
+def list_evidence_assets(workspace_id: str) -> list[dict[str, Any]]:
+    return db.list_evidence_assets(workspace_id)
 
 
 def expired_archived_ids(workspace_id: str, cutoff: str) -> list[str]:

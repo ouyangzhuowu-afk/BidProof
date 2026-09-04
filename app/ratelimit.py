@@ -64,7 +64,8 @@ def count(limit: Limit, bucket: str, path=None, *, moment: datetime | None = Non
         return int(connection.execute(statement).scalar_one())
 
 
-def record(limit: Limit, bucket: str, path=None, *, moment: datetime | None = None) -> None:
+def record(limit: Limit, bucket: str, path=None, *, moment: datetime | None = None) -> int:
+    """Insert one hit and prune stale rows for this bucket. Returns the window count."""
     at = moment or _now()
     with engine(path).begin() as connection:
         connection.execute(
@@ -75,14 +76,21 @@ def record(limit: Limit, bucket: str, path=None, *, moment: datetime | None = No
                 occurred_at=at.isoformat(),
             )
         )
-        # Pruning on write keeps the table proportional to the active window instead of growing
-        # forever, and avoids needing a separate cleanup job.
         connection.execute(
             sa.delete(rate_limit_hits).where(
                 rate_limit_hits.c.scope == limit.scope,
+                rate_limit_hits.c.bucket == bucket,
                 rate_limit_hits.c.occurred_at <= _cutoff(limit, at),
             )
         )
+        counted = connection.execute(
+            sa.select(sa.func.count()).select_from(rate_limit_hits).where(
+                rate_limit_hits.c.scope == limit.scope,
+                rate_limit_hits.c.bucket == bucket,
+                rate_limit_hits.c.occurred_at > _cutoff(limit, at),
+            )
+        ).scalar_one()
+    return int(counted)
 
 
 def retry_after(limit: Limit, bucket: str, path=None, *, moment: datetime | None = None) -> int:
@@ -105,8 +113,17 @@ def retry_after(limit: Limit, bucket: str, path=None, *, moment: datetime | None
     return max(1, int(limit.window_seconds - elapsed))
 
 
-def enforce(limit: Limit, bucket: str, path=None, *, detail: str = "请求过于频繁，请稍后再试") -> None:
-    """Raise 429 when the bucket has already used its allowance."""
+def enforce(limit: Limit, bucket: str, path=None, *, detail: str = "请求过于频繁，请稍后再试", consume: bool = False) -> None:
+    """Reject when the window is exhausted. Set consume=True to count this request."""
+    if consume:
+        hits = record(limit, bucket, path)
+        if hits >= limit.max_hits:
+            raise HTTPException(
+                status_code=429,
+                detail=detail,
+                headers={"Retry-After": str(retry_after(limit, bucket, path))},
+            )
+        return
     if count(limit, bucket, path) >= limit.max_hits:
         raise HTTPException(
             status_code=429,
@@ -116,9 +133,9 @@ def enforce(limit: Limit, bucket: str, path=None, *, detail: str = "请求过于
 
 
 def register_failure(limit: Limit, bucket: str, path=None, *, detail: str = "请求过于频繁，请稍后再试") -> None:
-    """Record a failed attempt and raise 429 if it exhausted the allowance."""
-    record(limit, bucket, path)
-    if count(limit, bucket, path) >= limit.max_hits:
+    """Record a failed attempt atomically and raise 429 if it exhausted the allowance."""
+    hits = record(limit, bucket, path)
+    if hits >= limit.max_hits:
         raise HTTPException(
             status_code=429,
             detail=detail,

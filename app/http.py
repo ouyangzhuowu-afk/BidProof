@@ -2,13 +2,14 @@
 
 from __future__ import annotations
 
+import json
 import logging
 import os
 
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import JSONResponse
 
-from . import config, csrf, identity, observability, ratelimit, request_context
+from . import config, csrf, identity, idempotency, observability, ratelimit, request_context
 
 logger = logging.getLogger("bidproof.http")
 
@@ -70,6 +71,43 @@ def install_middleware(app: FastAPI) -> None:
             _finalize_response(request, response, context)
             return response
 
+    @app.middleware("http")
+    async def api_v1_alias(request: Request, call_next):
+        path = request.scope.get("path") or ""
+        if path.startswith("/api/v1/") or path == "/api/v1":
+            request.scope["path"] = "/api/" + path[len("/api/v1/") :] if path.startswith("/api/v1/") else "/api"
+        return await call_next(request)
+
+    @app.middleware("http")
+    async def idempotency_guard(request: Request, call_next):
+        key = (request.headers.get("Idempotency-Key") or "").strip()
+        if not key or request.method.upper() not in WRITE_METHODS or not (request.scope.get("path") or "").startswith("/api/"):
+            return await call_next(request)
+        if "/api/auth/" in (request.scope.get("path") or ""):
+            return await call_next(request)
+        body = await request.body()
+
+        async def receive():
+            return {"type": "http.request", "body": body, "more_body": False}
+
+        request = Request(request.scope, receive)
+        request_hash = idempotency.hash_body(body)
+        cached = idempotency.lookup(request, key, request_hash)
+        if cached is not None:
+            return cached
+        response = await call_next(request)
+        if 200 <= response.status_code < 300 and isinstance(response, JSONResponse):
+            payload = None
+            if getattr(response, "media_type", "").startswith("application/json"):
+                try:
+                    payload = json.loads(bytes(response.body).decode("utf-8"))
+                except Exception:
+                    payload = {"status": response.status_code}
+            else:
+                payload = {"status": response.status_code}
+            idempotency.remember(request, key, request_hash, response.status_code, payload)
+        return response
+
 
 def _finalize_response(request: Request, response, context) -> None:
     for hdr, val in SECURITY_HEADERS.items():
@@ -104,7 +142,7 @@ def _check_action_limits(request: Request) -> None:
     method = request.method.upper()
     bucket = request_context.client_ip(request) or "unknown"
     if path.startswith("/api/") and any(path.endswith(suffix) for suffix in EXPORT_SUFFIXES):
-        ratelimit.enforce(ratelimit.EXPORT, bucket, detail="导出过于频繁，请稍后再试")
+        ratelimit.enforce(ratelimit.EXPORT, bucket, detail="导出过于频繁，请稍后再试", consume=True)
         return
     if method in WRITE_METHODS and path.startswith("/api/"):
-        ratelimit.enforce(ratelimit.WRITE, bucket, detail="写入过于频繁，请稍后再试")
+        ratelimit.enforce(ratelimit.WRITE, bucket, detail="写入过于频繁，请稍后再试", consume=True)

@@ -16,7 +16,7 @@ def test_scan_job_persists_progress_and_recovery_state(tmp_path):
     init_db(database)
     create_scan_job("pending", "workspace", None, "PENDING", {"tender_path": "pending.pdf"}, database)
     create_scan_job("running", "workspace", None, "RUNNING", {"tender_path": "running.pdf"}, database)
-    create_scan_job("done", "workspace", "run-1", "COMPLETED", {}, database)
+    create_scan_job("done", "workspace", None, "COMPLETED", {}, database)
 
     update_scan_job("running", "RUNNING", attempts=2, progress_current=2, progress_total=3, progress_message="保存结果", path=database)
     running = load_scan_job("running", database)

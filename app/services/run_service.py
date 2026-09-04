@@ -49,12 +49,20 @@ def listing(
     assignee_id: str | None,
     reviewer_id: str | None,
     sort: str,
+    after_created_at: str | None = None,
+    after_run_id: str | None = None,
 ) -> list[dict]:
     scoped_runs = runs.list_for_workspace(
         principal["workspace_id"],
         include_archived=include_archived,
         project_id=project_id or None,
+        after_created_at=after_created_at,
+        after_run_id=after_run_id,
     )
+    scoped_runs = [
+        run for run in scoped_runs
+        if runs.can_access_project(principal, run.get("project_id"))
+    ]
     normalized_search = search.strip().casefold() if search else ""
     if normalized_search:
         scoped_runs = [
@@ -173,7 +181,7 @@ def review(principal: dict[str, str], run: dict, payload: ReviewRequest) -> dict
     run["state"] = advance_state(run["state"], "SYNTHESIZE")
     run["status"] = run["state"]["status"]
     run["updated_at"] = reviewed_at
-    runs.save(run)
+    runs.save(run, expected_revision=payload.revision if payload.revision is not None else run.get("revision"))
     audit.record(
         principal["workspace_id"],
         principal["user_id"],

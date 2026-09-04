@@ -14,7 +14,11 @@ services:
       - key: BIDPROOF_DATA_ROOT
         value: /data
       - key: BIDPROOF_JOB_RUNNER
-        value: inline
+        value: worker
+      - key: BIDPROOF_METRICS
+        value: "1"
+      - key: BIDPROOF_DATA_REGION
+        value: singapore
       - key: BIDPROOF_PERSONAL_SIGNUP
         value: "1"
       - key: BIDPROOF_JSON_LOGS

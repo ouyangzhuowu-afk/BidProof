@@ -94,7 +94,9 @@ def test_password_change_revokes_existing_sessions():
         assert changed.status_code == 200
         assert changed.json()["sessions_revoked"] is True
         with sqlite3.connect(database) as db:
-            assert db.execute("SELECT COUNT(*) FROM auth_sessions WHERE user_id = ?", (user["user_id"],)).fetchone()[0] == 0
+            remaining = db.execute("SELECT token_hash FROM auth_sessions WHERE user_id = ?", (user["user_id"],)).fetchall()
+            assert token_hash not in {row[0] for row in remaining}
+            assert remaining, "the current session should be reissued after a password change"
     finally:
         with sqlite3.connect(database) as db:
             db.execute("DELETE FROM auth_sessions WHERE user_id = ?", (user["user_id"],))

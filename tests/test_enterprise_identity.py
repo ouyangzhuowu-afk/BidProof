@@ -49,7 +49,7 @@ def test_viewer_permissions_exclude_privileged_actions():
     principal = {"workspace_id": "w", "user_id": "v", "role": "VIEWER"}
 
     assert has_permission(principal, Permission.RUN_READ)
-    assert has_permission(principal, Permission.REPORT_EXPORT)
+    assert not has_permission(principal, Permission.REPORT_EXPORT)
     assert not has_permission(principal, Permission.AUDIT_EXPORT)
     assert not has_permission(principal, Permission.REPORT_BULK_EXPORT)
     assert not has_permission(principal, Permission.RUN_DELETE)

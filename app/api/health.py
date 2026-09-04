@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from fastapi import APIRouter, HTTPException, Query, Request
-from fastapi.responses import FileResponse, PlainTextResponse
+from fastapi.responses import FileResponse, PlainTextResponse, Response
 
 from .. import config, observability
 from ..config import PROJECT_ROOT
@@ -23,6 +23,38 @@ def landing() -> FileResponse:
 @router.get("/app", include_in_schema=False)
 def index() -> FileResponse:
     return FileResponse(PROJECT_ROOT / "static" / "index.html")
+
+
+@router.get("/privacy")
+def public_privacy_page() -> FileResponse:
+    """Shown before login so collection notice is not behind authentication."""
+    return FileResponse(PROJECT_ROOT / "static" / "privacy.html")
+
+
+@router.get("/api/privacy")
+def public_privacy() -> dict:
+    payload = workspace_service.privacy("public")
+    payload["data_region"] = config.DATA_REGION
+    return payload
+
+
+@router.get("/api/sample-tender")
+def sample_tender(request: Request) -> Response:
+    """A one-page public-procurement-style PDF so a new owner can try a scan immediately."""
+    principal = principal_of(request)
+    require(principal, Permission.RUN_CREATE)
+    import fitz
+
+    document = fitz.open()
+    page = document.new_page()
+    page.insert_text(
+        (72, 72),
+        "招标文件（样例）\n资格要求：投标人须提供有效营业执照。\n交货期：合同签订后 30 日内。\n",
+        fontsize=12,
+    )
+    payload = document.tobytes()
+    document.close()
+    return Response(content=payload, media_type="application/pdf", headers={"Content-Disposition": 'attachment; filename="sample-tender.pdf"'})
 
 
 @router.get("/healthz")

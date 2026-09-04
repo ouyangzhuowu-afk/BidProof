@@ -258,25 +258,37 @@ def test_two_personal_accounts_cannot_see_each_other(monkeypatch: pytest.MonkeyP
             _remove_workspace(workspace_id)
 
 
-def test_personal_register_rejects_duplicate_username(monkeypatch: pytest.MonkeyPatch):
+def test_personal_register_allows_same_username_in_another_workspace(monkeypatch: pytest.MonkeyPatch):
     monkeypatch.setattr(config, "PERSONAL_SIGNUP", True, raising=False)
     client = TestClient(main.app)
     username = f"dup-{uuid.uuid4().hex[:12]}"
-    workspace_id = None
+    workspace_ids = []
     try:
         first = client.post(
             "/api/auth/register",
             json={"username": username, "password": "PersonalPass-2026!"},
         )
         assert first.status_code == 201
-        workspace_id = first.json()["workspace_id"]
+        workspace_ids.append(first.json()["workspace_id"])
         second = TestClient(main.app).post(
             "/api/auth/register",
             json={"username": username, "password": "AnotherPass-2026!"},
         )
-        assert second.status_code == 409
+        assert second.status_code == 201
+        workspace_ids.append(second.json()["workspace_id"])
+        assert workspace_ids[0] != workspace_ids[1]
+        ambiguous = TestClient(main.app).post(
+            "/api/auth/login",
+            json={"username": username, "password": "PersonalPass-2026!"},
+        )
+        assert ambiguous.status_code == 400
+        scoped = TestClient(main.app).post(
+            "/api/auth/login",
+            json={"username": username, "password": "PersonalPass-2026!", "workspace_id": workspace_ids[0]},
+        )
+        assert scoped.status_code == 200
     finally:
-        if workspace_id:
+        for workspace_id in workspace_ids:
             _remove_workspace(workspace_id)
 
 

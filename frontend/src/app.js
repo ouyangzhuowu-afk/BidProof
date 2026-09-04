@@ -1,5 +1,8 @@
 import { html, raw, setHtml } from './escape.js';
 import { store } from './state.js';
+import { applyTheme, currentTheme, t, toggleTheme } from './i18n.js';
+
+applyTheme();
 
 const views = {
   home: document.querySelector('#home-view'),
@@ -79,6 +82,12 @@ document.querySelector('#missed-form').addEventListener('submit', submitMissedFe
 document.querySelector('#auth-form').addEventListener('submit', submitAuth);
 document.querySelector('#account-action-form').addEventListener('submit', submitAccountAction);
 document.querySelector('#logout-button').addEventListener('click', logout);
+document.querySelector('#theme-toggle')?.addEventListener('click', () => {
+  toggleTheme();
+  const button = document.querySelector('#theme-toggle span');
+  if (button) button.textContent = currentTheme() === 'dark' ? t('themeLight') : t('themeDark');
+  refreshIcons();
+});
 document.querySelectorAll('[data-password-toggle]').forEach((button) => button.addEventListener('click', togglePasswordVisibility));
 document.querySelector('#back-home').addEventListener('click', showHome);
 document.querySelector('#open-decision').addEventListener('click', showDecision);
@@ -360,6 +369,26 @@ async function submitAccountAction(event) {
   } finally { setButtonLoading(button, false); }
 }
 
+async function startSampleScan() {
+  try {
+    const response = await fetch('/api/sample-tender', withCsrf());
+    if (!response.ok) throw new Error('样例文件不可用');
+    const blob = await response.blob();
+    const file = new File([blob], 'sample-tender.pdf', { type: 'application/pdf' });
+    const input = document.querySelector('#tender-file');
+    const transfer = new DataTransfer();
+    transfer.items.add(file);
+    input.files = transfer.files;
+    store.rescanParentId = null;
+    await openIntake();
+    showToast('已填入样例招标文件，确认后即可开始扫描。');
+  } catch (error) {
+    showToast(`${error.message}，请手动上传招标文件。`);
+    store.rescanParentId = null;
+    await openIntake();
+  }
+}
+
 async function openIntake() {
   await loadProjects();
   if (store.rescanParentId && store.currentRun?.project_id) document.querySelector('#tender-project').value = store.currentRun.project_id;
@@ -396,7 +425,8 @@ setHtml(list, html`<div class="run-skeleton"></div><div class="run-skeleton"></d
     updateBulkControls(visibleRuns);
     if (!visibleRuns.length) {
       const filtered = store.runSearch || store.runTagFilter || store.runAssigneeFilter || store.runReviewerFilter || store.runFavoriteOnly || store.projectFilter;
-setHtml(list, html`<div class="empty-state"><span>${filtered ? '没有符合当前筛选的任务，请调整条件或清除筛选。' : '还没有扫描任务，请先上传一份招标文件。'}</span></div>`);
+setHtml(list, html`<div class="empty-state onboarding-empty"><span>${filtered ? t('emptyFiltered') : t('emptyRuns')}</span>${filtered ? '' : html`<button class="button primary" id="empty-start-scan" type="button"><i data-lucide="file-plus-2"></i><span>${t('trySample')}</span></button>`}</div>`);
+      document.querySelector('#empty-start-scan')?.addEventListener('click', startSampleScan);
       return;
     }
     list.replaceChildren(...visibleRuns.map(renderRunRow));
@@ -506,13 +536,81 @@ async function submitScan(event) {
 }
 
 async function waitForJob(jobId) {
+  const overlay = document.getElementById('loading-overlay');
+  const message = document.querySelector('#message');
+  if (overlay) overlay.hidden = false;
+  try {
+    return await new Promise((resolve, reject) => {
+      const source = new EventSource(`/api/jobs/${encodeURIComponent(jobId)}/events`);
+      const timer = setTimeout(() => {
+        source.close();
+        reject(new Error('扫描仍在后台执行。可离开本页，完成后在任务列表查看；刷新不会重复提交。'));
+      }, 30 * 60 * 1000);
+      source.onmessage = async (event) => {
+        let job;
+        try { job = JSON.parse(event.data); } catch { return; }
+        const pct = job.progress_total ? Math.round((job.progress_current || 0) * 100 / job.progress_total) : 0;
+        if (message) message.textContent = `${job.progress_message || '正在扫描'}（${pct}%）`;
+        if (job.status === 'COMPLETED' && job.run_id) {
+          clearTimeout(timer);
+          source.close();
+          resolve(request(`/api/runs/${encodeURIComponent(job.run_id)}`));
+        } else if (['FAILED', 'CANCELLED', 'DEAD'].includes(job.status)) {
+          clearTimeout(timer);
+          source.close();
+          reject(new Error(job.progress_message || '后台扫描失败，可在作业记录中重试'));
+        }
+      };
+      source.onerror = () => {
+        clearTimeout(timer);
+        source.close();
+        pollJobUntilDone(jobId).then(resolve, reject);
+      };
+    });
+  } finally {
+    if (overlay) overlay.hidden = true;
+  }
+}
+
+async function pollJobUntilDone(jobId) {
+  let delay = 750;
   for (let attempt = 0; attempt < 240; attempt += 1) {
     const job = await request(`/api/jobs/${encodeURIComponent(jobId)}`);
+    const message = document.querySelector('#message');
+    const pct = job.progress_total ? Math.round((job.progress_current || 0) * 100 / job.progress_total) : 0;
+    if (message) message.textContent = `${job.progress_message || '正在扫描'}（${pct}%）`;
     if (job.status === 'COMPLETED' && job.run_id) return request(`/api/runs/${encodeURIComponent(job.run_id)}`);
-    if (job.status === 'FAILED') throw new Error('后台扫描失败，可在作业记录中重试');
-    await new Promise((resolve) => setTimeout(resolve, 750));
+    if (['FAILED', 'CANCELLED', 'DEAD'].includes(job.status)) throw new Error(job.progress_message || '后台扫描失败，可在作业记录中重试');
+    await new Promise((resolve) => setTimeout(resolve, delay));
+    delay = Math.min(5000, Math.round(delay * 1.4));
   }
-  throw new Error('扫描仍在后台执行，请稍后刷新任务列表');
+  throw new Error('扫描仍在后台执行。可离开本页，完成后在任务列表查看；刷新不会重复提交。');
+}
+
+function confirmDanger({ title, body, confirmWord = 'DELETE' }) {
+  return new Promise((resolve) => {
+    const dialog = document.getElementById('confirm-panel');
+    document.getElementById('confirm-title').textContent = title;
+    document.getElementById('confirm-body').textContent = body;
+    const input = document.getElementById('confirm-word');
+    const hint = document.getElementById('confirm-hint');
+    hint.textContent = `输入 ${confirmWord} 以确认`;
+    input.value = '';
+    const submit = document.getElementById('confirm-submit');
+    const cancel = document.getElementById('confirm-cancel');
+    const done = (ok) => {
+      submit.removeEventListener('click', onSubmit);
+      cancel.removeEventListener('click', onCancel);
+      dialog.close();
+      resolve(ok);
+    };
+    const onSubmit = () => done(input.value === confirmWord);
+    const onCancel = () => done(false);
+    submit.addEventListener('click', onSubmit);
+    cancel.addEventListener('click', onCancel);
+    dialog.showModal();
+    input.focus();
+  });
 }
 
 function renderRunRow(run) {
@@ -552,7 +650,7 @@ function updateBulkControls(visibleRuns = []) {
 
 async function bulkManage(action) {
   if (!store.selectedRunIds.size) return;
-  if (action === 'DELETE' && !window.confirm(`确定永久删除已选择的 ${store.selectedRunIds.size} 个任务及其上传文件吗？此操作不可恢复。`)) return;
+  if (action === 'DELETE' && !(await confirmDanger({ title: '永久删除任务', body: `将删除已选择的 ${store.selectedRunIds.size} 个任务及其上传文件，不可恢复。`, confirmWord: 'DELETE' }))) return;
   try {
     const result = await request('/api/runs/bulk', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ run_ids: [...store.selectedRunIds], action }) });
     store.selectedRunIds.clear();
@@ -862,7 +960,7 @@ async function purgeRetention() {
   try {
     const preview = await request('/api/retention/preview');
     if (!preview.count) return showToast('当前没有到期归档任务。');
-    if (!window.confirm(`将永久删除 ${preview.count} 个到期归档任务及上传文件，确定继续吗？`)) return;
+    if (!(await confirmDanger({ title: '清理到期归档', body: `将永久删除 ${preview.count} 个到期归档任务及上传文件。`, confirmWord: 'DELETE' }))) return;
     const result = await request('/api/retention/purge', { method: 'POST' });
     showToast(`已清理 ${result.deleted} 个到期任务。`);
     await loadOperations();
@@ -890,8 +988,7 @@ async function changePassword(event) {
   try {
     await request('/api/auth/password', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ current_password: document.querySelector('#current-password').value, new_password: document.querySelector('#new-password').value }) });
     form.reset();
-    await request('/api/auth/logout', { method: 'POST' });
-    window.location.replace('/app');
+    message.textContent = '密码已更新，当前会话继续有效。';
   } catch (error) { message.textContent = `${error.message}，密码未更新。`; }
   finally { setButtonLoading(button, false); }
 }
@@ -1412,7 +1509,7 @@ async function reviewRequirement(requirementId, decision, button) {
   try {
     store.currentRun = await request(`/api/runs/${encodeURIComponent(store.currentRun.run_id)}/review`, {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ requirement_id: requirementId, decision, note: '' }),
+      body: JSON.stringify({ requirement_id: requirementId, decision, note: '', revision: store.currentRun.revision }),
     });
     renderDetail();
     showToast('复核状态已更新。');

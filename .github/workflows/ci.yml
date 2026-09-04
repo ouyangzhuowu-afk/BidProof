@@ -8,32 +8,58 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: bidproof
+          POSTGRES_PASSWORD: bidproof
+          POSTGRES_DB: bidproof
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U bidproof"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     env:
       BIDPROOF_ENV: test
       BIDPROOF_ALLOW_TRUSTED_HEADERS: "1"
+      BIDPROOF_TEST_POSTGRES_URL: postgresql+psycopg://bidproof:bidproof@localhost:5432/bidproof
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt pytest httpx
+          pip install -r requirements-postgres.txt pytest httpx ruff pip-audit
+      - name: Lint
+        run: python -m ruff check app tests
+      - name: Dependency audit
+        run: pip-audit -r requirements.txt
       - name: Workflow state check
         run: python -m app.workflow check
-      - name: Migrations apply to an empty database
+      - name: Migrations apply to empty SQLite
         env:
           BIDPROOF_DATABASE_URL: sqlite+pysqlite:///${{ runner.temp }}/ci-migrations.sqlite3
         run: |
           python -m app.dbctl upgrade
           python -m app.dbctl current
-      - name: JavaScript syntax check
+      - name: Migrations apply to PostgreSQL
+        env:
+          BIDPROOF_DATABASE_URL: postgresql+psycopg://bidproof:bidproof@localhost:5432/bidproof
         run: |
-          if command -v node >/dev/null 2>&1; then
-            node --check static/app.js
-          else
-            echo "Node.js unavailable; skipping JavaScript syntax check."
-          fi
+          python -m app.dbctl upgrade
+          python -m app.dbctl current
+      - name: Frontend build
+        run: |
+          npm ci --prefix frontend
+          npm run build --prefix frontend
+          node --check static/app.js
       - name: Run tests
         run: pytest -q

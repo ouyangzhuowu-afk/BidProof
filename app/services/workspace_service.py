@@ -150,9 +150,7 @@ def health_detail() -> dict:
 
 
 def evidence_index(workspace_id: str, category: str | None, query: str | None, valid_before: str | None) -> dict:
-    assets: list[dict] = []
-    for run in runs.list_for_workspace(workspace_id):
-        assets.extend({**asset, "run_id": run["run_id"]} for asset in run.get("evidence_assets", []))
+    assets = runs.list_evidence_assets(workspace_id)
     if category:
         assets = [asset for asset in assets if asset.get("category") == category.upper()]
     if query:

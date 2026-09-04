@@ -2,9 +2,12 @@
 
 from __future__ import annotations
 
+import asyncio
+import json
 from typing import Annotated
 
 from fastapi import APIRouter, BackgroundTasks, File, Form, HTTPException, Query, Request, UploadFile
+from fastapi.responses import StreamingResponse
 
 from ..authz import Permission, require
 from ..identity import principal_of
@@ -35,6 +38,27 @@ def get_scan_job(request: Request, job_id: str) -> dict:
     principal = principal_of(request)
     require(principal, Permission.JOB_READ)
     return _without_payload(jobs.require_scoped(job_id, principal))
+
+
+@router.get("/{job_id}/events")
+async def stream_scan_job(request: Request, job_id: str):
+    principal = principal_of(request)
+    require(principal, Permission.JOB_READ)
+    jobs.require_scoped(job_id, principal)
+
+    async def events():
+        delay = 0.75
+        while True:
+            if await request.is_disconnected():
+                break
+            job = _without_payload(jobs.require_scoped(job_id, principal))
+            yield f"data: {json.dumps(job, ensure_ascii=False)}\n\n"
+            if job.get("status") in {"COMPLETED", "FAILED", "CANCELLED", "DEAD"}:
+                break
+            await asyncio.sleep(delay)
+            delay = min(5.0, delay * 1.4)
+
+    return StreamingResponse(events(), media_type="text/event-stream", headers={"Cache-Control": "no-cache"})
 
 
 @router.post("", status_code=202)
@@ -68,6 +92,8 @@ def retry_scan_job(request: Request, job_id: str, background_tasks: BackgroundTa
     job = jobs.require_scoped(job_id, principal)
     if job["status"] not in {"FAILED", "PENDING"}:
         raise HTTPException(status_code=409, detail="当前作业状态不可重试")
+    if int(job.get("attempts") or 0) >= jobs.MAX_ATTEMPTS:
+        raise HTTPException(status_code=409, detail="该作业已超过重试上限")
     jobs.update(job_id, "PENDING", attempts=int(job.get("attempts", 0)), error=None, cancel_requested=False, progress_message="已重新排队")
     dispatch(job_id, background_tasks)
     return {"job_id": job_id, "status": "PENDING"}

@@ -41,6 +41,7 @@ METRICS_ENABLED = _flag("BIDPROOF_METRICS")
 OTEL_ENABLED = _flag("BIDPROOF_OTEL")
 LICENSE_KEY = os.environ.get("BIDPROOF_LICENSE_KEY", "").strip()
 LICENSE_REQUIRED = _flag("BIDPROOF_LICENSE_REQUIRED")
+DATA_REGION = os.environ.get("BIDPROOF_DATA_REGION", "singapore").strip() or "singapore"
 
 for directory in (DATA_DIR, UPLOAD_DIR, JOB_STAGING_DIR, BACKUP_ROOT):
     directory.mkdir(parents=True, exist_ok=True)

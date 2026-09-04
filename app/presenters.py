@@ -61,13 +61,23 @@ def quality_for_run(run: dict) -> dict:
 
 
 def public_summary(run: dict) -> dict:
-    requirements = run.get("requirements", [])
-    unresolved = [item for item in requirements if item.get("status") in {"UNKNOWN", "NEEDS_REVIEW"}]
-    blockers = [
-        item for item in requirements
-        if item.get("category") in {"FATAL", "QUALIFICATION"}
-        and item.get("status") in {"FAIL", "UNKNOWN", "NEEDS_REVIEW"}
-    ]
+    requirements = run.get("requirements") or []
+    if requirements:
+        unresolved = [item for item in requirements if item.get("status") in {"UNKNOWN", "NEEDS_REVIEW"}]
+        blockers = [
+            item for item in requirements
+            if item.get("category") in {"FATAL", "QUALIFICATION"}
+            and item.get("status") in {"FAIL", "UNKNOWN", "NEEDS_REVIEW"}
+        ]
+        requirement_count = len(requirements)
+        unresolved_count = len(unresolved)
+        blocker_count = len(blockers)
+        fatal_risk_count = sum(1 for item in requirements if item.get("category") == "FATAL")
+    else:
+        requirement_count = int(run.get("requirement_count") or 0)
+        unresolved_count = int(run.get("unresolved_count") or 0)
+        blocker_count = int(run.get("blocker_count") or 0)
+        fatal_risk_count = int(run.get("fatal_risk_count") or 0)
     return {
         "run_id": run["run_id"],
         "workspace_id": run.get("workspace_id", "local"),
@@ -83,13 +93,14 @@ def public_summary(run: dict) -> dict:
         "created_at": run["created_at"],
         "updated_at": run["updated_at"],
         "tender_filename": run["tender_filename"],
-        "requirement_count": len(requirements),
-        "unresolved_count": len(unresolved),
-        "blocker_count": len(blockers),
-        "fatal_risk_count": sum(1 for item in requirements if item.get("category") == "FATAL"),
+        "requirement_count": requirement_count,
+        "unresolved_count": unresolved_count,
+        "blocker_count": blocker_count,
+        "fatal_risk_count": fatal_risk_count,
         "decision": run.get("decision", {}),
         "archived_at": run.get("archived_at"),
         "scan_quality": quality_for_run(run),
+        "revision": int(run.get("revision") or 1),
     }
 
 

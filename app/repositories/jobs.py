@@ -8,6 +8,8 @@ from fastapi import HTTPException
 
 from .. import db
 
+MAX_ATTEMPTS = db.MAX_JOB_ATTEMPTS
+
 
 def create(job_id: str, workspace_id: str, run_id: str | None, status: str, payload: dict | None = None) -> None:
     db.create_scan_job(job_id, workspace_id, run_id, status, payload)

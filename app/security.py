@@ -11,7 +11,7 @@ import hashlib
 import secrets
 
 
-PBKDF2_ITERATIONS = 240_000
+PBKDF2_ITERATIONS = 600_000
 SESSION_TOKEN_BYTES = 32
 ACTION_TOKEN_BYTES = 32
 
@@ -36,6 +36,14 @@ def verify_password(password: str, encoded: str) -> bool:
             return False
         actual = password_hash(password, base64.urlsafe_b64decode(salt), int(iterations)).split("$", 3)[3]
         return secrets.compare_digest(actual, expected)
+    except (ValueError, TypeError):
+        return False
+
+
+def password_needs_rehash(encoded: str) -> bool:
+    try:
+        algorithm, iterations, _salt, _digest = encoded.split("$", 3)
+        return algorithm == "pbkdf2_sha256" and int(iterations) < PBKDF2_ITERATIONS
     except (ValueError, TypeError):
         return False
 

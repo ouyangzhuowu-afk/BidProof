@@ -16,7 +16,7 @@ from pathlib import Path
 
 from fastapi import HTTPException, UploadFile
 
-from .. import config, presenters
+from .. import config, presenters, uow
 from ..extraction import ExtractionError, extract_file
 from ..identity import InternalJobContext
 from ..repositories import audit, jobs, projects, runs
@@ -87,7 +87,7 @@ async def create_run(
     if queued_job_id:
         jobs.update(job_id, "RUNNING")
     else:
-        jobs.create(job_id, principal["workspace_id"], run_id, "RUNNING")
+        jobs.create(job_id, principal["workspace_id"], None, "RUNNING")
 
     run_dir = config.UPLOAD_DIR / run_id
     run_dir.mkdir(parents=True, exist_ok=False)
@@ -233,10 +233,11 @@ async def create_run(
         "requirements": requirements,
         "review": {"items": [], "updated_at": now},
     }
-    runs.save(run)
-    jobs.link_run(job_id, run_id)
-    jobs.update(job_id, "COMPLETED", attempts=1)
-    audit.record(principal["workspace_id"], principal["user_id"], "RUN_CREATED", run_id, {"filename": tender.filename, "version_number": 1})
+    with uow.transaction():
+        runs.save(run)
+        jobs.link_run(job_id, run_id)
+        jobs.update(job_id, "COMPLETED", attempts=1)
+        audit.record(principal["workspace_id"], principal["user_id"], "RUN_CREATED", run_id, {"filename": tender.filename, "version_number": 1})
     return presenters.public_run(run)
 
 

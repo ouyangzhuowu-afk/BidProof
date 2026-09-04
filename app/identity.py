@@ -204,11 +204,12 @@ def _login_limit() -> ratelimit.Limit:
 
 
 def enforce_login_rate_limit(key: str, now: float | None = None) -> None:
-    ratelimit.enforce(_login_limit(), key, detail="登录尝试过多，请稍后再试")
+    ratelimit.enforce(_login_limit(), key, detail="登录尝试过多，请稍后再试", consume=True)
 
 
 def record_failed_login(key: str, now: float | None = None) -> None:
-    ratelimit.register_failure(_login_limit(), key, detail="登录尝试过多，请稍后再试")
+    """Login attempts are already consumed by enforce_login_rate_limit()."""
+    return
 
 
 def clear_login_attempts(key: str) -> None:

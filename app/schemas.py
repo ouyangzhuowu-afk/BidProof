@@ -24,6 +24,7 @@ class ReviewRequest(BaseModel):
     decision: ReviewDecision
     note: str = Field(default="", max_length=2000)
     new_status: Literal["PASS", "FAIL", "UNKNOWN", "NEEDS_REVIEW"] | None = None
+    revision: int | None = Field(default=None, ge=1)
 
 
 class DecisionRequest(BaseModel):
@@ -98,6 +99,7 @@ class LoginRequest(BaseModel):
     # Deliberately permissive: a credential that is too short must fail as a normal 401 in the
     # login handler, not as a 422, so response codes cannot be used to probe password length.
     password: str = Field(min_length=1, max_length=MAX_PASSWORD_LENGTH)
+    workspace_id: str | None = Field(default=None, max_length=64)
 
 
 class TrialJoinRequest(BaseModel):

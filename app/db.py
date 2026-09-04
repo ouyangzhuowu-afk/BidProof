@@ -8,6 +8,7 @@ configured default.
 from __future__ import annotations
 
 import hashlib
+import threading
 import uuid
 from datetime import datetime, timezone
 from pathlib import Path
@@ -17,7 +18,8 @@ import sqlalchemy as sa
 from sqlalchemy.dialects import postgresql, sqlite
 from sqlalchemy.engine import Connection, Engine
 
-from .database import create_schema, engine_for
+from . import crypto
+from .database import create_schema, engine_for, runtime_ddl_allowed
 from .models import (
     accuracy_feedback,
     api_tokens,
@@ -26,8 +28,11 @@ from .models import (
     auth_sessions,
     comments,
     identity_bindings,
+    idempotency_keys,
     login_flows,
+    project_members,
     projects,
+    rate_limit_hits,
     remediations,
     runs as runs_table,
     scan_jobs,
@@ -41,7 +46,38 @@ from .models import (
 ACCURACY_MIN_SAMPLE_SIZE = 20
 
 _schema_ready: set[str] = set()
-_schema_in_progress: set[str] = set()
+_schema_lock = threading.Lock()
+_schema_events: dict[str, threading.Event] = {}
+MAX_JOB_ATTEMPTS = 5
+MAX_SESSIONS_PER_USER = 10
+RUN_LIST_COLUMNS = (
+    runs_table.c.run_id,
+    runs_table.c.created_at,
+    runs_table.c.updated_at,
+    runs_table.c.status,
+    runs_table.c.archived_at,
+    runs_table.c.workspace_id,
+    runs_table.c.owner_id,
+    runs_table.c.parent_run_id,
+    runs_table.c.version_number,
+    runs_table.c.job_id,
+    runs_table.c.assignee_id,
+    runs_table.c.reviewer_id,
+    runs_table.c.tags_json,
+    runs_table.c.favorite,
+    runs_table.c.project_id,
+    runs_table.c.tender_sha256,
+    runs_table.c.duplicate_run_ids_json,
+    runs_table.c.tender_filename,
+    runs_table.c.tender_path,
+    runs_table.c.evidence_files,
+    runs_table.c.decision_json,
+    runs_table.c.requirement_count,
+    runs_table.c.unresolved_count,
+    runs_table.c.blocker_count,
+    runs_table.c.fatal_risk_count,
+    runs_table.c.revision,
+)
 
 
 def _now() -> str:
@@ -53,27 +89,76 @@ def _new_id() -> str:
 
 
 def engine(path: Path | str | None = None) -> Engine:
-    """Return the engine for a database, creating its schema on first use.
+    """Return the engine for a database, creating its schema on first use outside production.
 
-    Doing it here rather than at application import means every entrypoint -- the API, a
-    worker, a CLI or a test -- gets a ready database without importing the web app for its
-    side effects.
+    Production containers migrate in the entrypoint (`dbctl upgrade`). Concurrent first
+    connections wait on a lock instead of skipping schema setup.
     """
     resolved = engine_for(path)
     key = str(resolved.url)
-    if key not in _schema_ready and key not in _schema_in_progress:
-        _schema_in_progress.add(key)
-        try:
+    if key in _schema_ready:
+        return resolved
+    with _schema_lock:
+        if key in _schema_ready:
+            return resolved
+        waiter = _schema_events.get(key)
+        if waiter is None:
+            waiter = threading.Event()
+            _schema_events[key] = waiter
+            owner = True
+        else:
+            owner = False
+    if not owner:
+        waiter.wait(timeout=60)
+        return resolved
+    try:
+        if runtime_ddl_allowed():
             create_schema(path)
-            _schema_ready.add(key)
-        finally:
-            _schema_in_progress.discard(key)
+        _schema_ready.add(key)
+        waiter.set()
+    except Exception:
+        with _schema_lock:
+            _schema_events.pop(key, None)
+        raise
     return resolved
 
 
+class _ReuseConnection:
+    """Yield an already-open unit-of-work connection without committing on exit."""
+
+    def __init__(self, connection: Connection):
+        self.connection = connection
+
+    def __enter__(self) -> Connection:
+        return self.connection
+
+    def __exit__(self, exc_type, exc, tb) -> bool:
+        return False
+
+
 def connect(path: Path | str | None = None) -> Connection:
-    """A transactional connection. Use as a context manager; it commits on clean exit."""
+    """A transactional connection. Use as a context manager; it commits on clean exit.
+
+    Nested calls inside `uow.transaction()` reuse the same connection so create-run +
+    audit + job updates commit together.
+    """
+    from . import uow
+
+    existing = uow.current_connection()
+    if existing is not None:
+        return _ReuseConnection(existing)
     return engine(path).begin()
+
+
+def _ensure_workspace_row(connection: Connection, workspace_id: str | None) -> None:
+    if not workspace_id or workspace_id == "-":
+        return
+    insert = sqlite.insert if connection.engine.dialect.name == "sqlite" else postgresql.insert
+    connection.execute(
+        insert(workspaces)
+        .values(workspace_id=workspace_id, name=workspace_id, created_at=_now())
+        .on_conflict_do_nothing(index_elements=["workspace_id"])
+    )
 
 
 def init_db(path: Path | str | None = None) -> None:
@@ -158,10 +243,32 @@ _RUN_STORAGE_FIELDS = (
     "source_documents_json",
     "evidence_assets_json",
     "decision_json",
+    "requirement_count",
+    "unresolved_count",
+    "blocker_count",
+    "fatal_risk_count",
+    "revision",
 )
 
 
+def _requirement_counts(requirements: list) -> dict[str, int]:
+    items = requirements or []
+    unresolved = [item for item in items if item.get("status") in {"UNKNOWN", "NEEDS_REVIEW"}]
+    blockers = [
+        item for item in items
+        if item.get("category") in {"FATAL", "QUALIFICATION"}
+        and item.get("status") in {"FAIL", "UNKNOWN", "NEEDS_REVIEW"}
+    ]
+    return {
+        "requirement_count": len(items),
+        "unresolved_count": len(unresolved),
+        "blocker_count": len(blockers),
+        "fatal_risk_count": sum(1 for item in items if item.get("category") == "FATAL"),
+    }
+
+
 def _run_to_storage(run: dict[str, Any]) -> dict[str, Any]:
+    counts = _requirement_counts(run.get("requirements") or [])
     return {
         "run_id": run["run_id"],
         "created_at": run["created_at"],
@@ -182,43 +289,62 @@ def _run_to_storage(run: dict[str, Any]) -> dict[str, Any]:
         "duplicate_run_ids_json": run.get("duplicate_run_ids", []),
         "tender_filename": run["tender_filename"],
         "tender_path": run["tender_path"],
-        "evidence_files": run["evidence_files"],
-        "state_json": run["state"],
-        "requirements_json": run["requirements"],
-        "review_json": run["review"],
-        "source_documents_json": run.get("source_documents", []),
-        "evidence_assets_json": run.get("evidence_assets", []),
-        "decision_json": run.get("decision", {}),
+        "evidence_files": crypto.protect(run["evidence_files"]),
+        "state_json": crypto.protect(run["state"]),
+        "requirements_json": crypto.protect(run["requirements"]),
+        "review_json": crypto.protect(run["review"]),
+        "source_documents_json": crypto.protect(run.get("source_documents", [])),
+        "evidence_assets_json": crypto.protect(run.get("evidence_assets", [])),
+        "decision_json": crypto.protect(run.get("decision", {})),
+        **counts,
+        "revision": int(run.get("revision", 1)),
     }
 
 
 def _run_from_storage(row: dict[str, Any]) -> dict[str, Any]:
     run = dict(row)
-    run["state"] = run.pop("state_json")
-    run["requirements"] = run.pop("requirements_json")
-    run["review"] = run.pop("review_json")
-    run["source_documents"] = run.pop("source_documents_json")
-    run["evidence_assets"] = run.pop("evidence_assets_json")
-    run["decision"] = run.pop("decision_json")
-    run["tags"] = run.pop("tags_json")
-    run["duplicate_run_ids"] = run.pop("duplicate_run_ids_json")
+    run["state"] = crypto.reveal(run.pop("state_json", {}) or {})
+    run["requirements"] = crypto.reveal(run.pop("requirements_json", []) or [])
+    run["review"] = crypto.reveal(run.pop("review_json", {"items": [], "updated_at": run.get("updated_at")}) or {"items": []})
+    run["source_documents"] = crypto.reveal(run.pop("source_documents_json", []) or [])
+    run["evidence_assets"] = crypto.reveal(run.pop("evidence_assets_json", []) or [])
+    run["decision"] = crypto.reveal(run.pop("decision_json", {}) or {})
+    run["evidence_files"] = crypto.reveal(run.get("evidence_files") or [])
+    run["tags"] = run.pop("tags_json", []) or []
+    run["duplicate_run_ids"] = run.pop("duplicate_run_ids_json", []) or []
     run["favorite"] = bool(run.get("favorite"))
+    run["revision"] = int(run.get("revision") or 1)
     return run
 
 
-def save_run(run: dict[str, Any], path: Path | str | None = None) -> None:
+def save_run(run: dict[str, Any], path: Path | str | None = None, *, expected_revision: int | None = None) -> None:
     bound = engine(path)
     values = _run_to_storage(run)
-    with bound.begin() as connection:
-        connection.execute(
-            _upsert_for(
-                runs_table,
-                values,
-                ("run_id",),
-                [name for name in _RUN_STORAGE_FIELDS if name != "run_id"],
-                bound,
+    with connect(path) as connection:
+        _ensure_workspace_row(connection, run.get("workspace_id"))
+        if expected_revision is None:
+            connection.execute(
+                _upsert_for(
+                    runs_table,
+                    values,
+                    ("run_id",),
+                    [name for name in _RUN_STORAGE_FIELDS if name != "run_id"],
+                    bound,
+                )
             )
+            return
+        next_revision = int(expected_revision) + 1
+        values["revision"] = next_revision
+        result = connection.execute(
+            sa.update(runs_table)
+            .where(runs_table.c.run_id == run["run_id"], runs_table.c.revision == int(expected_revision))
+            .values(**values)
         )
+        if result.rowcount != 1:
+            from fastapi import HTTPException
+
+            raise HTTPException(status_code=409, detail="该任务已被他人更新，请刷新后重试")
+        run["revision"] = next_revision
 
 
 def load_run(run_id: str, path: Path | str | None = None) -> dict[str, Any] | None:
@@ -235,20 +361,27 @@ def list_runs(
     project_id: str | None = None,
     limit: int | None = None,
     offset: int = 0,
+    after_created_at: str | None = None,
+    after_run_id: str | None = None,
 ) -> list[dict[str, Any]]:
     """Load runs newest first, with optional SQL-level filtering.
 
     The workspace predicate runs in SQL. Archived and project filters also push down to SQL
-    to avoid loading the entire run table into Python memory.
+    to avoid loading the entire run table into Python memory. `after_*` is keyset pagination
+    on `(created_at, run_id)` and is preferred over `offset` for deep pages.
     """
-    statement = sa.select(runs_table).order_by(runs_table.c.created_at.desc())
+    statement = sa.select(*RUN_LIST_COLUMNS).order_by(runs_table.c.created_at.desc(), runs_table.c.run_id.desc())
     if workspace_id is not None:
         statement = statement.where(runs_table.c.workspace_id == workspace_id)
     if not include_archived:
         statement = statement.where(runs_table.c.archived_at.is_(None))
     if project_id:
         statement = statement.where(runs_table.c.project_id == project_id)
-    if offset:
+    if after_created_at and after_run_id:
+        statement = statement.where(
+            sa.tuple_(runs_table.c.created_at, runs_table.c.run_id) < (after_created_at, after_run_id)
+        )
+    elif offset:
         statement = statement.offset(offset)
     if limit is not None:
         statement = statement.limit(limit)
@@ -256,13 +389,44 @@ def list_runs(
         return [_run_from_storage(row) for row in _rows(connection.execute(statement))]
 
 
-def update_review(run_id: str, review: dict[str, Any], path: Path | str | None = None) -> dict[str, Any] | None:
-    run = load_run(run_id, path)
-    if run is None:
-        return None
-    run["review"] = review
-    run["updated_at"] = review["updated_at"]
-    save_run(run, path)
+def list_evidence_assets(workspace_id: str, path: Path | str | None = None) -> list[dict[str, Any]]:
+    """Load only run_id + evidence asset metadata for the workspace evidence index."""
+    statement = sa.select(runs_table.c.run_id, runs_table.c.evidence_assets_json).where(
+        runs_table.c.workspace_id == workspace_id
+    )
+    with engine(path).connect() as connection:
+        rows = _rows(connection.execute(statement))
+    assets: list[dict[str, Any]] = []
+    for row in rows:
+        for asset in crypto.reveal(row.get("evidence_assets_json") or []):
+            assets.append({**asset, "run_id": row["run_id"]})
+    return assets
+
+
+def update_review(run_id: str, review: dict[str, Any], path: Path | str | None = None, *, expected_revision: int | None = None) -> dict[str, Any] | None:
+    """Apply a review in one transaction so concurrent reviewers cannot silently clobber each other."""
+    with connect(path) as connection:
+        row = _row(connection.execute(sa.select(runs_table).where(runs_table.c.run_id == run_id)))
+        if row is None:
+            return None
+        run = _run_from_storage(row)
+        if expected_revision is not None and int(run.get("revision", 1)) != int(expected_revision):
+            from fastapi import HTTPException
+
+            raise HTTPException(status_code=409, detail="该任务已被他人更新，请刷新后重试")
+        run["review"] = review
+        run["updated_at"] = review["updated_at"]
+        run["revision"] = int(run.get("revision", 1)) + 1
+        values = _run_to_storage(run)
+        result = connection.execute(
+            sa.update(runs_table)
+            .where(runs_table.c.run_id == run_id, runs_table.c.revision == int(run["revision"]) - 1)
+            .values(**values)
+        )
+        if result.rowcount != 1:
+            from fastapi import HTTPException
+
+            raise HTTPException(status_code=409, detail="该任务已被他人更新，请刷新后重试")
     return run
 
 
@@ -381,6 +545,7 @@ def create_project(workspace_id: str, name: str, code: str, path: Path | str | N
         "updated_at": now,
     }
     with connect(path) as connection:
+        _ensure_workspace_row(connection, workspace_id)
         connection.execute(sa.insert(projects).values(**item))
     return item
 
@@ -440,7 +605,16 @@ def record_audit_event(
 
     context = current()
     event_id = _new_id()
+    created_at = _now()
     with connect(path) as connection:
+        previous = connection.execute(
+            sa.select(audit_events.c.event_hash)
+            .where(audit_events.c.workspace_id == workspace_id)
+            .order_by(audit_events.c.created_at.desc(), audit_events.c.event_id.desc())
+            .limit(1)
+        ).scalar()
+        material = f"{previous or ''}|{event_id}|{event_type}|{created_at}|{outcome}"
+        event_hash = hashlib.sha256(material.encode("utf-8")).hexdigest()
         connection.execute(
             sa.insert(audit_events).values(
                 event_id=event_id,
@@ -449,14 +623,36 @@ def record_audit_event(
                 user_id=user_id,
                 event_type=event_type,
                 payload_json=payload or {},
-                created_at=_now(),
+                created_at=created_at,
                 actor_ip=context.client_ip,
                 user_agent=context.user_agent,
                 request_id=context.request_id or None,
                 outcome=outcome,
+                prev_hash=previous,
+                event_hash=event_hash,
             )
         )
     return event_id
+
+
+def verify_audit_chain(workspace_id: str, path: Path | str | None = None) -> dict[str, Any]:
+    """Walk prev_hash/event_hash and report the first break, if any."""
+    statement = (
+        sa.select(audit_events)
+        .where(audit_events.c.workspace_id == workspace_id)
+        .order_by(audit_events.c.created_at, audit_events.c.event_id)
+    )
+    with engine(path).connect() as connection:
+        rows = _rows(connection.execute(statement))
+    previous = None
+    for row in rows:
+        expected = hashlib.sha256(
+            f"{previous or ''}|{row['event_id']}|{row['event_type']}|{row['created_at']}|{row['outcome']}".encode("utf-8")
+        ).hexdigest()
+        if row.get("event_hash") != expected or (row.get("prev_hash") or None) != previous:
+            return {"ok": False, "broken_event_id": row["event_id"], "checked": len(rows)}
+        previous = row.get("event_hash")
+    return {"ok": True, "checked": len(rows)}
 
 
 def list_audit_events(workspace_id: str, run_id: str | None = None, path: Path | str | None = None) -> list[dict[str, Any]]:
@@ -507,7 +703,8 @@ def create_scan_job(
         "created_at": now,
         "updated_at": now,
     }
-    with bound.begin() as connection:
+    with connect(path) as connection:
+        _ensure_workspace_row(connection, workspace_id)
         connection.execute(_upsert_for(scan_jobs, values, ("job_id",), _JOB_UPSERT_FIELDS, bound))
 
 
@@ -616,17 +813,34 @@ def requeue_stale_scan_jobs(max_age_seconds: int, path: Path | str | None = None
     cutoff = datetime.fromtimestamp(
         datetime.now(timezone.utc).timestamp() - max_age_seconds, timezone.utc
     ).isoformat()
+    requeued = 0
+    dead = 0
     with connect(path) as connection:
-        result = connection.execute(
-            sa.update(scan_jobs)
-            .where(
-                scan_jobs.c.status == "RUNNING",
-                scan_jobs.c.cancel_requested == 0,
-                scan_jobs.c.updated_at < cutoff,
+        stale = _rows(
+            connection.execute(
+                sa.select(scan_jobs.c.job_id, scan_jobs.c.attempts).where(
+                    scan_jobs.c.status == "RUNNING",
+                    scan_jobs.c.cancel_requested == 0,
+                    scan_jobs.c.updated_at < cutoff,
+                )
             )
-            .values(status="PENDING", progress_message="工作进程中断，已重新排队", updated_at=_now())
         )
-    return int(result.rowcount or 0)
+        for job in stale:
+            if int(job.get("attempts") or 0) >= MAX_JOB_ATTEMPTS:
+                connection.execute(
+                    sa.update(scan_jobs)
+                    .where(scan_jobs.c.job_id == job["job_id"])
+                    .values(status="DEAD", progress_message="超过重试上限，已转入死信", updated_at=_now())
+                )
+                dead += 1
+            else:
+                connection.execute(
+                    sa.update(scan_jobs)
+                    .where(scan_jobs.c.job_id == job["job_id"])
+                    .values(status="PENDING", progress_message="工作进程中断，已重新排队", updated_at=_now())
+                )
+                requeued += 1
+    return requeued
 
 
 def claim_next_scan_job(path: Path | str | None = None) -> dict[str, Any] | None:
@@ -762,12 +976,14 @@ def load_remediation(remediation_id: str, path: Path | str | None = None) -> dic
 
 
 def update_remediation(remediation_id: str, payload: dict[str, Any], path: Path | str | None = None) -> dict[str, Any] | None:
-    current = load_remediation(remediation_id, path)
-    if current is None:
-        return None
-    merged = {**current, **{key: value for key, value in payload.items() if value is not None}}
-    merged["updated_at"] = _now()
     with connect(path) as connection:
+        current = _row(
+            connection.execute(sa.select(remediations).where(remediations.c.remediation_id == remediation_id))
+        )
+        if current is None:
+            return None
+        merged = {**current, **{key: value for key, value in payload.items() if value is not None}}
+        merged["updated_at"] = _now()
         connection.execute(
             sa.update(remediations)
             .where(remediations.c.remediation_id == remediation_id)
@@ -780,7 +996,9 @@ def update_remediation(remediation_id: str, payload: dict[str, Any], path: Path 
                 updated_at=merged["updated_at"],
             )
         )
-    return load_remediation(remediation_id, path)
+        return _row(
+            connection.execute(sa.select(remediations).where(remediations.c.remediation_id == remediation_id))
+        )
 
 
 # --------------------------------------------------------------------------------------
@@ -975,6 +1193,7 @@ def create_user(workspace_id: str, username: str, password_hash: str, role: str,
     }
     try:
         with connect(path) as connection:
+            _ensure_workspace_row(connection, workspace_id)
             connection.execute(sa.insert(users).values(**user))
     except sa.exc.IntegrityError as exc:
         # Callers catch sqlalchemy.exc.IntegrityError to answer 409 on duplicates.
@@ -1043,9 +1262,21 @@ def update_workspace_member(
     return {**updated, "active": bool(updated["active"])}
 
 
-def load_user_by_username(username: str, path: Path | str | None = None) -> dict[str, Any] | None:
+def load_user_by_username(username: str, path: Path | str | None = None, *, workspace_id: str | None = None) -> dict[str, Any] | None:
+    statement = sa.select(users).where(users.c.username == username)
+    if workspace_id:
+        statement = statement.where(users.c.workspace_id == workspace_id)
     with engine(path).connect() as connection:
-        return _row(connection.execute(sa.select(users).where(users.c.username == username)))
+        rows = _rows(connection.execute(statement))
+    if workspace_id:
+        return rows[0] if rows else None
+    if len(rows) == 1:
+        return rows[0]
+    if len(rows) > 1:
+        from fastapi import HTTPException
+
+        raise HTTPException(status_code=400, detail="该用户名对应多个工作区，请在登录时填写工作区")
+    return None
 
 
 def load_user_by_id(user_id: str, path: Path | str | None = None) -> dict[str, Any] | None:
@@ -1053,10 +1284,11 @@ def load_user_by_id(user_id: str, path: Path | str | None = None) -> dict[str, A
         return _row(connection.execute(sa.select(users).where(users.c.user_id == user_id)))
 
 
-def update_user_password(user_id: str, password_hash: str, path: Path | str | None = None) -> bool:
+def update_user_password(user_id: str, password_hash: str, path: Path | str | None = None, *, revoke_sessions: bool = True) -> bool:
     with connect(path) as connection:
         result = connection.execute(sa.update(users).where(users.c.user_id == user_id).values(password_hash=password_hash))
-        connection.execute(sa.delete(auth_sessions).where(auth_sessions.c.user_id == user_id))
+        if revoke_sessions:
+            connection.execute(sa.delete(auth_sessions).where(auth_sessions.c.user_id == user_id))
     return bool(result.rowcount)
 
 
@@ -1070,6 +1302,14 @@ def create_auth_session(token_hash: str, user_id: str, expires_at: str, path: Pa
                 created_at=_now(),
             )
         )
+        extra = connection.execute(
+            sa.select(auth_sessions.c.token_hash)
+            .where(auth_sessions.c.user_id == user_id)
+            .order_by(auth_sessions.c.created_at.desc())
+            .offset(MAX_SESSIONS_PER_USER)
+        ).scalars().all()
+        if extra:
+            connection.execute(sa.delete(auth_sessions).where(auth_sessions.c.token_hash.in_(extra)))
 
 
 def load_session_user(token_hash: str, now: str, path: Path | str | None = None) -> dict[str, Any] | None:
@@ -1260,6 +1500,9 @@ def load_api_token_by_hash(token_digest: str, now: str, path: Path | str | None 
 
 
 def touch_api_token(token_id: str, path: Path | str | None = None) -> None:
+    """Sample last-used writes so high-QPS token auth does not hotspot a single row."""
+    if int(token_id.encode().hex()[-1], 16) % 8 != 0:
+        return
     with connect(path) as connection:
         connection.execute(sa.update(api_tokens).where(api_tokens.c.token_id == token_id).values(last_used_at=_now()))
 
@@ -1442,6 +1685,75 @@ def consume_login_flow(state: str, provider: str, now: str, path: Path | str | N
     return row
 
 
+def list_project_members(project_id: str, path: Path | str | None = None) -> list[dict[str, Any]]:
+    with engine(path).connect() as connection:
+        return _rows(connection.execute(sa.select(project_members).where(project_members.c.project_id == project_id)))
+
+
+def replace_project_members(project_id: str, members: list[dict[str, str]], path: Path | str | None = None) -> None:
+    now = _now()
+    with connect(path) as connection:
+        connection.execute(sa.delete(project_members).where(project_members.c.project_id == project_id))
+        for member in members:
+            connection.execute(
+                sa.insert(project_members).values(
+                    project_id=project_id,
+                    user_id=member["user_id"],
+                    role=member.get("role") or "REVIEWER",
+                    created_at=now,
+                )
+            )
+
+
+def user_can_access_project(principal: dict[str, str], project_id: str | None, path: Path | str | None = None) -> bool:
+    if not project_id:
+        return True
+    if principal.get("role") in {"OWNER", "ADMIN"}:
+        return True
+    members = list_project_members(project_id, path)
+    if not members:
+        return True
+    return any(row["user_id"] == principal.get("user_id") for row in members)
+
+
+def load_idempotency(workspace_id: str, key: str, path: Path | str | None = None) -> dict[str, Any] | None:
+    with engine(path).connect() as connection:
+        return _row(
+            connection.execute(
+                sa.select(idempotency_keys).where(
+                    idempotency_keys.c.workspace_id == workspace_id,
+                    idempotency_keys.c.idempotency_key == key,
+                )
+            )
+        )
+
+
+def store_idempotency(
+    workspace_id: str,
+    key: str,
+    method: str,
+    path_value: str,
+    request_hash: str,
+    status_code: int,
+    response_json: Any,
+    db_path: Path | str | None = None,
+) -> None:
+    with connect(db_path) as connection:
+        connection.execute(
+            sa.insert(idempotency_keys).values(
+                record_id=_new_id(),
+                workspace_id=workspace_id,
+                idempotency_key=key,
+                method=method,
+                path=path_value,
+                request_hash=request_hash,
+                status_code=status_code,
+                response_json=response_json,
+                created_at=_now(),
+            )
+        )
+
+
 def cleanup_expired(*, path: Path | str | None = None) -> dict[str, int]:
     """Remove expired sessions, consumed/expired login flows, and stale rate-limit hits."""
     import datetime as _dt
@@ -1458,6 +1770,9 @@ def cleanup_expired(*, path: Path | str | None = None) -> dict[str, int]:
             )
         )
         counts["login_flows"] = r.rowcount  # type: ignore[assignment]
-        r = connection.execute(sa.delete(rate_limit_hits).where(rate_limit_hits.c.ts < cutoff))
+        r = connection.execute(sa.delete(rate_limit_hits).where(rate_limit_hits.c.occurred_at < cutoff))
         counts["rate_limit_hits"] = r.rowcount  # type: ignore[assignment]
+        stale_keys = (_dt.datetime.now(_dt.timezone.utc) - _dt.timedelta(hours=24)).isoformat()
+        r = connection.execute(sa.delete(idempotency_keys).where(idempotency_keys.c.created_at < stale_keys))
+        counts["idempotency_keys"] = r.rowcount  # type: ignore[assignment]
     return counts

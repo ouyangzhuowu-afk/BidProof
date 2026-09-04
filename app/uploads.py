@@ -49,12 +49,14 @@ async def save_upload(upload: UploadFile, target: Path) -> str:
 def validate_upload_content(path: Path) -> None:
     """Reject files whose bytes contradict their extension, or that carry active content."""
     suffix = path.suffix.lower()
-    header = path.read_bytes()[:8]
+    with path.open("rb") as handle:
+        header = handle.read(8)
+        text_prefix = header + handle.read(4096 - len(header)) if suffix in {".txt", ".md"} else header
     if suffix == ".pdf" and not header.startswith(b"%PDF"):
         raise HTTPException(status_code=422, detail="PDF 文件签名无效")
     if suffix in {".docx", ".xlsx", ".pptx"} and not header.startswith(b"PK"):
         raise HTTPException(status_code=422, detail="Office 文件签名无效")
-    if suffix in {".txt", ".md"} and b"\x00" in path.read_bytes()[:4096]:
+    if suffix in {".txt", ".md"} and b"\x00" in text_prefix:
         raise HTTPException(status_code=422, detail="文本文件包含二进制内容")
     safety_issues = scan_upload_safety(path)
     if safety_issues:

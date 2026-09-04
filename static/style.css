@@ -586,6 +586,8 @@ textarea { resize: vertical; line-height: 1.55; }
 
 /* Toast 入场动画 */
 .toast { animation: toast-in 280ms ease; }
+.confirm-body { padding: 0 22px 22px; display: grid; gap: 10px; }
+.onboarding-empty { display: grid; gap: 12px; justify-items: start; }
 @keyframes toast-in { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 
 /* 对话框动画 */
@@ -713,4 +715,22 @@ dialog::backdrop { animation: backdrop-fade-in 200ms ease; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+  color: #e8eef5;
+  background: #101820;
+  --ink: #e8eef5;
+  --ink-strong: #f7fafc;
+  --ink-soft: #c3cedb;
+  --muted: #9aa8b8;
+  --subtle: #8b98a8;
+  --line: #2a3848;
+  --line-strong: #3d4d5f;
+  --surface: #182230;
+  --surface-soft: #141c28;
+  --canvas: #101820;
+  --nav: #0c141c;
+  --primary-soft: #14332f;
 }
