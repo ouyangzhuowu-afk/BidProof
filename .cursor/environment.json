@@ -1,0 +1,14 @@
+{
+  "name": "BidProof",
+  "install": "export PATH=\"$HOME/.local/bin:$PATH\"\ncommand -v uv >/dev/null 2>&1 || curl -LsSf https://astral.sh/uv/install.sh | sh\nexport PATH=\"$HOME/.local/bin:$PATH\"\nuv sync\nnpm ci --prefix frontend",
+  "terminals": [
+    {
+      "name": "web",
+      "command": "export PATH=\"$HOME/.local/bin:$PATH\"\nBIDPROOF_ENV=development BIDPROOF_TRIAL_JOIN_CODE=BidProof-Trial-2026 exec .venv/bin/uvicorn app.main:app --host 0.0.0.0 --port 8000",
+      "description": "BidProof FastAPI dev server. Public product page at http://localhost:8000/ and the authenticated workbench at http://localhost:8000/app. Uses the local SQLite database by default; personal signup and the trial join code are enabled for development."
+    }
+  ],
+  "ports": [
+    { "name": "web", "port": 8000 }
+  ]
+}
