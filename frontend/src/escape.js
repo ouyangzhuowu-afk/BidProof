@@ -3,14 +3,16 @@
  * so a render path cannot forget to escape a user-supplied string.
  *
  * @typedef {object} SafeHtml
+ * @property {true} [__safe]
  * @property {string} value
  */
 
 /** @param {unknown} value */
 export function escapeHtml(value) {
-  return String(value ?? '').replace(/[&<>"']/g, (character) => (
-    { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[character]
-  ));
+  return String(value ?? '').replace(/[&<>"']/g, (character) => {
+    const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
+    return map[character] || character;
+  });
 }
 
 /**

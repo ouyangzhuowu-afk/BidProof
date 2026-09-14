@@ -1,0 +1,241 @@
+/* =============================================================================
+   BidProof 设计令牌 · v3「对照卷宗」
+   -----------------------------------------------------------------------------
+   使用规则（重要，决定这套 token 是否会再次腐化）：
+
+   1. --brand-*  只用于品牌标识与主动作按钮。**禁止**用于任何判定状态。
+   2. --verdict-* 只用于要求项的判定结论（PASS / FAIL / REVIEW / UNKNOWN）。
+      禁止把它们当作通用的绿/红/黄拿去装饰卡片。
+   3. --signal-* 用于与判定无关的系统信号（危险操作、逾期、服务降级）。
+   4. 层级靠「尺寸 + 字重 + 1px 边框」建立，不靠阴影。
+      --shadow-* 仅允许出现在浮层（dialog / toast / popover）上。
+   5. 圆角分三层：控件 4px、卡片 8px、浮层 14px。不存在「全局一个圆角」。
+
+   深色模式通过 html[data-theme="dark"] 覆盖同名变量，组件样式一律只引用变量。
+   ========================================================================== */
+
+:root {
+  color-scheme: light;
+
+  /* --- 排版 -----------------------------------------------------------------
+     不加载任何 Web Font。中文字形文件动辄 3–8MB，是本产品 LCP 的最大风险，
+     而系统栈在目标客户（Windows 企业内网 + macOS）上已经足够。 */
+  --font-ui:
+    -apple-system, BlinkMacSystemFont, "Segoe UI Variable Text", "Segoe UI",
+    "PingFang SC", "Microsoft YaHei UI", "Microsoft YaHei", "Noto Sans SC",
+    sans-serif;
+
+  /* 引文、定位号、哈希、页码。与界面语言在视觉上彻底分开——
+     这是「可引用的原文」和「产品在说话」的区别。 */
+  --font-cite:
+    "SF Mono", "JetBrains Mono", "Cascadia Mono", Consolas,
+    "PingFang SC", "Microsoft YaHei", monospace;
+
+  /* 1.22 minor third。信息密集的复核台，比常见的 1.25 更紧。 */
+  --text-2xs: 0.6875rem;  /* 11px  仅用于定位号 chip */
+  --text-xs:  0.75rem;    /* 12px  辅助说明 */
+  --text-sm:  0.8125rem;  /* 13px  表格、控件 */
+  --text-md:  0.9375rem;  /* 15px  正文基准 */
+  --text-lg:  1.0625rem;  /* 17px  小标题 */
+  --text-xl:  1.3125rem;  /* 21px  区块标题 */
+  --text-2xl: 1.5625rem;  /* 25px  页标题 */
+  --text-3xl: 1.9375rem;  /* 31px  仅登录/空状态 */
+
+  --leading-tight: 1.25;
+  --leading-snug: 1.4;
+  --leading-body: 1.65;   /* 中文正文需要比西文更松 */
+  --leading-cite: 1.75;   /* 引文最松，方便逐字比对 */
+
+  --tracking-tight: -0.012em;  /* 大字号收紧 */
+  --tracking-normal: 0;
+  --tracking-cite: 0.01em;
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-strong: 650;
+
+  /* --- 间距 ------------------------------------------------------------------
+     4px 基准。不使用 0.5 步进，避免出现 6px / 10px 这类无法解释的值。 */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* --- 纸面 ------------------------------------------------------------------
+     冷灰蓝，不是暖米色。招投标是公文语境，不是笔记软件。 */
+  --canvas:        #eceef1;   /* 页面底色 */
+  --paper:         #ffffff;   /* 卡片 / 表面 */
+  --paper-sunken:  #f4f6f8;   /* 表头、内嵌区、代码块 */
+  --paper-raised:  #ffffff;   /* 浮层 */
+
+  --ink:        #111b26;   /* 正文 */
+  --ink-strong: #06101a;   /* 标题与数字 */
+  --ink-soft:   #3a4a5c;   /* 次要正文 */
+  --ink-muted:  #5c6b7c;   /* 说明文字（对 --paper 对比度 5.4:1） */
+  --ink-faint:  #7c8899;   /* 占位符、禁用（仅用于非必读信息） */
+  --ink-invert: #ffffff;
+
+  --rule:        #e2e6eb;  /* 默认 1px 分隔线 */
+  --rule-strong: #c6cdd6;  /* 输入框边框、需要被看见的边界 */
+  --rule-gutter: #d4dae1;  /* 对照块中缝——设计中唯一被强调的分隔线 */
+
+  /* --- 品牌 ------------------------------------------------------------------
+     保留原青绿族作为品牌锚点（换品牌色是产品决策，不由重构单方面决定），
+     但压深一档以满足 4.5:1 文字对比度。 */
+  --brand:       #076e63;
+  --brand-hover: #05564e;
+  --brand-press: #04443e;
+  --brand-wash:  #e6f2f0;
+  --brand-line:  #8cc6bd;
+  --brand-on:    #ffffff;
+
+  /* --- 判定四态 --------------------------------------------------------------
+     UNKNOWN 与 NEEDS_REVIEW 语义不同，必须视觉可分：
+       UNKNOWN      = 系统没找到证据（中性灰，"还没有信息"）
+       NEEDS_REVIEW = 找到了但要人确认（琥珀，"等你动手"）
+     只有 NEEDS_REVIEW 会催人，所以只有它是暖色。 */
+  --verdict-pass:       #1a7f43;
+  --verdict-pass-wash:  #e8f6ed;
+  --verdict-pass-line:  #9bd7b2;
+
+  --verdict-fail:       #a8231a;
+  --verdict-fail-wash:  #fdeeed;
+  --verdict-fail-line:  #f0b8b3;
+
+  --verdict-review:     #9a4a06;
+  --verdict-review-wash:#fdf3e6;
+  --verdict-review-line:#f2ca94;
+
+  --verdict-unknown:      #4c5a68;
+  --verdict-unknown-wash: #eef1f4;
+  --verdict-unknown-line: #ccd4dc;
+
+  /* --- 系统信号（与判定无关）-------------------------------------------------- */
+  --signal-danger:  #a8231a;
+  --signal-warning: #9a4a06;
+  --signal-info:    #14519e;
+  --signal-ok:      #1a7f43;
+  --signal-danger-wash:  #fdeeed;
+  --signal-warning-wash: #fdf3e6;
+  --signal-info-wash:    #ebf3fd;
+  --signal-ok-wash:      #e8f6ed;
+
+  /* --- 导航（常暗，不随主题切换）------------------------------------------- */
+  --nav-bg:     #0d1720;
+  --nav-line:   rgba(255, 255, 255, 0.09);
+  --nav-text:   #c2cddb;
+  --nav-muted:  #7b8a9b;
+  --nav-active: rgba(255, 255, 255, 0.08);
+  /* 导航里的最高对比文字（品牌名、当前页、成员名）。
+     常暗底色下它就是纯白，但仍然走变量——layout.css 里不允许出现裸色值。 */
+  --nav-strong: #ffffff;
+
+  /* --- 圆角（分层，不是一个值）---------------------------------------------- */
+  --radius-control: 4px;   /* input / chip / 小按钮 */
+  --radius-card: 8px;      /* surface / 行 */
+  --radius-overlay: 14px;  /* dialog / toast */
+  --radius-full: 999px;
+
+  /* --- 高度（仅浮层）--------------------------------------------------------- */
+  --shadow-overlay: 0 16px 48px -12px rgba(6, 16, 26, 0.28),
+                    0 2px 6px rgba(6, 16, 26, 0.08);
+  --shadow-toast:   0 8px 28px -8px rgba(6, 16, 26, 0.4);
+
+  /* --- 动效 ------------------------------------------------------------------
+     只有三处动画：浮层进出、判定变更闪烁、扫描进度。其余一律无过渡。 */
+  --ease-out: cubic-bezier(0.22, 0.9, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.5, 0, 0.2, 1);
+  --dur-instant: 90ms;
+  --dur-fast: 150ms;
+  --dur-slow: 240ms;
+
+  /* --- 布局 ------------------------------------------------------------------ */
+  --sidebar-w: 232px;
+  --topbar-h: 56px;
+  --content-max: 1360px;
+  --measure: 68ch;        /* 正文最大行宽 */
+  --tap-target: 44px;     /* 触控最小尺寸，移动端强制 */
+
+  /* --- 层级 ------------------------------------------------------------------ */
+  --z-sidebar: 40;
+  --z-topbar: 30;
+  --z-mobile-nav: 35;
+  --z-overlay: 80;
+  --z-toast: 90;
+  --z-skip: 100;
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+
+  --canvas:       #0e151c;
+  --paper:        #161f29;
+  --paper-sunken: #121a23;
+  --paper-raised: #1b2632;
+
+  --ink:        #e5ecf4;
+  --ink-strong: #f6f9fc;
+  --ink-soft:   #bfcada;
+  --ink-muted:  #93a2b4;
+  --ink-faint:  #748294;
+  --ink-invert: #06101a;
+
+  --rule:        #26333f;
+  --rule-strong: #3a4a59;
+  --rule-gutter: #33424f;
+
+  --brand:       #24a392;
+  --brand-hover: #2fb8a5;
+  --brand-press: #1c8878;
+  --brand-wash:  #10302c;
+  --brand-line:  #2c6c62;
+  --brand-on:    #04211d;
+
+  --verdict-pass:        #45c47c;
+  --verdict-pass-wash:   #12301f;
+  --verdict-pass-line:   #1e5738;
+
+  --verdict-fail:        #fa8078;
+  --verdict-fail-wash:   #341614;
+  --verdict-fail-line:   #73302a;
+
+  --verdict-review:      #f2b53c;
+  --verdict-review-wash: #34280f;
+  --verdict-review-line: #6e5418;
+
+  --verdict-unknown:      #9aa8b8;
+  --verdict-unknown-wash: #1b2531;
+  --verdict-unknown-line: #38475a;
+
+  --signal-danger:  #fa8078;
+  --signal-warning: #f2b53c;
+  --signal-info:    #7ab3fb;
+  --signal-ok:      #45c47c;
+  --signal-danger-wash:  #341614;
+  --signal-warning-wash: #34280f;
+  --signal-info-wash:    #13233a;
+  --signal-ok-wash:      #12301f;
+
+  --nav-bg:   #0a1119;
+  --nav-line: rgba(255, 255, 255, 0.08);
+
+  --shadow-overlay: 0 16px 48px -12px rgba(0, 0, 0, 0.7),
+                    0 2px 6px rgba(0, 0, 0, 0.4);
+  --shadow-toast:   0 8px 28px -8px rgba(0, 0, 0, 0.75);
+}
+
+/* 高对比度模式：边界必须自己可见，不依赖底色差 */
+@media (prefers-contrast: more) {
+  :root {
+    --rule: #9aa6b4;
+    --rule-strong: #5c6b7c;
+    --ink-muted: #3a4a5c;
+    --ink-faint: #4c5a68;
+  }
+}

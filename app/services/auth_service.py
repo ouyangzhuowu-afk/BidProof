@@ -13,7 +13,7 @@ from .. import config, directory, identity, oidc, totp
 from ..authz import permissions_for
 from ..repositories import accounts, audit, identity as identity_store, workspaces
 from ..schemas import (
-    MIN_PASSWORD_LENGTH,
+    password_meets_policy,
     ApiTokenCreateRequest,
     AuthActionCompleteRequest,
     AuthBootstrapRequest,
@@ -105,7 +105,7 @@ def login(request: Request, response: Response, payload: LoginRequest) -> dict:
     username = payload.username.strip()
     workspace_hint = (payload.workspace_id or "").strip() or None
     user = accounts.by_username(username, workspace_hint)
-    meets_policy = len(payload.password) >= MIN_PASSWORD_LENGTH
+    meets_policy = password_meets_policy(payload.password)
     if user and not bool(user.get("active", 1)):
         _fail_login(attempt_key, user, username)
     if user and password_is_usable(user.get("password_hash")):

@@ -1,0 +1,30 @@
+/* =============================================================================
+   BidProof 工作台样式入口。
+   构建产物：static/style.css（由 scripts/build-css.mjs 生成）。
+
+   层级顺序在这里一次定死，之后任何一层内部的选择器特异性都不会再互相打架——
+   这是旧版 style.css 里 16 处 !important 的根因。
+
+   各层职责：
+     reset       归零，只在 base.css 里
+     base        排版、状态原语（按钮、输入、判定徽标、引文块、空态、骨架屏）
+     layout      应用外壳（侧栏、顶栏、内容区、底部导航、页头、内容网格）
+     components  由原语组合出的业务形状（表格、任务行、筛选栏、分页、提示队列）
+     views       单个视图专属、无法复用的样式。能进 components 的一律不放这里
+     utilities   少量单一职责工具类，最后一层，允许覆盖前面所有层
+   ========================================================================== */
+
+/* legacy 排在最前 = 优先级最低。未迁移视图靠它兜底，新层永远胜出。 */
+@layer legacy, reset, base, layout, components, views, utilities;
+
+@import "./legacy.css" layer(legacy);
+@import "./tokens.css";
+@import "./base.css";
+@import "./layout.css";
+@import "./components.css";
+@import "./views/runs.css";
+@import "./views/detail.css";
+@import "./views/jobs.css";
+@import "./views/collab.css";
+@import "./views/admin.css";
+@import "./views/auth.css";

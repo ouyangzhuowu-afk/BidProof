@@ -1,0 +1,162 @@
+/* =============================================================================
+   视图层 · 管理页（成员 / 项目 / 运维 / 账号安全）
+   -----------------------------------------------------------------------------
+   管理页的信息密度问题和任务列表不同：它不是「一列长表」，而是九个互不相关
+   的小面板。旧实现把它们平铺成一个 auto-fill 网格，于是「停用成员」和
+   「清理到期归档」这两个后果差着数量级的操作，长得一模一样、挨在一起。
+
+   这里按**后果分区**：治理（成员 / 项目）、数据生命周期（留存 / 备份）、
+   运行状态（健康 / 用量 / 隐私）、账号安全（密码 / 设备 / MFA / 令牌）。
+   分区标题是唯一的层级线索 —— 不加边框、不加底色，避免页面变成一堆盒子。
+   ========================================================================== */
+
+@layer views {
+
+  .admin-group { display: grid; gap: var(--space-4); margin-bottom: var(--space-8); }
+  .admin-group:last-child { margin-bottom: 0; }
+
+  .admin-group__head { display: grid; gap: var(--space-1); }
+  .admin-group__head h2 {
+    font-size: var(--text-lg);
+    font-weight: var(--weight-strong);
+    color: var(--ink-strong);
+  }
+
+  /* 面板网格。auto-fit + minmax：面板数量随角色变化，写死列数必然
+     在某个角色下留出空格。 */
+  .admin-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr));
+    gap: var(--space-4);
+    align-items: start;
+  }
+  /* 跨整行的面板：成员表在窄列里会被压得没法读。 */
+  .admin-grid > .admin-grid__wide { grid-column: 1 / -1; }
+
+  /* =========================================================================
+     通用行 — 项目、备份、会话、令牌四处形状一致
+     -----------------------------------------------------------------------
+     刻意共用一个 class：它们都是「图标 + 主标题副标题 + 右侧一个动作」。
+     旧实现有 .project-row / .backup-row / .operation-row 三套几乎相同的规则。
+     ====================================================================== */
+  .admin-row {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    border-bottom: 1px solid var(--rule);
+    border-left: 3px solid transparent;
+  }
+  .admin-row:last-child { border-bottom: 0; }
+
+  .admin-row__icon {
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: var(--radius-control);
+    background: var(--paper-sunken);
+    color: var(--ink-muted);
+  }
+  .admin-row__icon svg { width: 15px; height: 15px; }
+
+  .admin-row__main { display: grid; gap: 2px; min-width: 0; }
+  .admin-row__main strong {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    color: var(--ink-strong);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .admin-row__main strong.is-mono {
+    font-family: var(--font-cite);
+    font-size: var(--text-xs);
+    letter-spacing: var(--tracking-cite);
+  }
+  .admin-row__main small {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-xs);
+    color: var(--ink-muted);
+  }
+
+  /* 失效/归档的行整体降权，但不隐藏 —— 它们仍是记录。 */
+  .admin-row[data-archived="true"] .admin-row__main strong,
+  .admin-row[data-revoked="true"] .admin-row__main strong { color: var(--ink-muted); }
+  .admin-row[data-tone="danger"] { border-left-color: var(--signal-danger); }
+  .admin-row[data-tone="ok"] { border-left-color: var(--signal-ok); }
+  /* 当前设备高亮：踢设备时最怕的就是踢错自己那一台。 */
+  .admin-row[data-current="true"] {
+    border-left-color: var(--brand);
+    background: var(--brand-wash);
+  }
+
+  @media (max-width: 560px) {
+    .admin-row { grid-template-columns: auto minmax(0, 1fr); }
+    .admin-row > .btn,
+    .admin-row > .chip { grid-column: 2; justify-self: start; }
+  }
+
+  /* =========================================================================
+     成员表
+     ====================================================================== */
+  .member-cell {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    min-width: 0;
+  }
+  .member-cell__text { display: grid; gap: 2px; min-width: 0; }
+  .member-cell__text strong {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    color: var(--ink-strong);
+  }
+  /* 已停用的整行文字降权。状态列本身也写着，但扫读时先看到的是名字。 */
+  .table tbody tr[data-active="false"] .member-cell__text strong { color: var(--ink-muted); }
+  .table td .select { width: auto; min-width: 108px; }
+
+  /* =========================================================================
+     统计块 — 健康与用量
+     -----------------------------------------------------------------------
+     用 <dl>：这是名值对，不是表格也不是列表。读屏会播报「术语/定义」。
+     ====================================================================== */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(120px, 100%), 1fr));
+    gap: var(--space-3);
+    margin: 0;
+  }
+  .stat {
+    display: grid;
+    gap: 2px;
+    padding: var(--space-3);
+    border-radius: var(--radius-control);
+    background: var(--paper-sunken);
+  }
+  .stat dt { font-size: var(--text-xs); color: var(--ink-muted); }
+  .stat dd {
+    margin: 0;
+    font-size: var(--text-lg);
+    font-weight: var(--weight-strong);
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-strong);
+    overflow-wrap: anywhere;
+  }
+  .stat[data-tone="danger"] dd { color: var(--signal-danger); }
+
+  /* =========================================================================
+     隐私声明 — 合规展示文本，原样呈现
+     ====================================================================== */
+  #workspace-privacy {
+    display: grid;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    line-height: var(--leading-body);
+    color: var(--ink-soft);
+  }
+}

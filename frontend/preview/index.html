@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BidProof 设计系统预览</title>
+<!--
+  用途：在不装依赖、不起后端、不跑构建的前提下，验证设计系统。
+  直接用浏览器打开本文件即可（file:// 也可以）。
+
+  它同时是**标记契约的样板**：features/runs/list.js 生成的 DOM 结构
+  与这里的「任务列表」一节逐字对应。改组件样式前先在这里看效果，
+  比在真实页面里造数据快得多，也不会被后端状态干扰。
+
+  这不是构建产物，不参与打包，不会被部署。
+-->
+<link rel="stylesheet" href="../src/styles/tokens.css">
+<link rel="stylesheet" href="../src/styles/base.css">
+<link rel="stylesheet" href="../src/styles/layout.css">
+<link rel="stylesheet" href="../src/styles/components.css">
+<link rel="stylesheet" href="../src/styles/views/runs.css">
+<style>
+  /* 仅预览页自身使用，不属于设计系统。 */
+  .gallery { padding: var(--space-6) var(--space-5) var(--space-16); max-width: 1100px; margin-inline: auto; }
+  .gallery > section { margin-bottom: var(--space-12); }
+  .gallery h2 {
+    font-size: var(--text-xl); font-weight: var(--weight-strong); color: var(--ink-strong);
+    padding-bottom: var(--space-2); margin-bottom: var(--space-5);
+    border-bottom: 1px solid var(--rule);
+  }
+  .gallery h3 { font-size: var(--text-sm); color: var(--ink-muted); margin: var(--space-5) 0 var(--space-2); }
+  .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: var(--space-2); }
+  .swatch { border: 1px solid var(--rule); border-radius: var(--radius-card); overflow: hidden; font-size: var(--text-2xs); }
+  .swatch i { display: block; height: 48px; }
+  .swatch span { display: block; padding: var(--space-2); font-family: var(--font-cite); color: var(--ink-muted); }
+  .specimen { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="breadcrumb"><span>BidProof</span><strong>设计系统预览</strong></div>
+  <div class="topbar__actions">
+    <button class="btn btn--secondary btn--sm" type="button" id="theme">切换深色</button>
+  </div>
+</header>
+
+<div class="gallery">
+
+  <!-- ═══════════════ 色彩 ═══════════════ -->
+  <section>
+    <h2>色彩</h2>
+    <p class="lede">判定色（verdict）只用于要求项结论，信号色（signal）只用于与判定无关的系统状态。两者不得互换 —— 这是 tokens.css 的第 1、2、3 条规则。</p>
+
+    <h3>纸面与文字</h3>
+    <div class="swatches">
+      <div class="swatch"><i style="background:var(--canvas)"></i><span>--canvas</span></div>
+      <div class="swatch"><i style="background:var(--paper)"></i><span>--paper</span></div>
+      <div class="swatch"><i style="background:var(--paper-sunken)"></i><span>--paper-sunken</span></div>
+      <div class="swatch"><i style="background:var(--ink)"></i><span>--ink</span></div>
+      <div class="swatch"><i style="background:var(--ink-muted)"></i><span>--ink-muted</span></div>
+      <div class="swatch"><i style="background:var(--rule-gutter)"></i><span>--rule-gutter</span></div>
+    </div>
+
+    <h3>判定四态</h3>
+    <div class="swatches">
+      <div class="swatch"><i style="background:var(--verdict-pass)"></i><span>pass 已满足</span></div>
+      <div class="swatch"><i style="background:var(--verdict-fail)"></i><span>fail 不满足</span></div>
+      <div class="swatch"><i style="background:var(--verdict-review)"></i><span>review 待确认</span></div>
+      <div class="swatch"><i style="background:var(--verdict-unknown)"></i><span>unknown 无证据</span></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ 排版 ═══════════════ -->
+  <section>
+    <h2>排版</h2>
+    <p class="title-page">页标题 25px / 招标文件合规扫描</p>
+    <p class="title-section">区块标题 21px / 要求项对照</p>
+    <p class="lede">引导文字。集中查看投标风险、证据缺口与人工决策状态。</p>
+    <p>正文 15px。中文行高 1.65，比西文更松，长段落才不会糊成一片。</p>
+    <p class="hint">辅助说明 12px，用于表单提示与次要元信息。</p>
+    <p class="quote" style="margin-top:var(--space-3)">引文用等宽族与更松的行高（1.75），方便逐字比对原文。投标人须具备建筑工程施工总承包二级及以上资质。</p>
+  </section>
+
+  <!-- ═══════════════ 控件 ═══════════════ -->
+  <section>
+    <h2>控件</h2>
+    <h3>按钮</h3>
+    <div class="specimen">
+      <button class="btn btn--primary" type="button">新建扫描</button>
+      <button class="btn btn--secondary" type="button">导出报告</button>
+      <button class="btn btn--ghost" type="button">取消</button>
+      <button class="btn btn--danger" type="button">永久删除</button>
+      <button class="btn btn--secondary" type="button" disabled>不可用</button>
+      <button class="btn btn--primary" type="button" data-loading="true" aria-busy="true"><span>提交中</span></button>
+      <button class="btn btn--secondary btn--sm" type="button">小号</button>
+      <button class="icon-btn icon-btn--bordered" type="button" aria-label="刷新">↻</button>
+    </div>
+
+    <h3>输入</h3>
+    <div style="display:grid;gap:var(--space-3);max-width:420px">
+      <p class="field"><label for="d1">招标文件名</label><input class="input" id="d1" placeholder="例如：xx医院设备采购"></p>
+      <p class="field"><label for="d2">排序</label><select class="select" id="d2"><option>最近更新</option><option>文件名</option></select></p>
+      <p class="field"><label for="d3">复核说明</label><textarea class="textarea" id="d3" placeholder="记录判断依据"></textarea>
+        <span class="field__error">请填写复核说明后再提交。</span></p>
+    </div>
+
+    <h3>分段控件 / 标签 / 标签页</h3>
+    <div class="specimen">
+      <div class="segmented" role="radiogroup" aria-label="任务范围">
+        <button class="segmented__option" role="radio" aria-checked="true" type="button">未归档</button>
+        <button class="segmented__option" role="radio" aria-checked="false" type="button">已归档</button>
+        <button class="segmented__option" role="radio" aria-checked="false" type="button">全部</button>
+      </div>
+      <span class="chip">资格条件</span>
+      <span class="chip chip--mono">a3f9c1d0e8b2</span>
+      <span class="chip chip--danger">废标风险</span>
+      <span class="tag">华东区 <button class="tag__remove" type="button" aria-label="移除">×</button></span>
+    </div>
+    <div class="tabs" style="margin-top:var(--space-4)" role="tablist">
+      <button class="tab" role="tab" aria-selected="true" type="button">全部 <span class="tab__count">128</span></button>
+      <button class="tab" role="tab" aria-selected="false" type="button">高风险 <span class="tab__count">7</span></button>
+      <button class="tab" role="tab" aria-selected="false" type="button">待复核 <span class="tab__count">23</span></button>
+    </div>
+  </section>
+
+  <!-- ═══════════════ 判定与证据 ═══════════════ -->
+  <section>
+    <h2>判定与证据</h2>
+    <p class="lede">产品可信度的底线：没有页级定位的结论不允许显示为「已满足」。</p>
+    <div class="specimen" style="margin-bottom:var(--space-5)">
+      <span class="verdict verdict--PASS">已满足</span>
+      <span class="verdict verdict--FAIL">不满足</span>
+      <span class="verdict verdict--NEEDS_REVIEW">待人工确认</span>
+      <span class="verdict verdict--UNKNOWN">未找到证据</span>
+    </div>
+
+    <div class="surface">
+      <div class="surface__head"><strong>投标保证金金额与形式</strong><span class="verdict verdict--NEEDS_REVIEW">待人工确认</span></div>
+      <div class="citation">
+        <div class="citation__side">
+          <span class="citation__role">招标原文</span>
+          <span class="locator">第 12 页 · 3.2 条</span>
+          <p class="quote">投标保证金金额为人民币伍万元整，须以银行转账方式于投标截止时间前递交。</p>
+        </div>
+        <div class="citation__gutter"></div>
+        <div class="citation__side">
+          <span class="citation__role">企业证据</span>
+          <span class="locator locator--missing">定位缺失</span>
+          <p class="quote quote--absent">未匹配到可核验的转账凭证，需人工补充。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ 任务列表 ═══════════════ -->
+  <section>
+    <h2>任务列表（features/runs/list.js 的标记契约）</h2>
+
+    <div class="metric-grid">
+      <div class="metric" data-tone="neutral"><div class="metric__head"><span>扫描任务</span></div><strong class="metric__value">128</strong><small class="metric__note">当前范围内</small></div>
+      <div class="metric" data-tone="danger"><div class="metric__head"><span>高风险项</span></div><strong class="metric__value">7</strong><small class="metric__note">优先核对资格与废标项</small></div>
+      <div class="metric" data-tone="warning"><div class="metric__head"><span>待复核项</span></div><strong class="metric__value">23</strong><small class="metric__note">尚未形成确定证据链</small></div>
+      <div class="metric" data-tone="ok" data-zero="true"><div class="metric__head"><span>已做决策</span></div><strong class="metric__value">0</strong><small class="metric__note">覆盖 0% 任务</small></div>
+    </div>
+
+    <div class="surface">
+      <div class="toolbar">
+        <span class="toolbar__search"><input class="input" type="search" placeholder="文件名、标签或任务编号"></span>
+        <div class="segmented" role="radiogroup" aria-label="任务范围">
+          <button class="segmented__option" role="radio" aria-checked="true" type="button">未归档</button>
+          <button class="segmented__option" role="radio" aria-checked="false" type="button">已归档</button>
+          <button class="segmented__option" role="radio" aria-checked="false" type="button">全部</button>
+        </div>
+        <button class="icon-btn icon-btn--bordered" type="button" aria-label="刷新">↻</button>
+      </div>
+
+      <details class="filters">
+        <summary>更多筛选 <span class="filters__count">2</span></summary>
+        <div class="filters__grid">
+          <p class="field"><label for="f1">项目</label><select class="select" id="f1"><option>全部项目</option></select></p>
+          <p class="field"><label for="f2">标签</label><input class="input" id="f2" placeholder="精确标签"></p>
+          <p class="field"><label for="f3">负责人</label><select class="select" id="f3"><option>全部负责人</option></select></p>
+          <p class="field"><label for="f4">复核人</label><select class="select" id="f4"><option>全部复核人</option></select></p>
+        </div>
+      </details>
+
+      <div class="runs-list">
+        <article class="run-row" data-risk="blocked" data-selected="true">
+          <label class="run-row__select"><input type="checkbox" checked aria-label="选择"></label>
+          <div class="run-row__main">
+            <a class="run-row__link" href="#">市第一人民医院医用设备采购项目招标文件.pdf</a>
+            <p class="run-row__meta"><span class="chip chip--mono">a3f9c1d0e8b2</span><span>2 小时前</span><span class="chip">华东区</span></p>
+          </div>
+          <div class="run-row__aside">
+            <span class="run-count" data-tone="danger" data-nonzero="true"><b>3</b><span>高风险</span></span>
+            <span class="run-count" data-tone="warning" data-nonzero="true"><b>11</b><span>待复核</span></span>
+            <span class="decision-pill" data-decision="">未决策</span>
+            <button class="icon-btn run-star" type="button" aria-pressed="false" aria-label="收藏">★</button>
+          </div>
+        </article>
+
+        <article class="run-row" data-risk="review">
+          <label class="run-row__select"><input type="checkbox" aria-label="选择"></label>
+          <div class="run-row__main">
+            <a class="run-row__link" href="#">城市轨道交通 6 号线机电安装工程.pdf</a>
+            <p class="run-row__meta"><span class="chip chip--mono">7b2e4a90c115</span><span>昨天</span></p>
+          </div>
+          <div class="run-row__aside">
+            <span class="run-count" data-tone="danger" data-nonzero="false"><b>0</b><span>高风险</span></span>
+            <span class="run-count" data-tone="warning" data-nonzero="true"><b>4</b><span>待复核</span></span>
+            <span class="decision-pill" data-decision="HOLD">暂缓</span>
+            <button class="icon-btn run-star" type="button" aria-pressed="true" aria-label="取消收藏">★</button>
+          </div>
+        </article>
+
+        <article class="run-row" data-risk="clear">
+          <label class="run-row__select"><input type="checkbox" aria-label="选择"></label>
+          <div class="run-row__main">
+            <a class="run-row__link" href="#">高新区标准厂房建设项目施工总承包.pdf</a>
+            <p class="run-row__meta"><span class="chip chip--mono">c8d1f6b3a074</span><span>3 天前</span><span class="chip">已归档</span></p>
+          </div>
+          <div class="run-row__aside">
+            <span class="run-count" data-tone="danger" data-nonzero="false"><b>0</b><span>高风险</span></span>
+            <span class="run-count" data-tone="warning" data-nonzero="false"><b>0</b><span>待复核</span></span>
+            <span class="decision-pill" data-decision="CONTINUE">继续投标</span>
+            <button class="icon-btn run-star" type="button" aria-pressed="false" aria-label="收藏">★</button>
+          </div>
+        </article>
+      </div>
+
+      <div class="bulkbar">
+        <span class="bulkbar__count">已选 1 项</span>
+        <button class="btn btn--sm btn--secondary" type="button">归档</button>
+        <button class="btn btn--sm btn--secondary" type="button">导出报告</button>
+        <button class="btn btn--sm btn--danger" type="button">删除</button>
+        <button class="btn btn--sm btn--ghost" type="button">取消选择</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ 状态 ═══════════════ -->
+  <section>
+    <h2>状态</h2>
+    <p class="lede">四态必须都有设计。旧版只有「加载中」和「有数据」，空与错都落回一行灰字。</p>
+
+    <h3>加载</h3>
+    <div class="surface" style="padding:var(--space-4)">
+      <div class="skeleton skeleton--row" style="margin-bottom:var(--space-2)"></div>
+      <div class="skeleton skeleton--row" style="margin-bottom:var(--space-2)"></div>
+      <div class="skeleton skeleton--row"></div>
+    </div>
+
+    <h3>首次为空（含引导）</h3>
+    <div class="surface">
+      <div class="runs-onboarding">
+        <p class="title-section">还没有扫描任务</p>
+        <ol class="runs-onboarding__steps">
+          <li>新建扫描，选择要核查的招标文件</li>
+          <li>一并上传已有的企业资质与业绩材料</li>
+          <li>在作业页查看进度，完成后逐条复核证据</li>
+        </ol>
+        <button class="btn btn--primary" type="button">用一份示例招标文件试跑</button>
+      </div>
+    </div>
+
+    <h3>筛选后为空 / 出错</h3>
+    <div class="surface" style="margin-bottom:var(--space-3)">
+      <div class="state"><span class="state__icon">∅</span><p class="state__title">没有符合条件的任务</p><p class="state__body">当前筛选条件下没有任何任务。清除筛选即可看到全部。</p><button class="btn btn--secondary btn--sm" type="button">清除筛选</button></div>
+    </div>
+    <div class="surface">
+      <div class="state state--error"><span class="state__icon">!</span><p class="state__title">任务列表加载失败</p><p class="state__body">无法连接服务，请检查网络后重试。</p><button class="btn btn--secondary btn--sm" type="button">重试</button></div>
+    </div>
+
+    <h3>进度 / 行内提示</h3>
+    <div class="surface" style="padding:var(--space-4);display:grid;gap:var(--space-4)">
+      <div class="progress"><div class="progress__bar"><div class="progress__fill" style="width:62%"></div></div><div class="progress__label"><span>正在抽取页级证据</span><span>62%</span></div></div>
+      <div class="progress" data-indeterminate="true"><div class="progress__bar"><div class="progress__fill"></div></div><div class="progress__label"><span>正在统计页数…</span></div></div>
+      <p class="callout" data-tone="warning"><span>⚠</span><span>检测到同一招标文件已有 2 个任务，请先确认是否需要重复扫描。</span></p>
+      <p class="callout" data-tone="danger"><span>✕</span><span>此操作将永久删除证据链，且无法恢复。</span></p>
+    </div>
+
+    <h3>提示队列</h3>
+    <div class="surface" style="padding:var(--space-4);background:var(--paper-sunken)">
+      <div style="display:grid;gap:var(--space-2);justify-items:end">
+        <div class="toast toast--success">人工决策已保存。</div>
+        <div class="toast toast--error">收藏状态未能保存，请重试。</div>
+        <div class="toast">扫描任务已进入后台队列。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ 表格与投放区 ═══════════════ -->
+  <section>
+    <h2>表格与投放区</h2>
+    <div class="surface" style="margin-bottom:var(--space-5)">
+      <div class="table-wrap">
+        <table class="table table--responsive">
+          <thead><tr><th>成员</th><th>角色</th><th>状态</th><th class="td--actions">操作</th></tr></thead>
+          <tbody>
+            <tr><td data-label="成员">陈静</td><td data-label="角色">管理员</td><td data-label="状态"><span class="chip chip--info">在用</span></td><td data-label="操作" class="td--actions"><button class="btn btn--sm btn--ghost" type="button">编辑</button></td></tr>
+            <tr><td data-label="成员">李伟</td><td data-label="角色">复核人</td><td data-label="状态"><span class="chip">已停用</span></td><td data-label="操作" class="td--actions"><button class="btn btn--sm btn--ghost" type="button">编辑</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <label class="dropzone">
+      <span>⇪</span>
+      <strong>拖入招标文件，或点击选择</strong>
+      <small>支持 PDF、DOCX，单个不超过 100 MB</small>
+    </label>
+    <div class="filelist">
+      <p class="filelist__item"><span>▤</span><span class="filelist__name">市第一人民医院医用设备采购项目招标文件.pdf</span><span class="filelist__size">8.4 MB</span></p>
+    </div>
+  </section>
+</div>
+
+<script>
+  // 预览页自用，不属于产品代码。
+  document.getElementById('theme').addEventListener('click', (event) => {
+    const root = document.documentElement;
+    const dark = root.dataset.theme === 'dark';
+    root.dataset.theme = dark ? 'light' : 'dark';
+    event.currentTarget.textContent = dark ? '切换深色' : '切换浅色';
+  });
+</script>
+</body>
+</html>

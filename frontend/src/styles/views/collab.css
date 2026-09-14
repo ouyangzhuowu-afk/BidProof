@@ -1,0 +1,178 @@
+/* =============================================================================
+   视图层 · 协作区与决策确认清单
+   ========================================================================== */
+
+@layer views {
+
+  /* =========================================================================
+     评论流
+     ====================================================================== */
+  .activity {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    border-bottom: 1px solid var(--rule);
+  }
+  .activity:last-child { border-bottom: 0; }
+  .activity__body { display: grid; gap: var(--space-1); min-width: 0; }
+  .activity__head {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-2);
+    font-size: var(--text-xs);
+    color: var(--ink-muted);
+  }
+  .activity__head strong {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    color: var(--ink-strong);
+  }
+  .activity__text {
+    font-size: var(--text-sm);
+    line-height: var(--leading-body);
+    color: var(--ink);
+    /* 评论里贴原文片段是常态，保留换行。 */
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+
+  /* =========================================================================
+     审计时间线
+     -----------------------------------------------------------------------
+     竖线 + 节点。这是少数几个「装饰性图形」被允许存在的地方：
+     审计记录的价值在于顺序，而竖线是表达顺序最省字的方式。
+     ====================================================================== */
+  .timeline {
+    display: grid;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    list-style: none;
+  }
+  .timeline__item {
+    position: relative;
+    display: grid;
+    gap: 2px;
+    padding-left: var(--space-5);
+  }
+  /* 节点圆点 */
+  .timeline__item::before {
+    content: "";
+    position: absolute;
+    left: 3px;
+    top: 6px;
+    width: 7px;
+    height: 7px;
+    border-radius: var(--radius-full);
+    background: var(--paper);
+    box-shadow: 0 0 0 2px var(--rule-strong);
+  }
+  /* 连接线，最后一项不画 */
+  .timeline__item:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    left: 6px;
+    top: 16px;
+    bottom: calc(var(--space-3) * -1);
+    width: 1px;
+    background: var(--rule);
+  }
+  .timeline__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+  }
+  .timeline__head strong { font-weight: var(--weight-medium); color: var(--ink-strong); }
+  .timeline__head time { font-size: var(--text-xs); color: var(--ink-muted); white-space: nowrap; }
+  .timeline__item small { font-size: var(--text-xs); color: var(--ink-muted); }
+
+  /* =========================================================================
+     整改项
+     ====================================================================== */
+  .remediation {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    border-bottom: 1px solid var(--rule);
+    border-left: 3px solid var(--signal-warning);
+  }
+  .remediation:last-child { border-bottom: 0; }
+  .remediation[data-status="IN_PROGRESS"] { border-left-color: var(--signal-info); }
+  .remediation[data-status="RESOLVED"] { border-left-color: var(--signal-ok); }
+  /* 已豁免是中性结论，不是成功也不是风险。 */
+  .remediation[data-status="WAIVED"] { border-left-color: var(--rule-strong); }
+  .remediation[data-status="RESOLVED"] .remediation__main strong,
+  .remediation[data-status="WAIVED"] .remediation__main strong { color: var(--ink-muted); }
+
+  .remediation__main { display: grid; gap: 2px; min-width: 0; }
+  .remediation__main strong {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    color: var(--ink-strong);
+  }
+  .remediation__main small { font-size: var(--text-xs); color: var(--ink-muted); }
+  .remediation .select { width: auto; min-width: 104px; }
+
+  @media (max-width: 560px) {
+    .remediation { grid-template-columns: minmax(0, 1fr); }
+    .remediation .select { width: 100%; }
+  }
+
+  /* =========================================================================
+     决策确认清单
+     -----------------------------------------------------------------------
+     取代旧版的 <select multiple size="7">。多占竖向空间，换来不会选错 ——
+     这是全产品最重要的一次输入，不该用 Web 上最容易误操作的控件。
+     ====================================================================== */
+  .ack-list {
+    display: grid;
+    max-height: 320px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-control);
+  }
+
+  .ack {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: var(--space-3);
+    align-items: start;
+    padding: var(--space-3);
+    border-bottom: 1px solid var(--rule);
+    border-left: 3px solid transparent;
+    cursor: pointer;
+  }
+  .ack:last-child { border-bottom: 0; }
+  .ack:hover { background: var(--paper-sunken); }
+  .ack[data-status="UNKNOWN"] { border-left-color: var(--verdict-unknown); }
+  .ack[data-status="NEEDS_REVIEW"] { border-left-color: var(--verdict-review); }
+  /* 焦点环画在整行上：复选框只有 16px，键盘用户看不清停在哪。 */
+  .ack:has(input:focus-visible) {
+    outline: 2px solid var(--brand);
+    outline-offset: -2px;
+  }
+  .ack:has(input:checked) { background: var(--brand-wash); }
+
+  .ack__body { display: grid; gap: 2px; min-width: 0; }
+  .ack__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+  }
+  .ack__head strong {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    color: var(--ink-strong);
+  }
+  .ack__body small {
+    font-size: var(--text-xs);
+    line-height: var(--leading-snug);
+    color: var(--ink-muted);
+  }
+}

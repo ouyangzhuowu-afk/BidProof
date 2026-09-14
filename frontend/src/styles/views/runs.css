@@ -1,0 +1,144 @@
+/* =============================================================================
+   视图层 · 任务列表
+   -----------------------------------------------------------------------------
+   只放「这个视图独有、且无法复用」的东西。
+   任务行、筛选栏、指标卡、批量条都已经在 components.css 里，这里不重复。
+
+   判断标准：如果一段样式在第二个视图里也会用到，它就该在 components.css。
+   旧版 style.css 没有这条线，于是 `.run-stat` 这种明显通用的东西
+   被写死在 `.recent-section .run-open .run-stat` 里，详情页想复用只能复制。
+   ========================================================================== */
+
+@layer views {
+
+  /* 列表容器。分隔线由 .run-row 自己画，容器不再重复画边框 ——
+     旧版容器和行都有 border-bottom，最后一行下面是 2px 的粗线。 */
+  .runs-list {
+    display: grid;
+    min-height: 200px;
+  }
+
+  /* 任务行里的两个计数。等宽数字 + 固定最小宽度，
+     否则 3 位数和 1 位数会让右侧的判定徽标左右跳。 */
+  .run-count {
+    display: grid;
+    justify-items: center;
+    min-width: 52px;
+    line-height: var(--leading-tight);
+  }
+  .run-count > b {
+    font-size: var(--text-md);
+    font-weight: var(--weight-strong);
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-strong);
+  }
+  .run-count > span {
+    font-size: var(--text-2xs);
+    color: var(--ink-muted);
+    white-space: nowrap;
+  }
+  /* 只有非零才着色。「0 项高风险」是好消息，染红会制造假警报。 */
+  .run-count[data-tone="danger"][data-nonzero="true"] > b { color: var(--verdict-fail); }
+  .run-count[data-tone="warning"][data-nonzero="true"] > b { color: var(--verdict-review); }
+
+  @media (max-width: 640px) {
+    /* 手机上两个计数改为行内排布，不再各占一列。 */
+    .run-count {
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-1);
+      min-width: 0;
+    }
+  }
+
+  /* 决策状态。未记录时是虚线框 —— 「还没做」和「做了」必须一眼可分，
+     旧版两者都是实心 pill，只有文字不同。 */
+  .decision-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px var(--space-2);
+    border: 1px solid var(--rule-strong);
+    border-radius: var(--radius-full);
+    font-size: var(--text-2xs);
+    font-weight: var(--weight-medium);
+    white-space: nowrap;
+  }
+  .decision-pill[data-decision=""] {
+    border-style: dashed;
+    color: var(--ink-faint);
+  }
+  .decision-pill[data-decision="CONTINUE"] {
+    border-color: var(--verdict-pass-line);
+    background: var(--verdict-pass-wash);
+    color: var(--verdict-pass);
+  }
+  .decision-pill[data-decision="HOLD"] {
+    border-color: var(--verdict-review-line);
+    background: var(--verdict-review-wash);
+    color: var(--verdict-review);
+  }
+  .decision-pill[data-decision="STOP"] {
+    border-color: var(--verdict-fail-line);
+    background: var(--verdict-fail-wash);
+    color: var(--verdict-fail);
+  }
+
+  /* 收藏星标。未收藏时是描边，hover 才提示可点。 */
+  .run-star { color: var(--ink-faint); }
+  .run-star:hover { color: var(--verdict-review); }
+  .run-star[aria-pressed="true"] { color: var(--verdict-review); }
+  .run-star[aria-pressed="true"] svg { fill: currentColor; }
+
+  /* 首次使用的空状态。比通用 .state 多一层引导：
+     三步说明 + 一键试跑，因为新用户在这里最容易流失。 */
+  .runs-onboarding {
+    display: grid;
+    justify-items: center;
+    gap: var(--space-4);
+    padding: var(--space-12) var(--space-5);
+    text-align: center;
+  }
+  .runs-onboarding__steps {
+    display: grid;
+    gap: var(--space-2);
+    max-width: var(--measure);
+    text-align: left;
+    counter-reset: step;
+  }
+  .runs-onboarding__steps > li {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: var(--space-3);
+    align-items: center;
+    font-size: var(--text-sm);
+    color: var(--ink-soft);
+  }
+  .runs-onboarding__steps > li::before {
+    counter-increment: step;
+    content: counter(step);
+    display: grid;
+    place-items: center;
+    width: 22px;
+    height: 22px;
+    border-radius: var(--radius-full);
+    background: var(--brand-wash);
+    color: var(--brand);
+    font-size: var(--text-2xs);
+    font-weight: var(--weight-strong);
+  }
+
+  /* 准确率面板。未完成全量复核时整块降级为中性色并加说明 ——
+     合规要求：抽样估计不得呈现为已验证指标。 */
+  .accuracy[data-verified="false"] .accuracy__value { color: var(--ink-muted); }
+  .accuracy__value {
+    font-size: var(--text-xl);
+    font-weight: var(--weight-strong);
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-strong);
+  }
+  .accuracy__caveat {
+    font-size: var(--text-xs);
+    color: var(--ink-muted);
+    line-height: var(--leading-snug);
+  }
+}
