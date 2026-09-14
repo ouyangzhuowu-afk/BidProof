@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#eef1f5">
   <title>BidProof 企业证据工作台</title>
   <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/static/style.css?v=20260914-opus5">
+  <link rel="stylesheet" href="/static/style.css?v=20260914-pw8">
 </head>
 <body>
 <div id="loading-overlay" class="loading-overlay" hidden><div class="loading-spinner"></div></div>
@@ -227,8 +227,8 @@
                     <p class="field" id="member-password-wrap" hidden>
                       <label for="member-password">初始密码</label>
                       <input class="input" id="member-password" name="password"
-                             type="password" minlength="12" autocomplete="new-password">
-                      <span class="hint">至少 12 位。请通过可信渠道线下转交。</span>
+                             type="password" minlength="8" autocomplete="new-password">
+                      <span class="hint">至少 8 位，须同时包含字母和数字。请通过可信渠道线下转交。</span>
                     </p>
                   </div>
                   <div class="row">
@@ -358,8 +358,8 @@
                   <p class="field">
                     <label for="new-password">新密码</label>
                     <input class="input" id="new-password" name="new_password"
-                           type="password" required minlength="12" autocomplete="new-password">
-                    <span class="hint">至少 12 位。</span>
+                           type="password" required minlength="8" autocomplete="new-password">
+                    <span class="hint">至少 8 位，须同时包含字母和数字。</span>
                   </p>
                   <div class="row">
                     <button class="btn btn--secondary btn--sm" type="submit">
@@ -640,13 +640,13 @@
       <p class="field" id="auth-confirm-wrap" hidden>
         <label for="auth-password-confirm">确认密码</label>
         <span class="password-field">
-          <input class="input" id="auth-password-confirm" type="password" minlength="12" autocomplete="new-password">
+          <input class="input" id="auth-password-confirm" type="password" minlength="8" autocomplete="new-password">
           <button class="icon-btn password-toggle" type="button" data-password-toggle="auth-password-confirm"
                   aria-label="显示确认密码" aria-pressed="false"><i data-lucide="eye"></i></button>
         </span>
       </p>
 
-      <p class="hint" id="auth-password-hint" hidden>至少 12 个字符，建议包含字母、数字与符号。</p>
+      <p class="hint" id="auth-password-hint" hidden>至少 8 位，须同时包含字母和数字。</p>
 
       <div id="mfa-fields" class="stack stack--tight" hidden>
         <p class="field">
@@ -688,7 +688,7 @@
       <p class="field">
         <label for="account-action-password">新密码</label>
         <span class="password-field">
-          <input class="input" id="account-action-password" required type="password" minlength="12" autocomplete="new-password">
+          <input class="input" id="account-action-password" required type="password" minlength="8" autocomplete="new-password">
           <button class="icon-btn password-toggle" type="button" data-password-toggle="account-action-password"
                   aria-label="显示新密码" aria-pressed="false"><i data-lucide="eye"></i></button>
         </span>
@@ -696,7 +696,7 @@
       <p class="field">
         <label for="account-action-confirm">确认密码</label>
         <span class="password-field">
-          <input class="input" id="account-action-confirm" required type="password" minlength="12" autocomplete="new-password">
+          <input class="input" id="account-action-confirm" required type="password" minlength="8" autocomplete="new-password">
           <button class="icon-btn password-toggle" type="button" data-password-toggle="account-action-confirm"
                   aria-label="显示确认密码" aria-pressed="false"><i data-lucide="eye"></i></button>
         </span>
@@ -711,6 +711,6 @@
   </dialog>
   <div id="app-toast" class="toast" role="status" aria-live="polite" hidden></div>
   <script src="/static/vendor/lucide.min.js"></script>
-  <script src="/static/app.js?v=20260914-opus5"></script>
+  <script src="/static/app.js?v=20260914-pw8"></script>
 </body>
 </html>

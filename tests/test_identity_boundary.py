@@ -15,7 +15,7 @@ from fastapi.testclient import TestClient
 
 from app import identity, main
 from app.db import create_scan_job, load_scan_job
-from app.schemas import MIN_PASSWORD_LENGTH
+from app.schemas import MIN_PASSWORD_LENGTH, password_meets_policy
 from app.services import scan_service
 
 
@@ -167,11 +167,12 @@ def test_internal_job_context_carries_verified_identity_not_headers():
     assert identity.job_id_of(context) == "queued-job"
 
 
-def test_under_length_password_fails_as_unauthorized_not_validation_error():
+def test_under_policy_password_fails_as_unauthorized_not_validation_error():
     client = TestClient(main.app)
 
     response = client.post("/api/auth/login", json={"username": "nobody", "password": "short"})
 
+    assert not password_meets_policy("short")
     assert len("short") < MIN_PASSWORD_LENGTH
     assert response.status_code == 401
     assert response.json()["detail"] == "用户名或密码错误"

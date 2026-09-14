@@ -30,12 +30,10 @@ import { toastSuccess, toastFromError } from '../../core/toast.js';
 import { shortId, roleLabel } from '../../core/format.js';
 import { can, isMemberMutable, isPermissionError } from '../../core/permissions.js';
 import { workspaceApi, authApi } from '../../api/index.js';
+import { MIN_PASSWORD_LENGTH, PASSWORD_POLICY_MESSAGE, passwordMeetsPolicy } from '../../core/password.js';
 
 /** @typedef {import('../../../types/api.js').Member} Member */
 /** @typedef {import('../../../types/api.js').Role} Role */
-
-/** 直接开户的最短密码。与旧实现一致，后端也会再校验一次。 */
-const MIN_PASSWORD = 12;
 
 /** @type {(() => void)[]} */
 let teardown = [];
@@ -299,7 +297,7 @@ function setCreateMode(mode) {
   const password = /** @type {HTMLInputElement | null} */ (el('#member-password'));
   if (password) {
     password.required = direct;
-    password.minLength = MIN_PASSWORD;
+    password.minLength = MIN_PASSWORD_LENGTH;
   }
   const label = el('#member-submit-label');
   if (label) label.textContent = direct ? '直接开户' : '生成邀请链接';
@@ -320,8 +318,8 @@ async function submitCreate(event) {
     try {
       if (createMode === 'direct') {
         const password = String(data.get('password') || '');
-        if (password.length < MIN_PASSWORD) {
-          throw new Error(`直接开户的密码至少 ${MIN_PASSWORD} 位`);
+        if (!passwordMeetsPolicy(password)) {
+          throw new Error(PASSWORD_POLICY_MESSAGE);
         }
         await workspaceApi.createMember({ username, password, role });
         form.reset();

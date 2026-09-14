@@ -27,6 +27,7 @@ import {
   togglePasswordVisibility, clearAuthForm,
 } from './view.js';
 import { MODE_ENDPOINT, buildPayload, needsConfirm, clampMode } from './state.js';
+import { assertPasswordPolicy } from '../../core/password.js';
 
 /** @typedef {import('../../../types/api.js').AuthStatus} AuthStatus */
 /** @typedef {import('../../../types/api.js').CurrentUser} CurrentUser */
@@ -218,6 +219,7 @@ async function submitCredentials() {
     mismatch.name = 'ConfirmMismatch';
     throw mismatch;
   }
+  if (needsConfirm(mode)) assertPasswordPolicy(password);
 
   const payload = buildPayload(mode, {
     username: value('#auth-username'),
@@ -303,6 +305,13 @@ async function submitAccountAction(event) {
   if (password !== value('#account-action-confirm')) {
     accountMessage('两次输入的密码不一致。', 'danger');
     /** @type {HTMLInputElement | null} */ (el('#account-action-confirm'))?.focus();
+    return;
+  }
+  try {
+    assertPasswordPolicy(password);
+  } catch (error) {
+    accountMessage(error instanceof Error ? error.message : '密码不符合要求。', 'danger');
+    /** @type {HTMLInputElement | null} */ (el('#account-action-password'))?.focus();
     return;
   }
 

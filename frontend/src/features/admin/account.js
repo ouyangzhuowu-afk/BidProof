@@ -26,6 +26,7 @@ import { toastSuccess, toastFromError } from '../../core/toast.js';
 import { formatDate, formatRelative } from '../../core/format.js';
 import { isPermissionError } from '../../core/permissions.js';
 import { authApi } from '../../api/index.js';
+import { assertPasswordPolicy } from '../../core/password.js';
 
 /** @type {(() => void)[]} */
 let teardown = [];
@@ -79,9 +80,11 @@ async function changePassword(event) {
 
   await withLoading(form.querySelector('button[type="submit"]'), async () => {
     try {
+      const newPassword = String(data.get('new_password') || '');
+      assertPasswordPolicy(newPassword);
       await authApi.changePassword({
         current_password: String(data.get('current_password') || ''),
-        new_password: String(data.get('new_password') || ''),
+        new_password: newPassword,
       });
       form.reset();
       // 「当前会话继续有效」是必须说的一句：改完密码之后

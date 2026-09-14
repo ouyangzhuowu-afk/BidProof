@@ -83,7 +83,7 @@ Not run in this pass: full `pytest -q` suite, Playwright visual, real login agai
 
 - **Browser E2E**: login → new scan → matrix review → decision CONTINUE/HOLD/STOP not exercised in headed browser here.
 - **TypeScript**: `npm run check` still noisy when `checkJs` re-enabled; restore after typing `emptyState`/`RunFilters.scope`/`AuthMode` casts.
-- **Behavior change**: background scan watcher vs full-screen wait — confirm with product before pilot.
+- **Behavior change**: background scan watcher vs full-screen wait — **accepted by product 2026-09-14** (dock UI is the pilot path).
 - **CSS size**: larger than pre-refactor until `legacy.css` deleted (admin/auth shell migration remaining).
 - **Windows PowerShell**: do not re-save `index.html` with `Set-Content` (corrupts Unicode); use Python/`uv` write.
 - Unrelated dirty files on branch (backend/AGENTS/workflow) were **not** included in frontend commits.
@@ -103,7 +103,7 @@ Keep `_opus5_refactor/` (gitignored) and Downloads zips as cold backup.
 
 ## 7. Next steps
 
-1. Product confirm: background scan dock OK for pilot.
+1. ~~Product confirm: background scan dock OK for pilot.~~ **Done 2026-09-14.**
 2. Re-enable `checkJs` + fix remaining TS; restore `verify` to include `check`.
 3. Migrate intake dialog + detail metadata/version chrome; then delete `legacy.css` + lucide UMD.
 4. Unify stores onto `core/store.js`.

@@ -200,7 +200,7 @@ export function resolveAuthView(status, requestedMode, pendingMfa) {
     },
 
     credentialsDisabled: pendingMfa,
-    passwordMinLength: confirm ? 12 : 1,
+    passwordMinLength: confirm ? 8 : 1,
     passwordAutocomplete: confirm ? 'new-password' : 'current-password',
   };
 }
