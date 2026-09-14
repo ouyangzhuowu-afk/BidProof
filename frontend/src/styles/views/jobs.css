@@ -1,0 +1,185 @@
+/* =============================================================================
+   视图层 · 扫描作业与后台扫描停靠区
+   ========================================================================== */
+
+@layer views {
+
+  /* =========================================================================
+     后台扫描停靠区
+     -----------------------------------------------------------------------
+     取代旧版的全屏遮罩。它必须满足两个条件才算成立：
+       1. 不遮挡任何可操作区域 —— 否则等于换个样子的遮罩；
+       2. 足够显眼，用户不会忘记有扫描在跑。
+     所以用右下角固定停靠 + 阴影浮层，并且始终排在提示队列之下（z-index 更低），
+     避免完成提示被自己的进度卡片盖住。
+     ====================================================================== */
+  .scandock {
+    position: fixed;
+    z-index: calc(var(--z-toast) - 1);
+    right: var(--space-5);
+    bottom: var(--space-5);
+    display: grid;
+    gap: var(--space-2);
+    width: min(320px, calc(100vw - var(--space-8)));
+  }
+
+  @media (max-width: 640px) {
+    .scandock {
+      right: var(--space-4);
+      left: var(--space-4);
+      width: auto;
+      /* 让开底部导航，否则卡片会压住「任务 / 作业 / 设置」三个入口。 */
+      bottom: calc(var(--tap-target) + var(--space-4) + env(safe-area-inset-bottom));
+    }
+  }
+
+  .scancard {
+    display: grid;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid var(--rule-strong);
+    border-left: 3px solid var(--brand);
+    border-radius: var(--radius-overlay);
+    background: var(--paper-raised);
+    box-shadow: var(--shadow-overlay);
+    animation: bp-scancard-in var(--dur-slow) var(--ease-out);
+  }
+  .scancard[data-state="done"] { border-left-color: var(--signal-ok); }
+  .scancard[data-state="failed"] { border-left-color: var(--signal-danger); }
+
+  @keyframes bp-scancard-in {
+    from { opacity: 0; transform: translateY(10px); }
+  }
+
+  .scancard__head {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+  .scancard__name {
+    min-width: 0;
+    flex: 1;
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    color: var(--ink-strong);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .scancard__hint {
+    font-size: var(--text-xs);
+    line-height: var(--leading-snug);
+    color: var(--ink-muted);
+  }
+  .scancard .callout { padding: var(--space-2) var(--space-3); }
+
+  /* =========================================================================
+     作业表格
+     ====================================================================== */
+
+  /* 进度列固定宽度，否则百分比变化会让整张表左右抖动。 */
+  .table td[data-label="进度"] { min-width: 160px; }
+  .table td[data-label="进度"] .progress__label { font-size: var(--text-2xs); }
+
+  /* 作业号与任务号分两行：前者是运维视角，后者是业务视角，
+     旧实现挤在一行里用 · 分隔，扫读时分不清哪个是哪个。 */
+  .table td[data-label="作业"] { display: grid; gap: 2px; }
+  .table td[data-label="作业"] .hint {
+    font-size: var(--text-2xs);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* 失败行整行轻微着色。作业页的主要用途就是找失败的那几条。 */
+  .table tbody tr[data-status="FAILED"] td,
+  .table tbody tr[data-status="DEAD"] td {
+    background: var(--signal-danger-wash);
+  }
+
+  @media (max-width: 720px) {
+    /* 卡片模式下「作业」格已经是两行，取消 grid 模板的列名对齐。 */
+    .table--responsive td[data-label="作业"] { grid-template-columns: minmax(0, 1fr); }
+    .table--responsive td[data-label="作业"]::before { display: none; }
+  }
+
+  /* =========================================================================
+     人工决策
+     ====================================================================== */
+  .decision-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr));
+    gap: var(--space-3);
+  }
+
+  /* 三选一用整块可点的卡片而不是裸 radio：
+     这是全产品最重要的一次输入，点击热区不该只有 16px。 */
+  .decision-option {
+    position: relative;
+    display: grid;
+    gap: var(--space-1);
+    padding: var(--space-4);
+    border: 1px solid var(--rule-strong);
+    border-radius: var(--radius-card);
+    background: var(--paper);
+    cursor: pointer;
+  }
+  .decision-option input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .decision-option strong {
+    font-size: var(--text-md);
+    font-weight: var(--weight-strong);
+    color: var(--ink-strong);
+  }
+  .decision-option small {
+    font-size: var(--text-xs);
+    line-height: var(--leading-snug);
+    color: var(--ink-muted);
+  }
+  .decision-option:hover { border-color: var(--ink-faint); }
+
+  /* 选中态：焦点环 + 判定色描边。不填充大面积色块 ——
+     三张卡片里有一张整块变红，会让「停止投标」看起来像是系统的建议。 */
+  .decision-option:has(input:checked) {
+    border-color: var(--brand);
+    box-shadow: inset 0 0 0 1px var(--brand);
+  }
+  .decision-option:has(input:focus-visible) {
+    outline: 2px solid var(--brand);
+    outline-offset: 2px;
+  }
+  .decision-option[data-value="STOP"]:has(input:checked) {
+    border-color: var(--verdict-fail);
+    box-shadow: inset 0 0 0 1px var(--verdict-fail);
+  }
+  .decision-option[data-value="CONTINUE"]:has(input:checked) {
+    border-color: var(--verdict-pass);
+    box-shadow: inset 0 0 0 1px var(--verdict-pass);
+  }
+
+  /* 决策上下文：做决定前必须看见的三个数字。 */
+  .decision-context {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(120px, 100%), 1fr));
+    gap: var(--space-3);
+  }
+  .context-metric {
+    display: grid;
+    gap: 2px;
+    padding: var(--space-3);
+    border-radius: var(--radius-control);
+    background: var(--paper-sunken);
+  }
+  .context-metric strong {
+    font-size: var(--text-xl);
+    font-weight: var(--weight-strong);
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-strong);
+  }
+  .context-metric span { font-size: var(--text-xs); color: var(--ink-muted); }
+  .context-metric[data-tone="danger"][data-nonzero="true"] strong { color: var(--verdict-fail); }
+  .context-metric[data-tone="warning"][data-nonzero="true"] strong { color: var(--verdict-review); }
+}

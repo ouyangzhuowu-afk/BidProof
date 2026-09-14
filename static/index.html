@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#eef1f5">
   <title>BidProof 企业证据工作台</title>
   <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/static/style.css?v=20260905-1">
+  <link rel="stylesheet" href="/static/style.css?v=20260914-opus5">
 </head>
 <body>
 <div id="loading-overlay" class="loading-overlay" hidden><div class="loading-spinner"></div></div>
@@ -38,66 +38,395 @@
       </header>
 
       <main class="content" id="app-main" tabindex="-1">
-        <section id="home-view" class="view">
-          <header class="page-header">
-            <div><p class="eyebrow">任务总览</p><h1>扫描任务</h1><p class="lede">集中查看投标风险、证据缺口与人工决策状态。</p></div>
-            <button class="button primary desktop-primary-action" id="new-scan-button" type="button"><i data-lucide="file-plus-2"></i><span>新建扫描</span></button>
+        <!-- ═══════════════════════════════════════════════════════════════
+             任务列表 · 由 frontend/src/features/runs/list.js 驱动
+             标记契约的权威样板在 frontend/preview/index.html。
+             本段的 class 全部来自新设计系统；其余视图仍用旧 class，
+             由 styles/legacy.css（@layer legacy，优先级最低）兜底。
+             ════════════════════════════════════════════════════════════ -->
+        <section id="home-view" class="view stack">
+          <header class="page-head">
+            <div class="page-head__text">
+              <p class="page-head__eyebrow">任务总览</p>
+              <h1 class="title-page">扫描任务</h1>
+              <p class="lede">集中查看投标风险、证据缺口与人工决策状态。</p>
+            </div>
+            <div class="page-head__actions">
+              <button class="btn btn--primary" id="new-scan-button" type="button">
+                <i data-lucide="file-plus-2"></i><span>新建扫描</span>
+              </button>
+            </div>
           </header>
-          <section class="overview-grid" id="overview-grid" aria-label="任务概览">
-            <div class="overview-card skeleton-block"></div><div class="overview-card skeleton-block"></div><div class="overview-card skeleton-block"></div><div class="overview-card skeleton-block"></div>
-          </section>
-          <div class="home-layout">
-            <section class="surface recent-section" aria-labelledby="recent-title">
-              <div class="surface-header"><div><p class="eyebrow">最近更新</p><h2 id="recent-title">扫描记录</h2></div><div class="surface-actions"><select id="run-project-filter" aria-label="按项目筛选"><option value="">全部项目</option></select><select id="run-scope" aria-label="任务范围"><option value="ACTIVE">未归档</option><option value="ARCHIVED">已归档</option><option value="ALL">全部任务</option></select><button class="icon-button" id="refresh-runs" type="button" aria-label="刷新任务" title="刷新任务"><i data-lucide="refresh-cw"></i></button></div></div>
-              <div class="task-filter-bar" aria-label="任务筛选">
-                <label class="task-search" for="run-search"><span>搜索任务</span><span class="search-input"><i data-lucide="search" aria-hidden="true"></i><input id="run-search" type="search" placeholder="文件名、标签或任务编号" autocomplete="off"></span></label>
-                <label class="filter-field" for="run-tag-filter"><span>标签</span><input id="run-tag-filter" type="text" placeholder="精确标签" autocomplete="off"></label>
-                <label class="filter-field" for="run-assignee-filter"><span>负责人</span><select id="run-assignee-filter"><option value="">全部负责人</option></select></label>
-                <label class="filter-field" for="run-reviewer-filter"><span>复核人</span><select id="run-reviewer-filter"><option value="">全部复核人</option></select></label>
-                <label class="filter-field" for="run-sort"><span>排序</span><select id="run-sort"><option value="updated_desc">最近更新</option><option value="filename">文件名</option></select></label>
-                <div class="filter-bottom-row">
-                  <label class="favorite-filter"><input id="run-favorite-filter" type="checkbox"><span>只看收藏</span></label>
-                  <button class="mini-button filter-reset" id="clear-run-filters" type="button"><i data-lucide="filter-x"></i><span>清除</span></button>
-                </div>
+
+          <div class="metric-grid" id="runs-metrics" aria-label="任务概览">
+            <div class="skeleton skeleton--card"></div>
+            <div class="skeleton skeleton--card"></div>
+            <div class="skeleton skeleton--card"></div>
+            <div class="skeleton skeleton--card"></div>
+          </div>
+
+          <div class="split">
+            <section class="surface" aria-labelledby="runs-title">
+              <div class="surface__head">
+                <h2 class="title-section" id="runs-title">扫描记录</h2>
               </div>
-              <div class="bulk-toolbar" aria-label="批量任务操作"><label class="check-wrap"><input id="select-all-runs" type="checkbox"><span>全选</span></label><span id="selection-count" class="result-count">未选择任务</span><button class="mini-button" id="bulk-archive" type="button" disabled><i data-lucide="archive"></i><span>归档</span></button><button class="mini-button" id="bulk-restore" type="button" disabled hidden><i data-lucide="archive-restore"></i><span>恢复</span></button><button class="mini-button" id="bulk-export" type="button" disabled><i data-lucide="file-archive"></i><span>导出报告</span></button><button class="mini-button" id="bulk-delete" type="button" disabled><i data-lucide="trash-2"></i><span>删除</span></button></div>
-              <div class="run-table-head" aria-hidden="true"><span>项目文件</span><span>风险</span><span>待复核</span><span>人工决定</span><span></span></div>
-              <div id="runs-list" class="runs-list"><div class="run-skeleton"></div><div class="run-skeleton"></div><div class="run-skeleton"></div></div>
+
+              <div class="toolbar">
+                <span class="toolbar__search">
+                  <i data-lucide="search" aria-hidden="true"></i>
+                  <input class="input" id="runs-search" type="search"
+                         placeholder="文件名、标签或任务编号" autocomplete="off"
+                         aria-label="搜索任务">
+                </span>
+                <div class="segmented" id="runs-scope" role="radiogroup" aria-label="任务范围">
+                  <button class="segmented__option" type="button" role="radio"
+                          data-scope="ACTIVE" aria-checked="true">未归档</button>
+                  <button class="segmented__option" type="button" role="radio"
+                          data-scope="ARCHIVED" aria-checked="false">已归档</button>
+                  <button class="segmented__option" type="button" role="radio"
+                          data-scope="ALL" aria-checked="false">全部</button>
+                </div>
+                <button class="icon-btn icon-btn--bordered" id="runs-refresh" type="button"
+                        aria-label="刷新任务列表" title="刷新">
+                  <i data-lucide="refresh-cw"></i>
+                </button>
+              </div>
+
+              <details class="filters" id="runs-filters">
+                <summary>
+                  <i data-lucide="sliders-horizontal" aria-hidden="true"></i>
+                  <span>更多筛选</span>
+                  <span class="filters__count" id="runs-filter-count" hidden>0</span>
+                  <i data-lucide="chevron-down" class="filters__caret" aria-hidden="true"></i>
+                </summary>
+                <div class="filters__grid">
+                  <p class="field">
+                    <label for="run-project-filter">项目</label>
+                    <!-- id 保留：选项仍由 app.js 的 loadProjects() 填充（批次 5 迁出） -->
+                    <select class="select" id="run-project-filter" data-filter="projectId">
+                      <option value="">全部项目</option>
+                    </select>
+                  </p>
+                  <p class="field">
+                    <label for="runs-tag">标签</label>
+                    <input class="input" id="runs-tag" type="text" data-filter="tag"
+                           placeholder="精确标签" autocomplete="off">
+                  </p>
+                  <p class="field">
+                    <label for="runs-assignee">负责人</label>
+                    <select class="select" id="runs-assignee" data-filter="assigneeId">
+                      <option value="">全部负责人</option>
+                    </select>
+                  </p>
+                  <p class="field">
+                    <label for="runs-reviewer">复核人</label>
+                    <select class="select" id="runs-reviewer" data-filter="reviewerId">
+                      <option value="">全部复核人</option>
+                    </select>
+                  </p>
+                  <p class="field">
+                    <label for="runs-sort">排序</label>
+                    <select class="select" id="runs-sort" data-filter="sort">
+                      <option value="updated_desc">最近更新</option>
+                      <option value="filename">文件名</option>
+                    </select>
+                  </p>
+                  <p class="field">
+                    <label for="runs-favorite">收藏</label>
+                    <label class="row">
+                      <input id="runs-favorite" type="checkbox" data-filter="favoriteOnly">
+                      <span>只看收藏</span>
+                    </label>
+                  </p>
+                </div>
+                <div class="row row--end" style="padding: 0 var(--space-4) var(--space-4)">
+                  <button class="btn btn--sm btn--ghost" id="runs-clear-filters-btn" type="button">
+                    <i data-lucide="filter-x"></i><span>清除筛选</span>
+                  </button>
+                </div>
+              </details>
+
+              <!-- aria-busy 由 list.js 在加载期间切换，读屏因此不会朗读半成品 -->
+              <div class="runs-list" id="runs-list" aria-busy="false" aria-label="扫描任务列表">
+                <div class="skeleton skeleton--row"></div>
+                <div class="skeleton skeleton--row"></div>
+                <div class="skeleton skeleton--row"></div>
+              </div>
+
+              <div class="bulkbar" id="runs-bulkbar" role="group" aria-label="批量操作" hidden></div>
             </section>
-            <aside class="home-aside" aria-label="运行规则">
-              <section class="surface rule-panel">
-                <div class="surface-header"><div><p class="eyebrow">判定原则</p><h2>证据闸门</h2></div><i class="section-icon" data-lucide="shield-check"></i></div>
-                <div class="rule-list">
-                  <div><span class="rule-icon safe"><i data-lucide="link-2"></i></span><span><strong>双页码引用</strong><small>招标原文和企业证据缺一不可</small></span></div>
-                  <div><span class="rule-icon warning"><i data-lucide="triangle-alert"></i></span><span><strong>不确定即降级</strong><small>冲突与 OCR 风险保留人工复核</small></span></div>
-                  <div><span class="rule-icon neutral"><i data-lucide="user-check"></i></span><span><strong>人工最终决策</strong><small>系统不替你决定是否继续投标</small></span></div>
+
+            <aside class="stack" aria-label="辅助信息">
+              <section class="surface" aria-labelledby="notices-title">
+                <div class="surface__head"><h2 class="title-section" id="notices-title">待处理提醒</h2></div>
+                <div class="surface__body surface__body--flush" id="runs-notices-body">
+                  <div class="skeleton skeleton--line"></div>
                 </div>
               </section>
-              <section class="readiness-strip"><span class="live-dot"></span><span><strong>安全会话已启用</strong><small>权限、审计与人工复核链路在线</small></span></section>
-              <section class="surface rule-panel notification-panel"><div class="surface-header"><div><p class="eyebrow">需要关注</p><h2>待处理提醒</h2></div><i class="section-icon" data-lucide="bell-ring"></i></div><div id="notifications-list" class="notification-list"><div class="empty-state">正在检查提醒...</div></div></section>
-              <section class="surface rule-panel"><div class="surface-header"><div><p class="eyebrow">反馈样本</p><h2>准确度观测</h2></div><i class="section-icon" data-lucide="chart-no-axes-combined"></i></div><div id="accuracy-summary" class="rule-list"></div></section>
+              <section class="surface" aria-labelledby="accuracy-title">
+                <div class="surface__head"><h2 class="title-section" id="accuracy-title">检出质量</h2></div>
+                <div class="surface__body surface__body--flush" id="runs-accuracy-body">
+                  <div class="skeleton skeleton--line"></div>
+                </div>
+              </section>
             </aside>
           </div>
         </section>
-
         <section id="jobs-view" class="view" hidden>
           <header class="page-header"><div><p class="eyebrow">后台处理</p><h1>扫描作业</h1><p class="lede">查看排队、执行、失败与重试状态，失败任务不会静默消失。</p></div><button class="button secondary" id="refresh-jobs" type="button"><i data-lucide="refresh-cw"></i><span>刷新</span></button></header>
           <section class="surface operations-section" aria-labelledby="jobs-title"><div class="surface-header"><div><p class="eyebrow">最近作业</p><h2 id="jobs-title">处理记录</h2></div><span class="result-count" id="jobs-count"></span></div><div class="job-columns" aria-hidden="true"><span>文件与作业</span><span>状态</span><span>尝试</span><span>更新时间</span><span></span></div><div id="jobs-list" class="operations-list"><div class="run-skeleton"></div></div></section>
         </section>
 
-        <section id="admin-view" class="view" hidden>
-          <header class="page-header"><div><p class="eyebrow">企业管理</p><h1>成员与设置</h1><p class="lede">管理访问角色、数据保留、备份证据和运行健康。</p></div></header>
-          <div class="ops-grid">
-            <section class="surface operations-section" aria-labelledby="projects-title"><div class="surface-header"><div><p class="eyebrow">任务分组</p><h2 id="projects-title">投标项目</h2></div><i class="section-icon" data-lucide="folder-kanban"></i></div><form id="project-form" class="inline-admin-form compact-admin-form"><label for="project-name">项目名称</label><input id="project-name" required maxlength="120"><label for="project-code">项目编码</label><input id="project-code" maxlength="40" pattern="[A-Za-z0-9][A-Za-z0-9_-]*"><button class="button primary" type="submit"><i data-lucide="folder-plus"></i><span>创建项目</span></button></form><div id="projects-list" class="operations-list"></div></section>
-            <section class="surface operations-section" aria-labelledby="members-title"><div class="surface-header"><div><p class="eyebrow">访问控制</p><h2 id="members-title">企业成员</h2></div><i class="section-icon" data-lucide="user-cog"></i></div><form id="member-form" class="inline-admin-form"><div class="auth-mode-wrap member-mode-wrap"><button class="auth-mode-button is-active" type="button" data-member-mode="invite">生成邀请</button><button class="auth-mode-button" type="button" data-member-mode="direct">直接开户</button></div><label for="member-username">用户名</label><input id="member-username" required minlength="3" autocomplete="off"><label for="member-role">角色</label><select id="member-role"><option value="REVIEWER">复核人</option><option value="VIEWER">只读成员</option><option value="ADMIN">管理员</option></select><div id="member-password-wrap" hidden><label for="member-password">初始密码</label><span class="password-field"><input id="member-password" type="password" minlength="12" autocomplete="new-password"><button class="password-toggle" type="button" data-password-toggle="member-password" aria-label="显示初始密码"><i data-lucide="eye"></i></button></span><small class="password-hint">直接告知对方用户名与密码即可登录；至少 12 位。</small></div><button class="button primary" type="submit"><i data-lucide="send"></i><span id="member-submit-label">生成邀请</span></button><span id="member-message" class="form-message invite-message" aria-live="polite"></span></form><div id="members-list" class="operations-list"></div></section>
-            <section class="surface operations-section" aria-labelledby="retention-title"><div class="surface-header"><div><p class="eyebrow">数据生命周期</p><h2 id="retention-title">保留策略</h2></div><i class="section-icon" data-lucide="archive"></i></div><form id="retention-form" class="inline-admin-form compact-admin-form"><label for="retention-days">归档保留天数</label><input id="retention-days" type="number" min="1" max="3650" required><button class="button secondary" type="submit"><i data-lucide="save"></i><span>保存策略</span></button></form><div id="retention-preview" class="operation-summary"></div><div class="panel-actions"><button class="button secondary danger-action" id="purge-retention" type="button"><i data-lucide="trash-2"></i><span>清理到期归档</span></button></div></section>
-            <section class="surface operations-section" aria-labelledby="backups-title"><div class="surface-header"><div><p class="eyebrow">恢复证据</p><h2 id="backups-title">备份</h2></div><button class="button secondary" id="create-backup" type="button"><i data-lucide="database-backup"></i><span>创建并验证</span></button></div><div id="backups-list" class="operations-list"></div></section>
-            <section class="surface operations-section" aria-labelledby="health-title"><div class="surface-header"><div><p class="eyebrow">运行状态</p><h2 id="health-title">服务健康</h2></div><i class="section-icon" data-lucide="activity"></i></div><div id="operations-health" class="operation-summary"></div></section>
-            <section class="surface operations-section" aria-labelledby="usage-title"><div class="surface-header"><div><p class="eyebrow">工作区治理</p><h2 id="usage-title">用量与隐私</h2></div><i class="section-icon" data-lucide="database-zap"></i></div><div id="workspace-usage" class="operation-summary"></div><div id="workspace-privacy" class="privacy-copy"></div></section>
-            <section class="surface operations-section" aria-labelledby="password-title"><div class="surface-header"><div><p class="eyebrow">账号安全</p><h2 id="password-title">修改密码</h2></div><i class="section-icon" data-lucide="key-round"></i></div><form id="password-form" class="inline-admin-form compact-admin-form"><input id="password-username" type="text" autocomplete="username" hidden><label for="current-password">当前密码</label><span class="password-field"><input id="current-password" type="password" autocomplete="current-password" required><button class="password-toggle" type="button" data-password-toggle="current-password" aria-label="显示当前密码"><i data-lucide="eye"></i></button></span><label for="new-password">新密码</label><span class="password-field"><input id="new-password" type="password" autocomplete="new-password" minlength="12" required><button class="password-toggle" type="button" data-password-toggle="new-password" aria-label="显示新密码"><i data-lucide="eye"></i></button></span><small class="password-hint">至少 12 个字符，建议包含字母、数字与符号。</small><button class="button secondary" type="submit"><i data-lucide="key-round"></i><span>更新密码</span></button><span id="password-message" class="form-message" aria-live="polite"></span></form></section>
-            <section class="surface operations-section" aria-labelledby="sessions-title"><div class="surface-header"><div><p class="eyebrow">账号安全</p><h2 id="sessions-title">登录设备</h2></div><i class="section-icon" data-lucide="monitor-smartphone"></i></div><div id="sessions-list" class="operation-summary"></div><div class="panel-actions"><button class="button secondary" id="revoke-other-sessions" type="button">踢出其他设备</button></div></section>
-            <section class="surface operations-section" aria-labelledby="mfa-title"><div class="surface-header"><div><p class="eyebrow">账号安全</p><h2 id="mfa-title">二次验证</h2></div><i class="section-icon" data-lucide="shield-check"></i></div><div id="mfa-status" class="operation-summary"></div><form id="mfa-form" class="inline-admin-form compact-admin-form"><label for="mfa-code">验证码或恢复码</label><input id="mfa-code" maxlength="64" autocomplete="one-time-code"><div class="panel-actions"><button class="button secondary" id="mfa-enroll" type="button">开始绑定</button><button class="button primary" type="submit">确认或关闭</button></div><pre id="mfa-secret" class="privacy-copy" hidden></pre><span id="mfa-message" class="form-message" aria-live="polite"></span></form></section>
-            <section class="surface operations-section" aria-labelledby="tokens-title"><div class="surface-header"><div><p class="eyebrow">集成访问</p><h2 id="tokens-title">API 令牌</h2></div><i class="section-icon" data-lucide="key"></i></div><form id="token-form" class="inline-admin-form compact-admin-form"><label for="token-name">令牌名称</label><input id="token-name" required maxlength="80"><button class="button primary" type="submit"><i data-lucide="plus"></i><span>创建令牌</span></button><span id="token-message" class="form-message" aria-live="polite"></span></form><div id="tokens-list" class="operations-list"></div></section>
+        <!-- ═══════════════════════════════════════════════════════════════
+             管理页 · 由 frontend/src/features/admin/ 驱动
+             按「后果」分四区，而不是把九个面板平铺成一个网格 ——
+             旧版里「停用成员」和「清理到期归档」长得一模一样还挨在一起。
+             ════════════════════════════════════════════════════════════ -->
+        <section id="admin-view" class="view stack" hidden>
+          <header class="page-head">
+            <div class="page-head__text">
+              <p class="page-head__eyebrow">企业管理</p>
+              <h1 class="title-page">成员与设置</h1>
+              <p class="lede">管理访问角色、数据保留、备份证据与运行健康。</p>
+            </div>
+          </header>
+
+          <!-- ── 工作区治理 ────────────────────────────────────────────── -->
+          <div class="admin-group">
+            <div class="admin-group__head">
+              <h2>工作区治理</h2>
+              <p class="hint">谁能进来，以及任务如何分组。改动对相关成员立即生效。</p>
+            </div>
+            <div class="admin-grid">
+              <section class="surface admin-grid__wide" aria-labelledby="members-title">
+                <div class="surface__head">
+                  <h3 class="title-section" id="members-title">企业成员</h3>
+                </div>
+
+                <form id="member-form" class="surface__body stack stack--tight" hidden>
+                  <div class="segmented" id="member-mode" role="group" aria-label="创建方式">
+                    <button class="segmented__option" type="button"
+                            data-member-mode="invite" aria-pressed="true">发送邀请链接</button>
+                    <button class="segmented__option" type="button"
+                            data-member-mode="direct" aria-pressed="false">直接开户</button>
+                  </div>
+                  <div class="filters__grid" style="padding: 0">
+                    <p class="field">
+                      <label for="member-username">用户名</label>
+                      <input class="input" id="member-username" name="username"
+                             required maxlength="80" autocomplete="off">
+                    </p>
+                    <p class="field">
+                      <label for="member-role">角色</label>
+                      <select class="select" id="member-role" name="role">
+                        <option value="REVIEWER">复核人</option>
+                        <option value="ADMIN">管理员</option>
+                        <option value="VIEWER">只读成员</option>
+                      </select>
+                    </p>
+                    <p class="field" id="member-password-wrap" hidden>
+                      <label for="member-password">初始密码</label>
+                      <input class="input" id="member-password" name="password"
+                             type="password" minlength="12" autocomplete="new-password">
+                      <span class="hint">至少 12 位。请通过可信渠道线下转交。</span>
+                    </p>
+                  </div>
+                  <div class="row">
+                    <button class="btn btn--primary btn--sm" type="submit">
+                      <i data-lucide="user-plus"></i><span id="member-submit-label">生成邀请链接</span>
+                    </button>
+                  </div>
+                  <!-- 邀请链接与重置链接都渲染到这里，走 ui/secret-reveal.js -->
+                  <div id="member-message" aria-live="polite"></div>
+                </form>
+
+                <div class="surface__body surface__body--flush" id="members-list"></div>
+              </section>
+
+              <section class="surface" aria-labelledby="projects-title">
+                <div class="surface__head">
+                  <h3 class="title-section" id="projects-title">投标项目</h3>
+                </div>
+                <form id="project-form" class="surface__body stack stack--tight" hidden>
+                  <div class="filters__grid" style="padding: 0">
+                    <p class="field">
+                      <label for="project-name">项目名称</label>
+                      <input class="input" id="project-name" name="name" required maxlength="120">
+                    </p>
+                    <p class="field">
+                      <label for="project-code">编号</label>
+                      <input class="input" id="project-code" name="code" maxlength="32"
+                             autocomplete="off" placeholder="留空自动生成">
+                    </p>
+                  </div>
+                  <div class="row">
+                    <button class="btn btn--secondary btn--sm" type="submit">
+                      <i data-lucide="folder-plus"></i><span>创建项目</span>
+                    </button>
+                  </div>
+                </form>
+                <div class="surface__body surface__body--flush" id="projects-list"></div>
+              </section>
+            </div>
+          </div>
+
+          <!-- ── 数据生命周期 ──────────────────────────────────────────── -->
+          <div class="admin-group">
+            <div class="admin-group__head">
+              <h2>数据生命周期</h2>
+              <p class="hint">这一区的操作会永久删除证据材料，且无法恢复。</p>
+            </div>
+            <div class="admin-grid">
+              <section class="surface" aria-labelledby="retention-title">
+                <div class="surface__head">
+                  <h3 class="title-section" id="retention-title">保留策略</h3>
+                </div>
+                <div class="surface__body stack stack--tight">
+                  <form id="retention-form" class="stack stack--tight" hidden>
+                    <p class="field">
+                      <label for="retention-days">归档保留天数</label>
+                      <input class="input" id="retention-days" name="retention_days"
+                             type="number" min="1" max="3650" required>
+                      <span class="hint">超过该天数的已归档任务会进入待清理范围。</span>
+                    </p>
+                    <div class="row">
+                      <button class="btn btn--secondary btn--sm" type="submit">
+                        <i data-lucide="save"></i><span>保存策略</span>
+                      </button>
+                    </div>
+                  </form>
+                  <div id="retention-preview"></div>
+                  <div class="row">
+                    <button class="btn btn--danger btn--sm" id="purge-retention" type="button" hidden>
+                      <i data-lucide="trash-2"></i><span>清理到期归档</span>
+                    </button>
+                  </div>
+                </div>
+              </section>
+
+              <section class="surface" aria-labelledby="backups-title">
+                <div class="surface__head">
+                  <h3 class="title-section" id="backups-title">备份</h3>
+                  <button class="btn btn--secondary btn--sm" id="create-backup" type="button" hidden>
+                    <i data-lucide="database-backup"></i><span>创建并验证</span>
+                  </button>
+                </div>
+                <div class="surface__body surface__body--flush" id="backups-list"></div>
+              </section>
+            </div>
+          </div>
+
+          <!-- ── 运行状态 ──────────────────────────────────────────────── -->
+          <div class="admin-group">
+            <div class="admin-group__head">
+              <h2>运行状态</h2>
+              <p class="hint">只读信息。用于排查扫描失败与备份缺口。</p>
+            </div>
+            <div class="admin-grid">
+              <section class="surface" aria-labelledby="health-title">
+                <div class="surface__head"><h3 class="title-section" id="health-title">服务健康</h3></div>
+                <div class="surface__body stack stack--tight" id="operations-health"></div>
+              </section>
+              <section class="surface" aria-labelledby="usage-title">
+                <div class="surface__head"><h3 class="title-section" id="usage-title">用量与隐私</h3></div>
+                <div class="surface__body stack stack--tight">
+                  <div id="workspace-usage"></div>
+                  <!-- 合规展示内容，原样呈现，不得删减或改写 -->
+                  <div id="workspace-privacy"></div>
+                </div>
+              </section>
+            </div>
+          </div>
+
+          <!-- ── 账号安全 ──────────────────────────────────────────────── -->
+          <div class="admin-group">
+            <div class="admin-group__head">
+              <h2>账号安全</h2>
+              <p class="hint">只影响你自己的账号，不影响其他成员。</p>
+            </div>
+            <div class="admin-grid">
+              <section class="surface" aria-labelledby="password-title">
+                <div class="surface__head"><h3 class="title-section" id="password-title">修改密码</h3></div>
+                <form id="password-form" class="surface__body stack stack--tight">
+                  <!-- 隐藏的用户名字段：密码管理器靠它把新密码存到正确的条目上 -->
+                  <input id="password-username" type="text" autocomplete="username" hidden>
+                  <p class="field">
+                    <label for="current-password">当前密码</label>
+                    <input class="input" id="current-password" name="current_password"
+                           type="password" required autocomplete="current-password">
+                  </p>
+                  <p class="field">
+                    <label for="new-password">新密码</label>
+                    <input class="input" id="new-password" name="new_password"
+                           type="password" required minlength="12" autocomplete="new-password">
+                    <span class="hint">至少 12 位。</span>
+                  </p>
+                  <div class="row">
+                    <button class="btn btn--secondary btn--sm" type="submit">
+                      <i data-lucide="key-round"></i><span>更新密码</span>
+                    </button>
+                  </div>
+                  <div id="password-message" aria-live="polite"></div>
+                </form>
+              </section>
+
+              <section class="surface" aria-labelledby="sessions-title">
+                <div class="surface__head"><h3 class="title-section" id="sessions-title">登录设备</h3></div>
+                <div class="surface__body surface__body--flush" id="sessions-list"></div>
+                <div class="surface__body">
+                  <button class="btn btn--danger btn--sm" id="revoke-other-sessions" type="button" hidden>
+                    <i data-lucide="log-out"></i><span>踢出全部其他设备</span>
+                  </button>
+                </div>
+              </section>
+
+              <section class="surface" aria-labelledby="mfa-title">
+                <div class="surface__head">
+                  <h3 class="title-section" id="mfa-title">二次验证</h3>
+                  <button class="btn btn--secondary btn--sm" id="mfa-enroll" type="button">
+                    <i data-lucide="shield-plus"></i><span>开始绑定</span>
+                  </button>
+                </div>
+                <div class="surface__body stack stack--tight">
+                  <div id="mfa-status"></div>
+                  <!-- 密钥与恢复码渲染到这里，走 ui/secret-reveal.js。
+                       必须是 div：<pre> 只允许短语内容 -->
+                  <div id="mfa-secret" hidden></div>
+                  <form id="mfa-form" class="stack stack--tight">
+                    <p class="field">
+                      <label for="mfa-code">验证码或恢复码</label>
+                      <input class="input" id="mfa-code" name="code"
+                             maxlength="64" autocomplete="one-time-code" inputmode="numeric">
+                    </p>
+                    <div class="row">
+                      <button class="btn btn--secondary btn--sm" type="submit">
+                        <span id="mfa-submit-label">确认并启用</span>
+                      </button>
+                    </div>
+                  </form>
+                  <div id="mfa-message" aria-live="polite"></div>
+                </div>
+              </section>
+
+              <section class="surface" aria-labelledby="tokens-title">
+                <div class="surface__head"><h3 class="title-section" id="tokens-title">API 令牌</h3></div>
+                <form id="token-form" class="surface__body stack stack--tight" hidden>
+                  <p class="field">
+                    <label for="token-name">令牌名称</label>
+                    <input class="input" id="token-name" name="name" required maxlength="80"
+                           placeholder="例如：归档同步脚本">
+                  </p>
+                  <div class="row">
+                    <button class="btn btn--secondary btn--sm" type="submit">
+                      <i data-lucide="key"></i><span>创建令牌</span>
+                    </button>
+                  </div>
+                  <!-- 明文令牌渲染到这里，只出现一次 -->
+                  <div id="token-message" aria-live="polite"></div>
+                </form>
+                <div class="surface__body surface__body--flush" id="tokens-list"></div>
+              </section>
+            </div>
           </div>
         </section>
 
@@ -121,29 +450,111 @@
           <section class="collaboration-grid" aria-label="协作与审计"><div class="surface collaboration-panel"><div class="surface-header"><div><p class="eyebrow">团队协作</p><h2>评论</h2></div></div><form id="comment-form" class="comment-form"><label for="comment-body" class="sr-only">添加评论</label><textarea id="comment-body" rows="3" placeholder="记录复核结论、待补材料和责任人"></textarea><button class="button primary" type="submit"><i data-lucide="message-square-plus"></i><span>添加评论</span></button></form><div id="comments-list" class="activity-list"></div></div><div class="surface collaboration-panel"><div class="surface-header"><div><p class="eyebrow">操作留痕</p><h2>审计记录</h2></div></div><div id="audit-events" class="activity-list"></div></div></section>
           <section class="surface remediation-panel" aria-labelledby="remediation-panel-title"><div class="surface-header"><div><p class="eyebrow">整改行动</p><h2 id="remediation-panel-title">证据缺口处理</h2></div><span class="guardrail">负责人和截止日期</span></div><form id="remediation-form" class="inline-admin-form remediation-form"><label for="remediation-title-input">行动</label><input id="remediation-title-input" required maxlength="300" placeholder="例如：补充营业执照原件"><label for="remediation-requirement">关联要求</label><select id="remediation-requirement"><option value="">不关联具体要求</option></select><label for="remediation-owner">负责人</label><select id="remediation-owner"></select><label for="remediation-due">截止日期</label><input id="remediation-due" type="date"><button class="button primary" type="submit"><i data-lucide="clipboard-plus"></i><span>创建整改项</span></button></form><div id="remediations-list" class="operations-list"></div></section>
           <section class="surface matrix-section" aria-labelledby="matrix-title">
-            <div class="surface-header matrix-heading"><div><p class="eyebrow">要求清单</p><h2 id="matrix-title">逐项核验</h2></div><span id="matrix-count" class="result-count"></span></div>
-            <div class="matrix-toolbar"><label class="search-control" for="requirement-search"><i data-lucide="search"></i><span class="sr-only">搜索要求项</span><input id="requirement-search" type="search" placeholder="搜索类别、标题或原文" autocomplete="off"></label><div id="matrix-filters" class="filter-group" aria-label="按类别筛选"></div><label class="toggle-row review-complete-toggle"><input id="accuracy-review-complete" type="checkbox"><span>完成全文漏项复核</span></label></div>
-            <div class="requirement-columns" aria-hidden="true"><span>要求项</span><span>来源</span><span>状态</span><span></span></div>
-            <div id="requirements" class="requirements"></div><nav id="matrix-pagination" class="pagination" aria-label="要求项分页"></nav>
+            <div class="matrix-head">
+              <div class="page-head__text">
+                <p class="page-head__eyebrow">要求清单</p>
+                <h2 class="title-section" id="matrix-title">逐项核验</h2>
+              </div>
+              <span class="matrix-head__count" id="matrix-count"></span>
+            </div>
+
+            <div class="toolbar">
+              <span class="toolbar__search">
+                <i data-lucide="search" aria-hidden="true"></i>
+                <input class="input" id="requirement-search" type="search"
+                       placeholder="搜索类别、标题或原文" autocomplete="off"
+                       aria-label="搜索要求项">
+              </span>
+              <span class="toolbar__spacer"></span>
+              <!-- 这个开关决定 /api/accuracy/metrics 的 review_population_complete，
+                   进而决定准确率能否对外引用。不能默认勾选，也不能移除。 -->
+              <label class="row">
+                <input id="accuracy-review-complete" type="checkbox">
+                <span class="hint">完成全文漏项复核</span>
+              </label>
+            </div>
+
+            <div class="tabs" id="matrix-filters" role="tablist" aria-label="按类别筛选"></div>
+
+            <div id="requirements" aria-label="要求项列表"></div>
+            <nav class="pager" id="matrix-pagination" aria-label="要求项分页"></nav>
           </section>
         </section>
 
-        <section id="decision-view" class="view" hidden>
-          <div class="breadcrumb-bar"><button class="text-button" id="back-detail" type="button"><i data-lucide="arrow-left"></i><span>扫描详情</span></button></div>
-          <header class="page-header"><div><p class="eyebrow">人工闸门</p><h1>记录投标决策</h1><p class="lede">基于当前证据确认继续、暂缓或停止，并留下可审计说明。</p></div></header>
-          <section class="decision-layout">
-            <div class="surface decision-panel"><form id="decision-form">
-              <fieldset><legend>当前决定</legend><div class="decision-options">
-                <label class="decision-option continue"><input type="radio" name="decision" value="CONTINUE"><span class="decision-symbol"><i data-lucide="circle-play"></i></span><span><strong>继续投入</strong><small>关键证据充分，进入后续投标流程</small></span></label>
-                <label class="decision-option hold"><input type="radio" name="decision" value="HOLD" checked><span class="decision-symbol"><i data-lucide="circle-pause"></i></span><span><strong>暂缓处理</strong><small>补齐证据或等待关键事项确认</small></span></label>
-                <label class="decision-option stop"><input type="radio" name="decision" value="STOP"><span class="decision-symbol"><i data-lucide="circle-stop"></i></span><span><strong>停止投入</strong><small>存在不可接受的资格或废标风险</small></span></label>
-              </div></fieldset>
-              <label for="decision-note">决策说明<span class="field-hint">记录依据、缺口和下一责任人</span></label><textarea id="decision-note" name="note" rows="5" placeholder="例如：等待法务核对资质原件，负责人：王经理"></textarea>
-              <label for="unresolved-items">未解决要求项<span class="field-hint">按 Ctrl / Cmd 可多选</span></label><select name="unresolved_requirement_ids" id="unresolved-items" multiple size="7"></select>
-              <div class="form-actions"><button class="button primary" type="submit"><i data-lucide="save"></i><span>保存决策</span></button><span id="decision-message" aria-live="polite"></span></div>
-            </form></div>
-            <aside class="surface decision-context"><p class="eyebrow">证据摘要</p><h2>决策前确认</h2><div id="decision-context-content"></div></aside>
-          </section>
+        <section id="decision-view" class="view stack" hidden>
+          <div class="row">
+            <button class="btn btn--ghost btn--sm" id="back-detail" type="button">
+              <i data-lucide="arrow-left"></i><span>返回扫描详情</span>
+            </button>
+          </div>
+
+          <header class="page-head">
+            <div class="page-head__text">
+              <p class="page-head__eyebrow">人工闸门</p>
+              <h1 class="title-page">记录投标决策</h1>
+              <p class="lede">基于当前证据确认继续、暂缓或停止，并留下可审计说明。</p>
+            </div>
+          </header>
+
+          <div class="split">
+            <section class="surface">
+              <form id="decision-form" class="surface__body stack">
+                <fieldset>
+                  <legend class="title-section">当前决定</legend>
+                  <div class="decision-options">
+                    <label class="decision-option" data-value="CONTINUE">
+                      <input type="radio" name="decision" value="CONTINUE">
+                      <strong>继续投标</strong>
+                      <small>关键证据充分，进入后续投标流程</small>
+                    </label>
+                    <label class="decision-option" data-value="HOLD">
+                      <input type="radio" name="decision" value="HOLD" checked>
+                      <strong>暂缓处理</strong>
+                      <small>补齐证据或等待关键事项确认</small>
+                    </label>
+                    <label class="decision-option" data-value="STOP">
+                      <input type="radio" name="decision" value="STOP">
+                      <strong>停止投标</strong>
+                      <small>存在不可接受的资格或废标风险</small>
+                    </label>
+                  </div>
+                </fieldset>
+
+                <p class="field">
+                  <label for="decision-note">决策说明</label>
+                  <span class="hint">记录依据、缺口和下一责任人。审计时这段文字是还原判断过程的唯一线索。</span>
+                  <textarea class="textarea" id="decision-note" name="note" rows="5"
+                            placeholder="例如：等待法务核对资质原件，负责人：王经理"></textarea>
+                </p>
+
+                <fieldset>
+                  <legend class="title-section" id="unresolved-label">未解决要求项</legend>
+                  <span class="hint">
+                    勾选表示「我知道这一项还没解决，并且决策已把它考虑在内」。
+                    <span id="unresolved-count" class="filters__count"></span>
+                  </span>
+                  <!-- 旧实现这里是 select multiple，点一下会清空之前所有选择，
+                       触屏几乎无法多选。改为复选框列表。 -->
+                  <div id="unresolved-items"></div>
+                </fieldset>
+
+                <div id="decision-message" aria-live="assertive"></div>
+
+                <div class="row">
+                  <button class="btn btn--primary" type="submit">
+                    <i data-lucide="save"></i><span>保存决策</span>
+                  </button>
+                </div>
+              </form>
+            </section>
+
+            <aside class="surface">
+              <div class="surface__head">
+                <h2 class="title-section">决策前确认</h2>
+              </div>
+              <div class="surface__body stack stack--tight" id="decision-context-content"></div>
+            </aside>
+          </div>
         </section>
       </main>
     </div>
@@ -168,11 +579,138 @@
     </form>
   </dialog>
   <dialog class="intake-dialog" id="missed-panel" aria-labelledby="missed-title"><div class="dialog-header"><div><p class="eyebrow">准确度反馈</p><h2 id="missed-title">报告漏检要求</h2><p>补充可独立复核的原文定位，避免只凭描述计算漏报。</p></div><button class="icon-button" id="close-missed" type="button" aria-label="关闭漏项窗口"><i data-lucide="x"></i></button></div><form id="missed-form"><label for="missed-category">类别</label><select id="missed-category"><option>QUALIFICATION</option><option>FATAL</option><option>DEADLINE</option><option>BOND</option><option>SIGNATURE</option><option>CREDENTIAL</option><option>SCORING</option></select><label for="missed-locator">原文定位<span class="field-hint">例如：第 12 页、段落 8、工作表“资质清单” · B17</span></label><input id="missed-locator" required maxlength="200"><label for="missed-quote">原文引用</label><textarea id="missed-quote" rows="3" required maxlength="2000"></textarea><label for="missed-note">补充说明</label><textarea id="missed-note" rows="3" maxlength="2000"></textarea><div class="form-actions dialog-actions"><button class="button secondary" id="cancel-missed" type="button">取消</button><button class="button primary" type="submit">提交反馈</button></div></form></dialog>
-  <dialog class="intake-dialog auth-dialog" id="auth-panel" aria-labelledby="auth-title"><div class="dialog-header"><div><p class="eyebrow">BidProof 安全入口</p><h2 id="auth-title">登录工作台</h2><p id="auth-subtitle"></p></div></div><form id="auth-form"><div id="auth-mode-wrap" class="auth-mode-wrap" hidden><button class="auth-mode-button" type="button" data-auth-mode="setup" hidden>开通企业</button><button class="auth-mode-button is-active" type="button" data-auth-mode="login">登录</button><button class="auth-mode-button" type="button" data-auth-mode="register">个人注册</button><button class="auth-mode-button" type="button" data-auth-mode="trial">试用加入</button></div><div id="setup-fields" hidden><label for="auth-workspace">企业名称</label><input id="auth-workspace" autocomplete="organization"><div id="bootstrap-token-wrap" hidden><label for="auth-bootstrap-token">初始化令牌</label><input id="auth-bootstrap-token" type="password" autocomplete="one-time-code"><small class="password-hint">由部署运维人员安全提供。</small></div></div><div id="trial-join-fields" hidden><label for="auth-join-code">试用加入码</label><input id="auth-join-code" type="password" autocomplete="one-time-code" minlength="4" maxlength="120"><small class="password-hint">向组织者索取加入码后自助开户，加入主企业空间，默认角色为复核人。</small></div><div id="register-fields" hidden><label for="auth-display-name">空间名称（可选）</label><input id="auth-display-name" autocomplete="organization" maxlength="120"><small class="password-hint">默认「个人空间 · 用户名」。个人工作区与企业空间隔离，注册后即可登录使用。</small></div><label for="auth-username">用户名</label><input id="auth-username" required autocomplete="username"><label for="auth-password">密码</label><span class="password-field"><input id="auth-password" required type="password" minlength="1" autocomplete="current-password"><button class="password-toggle" type="button" data-password-toggle="auth-password" aria-label="显示密码"><i data-lucide="eye"></i></button></span><div id="auth-confirm-wrap" hidden><label for="auth-password-confirm">确认密码</label><span class="password-field"><input id="auth-password-confirm" type="password" minlength="12" autocomplete="new-password"><button class="password-toggle" type="button" data-password-toggle="auth-password-confirm" aria-label="显示确认密码"><i data-lucide="eye"></i></button></span></div><small id="auth-password-hint" class="password-hint" hidden>至少 12 个字符，建议包含字母、数字与符号。</small><div id="mfa-fields" hidden><label for="auth-mfa-code">二次验证码</label><input id="auth-mfa-code" inputmode="numeric" autocomplete="one-time-code" maxlength="64"><small class="password-hint">打开身份验证器应用，或输入一次性恢复码。</small></div><div class="form-actions"><button class="button primary full-width" type="submit"><i data-lucide="log-in"></i><span id="auth-submit-label">登录</span></button></div><span id="auth-message" class="error-text" role="alert" aria-live="assertive"></span><p id="auth-help" class="auth-help">无法登录？请联系企业管理员生成一次性密码重置链接。</p><p class="auth-help"><a href="/privacy" target="_blank" rel="noopener">隐私与数据处理说明</a></p><p id="oidc-login-wrap" class="auth-help" hidden><a id="oidc-login" href="/api/auth/oidc/start">使用企业账号登录</a></p></form></dialog>
-  <dialog class="intake-dialog" id="confirm-panel" aria-labelledby="confirm-title"><div class="dialog-header"><div><p class="eyebrow">危险操作</p><h2 id="confirm-title">确认删除</h2><p id="confirm-body"></p></div></div><div class="confirm-body"><label for="confirm-word" id="confirm-hint">输入 DELETE 以确认</label><input id="confirm-word" autocomplete="off"><div class="form-actions dialog-actions"><button class="button secondary" id="confirm-cancel" type="button">取消</button><button class="button primary" id="confirm-submit" type="button">确认</button></div></div></dialog>
-  <dialog class="intake-dialog auth-dialog" id="account-action-panel" aria-labelledby="account-action-title"><div class="dialog-header"><div><p class="eyebrow">BidProof 账号安全</p><h2 id="account-action-title">设置账号密码</h2><p id="account-action-subtitle"></p></div></div><form id="account-action-form"><label for="account-action-username">用户名</label><input id="account-action-username" readonly autocomplete="username"><label for="account-action-password">新密码</label><span class="password-field"><input id="account-action-password" required type="password" minlength="12" autocomplete="new-password"><button class="password-toggle" type="button" data-password-toggle="account-action-password" aria-label="显示新密码"><i data-lucide="eye"></i></button></span><label for="account-action-confirm">确认密码</label><span class="password-field"><input id="account-action-confirm" required type="password" minlength="12" autocomplete="new-password"><button class="password-toggle" type="button" data-password-toggle="account-action-confirm" aria-label="显示确认密码"><i data-lucide="eye"></i></button></span><small class="password-hint">链接只能使用一次；完成后将直接进入企业工作台。</small><button class="button primary full-width" type="submit"><i data-lucide="key-round"></i><span id="account-action-submit">设置并进入</span></button><span id="account-action-message" class="error-text" role="alert" aria-live="assertive"></span></form></dialog>
+  <!-- ═══════════════════════════════════════════════════════════════════
+       鉴权对话框 · 由 frontend/src/features/auth/ 驱动
+       所有字段可见性、必填、文案、焦点都由 state.js 的 resolveAuthView()
+       计算，view.js 只负责刷 DOM。这里不要写任何内联条件。
+       ════════════════════════════════════════════════════════════════ -->
+  <dialog class="dialog auth-dialog" id="auth-panel" aria-labelledby="auth-title">
+    <form id="auth-form" class="auth-form">
+      <header class="auth-form__head">
+        <p class="page-head__eyebrow">BidProof 安全入口</p>
+        <h2 class="title-section" id="auth-title">登录工作台</h2>
+        <p class="hint" id="auth-subtitle"></p>
+      </header>
+
+      <div class="segmented" id="auth-mode-wrap" role="group" aria-label="进入方式" hidden>
+        <button class="segmented__option" type="button" data-auth-mode="setup" aria-pressed="false" hidden>开通企业</button>
+        <button class="segmented__option" type="button" data-auth-mode="login" aria-pressed="true">登录</button>
+        <button class="segmented__option" type="button" data-auth-mode="register" aria-pressed="false" hidden>个人注册</button>
+        <button class="segmented__option" type="button" data-auth-mode="trial" aria-pressed="false" hidden>试用加入</button>
+      </div>
+
+      <div id="setup-fields" class="stack stack--tight" hidden>
+        <p class="field">
+          <label for="auth-workspace">企业名称</label>
+          <input class="input" id="auth-workspace" autocomplete="organization" maxlength="120">
+        </p>
+        <p class="field" id="bootstrap-token-wrap" hidden>
+          <label for="auth-bootstrap-token">初始化令牌</label>
+          <input class="input" id="auth-bootstrap-token" type="password" autocomplete="one-time-code">
+          <span class="hint">由部署运维人员安全提供。</span>
+        </p>
+      </div>
+
+      <p class="field" id="trial-join-fields" hidden>
+        <label for="auth-join-code">试用加入码</label>
+        <input class="input" id="auth-join-code" type="password" autocomplete="one-time-code" minlength="4" maxlength="120">
+        <span class="hint">向组织者索取加入码后自助开户，加入主企业空间，默认角色为复核人。</span>
+      </p>
+
+      <p class="field" id="register-fields" hidden>
+        <label for="auth-display-name">空间名称（可选）</label>
+        <input class="input" id="auth-display-name" autocomplete="organization" maxlength="120">
+        <span class="hint">默认「个人空间 · 用户名」。个人工作区与企业空间隔离。</span>
+      </p>
+
+      <p class="field">
+        <label for="auth-username">用户名</label>
+        <input class="input" id="auth-username" required autocomplete="username">
+      </p>
+
+      <p class="field">
+        <label for="auth-password">密码</label>
+        <span class="password-field">
+          <input class="input" id="auth-password" required type="password" minlength="1" autocomplete="current-password">
+          <button class="icon-btn password-toggle" type="button" data-password-toggle="auth-password"
+                  aria-label="显示密码" aria-pressed="false"><i data-lucide="eye"></i></button>
+        </span>
+      </p>
+
+      <p class="field" id="auth-confirm-wrap" hidden>
+        <label for="auth-password-confirm">确认密码</label>
+        <span class="password-field">
+          <input class="input" id="auth-password-confirm" type="password" minlength="12" autocomplete="new-password">
+          <button class="icon-btn password-toggle" type="button" data-password-toggle="auth-password-confirm"
+                  aria-label="显示确认密码" aria-pressed="false"><i data-lucide="eye"></i></button>
+        </span>
+      </p>
+
+      <p class="hint" id="auth-password-hint" hidden>至少 12 个字符，建议包含字母、数字与符号。</p>
+
+      <div id="mfa-fields" class="stack stack--tight" hidden>
+        <p class="field">
+          <label for="auth-mfa-code">二次验证码</label>
+          <input class="input" id="auth-mfa-code" inputmode="numeric" autocomplete="one-time-code" maxlength="64">
+          <span class="hint">打开身份验证器应用，或输入一次性恢复码。</span>
+        </p>
+        <!-- 旧版没有这个出口：换了手机拿不到验证码时只能刷新整页 -->
+        <button class="btn btn--ghost btn--sm" type="button" id="auth-mfa-cancel">
+          <i data-lucide="arrow-left"></i><span>返回登录</span>
+        </button>
+      </div>
+
+      <button class="btn btn--primary" type="submit">
+        <i data-lucide="log-in"></i><span id="auth-submit-label">登录</span>
+      </button>
+
+      <div id="auth-message" role="alert" aria-live="assertive"></div>
+
+      <p class="hint" id="auth-help">无法登录？请联系企业管理员生成一次性密码重置链接。</p>
+      <p class="hint"><a href="/privacy" target="_blank" rel="noopener">隐私与数据处理说明</a></p>
+      <p class="hint" id="oidc-login-wrap" hidden>
+        <a id="oidc-login" href="/api/auth/oidc/start">使用企业账号登录</a>
+      </p>
+    </form>
+  </dialog>
+  <dialog class="dialog auth-dialog" id="account-action-panel" aria-labelledby="account-action-title">
+    <form id="account-action-form" class="auth-form">
+      <header class="auth-form__head">
+        <p class="page-head__eyebrow">BidProof 账号安全</p>
+        <h2 class="title-section" id="account-action-title">设置账号密码</h2>
+        <p class="hint" id="account-action-subtitle"></p>
+      </header>
+
+      <p class="field">
+        <label for="account-action-username">用户名</label>
+        <input class="input" id="account-action-username" readonly autocomplete="username">
+      </p>
+      <p class="field">
+        <label for="account-action-password">新密码</label>
+        <span class="password-field">
+          <input class="input" id="account-action-password" required type="password" minlength="12" autocomplete="new-password">
+          <button class="icon-btn password-toggle" type="button" data-password-toggle="account-action-password"
+                  aria-label="显示新密码" aria-pressed="false"><i data-lucide="eye"></i></button>
+        </span>
+      </p>
+      <p class="field">
+        <label for="account-action-confirm">确认密码</label>
+        <span class="password-field">
+          <input class="input" id="account-action-confirm" required type="password" minlength="12" autocomplete="new-password">
+          <button class="icon-btn password-toggle" type="button" data-password-toggle="account-action-confirm"
+                  aria-label="显示确认密码" aria-pressed="false"><i data-lucide="eye"></i></button>
+        </span>
+      </p>
+      <p class="hint">链接只能使用一次；完成后将直接进入工作台。</p>
+
+      <button class="btn btn--primary" type="submit">
+        <i data-lucide="key-round"></i><span id="account-action-submit">设置并进入</span>
+      </button>
+      <div id="account-action-message" role="alert" aria-live="assertive"></div>
+    </form>
+  </dialog>
   <div id="app-toast" class="toast" role="status" aria-live="polite" hidden></div>
   <script src="/static/vendor/lucide.min.js"></script>
-  <script src="/static/app.js?v=20260905-1"></script>
+  <script src="/static/app.js?v=20260914-opus5"></script>
 </body>
 </html>

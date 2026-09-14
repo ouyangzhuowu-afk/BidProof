@@ -1,8 +1,45 @@
-import { html, raw, setHtml } from './escape.js';
+// @ts-nocheck
+// Strangler leftover: keep checkJs off until remaining detail/intake logic moves to features/.
+import { html, mount as setHtml } from './ui/render.js';
 import { store } from './state.js';
-import { applyTheme, currentTheme, t, toggleTheme } from './i18n.js';
-
-applyTheme();
+import { t, formatDateTime } from './i18n/index.js';
+import * as theme from './core/theme.js';
+import { renderIcons } from './core/icons.js';
+import { setLoading } from './core/dom.js';
+// Confirm / secret-reveal callers moved to admin; app.js no longer imports them.
+import { setCurrentRole } from './core/permissions.js';
+import {
+  ApiError,
+  json,
+  request,
+  requestBlob,
+  saveBlob,
+  watchJob,
+  UPLOAD_TIMEOUT_MS,
+} from './core/http.js';
+import { configureAuth, startAuth } from './features/auth/index.js';
+import {
+  mountRunsView,
+  unmountRunsView,
+  reloadRuns,
+  reloadAccuracy,
+  ensureFilterOptions,
+} from './features/runs/list.js';
+import {
+  mountMatrix,
+  unmountMatrix,
+  resetMatrixView,
+  renderMatrixSection,
+} from './features/runs/matrix.js';
+import {
+  mountDecisionView,
+  unmountDecisionView,
+  render as renderDecision,
+} from './features/runs/decision.js';
+import { mountCollab, unmountCollab, loadCollab } from './features/runs/collab.js';
+import { mountJobsView, unmountJobsView, reloadJobs } from './features/jobs/index.js';
+import { mountAdminView, unmountAdminView, reloadAdmin } from './features/admin/index.js';
+import { watchScanJob } from './features/scan/watcher.js';
 
 const views = {
   home: document.querySelector('#home-view'),
@@ -11,10 +48,7 @@ const views = {
   detail: document.querySelector('#detail-view'),
   decision: document.querySelector('#decision-view'),
 };
-const PAGE_SIZE = 12;
 const missedDialog = document.querySelector('#missed-panel');
-const authDialog = document.querySelector('#auth-panel');
-const accountActionDialog = document.querySelector('#account-action-panel');
 
 const intakeDialog = document.querySelector('#intake-panel');
 const openIntakeButtons = ['#new-scan-button', '#top-new-scan', '#nav-new-scan'];
@@ -24,94 +58,34 @@ document.querySelector('#cancel-intake').addEventListener('click', closeIntake);
 document.querySelector('#nav-runs').addEventListener('click', showHome);
 document.querySelector('#nav-jobs').addEventListener('click', showJobs);
 document.querySelector('#nav-admin').addEventListener('click', showAdmin);
-document.querySelector('#refresh-jobs').addEventListener('click', loadJobs);
-document.querySelector('#member-form').addEventListener('submit', createMember);
-document.querySelectorAll('[data-member-mode]').forEach((button) => button.addEventListener('click', () => setMemberCreateMode(button.dataset.memberMode)));
-document.querySelectorAll('[data-auth-mode]').forEach((button) => button.addEventListener('click', () => setAuthMode(button.dataset.authMode)));
-document.querySelector('#project-form').addEventListener('submit', createProject);
-document.querySelector('#retention-form').addEventListener('submit', saveRetention);
-document.querySelector('#purge-retention').addEventListener('click', purgeRetention);
-document.querySelector('#create-backup').addEventListener('click', createBackup);
-document.querySelector('#password-form').addEventListener('submit', changePassword);
-document.querySelector('#mfa-form').addEventListener('submit', submitMfaSettings);
-document.querySelector('#mfa-enroll').addEventListener('click', enrollMfa);
-document.querySelector('#token-form').addEventListener('submit', createApiToken);
-document.querySelector('#tokens-list').addEventListener('click', (event) => {
-  const button = event.target.closest('[data-revoke-token]');
-  if (button) revokeApiToken(button.dataset.revokeToken);
-});
-document.querySelector('#sessions-list')?.addEventListener('click', (event) => {
-  const button = event.target.closest('[data-revoke-session]');
-  if (button) revokeSession(button.dataset.revokeSession);
-});
-document.querySelector('#revoke-other-sessions')?.addEventListener('click', revokeOtherSessions);
+document.querySelector('#refresh-jobs').addEventListener('click', () => { void reloadJobs(); });
 document.querySelectorAll('[data-mobile-view]').forEach((button) => button.addEventListener('click', () => {
   if (button.dataset.mobileView === 'home') showHome();
   if (button.dataset.mobileView === 'jobs') showJobs();
   if (button.dataset.mobileView === 'admin') showAdmin();
 }));
-document.querySelector('#refresh-runs').addEventListener('click', loadRuns);
-document.querySelector('#run-scope').addEventListener('change', (event) => { store.runScope = event.target.value; store.selectedRunIds.clear(); loadRuns(); });
-document.querySelector('#run-project-filter').addEventListener('change', (event) => { store.projectFilter = event.target.value; store.selectedRunIds.clear(); loadRuns(); });
-document.querySelector('#run-search').addEventListener('input', (event) => {
-  store.runSearch = event.target.value.trim();
-  clearTimeout(store.runSearchTimer);
-  store.runSearchTimer = setTimeout(() => { store.selectedRunIds.clear(); loadRuns(); }, 250);
-});
-document.querySelector('#run-tag-filter').addEventListener('change', (event) => { store.runTagFilter = event.target.value.trim(); store.selectedRunIds.clear(); loadRuns(); });
-document.querySelector('#run-assignee-filter').addEventListener('change', (event) => { store.runAssigneeFilter = event.target.value; store.selectedRunIds.clear(); loadRuns(); });
-document.querySelector('#run-reviewer-filter').addEventListener('change', (event) => { store.runReviewerFilter = event.target.value; store.selectedRunIds.clear(); loadRuns(); });
-document.querySelector('#run-favorite-filter').addEventListener('change', (event) => { store.runFavoriteOnly = event.target.checked; store.selectedRunIds.clear(); loadRuns(); });
-document.querySelector('#run-sort').addEventListener('change', (event) => { store.runSort = event.target.value; store.selectedRunIds.clear(); loadRuns(); });
-document.querySelector('#clear-run-filters').addEventListener('click', clearRunFilters);
-document.querySelector('#select-all-runs').addEventListener('change', toggleAllRuns);
-document.querySelector('#bulk-archive').addEventListener('click', () => bulkManage('ARCHIVE'));
-document.querySelector('#bulk-restore').addEventListener('click', () => bulkManage('RESTORE'));
-document.querySelector('#bulk-export').addEventListener('click', bulkExportReports);
-document.querySelector('#bulk-delete').addEventListener('click', () => bulkManage('DELETE'));
 document.querySelector('#export-html').addEventListener('click', () => exportCurrentRun('html'));
 document.querySelector('#export-csv').addEventListener('click', () => exportCurrentRun('csv'));
 document.querySelector('#export-pdf').addEventListener('click', () => exportCurrentRun('pdf'));
 document.querySelector('#rescan-run').addEventListener('click', () => { store.rescanParentId = store.currentRun?.run_id || null; openIntake(); });
 document.querySelector('#run-metadata-form').addEventListener('submit', saveRunMetadata);
-document.querySelector('#comment-form').addEventListener('submit', addComment);
-document.querySelector('#remediation-form').addEventListener('submit', createRemediation);
-document.querySelector('#remediations-list').addEventListener('change', (event) => {
-  const select = event.target.closest('[data-remediation-status]');
-  if (select) updateRemediation(select.dataset.remediationStatus, { status: select.value }, select);
-});
 document.querySelector('#report-missed').addEventListener('click', () => missedDialog.showModal());
 document.querySelector('#close-missed').addEventListener('click', () => missedDialog.close());
 document.querySelector('#cancel-missed').addEventListener('click', () => missedDialog.close());
 document.querySelector('#missed-form').addEventListener('submit', submitMissedFeedback);
-document.querySelector('#auth-form').addEventListener('submit', submitAuth);
-document.querySelector('#account-action-form').addEventListener('submit', submitAccountAction);
-document.querySelector('#logout-button').addEventListener('click', logout);
 document.querySelector('#theme-toggle')?.addEventListener('click', () => {
-  toggleTheme();
-  const button = document.querySelector('#theme-toggle span');
-  if (button) button.textContent = currentTheme() === 'dark' ? t('themeLight') : t('themeDark');
-  refreshIcons();
+  theme.cycle();
+  const label = document.querySelector('#theme-toggle span');
+  if (label) label.textContent = theme.resolved() === 'dark' ? t('nav.theme.toLight') : t('nav.theme.toDark');
 });
-document.querySelectorAll('[data-password-toggle]').forEach((button) => button.addEventListener('click', togglePasswordVisibility));
 document.querySelector('#back-home').addEventListener('click', showHome);
 document.querySelector('#open-decision').addEventListener('click', showDecision);
 document.querySelector('#aside-decision').addEventListener('click', showDecision);
 document.querySelector('#back-detail').addEventListener('click', showDetail);
 document.querySelector('#scan-form').addEventListener('submit', submitScan);
-document.querySelector('#decision-form').addEventListener('submit', submitDecision);
-document.querySelector('#requirements').addEventListener('click', handleRequirementAction);
-document.querySelector('#risk-list').addEventListener('click', handleRequirementAction);
-document.querySelector('#requirement-search').addEventListener('input', (event) => {
-  store.searchTerm = event.target.value.trim().toLocaleLowerCase('zh-CN');
-  store.matrixPage = 1;
-  renderMatrix();
-});
 intakeDialog.addEventListener('click', (event) => {
   if (event.target === intakeDialog) closeIntake();
 });
-authDialog.addEventListener('cancel', (event) => event.preventDefault());
-accountActionDialog.addEventListener('cancel', (event) => event.preventDefault());
 
 document.querySelectorAll('.drop-zone').forEach((zone) => {
   zone.addEventListener('dragover', (e) => { e.preventDefault(); zone.classList.add('drag-over'); });
@@ -128,186 +102,29 @@ refreshIcons();
 initializeApp();
 
 async function initializeApp() {
-  try {
-    if (await initializeAccountAction()) return;
-    const status = await request('/api/auth/status');
-    store.authStatus = status;
-    const mfaToken = new URLSearchParams(window.location.search).get('mfa_token');
-    if (mfaToken && !status.authenticated) {
-      store.pendingMfaToken = mfaToken;
-      return showAuth(false);
-    }
-    if (!status.authenticated && !status.setup_required) return showAuth(false);
-    if (status.setup_required) return showAuth(true, status.bootstrap_locked ? '生产环境尚未配置初始化令牌，请联系运维人员。' : '');
-    store.currentUser = status.user;
-    renderCurrentUser();
-    await loadProjects();
-    loadRuns();
-    navigateFromHash();
-  } catch (error) { showAuth(false, error.message); }
-}
-
-function showAuth(setup, message = '') {
-  store.authSetupRequired = setup;
-  store.authMode = setup ? 'setup' : 'login';
-  const personalEnabled = Boolean(store.authStatus?.personal_signup_enabled);
-  const trialEnabled = !setup && Boolean(store.authStatus?.trial_join_enabled);
-  const showModes = personalEnabled || trialEnabled || setup;
-  document.querySelector('#auth-mode-wrap').hidden = !showModes;
-  document.querySelector('[data-auth-mode="setup"]').hidden = !setup;
-  document.querySelector('[data-auth-mode="login"]').hidden = setup;
-  document.querySelector('[data-auth-mode="register"]').hidden = !personalEnabled;
-  document.querySelector('[data-auth-mode="trial"]').hidden = !trialEnabled;
-  applyAuthMode(message);
-  const lockedSetup = Boolean(store.authStatus?.bootstrap_locked) && store.authMode === 'setup';
-  document.querySelector('#auth-form button[type="submit"]').disabled = lockedSetup;
-  if (!authDialog.open) authDialog.showModal();
-  setTimeout(() => {
-    const focusId = store.pendingMfaToken ? '#auth-mfa-code' : (store.authMode === 'setup' ? '#auth-workspace' : (store.authMode === 'trial' ? '#auth-join-code' : '#auth-username'));
-    document.querySelector(focusId)?.focus();
-  }, 0);
-  refreshIcons();
-}
-
-function setAuthMode(mode) {
-  const personalEnabled = Boolean(store.authStatus?.personal_signup_enabled);
-  const trialEnabled = Boolean(store.authStatus?.trial_join_enabled) && !store.authSetupRequired;
-  if (mode === 'register' && !personalEnabled) mode = store.authSetupRequired ? 'setup' : 'login';
-  if (mode === 'trial' && !trialEnabled) mode = 'login';
-  if (mode === 'setup' && !store.authSetupRequired) mode = 'login';
-  if (mode === 'login' && store.authSetupRequired) mode = 'setup';
-  store.authMode = mode;
-  applyAuthMode('');
-  const focusId = mode === 'setup' ? '#auth-workspace' : (mode === 'trial' ? '#auth-join-code' : '#auth-username');
-  setTimeout(() => document.querySelector(focusId)?.focus(), 0);
-  refreshIcons();
-}
-
-function applyAuthMode(message = '') {
-  const setup = store.authMode === 'setup';
-  const trial = store.authMode === 'trial';
-  const register = store.authMode === 'register';
-  document.querySelectorAll('[data-auth-mode]').forEach((button) => {
-    button.classList.toggle('is-active', button.dataset.authMode === store.authMode);
-  });
-  document.querySelector('#auth-title').textContent = setup
-    ? '初始化企业管理员'
-    : (trial ? '试用加入企业空间' : (register ? '注册个人账号' : '登录工作台'));
-  document.querySelector('#auth-subtitle').textContent = setup
-    ? '使用运维令牌创建首个企业空间和所有者账号。'
-    : (trial
-      ? '输入组织者提供的试用加入码，自助创建复核人账号。'
-      : (register
-        ? '自行创建个人工作区，与企业空间隔离，注册后即可登录使用。'
-        : '使用个人或企业账号进入任务与证据数据。'));
-  document.querySelector('#setup-fields').hidden = !setup;
-  document.querySelector('#auth-workspace').required = setup;
-  const tokenRequired = setup && Boolean(store.authStatus?.bootstrap_token_required);
-  document.querySelector('#bootstrap-token-wrap').hidden = !tokenRequired;
-  document.querySelector('#auth-bootstrap-token').required = tokenRequired;
-  document.querySelector('#trial-join-fields').hidden = !trial;
-  document.querySelector('#auth-join-code').required = trial;
-  document.querySelector('#register-fields').hidden = !register;
-  const needsConfirm = setup || trial || register;
-  document.querySelector('#auth-confirm-wrap').hidden = !needsConfirm;
-  document.querySelector('#auth-password-confirm').required = needsConfirm;
-  document.querySelector('#auth-password').minLength = needsConfirm ? 12 : 1;
-  document.querySelector('#auth-password').autocomplete = needsConfirm ? 'new-password' : 'current-password';
-  document.querySelector('#auth-password-hint').hidden = !needsConfirm;
-  document.querySelector('#auth-help').hidden = setup;
-  document.querySelector('#auth-help').textContent = register
-    ? '已有账号？切换到「登录」。企业成员也可由管理员邀请加入。'
-    : (trial
-      ? '已有账号？切换到「登录」。忘记密码仍需管理员重置。'
-      : (store.authStatus?.personal_signup_enabled
-        ? '没有账号？切换到「个人注册」。企业成员也可使用试用加入码或联系管理员。'
-        : (store.authStatus?.trial_join_enabled
-          ? '没有账号？切换到「试用加入」。无法登录可联系管理员重置密码。'
-          : '无法登录？请联系企业管理员生成一次性密码重置链接。')));
-  document.querySelector('#auth-submit-label').textContent = store.pendingMfaToken
-    ? '完成验证'
-    : (setup ? '创建并进入' : (trial ? '加入并进入' : (register ? '注册并进入' : '登录')));
-  document.querySelector('#mfa-fields').hidden = !store.pendingMfaToken;
-  document.querySelector('#auth-mfa-code').required = Boolean(store.pendingMfaToken);
-  document.querySelector('#auth-username').disabled = Boolean(store.pendingMfaToken);
-  document.querySelector('#auth-password').disabled = Boolean(store.pendingMfaToken);
-  document.querySelector('#oidc-login-wrap').hidden = setup || trial || register || Boolean(store.pendingMfaToken) || !store.authStatus?.oidc_enabled;
-  document.querySelector('#auth-message').textContent = message || (store.pendingMfaToken ? '请输入身份验证器中的 6 位验证码。' : '');
-  const lockedSetup = Boolean(store.authStatus?.bootstrap_locked) && store.authMode === 'setup';
-  document.querySelector('#auth-form button[type="submit"]').disabled = lockedSetup || Boolean(store.pendingMfaToken);
-}
-
-async function submitAuth(event) {
-  event.preventDefault();
-  const form = event.currentTarget;
-  const button = form.querySelector('button[type="submit"]');
-  const loadingLabel = store.pendingMfaToken
-    ? '正在验证'
-    : (store.authMode === 'setup'
-      ? '正在初始化'
-      : (store.authMode === 'trial'
-        ? '正在加入'
-        : (store.authMode === 'register' ? '正在注册' : '正在登录')));
-  setButtonLoading(button, true, loadingLabel);
-  try {
-    if (store.pendingMfaToken) {
-      store.currentUser = await request('/api/auth/mfa/verify', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ code: document.querySelector('#auth-mfa-code').value, mfa_token: store.pendingMfaToken }),
-      });
-      store.pendingMfaToken = '';
-      authDialog.close();
-      form.reset();
+  // 鉴权全部收进 features/auth/：四种模式、MFA 两步、以及从 URL 进入的
+  // 激活 / 重置，都由那边的状态机决定。这里只提供「登录之后做什么」。
+  configureAuth({
+    onAuthenticated: async (user) => {
+      store.currentUser = user;
       renderCurrentUser();
       await loadProjects();
-      await loadRuns();
-      return;
-    }
-    const payload = { username: document.querySelector('#auth-username').value.trim(), password: document.querySelector('#auth-password').value };
-    let endpoint = '/api/auth/login';
-    if (store.authMode === 'setup') {
-      if (payload.password !== document.querySelector('#auth-password-confirm').value) throw new Error('两次输入的密码不一致');
-      payload.workspace_name = document.querySelector('#auth-workspace').value.trim();
-      payload.bootstrap_token = document.querySelector('#auth-bootstrap-token').value || null;
-      endpoint = '/api/auth/bootstrap';
-    } else if (store.authMode === 'trial') {
-      if (payload.password !== document.querySelector('#auth-password-confirm').value) throw new Error('两次输入的密码不一致');
-      payload.join_code = document.querySelector('#auth-join-code').value;
-      endpoint = '/api/auth/trial-join';
-    } else if (store.authMode === 'register') {
-      if (payload.password !== document.querySelector('#auth-password-confirm').value) throw new Error('两次输入的密码不一致');
-      const displayName = document.querySelector('#auth-display-name').value.trim();
-      if (displayName) payload.display_name = displayName;
-      endpoint = '/api/auth/register';
-    }
-    const result = await request(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-    if (result.mfa_required) {
-      store.pendingMfaToken = result.mfa_token;
-      applyAuthMode('请输入身份验证器中的 6 位验证码。');
-      document.querySelector('#auth-mfa-code').focus();
-      return;
-    }
-    store.currentUser = result;
-    authDialog.close();
-    form.reset();
-    renderCurrentUser();
-    await loadProjects();
-    await loadRuns();
-  } catch (error) {
-    document.querySelector('#auth-message').textContent = error.message;
-    const confirmMismatch = String(error.message).includes('两次');
-    document.querySelector(store.pendingMfaToken ? '#auth-mfa-code' : (store.authMode === 'trial' ? '#auth-join-code' : (confirmMismatch ? '#auth-password-confirm' : '#auth-password'))).focus();
-  }
-  finally { setButtonLoading(button, false); }
+      await reloadRuns();
+      navigateFromHash();
+    },
+  });
+  await startAuth();
 }
 
-async function logout() {
-  await request('/api/auth/logout', { method: 'POST' });
-  window.location.replace('/app');
-}
+
+
+
+
 
 function renderCurrentUser() {
+  // 权限判定统一走 core/permissions.js。之所以在这里推而不是让它订阅 store：
+  // 目前 app.js 用 state.js、features/* 用 core/store.js，两套并存。
+  setCurrentRole(store.currentUser?.role);
   const container = document.querySelector('#current-user');
   container.hidden = !store.currentUser;
   document.querySelector('#logout-button').hidden = !store.currentUser;
@@ -316,68 +133,12 @@ function renderCurrentUser() {
   document.querySelector('#password-username').value = store.currentUser?.username || '';
 }
 
-function togglePasswordVisibility(event) {
-  const button = event.currentTarget;
-  const input = document.querySelector(`#${CSS.escape(button.dataset.passwordToggle)}`);
-  const showing = input.type === 'text';
-  input.type = showing ? 'password' : 'text';
-  button.setAttribute('aria-label', showing ? '显示密码' : '隐藏密码');
-setHtml(button, html`<i data-lucide="${showing ? 'eye' : 'eye-off'}"></i>`);
-  refreshIcons();
-}
 
-async function initializeAccountAction() {
-  const params = new URLSearchParams(window.location.search);
-  const token = params.get('token');
-  const requestedAction = params.get('auth_action');
-  if (!token || !['activate', 'reset'].includes(requestedAction)) return false;
-  try {
-    const inspected = await request(`/api/auth/action?token=${encodeURIComponent(token)}`);
-    store.accountAction = { token, action: inspected.action };
-    document.querySelector('#account-action-title').textContent = inspected.action === 'INVITE' ? '激活企业账号' : '重置账号密码';
-    document.querySelector('#account-action-subtitle').textContent = inspected.action === 'INVITE' ? `接受邀请并设置 ${roleLabel(inspected.role)} 账号密码。` : '设置新密码后，旧会话将全部失效。';
-    document.querySelector('#account-action-username').value = inspected.username;
-    document.querySelector('#account-action-submit').textContent = inspected.action === 'INVITE' ? '激活并进入' : '重置并进入';
-  } catch (error) {
-    store.accountAction = null;
-    document.querySelector('#account-action-message').textContent = error.message;
-    document.querySelector('#account-action-form button[type="submit"]').disabled = true;
-  }
-  accountActionDialog.showModal();
-  refreshIcons();
-  return true;
-}
 
-async function submitAccountAction(event) {
-  event.preventDefault();
-  if (!store.accountAction) return;
-  const password = document.querySelector('#account-action-password').value;
-  const confirm = document.querySelector('#account-action-confirm').value;
-  const message = document.querySelector('#account-action-message');
-  if (password !== confirm) {
-    message.textContent = '两次输入的密码不一致';
-    document.querySelector('#account-action-confirm').focus();
-    return;
-  }
-  const button = event.currentTarget.querySelector('button[type="submit"]');
-  setButtonLoading(button, true, '正在设置');
-  try {
-    const endpoint = store.accountAction.action === 'INVITE' ? '/api/auth/activate' : '/api/auth/reset-password';
-    store.currentUser = await request(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ token: store.accountAction.token, password }) });
-    window.history.replaceState({}, '', '/app');
-    accountActionDialog.close();
-    renderCurrentUser();
-    await loadProjects();
-    await loadRuns();
-  } catch (error) {
-    message.textContent = error.message;
-  } finally { setButtonLoading(button, false); }
-}
 
 async function startSampleScan() {
   try {
-    const response = await fetch('/api/sample-tender', withCsrf());
-    if (!response.ok) throw new Error('样例文件不可用');
+    const response = await requestBlob('/api/sample-tender');
     const blob = await response.blob();
     const file = new File([blob], 'sample-tender.pdf', { type: 'application/pdf' });
     const input = document.querySelector('#tender-file');
@@ -407,103 +168,10 @@ function closeIntake() {
   document.querySelector('#message').textContent = '';
 }
 
-async function loadRuns() {
-  const list = document.querySelector('#runs-list');
-  const refresh = document.querySelector('#refresh-runs');
-setHtml(list, html`<div class="run-skeleton"></div><div class="run-skeleton"></div><div class="run-skeleton"></div>`);
-  refresh.disabled = true;
-  try {
-    await loadTaskFilterOptions();
-    const params = new URLSearchParams({ include_archived: String(store.runScope !== 'ACTIVE'), sort: store.runSort });
-    if (store.projectFilter) params.set('project_id', store.projectFilter);
-    if (store.runSearch) params.set('search', store.runSearch);
-    if (store.runTagFilter) params.set('tag', store.runTagFilter);
-    if (store.runAssigneeFilter) params.set('assignee_id', store.runAssigneeFilter);
-    if (store.runReviewerFilter) params.set('reviewer_id', store.runReviewerFilter);
-    if (store.runFavoriteOnly) params.set('favorite', 'true');
-    const runs = await request(`/api/runs?${params.toString()}`);
-    const visibleRuns = store.runScope === 'ARCHIVED' ? runs.filter((run) => run.archived_at) : store.runScope === 'ACTIVE' ? runs.filter((run) => !run.archived_at) : runs;
-    renderOverview(visibleRuns);
-    loadAccuracySummary();
-    loadNotifications();
-    store.selectedRunIds.forEach((id) => { if (!visibleRuns.some((run) => run.run_id === id)) store.selectedRunIds.delete(id); });
-    updateBulkControls(visibleRuns);
-    if (!visibleRuns.length) {
-      const filtered = store.runSearch || store.runTagFilter || store.runAssigneeFilter || store.runReviewerFilter || store.runFavoriteOnly || store.projectFilter;
-setHtml(list, html`<div class="empty-state onboarding-empty"><span>${filtered ? t('emptyFiltered') : t('emptyRuns')}</span>${filtered ? '' : html`<button class="button primary" id="empty-start-scan" type="button"><i data-lucide="file-plus-2"></i><span>${t('trySample')}</span></button>`}</div>`);
-      document.querySelector('#empty-start-scan')?.addEventListener('click', startSampleScan);
-      return;
-    }
-    list.replaceChildren(...visibleRuns.map(renderRunRow));
-    updateBulkControls(visibleRuns);
-  } catch (error) {
-setHtml(list, html`<div class="empty-state error-text">${error.message}，请检查本地服务后重试。</div>`);
-    renderOverview([]);
-  } finally {
-    refresh.disabled = false;
-    refreshIcons();
-  }
-}
 
-async function loadTaskFilterOptions() {
-  if (!store.membersCache.length) store.membersCache = (await request('/api/members')).members;
-  const options = memberOptionList('全部负责人');
-  const assignee = document.querySelector('#run-assignee-filter');
-  const reviewer = document.querySelector('#run-reviewer-filter');
-  setHtml(assignee, options);
-  setHtml(reviewer, memberOptionList('全部复核人'));
-  assignee.value = store.runAssigneeFilter;
-  reviewer.value = store.runReviewerFilter;
-}
 
-function clearRunFilters() {
-  store.runSearch = '';
-  store.runTagFilter = '';
-  store.runAssigneeFilter = '';
-  store.runReviewerFilter = '';
-  store.runFavoriteOnly = false;
-  store.runSort = 'updated_desc';
-  document.querySelector('#run-search').value = '';
-  document.querySelector('#run-tag-filter').value = '';
-  document.querySelector('#run-assignee-filter').value = '';
-  document.querySelector('#run-reviewer-filter').value = '';
-  document.querySelector('#run-favorite-filter').checked = false;
-  document.querySelector('#run-sort').value = store.runSort;
-  store.selectedRunIds.clear();
-  loadRuns();
-}
 
-async function loadNotifications() {
-  const target = document.querySelector('#notifications-list');
-  try {
-    const payload = await request('/api/notifications');
-    if (!payload.notifications.length) {
-setHtml(target, html`<div class="empty-state success-text">暂无需要立即处理的提醒。</div>`);
-      return;
-    }
-setHtml(target, payload.notifications.slice(0, 6).map((item) => html`<article class="notification-item ${item.severity}"><span class="notification-icon"><i data-lucide="${item.type === 'SCAN_JOB_FAILED' ? 'triangle-alert' : 'calendar-clock'}"></i></span><span><strong>${item.title}</strong><small>${item.message}${item.run_id ? ` · 任务 ${item.run_id.slice(0, 12)}` : ''}</small></span></article>`));
-    if (payload.count > 6) target.insertAdjacentHTML('beforeend', `<small class="notification-more">还有 ${payload.count - 6} 条提醒，请打开对应任务或作业查看。</small>`);
-    refreshIcons();
-  } catch (error) {setHtml(target, html`<div class="empty-state error-text">${error.message}，提醒加载失败。</div>`); }
-}
 
-function renderOverview(runs) {
-  const totalBlockers = runs.reduce((sum, run) => sum + Number(run.blocker_count || 0), 0);
-  const totalUnresolved = runs.reduce((sum, run) => sum + Number(run.unresolved_count || 0), 0);
-  const decided = runs.filter((run) => run.decision?.decision).length;
-  const items = [
-    ['扫描任务', runs.length, '累计任务', 'files', 'neutral'],
-    ['高风险项', totalBlockers, '优先核对资格与废标项', 'shield-alert', 'danger'],
-    ['待复核项', totalUnresolved, '尚未形成确定证据链', 'circle-help', 'warning'],
-    ['已做决策', decided, `覆盖 ${runs.length ? Math.round(decided / runs.length * 100) : 0}% 任务`, 'clipboard-check', 'success'],
-  ];
-  document.querySelector('#overview-grid').replaceChildren(...items.map(([label, value, note, icon, tone]) => {
-    const card = document.createElement('div');
-    card.className = `overview-card ${tone}`;
-setHtml(card, html`<div class="overview-top"><span>${label}</span><span class="overview-icon"><i data-lucide="${icon}"></i></span></div><strong>${value}</strong><small>${note}</small>`);
-    return card;
-  }));
-}
 
 async function submitScan(event) {
   event.preventDefault();
@@ -516,23 +184,29 @@ async function submitScan(event) {
     const formData = new FormData(form);
     if (!document.querySelector('#evidence-files').files.length) formData.delete('evidence');
     if (store.rescanParentId) {
-      store.currentRun = await request(`/api/runs/${encodeURIComponent(store.rescanParentId)}/rescan`, { method: 'POST', body: formData });
+      store.currentRun = await request(`/api/runs/${encodeURIComponent(store.rescanParentId)}/rescan`, { method: 'POST', body: formData, timeoutMs: UPLOAD_TIMEOUT_MS });
     } else {
-      const job = await request('/api/jobs', { method: 'POST', body: formData });
+      // 【行为改变】提交后立刻放行，不再用全屏遮罩把应用锁住 30 分钟。
+      // 扫描在后台跑，进度显示在右下角停靠区，完成时提示并可跳转。
+      // 详见 features/scan/watcher.js 顶部说明。
+      const job = await request('/api/jobs', { method: 'POST', body: formData, timeoutMs: UPLOAD_TIMEOUT_MS });
+      const filename = document.querySelector('#tender-file')?.files?.[0]?.name || '招标文件';
       form.reset();
       closeIntake();
-      showToast('扫描任务已进入后台队列。');
-      store.currentRun = await waitForJob(job.job_id);
+      store.rescanParentId = null;
+      watchScanJob(job.job_id, filename, (runId) => { void openRun(runId); });
+      showToast('扫描已进入后台队列，完成后会通知你。');
+      await reloadRuns();
+      return;
     }
+    // 重扫是同步契约，直接拿到 Run。
     form.reset();
     closeIntake();
     store.rescanParentId = null;
-    store.activeCategory = 'ALL';
-    store.searchTerm = '';
-    store.matrixPage = 1;
+    resetMatrixView();
     showDetail();
-    await loadRuns();
-    showToast('扫描完成，已生成可复核证据链。');
+    await reloadRuns();
+    showToast('重新扫描完成，已生成新版本证据链。');
   } catch (error) {
     message.textContent = `${error.message}。请检查文件格式后重试。`;
   } finally {
@@ -540,155 +214,13 @@ async function submitScan(event) {
   }
 }
 
-async function waitForJob(jobId) {
-  const overlay = document.getElementById('loading-overlay');
-  const message = document.querySelector('#message');
-  if (overlay) overlay.hidden = false;
-  try {
-    return await new Promise((resolve, reject) => {
-      const source = new EventSource(`/api/jobs/${encodeURIComponent(jobId)}/events`);
-      const timer = setTimeout(() => {
-        source.close();
-        reject(new Error('扫描仍在后台执行。可离开本页，完成后在任务列表查看；刷新不会重复提交。'));
-      }, 30 * 60 * 1000);
-      source.onmessage = async (event) => {
-        let job;
-        try { job = JSON.parse(event.data); } catch { return; }
-        const pct = job.progress_total ? Math.round((job.progress_current || 0) * 100 / job.progress_total) : 0;
-        if (message) message.textContent = `${job.progress_message || '正在扫描'}（${pct}%）`;
-        if (job.status === 'COMPLETED' && job.run_id) {
-          clearTimeout(timer);
-          source.close();
-          resolve(request(`/api/runs/${encodeURIComponent(job.run_id)}`));
-        } else if (['FAILED', 'CANCELLED', 'DEAD'].includes(job.status)) {
-          clearTimeout(timer);
-          source.close();
-          reject(new Error(job.progress_message || '后台扫描失败，可在作业记录中重试'));
-        }
-      };
-      source.onerror = () => {
-        clearTimeout(timer);
-        source.close();
-        pollJobUntilDone(jobId).then(resolve, reject);
-      };
-    });
-  } finally {
-    if (overlay) overlay.hidden = true;
-  }
-}
 
-async function pollJobUntilDone(jobId) {
-  let delay = 750;
-  for (let attempt = 0; attempt < 240; attempt += 1) {
-    const job = await request(`/api/jobs/${encodeURIComponent(jobId)}`);
-    const message = document.querySelector('#message');
-    const pct = job.progress_total ? Math.round((job.progress_current || 0) * 100 / job.progress_total) : 0;
-    if (message) message.textContent = `${job.progress_message || '正在扫描'}（${pct}%）`;
-    if (job.status === 'COMPLETED' && job.run_id) return request(`/api/runs/${encodeURIComponent(job.run_id)}`);
-    if (['FAILED', 'CANCELLED', 'DEAD'].includes(job.status)) throw new Error(job.progress_message || '后台扫描失败，可在作业记录中重试');
-    await new Promise((resolve) => setTimeout(resolve, delay));
-    delay = Math.min(5000, Math.round(delay * 1.4));
-  }
-  throw new Error('扫描仍在后台执行。可离开本页，完成后在任务列表查看；刷新不会重复提交。');
-}
 
-function confirmDanger({ title, body, confirmWord = 'DELETE' }) {
-  return new Promise((resolve) => {
-    const dialog = document.getElementById('confirm-panel');
-    document.getElementById('confirm-title').textContent = title;
-    document.getElementById('confirm-body').textContent = body;
-    const input = document.getElementById('confirm-word');
-    const hint = document.getElementById('confirm-hint');
-    hint.textContent = `输入 ${confirmWord} 以确认`;
-    input.value = '';
-    const submit = document.getElementById('confirm-submit');
-    const cancel = document.getElementById('confirm-cancel');
-    const done = (ok) => {
-      submit.removeEventListener('click', onSubmit);
-      cancel.removeEventListener('click', onCancel);
-      dialog.close();
-      resolve(ok);
-    };
-    const onSubmit = () => done(input.value === confirmWord);
-    const onCancel = () => done(false);
-    submit.addEventListener('click', onSubmit);
-    cancel.addEventListener('click', onCancel);
-    dialog.showModal();
-    input.focus();
-  });
-}
 
-function renderRunRow(run) {
-  const row = document.createElement('div');
-  const decision = run.decision?.decision || '未记录';
-  row.className = 'run-row';
-  row.dataset.runId = run.run_id;
-  row.setAttribute('aria-label', `打开 ${run.tender_filename}，${run.blocker_count} 项高风险，${run.unresolved_count} 项待复核`);
-setHtml(row, html`<label class="run-select" aria-label="选择 ${run.tender_filename}"><input type="checkbox" data-run-select="${run.run_id}" ${store.selectedRunIds.has(run.run_id) ? 'checked' : ''}><span></span></label><button class="run-open" type="button" aria-label="打开 ${run.tender_filename}，${run.blocker_count} 项高风险，${run.unresolved_count} 项待复核"><span class="run-main"><strong title="${run.tender_filename}">${run.tender_filename}</strong><small>${formatDate(run.updated_at || run.created_at)} · ${run.run_id.slice(0, 12)}</small></span><span class="run-stat danger"><b>${run.blocker_count}</b><span>高风险</span></span><span class="run-stat warning"><b>${run.unresolved_count}</b><span>待复核</span></span><span class="decision-pill ${decision}">${decisionLabel(decision)}</span><span class="run-arrow"><i data-lucide="chevron-right"></i></span></button>`);
-  row.querySelector('[data-run-select]').addEventListener('change', (event) => { if (event.target.checked) store.selectedRunIds.add(run.run_id); else store.selectedRunIds.delete(run.run_id); updateBulkControls(); });
-  row.querySelector('.run-open').addEventListener('click', () => openRun(run.run_id));
-  return row;
-}
 
-function toggleAllRuns(event) {
-  document.querySelectorAll('[data-run-select]').forEach((input) => {
-    input.checked = event.target.checked;
-    if (event.target.checked) store.selectedRunIds.add(input.dataset.runSelect); else store.selectedRunIds.delete(input.dataset.runSelect);
-  });
-  updateBulkControls();
-}
 
-function updateBulkControls(visibleRuns = []) {
-  const count = store.selectedRunIds.size;
-  document.querySelector('#selection-count').textContent = count ? `已选择 ${count} 个任务` : '未选择任务';
-  document.querySelector('#bulk-archive').disabled = !count || store.runScope === 'ARCHIVED';
-  document.querySelector('#bulk-restore').disabled = !count || store.runScope === 'ACTIVE';
-  document.querySelector('#bulk-restore').hidden = store.runScope === 'ACTIVE';
-  document.querySelector('#bulk-delete').disabled = !count;
-  document.querySelector('#bulk-export').disabled = !count;
-  const selectAll = document.querySelector('#select-all-runs');
-  const total = visibleRuns.length || document.querySelectorAll('[data-run-select]').length;
-  selectAll.checked = Boolean(total && count === total);
-  selectAll.indeterminate = Boolean(count && count < total);
-  refreshIcons();
-}
 
-async function bulkManage(action) {
-  if (!store.selectedRunIds.size) return;
-  if (action === 'DELETE' && !(await confirmDanger({ title: '永久删除任务', body: `将删除已选择的 ${store.selectedRunIds.size} 个任务及其上传文件，不可恢复。`, confirmWord: 'DELETE' }))) return;
-  try {
-    const result = await request('/api/runs/bulk', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ run_ids: [...store.selectedRunIds], action }) });
-    store.selectedRunIds.clear();
-    await loadRuns();
-    showToast(`${action === 'ARCHIVE' ? '已归档' : action === 'RESTORE' ? '已恢复' : '已删除'} ${result.updated} 个任务。`);
-  } catch (error) { showToast(`${error.message}，批量操作未完成。`); }
-}
 
-async function bulkExportReports() {
-  if (!store.selectedRunIds.size) return;
-  const button = document.querySelector('#bulk-export');
-  setButtonLoading(button, true, '导出中');
-  try {
-    const response = await requestBlobResponse('/api/runs/bulk/report.zip', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ run_ids: [...store.selectedRunIds], format: 'pdf' }),
-    });
-    const blob = await response.blob();
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = 'bidproof-reports.zip';
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-    URL.revokeObjectURL(link.href);
-    showToast(`已导出 ${store.selectedRunIds.size} 个任务的 PDF 报告。`);
-  } catch (error) {
-    showToast(`${error.message}，请重试。`);
-  } finally {
-    setButtonLoading(button, false);
-  }
-}
 
 function exportCurrentRun(format) {
   if (!store.currentRun) return;
@@ -705,9 +237,7 @@ async function openRun(runId) {
   if (overlay) overlay.hidden = false;
   try {
     store.currentRun = await request(`/api/runs/${encodeURIComponent(runId)}`);
-    store.activeCategory = 'ALL';
-    store.searchTerm = '';
-    store.matrixPage = 1;
+    resetMatrixView();
     document.querySelector('#requirement-search').value = '';
     showDetail();
   } catch (error) {
@@ -718,6 +248,43 @@ async function openRun(runId) {
 }
 
 
+/**
+ * 只负责填两个下拉：任务列表的项目筛选、扫描弹窗的项目选择。
+ *
+ * 旧版这个函数同时还渲染管理页的项目列表并绑定归档按钮，
+ * 于是管理页刷新一次就会顺手重置用户在别处选好的筛选。
+ * 管理页那一份现在在 features/admin/projects.js。
+ */
+async function loadProjects() {
+  try {
+    const payload = await request('/api/projects?include_archived=true');
+    store.projectsCache = payload.projects;
+    const active = store.projectsCache.filter((project) => !project.archived_at);
+
+    // 两个下拉都可能不在当前视图里 —— 裸 querySelector(...).innerHTML
+    // 在别的页面会抛 TypeError 把整页拖垮，必须判空。
+    const filter = document.querySelector('#run-project-filter');
+    if (filter) {
+      const previous = filter.value;
+      setHtml(filter, [
+        html`<option value="">全部项目</option>`,
+        ...store.projectsCache.map((project) => html`<option value="${project.project_id}">${project.code} · ${project.name}${project.archived_at ? '（已归档）' : ''}</option>`),
+      ]);
+      filter.value = store.projectFilter || previous || '';
+    }
+
+    const tender = document.querySelector('#tender-project');
+    if (tender) {
+      const previous = tender.value;
+      setHtml(tender, active.map((project) => html`<option value="${project.project_id}">${project.code} · ${project.name}</option>`));
+      if (active.some((project) => project.project_id === previous)) tender.value = previous;
+    }
+  } catch (error) {
+    // 下拉取不回来不该阻塞任何页面，静默降级为「全部项目」。
+    console.warn('[bidproof] 项目下拉加载失败', error);
+  }
+}
+
 function memberOptionList(placeholder) {
   return [
     html`<option value="">${placeholder}</option>`,
@@ -726,438 +293,76 @@ function memberOptionList(placeholder) {
 }
 
 function showHome() {
+  // 视图切换仍由 app.js 的 showView 负责（路由迁移见批次 5）。
+  // 这里只保证进入本视图时新模块被挂载、离开时被卸载。
+  void ensureFilterOptions().then(mountRunsView);
   showView('home', '扫描任务');
-  loadRuns();
+  reloadRuns();
 }
 
 function showJobs() {
   showView('jobs', '扫描作业');
-  loadJobs();
+  mountJobsView();
+  void reloadJobs();
 }
 
-async function loadJobs() {
-  const target = document.querySelector('#jobs-list');
-  const refresh = document.querySelector('#refresh-jobs');
-setHtml(target, html`<div class="run-skeleton"></div><div class="run-skeleton"></div>`);
-  refresh.disabled = true;
-  try {
-    const payload = await request('/api/jobs?limit=200');
-    document.querySelector('#jobs-count').textContent = `${payload.jobs.length} 个作业`;
-    if (!payload.jobs.length) {
-setHtml(target, html`<div class="empty-state">还没有后台扫描作业。</div>`);
-      return;
-    }
-setHtml(target, payload.jobs.map((job) => {
-      const retry = job.status === 'FAILED' ? html`<button class="mini-button" type="button" data-retry-job="${job.job_id}"><i data-lucide="refresh-ccw"></i><span>重试</span></button>` : '';
-      const cancel = ['PENDING', 'RUNNING'].includes(job.status) ? html`<button class="mini-button danger-action" type="button" data-cancel-job="${job.job_id}"><i data-lucide="circle-stop"></i><span>取消</span></button>` : '';
-      const progressTotal = Number(job.progress_total || 0);
-      const progressCurrent = Math.min(Number(job.progress_current || 0), progressTotal || Number(job.progress_current || 0));
-      const progressLabel = progressTotal ? `${progressCurrent}/${progressTotal}` : (job.progress_message || '等待开始');
-      const progressPercent = progressTotal ? Math.round(progressCurrent / progressTotal * 100) : 0;
-      return html`<article class="job-row"><span class="operation-main"><strong>${job.job_id.slice(0, 12)}</strong><small>${job.run_id ? `任务 ${job.run_id.slice(0, 12)}` : (job.error || job.progress_message || '等待生成任务')}</small><span class="job-progress" aria-label="处理进度 ${progressLabel}"><span class="job-progress-track"><span style="width:${progressPercent}%"></span></span><small>${progressLabel}</small></span></span><span class="status-pill ${job.status}">${jobStatusLabel(job.status)}</span><span>${Number(job.attempts || 0)}</span><time>${formatDate(job.updated_at)}</time><span>${retry}${cancel}</span></article>`;
-    }));
-    target.querySelectorAll('[data-retry-job]').forEach((button) => button.addEventListener('click', () => retryJob(button)));
-    target.querySelectorAll('[data-cancel-job]').forEach((button) => button.addEventListener('click', () => cancelJob(button)));
-  } catch (error) {
-setHtml(target, html`<div class="empty-state error-text">${error.message}，作业记录加载失败。</div>`);
-  } finally {
-    refresh.disabled = false;
-    refreshIcons();
-  }
-}
 
-async function retryJob(button) {
-  setButtonLoading(button, true, '重试中');
-  try {
-    await request(`/api/jobs/${encodeURIComponent(button.dataset.retryJob)}/retry`, { method: 'POST' });
-    showToast('作业已重新进入队列。');
-    await loadJobs();
-  } catch (error) { showToast(`${error.message}，重试未启动。`); }
-  finally { setButtonLoading(button, false); }
-}
 
-async function cancelJob(button) {
-  if (!window.confirm('确定取消这个扫描作业吗？已完成的结果不会被删除。')) return;
-  setButtonLoading(button, true, '取消中');
-  try {
-    await request(`/api/jobs/${encodeURIComponent(button.dataset.cancelJob)}/cancel`, { method: 'POST' });
-    showToast('作业已取消。');
-    await loadJobs();
-  } catch (error) { showToast(`${error.message}，作业未取消。`); }
-  finally { setButtonLoading(button, false); }
-}
 
 function showAdmin() {
   showView('admin', '成员与设置');
-  loadOperations();
+  // 四个面板各自取数、各自显示状态。旧实现用一个 Promise.all 拉五个接口，
+  // 任何一个挂掉五块一起变错误态 —— 而其中四块的数据其实已经拿到了。
+  mountAdminView();
+  reloadAdmin();
 }
 
-async function loadMembers() {
-  const target = document.querySelector('#members-list');
-setHtml(target, html`<div class="run-skeleton"></div>`);
-  try {
-    const payload = await request('/api/members');
-    store.membersCache = payload.members;
-    const canManage = ['OWNER', 'ADMIN'].includes(store.currentUser?.role);
-    document.querySelector('#member-form').hidden = !canManage;
-setHtml(target, store.membersCache.map((member) => {
-      const roleControls = canManage && member.role !== 'OWNER' ? html`<select data-member-role="${member.user_id}" aria-label="${member.username} 的角色"><option value="ADMIN" ${member.role === 'ADMIN' ? 'selected' : ''}>管理员</option><option value="REVIEWER" ${member.role === 'REVIEWER' ? 'selected' : ''}>复核人</option><option value="VIEWER" ${member.role === 'VIEWER' ? 'selected' : ''}>只读成员</option></select><button class="mini-button" type="button" data-member-active="${member.user_id}" data-active="${member.active}">${member.active ? '停用' : '启用'}</button>` : html`<span class="role-label">${roleLabel(member.role)}</span>`;
-      const resetControl = canManage && member.active ? html`<button class="mini-button" type="button" data-member-reset="${member.user_id}">重置密码</button>` : '';
-      return html`<article class="member-row ${member.active ? '' : 'is-inactive'}"><span class="member-avatar"><i data-lucide="user-round"></i></span><span class="operation-main"><strong>${member.username}</strong><small>${member.user_id.slice(0, 12)} · ${member.active ? '可登录' : '已停用'}</small></span><span class="member-controls">${roleControls}${resetControl}</span></article>`;
-    }));
-    target.querySelectorAll('[data-member-role]').forEach((select) => select.addEventListener('change', () => updateMember(select.dataset.memberRole, { role: select.value })));
-    target.querySelectorAll('[data-member-active]').forEach((button) => button.addEventListener('click', () => updateMember(button.dataset.memberActive, { active: button.dataset.active !== 'true' })));
-    target.querySelectorAll('[data-member-reset]').forEach((button) => button.addEventListener('click', () => resetMemberPassword(button.dataset.memberReset, button)));
-  } catch (error) {setHtml(target, html`<div class="empty-state error-text">${error.message}，成员加载失败。</div>`); }
-  refreshIcons();
-}
 
-async function loadProjects() {
-  const target = document.querySelector('#projects-list');
-  try {
-    const payload = await request('/api/projects?include_archived=true');
-    store.projectsCache = payload.projects;
-    const activeProjects = store.projectsCache.filter((project) => !project.archived_at);
-    const filter = document.querySelector('#run-project-filter');
-setHtml(filter, [html`<option value="">全部项目</option>`, ...store.projectsCache.map((project) => html`<option value="${project.project_id}">${project.code} · ${project.name}${project.archived_at ? '（已归档）' : ''}</option>`)]);
-    filter.value = store.projectFilter;
-    const tenderProject = document.querySelector('#tender-project');
-    const previousTender = tenderProject.value;
-setHtml(tenderProject, activeProjects.map((project) => html`<option value="${project.project_id}">${project.code} · ${project.name}</option>`));
-    if (activeProjects.some((project) => project.project_id === previousTender)) tenderProject.value = previousTender;
-    const canManage = ['OWNER', 'ADMIN'].includes(store.currentUser?.role);
-    document.querySelector('#project-form').hidden = !canManage;
-setHtml(target, store.projectsCache.map((project) => html`<article class="project-row ${project.archived_at ? 'is-inactive' : ''}"><span class="member-avatar"><i data-lucide="folder"></i></span><span class="operation-main"><strong>${project.name}</strong><small>${project.code} · ${project.archived_at ? '已归档' : '可创建扫描'}</small></span>${canManage && project.code !== 'DEFAULT' ? html`<button class="mini-button" type="button" data-project-archive="${project.project_id}" data-archived="${Boolean(project.archived_at)}">${project.archived_at ? '恢复' : '归档'}</button>` : html`<span class="role-label">默认</span>`}</article>`));
-    target.querySelectorAll('[data-project-archive]').forEach((button) => button.addEventListener('click', () => toggleProject(button)));
-  } catch (error) {
-setHtml(target, html`<div class="empty-state error-text">${error.message}，项目加载失败。</div>`);
-  }
-  refreshIcons();
-}
 
-async function createProject(event) {
-  event.preventDefault();
-  const form = event.currentTarget;
-  const button = form.querySelector('button[type="submit"]');
-  setButtonLoading(button, true, '创建中');
-  try {
-    const code = document.querySelector('#project-code').value.trim();
-    await request('/api/projects', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: document.querySelector('#project-name').value.trim(), code: code || null }) });
-    form.reset();
-    showToast('项目已创建。');
-    await loadProjects();
-  } catch (error) { showToast(`${error.message}，项目未创建。`); }
-  finally { setButtonLoading(button, false); }
-}
 
-async function toggleProject(button) {
-  try {
-    await request(`/api/projects/${encodeURIComponent(button.dataset.projectArchive)}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ archived: button.dataset.archived !== 'true' }) });
-    showToast(button.dataset.archived === 'true' ? '项目已恢复。' : '项目已归档。');
-    await loadProjects();
-  } catch (error) { showToast(`${error.message}，项目状态未更新。`); }
-}
 
-async function createMember(event) {
-  event.preventDefault();
-  const form = event.currentTarget;
-  const button = form.querySelector('button[type="submit"]');
-  const message = document.querySelector('#member-message');
-  const direct = store.memberCreateMode === 'direct';
-  setButtonLoading(button, true, direct ? '开户中' : '生成中');
-  try {
-    const username = document.querySelector('#member-username').value.trim();
-    const role = document.querySelector('#member-role').value;
-    if (direct) {
-      const password = document.querySelector('#member-password').value;
-      if (password.length < 12) throw new Error('直接开户密码至少 12 位');
-      await request('/api/members', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username, password, role }) });
-      form.reset();
-      setMemberCreateMode('direct');
-      message.textContent = `已为 ${username} 直接开户，请线下告知对方密码。`;
-      await loadMembers();
-    } else {
-      const invitation = await request('/api/auth/invitations', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username, role }) });
-      form.reset();
-      setMemberCreateMode('invite');
-      showSecureLink(message, invitation.activation_path, '邀请链接已生成，72 小时内有效。');
-    }
-  } catch (error) { message.textContent = error.message; }
-  finally { setButtonLoading(button, false); }
-}
 
-function setMemberCreateMode(mode) {
-  store.memberCreateMode = mode === 'direct' ? 'direct' : 'invite';
-  document.querySelectorAll('[data-member-mode]').forEach((button) => {
-    button.classList.toggle('is-active', button.dataset.memberMode === store.memberCreateMode);
-  });
-  const direct = store.memberCreateMode === 'direct';
-  document.querySelector('#member-password-wrap').hidden = !direct;
-  document.querySelector('#member-password').required = direct;
-  document.querySelector('#member-submit-label').textContent = direct ? '直接开户' : '生成邀请';
-  refreshIcons();
-}
 
-async function resetMemberPassword(userId, button) {
-  setButtonLoading(button, true, '生成中');
-  const message = document.querySelector('#member-message');
-  try {
-    const reset = await request(`/api/members/${encodeURIComponent(userId)}/password-reset`, { method: 'POST' });
-    showSecureLink(message, reset.reset_path, '密码重置链接已生成，1 小时内有效。');
-  } catch (error) { message.textContent = error.message; }
-  finally { setButtonLoading(button, false); }
-}
 
-function showSecureLink(target, path, prefix) {
-  const url = new URL(path, window.location.origin).toString();
-setHtml(target, html`${prefix} <a href="${url}">打开链接</a> <button class="text-button" type="button" data-copy-secure-link>复制</button>`);
-  target.querySelector('[data-copy-secure-link]').addEventListener('click', async () => {
-    try {
-      await navigator.clipboard.writeText(url);
-      showToast('安全链接已复制。');
-    } catch (_error) {
-      window.prompt('复制以下安全链接', url);
-    }
-  });
-}
 
-async function updateMember(userId, payload) {
-  try {
-    await request(`/api/members/${encodeURIComponent(userId)}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-    showToast('成员权限已更新。');
-    await loadMembers();
-  } catch (error) { showToast(`${error.message}，成员未更新。`); }
-}
 
-async function loadOperations() {
-  await Promise.all([loadMembers(), loadProjects(), loadMfaStatus(), loadApiTokens(), loadSessions()]);
-  const healthTarget = document.querySelector('#operations-health');
-  const backupTarget = document.querySelector('#backups-list');
-  try {
-    const [settings, preview, health, usage, privacy] = await Promise.all([request('/api/workspace/settings'), request('/api/retention/preview'), request('/healthz?detail=true'), request('/api/workspace/usage'), request('/api/workspace/privacy')]);
-    document.querySelector('#retention-days').value = settings.retention_days;
-setHtml(document.querySelector('#retention-preview'), html`<strong>${preview.count}</strong><span>个已归档任务早于 ${formatDate(preview.cutoff)}，执行前仍会再次预览。</span>`);
-setHtml(healthTarget, html`<div class="health-grid"><span><small>数据库</small><strong>${health.database || 'unknown'}</strong></span><span><small>备份</small><strong>${backupStatusLabel(health.backup_status)}</strong></span><span><small>失败作业</small><strong>${Number(health.failed_jobs || 0)}</strong></span><span><small>最近验证</small><strong>${health.last_verified_backup_at ? formatDate(health.last_verified_backup_at) : '无'}</strong></span></div><small class="health-reasons">${health.degraded_reasons?.length ? `降级原因：${health.degraded_reasons.join('、')}` : '未发现降级原因'}</small>`);
-setHtml(document.querySelector('#workspace-usage'), html`<div class="health-grid"><span><small>任务</small><strong>${usage.runs}</strong></span><span><small>作业</small><strong>${usage.scan_jobs}</strong></span><span><small>整改项</small><strong>${usage.remediations}</strong></span><span><small>审计事件</small><strong>${usage.audit_events}</strong></span></div>`);
-setHtml(document.querySelector('#workspace-privacy'), html`<p>${privacy.boundary}</p><p>${privacy.deletion}</p><small>当前保留策略：${privacy.retention_days} 天</small>`);
-  } catch (error) {setHtml(healthTarget, html`<div class="empty-state error-text">${error.message}，运行状态加载失败。</div>`); }
-  try {
-    const payload = await request('/api/backups');
-setHtml(backupTarget, payload.backups.length ? payload.backups.map((backup) => html`<article class="backup-row"><span class="operation-main"><strong>${backup.backup_id}</strong><small>${formatDate(backup.created_at)}</small></span><span class="status-pill ${backup.valid ? 'COMPLETED' : 'FAILED'}">${backup.valid ? '已验证' : '未验证'}</span></article>`) : html`<div class="empty-state">还没有已登记备份。</div>`);
-  } catch (error) {
-setHtml(backupTarget, html`<div class="empty-state">当前角色无备份管理权限。</div>`);
-    document.querySelector('#create-backup').hidden = true;
-  }
-  document.querySelector('#purge-retention').hidden = !['OWNER', 'ADMIN'].includes(store.currentUser?.role);
-  refreshIcons();
-}
 
-async function saveRetention(event) {
-  event.preventDefault();
-  try {
-    await request('/api/workspace/settings', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ retention_days: Number(document.querySelector('#retention-days').value) }) });
-    showToast('保留策略已保存。');
-    await loadOperations();
-  } catch (error) { showToast(`${error.message}，策略未保存。`); }
-}
 
-async function purgeRetention() {
-  try {
-    const preview = await request('/api/retention/preview');
-    if (!preview.count) return showToast('当前没有到期归档任务。');
-    if (!(await confirmDanger({ title: '清理到期归档', body: `将永久删除 ${preview.count} 个到期归档任务及上传文件。`, confirmWord: 'DELETE' }))) return;
-    const result = await request('/api/retention/purge', { method: 'POST' });
-    showToast(`已清理 ${result.deleted} 个到期任务。`);
-    await loadOperations();
-  } catch (error) { showToast(`${error.message}，清理未执行。`); }
-}
 
-async function createBackup() {
-  const button = document.querySelector('#create-backup');
-  setButtonLoading(button, true, '备份中');
-  try {
-    const result = await request('/api/backups', { method: 'POST' });
-    showToast(result.valid ? '备份已创建并通过校验。' : '备份已创建但校验失败。');
-    await loadOperations();
-  } catch (error) { showToast(`${error.message}，备份未完成。`); }
-  finally { setButtonLoading(button, false); }
-}
 
-async function changePassword(event) {
-  event.preventDefault();
-  const form = event.currentTarget;
-  const button = form.querySelector('button[type="submit"]');
-  const message = document.querySelector('#password-message');
-  message.textContent = '';
-  setButtonLoading(button, true, '更新中');
-  try {
-    await request('/api/auth/password', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ current_password: document.querySelector('#current-password').value, new_password: document.querySelector('#new-password').value }) });
-    form.reset();
-    message.textContent = '密码已更新，当前会话继续有效。';
-    await loadSessions();
-  } catch (error) { message.textContent = `${error.message}，密码未更新。`; }
-  finally { setButtonLoading(button, false); }
-}
 
-async function loadSessions() {
-  const list = document.querySelector('#sessions-list');
-  if (!list) return;
-  try {
-    const payload = await request('/api/auth/sessions');
-    if (!payload.sessions.length) {
-      setHtml(list, html`<div class="empty-state">没有有效会话。</div>`);
-      return;
-    }
-    setHtml(list, html`${payload.sessions.map((session) => html`
-      <article class="operation-row">
-        <div>
-          <strong>${session.current ? '当前设备' : '其他设备'}</strong>
-          <span>登录于 ${session.created_at}，有效至 ${session.expires_at}</span>
-        </div>
-        ${session.current ? html`` : html`<button class="button secondary" type="button" data-revoke-session="${session.session_id}">踢出</button>`}
-      </article>
-    `)}`);
-  } catch (error) {
-    setHtml(list, html`<div class="empty-state error-text">${error.message}</div>`);
-  }
-}
 
-async function revokeSession(sessionId) {
-  try {
-    await request(`/api/auth/sessions/${encodeURIComponent(sessionId)}`, { method: 'DELETE' });
-    showToast('已踢出该设备。');
-    await loadSessions();
-  } catch (error) {
-    showToast(`${error.message}，未能踢出该设备。`);
-  }
-}
 
-async function revokeOtherSessions() {
-  const button = document.querySelector('#revoke-other-sessions');
-  setButtonLoading(button, true, '处理中');
-  try {
-    const result = await request('/api/auth/sessions/revoke-others', { method: 'POST' });
-    showToast(`已踢出 ${result.revoked} 台其他设备。`);
-    await loadSessions();
-  } catch (error) {
-    showToast(`${error.message}，未能踢出其他设备。`);
-  } finally {
-    setButtonLoading(button, false);
-  }
-}
 
-async function loadMfaStatus() {
-  const status = document.querySelector('#mfa-status');
-  const secret = document.querySelector('#mfa-secret');
-  if (!status) return;
-  secret.hidden = true;
-  secret.textContent = '';
-  try {
-    const payload = await request('/api/auth/status');
-setHtml(status, payload.mfa_enabled
-      ? html`<strong>已启用。</strong><span>登录时需要验证器或恢复码。</span>`
-      : html`<span>尚未启用二次验证。</span>`);
-  } catch (error) {
-setHtml(status, html`<div class="empty-state error-text">${error.message}</div>`);
-  }
-}
 
-async function enrollMfa() {
-  const message = document.querySelector('#mfa-message');
-  const secret = document.querySelector('#mfa-secret');
-  message.textContent = '';
-  try {
-    const payload = await request('/api/auth/mfa/enroll', { method: 'POST' });
-    secret.hidden = false;
-    secret.textContent = `密钥：${payload.secret}\n恢复码（仅显示一次）：\n${payload.recovery_codes.join('\n')}`;
-    message.textContent = '请用验证器扫描或录入密钥，然后输入一个验证码确认。';
-  } catch (error) { message.textContent = error.message; }
-}
 
-async function submitMfaSettings(event) {
-  event.preventDefault();
-  const message = document.querySelector('#mfa-message');
-  const code = document.querySelector('#mfa-code').value.trim();
-  message.textContent = '';
-  try {
-    const status = await request('/api/auth/status');
-    if (status.mfa_enabled) {
-      await request('/api/auth/mfa/disable', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ code }) });
-      showToast('二次验证已关闭。');
-    } else {
-      await request('/api/auth/mfa/confirm', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ code }) });
-      showToast('二次验证已启用。');
-    }
-    document.querySelector('#mfa-code').value = '';
-    await loadMfaStatus();
-  } catch (error) { message.textContent = error.message; }
-}
 
-async function loadApiTokens() {
-  const target = document.querySelector('#tokens-list');
-  try {
-    const payload = await request('/api/auth/tokens');
-setHtml(target, payload.tokens.length
-      ? payload.tokens.map((token) => html`<article class="backup-row"><span class="operation-main"><strong>${token.name}</strong><small>${token.token_prefix} · ${token.revoked_at ? '已撤销' : '有效'}</small></span>${token.revoked_at ? '' : html`<button class="button secondary" type="button" data-revoke-token="${token.token_id}">撤销</button>`}</article>`)
-      : html`<div class="empty-state">还没有 API 令牌。</div>`);
-    document.querySelector('#token-form').hidden = false;
-  } catch (error) {
-setHtml(target, html`<div class="empty-state">当前角色不能管理 API 令牌。</div>`);
-    document.querySelector('#token-form').hidden = true;
-  }
-}
 
-async function createApiToken(event) {
-  event.preventDefault();
-  const message = document.querySelector('#token-message');
-  message.textContent = '';
-  try {
-    const created = await request('/api/auth/tokens', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name: document.querySelector('#token-name').value.trim() }),
-    });
-    document.querySelector('#token-name').value = '';
-    message.textContent = `请立即保存令牌：${created.token}`;
-    await loadApiTokens();
-  } catch (error) { message.textContent = error.message; }
-}
 
-async function revokeApiToken(tokenId) {
-  try {
-    await request(`/api/auth/tokens/${encodeURIComponent(tokenId)}`, { method: 'DELETE' });
-    showToast('令牌已撤销。');
-    await loadApiTokens();
-  } catch (error) { showToast(`${error.message}，令牌未撤销。`); }
+
+function showDecision() {
+  if (!store.get?.().currentRun && !store.currentRun) return;
+  showView('decision', '人工决策');
+  mountDecisionView();
+  renderDecision();
 }
 
 function showDetail() {
+  mountMatrix();
+  mountCollab();
   if (!store.currentRun) return showHome();
   showView('detail', '扫描详情');
   renderDetail();
 }
 
-function showDecision() {
-  if (!store.currentRun) return;
-  showView('decision', '人工决策');
-  const unresolved = store.currentRun.requirements.filter((item) => ['UNKNOWN', 'NEEDS_REVIEW'].includes(item.status));
-  const select = document.querySelector('#unresolved-items');
-  select.replaceChildren(...unresolved.map((item) => {
-    const option = document.createElement('option');
-    option.value = item.requirement_id;
-    option.textContent = `${item.requirement_id} · ${item.label} · ${item.title.slice(0, 56)}`;
-    option.selected = store.currentRun.decision?.unresolved_requirement_ids?.includes(item.requirement_id) || false;
-    return option;
-  }));
-  const decision = store.currentRun.decision?.decision || 'HOLD';
-  const radio = document.querySelector(`#decision-form input[value="${decision}"]`);
-  if (radio) radio.checked = true;
-  document.querySelector('#decision-note').value = store.currentRun.decision?.note || '';
-setHtml(document.querySelector('#decision-context-content'), html`<div class="context-metric"><strong>${store.currentRun.blocker_count}</strong><span>资格 / 废标风险</span></div><div class="context-metric"><strong>${store.currentRun.unresolved_count}</strong><span>未解决要求</span></div><div class="context-metric"><strong>${store.currentRun.requirement_count}</strong><span>全部要求项</span></div><p>${store.currentRun.decision?.note || '尚未记录人工决定。请先核对高风险项与证据缺口。'}</p>`);
-  refreshIcons();
-}
 
 function showView(name, context, pushHash = true) {
+  if (name !== 'home') unmountRunsView();
+  if (name !== 'detail') unmountMatrix();
+  if (name !== 'jobs') unmountJobsView();
+  if (name !== 'decision') unmountDecisionView();
+  if (name !== 'admin') unmountAdminView();
+  if (name !== 'detail') unmountCollab();
   Object.entries(views).forEach(([key, view]) => { view.hidden = key !== name; });
   document.querySelector('#page-context').textContent = context;
   if (pushHash) {
@@ -1190,28 +395,6 @@ function navigateFromHash() {
 
 window.addEventListener('popstate', navigateFromHash);
 
-async function submitDecision(event) {
-  event.preventDefault();
-  const form = event.currentTarget;
-  const button = form.querySelector('button[type="submit"]');
-  const values = new FormData(form);
-  const unresolved = [...form.querySelector('#unresolved-items').selectedOptions].map((option) => option.value);
-  const message = document.querySelector('#decision-message');
-  setButtonLoading(button, true, '正在保存');
-  message.textContent = '';
-  try {
-    store.currentRun = await request(`/api/runs/${encodeURIComponent(store.currentRun.run_id)}/decision`, {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ decision: values.get('decision'), note: values.get('note'), unresolved_requirement_ids: unresolved }),
-    });
-    showDetail();
-    showToast('人工决策已保存。');
-  } catch (error) {
-    message.textContent = `${error.message}，请重试。`;
-  } finally {
-    setButtonLoading(button, false);
-  }
-}
 
 function renderDetail() {
   document.querySelector('#detail-title').textContent = store.currentRun.tender_filename;
@@ -1239,9 +422,8 @@ setHtml(duplicateWarning, duplicateWarning.hidden ? '' : html`<i data-lucide="co
   loadAssigneeOptions();
   document.querySelector('#run-tags').value = (store.currentRun.tags || []).join(', ');
   document.querySelector('#run-favorite').checked = Boolean(store.currentRun.favorite);
-  renderRisks();
-  renderMatrix();
-  loadCollaboration();
+  renderMatrixSection();
+  loadCollab();
   loadVersionDiff();
   refreshIcons();
 }
@@ -1305,231 +487,32 @@ async function saveRunMetadata(event) {
       body: JSON.stringify({ assignee_id: document.querySelector('#run-assignee').value.trim() || null, reviewer_id: document.querySelector('#run-reviewer').value.trim() || null, tags: document.querySelector('#run-tags').value.split(',').map((tag) => tag.trim()).filter(Boolean), favorite: document.querySelector('#run-favorite').checked }),
     });
     showToast('协作信息已保存。');
-    loadCollaboration();
+    loadCollab();
   } catch (error) { showToast(`${error.message}，保存失败。`); }
   finally { setButtonLoading(button, false); }
 }
 
-async function addComment(event) {
-  event.preventDefault();
-  const input = document.querySelector('#comment-body');
-  const body = input.value.trim();
-  if (!body) return;
-  try {
-    await request(`/api/runs/${encodeURIComponent(store.currentRun.run_id)}/comments`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ body }) });
-    input.value = '';
-    await loadCollaboration();
-    showToast('评论已添加。');
-  } catch (error) { showToast(`${error.message}，评论未保存。`); }
-}
 
-async function loadCollaboration() {
-  if (!store.currentRun) return;
-  try {
-    const [comments, audit, remediations] = await Promise.all([
-      request(`/api/runs/${encodeURIComponent(store.currentRun.run_id)}/comments`),
-      request(`/api/runs/${encodeURIComponent(store.currentRun.run_id)}/audit`),
-      request(`/api/runs/${encodeURIComponent(store.currentRun.run_id)}/remediations`),
-    ]);
-setHtml(document.querySelector('#comments-list'), comments.comments.length ? comments.comments.map((item) => html`<article class="activity-item"><strong>${item.user_id}</strong><p>${item.body}</p><time>${formatDate(item.created_at)}</time></article>`) : html`<div class="empty-state">暂无评论</div>`);
-    setHtml(document.querySelector('#audit-events'), audit.events.length ? audit.events.slice(0, 30).map((item) => html`<article class="activity-item"><strong>${auditLabel(item.event_type)}</strong><p>${item.user_id}</p><time>${formatDate(item.created_at)}</time></article>`) : html`<div class="empty-state">暂无审计记录</div>`);
-    await loadRemediationOwners();
-    renderRemediations(remediations.remediations || []);
-  } catch (error) {
-setHtml(document.querySelector('#comments-list'), html`<div class="empty-state error-text">协作记录加载失败</div>`);
-setHtml(document.querySelector('#remediations-list'), html`<div class="empty-state error-text">${error.message}，整改项加载失败</div>`);
-  }
-}
 
-async function loadRemediationOwners() {
-  const select = document.querySelector('#remediation-owner');
-  try {
-    if (!store.membersCache.length) store.membersCache = (await request('/api/members')).members;
-setHtml(select, memberOptionList('未分配'));
-  } catch (_error) {
-setHtml(select, html`<option value="">未分配</option>`);
-  }
-  const requirementSelect = document.querySelector('#remediation-requirement');
-setHtml(requirementSelect, [html`<option value="">不关联具体要求</option>`, ...(store.currentRun?.requirements || []).map((item) => html`<option value="${item.requirement_id}">${item.requirement_id} · ${item.label}</option>`)]);
-}
 
-function renderRemediations(items) {
-  const target = document.querySelector('#remediations-list');
-  if (!items.length) {
-setHtml(target, html`<div class="empty-state">暂无整改行动。发现证据缺口后，可在这里分派负责人并跟踪截止日期。</div>`);
-    return;
-  }
-setHtml(target, items.map((item) => {
-    const owner = store.membersCache.find((member) => member.user_id === item.owner_id);
-    const due = item.due_date ? new Date(`${item.due_date}T00:00:00`).toLocaleDateString('zh-CN') : '未设置';
-    const overdue = item.due_date && !['DONE', 'CANCELLED'].includes(item.status) && new Date(`${item.due_date}T23:59:59`) < new Date();
-    return html`<article class="remediation-row ${overdue ? 'is-overdue' : ''}"><div class="remediation-main"><strong>${item.title}</strong><small>${item.requirement_id ? `关联要求 ${item.requirement_id}` : '未关联具体要求'} · ${owner?.username || item.owner_id || '未分配'} · ${overdue ? '已逾期' : `截止 ${due}`}</small>${item.note ? html`<p>${item.note}</p>` : ''}</div><div class="remediation-controls"><label class="sr-only" for="remediation-status-${item.remediation_id}">整改状态</label><select id="remediation-status-${item.remediation_id}" data-remediation-status="${item.remediation_id}"><option value="OPEN" ${item.status === 'OPEN' ? 'selected' : ''}>待处理</option><option value="IN_PROGRESS" ${item.status === 'IN_PROGRESS' ? 'selected' : ''}>处理中</option><option value="DONE" ${item.status === 'DONE' ? 'selected' : ''}>已完成</option><option value="CANCELLED" ${item.status === 'CANCELLED' ? 'selected' : ''}>已取消</option></select></div></article>`;
-  }));
-}
 
-async function createRemediation(event) {
-  event.preventDefault();
-  if (!store.currentRun) return;
-  const form = event.currentTarget;
-  const button = form.querySelector('button[type="submit"]');
-  setButtonLoading(button, true, '创建中');
-  try {
-    await request(`/api/runs/${encodeURIComponent(store.currentRun.run_id)}/remediations`, {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ title: document.querySelector('#remediation-title-input').value.trim(), requirement_id: document.querySelector('#remediation-requirement').value || null, owner_id: document.querySelector('#remediation-owner').value || null, due_date: document.querySelector('#remediation-due').value || null }),
-    });
-    form.reset();
-    await loadCollaboration();
-    showToast('整改项已创建。');
-  } catch (error) { showToast(`${error.message}，整改项未创建。`); }
-  finally { setButtonLoading(button, false); }
-}
 
-async function updateRemediation(remediationId, payload, control) {
-  if (control) control.disabled = true;
-  try {
-    await request(`/api/remediations/${encodeURIComponent(remediationId)}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-    await loadCollaboration();
-    showToast('整改状态已更新。');
-  } catch (error) {
-    showToast(`${error.message}，整改状态未更新。`);
-    if (control) control.disabled = false;
-  }
-}
 
-function auditLabel(value) {
-  return ({ RUN_CREATED: '创建扫描', RUN_RESCANNED: '重新扫描', RUN_METADATA_UPDATED: '更新协作信息', COMMENT_ADDED: '添加评论', ACCURACY_FEEDBACK_ADDED: '提交准确度反馈', SCAN_JOB_COMPLETED: '后台扫描完成', RUN_ARCHIVE: '归档任务', RUN_RESTORE: '恢复任务', REMEDIATION_CREATED: '创建整改项', REMEDIATION_UPDATED: '更新整改项' })[value] || value;
-}
 
 function roleLabel(value) { return ({ OWNER: '所有者', ADMIN: '管理员', REVIEWER: '复核人', VIEWER: '只读成员' })[value] || value; }
-function jobStatusLabel(value) { return ({ PENDING: '排队中', RUNNING: '扫描中', COMPLETED: '已完成', FAILED: '失败', CANCELLED: '已取消' })[value] || value; }
-function backupStatusLabel(value) { return ({ verified: '已验证', unverified: '未验证', missing: '无备份' })[value] || value || '未知'; }
 
-function renderRisks() {
-  const risks = store.currentRun.requirements
-    .filter((item) => ['FATAL', 'QUALIFICATION', 'DEADLINE'].includes(item.category) && item.status !== 'PASS')
-    .sort((a, b) => riskRank(a) - riskRank(b))
-    .slice(0, 4);
-  const target = document.querySelector('#risk-list');
-  if (!risks.length) {
-setHtml(target, html`<div class="empty-state success-text">当前没有需要优先处理的高风险项。</div>`);
-    return;
-  }
-  target.replaceChildren(...risks.map(renderRiskCard));
-}
 
-function renderMatrix() {
-  const categories = ['ALL', ...new Set(store.currentRun.requirements.map((item) => item.category))];
-  const filters = document.querySelector('#matrix-filters');
-  filters.replaceChildren(...categories.map((category) => {
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.className = `filter-button ${store.activeCategory === category ? 'active' : ''}`;
-    button.textContent = category === 'ALL' ? '全部' : category;
-    button.setAttribute('aria-pressed', String(store.activeCategory === category));
-    button.addEventListener('click', () => { store.activeCategory = category; store.matrixPage = 1; renderMatrix(); });
-    return button;
-  }));
-  const filtered = store.currentRun.requirements.filter((item) => {
-    const categoryMatch = store.activeCategory === 'ALL' || item.category === store.activeCategory;
-    const haystack = `${item.category} ${item.label} ${item.title} ${item.source?.quote || ''}`.toLocaleLowerCase('zh-CN');
-    return categoryMatch && (!store.searchTerm || haystack.includes(store.searchTerm));
-  });
-  const pageCount = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
-  store.matrixPage = Math.min(store.matrixPage, pageCount);
-  const start = (store.matrixPage - 1) * PAGE_SIZE;
-  const items = filtered.slice(start, start + PAGE_SIZE);
-  document.querySelector('#matrix-count').textContent = `共 ${filtered.length} 项`;
-  const target = document.querySelector('#requirements');
-  if (!items.length) setHtml(target, html`<div class="empty-state">没有符合当前条件的要求项。</div>`);
-  else target.replaceChildren(...items.map(renderRequirementRow));
-  renderPagination(filtered.length, pageCount);
-  refreshIcons();
-}
 
-function renderRiskCard(item) {
-  const article = document.createElement('article');
-  article.className = `risk-card ${item.status === 'FAIL' ? 'is-fail' : ''}`;
-setHtml(article, html`${requirementHeading(item)}<p class="requirement-title">${item.title}</p>${citationMarkup(item)}${explanationMarkup(item)}${requirementFooter(item)}`);
-  return article;
-}
 
-function renderRequirementRow(item) {
-  const details = document.createElement('details');
-  details.className = 'requirement-row';
-  const source = item.source || {};
-setHtml(details, html`<summary class="requirement-summary"><span class="requirement-name"><strong>${item.label}</strong><small>${item.category} · ${item.requirement_id}</small></span><span class="source-page">${locatorLabel(source)}</span><span class="status ${item.status}">${statusLabel(item.status)}</span><span class="expand-icon"><i data-lucide="chevron-down"></i></span></summary><div class="requirement-detail"><p class="requirement-title">${item.title}</p>${citationMarkup(item)}${explanationMarkup(item)}${requirementFooter(item)}</div>`);
-  return details;
-}
 
-function requirementHeading(item) {
-  return html`<div class="requirement-top"><div><span class="category-label">${item.category}</span><h3>${item.label}</h3></div><span class="status ${item.status}">${statusLabel(item.status)}</span></div>`;
-}
 
-function citationMarkup(item) {
-  const source = item.source || {};
-  const evidence = item.evidence || [];
-  const evidenceMarkup = evidence.length
-    ? evidence.map((entry) => html`<strong>${entry.filename} · ${locatorLabel(entry)}</strong><p>${entry.quote || '已定位'}</p>`)
-    : html`<strong class="muted">未匹配，需人工复核</strong>`;
-  return html`<div class="citation-grid"><div class="citation-block"><span>招标原文</span><strong>${locatorLabel(source)}</strong><p>${source.quote || '未提取到可引用原文'}</p></div><div class="citation-block"><span>企业证据</span>${evidenceMarkup}</div></div>`;
-}
 
-function locatorLabel(item) {
-  return item?.locator?.label || '定位缺失';
-}
 
-function explanationMarkup(item) {
-  const gap = (item.evidence || []).length ? '已定位候选企业证据，仍需人工确认语义充分性与原件有效性' : ['QUALIFICATION', 'CREDENTIAL', 'BOND', 'SIGNATURE'].includes(item.category) ? '未定位到可核验的企业证据' : '该项主要依赖招标原文，需人工确认适用条件';
-  const impact = item.category === 'FATAL' ? '可能导致废标或资格失效' : item.category === 'QUALIFICATION' ? '可能导致资格审查不通过' : item.category === 'DEADLINE' ? '错过节点可能导致文件不被接收' : '可能影响合规性、评分或材料完整性';
-  const action = ['UNKNOWN', 'NEEDS_REVIEW'].includes(item.status) ? '补充证据并由人工复核' : item.status === 'FAIL' ? '核对原文并制定风险处置方案' : '保留原文定位并确认原件有效';
-  return html`<div class="explanation-grid"><div><span>证据缺口</span><strong>${gap}</strong></div><div><span>风险影响</span><strong>${impact}</strong></div><div><span>建议动作</span><strong>${action}</strong></div></div>`;
-}
 
-function requirementFooter(item) {
-  const actions = item.status === 'PASS' || item.status === 'FAIL'
-    ? html`<button class="mini-button" data-review="CONFIRM" data-id="${item.requirement_id}">确认结论</button><button class="mini-button" data-review="REJECT" data-id="${item.requirement_id}">驳回结论</button>`
-    : html`<button class="mini-button" data-review="REQUEST_EVIDENCE" data-id="${item.requirement_id}">请求证据</button><button class="mini-button" data-review="CONFIRM" data-id="${item.requirement_id}">保留复核</button>`;
-  return html`<div class="requirement-footer"><span>${item.detection_method || 'deterministic'} · ${item.criticality || 'REVIEW'}</span><div class="action-buttons">${actions}<button class="mini-button" data-accuracy="RELEVANT" data-id="${item.requirement_id}" data-category="${item.category}">确认有效</button><button class="mini-button" data-accuracy="NOT_RELEVANT" data-id="${item.requirement_id}" data-category="${item.category}">标记误报</button></div></div>`;
-}
 
-function renderPagination(total, pageCount) {
-  const target = document.querySelector('#matrix-pagination');
-  if (!total) {
-    target.replaceChildren();
-    return;
-  }
-  const start = (store.matrixPage - 1) * PAGE_SIZE + 1;
-  const end = Math.min(store.matrixPage * PAGE_SIZE, total);
-setHtml(target, html`<span class="pagination-info">显示 ${start}-${end}，共 ${total} 项</span><span class="pagination-actions"><button class="page-button" type="button" data-page="prev" ${store.matrixPage === 1 ? 'disabled' : ''}><i data-lucide="arrow-left"></i><span>上一页</span></button><button class="page-button" type="button" data-page="next" ${store.matrixPage === pageCount ? 'disabled' : ''}><span>下一页</span><i data-lucide="arrow-right"></i></button></span>`);
-  target.querySelector('[data-page="prev"]').addEventListener('click', () => { store.matrixPage -= 1; renderMatrix(); scrollMatrixIntoView(); });
-  target.querySelector('[data-page="next"]').addEventListener('click', () => { store.matrixPage += 1; renderMatrix(); scrollMatrixIntoView(); });
-}
 
-function scrollMatrixIntoView() {
-  document.querySelector('#matrix-title').scrollIntoView({ block: 'start', behavior: 'smooth' });
-}
 
-function handleRequirementAction(event) {
-  const accuracyButton = event.target.closest('[data-accuracy]');
-  if (accuracyButton) {
-    submitDetectedFeedback(accuracyButton);
-    return;
-  }
-  const button = event.target.closest('[data-review]');
-  if (!button) return;
-  reviewRequirement(button.dataset.id, button.dataset.review, button);
-}
 
-async function submitDetectedFeedback(button) {
-  button.disabled = true;
-  try {
-    const reviewComplete = document.querySelector('#accuracy-review-complete').checked;
-    await request(`/api/runs/${encodeURIComponent(store.currentRun.run_id)}/accuracy-feedback`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ category: button.dataset.category, predicted: 'DETECTED', actual: button.dataset.accuracy, requirement_id: button.dataset.id, note: '界面人工反馈', dataset_scope: 'PILOT', review_complete: reviewComplete }) });
-    showToast(button.dataset.accuracy === 'RELEVANT' ? '有效要求已确认。' : '误报反馈已记录。');
-    await loadAccuracySummary();
-  } catch (error) { button.disabled = false; showToast(`${error.message}，反馈未保存。`); }
-}
 
 async function submitMissedFeedback(event) {
   event.preventDefault();
@@ -1540,81 +523,25 @@ async function submitMissedFeedback(event) {
     form.reset();
     missedDialog.close();
     showToast('漏项反馈已记录。');
-    await loadAccuracySummary();
+    await reloadAccuracy();
   } catch (error) { showToast(`${error.message}，反馈未保存。`); }
 }
 
-async function loadAccuracySummary() {
-  const target = document.querySelector('#accuracy-summary');
-  try {
-    const metrics = await request('/api/accuracy/metrics');
-setHtml(target, metrics.categories.length ? metrics.categories.slice(0, 4).map((item) => {
-      const status = item.measurement_status === 'MEASURABLE' ? '可计量' : '证据不足';
-      const coverage = item.coverage == null ? '—' : `${Math.round(item.coverage * 100)}%`;
-      return html`<div><span class="rule-icon ${item.measurement_status === 'MEASURABLE' ? 'safe' : 'warning'}"><i data-lucide="chart-no-axes-combined"></i></span><span><strong>${item.category} · ${status}</strong><small>观察精确率 ${item.precision ?? '—'} · 召回率 ${item.recall ?? '—'} · 覆盖 ${coverage} · 样本 ${item.sample_size} · 完整复核 ${item.review_population_complete ? '是' : '否'}</small></span></div>`;
-    }) : html`<div class="empty-state">尚无人工反馈样本</div>`);
-    refreshIcons();
-  } catch (error) {setHtml(target, html`<div class="empty-state error-text">指标加载失败</div>`); }
-}
 
-async function reviewRequirement(requirementId, decision, button) {
-  button.disabled = true;
-  try {
-    store.currentRun = await request(`/api/runs/${encodeURIComponent(store.currentRun.run_id)}/review`, {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ requirement_id: requirementId, decision, note: '', revision: store.currentRun.revision }),
-    });
-    renderDetail();
-    showToast('复核状态已更新。');
-  } catch (error) {
-    button.disabled = false;
-    showToast(`${error.message}，请重试。`);
-  }
-}
 
-async function request(url, options = {}) {
-  const response = await fetch(url, withCsrf(options));
-  const contentType = response.headers.get('content-type') || '';
-  const payload = contentType.includes('application/json') ? await response.json() : { detail: await response.text() };
-  if (!response.ok) {
-    if (response.status === 401 && !url.startsWith('/api/auth/')) showAuth(false);
-    throw new Error(payload.detail || '请求失败');
-  }
-  return payload;
-}
-
-// Same session handling as request(), for endpoints whose success path is a binary download.
-async function requestBlobResponse(url, options = {}) {
-  const response = await fetch(url, withCsrf(options));
-  if (!response.ok) {
-    if (response.status === 401 && !url.startsWith('/api/auth/')) showAuth(false);
-    const contentType = response.headers.get('content-type') || '';
-    const payload = contentType.includes('application/json') ? await response.json() : { detail: await response.text() };
-    throw new Error(payload.detail || '请求失败');
-  }
-  return response;
-}
-
-function csrfHeaders() {
-  const match = document.cookie.split('; ').find((row) => row.startsWith('bidproof_csrf='));
-  if (!match) return {};
-  return { 'X-CSRF-Token': decodeURIComponent(match.slice('bidproof_csrf='.length)) };
-}
-
-function withCsrf(options = {}) {
-  return { credentials: 'same-origin', ...options, headers: { ...csrfHeaders(), ...(options.headers || {}) } };
-}
-
-function setButtonLoading(button, loading, label = '') {
-  if (loading) {
-    button.dataset.originalHtml = button.innerHTML;
-    button.disabled = true;
-setHtml(button, html`<i data-lucide="loader-circle"></i><span>${label}</span>`);
-  } else {
-    button.disabled = false;
-    if (button.dataset.originalHtml) setHtml(button, raw(button.dataset.originalHtml));
-  }
-  refreshIcons();
+/**
+ * 按钮加载态。
+ * 旧实现把 button.innerHTML 存进 dataset 再用 raw() 还原，等于把一段已渲染的
+ * DOM 字符串当作可信 HTML 重新注入——只要按钮里渲染过用户可控文本，就是一条
+ * 自我 XSS 通道。现在只切 data-loading，DOM 一个字都不动，文案由 CSS 负责。
+ * 第三个参数保留以免改动 18 处调用点，但不再使用。
+ *
+ * @param {Element | null} button
+ * @param {boolean} loading
+ * @param {string} [_label] 已废弃
+ */
+function setButtonLoading(button, loading, _label = '') {
+  setLoading(button, loading);
 }
 
 function showToast(message) {
@@ -1625,26 +552,30 @@ function showToast(message) {
   store.toastTimer = setTimeout(() => { toast.hidden = true; }, 4000);
 }
 
+/**
+ * 旧实现每次都对整个 document 重扫 [data-lucide] 并替换节点，详情页一次渲染
+ * 触发 5 次全文档扫描。setHtml() 现在已按子树渲染图标，这里只兜底处理
+ * 直接操作 DOM 而没走 setHtml 的少数路径，且已渲染节点不会重做。
+ */
 function refreshIcons() {
-  if (window.lucide) window.lucide.createIcons({ attrs: { 'aria-hidden': 'true' } });
+  renderIcons(document);
 }
 
-function riskRank(item) {
-  const severity = item.severity === 'HIGH' ? 0 : 1;
-  const status = item.status === 'FAIL' ? 0 : item.status === 'UNKNOWN' ? 1 : 2;
-  return severity * 10 + status;
-}
 
 function decisionLabel(value) {
   return ({ CONTINUE: '继续', HOLD: '暂缓', STOP: '停止', '未记录': '未记录' })[value] || value;
 }
 
-function statusLabel(value) {
-  return ({ PASS: '已通过', FAIL: '不通过', UNKNOWN: '待确认', NEEDS_REVIEW: '待复核' })[value] || value;
-}
 
+/** 语言跟随 i18n，不再写死 zh-CN。 */
 function formatDate(value) {
-  if (!value) return '—';
-  return new Date(value).toLocaleString('zh-CN', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+  return formatDateTime(value);
 }
 
+// 空状态里的「用示例文件试跑」在 features/runs/list.js 中触发，
+// 但打开扫描弹窗的逻辑还在 app.js。用事件解耦，避免反向依赖。
+window.addEventListener('bidproof:start-sample-scan', () => { void startSampleScan(); });
+
+// 矩阵里的检出质量反馈会影响准确率面板，但两者分属不同视图。
+// 用事件通知，避免 matrix.js 反向依赖任务列表模块。
+window.addEventListener('bidproof:accuracy-changed', () => { void reloadAccuracy(); });

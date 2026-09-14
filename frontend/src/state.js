@@ -33,6 +33,8 @@
 /** @type {AppStore} */
 export const store = {
   currentRun: null,
+  // ⚠️ 以下字段已随任务列表与要求项矩阵迁出，仅为兼容尚未迁移的代码保留。
+  // 真正在用的是 core/store.js。app.js 清空后整组删除。
   activeCategory: 'ALL',
   matrixPage: 1,
   searchTerm: '',

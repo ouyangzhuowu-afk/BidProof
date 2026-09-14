@@ -1,0 +1,79 @@
+/* =============================================================================
+   视图层 · 鉴权与账号动作对话框
+   -----------------------------------------------------------------------------
+   这是产品的第一屏，也是唯一一个「用户还没进入产品」的界面。
+   设计上只有一条要求：在四种模式之间切换时，**版面不能跳**。
+   字段块的显隐会改变对话框高度，但输入框的位置、按钮的位置要保持稳定，
+   否则用户切一下模式就得重新找输入框在哪。
+   ========================================================================== */
+
+@layer views {
+
+  .auth-dialog { width: min(420px, calc(100vw - var(--space-6))); }
+
+  .auth-form {
+    display: grid;
+    gap: var(--space-4);
+    padding: var(--space-6);
+  }
+
+  .auth-form__head { display: grid; gap: var(--space-1); }
+
+  /* 提交按钮占满整行：这一屏只有一个主动作，不需要和别的按钮争。 */
+  .auth-form > .btn[type="submit"] { width: 100%; justify-content: center; }
+
+  /* 消息区为空时不占高度 —— 否则每种模式之间会差出一行空白。 */
+  #auth-message:empty,
+  #account-action-message:empty { display: none; }
+
+  .auth-form .hint a {
+    color: var(--brand);
+    text-underline-offset: 2px;
+  }
+
+  /* =========================================================================
+     密码输入 + 显隐按钮
+     -----------------------------------------------------------------------
+     按钮压在输入框右侧内部。给 input 留出右内边距，否则长密码会钻到按钮下面。
+     ====================================================================== */
+  .password-field {
+    position: relative;
+    display: block;
+  }
+  .password-field .input { width: 100%; padding-right: calc(var(--tap-target) + var(--space-1)); }
+  .password-toggle {
+    position: absolute;
+    right: 2px;
+    top: 50%;
+    translate: 0 -50%;
+    /* 触控尺寸：这个按钮在手机上很容易点不中。 */
+    width: var(--tap-target);
+    height: calc(100% - 4px);
+  }
+
+  /* =========================================================================
+     模式切换器
+     -----------------------------------------------------------------------
+     复用 .segmented，但这里的选项数量是动态的（取决于后端开关），
+     所以让它占满整行并均分，避免出现「两个按钮各占 30% 靠左挤着」的样子。
+     ====================================================================== */
+  #auth-mode-wrap {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+  }
+  #auth-mode-wrap .segmented__option { text-align: center; }
+  /* 被后端开关隐藏的选项不参与网格 —— 不写这条会留出空列。 */
+  #auth-mode-wrap .segmented__option[hidden] { display: none; }
+
+  /* MFA 区块：加一条左边线与内缩，表明它是登录流程的第二步，
+     而不是又一个并列字段。 */
+  #mfa-fields {
+    padding-left: var(--space-3);
+    border-left: 2px solid var(--brand-line);
+  }
+
+  @media (max-width: 480px) {
+    .auth-form { padding: var(--space-5) var(--space-4); }
+  }
+}

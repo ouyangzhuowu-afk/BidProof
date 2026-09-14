@@ -46,3 +46,7 @@ Thumbs.db
 
 # Local virtualenv
 .venv/
+
+# Opus5 unpack staging
+_opus5_refactor/
+
