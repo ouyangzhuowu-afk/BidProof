@@ -133,6 +133,61 @@ async function readPayload(response) {
   return { detail: await response.text() };
 }
 
+/** FastAPI / Pydantic 校验字段 → 中文标签。 */
+const VALIDATION_FIELD_LABELS = {
+  username: '用户名',
+  password: '密码',
+  workspace_name: '企业名称',
+  bootstrap_token: '初始化令牌',
+  join_code: '试用加入码',
+  display_name: '空间名称',
+  current_password: '当前密码',
+  new_password: '新密码',
+  mfa_token: '二次验证令牌',
+  code: '验证码',
+};
+
+/**
+ * 把 FastAPI 的 detail（字符串或校验错误数组）收成一句可读中文。
+ * 旧实现只认 string，校验失败时用户只能看到「请求失败（422）」。
+ *
+ * @param {unknown} detail
+ * @returns {string}
+ */
+export function formatErrorDetail(detail) {
+  if (typeof detail === 'string' && detail.trim()) return detail.trim();
+  if (!Array.isArray(detail) || detail.length === 0) return '';
+
+  const messages = [];
+  for (const item of detail) {
+    if (typeof item === 'string' && item.trim()) {
+      messages.push(item.trim());
+      continue;
+    }
+    if (!item || typeof item !== 'object') continue;
+    const entry = /** @type {{ loc?: unknown[], msg?: string, type?: string, ctx?: { min_length?: number, max_length?: number } }} */ (item);
+    const field = Array.isArray(entry.loc)
+      ? entry.loc.filter((part) => part !== 'body' && typeof part === 'string').at(-1)
+      : '';
+    const label = (typeof field === 'string' && VALIDATION_FIELD_LABELS[field]) || field || '';
+    let msg = typeof entry.msg === 'string' ? entry.msg.replace(/^Value error,\s*/i, '').trim() : '';
+
+    if (entry.type === 'string_too_short' && entry.ctx?.min_length) {
+      msg = `至少 ${entry.ctx.min_length} 个字符`;
+    } else if (entry.type === 'string_too_long' && entry.ctx?.max_length) {
+      msg = `最多 ${entry.ctx.max_length} 个字符`;
+    } else if (entry.type === 'missing') {
+      msg = '不能为空';
+    }
+
+    if (!msg) continue;
+    messages.push(label ? `${label}：${msg}` : msg);
+  }
+
+  // 去重：同一字段偶发重复条目
+  return [...new Set(messages)].join('；');
+}
+
 /**
  * @param {Response} response
  * @param {string} url
@@ -140,9 +195,7 @@ async function readPayload(response) {
  */
 function toApiError(response, url, payload) {
   const body = /** @type {Record<string, unknown>} */ (payload || {});
-  const detail = typeof body.detail === 'string' && body.detail.trim()
-    ? body.detail
-    : `请求失败（${response.status}）`;
+  const detail = formatErrorDetail(body.detail) || `请求失败（${response.status}）`;
   return new ApiError({
     message: detail,
     status: response.status,

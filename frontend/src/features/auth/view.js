@@ -75,7 +75,10 @@ export function renderAuth(status, mode, pendingMfa, message = '') {
     password.disabled = view.credentialsDisabled;
   }
   const username = /** @type {HTMLInputElement | null} */ (el('#auth-username'));
-  if (username) username.disabled = view.credentialsDisabled;
+  if (username) {
+    username.minLength = view.usernameMinLength;
+    username.disabled = view.credentialsDisabled;
+  }
 
   const submit = /** @type {HTMLButtonElement | null} */ (el('#auth-form button[type="submit"]'));
   if (submit) submit.disabled = view.submitDisabled;

@@ -126,6 +126,7 @@ export function needsConfirm(mode) {
  * @property {Record<string, boolean>} required
  * @property {boolean} credentialsDisabled  MFA 挂起时锁住用户名与密码
  * @property {number} passwordMinLength
+ * @property {number} usernameMinLength
  * @property {string} passwordAutocomplete
  */
 
@@ -200,7 +201,10 @@ export function resolveAuthView(status, requestedMode, pendingMfa) {
     },
 
     credentialsDisabled: pendingMfa,
+    // 登录允许任意非空密码进处理器（失败走 401）；创建凭据时与后端 AccountPassword 对齐。
     passwordMinLength: confirm ? 8 : 1,
+    // 注册 / 开通 / 试用加入：用户名最少 3 位（与 schemas 一致）；登录允许 1 位以便显示服务端错误。
+    usernameMinLength: mode === 'login' ? 1 : 3,
     passwordAutocomplete: confirm ? 'new-password' : 'current-password',
   };
 }

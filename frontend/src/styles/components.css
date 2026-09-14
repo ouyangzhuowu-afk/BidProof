@@ -104,11 +104,14 @@
     font-size: var(--text-sm);
     white-space: nowrap;
   }
-  .segmented__option[aria-checked="true"] {
-    background: var(--paper);
+  /* radiogroup 用 aria-checked；鉴权/成员切换器是 toggle，用 aria-pressed。
+     选中态用 raised 表面 + 强分隔线：暗色下 paper 与 sunken 几乎同色，肉眼看不出色块。 */
+  .segmented__option[aria-checked="true"],
+  .segmented__option[aria-pressed="true"] {
+    background: var(--paper-raised);
     color: var(--ink-strong);
     font-weight: var(--weight-medium);
-    box-shadow: 0 0 0 1px var(--rule);
+    box-shadow: 0 0 0 1px var(--rule-strong);
   }
   @media (pointer: coarse) {
     .segmented__option { min-height: 36px; display: grid; place-items: center; }
