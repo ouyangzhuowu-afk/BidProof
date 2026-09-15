@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0",
+  "purpose": "Minimal key-field labels for OCR/extraction assessment (engineering only).",
+  "documents": [
+    {
+      "document_id": "fixture-001",
+      "path": "work/public-eval/pdfs/source2-nanjing.pdf",
+      "doc_type": "electronic_pdf",
+      "page_type_notes": "born-digital text layer present",
+      "fields": [
+        {"name": "project_name", "page": 2, "value": "招标投标交易系统第三方软件测评服务"},
+        {"name": "budget", "page": 2, "value": "16.01"},
+        {"name": "deadline", "page": 2, "value": "2024年8月12日09:40"},
+        {"name": "bond", "page": 3, "value": "不收取投标保证金"},
+        {"name": "qualification_ref", "page": 2, "value": "政府采购法"}
+      ]
+    },
+    {
+      "document_id": "fixture-002",
+      "path": "work/public-eval/pdfs/source2-shaanxi.pdf",
+      "doc_type": "electronic_pdf",
+      "fields": [
+        {"name": "project_name", "page": 3, "value": "陕西省统计局国产化计算机终端及应用软件采购项目"},
+        {"name": "budget", "page": 3, "value": "149.99"},
+        {"name": "project_code", "page": 1, "value": "SNCG-FM-2024123", "optional": true},
+        {"name": "deadline", "page": 3, "value": "2024-11-11"},
+        {"name": "bond_required", "page": 6, "value": "不收取投标保证金"}
+      ]
+    },
+    {
+      "document_id": "fixture-003",
+      "path": "work/public-eval/pdfs/source4-zbtb.pdf",
+      "doc_type": "electronic_pdf",
+      "fields": [
+        {"name": "budget", "page": 4, "value": "117.5"},
+        {"name": "contract_end", "page": 4, "value": "2025年9月30日"},
+        {"name": "bond_section", "page": 2, "value": "投标保证金"},
+        {"name": "qualification_ref", "page": 4, "value": "政府采购法第二十二条"}
+      ]
+    },
+    {
+      "document_id": "med-cryostat-consult-redacted",
+      "path": "work/eval/meddevice-redacted/consult-cryostat-redacted.docx",
+      "doc_type": "electronic_docx",
+      "domain": "hospital_medical_device",
+      "notes": "Offline-redacted competitive consultation tender for cryostat; source WeChat temp not committed.",
+      "fields": [
+        {"name": "project_name", "page": 1, "value": "冷冻切片机"},
+        {"name": "device_license", "page": 1, "value": "医疗器械经营许可证"},
+        {"name": "device_registration", "page": 1, "value": "医疗器械注册证"},
+        {"name": "budget", "page": 1, "value": "40万元"},
+        {"name": "ceiling", "page": 1, "value": "27万元"},
+        {"name": "no_bond", "page": 1, "value": "不缴纳"}
+      ]
+    }
+  ]
+}

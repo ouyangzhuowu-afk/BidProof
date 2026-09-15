@@ -16,6 +16,10 @@ dependencies = [
 [project.optional-dependencies]
 postgres = ["psycopg[binary]>=3.1"]
 ldap = ["ldap3>=2.9"]
+# Local OCR: RapidOCR+ONNX preferred on Windows RTX 50-series; Paddle preferred in WSL2/Linux.
+# See outputs/LOCAL_OCR_OPTIONS.md
+ocr = ["rapidocr-onnxruntime>=1.3", "onnxruntime>=1.17", "pillow>=10", "numpy>=1.24"]
+ocr-paddle = ["paddleocr>=2.7", "paddlepaddle>=2.5", "pillow>=10", "numpy>=1.24"]
 
 [dependency-groups]
 dev = [

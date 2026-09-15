@@ -12,6 +12,9 @@ work/uploads/*
 !work/uploads/.gitkeep
 work/backups/
 work/job-staging/
+work/ocr/
+work/previews/
+work/models/
 work/*.log
 work/*.err.log
 *.sqlite3

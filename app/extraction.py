@@ -1,15 +1,211 @@
 from pathlib import Path
 from typing import Any
+import logging
+import os
 import unicodedata
 import re
 import zipfile
 import xml.etree.ElementTree as ET
 
-from .ocr import OCRAdapter, OCRUnavailable, get_ocr_adapter
+from .ocr import (
+    OCRAdapter,
+    OCRResult,
+    OCRUnavailable,
+    get_cloud_ocr_adapter,
+    get_local_ocr_adapter,
+    get_ocr_adapter,
+)
+from .ocr_privacy import (
+    REDACTION_VERSION,
+    classify_page_text,
+    egress_allowed_for_cloud,
+    egress_mode,
+    merge_ocr_texts,
+    redact_png_bytes,
+    should_escalate_to_cloud,
+)
+
+
+logger = logging.getLogger("bidproof.extraction")
 
 
 class ExtractionError(RuntimeError):
     pass
+
+
+def _ocr_tiles_enabled() -> bool:
+    return os.getenv("BID_OCR_TILE_ENABLED", "1").strip().lower() in {"1", "true", "yes"}
+
+
+def _tile_count() -> int:
+    try:
+        return max(2, min(int(os.getenv("BID_OCR_TILE_STRIPS", "3")), 6))
+    except ValueError:
+        return 3
+
+
+def _needs_page_tiling(result: OCRResult, page_height: float) -> bool:
+    if not _ocr_tiles_enabled():
+        return False
+    if result.confidence is not None and result.confidence < 0.5:
+        return True
+    # Local engines with line boxes already covered the page — skip strip OCR.
+    if result.lines and result.confidence is not None and result.confidence >= 0.5:
+        return False
+    return page_height >= 700 and len(result.text.strip()) < 500
+
+
+def _blocks_from_ocr_result(
+    result: OCRResult,
+    *,
+    page_number: int,
+    page_rect: list[float],
+    scale: float = 1.5,
+) -> list[dict[str, Any]]:
+    """Prefer per-line OCR boxes so quote matching can localize after OCR."""
+    if not result.lines:
+        return [
+            {
+                "text": result.text,
+                "bbox": page_rect,
+                "locator": {
+                    "kind": "page",
+                    "label": f"第 {page_number} 页",
+                    "page": page_number,
+                    "index": page_number,
+                    "bbox": page_rect,
+                },
+            }
+        ]
+    blocks: list[dict[str, Any]] = []
+    for line_index, line in enumerate(result.lines, 1):
+        bbox = None
+        if line.bbox is not None:
+            x0, y0, x1, y1 = line.bbox
+            # OCR boxes are in rendered image pixels; convert back to PDF points.
+            bbox = [x0 / scale, y0 / scale, x1 / scale, y1 / scale]
+        blocks.append(
+            {
+                "text": line.text,
+                "bbox": bbox,
+                "locator": {
+                    "kind": "ocr_line",
+                    "label": f"第 {page_number} 页 · OCR行 {line_index}",
+                    "page": page_number,
+                    "line": line_index,
+                    "bbox": bbox,
+                },
+            }
+        )
+    return blocks
+
+
+def ocr_page_image(page: Any, adapter: OCRAdapter, page_number: int, scale: float = 1.5) -> OCRResult:
+    """OCR a PDF page; optionally stitch vertical strips when the full-page pass looks truncated."""
+    import fitz
+
+    matrix = fitz.Matrix(scale, scale)
+    full = adapter.extract(page.get_pixmap(matrix=matrix, alpha=False).tobytes("png"), page_number)
+    if not _needs_page_tiling(full, float(page.rect.height)):
+        return full
+
+    strips = _tile_count()
+    rect = page.rect
+    overlap = rect.height * 0.04
+    band = rect.height / strips
+    parts: list[str] = []
+    confidences: list[float] = []
+    line_acc = list(full.lines)
+    for index in range(strips):
+        y0 = max(rect.y0, rect.y0 + index * band - (overlap if index else 0))
+        y1 = min(rect.y1, rect.y0 + (index + 1) * band + (overlap if index < strips - 1 else 0))
+        clip = fitz.Rect(rect.x0, y0, rect.x1, y1)
+        try:
+            tile = adapter.extract(page.get_pixmap(matrix=matrix, clip=clip, alpha=False).tobytes("png"), page_number)
+        except OCRUnavailable:
+            continue
+        if tile.text.strip():
+            parts.append(tile.text.strip())
+        if tile.confidence is not None:
+            confidences.append(tile.confidence)
+        line_acc.extend(tile.lines)
+    if not parts:
+        return full
+    stitched = "\n".join(parts)
+    if len(stitched) <= len(full.text):
+        return full
+    confidence = sum(confidences) / len(confidences) if confidences else full.confidence
+    provider = full.provider if "+tiles" in full.provider else f"{full.provider}+tiles"
+    return OCRResult(text=stitched, confidence=confidence, provider=provider, lines=tuple(line_acc))
+
+
+def _maybe_escalate_cloud(
+    page: Any,
+    page_number: int,
+    local: OCRResult,
+    scale: float = 1.5,
+) -> tuple[OCRResult, dict[str, Any]]:
+    """T1: escalate only after image redaction; never send original pixels."""
+    meta: dict[str, Any] = {
+        "ocr_egress": "none",
+        "ocr_egress_mode": egress_mode(),
+        "ocr_redaction_version": REDACTION_VERSION,
+        "ocr_escalation_reason": "",
+        "ocr_page_types": [],
+    }
+    risk = classify_page_text(local.text)
+    meta["ocr_page_types"] = list(risk.page_types)
+    escalate, reason = should_escalate_to_cloud(
+        local_text=local.text,
+        local_confidence=local.confidence,
+        risk=risk,
+        page_height_pt=float(page.rect.height),
+    )
+    meta["ocr_escalation_reason"] = reason
+    if not escalate:
+        if reason.startswith("blocked:"):
+            meta["ocr_egress"] = "blocked_sensitive_page"
+        return local, meta
+
+    cloud = get_cloud_ocr_adapter()
+    if not cloud.enabled:
+        meta["ocr_egress"] = "cloud_unavailable"
+        return local, meta
+
+    import fitz
+
+    matrix = fitz.Matrix(scale, scale)
+    original_png = page.get_pixmap(matrix=matrix, alpha=False).tobytes("png")
+    redacted = redact_png_bytes(original_png, local.lines)
+    meta["ocr_redaction_sha256"] = redacted.content_sha256
+    meta["ocr_redaction_masked_lines"] = redacted.masked_line_count
+    if not redacted.clean:
+        meta["ocr_egress"] = "blocked_residual_pii"
+        meta["ocr_redaction_residuals"] = redacted.residual_findings
+        logger.info(
+            "ocr_escalation_blocked_residual",
+            extra={"page": page_number, "residuals": redacted.residual_findings},
+        )
+        return local, meta
+
+    try:
+        cloud_result = cloud.extract(redacted.image_bytes, page_number)
+    except OCRUnavailable:
+        meta["ocr_egress"] = "cloud_failed"
+        return local, meta
+
+    merged = merge_ocr_texts(local.text, cloud_result.text)
+    used_cloud = len(cloud_result.text.strip()) > len(local.text.strip())
+    if used_cloud:
+        meta["ocr_egress"] = "redacted_cloud" if egress_mode() == "redacted_only" else "vpc"
+        provider = f"{local.provider}+redacted:{cloud_result.provider}"
+        confidence = cloud_result.confidence if cloud_result.confidence is not None else local.confidence
+        return (
+            OCRResult(text=merged, confidence=confidence, provider=provider, lines=local.lines),
+            meta,
+        )
+    meta["ocr_egress"] = "redacted_cloud_unused"
+    return local, meta
 
 
 def extract_pdf(path: Path, ocr_adapter: OCRAdapter | None = None) -> list[dict[str, Any]]:
@@ -19,7 +215,14 @@ def extract_pdf(path: Path, ocr_adapter: OCRAdapter | None = None) -> list[dict[
         raise ExtractionError("PyMuPDF is required to extract PDF text") from exc
 
     pages: list[dict[str, Any]] = []
-    adapter = ocr_adapter if ocr_adapter is not None else get_ocr_adapter()
+    if ocr_adapter is not None:
+        adapter = ocr_adapter
+    elif egress_allowed_for_cloud():
+        adapter = get_local_ocr_adapter()
+        if not adapter.enabled:
+            adapter = get_ocr_adapter()
+    else:
+        adapter = get_ocr_adapter()
     try:
         document = fitz.open(path)
     except Exception as exc:
@@ -54,7 +257,6 @@ def extract_pdf(path: Path, ocr_adapter: OCRAdapter | None = None) -> list[dict[
                         }
                     )
             except (AttributeError, TypeError, ValueError):
-                # Text extraction remains usable even when a malformed block is returned.
                 blocks = []
             page_data = {
                     "page": index + 1,
@@ -68,25 +270,40 @@ def extract_pdf(path: Path, ocr_adapter: OCRAdapter | None = None) -> list[dict[
                 }
             if adapter.enabled and (page_data["ocr_required"] or page_data["low_text_confidence"]):
                 try:
-                    pixmap = page.get_pixmap(matrix=fitz.Matrix(1.5, 1.5), alpha=False)
-                    result = adapter.extract(pixmap.tobytes("png"), index + 1)
+                    result = ocr_page_image(page, adapter, index + 1)
+                    if egress_allowed_for_cloud():
+                        result, egress_meta = _maybe_escalate_cloud(page, index + 1, result)
+                        page_data.update(egress_meta)
+                    else:
+                        page_data["ocr_egress"] = "none"
+                        page_data["ocr_egress_mode"] = egress_mode()
                     page_data["text"] = result.text
                     page_data["has_text"] = True
                     page_data["ocr_status"] = "EXTRACTED"
                     page_data["ocr_provider"] = result.provider
                     page_data["ocr_confidence"] = result.confidence
                     page_data["char_count"] = len(result.text)
-                    page_data["blocks"] = [{"text": result.text, "bbox": list(page.rect)}]
-                except OCRUnavailable as exc:
+                    page_data["blocks"] = _blocks_from_ocr_result(result, page_number=index + 1, page_rect=list(page.rect))
+                    if result.confidence is not None and result.confidence < 0.5:
+                        page_data["low_text_confidence"] = True
+                    try:
+                        from . import observability
+
+                        observability.record_ocr_page(
+                            provider=result.provider,
+                            egress=str(page_data.get("ocr_egress") or "none"),
+                        )
+                    except Exception:  # noqa: BLE001 — metrics must never break extraction
+                        pass
+                except OCRUnavailable:
                     page_data["ocr_status"] = "FAILED"
-                    # Keep provider details and credentials out of persisted page metadata.
                     page_data["ocr_error"] = "OCR_UNAVAILABLE"
                     page_data["low_text_confidence"] = True
+                    page_data["ocr_egress"] = "none"
             elif page_data["ocr_required"]:
                 page_data["ocr_status"] = "DISABLED"
             pages.append(page_data)
     return pages
-
 
 def extract_text_file(path: Path) -> list[dict[str, Any]]:
     text = unicodedata.normalize("NFKC", path.read_text(encoding="utf-8", errors="replace"))

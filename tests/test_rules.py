@@ -59,3 +59,21 @@ def test_failed_ocr_page_cannot_create_pass():
 
     assert matched[0]["status"] == "UNKNOWN"
     assert matched[0]["evidence"] == []
+
+
+def test_hospital_medical_device_patterns_are_detected():
+    pages = [
+        {
+            "page": 4,
+            "text": (
+                "投标人须提供有效的医疗器械经营许可证及第三类医疗器械注册证；"
+                "并提交制造商销售授权与两票制相关证明。同类三甲医院业绩作为评审因素。"
+            ),
+        }
+    ]
+    requirements = extract_requirements(pages)
+    labels = {item["label"] for item in requirements}
+    assert "医疗器械资质" in labels
+    assert "授权配送" in labels
+    assert "医院业绩/售后" in labels
+    assert any(item["category"] == "CREDENTIAL" for item in requirements)

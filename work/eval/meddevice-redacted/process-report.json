@@ -1,0 +1,126 @@
+{
+  "generated_at": "2026-09-15T21:32:54.021821+08:00",
+  "egress": "disabled",
+  "ocr_provider": "disabled",
+  "note": "Source was a hospital competitive-consultation tender for a cryostat (冷冻切片机), not a supplier bid-response. Processed offline after redaction.",
+  "redaction": {
+    "source_sha256": "50262d6173d2dd0f098ff7d369365ecb46a92e7b5ee94dcc705db67d5c180a94",
+    "dest_sha256": "d864c4ca7614491dc3eb3aa78bd13eef774db94fa0f5304e95f736853e31f7c3",
+    "xml_files_changed": 3,
+    "dest": "work/eval/meddevice-redacted/consult-cryostat-redacted.docx"
+  },
+  "units": 990,
+  "chars": 30629,
+  "residual_findings": {},
+  "requirement_count": 105,
+  "categories": {
+    "QUALIFICATION": 35,
+    "CREDENTIAL": 15,
+    "SCORING": 10,
+    "SIGNATURE": 37,
+    "FATAL": 5,
+    "DEADLINE": 3
+  },
+  "labels": {
+    "资格条件": 29,
+    "医疗器械资质": 7,
+    "评分项": 10,
+    "签章要求": 37,
+    "授权配送": 6,
+    "医院业绩/售后": 8,
+    "废标/否决": 5,
+    "关键日期": 3
+  },
+  "sample_requirements": [
+    {
+      "requirement_id": "REQ-0001",
+      "label": "资格条件",
+      "category": "QUALIFICATION",
+      "page": 25,
+      "quote": "[医院A]病理科冷冻切片机采购项目,委托代理编号:REDACTED-CG-0001,进行竞争性磋商采购,现采用发布公告方式,邀请符合资格条件的供应商参与竞争性磋商采购活动。"
+    },
+    {
+      "requirement_id": "REQ-0002",
+      "label": "资格条件",
+      "category": "QUALIFICATION",
+      "page": 45,
+      "quote": "二、供应商资格条件:"
+    },
+    {
+      "requirement_id": "REQ-0003",
+      "label": "资格条件",
+      "category": "QUALIFICATION",
+      "page": 46,
+      "quote": "1、供应商的基本资格条件:应当符合《政府采购法》第二十二条第一款的规定,即:"
+    },
+    {
+      "requirement_id": "REQ-0004",
+      "label": "资格条件",
+      "category": "QUALIFICATION",
+      "page": 53,
+      "quote": "2、供应商特定资格条件:"
+    },
+    {
+      "requirement_id": "REQ-0005",
+      "label": "医疗器械资质",
+      "category": "CREDENTIAL",
+      "page": 54,
+      "quote": "(1)所投货物纳入医疗器械管理的,须具有相应的医疗器械经营许可证(或备案凭证)、或有效的医疗器械生产许可证(或备案凭证)、且证件在有效期内。"
+    },
+    {
+      "requirement_id": "REQ-0007",
+      "label": "医疗器械资质",
+      "category": "CREDENTIAL",
+      "page": 55,
+      "quote": "(2)所投货物纳入医疗器械管理的,货物须具有有效的医疗器械注册证(或备案凭证)且在证件有效期内生产。"
+    },
+    {
+      "requirement_id": "REQ-0008",
+      "label": "资格条件",
+      "category": "QUALIFICATION",
+      "page": 106,
+      "quote": "供应商资格条件"
+    },
+    {
+      "requirement_id": "REQ-0009",
+      "label": "资格条件",
+      "category": "QUALIFICATION",
+      "page": 107,
+      "quote": "1、供应商基本资格条件: 供应商必须是在中华人民共和国境内注册登记的法人、其他组织或者自然人,且应当符合 《政府采购法》第二十二条第一款的规定,即: (1)具有独立承担民事责任的能力; (2)具有良好的商业信誉和健全的财务会计制度; (3)具"
+    },
+    {
+      "requirement_id": "REQ-0010",
+      "label": "资格条件",
+      "category": "QUALIFICATION",
+      "page": 107,
+      "quote": "务会计制度; (3)具有履行合同所必需的设备和专业技术能力; (4)有依法缴纳税收和社会保障资金的良好记录; (5)参加政府采购活动前三年内,在经营活动中没有重大违法记录; (6)法律、行政法规规定的其他条件。 2、特定资格条件: (1) 所投货物纳入医疗器械管理的,须具有相应的医疗器械经营许可证(或备案凭证)、或有效的医疗器械生产许可证(或备案凭证)、且证"
+    },
+    {
+      "requirement_id": "REQ-0011",
+      "label": "医疗器械资质",
+      "category": "CREDENTIAL",
+      "page": 107,
+      "quote": "(4)有依法缴纳税收和社会保障资金的良好记录; (5)参加政府采购活动前三年内,在经营活动中没有重大违法记录; (6)法律、行政法规规定的其他条件。 2、特定资格条件: (1) 所投货物纳入医疗器械管理的,须具有相应的医疗器械经营许可证(或备案凭证)、或有效的医疗器械生产许可证(或备案凭证)、且证件在有效期内 。 所投货物纳入医疗器械管理的,货物须具有有效的"
+    },
+    {
+      "requirement_id": "REQ-0012",
+      "label": "医疗器械资质",
+      "category": "CREDENTIAL",
+      "page": 107,
+      "quote": "记录; (5)参加政府采购活动前三年内,在经营活动中没有重大违法记录; (6)法律、行政法规规定的其他条件。 2、特定资格条件: (1) 所投货物纳入医疗器械管理的,须具有相应的医疗器械经营许可证(或备案凭证)、或有效的医疗器械生产许可证(或备案凭证)、且证件在有效期内 。 所投货物纳入医疗器械管理的,货物须具有有效的医疗器械注册证(或备案凭证)且在证件有效"
+    },
+    {
+      "requirement_id": "REQ-0013",
+      "label": "医疗器械资质",
+      "category": "CREDENTIAL",
+      "page": 107,
+      "quote": "他条件。 2、特定资格条件: (1) 所投货物纳入医疗器械管理的,须具有相应的医疗器械经营许可证(或备案凭证)、或有效的医疗器械生产许可证(或备案凭证)、且证件在有效期内 。 所投货物纳入医疗器械管理的,货物须具有有效的医疗器械注册证(或备案凭证)且在证件有效期内生产 。 3、单位负责人为同一人或者存在直接控股、管理关系的不同供应商,不得参加同一合同项下的采"
+    }
+  ],
+  "key_field_hits": {
+    "device_license_clause": true,
+    "budget_present": true,
+    "deadline_present": true,
+    "no_bond": true
+  }
+}

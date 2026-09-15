@@ -1,0 +1,265 @@
+{
+  "generated_at": "2026-09-16T01:01:45.161121+08:00",
+  "branch": "assessment/ocr-backend-db",
+  "adapter_enabled": false,
+  "summary": {
+    "electronic_text": {
+      "pages": 9,
+      "mean_cer": 0.0,
+      "mean_wer": 0.0,
+      "p95_latency_ms": null,
+      "mean_latency_ms": null,
+      "field_accuracy": 1.0,
+      "field_hits": 14,
+      "field_total": 14,
+      "providers": [
+        "pymupdf_text_layer"
+      ]
+    }
+  },
+  "metrics": [
+    {
+      "document_id": "fixture-001",
+      "page": 1,
+      "provider": "pymupdf_text_layer",
+      "mode": "electronic_text",
+      "cer": 0.0,
+      "wer": 0.0,
+      "char_count_ref": 21,
+      "char_count_hyp": 21,
+      "latency_ms": null,
+      "field_hits": 0,
+      "field_total": 0,
+      "notes": "text-layer self baseline; CER defined as 0 when non-empty"
+    },
+    {
+      "document_id": "fixture-001",
+      "page": 2,
+      "provider": "pymupdf_text_layer",
+      "mode": "electronic_text",
+      "cer": 0.0,
+      "wer": 0.0,
+      "char_count_ref": 450,
+      "char_count_hyp": 450,
+      "latency_ms": null,
+      "field_hits": 4,
+      "field_total": 4,
+      "notes": "text-layer self baseline; CER defined as 0 when non-empty"
+    },
+    {
+      "document_id": "fixture-001",
+      "page": 3,
+      "provider": "pymupdf_text_layer",
+      "mode": "electronic_text",
+      "cer": 0.0,
+      "wer": 0.0,
+      "char_count_ref": 462,
+      "char_count_hyp": 462,
+      "latency_ms": null,
+      "field_hits": 1,
+      "field_total": 1,
+      "notes": "text-layer self baseline; CER defined as 0 when non-empty"
+    },
+    {
+      "document_id": "fixture-002",
+      "page": 1,
+      "provider": "pymupdf_text_layer",
+      "mode": "electronic_text",
+      "cer": 0.0,
+      "wer": 0.0,
+      "char_count_ref": 123,
+      "char_count_hyp": 123,
+      "latency_ms": null,
+      "field_hits": 1,
+      "field_total": 1,
+      "notes": "text-layer self baseline; CER defined as 0 when non-empty"
+    },
+    {
+      "document_id": "fixture-002",
+      "page": 3,
+      "provider": "pymupdf_text_layer",
+      "mode": "electronic_text",
+      "cer": 0.0,
+      "wer": 0.0,
+      "char_count_ref": 514,
+      "char_count_hyp": 514,
+      "latency_ms": null,
+      "field_hits": 3,
+      "field_total": 3,
+      "notes": "text-layer self baseline; CER defined as 0 when non-empty"
+    },
+    {
+      "document_id": "fixture-002",
+      "page": 6,
+      "provider": "pymupdf_text_layer",
+      "mode": "electronic_text",
+      "cer": 0.0,
+      "wer": 0.0,
+      "char_count_ref": 859,
+      "char_count_hyp": 859,
+      "latency_ms": null,
+      "field_hits": 1,
+      "field_total": 1,
+      "notes": "text-layer self baseline; CER defined as 0 when non-empty"
+    },
+    {
+      "document_id": "fixture-003",
+      "page": 1,
+      "provider": "pymupdf_text_layer",
+      "mode": "electronic_text",
+      "cer": 0.0,
+      "wer": 0.0,
+      "char_count_ref": 75,
+      "char_count_hyp": 75,
+      "latency_ms": null,
+      "field_hits": 0,
+      "field_total": 0,
+      "notes": "text-layer self baseline; CER defined as 0 when non-empty"
+    },
+    {
+      "document_id": "fixture-003",
+      "page": 2,
+      "provider": "pymupdf_text_layer",
+      "mode": "electronic_text",
+      "cer": 0.0,
+      "wer": 0.0,
+      "char_count_ref": 5902,
+      "char_count_hyp": 5902,
+      "latency_ms": null,
+      "field_hits": 1,
+      "field_total": 1,
+      "notes": "text-layer self baseline; CER defined as 0 when non-empty"
+    },
+    {
+      "document_id": "fixture-003",
+      "page": 4,
+      "provider": "pymupdf_text_layer",
+      "mode": "electronic_text",
+      "cer": 0.0,
+      "wer": 0.0,
+      "char_count_ref": 632,
+      "char_count_hyp": 632,
+      "latency_ms": null,
+      "field_hits": 3,
+      "field_total": 3,
+      "notes": "text-layer self baseline; CER defined as 0 when non-empty"
+    }
+  ],
+  "pipeline": [
+    {
+      "document_id": "fixture-001",
+      "pages": 33,
+      "text_pages": 33,
+      "ocr_required_pages": 0,
+      "requirement_count": 37,
+      "field_hits": 5,
+      "field_total": 5,
+      "field_recall": [
+        {
+          "name": "project_name",
+          "hit": true
+        },
+        {
+          "name": "budget",
+          "hit": true
+        },
+        {
+          "name": "deadline",
+          "hit": true
+        },
+        {
+          "name": "bond",
+          "hit": true
+        },
+        {
+          "name": "qualification_ref",
+          "hit": true
+        }
+      ],
+      "categories": {
+        "QUALIFICATION": 15,
+        "SIGNATURE": 11,
+        "BOND": 4,
+        "DEADLINE": 1,
+        "FATAL": 5,
+        "SCORING": 1
+      }
+    },
+    {
+      "document_id": "fixture-002",
+      "pages": 67,
+      "text_pages": 67,
+      "ocr_required_pages": 0,
+      "requirement_count": 101,
+      "field_hits": 5,
+      "field_total": 5,
+      "field_recall": [
+        {
+          "name": "project_name",
+          "hit": true
+        },
+        {
+          "name": "budget",
+          "hit": true
+        },
+        {
+          "name": "project_code",
+          "hit": true
+        },
+        {
+          "name": "deadline",
+          "hit": true
+        },
+        {
+          "name": "bond_required",
+          "hit": true
+        }
+      ],
+      "categories": {
+        "QUALIFICATION": 23,
+        "SIGNATURE": 33,
+        "BOND": 4,
+        "DEADLINE": 5,
+        "CREDENTIAL": 14,
+        "FATAL": 18,
+        "SCORING": 4
+      }
+    },
+    {
+      "document_id": "fixture-003",
+      "pages": 66,
+      "text_pages": 66,
+      "ocr_required_pages": 0,
+      "requirement_count": 103,
+      "field_hits": 4,
+      "field_total": 4,
+      "field_recall": [
+        {
+          "name": "budget",
+          "hit": true
+        },
+        {
+          "name": "contract_end",
+          "hit": true
+        },
+        {
+          "name": "bond_section",
+          "hit": true
+        },
+        {
+          "name": "qualification_ref",
+          "hit": true
+        }
+      ],
+      "categories": {
+        "BOND": 11,
+        "QUALIFICATION": 17,
+        "SIGNATURE": 42,
+        "DEADLINE": 14,
+        "FATAL": 14,
+        "SCORING": 3,
+        "CREDENTIAL": 2
+      }
+    }
+  ]
+}

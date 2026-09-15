@@ -15,6 +15,7 @@ _configured = False
 _lock = Lock()
 _http_requests: dict[tuple[str, str], int] = defaultdict(int)
 _job_claims = 0
+_ocr_pages: dict[tuple[str, str], int] = defaultdict(int)
 
 
 class RequestContextFilter(logging.Filter):
@@ -49,6 +50,7 @@ def reset_for_tests() -> None:
     _configured = False
     _job_claims = 0
     _http_requests.clear()
+    _ocr_pages.clear()
     logging.getLogger().handlers.clear()
 
 
@@ -116,6 +118,13 @@ def record_job_claim() -> None:
         _job_claims += 1
 
 
+def record_ocr_page(*, provider: str, egress: str) -> None:
+    """Count OCR page outcomes for cost/egress control when metrics are scraped."""
+    key = ((provider or "unknown")[:80], (egress or "none")[:40])
+    with _lock:
+        _ocr_pages[key] += 1
+
+
 def prometheus_text() -> str:
     from .repositories import jobs
 
@@ -127,11 +136,24 @@ def prometheus_text() -> str:
         for (method, code), count in sorted(_http_requests.items()):
             lines.append(f'bidproof_http_requests_total{{method="{method}",code="{code}"}} {count}')
         claims = _job_claims
+        ocr_snapshot = sorted(_ocr_pages.items())
     lines.extend(
         [
             "# HELP bidproof_job_claims_total Jobs claimed by this process",
             "# TYPE bidproof_job_claims_total counter",
             f"bidproof_job_claims_total {claims}",
+            "# HELP bidproof_ocr_pages_total OCR pages by provider and egress mode",
+            "# TYPE bidproof_ocr_pages_total counter",
+        ]
+    )
+    for (provider, egress), count in ocr_snapshot:
+        safe_provider = provider.replace('"', "")
+        safe_egress = egress.replace('"', "")
+        lines.append(
+            f'bidproof_ocr_pages_total{{provider="{safe_provider}",egress="{safe_egress}"}} {count}'
+        )
+    lines.extend(
+        [
             "# HELP bidproof_jobs Jobs currently stored, by status",
             "# TYPE bidproof_jobs gauge",
         ]

@@ -10,6 +10,23 @@ REQUIREMENT_PATTERNS: list[tuple[str, str, str]] = [
     ("签章要求", "SIGNATURE", r"签字盖章|签章|电子签章|法定代表人"),
     ("保证金", "BOND", r"投标保证金|履约保证金|保函"),
     ("证书/业绩", "CREDENTIAL", r"资质证书|认证证书|类似业绩|项目经验|人员证书"),
+    # Hospital / medical-device procurement (器械经销商对医院招标)
+    (
+        "医疗器械资质",
+        "CREDENTIAL",
+        r"医疗器械经营许可证|医疗器械注册证|医疗器械备案|第二类医疗器械|第三类医疗器械|"
+        r"医疗器械生产许可证|生产企业许可证|ISO\s*13485|产品注册证",
+    ),
+    (
+        "授权配送",
+        "QUALIFICATION",
+        r"授权委托书|销售授权|区域授权|两票制|配送授权|经销授权",
+    ),
+    (
+        "医院业绩/售后",
+        "CREDENTIAL",
+        r"三级甲等|三甲医院|医院业绩|同类项目业绩|售后服务承诺|质保期|冷链",
+    ),
 ]
 
 EVIDENCE_CATEGORIES = {"QUALIFICATION", "SIGNATURE", "BOND", "CREDENTIAL"}
@@ -68,10 +85,12 @@ def extract_requirements(pages: list[dict[str, Any]]) -> list[dict[str, Any]]:
 
 
 def _deduplicate(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    seen: set[tuple[str, str, int]] = set()
+    seen: set[tuple[str, str, str, int]] = set()
     result: list[dict[str, Any]] = []
     for item in items:
-        key = (item["category"], item["source"]["quote"], item["source"]["page"])
+        # Include label so hospital pages can keep both 器械证照 and 三甲业绩
+        # even when the quote window covers the same short paragraph.
+        key = (item["category"], item["label"], item["source"]["quote"], item["source"]["page"])
         if key not in seen:
             seen.add(key)
             result.append(item)
@@ -129,13 +148,22 @@ def _terms_for(requirement: dict[str, Any]) -> list[str]:
     text = requirement["title"]
     terms = [t.lower() for t in re.findall(r"[\u4e00-\u9fff]{2,8}|[A-Za-z]{3,}", text)]
     category_terms = {
-        "QUALIFICATION": ["营业执照", "资格", "供应商"],
+        "QUALIFICATION": ["营业执照", "资格", "供应商", "授权", "两票制", "配送"],
         "FATAL": ["废标", "否决", "无效"],
         "SCORING": ["评分", "业绩"],
         "DEADLINE": ["截止", "开标", "递交"],
         "SIGNATURE": ["签章", "盖章", "法定代表人"],
         "BOND": ["保证金", "保函"],
-        "CREDENTIAL": ["证书", "资质", "业绩"],
+        "CREDENTIAL": [
+            "证书",
+            "资质",
+            "业绩",
+            "医疗器械",
+            "注册证",
+            "经营许可证",
+            "iso13485",
+            "三甲",
+        ],
     }
     return list(dict.fromkeys(terms + [x.lower() for x in category_terms.get(requirement["category"], [])]))
 
