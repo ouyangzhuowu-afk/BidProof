@@ -18,7 +18,8 @@ Why this path: RapidOCR docs explicitly recommend Paddle fine-tune → ONNX → 
 | RapidOCR page CER baseline | Done — clean mean CER **18.2%**, synthetic **17.0%** (gate ≤2% **NO**) |
 | RapidOCR **line** CER (val crops) | Done — n=100, mean **8.9%**, median **0%**, exact **60%** (gate ≤2% **NO**) |
 | Rec dataset build | Done — **4316 train / 480 val** lines (expanded) |
-| Paddle fine-tune epochs | **Running on Windows CPU** (py3.11 `.venv-ocr-train`): PP-OCRv4_mobile_rec, 2 epochs, pretrained `student.pdparams` loaded; log `outputs/ocr-benchmark/win-train.log` |
+| Paddle fine-tune epochs | **Done on Windows GPU** (RTX 5060 / Paddle 3.3.0 cu129): PP-OCRv4_mobile_rec, 2 epochs; val **acc=0.911**, **norm_edit_dis=0.985**, fps≈134; artifacts `work/models/ocr/paddle-rec-finetune/{latest,iter_epoch_2,best_accuracy}` + infer `work/models/ocr/paddle-rec-infer/`; logs `win-train-gpu.log`, `paddle-rec-eval.log` |
+| ONNX → RapidOCR redeploy | **Blocked** — Windows `paddle2onnx` DLL fails (known vs Paddle 3.3); WSL has no egress (conda/pypi timeout). Inference dir ready at `work/models/ocr/paddle-rec-infer/`. Paddle val proxy: **norm_edit_dis=0.985 ⇒ ~1.5% edit error** on weak-label val (not RapidOCR page CER; gate still open until ONNX deploy + held-out CER) |
 | T1 redacted cloud re-measure | **Blocked** — `BIDPROOF_OCR_EGRESS_ALLOWED!=1` (correct) |
 
 ## Commands
