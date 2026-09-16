@@ -1,0 +1,12 @@
+{
+  "completed_documents": 12,
+  "failed_urls": 8,
+  "newly_added": 9,
+  "newly_failed": 8,
+  "this_leaf_completed": 9,
+  "this_leaf_failed": 8,
+  "product_pass": false,
+  "business_pass": false,
+  "t005": false,
+  "leaf_id": "S-A-09"
+}
