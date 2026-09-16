@@ -59,3 +59,5 @@ uv run python -m work.eval.rapidocr_line_cer
 ```
 
 The line-CER command is expected to remain `GATE_FAIL` on the sandbox hypotheses (intentional; not a product PASS).
+
+Key-field GT seed (S-A-04) is separate: `uv run python -m work.eval.key_field_gt`. See `work/eval/KEY_FIELD_GT.md`. That command does **not** compute F1.

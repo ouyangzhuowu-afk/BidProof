@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "leaf_id": "S-A-04",
+  "frozen": true,
+  "purpose": "Frozen key-field name enum for sandbox Campaign A. S-A-03 F1 must use these names only; unknown names fail closed.",
+  "claim_scope": "engineering labels only; not a product or business PASS; F1 is not evaluated here",
+  "product_pass": false,
+  "business_pass": false,
+  "t005": false,
+  "notes": [
+    "Do not reintroduce legacy aliases bond / bond_required / bond_section / no_bond.",
+    "table_title remains a page-schema field for TEDS later, not a key-field F1 name.",
+    "Bump this file and page_annotation.schema.json $defs.key_field_name together."
+  ],
+  "names": [
+    {"name": "agent", "label_zh": "采购代理机构"},
+    {"name": "bid_bond", "label_zh": "投标保证金"},
+    {"name": "budget", "label_zh": "采购预算"},
+    {"name": "ceiling", "label_zh": "最高限价"},
+    {"name": "contract_end", "label_zh": "合同履行期限"},
+    {"name": "deadline", "label_zh": "投标截止/开标时间"},
+    {"name": "device_license", "label_zh": "医疗器械经营/生产许可证"},
+    {"name": "device_registration", "label_zh": "医疗器械注册证"},
+    {"name": "procurement_method", "label_zh": "采购方式"},
+    {"name": "project_code", "label_zh": "项目编号"},
+    {"name": "project_name", "label_zh": "项目名称"},
+    {"name": "purchaser", "label_zh": "采购人"},
+    {"name": "qualification_ref", "label_zh": "资格依据"}
+  ]
+}

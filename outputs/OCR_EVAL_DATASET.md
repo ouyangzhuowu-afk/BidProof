@@ -6,7 +6,7 @@
 |---|---:|---|---|
 | Public electronic PDFs | 12 | `work/public-eval/pdfs/` | Real published tenders; text layer present. S-A-09 added 9 hospital docs; 8 failed URLs recorded and not counted |
 | Requirement quote GT | 15 rows (5×3) | `work/ground-truth/fixture-00*.md` | Draft; needs second reviewer |
-| Key-field labels | 14 fields / 3 docs + 4 scan-cover | `work/eval/key_fields.json` | Minimal; engineering only |
+| Key-field labels | **7 public docs / 78 unique `(doc, name)` + 1 synthetic page** | `work/eval/fixtures/key_field_gt.jsonl` | S-A-04 seed; frozen enum; F1 **not** evaluated; engineering only |
 | Page JSONL schema + sandbox samples | 3 pages | `work/eval/fixtures/sandbox_pages.jsonl` | Synthetic/public; S-A-01 contract |
 | Scanned OCR cache | 78 pages / 1 doc | `work/ocr/akss-water-it/` | **PII — internal only**; no char-level GT |
 | Synthetic degraded / fax / handwriting / seals | **0** (flags only) | `has_seal` / `has_hw` on JSONL | Gap |
@@ -66,6 +66,24 @@ uv run python -m work.eval.page_annotation work/eval/fixtures/sandbox_pages.json
 
 Exit `0` if every sample is legal; exit `1` otherwise.
 
+## Key-field GT seed (S-A-04)
+
+Canonical labels: `work/eval/fixtures/key_field_gt.jsonl` (S-A-01 page JSONL).  
+Frozen names: `work/eval/key_field_names.json` and `page_annotation.schema.json` `$defs.key_field_name`.  
+Runbook: `work/eval/KEY_FIELD_GT.md`.
+
+S-A-03 F1 **must** use this enum. Unknown names fail closed. Legacy aliases `bond` / `bond_required` / `bond_section` / `no_bond` are not part of F1 vocabulary. `table_title` remains allowed on page JSONL for later TEDS, not as a key field.
+
+Public rows are traceable to `work/public-eval/manifest.json` `source_url` + `sha256`. Synthetic rows use `origin=synthetic` and `doc_id` prefix `synthetic-`. Seed minima: **5 public documents** and **30 unique labeled key fields**. Below that the report is `INSUFFICIENT` (missing GT), never a fabricated F1.
+
+```bash
+uv run python -m work.eval.key_field_gt
+uv run python -m work.eval.page_annotation work/eval/fixtures/key_field_gt.jsonl
+```
+
+Exit `0` = schema valid and seed minima met (`SUFFICIENT_SEED`). Exit `2` = `INSUFFICIENT`. Exit `1` = validation error.  
+`SUFFICIENT_SEED` is **not** F1 ≥ 97% and **not** a product/business PASS. T-005 ledgers are not written.
+
 ## Line-CER harness (S-A-02)
 
 `work/eval/rapidocr_line_cer.py` compares annotation `text_gt` to hypothesis `text_hyp` / `lines_hyp`.
@@ -114,7 +132,7 @@ uv run python -m work.eval.collect_public_tenders --check
 
 See `work/public-eval/FETCH.md`.
 3. Render 10% pages to images; create **synthetic scan** by downsample+JPEG Q40 for CER without customer data.
-4. Manually label 200 key pages for fields + 50 table pages for TEDS (`table_html` with a `<table>`).
+4. Add key-field pages to `work/eval/fixtures/key_field_gt.jsonl` using the frozen enum (`work/eval/KEY_FIELD_GT.md`). Then label 50 table pages for TEDS (`table_html` with a `<table>`).
 5. Keep AKSS only for internal soak; replace with redacted clone before any share.
 6. Keep new pages in the S-A-01 JSONL contract; bump `schema_version` only when adding required fields.
 
@@ -123,6 +141,8 @@ See `work/public-eval/FETCH.md`.
 ```bash
 uv run python -m work.eval.collect_public_tenders --check
 uv run python -m work.eval.page_annotation work/eval/fixtures/sandbox_pages.jsonl
+uv run python -m work.eval.page_annotation work/eval/fixtures/key_field_gt.jsonl
+uv run python -m work.eval.key_field_gt
 uv run python -m work.eval.rapidocr_line_cer
 uv run python -m work.eval.ocr_benchmark --skip-live
 ```

@@ -8,6 +8,25 @@
     { "$ref": "#/$defs/weak_v0_1" }
   ],
   "$defs": {
+    "key_field_name": {
+      "type": "string",
+      "description": "Frozen S-A-04 key-field vocabulary. Page JSONL may still use other names (e.g. table_title); key-field GT / S-A-03 F1 may not.",
+      "enum": [
+        "agent",
+        "bid_bond",
+        "budget",
+        "ceiling",
+        "contract_end",
+        "deadline",
+        "device_license",
+        "device_registration",
+        "procurement_method",
+        "project_code",
+        "project_name",
+        "purchaser",
+        "qualification_ref"
+      ]
+    },
     "field": {
       "type": "object",
       "required": ["name", "value"],

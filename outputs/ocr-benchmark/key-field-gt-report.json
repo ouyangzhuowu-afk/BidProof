@@ -1,0 +1,190 @@
+{
+  "leaf_id": "S-A-04",
+  "claim_scope": "engineering seed only; F1 not evaluated; not a product or business PASS",
+  "coverage_status": "SUFFICIENT_SEED",
+  "min_public_documents": 5,
+  "min_labeled_key_fields": 30,
+  "public_documents": 7,
+  "synthetic_documents": 1,
+  "labeled_key_fields": 78,
+  "labeled_field_instances": 78,
+  "public_document_ids": [
+    "fixture-001",
+    "fixture-002",
+    "fixture-003",
+    "pub-gx-daxin-ultrasound-anesthesia",
+    "pub-gx-qintang-flow-cytometer",
+    "pub-gx-ventilator-monitors",
+    "pub-gx-youjiang-ultrasound"
+  ],
+  "synthetic_document_ids": [
+    "synthetic-keyfield-001"
+  ],
+  "unlabeled_enum_names": [
+    "device_registration"
+  ],
+  "insufficient_reasons": [],
+  "documents": [
+    {
+      "doc_id": "fixture-001",
+      "origin": "public",
+      "source_url": "https://njggzy.nanjing.gov.cn/njweb/tz/20240730/676b45b5-113e-4aff-b074-1e6fd738090e.html",
+      "sha256": "b90b22d14736992e3a5ad8fa2c29c4d23a603654faa3fffbead330c6615defd2",
+      "pages": 2,
+      "fields": [
+        "project_name",
+        "budget",
+        "deadline",
+        "qualification_ref",
+        "procurement_method",
+        "contract_end",
+        "bid_bond"
+      ]
+    },
+    {
+      "doc_id": "fixture-002",
+      "origin": "public",
+      "source_url": "https://www.ccgp-shaanxi.gov.cn/gpx-bid-file/ZF_JGBM_000003/610001/2024/10/21/8a69c58e90e72f300192ac9d3d5b467b/gpx-template/8a69c2509211dc7a0192adb56a814416.pdf?accessCode=9b3feae299491ee3179981e5e497afd4",
+      "sha256": "a6c1f042b077ecbacf5877ac682415ede3dcd64980490eb9d9379867e4fd2b7d",
+      "pages": 3,
+      "fields": [
+        "project_code",
+        "purchaser",
+        "agent",
+        "procurement_method",
+        "project_name",
+        "budget",
+        "qualification_ref",
+        "bid_bond",
+        "deadline"
+      ]
+    },
+    {
+      "doc_id": "fixture-003",
+      "origin": "public",
+      "source_url": "https://weekly.zbtb.org.cn/2024/1b3441f1ffc3d22.pdf",
+      "sha256": "e233f7b45ec3eb26ea8e41c542fcf37b3601cfdf7243bfe1c7956e641eecebf3",
+      "pages": 4,
+      "fields": [
+        "project_code",
+        "purchaser",
+        "agent",
+        "project_name",
+        "budget",
+        "contract_end",
+        "qualification_ref",
+        "deadline",
+        "bid_bond"
+      ]
+    },
+    {
+      "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
+      "origin": "public",
+      "source_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-gov-open-doc/1023FP/450103/10007339275/20261/be962ee4-51f0-46f2-a542-3bf7fe68bd71.pdf",
+      "sha256": "ee2a69cba1ae8ef7cb27a71d89f8aaafbc9ec832647adc453029c0bebec3277d",
+      "pages": 3,
+      "fields": [
+        "project_code",
+        "purchaser",
+        "agent",
+        "project_name",
+        "budget",
+        "ceiling",
+        "contract_end",
+        "qualification_ref",
+        "device_license",
+        "deadline",
+        "procurement_method",
+        "bid_bond"
+      ]
+    },
+    {
+      "doc_id": "pub-gx-youjiang-ultrasound",
+      "origin": "public",
+      "source_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1024FPA/undefined/450103/10007339425/20266/572479dc-2493-43cc-8e66-5186ff6dab02.pdf",
+      "sha256": "c385256a47c8c00c048a03fd96de3297484f158345a06b34bc3ebb4923fbac54",
+      "pages": 4,
+      "fields": [
+        "project_name",
+        "project_code",
+        "purchaser",
+        "agent",
+        "budget",
+        "ceiling",
+        "contract_end",
+        "qualification_ref",
+        "device_license",
+        "deadline",
+        "bid_bond"
+      ]
+    },
+    {
+      "doc_id": "pub-gx-qintang-flow-cytometer",
+      "origin": "public",
+      "source_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1024FPA/undefined/450899/10009653243/20266/b75de483-40d0-4916-93de-a1dbbc97d84a.pdf",
+      "sha256": "ff8495e75653d60f936cb22491581c4933d41a377bb328fd70dbadd503f026f5",
+      "pages": 3,
+      "fields": [
+        "project_name",
+        "project_code",
+        "purchaser",
+        "agent",
+        "procurement_method",
+        "budget",
+        "ceiling",
+        "contract_end",
+        "qualification_ref",
+        "device_license",
+        "deadline",
+        "bid_bond"
+      ]
+    },
+    {
+      "doc_id": "pub-gx-ventilator-monitors",
+      "origin": "public",
+      "source_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1024FPA/undefined/450103/10007341141/20266/264475cd-19b9-493f-b4e3-142276a4f506.pdf",
+      "sha256": "c52e7d6e84dd1dc82f6800fa4d361a48d9c2c77278590af6d53a89012a12659e",
+      "pages": 4,
+      "fields": [
+        "agent",
+        "project_name",
+        "project_code",
+        "budget",
+        "ceiling",
+        "contract_end",
+        "qualification_ref",
+        "device_license",
+        "procurement_method",
+        "deadline",
+        "bid_bond",
+        "purchaser"
+      ]
+    },
+    {
+      "doc_id": "synthetic-keyfield-001",
+      "origin": "synthetic",
+      "source_url": null,
+      "sha256": null,
+      "pages": 1,
+      "fields": [
+        "project_name",
+        "project_code",
+        "budget",
+        "deadline",
+        "bid_bond",
+        "qualification_ref"
+      ]
+    }
+  ],
+  "product_pass": false,
+  "business_pass": false,
+  "t005": false,
+  "f1": null,
+  "f1_status": "NOT_EVALUATED",
+  "f1_gate": 0.97,
+  "line_cer_gate": 0.02,
+  "teds_gate": 0.9,
+  "ok": true,
+  "issues": [],
+  "schema_ok": true
+}
