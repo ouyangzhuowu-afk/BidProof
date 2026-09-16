@@ -393,22 +393,30 @@
       "validation": "Fail-closed JSONL validator + line-CER report with page_cer/line_cer separated and GATE_FAIL vs ≤2%. Engineering only; not a product PASS; no pilot/ICP ledger writes. T-005 still blocked on real enterprise input."
     },
     {
+      "id": "C-024",
+      "title": "S-A-08 门禁产品化验收规格（Audit）",
+      "status": "verified",
+      "dependencies": [
+        "C-023"
+      ],
+      "artifacts": [],
+      "validation": "Audit S-A-08 gate productization accepted (hard OR CER/F1/TEDS => NEEDS_REVIEW; demo!=T-005). Spec file outputs/sandbox-gate-productization-spec.md not yet on assessment tip; re-commit when local tip reconciles. Does NOT claim OCR gates met; does NOT bump T-005.",
+      "note": "Spec may live only in orchestration history if file not yet on tip; re-commit if missing."
+    },
+    {
       "id": "C-025",
-      "title": "Sandbox Campaign A: public hospital tender corpus expand (S-A-09)",
+      "title": "S-A-09 expand public hospital tender eval corpus",
       "status": "verified",
       "dependencies": [
         "C-023"
       ],
       "artifacts": [
         "work/eval/collect_public_tenders.py",
-        "work/eval/public_tender_candidates.json",
-        "work/public-eval/",
         "work/public-eval/FETCH.md",
         "outputs/ocr-benchmark/public-tender-fetch-report.md"
       ],
-      "validation": "PR #5 merged (dd345e3). Collector --check: 12 completed (+9 this leaf), 8 failed URLs not counted; product_pass=false. Audit engineering PASS. Not T-005; no pilot/ICP writes.",
-      "pr": "https://github.com/ouyangzhuowu-afk/BidProof/pull/5",
-      "completed_at": "2026-09-16"
+      "validation": "PR #5 merged: +9 completed public PDFs, 8 failed URLs recorded not counted; product_pass=false; Audit eng PASS; no pilot/ICP writes; T-005 not bumped.",
+      "pr": "https://github.com/ouyangzhuowu-afk/BidProof/pull/5"
     }
   ],
   "backlog": [
@@ -439,7 +447,7 @@
       "status": "pending",
       "priority": "P0",
       "dependencies": [
-        "C-023"
+        "S-A-01"
       ],
       "owner": "Javis",
       "campaign": "A"
@@ -450,7 +458,7 @@
       "status": "pending",
       "priority": "P0",
       "dependencies": [
-        "C-023"
+        "S-A-01"
       ],
       "owner": "Javis",
       "campaign": "A"
@@ -461,7 +469,7 @@
       "status": "pending",
       "priority": "P0",
       "dependencies": [
-        "C-023"
+        "S-A-01"
       ],
       "owner": "Javis",
       "campaign": "A"
@@ -483,7 +491,7 @@
       "status": "pending",
       "priority": "P1",
       "dependencies": [
-        "C-023"
+        "S-A-01"
       ],
       "owner": "Javis",
       "campaign": "A"
@@ -524,9 +532,15 @@
     },
     {
       "id": "D-SANDBOX-2026-09-16",
-      "decision": "Sandbox roadmap locked: gates line CER<=2%, key-field F1>=97%, TEDS>=90%; controlled OCR egress allowed (feature-flagged); M3 vector experiment-only (never PASS); no real enterprise/prod; T-005 human pilot deferred from phase KPIs.",
+      "decision": "Sandbox roadmap locked: gates line CER<=2%, key-field F1>=97%, TEDS>=90%; controlled OCR egress allowed (feature-flagged); M3 vector experiment-only; no real enterprise/prod; T-005 human pilot deferred from phase KPIs.",
       "date": "2026-09-16",
       "decided_by": "Joe"
+    },
+    {
+      "id": "D-SA02-AUDIT-2026-09-16",
+      "decision": "Audit §5 on PR#4: honest GATE_FAIL line_cer=3.17%; continue forced NEEDS_REVIEW.",
+      "date": "2026-09-16",
+      "source": "Audit"
     }
   ],
   "open_questions": [
@@ -787,19 +801,25 @@
       "path": "outputs/ocr-benchmark/public-tender-fetch-report.md",
       "kind": "public-tender-fetch-report",
       "status": "verified",
-      "note": "S-A-09: +9 completed public PDFs; 8 failures not counted; engineering only"
+      "note": "S-A-09: +9/failed 8 not counted; engineering fixtures only"
     },
     {
       "path": "work/public-eval/FETCH.md",
       "kind": "public-tender-fetch-runbook",
       "status": "verified",
       "note": "S-A-09 reproduce runbook"
+    },
+    {
+      "path": "work/eval/collect_public_tenders.py",
+      "kind": "public-tender-collector",
+      "status": "verified",
+      "note": "S-A-09 collector"
     }
   ],
   "next_best_action": {
     "task_id": "S-A-04",
     "title": "Key-field GT 种子扩容（公开/合成）",
-    "reason": "S-A-01/02/09 merged; S-A-08 gate spec authored earlier. Next: GT expansion for key-fields/TEDS/seals after schema (S-A-04/05/07), then F1/TEDS harness (S-A-03/06).",
+    "reason": "S-A-01/02/09 merged; S-A-08 gate productization accepted. Next: GT expansion (S-A-04/05/07) then harnesses (S-A-03/06).",
     "blocked_by": [],
     "parallel": [
       "S-A-05",
@@ -808,5 +828,16 @@
     ],
     "note": "T-005 remains blocked; product path forced NEEDS_REVIEW while CER/F1/TEDS unmet"
   },
-  "updated_at": "2026-09-16T15:07:34Z"
+  "updated_at": "2026-09-16T15:10:01Z",
+  "sandbox_roadmap": {
+    "locked_at": "2026-09-16",
+    "gates": {
+      "line_cer_max": 0.02,
+      "key_field_f1_min": 0.97,
+      "teds_min": 0.9
+    },
+    "ocr_egress": "allowed_feature_flagged",
+    "m3_vector": "experiment_only_never_pass",
+    "scope": "public_synthetic_redacted_only"
+  }
 }
