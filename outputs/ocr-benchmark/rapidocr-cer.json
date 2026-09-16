@@ -1,0 +1,705 @@
+{
+  "generated_at": "2026-09-16T13:00:48.842127+08:00",
+  "egress_allowed": false,
+  "egress_mode": "never",
+  "doc_count": 9,
+  "summary": {
+    "rapidocr_clean_render": {
+      "pages": 18,
+      "mean_cer": 0.18192266107181984,
+      "median_cer": 0.09201583128216603,
+      "p95_cer": 0.7261904761904762,
+      "mean_wer": 0.4836243114212111,
+      "mean_latency_ms": 2675.9944444444445,
+      "hard_pages": 9,
+      "gate_cer_le_2pct": false
+    },
+    "rapidocr_synthetic_scan": {
+      "pages": 18,
+      "mean_cer": 0.1697387757794902,
+      "median_cer": 0.14443375752194929,
+      "p95_cer": 0.3173076923076923,
+      "mean_wer": 0.5120428534980981,
+      "mean_latency_ms": 2171.411111111111,
+      "hard_pages": 11,
+      "gate_cer_le_2pct": false
+    }
+  },
+  "metrics": [
+    {
+      "document_id": "fixture-001-nanjing",
+      "page": 1,
+      "mode": "rapidocr_clean_render",
+      "provider": "rapidocr",
+      "cer": 1.0,
+      "wer": 1.0,
+      "ref_chars": 21,
+      "hyp_chars": 42,
+      "latency_ms": 3289.5,
+      "confidence": 0.999689302406209,
+      "hard_page": true,
+      "error": "",
+      "t1": {
+        "attempted": true,
+        "egress_mode": "never",
+        "egress_allowed": false,
+        "egress": "blocked_policy",
+        "note": "BIDPROOF_OCR_EGRESS_ALLOWED!=1 — skip cloud"
+      }
+    },
+    {
+      "document_id": "fixture-001-nanjing",
+      "page": 1,
+      "mode": "rapidocr_synthetic_scan",
+      "provider": "rapidocr",
+      "cer": 1.0,
+      "wer": 1.0,
+      "ref_chars": 21,
+      "hyp_chars": 42,
+      "latency_ms": 848.1,
+      "confidence": 0.9990019778397312,
+      "hard_page": true,
+      "error": "",
+      "t1": {
+        "attempted": false,
+        "egress": "none"
+      }
+    },
+    {
+      "document_id": "fixture-001-nanjing",
+      "page": 17,
+      "mode": "rapidocr_clean_render",
+      "provider": "rapidocr",
+      "cer": 0.025518341307814992,
+      "wer": 0.024691358024691357,
+      "ref_chars": 627,
+      "hyp_chars": 627,
+      "latency_ms": 5328.8,
+      "confidence": 0.9985751158691839,
+      "hard_page": false,
+      "error": "",
+      "t1": {
+        "attempted": false,
+        "egress": "none"
+      }
+    },
+    {
+      "document_id": "fixture-001-nanjing",
+      "page": 17,
+      "mode": "rapidocr_synthetic_scan",
+      "provider": "rapidocr",
+      "cer": 0.07017543859649122,
+      "wer": 0.30864197530864196,
+      "ref_chars": 627,
+      "hyp_chars": 618,
+      "latency_ms": 4361.7,
+      "confidence": 0.9147581505938503,
+      "hard_page": false,
+      "error": "",
+      "t1": {
+        "attempted": false,
+        "egress": "none"
+      }
+    },
+    {
+      "document_id": "fixture-002-shaanxi",
+      "page": 1,
+      "mode": "rapidocr_clean_render",
+      "provider": "rapidocr",
+      "cer": 0.0,
+      "wer": 0.23529411764705882,
+      "ref_chars": 123,
+      "hyp_chars": 123,
+      "latency_ms": 1725.0,
+      "confidence": 0.9949029195703998,
+      "hard_page": false,
+      "error": "",
+      "t1": {
+        "attempted": false,
+        "egress": "none"
+      }
+    },
+    {
+      "document_id": "fixture-002-shaanxi",
+      "page": 1,
+      "mode": "rapidocr_synthetic_scan",
+      "provider": "rapidocr",
+      "cer": 0.0,
+      "wer": 0.23529411764705882,
+      "ref_chars": 123,
+      "hyp_chars": 123,
+      "latency_ms": 1072.5,
+      "confidence": 0.9961547946115156,
+      "hard_page": false,
+      "error": "",
+      "t1": {
+        "attempted": false,
+        "egress": "none"
+      }
+    },
+    {
+      "document_id": "fixture-002-shaanxi",
+      "page": 34,
+      "mode": "rapidocr_clean_render",
+      "provider": "rapidocr",
+      "cer": 0.07164634146341463,
+      "wer": 0.4649122807017544,
+      "ref_chars": 656,
+      "hyp_chars": 655,
+      "latency_ms": 4651.3,
+      "confidence": 0.9983549756956843,
+      "hard_page": false,
+      "error": "",
+      "t1": {
+        "attempted": false,
+        "egress": "none"
+      }
+    },
+    {
+      "document_id": "fixture-002-shaanxi",
+      "page": 34,
+      "mode": "rapidocr_synthetic_scan",
+      "provider": "rapidocr",
+      "cer": 0.11585365853658537,
+      "wer": 0.5614035087719298,
+      "ref_chars": 656,
+      "hyp_chars": 650,
+      "latency_ms": 4176.9,
+      "confidence": 0.934729810685605,
+      "hard_page": true,
+      "error": "",
+      "t1": {
+        "attempted": false,
+        "egress": "none"
+      }
+    },
+    {
+      "document_id": "fixture-003-zbtb",
+      "page": 1,
+      "mode": "rapidocr_clean_render",
+      "provider": "rapidocr",
+      "cer": 0.013333333333333334,
+      "wer": 0.6875,
+      "ref_chars": 75,
+      "hyp_chars": 75,
+      "latency_ms": 1042.6,
+      "confidence": 0.9987335312106307,
+      "hard_page": false,
+      "error": "",
+      "t1": {
+        "attempted": false,
+        "egress": "none"
+      }
+    },
+    {
+      "document_id": "fixture-003-zbtb",
+      "page": 1,
+      "mode": "rapidocr_synthetic_scan",
+      "provider": "rapidocr",
+      "cer": 0.013333333333333334,
+      "wer": 0.6875,
+      "ref_chars": 75,
+      "hyp_chars": 75,
+      "latency_ms": 1247.0,
+      "confidence": 0.9970963767005337,
+      "hard_page": false,
+      "error": "",
+      "t1": {
+        "attempted": false,
+        "egress": "none"
+      }
+    },
+    {
+      "document_id": "fixture-003-zbtb",
+      "page": 34,
+      "mode": "rapidocr_clean_render",
+      "provider": "rapidocr",
+      "cer": 0.26582278481012656,
+      "wer": 0.3442622950819672,
+      "ref_chars": 632,
+      "hyp_chars": 620,
+      "latency_ms": 5006.7,
+      "confidence": 0.9837568260732289,
+      "hard_page": true,
+      "error": "",
+      "t1": {
+        "attempted": true,
+        "egress_mode": "never",
+        "egress_allowed": false,
+        "egress": "blocked_policy",
+        "note": "BIDPROOF_OCR_EGRESS_ALLOWED!=1 — skip cloud"
+      }
+    },
+    {
+      "document_id": "fixture-003-zbtb",
+      "page": 34,
+      "mode": "rapidocr_synthetic_scan",
+      "provider": "rapidocr",
+      "cer": 0.18829113924050633,
+      "wer": 0.2786885245901639,
+      "ref_chars": 632,
+      "hyp_chars": 561,
+      "latency_ms": 4426.8,
+      "confidence": 0.9414478462100023,
+      "hard_page": true,
+      "error": "",
+      "t1": {
+        "attempted": false,
+        "egress": "none"
+      }
+    },
+    {
+      "document_id": "ccgp-ningdong-hospital-devices",
+      "page": 1,
+      "mode": "rapidocr_clean_render",
+      "provider": "rapidocr",
+      "cer": 0.17105263157894737,
+      "wer": 0.7272727272727273,
+      "ref_chars": 76,
+      "hyp_chars": 76,
+      "latency_ms": 1082.0,
+      "confidence": 0.9189513100804442,
+      "hard_page": true,
+      "error": "",
+      "t1": {
+        "attempted": true,
+        "egress_mode": "never",
+        "egress_allowed": false,
+        "egress": "blocked_policy",
+        "note": "BIDPROOF_OCR_EGRESS_ALLOWED!=1 — skip cloud"
+      }
+    },
+    {
+      "document_id": "ccgp-ningdong-hospital-devices",
+      "page": 1,
+      "mode": "rapidocr_synthetic_scan",
+      "provider": "rapidocr",
+      "cer": 0.06578947368421052,
+      "wer": 0.6363636363636364,
+      "ref_chars": 76,
+      "hyp_chars": 73,
+      "latency_ms": 1186.2,
+      "confidence": 0.9806311834945968,
+      "hard_page": false,
+      "error": "",
+      "t1": {
+        "attempted": false,
+        "egress": "none"
+      }
+    },
+    {
+      "document_id": "ccgp-ningdong-hospital-devices",
+      "page": 56,
+      "mode": "rapidocr_clean_render",
+      "provider": "rapidocr",
+      "cer": 0.007352941176470588,
+      "wer": 0.25333333333333335,
+      "ref_chars": 544,
+      "hyp_chars": 544,
+      "latency_ms": 5135.2,
+      "confidence": 0.9889185928362524,
+      "hard_page": false,
+      "error": "",
+      "t1": {
+        "attempted": false,
+        "egress": "none"
+      }
+    },
+    {
+      "document_id": "ccgp-ningdong-hospital-devices",
+      "page": 56,
+      "mode": "rapidocr_synthetic_scan",
+      "provider": "rapidocr",
+      "cer": 0.05330882352941176,
+      "wer": 0.48,
+      "ref_chars": 544,
+      "hyp_chars": 533,
+      "latency_ms": 3581.7,
+      "confidence": 0.95703043941253,
+      "hard_page": false,
+      "error": "",
+      "t1": {
+        "attempted": false,
+        "egress": "none"
+      }
+    },
+    {
+      "document_id": "ccgp-tongji-neuro-ortho-power",
+      "page": 1,
+      "mode": "rapidocr_clean_render",
+      "provider": "rapidocr",
+      "cer": 0.19801980198019803,
+      "wer": 0.5294117647058824,
+      "ref_chars": 101,
+      "hyp_chars": 121,
+      "latency_ms": 1130.2,
+      "confidence": 0.9975093905075963,
+      "hard_page": true,
+      "error": "",
+      "t1": {
+        "attempted": true,
+        "egress_mode": "never",
+        "egress_allowed": false,
+        "egress": "blocked_policy",
+        "note": "BIDPROOF_OCR_EGRESS_ALLOWED!=1 — skip cloud"
+      }
+    },
+    {
+      "document_id": "ccgp-tongji-neuro-ortho-power",
+      "page": 1,
+      "mode": "rapidocr_synthetic_scan",
+      "provider": "rapidocr",
+      "cer": 0.19801980198019803,
+      "wer": 0.5294117647058824,
+      "ref_chars": 101,
+      "hyp_chars": 121,
+      "latency_ms": 741.0,
+      "confidence": 0.9930246372356432,
+      "hard_page": true,
+      "error": "",
+      "t1": {
+        "attempted": false,
+        "egress": "none"
+      }
+    },
+    {
+      "document_id": "ccgp-tongji-neuro-ortho-power",
+      "page": 49,
+      "mode": "rapidocr_clean_render",
+      "provider": "rapidocr",
+      "cer": 0.11238532110091744,
+      "wer": 0.3333333333333333,
+      "ref_chars": 436,
+      "hyp_chars": 433,
+      "latency_ms": 3382.7,
+      "confidence": 0.9988503405992429,
+      "hard_page": true,
+      "error": "",
+      "t1": {
+        "attempted": true,
+        "egress_mode": "never",
+        "egress_allowed": false,
+        "egress": "blocked_policy",
+        "note": "BIDPROOF_OCR_EGRESS_ALLOWED!=1 — skip cloud"
+      }
+    },
+    {
+      "document_id": "ccgp-tongji-neuro-ortho-power",
+      "page": 49,
+      "mode": "rapidocr_synthetic_scan",
+      "provider": "rapidocr",
+      "cer": 0.14908256880733944,
+      "wer": 0.5238095238095238,
+      "ref_chars": 436,
+      "hyp_chars": 425,
+      "latency_ms": 2813.0,
+      "confidence": 0.9341264732897689,
+      "hard_page": true,
+      "error": "",
+      "t1": {
+        "attempted": false,
+        "egress": "none"
+      }
+    },
+    {
+      "document_id": "ccgp-xiehe-intraop-ultrasound",
+      "page": 1,
+      "mode": "rapidocr_clean_render",
+      "provider": "rapidocr",
+      "cer": 0.19607843137254902,
+      "wer": 0.5882352941176471,
+      "ref_chars": 102,
+      "hyp_chars": 122,
+      "latency_ms": 943.5,
+      "confidence": 0.9976939965917467,
+      "hard_page": true,
+      "error": "",
+      "t1": {
+        "attempted": true,
+        "egress_mode": "never",
+        "egress_allowed": false,
+        "egress": "blocked_policy",
+        "note": "BIDPROOF_OCR_EGRESS_ALLOWED!=1 — skip cloud"
+      }
+    },
+    {
+      "document_id": "ccgp-xiehe-intraop-ultrasound",
+      "page": 1,
+      "mode": "rapidocr_synthetic_scan",
+      "provider": "rapidocr",
+      "cer": 0.19607843137254902,
+      "wer": 0.5294117647058824,
+      "ref_chars": 102,
+      "hyp_chars": 122,
+      "latency_ms": 1169.5,
+      "confidence": 0.9949654949141267,
+      "hard_page": true,
+      "error": "",
+      "t1": {
+        "attempted": false,
+        "egress": "none"
+      }
+    },
+    {
+      "document_id": "ccgp-xiehe-intraop-ultrasound",
+      "page": 48,
+      "mode": "rapidocr_clean_render",
+      "provider": "rapidocr",
+      "cer": 0.1440677966101695,
+      "wer": 0.4421052631578947,
+      "ref_chars": 708,
+      "hyp_chars": 671,
+      "latency_ms": 4693.9,
+      "confidence": 0.9973976528935514,
+      "hard_page": true,
+      "error": "",
+      "t1": {
+        "attempted": true,
+        "egress_mode": "never",
+        "egress_allowed": false,
+        "egress": "blocked_policy",
+        "note": "BIDPROOF_OCR_EGRESS_ALLOWED!=1 — skip cloud"
+      }
+    },
+    {
+      "document_id": "ccgp-xiehe-intraop-ultrasound",
+      "page": 48,
+      "mode": "rapidocr_synthetic_scan",
+      "provider": "rapidocr",
+      "cer": 0.15677966101694915,
+      "wer": 0.5789473684210527,
+      "ref_chars": 708,
+      "hyp_chars": 678,
+      "latency_ms": 4327.5,
+      "confidence": 0.9447816087480176,
+      "hard_page": true,
+      "error": "",
+      "t1": {
+        "attempted": false,
+        "egress": "none"
+      }
+    },
+    {
+      "document_id": "zbtb-mofcom-it-budget-eval",
+      "page": 1,
+      "mode": "rapidocr_clean_render",
+      "provider": "rapidocr",
+      "cer": 0.013333333333333334,
+      "wer": 0.6875,
+      "ref_chars": 75,
+      "hyp_chars": 75,
+      "latency_ms": 651.3,
+      "confidence": 0.9987335312106307,
+      "hard_page": false,
+      "error": "",
+      "t1": {
+        "attempted": false,
+        "egress": "none"
+      }
+    },
+    {
+      "document_id": "zbtb-mofcom-it-budget-eval",
+      "page": 1,
+      "mode": "rapidocr_synthetic_scan",
+      "provider": "rapidocr",
+      "cer": 0.013333333333333334,
+      "wer": 0.6875,
+      "ref_chars": 75,
+      "hyp_chars": 75,
+      "latency_ms": 762.7,
+      "confidence": 0.9970963767005337,
+      "hard_page": false,
+      "error": "",
+      "t1": {
+        "attempted": false,
+        "egress": "none"
+      }
+    },
+    {
+      "document_id": "zbtb-mofcom-it-budget-eval",
+      "page": 34,
+      "mode": "rapidocr_clean_render",
+      "provider": "rapidocr",
+      "cer": 0.26582278481012656,
+      "wer": 0.3442622950819672,
+      "ref_chars": 632,
+      "hyp_chars": 620,
+      "latency_ms": 3132.5,
+      "confidence": 0.9837568260732289,
+      "hard_page": true,
+      "error": "",
+      "t1": {
+        "attempted": true,
+        "egress_mode": "never",
+        "egress_allowed": false,
+        "egress": "blocked_policy",
+        "note": "BIDPROOF_OCR_EGRESS_ALLOWED!=1 — skip cloud"
+      }
+    },
+    {
+      "document_id": "zbtb-mofcom-it-budget-eval",
+      "page": 34,
+      "mode": "rapidocr_synthetic_scan",
+      "provider": "rapidocr",
+      "cer": 0.18829113924050633,
+      "wer": 0.2786885245901639,
+      "ref_chars": 632,
+      "hyp_chars": 561,
+      "latency_ms": 2547.1,
+      "confidence": 0.9414478462100023,
+      "hard_page": true,
+      "error": "",
+      "t1": {
+        "attempted": false,
+        "egress": "none"
+      }
+    },
+    {
+      "document_id": "zbtb-hanjiang-lab-service",
+      "page": 1,
+      "mode": "rapidocr_clean_render",
+      "provider": "rapidocr",
+      "cer": 0.7261904761904762,
+      "wer": 0.8461538461538461,
+      "ref_chars": 84,
+      "hyp_chars": 145,
+      "latency_ms": 1454.8,
+      "confidence": 0.9877363258701719,
+      "hard_page": true,
+      "error": "",
+      "t1": {
+        "attempted": true,
+        "egress_mode": "never",
+        "egress_allowed": false,
+        "egress": "blocked_policy",
+        "note": "BIDPROOF_OCR_EGRESS_ALLOWED!=1 — skip cloud"
+      }
+    },
+    {
+      "document_id": "zbtb-hanjiang-lab-service",
+      "page": 1,
+      "mode": "rapidocr_synthetic_scan",
+      "provider": "rapidocr",
+      "cer": 0.16666666666666666,
+      "wer": 0.46153846153846156,
+      "ref_chars": 84,
+      "hyp_chars": 98,
+      "latency_ms": 680.8,
+      "confidence": 0.9923845705741541,
+      "hard_page": true,
+      "error": "",
+      "t1": {
+        "attempted": false,
+        "egress": "none"
+      }
+    },
+    {
+      "document_id": "zbtb-hanjiang-lab-service",
+      "page": 46,
+      "mode": "rapidocr_clean_render",
+      "provider": "rapidocr",
+      "cer": 0.025522041763341066,
+      "wer": 0.3333333333333333,
+      "ref_chars": 431,
+      "hyp_chars": 432,
+      "latency_ms": 3220.4,
+      "confidence": 0.9960821228710546,
+      "hard_page": false,
+      "error": "",
+      "t1": {
+        "attempted": false,
+        "egress": "none"
+      }
+    },
+    {
+      "document_id": "zbtb-hanjiang-lab-service",
+      "page": 46,
+      "mode": "rapidocr_synthetic_scan",
+      "provider": "rapidocr",
+      "cer": 0.02320185614849188,
+      "wer": 0.29411764705882354,
+      "ref_chars": 431,
+      "hyp_chars": 431,
+      "latency_ms": 2903.9,
+      "confidence": 0.9719827854353481,
+      "hard_page": false,
+      "error": "",
+      "t1": {
+        "attempted": false,
+        "egress": "none"
+      }
+    },
+    {
+      "document_id": "zbtb-hefei-highway-template",
+      "page": 1,
+      "mode": "rapidocr_clean_render",
+      "provider": "rapidocr",
+      "cer": 0.0,
+      "wer": 0.36363636363636365,
+      "ref_chars": 93,
+      "hyp_chars": 93,
+      "latency_ms": 901.2,
+      "confidence": 0.9990122446741062,
+      "hard_page": false,
+      "error": "",
+      "t1": {
+        "attempted": false,
+        "egress": "none"
+      }
+    },
+    {
+      "document_id": "zbtb-hefei-highway-template",
+      "page": 1,
+      "mode": "rapidocr_synthetic_scan",
+      "provider": "rapidocr",
+      "cer": 0.13978494623655913,
+      "wer": 0.5454545454545454,
+      "ref_chars": 93,
+      "hyp_chars": 82,
+      "latency_ms": 1023.9,
+      "confidence": 0.971564986334851,
+      "hard_page": true,
+      "error": "",
+      "t1": {
+        "attempted": false,
+        "egress": "none"
+      }
+    },
+    {
+      "document_id": "zbtb-hefei-highway-template",
+      "page": 97,
+      "mode": "rapidocr_clean_render",
+      "provider": "rapidocr",
+      "cer": 0.038461538461538464,
+      "wer": 0.5,
+      "ref_chars": 104,
+      "hyp_chars": 104,
+      "latency_ms": 1396.3,
+      "confidence": 0.9987641776665981,
+      "hard_page": false,
+      "error": "",
+      "t1": {
+        "attempted": false,
+        "egress": "none"
+      }
+    },
+    {
+      "document_id": "zbtb-hefei-highway-template",
+      "page": 97,
+      "mode": "rapidocr_synthetic_scan",
+      "provider": "rapidocr",
+      "cer": 0.3173076923076923,
+      "wer": 0.6,
+      "ref_chars": 104,
+      "hyp_chars": 77,
+      "latency_ms": 1215.1,
+      "confidence": 0.8088411153265924,
+      "hard_page": true,
+      "error": "",
+      "t1": {
+        "attempted": false,
+        "egress": "none"
+      }
+    }
+  ]
+}

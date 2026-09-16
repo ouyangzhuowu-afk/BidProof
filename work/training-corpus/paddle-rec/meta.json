@@ -1,0 +1,17 @@
+{
+  "generated_at": "2026-09-16T16:21:00.178900+08:00",
+  "method": "paddleocr_simpledataset_from_pdf_text_dict",
+  "references": [
+    "https://rapidai.github.io/RapidOCRDocs/main/",
+    "https://github.com/PaddlePaddle/PaddleOCR",
+    "https://github.com/RapidAI/PaddleOCRModelConverter"
+  ],
+  "train_samples": 4316,
+  "val_samples": 480,
+  "next_steps": [
+    "Install paddleocr/paddlepaddle (uv sync --extra ocr-paddle or WSL GPU env)",
+    "Fine-tune ch_PP-OCRv4_rec with SimpleDataSet pointing at this folder",
+    "Export ONNX and configure RapidOCR model paths under work/models/ocr/"
+  ],
+  "out_dir": "work/training-corpus/paddle-rec"
+}
