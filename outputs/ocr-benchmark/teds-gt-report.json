@@ -1,0 +1,146 @@
+{
+  "leaf_id": "S-A-05",
+  "claim_scope": "engineering seed only; TEDS not evaluated; not a product or business PASS",
+  "coverage_status": "SUFFICIENT_SEED",
+  "min_teds_pages": 15,
+  "min_public_documents": 3,
+  "teds_gt_pages": 16,
+  "public_documents": 6,
+  "synthetic_documents": 4,
+  "public_document_ids": [
+    "fixture-001",
+    "fixture-002",
+    "fixture-003",
+    "pub-gx-daxin-ultrasound-anesthesia",
+    "pub-gx-nanning-vascular-doppler",
+    "pub-gx-ventilator-monitors"
+  ],
+  "synthetic_document_ids": [
+    "synthetic-teds-bid-opening",
+    "synthetic-teds-deviation",
+    "synthetic-teds-quote-detail",
+    "synthetic-teds-score"
+  ],
+  "insufficient_reasons": [],
+  "documents": [
+    {
+      "doc_id": "fixture-001",
+      "origin": "public",
+      "source_url": "https://njggzy.nanjing.gov.cn/njweb/tz/20240730/676b45b5-113e-4aff-b074-1e6fd738090e.html",
+      "sha256": "b90b22d14736992e3a5ad8fa2c29c4d23a603654faa3fffbead330c6615defd2",
+      "pages": 2,
+      "titles": [
+        "采购清单",
+        "开标报价表"
+      ]
+    },
+    {
+      "doc_id": "fixture-002",
+      "origin": "public",
+      "source_url": "https://www.ccgp-shaanxi.gov.cn/gpx-bid-file/ZF_JGBM_000003/610001/2024/10/21/8a69c58e90e72f300192ac9d3d5b467b/gpx-template/8a69c2509211dc7a0192adb56a814416.pdf?accessCode=9b3feae299491ee3179981e5e497afd4",
+      "sha256": "a6c1f042b077ecbacf5877ac682415ede3dcd64980490eb9d9379867e4fd2b7d",
+      "pages": 2,
+      "titles": [
+        "符合性审查表",
+        "货物清单"
+      ]
+    },
+    {
+      "doc_id": "fixture-003",
+      "origin": "public",
+      "source_url": "https://weekly.zbtb.org.cn/2024/1b3441f1ffc3d22.pdf",
+      "sha256": "e233f7b45ec3eb26ea8e41c542fcf37b3601cfdf7243bfe1c7956e641eecebf3",
+      "pages": 2,
+      "titles": [
+        "资格审查与符合性审查",
+        "投标报价表"
+      ]
+    },
+    {
+      "doc_id": "pub-gx-nanning-vascular-doppler",
+      "origin": "public",
+      "source_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-gov-open-doc/1024FPA/450103/10007339269/20262/e485f8f3-9a31-4bc8-9a18-404b826dcb1a.pdf",
+      "sha256": "59e5b5814d4b8c340f3237871a9f3f35870b7468aa5dbe0a081c774554a22486",
+      "pages": 3,
+      "titles": [
+        "分标最高限价一览表",
+        "母婴中央监护系统配置清单",
+        "胎儿监护仪配置清单"
+      ]
+    },
+    {
+      "doc_id": "pub-gx-ventilator-monitors",
+      "origin": "public",
+      "source_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1024FPA/undefined/450103/10007341141/20266/264475cd-19b9-493f-b4e3-142276a4f506.pdf",
+      "sha256": "c52e7d6e84dd1dc82f6800fa4d361a48d9c2c77278590af6d53a89012a12659e",
+      "pages": 1,
+      "titles": [
+        "遥测与患者监护仪配置清单"
+      ]
+    },
+    {
+      "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
+      "origin": "public",
+      "source_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-gov-open-doc/1023FP/450103/10007339275/20261/be962ee4-51f0-46f2-a542-3bf7fe68bd71.pdf",
+      "sha256": "ee2a69cba1ae8ef7cb27a71d89f8aaafbc9ec832647adc453029c0bebec3277d",
+      "pages": 2,
+      "titles": [
+        "代理服务费费率表",
+        "分项报价表"
+      ]
+    },
+    {
+      "doc_id": "synthetic-teds-bid-opening",
+      "origin": "synthetic",
+      "source_url": null,
+      "sha256": null,
+      "pages": 1,
+      "titles": [
+        "开标一览表"
+      ]
+    },
+    {
+      "doc_id": "synthetic-teds-quote-detail",
+      "origin": "synthetic",
+      "source_url": null,
+      "sha256": null,
+      "pages": 1,
+      "titles": [
+        "报价明细表"
+      ]
+    },
+    {
+      "doc_id": "synthetic-teds-score",
+      "origin": "synthetic",
+      "source_url": null,
+      "sha256": null,
+      "pages": 1,
+      "titles": [
+        "综合评分标准表"
+      ]
+    },
+    {
+      "doc_id": "synthetic-teds-deviation",
+      "origin": "synthetic",
+      "source_url": null,
+      "sha256": null,
+      "pages": 1,
+      "titles": [
+        "技术偏离表"
+      ]
+    }
+  ],
+  "product_pass": false,
+  "business_pass": false,
+  "t005": false,
+  "teds": null,
+  "teds_status": "NOT_EVALUATED",
+  "teds_gate": 0.9,
+  "line_cer_gate": 0.02,
+  "f1_gate": 0.97,
+  "week1_scope": "single_page_complete_tables_only",
+  "cross_page_tables": "out_of_scope",
+  "ok": true,
+  "issues": [],
+  "schema_ok": true
+}
