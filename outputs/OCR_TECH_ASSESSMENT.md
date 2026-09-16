@@ -16,7 +16,7 @@
 
 ## Scope & limits
 
-- Public electronic PDFs: 3 fixtures under `work/public-eval/pdfs/`.
+- Public electronic PDFs: 12 fixtures under `work/public-eval/pdfs/`.
 - Hospital ICP sample: desensitized cryostat consult DOCX (`work/eval/meddevice-redacted/`) — **text path**, not scan OCR.
 - Scanned corpus: AKSS 78-page Qwen OCR cache (**PII — do not publish**).
 - Live cloud OCR sample (prior): 4 pages, cost-controlled; this refresh ran offline (`adapter_enabled=false`).

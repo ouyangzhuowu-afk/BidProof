@@ -1,0 +1,169 @@
+{
+  "schema_version": "1.0",
+  "leaf_id": "S-A-09",
+  "purpose": "Seed catalog of public government tender PDFs for engineering fixtures only (NOT T-005).",
+  "rate_limit_seconds": 2.0,
+  "constraints": [
+    "public government tender PDFs only",
+    "prefer hospital / medical-device tenders",
+    "failed/dead URLs must be recorded and must not count as completed documents",
+    "do not write outputs/pilot-ledger.csv or outputs/icp-outreach.csv"
+  ],
+  "candidates": [
+    {
+      "candidate_id": "pub-henan-zz-tomo",
+      "title": "郑州市第三人民医院螺旋断层放射治疗系统（TOMO）配套设备购置项目",
+      "publisher": "郑州市政府采购网 / 许昌市政府采购网镜像",
+      "source_type": "provincial_public_resource_platform",
+      "domain": "hospital_meddevice",
+      "source_url": "https://xuchang.zfcg.henan.gov.cn/cmsweb81e27e/nas/webfile2024/zhengzhou/rootfiles/2026/03/20/a31764cf176e40aa81f2663991b4106b.pdf",
+      "file_url": "https://xuchang.zfcg.henan.gov.cn/cmsweb81e27e/nas/webfile2024/zhengzhou/rootfiles/2026/03/20/a31764cf176e40aa81f2663991b4106b.pdf"
+    },
+    {
+      "candidate_id": "pub-henan-ly-infectious",
+      "title": "洛阳市中心医院传染病防控综合服务能力提升项目设备一批采购项目（四次）",
+      "publisher": "洛阳市政府采购网",
+      "source_type": "provincial_public_resource_platform",
+      "domain": "hospital_meddevice",
+      "source_url": "https://luoyang.zfcg.henan.gov.cn/cmsweb35rc67w/luoyang/rootfiles/2026/06/18/dc460f919350456c931c03f31cde03ae.pdf",
+      "file_url": "https://luoyang.zfcg.henan.gov.cn/cmsweb35rc67w/luoyang/rootfiles/2026/06/18/dc460f919350456c931c03f31cde03ae.pdf"
+    },
+    {
+      "candidate_id": "pub-henan-sq-or-lights",
+      "title": "商丘市第一人民医院儿童医院医用吊塔、手术无影灯医疗设备购置项目（二次）",
+      "publisher": "商丘市政府采购网",
+      "source_type": "provincial_public_resource_platform",
+      "domain": "hospital_meddevice",
+      "source_url": "https://shangqiu.zfcg.henan.gov.cn/cmsweb81e27e/shangqiu/rootfiles/2026/03/17/aedb633d809842cca0310000685399dc.pdf",
+      "file_url": "https://shangqiu.zfcg.henan.gov.cn/cmsweb81e27e/shangqiu/rootfiles/2026/03/17/aedb633d809842cca0310000685399dc.pdf"
+    },
+    {
+      "candidate_id": "pub-gx-youjiang-ultrasound",
+      "title": "右江民族医学院附属医院彩色多普勒超声诊断系统（腹部方向）采购",
+      "publisher": "广西政府采购云平台",
+      "source_type": "provincial_public_resource_platform",
+      "domain": "hospital_meddevice",
+      "source_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1024FPA/undefined/450103/10007339425/20266/572479dc-2493-43cc-8e66-5186ff6dab02.pdf",
+      "file_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1024FPA/undefined/450103/10007339425/20266/572479dc-2493-43cc-8e66-5186ff6dab02.pdf"
+    },
+    {
+      "candidate_id": "pub-gx-nanning-vascular-doppler",
+      "title": "南宁市公开招标采购文件（多普勒周围血管诊断系统等医疗设备）",
+      "publisher": "广西政府采购云平台",
+      "source_type": "provincial_public_resource_platform",
+      "domain": "hospital_meddevice",
+      "source_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-gov-open-doc/1024FPA/450103/10007339269/20262/e485f8f3-9a31-4bc8-9a18-404b826dcb1a.pdf",
+      "file_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-gov-open-doc/1024FPA/450103/10007339269/20262/e485f8f3-9a31-4bc8-9a18-404b826dcb1a.pdf"
+    },
+    {
+      "candidate_id": "pub-gx-qintang-flow-cytometer",
+      "title": "贵港市覃塘区人民医院医疗设备采购（流式细胞仪）",
+      "publisher": "广西政府采购云平台",
+      "source_type": "provincial_public_resource_platform",
+      "domain": "hospital_meddevice",
+      "source_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1024FPA/undefined/450899/10009653243/20266/b75de483-40d0-4916-93de-a1dbbc97d84a.pdf",
+      "file_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1024FPA/undefined/450899/10009653243/20266/b75de483-40d0-4916-93de-a1dbbc97d84a.pdf"
+    },
+    {
+      "candidate_id": "pub-gx-daxin-ultrasound-anesthesia",
+      "title": "大新县人民医院高档彩色多普勒超声诊断仪及麻醉机等医疗设备采购",
+      "publisher": "广西政府采购云平台",
+      "source_type": "provincial_public_resource_platform",
+      "domain": "hospital_meddevice",
+      "source_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-gov-open-doc/1023FP/450103/10007339275/20261/be962ee4-51f0-46f2-a542-3bf7fe68bd71.pdf",
+      "file_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-gov-open-doc/1023FP/450103/10007339275/20261/be962ee4-51f0-46f2-a542-3bf7fe68bd71.pdf"
+    },
+    {
+      "candidate_id": "pub-gx-ventilator-monitors",
+      "title": "呼吸机等医疗设备采购项目（呼吸机、无创呼吸机、中央监护系统、高端心电监护仪）",
+      "publisher": "广西政府采购云平台",
+      "source_type": "provincial_public_resource_platform",
+      "domain": "hospital_meddevice",
+      "source_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1024FPA/undefined/450103/10007341141/20266/264475cd-19b9-493f-b4e3-142276a4f506.pdf",
+      "file_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1024FPA/undefined/450103/10007341141/20266/264475cd-19b9-493f-b4e3-142276a4f506.pdf"
+    },
+    {
+      "candidate_id": "pub-gx-niv-sleep-monitor",
+      "title": "无创全自动呼吸机、心电监护仪及多导睡眠记录仪采购",
+      "publisher": "广西政府采购云平台",
+      "source_type": "provincial_public_resource_platform",
+      "domain": "hospital_meddevice",
+      "source_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1024FPA/450103/10007339432/20268/d1063021-8810-48f4-9b0b-58a7e3f1a227.pdf",
+      "file_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1024FPA/450103/10007339432/20268/d1063021-8810-48f4-9b0b-58a7e3f1a227.pdf"
+    },
+    {
+      "candidate_id": "pub-gx-guiping-hospital-it",
+      "title": "桂平市人民医院信息化系统与网络安全设备采购项目",
+      "publisher": "广西政府采购云平台",
+      "source_type": "provincial_public_resource_platform",
+      "domain": "hospital_it",
+      "source_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1014AN/450103/10007300794/20268/ba5ac90a-96fe-4f8f-bd50-361317e042e4.pdf",
+      "file_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1014AN/450103/10007300794/20268/ba5ac90a-96fe-4f8f-bd50-361317e042e4.pdf"
+    },
+    {
+      "candidate_id": "pub-gx-luocheng-smart-hospital",
+      "title": "罗城仫佬族自治县人民医院智慧医院建设",
+      "publisher": "广西政府采购云平台",
+      "source_type": "provincial_public_resource_platform",
+      "domain": "hospital_it",
+      "source_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1024FPA/450502/10009782286/20267/cfbe15f8-d793-487c-9c11-f255d321062d.pdf",
+      "file_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1024FPA/450502/10009782286/20267/cfbe15f8-d793-487c-9c11-f255d321062d.pdf"
+    },
+    {
+      "candidate_id": "pub-gx-yulin-dermatology-his",
+      "title": "玉林市皮肤病医院智慧医院信息化建设一期项目",
+      "publisher": "广西政府采购云平台",
+      "source_type": "provincial_public_resource_platform",
+      "domain": "hospital_it",
+      "source_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-gov-open-doc/1023FP/450999/10008210707/20263/434f78b2-57f6-44a1-8840-28a423677952.pdf",
+      "file_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-gov-open-doc/1023FP/450999/10008210707/20263/434f78b2-57f6-44a1-8840-28a423677952.pdf"
+    },
+    {
+      "candidate_id": "pub-uk-nhs-theatres-2023",
+      "title": "Operating Theatres Equipment and Related Accessories and Services",
+      "publisher": "NHS Supply Chain / Find a Tender (UK government)",
+      "source_type": "national_public_tender_notice",
+      "domain": "hospital_meddevice",
+      "source_url": "https://www.find-tender.service.gov.uk/Notice/031638-2023/PDF",
+      "file_url": "https://www.find-tender.service.gov.uk/Notice/031638-2023/PDF"
+    },
+    {
+      "candidate_id": "pub-uk-nhs-endoscopy-2025",
+      "title": "Framework Agreement for the Supply of Endoscopy Suite Goods & Services",
+      "publisher": "HealthTrust Europe / Find a Tender (UK government)",
+      "source_type": "national_public_tender_notice",
+      "domain": "hospital_meddevice",
+      "source_url": "https://www.find-tender.service.gov.uk/Notice/012270-2025/PDF",
+      "file_url": "https://www.find-tender.service.gov.uk/Notice/012270-2025/PDF"
+    },
+    {
+      "candidate_id": "pub-uk-nhs-theatres-award-2024",
+      "title": "Operating Theatres Equipment and Related Accessories and Services (award notice)",
+      "publisher": "NHS Supply Chain / Find a Tender (UK government)",
+      "source_type": "national_public_tender_notice",
+      "domain": "hospital_meddevice",
+      "source_url": "https://www.find-tender.service.gov.uk/Notice/011959-2024/PDF",
+      "file_url": "https://www.find-tender.service.gov.uk/Notice/011959-2024/PDF"
+    },
+    {
+      "candidate_id": "pub-ccgp-uuid-likely-dead",
+      "title": "CCGP OSS uuid download (expected dead or session-bound)",
+      "publisher": "中国政府采购网",
+      "source_type": "national_public_procurement_portal",
+      "domain": "hospital_meddevice",
+      "source_url": "http://download.ccgp.gov.cn/oss/download?uuid=A42D64E908938ACB579C2B20E655B5",
+      "file_url": "http://download.ccgp.gov.cn/oss/download?uuid=A42D64E908938ACB579C2B20E655B5",
+      "expect_failure": true
+    },
+    {
+      "candidate_id": "pub-dead-url-probe",
+      "title": "Intentional dead URL to prove failures are recorded and not counted",
+      "publisher": "n/a",
+      "source_type": "negative_control",
+      "domain": "hospital_meddevice",
+      "source_url": "https://www.ccgp.gov.cn/bidproof-sa09-does-not-exist.pdf",
+      "file_url": "https://www.ccgp.gov.cn/bidproof-sa09-does-not-exist.pdf",
+      "expect_failure": true
+    }
+  ]
+}

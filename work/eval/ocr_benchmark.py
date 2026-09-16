@@ -348,6 +348,7 @@ def write_assessment(payload: dict[str, Any]) -> None:
         verdict = "不达标"
         verdict_detail = f"渲染后云 OCR 对电子页回读 mean CER={live_cer:.4f} > 2%，字符层不达标。"
 
+    n_public = len(list((ROOT / "work" / "public-eval" / "pdfs").glob("*.pdf")))
     lines = [
         "# OCR Technical Assessment",
         "",
@@ -358,7 +359,7 @@ def write_assessment(payload: dict[str, Any]) -> None:
         "",
         "## Scope & limits",
         "",
-        "- Public electronic PDFs: 3 fixtures under `work/public-eval/pdfs/`.",
+        f"- Public electronic PDFs: {n_public} fixtures under `work/public-eval/pdfs/`.",
         "- Scanned corpus: AKSS 78-page Qwen OCR cache (contains PII — do not publish).",
         "- No formal TEDS / seal / handwriting GT in-repo yet.",
         "- Live cloud OCR limited to a small page sample to control cost.",

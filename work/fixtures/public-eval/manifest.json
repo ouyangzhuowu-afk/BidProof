@@ -2,6 +2,8 @@
   "schema_version": "1.0",
   "leaf_id": "L-PUBLIC-EVAL-SOURCE",
   "purpose": "Public Eval sourcing pack for engineering regression only (NOT T-005).",
+  "canonical": "work/public-eval/manifest.json",
+  "s_a_09_note": "S-A-09 hospital corpus expansion lives only in the canonical manifest and work/public-eval/pdfs/; this legacy copy keeps the original three IT fixtures and is not the fetch target.",
   "prepared_at": "2026-09-13T03:07:06+08:00",
   "rate_limit_note": "No new remote downloads this leaf; reused already-fetched public PDFs to avoid hammering procurement portals.",
   "license_note": "公开政府采购/公共资源交易平台公开发布的招标采购文件，仅作为内部工程能力回归的公开 DATA 备份；不用于对外产品承诺，不替代官方分发授权。",
