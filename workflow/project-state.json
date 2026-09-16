@@ -453,6 +453,25 @@
       ],
       "validation": "PR #5 merged: +9 completed public PDFs, 8 failed URLs recorded not counted; product_pass=false; Audit eng PASS; no pilot/ICP writes; T-005 not bumped.",
       "pr": "https://github.com/ouyangzhuowu-afk/BidProof/pull/5"
+    },
+    {
+      "id": "S-A-04",
+      "title": "Key-field GT 种子扩容（公开/合成）",
+      "status": "verified",
+      "priority": "P0",
+      "campaign": "A",
+      "owner": "Javis",
+      "dependencies": [
+        "S-A-01"
+      ],
+      "artifacts": [
+        "outputs/ocr-benchmark/key-field-gt-report.md",
+        "work/eval/fixtures/key_field_gt.jsonl",
+        "work/eval/key_field_names.json",
+        "work/eval/KEY_FIELD_GT.md"
+      ],
+      "validation": "PR #7 merged at 3d12b2b: coverage SUFFICIENT_SEED (7 public docs / 78 unique (doc, name) + 1 synthetic); f1_status=NOT_EVALUATED (gate F1>=97% unevaluated); product_pass=false; not a product PASS; no pilot/ICP ledger writes; T-005 not bumped. OCR gates unchanged.",
+      "pr": "https://github.com/ouyangzhuowu-afk/BidProof/pull/7"
     }
   ],
   "backlog": [
@@ -480,17 +499,6 @@
     {
       "id": "S-A-03",
       "title": "Key-field F1 harness",
-      "status": "pending",
-      "priority": "P0",
-      "dependencies": [
-        "S-A-01"
-      ],
-      "owner": "Javis",
-      "campaign": "A"
-    },
-    {
-      "id": "S-A-04",
-      "title": "Key-field GT 种子扩容（公开/合成）",
       "status": "pending",
       "priority": "P0",
       "dependencies": [
@@ -850,21 +858,44 @@
       "kind": "public-tender-collector",
       "status": "verified",
       "note": "S-A-09 collector"
+    },
+    {
+      "path": "outputs/ocr-benchmark/key-field-gt-report.md",
+      "kind": "key-field-gt-coverage-report",
+      "status": "verified",
+      "note": "S-A-04: SUFFICIENT_SEED; F1 NOT_EVALUATED; not a product PASS"
+    },
+    {
+      "path": "work/eval/fixtures/key_field_gt.jsonl",
+      "kind": "key-field-gt-seed",
+      "status": "verified",
+      "note": "S-A-04 canonical seed JSONL"
+    },
+    {
+      "path": "work/eval/key_field_names.json",
+      "kind": "key-field-name-enum",
+      "status": "verified",
+      "note": "S-A-04 frozen enum; F1 not evaluated here"
+    },
+    {
+      "path": "work/eval/KEY_FIELD_GT.md",
+      "kind": "key-field-gt-runbook",
+      "status": "verified",
+      "note": "S-A-04 reproduce runbook"
     }
   ],
   "next_best_action": {
-    "task_id": "S-A-04",
-    "title": "Key-field GT 种子扩容（公开/合成）",
-    "reason": "S-A-01/02/09 merged; S-A-08 gate productization accepted. Next: GT expansion (S-A-04/05/07) then harnesses (S-A-03/06).",
+    "task_id": "S-A-05",
+    "title": "TEDS 表结构 GT 种子",
+    "reason": "S-A-04 key-field GT seed merged (SUFFICIENT_SEED; F1 NOT_EVALUATED). Next: TEDS table GT seeds (S-A-05), then TEDS harness (S-A-06).",
     "blocked_by": [],
     "parallel": [
-      "S-A-05",
       "S-A-07",
       "S-A-03"
     ],
-    "note": "T-005 remains blocked; product path forced NEEDS_REVIEW while CER/F1/TEDS unmet"
+    "note": "T-005 remains blocked; product path forced NEEDS_REVIEW while CER/F1/TEDS unmet. Do not relax OCR gates."
   },
-  "updated_at": "2026-09-16T15:10:01Z",
+  "updated_at": "2026-09-16T15:35:00Z",
   "sandbox_roadmap": {
     "locked_at": "2026-09-16",
     "gates": {
