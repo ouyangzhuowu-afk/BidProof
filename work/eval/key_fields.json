@@ -1,57 +1,481 @@
 {
-  "schema_version": "1.0",
-  "purpose": "Minimal key-field labels for OCR/extraction assessment (engineering only).",
+  "schema_version": "1.1",
+  "leaf_id": "S-A-04",
+  "purpose": "Document-level projection of S-A-04 key-field JSONL. Canonical seed is work/eval/fixtures/key_field_gt.jsonl. Engineering only.",
+  "canonical_jsonl": "work/eval/fixtures/key_field_gt.jsonl",
+  "product_pass": false,
+  "f1_status": "NOT_EVALUATED",
   "documents": [
     {
       "document_id": "fixture-001",
-      "path": "work/public-eval/pdfs/source2-nanjing.pdf",
-      "doc_type": "electronic_pdf",
-      "page_type_notes": "born-digital text layer present",
+      "origin": "public",
+      "source_url": "https://njggzy.nanjing.gov.cn/njweb/tz/20240730/676b45b5-113e-4aff-b074-1e6fd738090e.html",
+      "sha256": "b90b22d14736992e3a5ad8fa2c29c4d23a603654faa3fffbead330c6615defd2",
       "fields": [
-        {"name": "project_name", "page": 2, "value": "招标投标交易系统第三方软件测评服务"},
-        {"name": "budget", "page": 2, "value": "16.01"},
-        {"name": "deadline", "page": 2, "value": "2024年8月12日09:40"},
-        {"name": "bond", "page": 3, "value": "不收取投标保证金"},
-        {"name": "qualification_ref", "page": 2, "value": "政府采购法"}
-      ]
+        {
+          "name": "project_name",
+          "page": 2,
+          "value": "招标投标交易系统第三方软件测评服务"
+        },
+        {
+          "name": "budget",
+          "page": 2,
+          "value": "16.01 万元"
+        },
+        {
+          "name": "deadline",
+          "page": 2,
+          "value": "2024 年8 月12 日09:40"
+        },
+        {
+          "name": "qualification_ref",
+          "page": 2,
+          "value": "政府采购法》第二十二条"
+        },
+        {
+          "name": "procurement_method",
+          "page": 2,
+          "value": "竞争性磋商"
+        },
+        {
+          "name": "contract_end",
+          "page": 2,
+          "value": "合同签订之日起至招标投标交易系统建设项目通过终验为止"
+        },
+        {
+          "name": "bid_bond",
+          "page": 3,
+          "value": "不收取投标保证金"
+        }
+      ],
+      "path": "work/public-eval/pdfs/source2-nanjing.pdf",
+      "doc_type": "electronic_pdf"
     },
     {
       "document_id": "fixture-002",
-      "path": "work/public-eval/pdfs/source2-shaanxi.pdf",
-      "doc_type": "electronic_pdf",
+      "origin": "public",
+      "source_url": "https://www.ccgp-shaanxi.gov.cn/gpx-bid-file/ZF_JGBM_000003/610001/2024/10/21/8a69c58e90e72f300192ac9d3d5b467b/gpx-template/8a69c2509211dc7a0192adb56a814416.pdf?accessCode=9b3feae299491ee3179981e5e497afd4",
+      "sha256": "a6c1f042b077ecbacf5877ac682415ede3dcd64980490eb9d9379867e4fd2b7d",
       "fields": [
-        {"name": "project_name", "page": 3, "value": "陕西省统计局国产化计算机终端及应用软件采购项目"},
-        {"name": "budget", "page": 3, "value": "149.99"},
-        {"name": "project_code", "page": 1, "value": "SNCG-FM-2024123", "optional": true},
-        {"name": "deadline", "page": 3, "value": "2024-11-11"},
-        {"name": "bond_required", "page": 6, "value": "不收取投标保证金"}
-      ]
+        {
+          "name": "project_code",
+          "page": 1,
+          "value": "SNCG-FM-2024123"
+        },
+        {
+          "name": "purchaser",
+          "page": 1,
+          "value": "陕西省统计局"
+        },
+        {
+          "name": "agent",
+          "page": 1,
+          "value": "陕西省省级单位政府采购中心"
+        },
+        {
+          "name": "procurement_method",
+          "page": 1,
+          "value": "公开招标"
+        },
+        {
+          "name": "project_name",
+          "page": 3,
+          "value": "陕西省统计局国产化计算机终端及应用软件采购项目"
+        },
+        {
+          "name": "budget",
+          "page": 3,
+          "value": "149.99 万元"
+        },
+        {
+          "name": "qualification_ref",
+          "page": 3,
+          "value": "政府采购法》第二十二条"
+        },
+        {
+          "name": "bid_bond",
+          "page": 6,
+          "value": "不收取投标保证金"
+        },
+        {
+          "name": "deadline",
+          "page": 6,
+          "value": "2024 年11 月11 日09:30"
+        }
+      ],
+      "path": "work/public-eval/pdfs/source2-shaanxi.pdf",
+      "doc_type": "electronic_pdf"
     },
     {
       "document_id": "fixture-003",
-      "path": "work/public-eval/pdfs/source4-zbtb.pdf",
-      "doc_type": "electronic_pdf",
+      "origin": "public",
+      "source_url": "https://weekly.zbtb.org.cn/2024/1b3441f1ffc3d22.pdf",
+      "sha256": "e233f7b45ec3eb26ea8e41c542fcf37b3601cfdf7243bfe1c7956e641eecebf3",
       "fields": [
-        {"name": "budget", "page": 4, "value": "117.5"},
-        {"name": "contract_end", "page": 4, "value": "2025年9月30日"},
-        {"name": "bond_section", "page": 2, "value": "投标保证金"},
-        {"name": "qualification_ref", "page": 4, "value": "政府采购法第二十二条"}
-      ]
+        {
+          "name": "project_code",
+          "page": 1,
+          "value": "MOC2024GK0809005"
+        },
+        {
+          "name": "purchaser",
+          "page": 1,
+          "value": "商务部"
+        },
+        {
+          "name": "agent",
+          "page": 1,
+          "value": "北京数字支点国际项目管理有限公司"
+        },
+        {
+          "name": "project_name",
+          "page": 4,
+          "value": "信息化项目预算评估和效能考核"
+        },
+        {
+          "name": "budget",
+          "page": 4,
+          "value": "117.5 万元"
+        },
+        {
+          "name": "contract_end",
+          "page": 4,
+          "value": "2024 年11 月18 日至2025 年9 月30 日"
+        },
+        {
+          "name": "qualification_ref",
+          "page": 4,
+          "value": "政府采购法第二十二条"
+        },
+        {
+          "name": "deadline",
+          "page": 5,
+          "value": "2024 年10 月31 日10 点30 分"
+        },
+        {
+          "name": "bid_bond",
+          "page": 9,
+          "value": "本项目不适用"
+        }
+      ],
+      "path": "work/public-eval/pdfs/source4-zbtb.pdf",
+      "doc_type": "electronic_pdf"
     },
     {
-      "document_id": "med-cryostat-consult-redacted",
-      "path": "work/eval/meddevice-redacted/consult-cryostat-redacted.docx",
-      "doc_type": "electronic_docx",
-      "domain": "hospital_medical_device",
-      "notes": "Offline-redacted competitive consultation tender for cryostat; source WeChat temp not committed.",
+      "document_id": "pub-gx-daxin-ultrasound-anesthesia",
+      "origin": "public",
+      "source_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-gov-open-doc/1023FP/450103/10007339275/20261/be962ee4-51f0-46f2-a542-3bf7fe68bd71.pdf",
+      "sha256": "ee2a69cba1ae8ef7cb27a71d89f8aaafbc9ec832647adc453029c0bebec3277d",
       "fields": [
-        {"name": "project_name", "page": 1, "value": "冷冻切片机"},
-        {"name": "device_license", "page": 1, "value": "医疗器械经营许可证"},
-        {"name": "device_registration", "page": 1, "value": "医疗器械注册证"},
-        {"name": "budget", "page": 1, "value": "40万元"},
-        {"name": "ceiling", "page": 1, "value": "27万元"},
-        {"name": "no_bond", "page": 1, "value": "不缴纳"}
-      ]
+        {
+          "name": "project_code",
+          "page": 1,
+          "value": "CZZC2025-G1-240219-YZLZ"
+        },
+        {
+          "name": "purchaser",
+          "page": 1,
+          "value": "大新县人民医院"
+        },
+        {
+          "name": "agent",
+          "page": 1,
+          "value": "云之龙咨询集团有限公司"
+        },
+        {
+          "name": "project_name",
+          "page": 3,
+          "value": "高档彩色多普勒超声诊断仪及麻醉机等医疗设备采购项目"
+        },
+        {
+          "name": "budget",
+          "page": 3,
+          "value": "378.9 万元"
+        },
+        {
+          "name": "ceiling",
+          "page": 3,
+          "value": "378.9 万元"
+        },
+        {
+          "name": "contract_end",
+          "page": 4,
+          "value": "自签订合同之日起30 日"
+        },
+        {
+          "name": "qualification_ref",
+          "page": 4,
+          "value": "政府采购法》第二十二条"
+        },
+        {
+          "name": "device_license",
+          "page": 4,
+          "value": "医疗器械经营备案凭证或者经营许可证"
+        },
+        {
+          "name": "deadline",
+          "page": 4,
+          "value": "2026 年1 月27 日9 时00 分"
+        },
+        {
+          "name": "procurement_method",
+          "page": 4,
+          "value": "公开招标"
+        },
+        {
+          "name": "bid_bond",
+          "page": 4,
+          "value": "投标保证金:0 元"
+        }
+      ],
+      "path": "work/public-eval/pdfs/pub-gx-daxin-ultrasound-anesthesia.pdf",
+      "doc_type": "electronic_pdf"
+    },
+    {
+      "document_id": "pub-gx-youjiang-ultrasound",
+      "origin": "public",
+      "source_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1024FPA/undefined/450103/10007339425/20266/572479dc-2493-43cc-8e66-5186ff6dab02.pdf",
+      "sha256": "c385256a47c8c00c048a03fd96de3297484f158345a06b34bc3ebb4923fbac54",
+      "fields": [
+        {
+          "name": "project_name",
+          "page": 2,
+          "value": "彩色多普勒超声诊断系统(腹部方向)采购"
+        },
+        {
+          "name": "project_code",
+          "page": 2,
+          "value": "GXZC2026-G1-001836-YZLZ"
+        },
+        {
+          "name": "purchaser",
+          "page": 2,
+          "value": "右江民族医学院附属医院"
+        },
+        {
+          "name": "agent",
+          "page": 2,
+          "value": "云之龙咨询集团有限公司"
+        },
+        {
+          "name": "budget",
+          "page": 4,
+          "value": "3580000.00"
+        },
+        {
+          "name": "ceiling",
+          "page": 4,
+          "value": "1780000.00 元"
+        },
+        {
+          "name": "contract_end",
+          "page": 4,
+          "value": "自合同签订之日起45 日内"
+        },
+        {
+          "name": "qualification_ref",
+          "page": 5,
+          "value": "政府采购法》第二十二条"
+        },
+        {
+          "name": "device_license",
+          "page": 5,
+          "value": "医疗器械经营备案凭证或者经营许可证"
+        },
+        {
+          "name": "deadline",
+          "page": 5,
+          "value": "2026 年7 月27 日09 时00 分"
+        },
+        {
+          "name": "bid_bond",
+          "page": 6,
+          "value": "免缴纳"
+        }
+      ],
+      "path": "work/public-eval/pdfs/pub-gx-youjiang-ultrasound.pdf",
+      "doc_type": "electronic_pdf"
+    },
+    {
+      "document_id": "pub-gx-qintang-flow-cytometer",
+      "origin": "public",
+      "source_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1024FPA/undefined/450899/10009653243/20266/b75de483-40d0-4916-93de-a1dbbc97d84a.pdf",
+      "sha256": "ff8495e75653d60f936cb22491581c4933d41a377bb328fd70dbadd503f026f5",
+      "fields": [
+        {
+          "name": "project_name",
+          "page": 1,
+          "value": "覃塘区人民医院医疗设备采购"
+        },
+        {
+          "name": "project_code",
+          "page": 1,
+          "value": "GGZC2026-J1-040027-GXXY"
+        },
+        {
+          "name": "purchaser",
+          "page": 1,
+          "value": "贵港市覃塘区人民医院"
+        },
+        {
+          "name": "agent",
+          "page": 1,
+          "value": "广西鑫远工程项目管理有限公司"
+        },
+        {
+          "name": "procurement_method",
+          "page": 1,
+          "value": "竞争性谈判"
+        },
+        {
+          "name": "budget",
+          "page": 3,
+          "value": "590000.00 元"
+        },
+        {
+          "name": "ceiling",
+          "page": 3,
+          "value": "590000.00 元"
+        },
+        {
+          "name": "contract_end",
+          "page": 3,
+          "value": "自合同签订之日起30 日内"
+        },
+        {
+          "name": "qualification_ref",
+          "page": 3,
+          "value": "政府采购法》第二十二条"
+        },
+        {
+          "name": "device_license",
+          "page": 3,
+          "value": "医疗器械生产或经营许可证"
+        },
+        {
+          "name": "deadline",
+          "page": 4,
+          "value": "2026 年6 月12 日9 时00 分"
+        },
+        {
+          "name": "bid_bond",
+          "page": 4,
+          "value": "无需缴纳竞谈保证金"
+        }
+      ],
+      "path": "work/public-eval/pdfs/pub-gx-qintang-flow-cytometer.pdf",
+      "doc_type": "electronic_pdf"
+    },
+    {
+      "document_id": "pub-gx-ventilator-monitors",
+      "origin": "public",
+      "source_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1024FPA/undefined/450103/10007341141/20266/264475cd-19b9-493f-b4e3-142276a4f506.pdf",
+      "sha256": "c52e7d6e84dd1dc82f6800fa4d361a48d9c2c77278590af6d53a89012a12659e",
+      "fields": [
+        {
+          "name": "agent",
+          "page": 1,
+          "value": "华物盛泰工程咨询管理有限公司"
+        },
+        {
+          "name": "project_name",
+          "page": 3,
+          "value": "呼吸机等医疗设备采购项目"
+        },
+        {
+          "name": "project_code",
+          "page": 3,
+          "value": "QZZC2026-G1-990149-HWST"
+        },
+        {
+          "name": "budget",
+          "page": 3,
+          "value": "4700000.00"
+        },
+        {
+          "name": "ceiling",
+          "page": 3,
+          "value": "4250000.00"
+        },
+        {
+          "name": "contract_end",
+          "page": 3,
+          "value": "自签订合同之日起60 天内"
+        },
+        {
+          "name": "qualification_ref",
+          "page": 3,
+          "value": "政府采购法》第二十二条"
+        },
+        {
+          "name": "device_license",
+          "page": 3,
+          "value": "医疗器械生产或经营许可证"
+        },
+        {
+          "name": "procurement_method",
+          "page": 3,
+          "value": "公开招标"
+        },
+        {
+          "name": "deadline",
+          "page": 4,
+          "value": "2026 年7 月8 日9 时30 分"
+        },
+        {
+          "name": "bid_bond",
+          "page": 4,
+          "value": "肆万元整"
+        },
+        {
+          "name": "purchaser",
+          "page": 5,
+          "value": "钦州市第一人民医院"
+        }
+      ],
+      "path": "work/public-eval/pdfs/pub-gx-ventilator-monitors.pdf",
+      "doc_type": "electronic_pdf"
+    },
+    {
+      "document_id": "synthetic-keyfield-001",
+      "origin": "synthetic",
+      "source_url": null,
+      "sha256": null,
+      "fields": [
+        {
+          "name": "project_name",
+          "page": 1,
+          "value": "SYNTH-医院超声设备采购演示"
+        },
+        {
+          "name": "project_code",
+          "page": 1,
+          "value": "SYNTH-KF-0001"
+        },
+        {
+          "name": "budget",
+          "page": 1,
+          "value": "88.00 万元"
+        },
+        {
+          "name": "deadline",
+          "page": 1,
+          "value": "2099 年1 月1 日09:00"
+        },
+        {
+          "name": "bid_bond",
+          "page": 1,
+          "value": "不收取投标保证金"
+        },
+        {
+          "name": "qualification_ref",
+          "page": 1,
+          "value": "政府采购法第二十二条"
+        }
+      ],
+      "path": null,
+      "doc_type": "synthetic",
+      "notes": "Synthetic sandbox page; not a public tender."
     }
   ]
 }
