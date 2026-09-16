@@ -374,39 +374,6 @@
         "tests/test_ui_product_contract.py"
       ],
       "validation": "002 整页替换打乱扫描任务页与上一版的网格/入口对齐，已回退到 4516b3f 工作台 DOM 与样式；zip 仅作设计参考，不再整页落地。T-005 仍未完成。"
-    },
-    {
-      "id": "C-023",
-      "title": "Sandbox Campaign A Day-1: page JSONL schema + line-CER harness (S-A-01/S-A-02)",
-      "status": "verified",
-      "dependencies": [
-        "C-006"
-      ],
-      "artifacts": [
-        "work/eval/page_annotation.py",
-        "work/eval/page_annotation.schema.json",
-        "work/eval/rapidocr_line_cer.py",
-        "work/eval/fixtures/sandbox_pages.jsonl",
-        "outputs/OCR_EVAL_DATASET.md",
-        "outputs/ocr-benchmark/line-cer-report.md"
-      ],
-      "validation": "Fail-closed JSONL validator + line-CER report with page_cer/line_cer separated and GATE_FAIL vs ≤2%. Engineering only; not a product PASS; no pilot/ICP ledger writes. T-005 still blocked on real enterprise input."
-    },
-    {
-      "id": "C-024",
-      "title": "Sandbox Campaign A: public tender corpus expansion (S-A-09)",
-      "status": "verified",
-      "dependencies": [
-        "C-023"
-      ],
-      "artifacts": [
-        "work/eval/collect_public_tenders.py",
-        "work/eval/public_tender_candidates.json",
-        "work/public-eval/manifest.json",
-        "work/public-eval/FETCH.md",
-        "outputs/ocr-benchmark/public-tender-fetch-report.md"
-      ],
-      "validation": "Rate-limited collector added 9 public hospital PDFs (source_url+sha256 each); 8 failed URLs recorded and not counted; --check and pytest cover the contract. Engineering fixtures only; not a product PASS; no pilot/ICP ledger writes. Line CER gate remains ≤2%. T-005 still blocked on real enterprise input."
     }
   ],
   "backlog": [
@@ -686,56 +653,6 @@
       "path": "docs/workbench-patch-002.md",
       "kind": "workbench-design-notes",
       "status": "archived"
-    },
-    {
-      "path": "work/eval/page_annotation.py",
-      "kind": "ocr-eval-schema-validator",
-      "status": "verified"
-    },
-    {
-      "path": "work/eval/page_annotation.schema.json",
-      "kind": "ocr-eval-schema",
-      "status": "verified"
-    },
-    {
-      "path": "work/eval/rapidocr_line_cer.py",
-      "kind": "ocr-line-cer-harness",
-      "status": "verified"
-    },
-    {
-      "path": "work/eval/fixtures/sandbox_pages.jsonl",
-      "kind": "sandbox-page-annotations",
-      "status": "verified"
-    },
-    {
-      "path": "outputs/ocr-benchmark/line-cer-report.md",
-      "kind": "line-cer-engineering-report",
-      "status": "verified"
-    },
-    {
-      "path": "work/eval/collect_public_tenders.py",
-      "kind": "public-tender-collector",
-      "status": "verified"
-    },
-    {
-      "path": "work/public-eval/manifest.json",
-      "kind": "public-eval-manifest",
-      "status": "verified"
-    },
-    {
-      "path": "work/eval/public_tender_candidates.json",
-      "kind": "public-tender-candidate-catalog",
-      "status": "verified"
-    },
-    {
-      "path": "work/public-eval/FETCH.md",
-      "kind": "public-tender-fetch-runbook",
-      "status": "verified"
-    },
-    {
-      "path": "outputs/ocr-benchmark/public-tender-fetch-report.md",
-      "kind": "public-tender-fetch-report",
-      "status": "verified"
     }
   ],
   "next_best_action": {
@@ -745,7 +662,7 @@
     "blocked_by": [
       "尚无首批真实企业任务输入"
     ],
-    "fallback": "S-A-09 public hospital corpus expansion is engineering-only (9 added, 8 failed URLs not counted). ICP 触达台账与 pilot intake 模板已就绪；收到真实企业输入后追加 pilot-row 并关联 icp-outreach.linked_pilot_task_id"
+    "fallback": "ICP 触达台账与 pilot intake 模板已就绪；收到真实企业输入后追加 pilot-row 并关联 icp-outreach.linked_pilot_task_id"
   },
-  "updated_at": "2026-09-16T20:00:00+08:00"
+  "updated_at": "2026-09-04T14:20:00+08:00"
 }
