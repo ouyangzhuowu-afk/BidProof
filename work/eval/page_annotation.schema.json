@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bidproof.local/eval/page_annotation.schema.json",
+  "title": "BidProof page-level OCR annotation (S-A-01)",
+  "description": "One JSON object per JSONL line. schema_version 1.0 is the current contract; 0.1 weak labels remain compatible. Engineering / sandbox only.",
+  "oneOf": [
+    { "$ref": "#/$defs/v1" },
+    { "$ref": "#/$defs/weak_v0_1" }
+  ],
+  "$defs": {
+    "field": {
+      "type": "object",
+      "required": ["name", "value"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "value": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "v1": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "doc_id",
+        "page",
+        "page_type",
+        "text_gt",
+        "fields",
+        "table_html",
+        "has_seal",
+        "has_hw"
+      ],
+      "properties": {
+        "schema_version": { "const": "1.0" },
+        "doc_id": { "type": "string", "minLength": 1 },
+        "page": { "type": "integer", "minimum": 1 },
+        "page_type": { "enum": ["cover", "toc", "body", "table", "seal"] },
+        "text_gt": { "type": "string" },
+        "fields": { "type": "array", "items": { "$ref": "#/$defs/field" } },
+        "table_html": { "type": ["string", "null"] },
+        "has_seal": { "type": "boolean" },
+        "has_hw": { "type": "boolean" }
+      },
+      "additionalProperties": true
+    },
+    "weak_v0_1": {
+      "type": "object",
+      "required": ["doc_id", "page", "text_gt"],
+      "properties": {
+        "schema_version": { "enum": ["0.1"] },
+        "doc_id": { "type": "string", "minLength": 1 },
+        "page": { "type": "integer", "minimum": 1 },
+        "page_type": { "enum": ["cover", "toc", "body", "table", "seal"] },
+        "text_gt": { "type": "string" },
+        "fields": { "type": "array", "items": { "$ref": "#/$defs/field" } },
+        "table_html": { "type": ["string", "null"] },
+        "has_seal": { "type": "boolean" },
+        "has_hw": { "type": "boolean" }
+      },
+      "additionalProperties": true
+    }
+  }
+}
