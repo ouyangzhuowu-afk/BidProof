@@ -1,0 +1,37 @@
+{
+  "generated_at": "2026-09-16T11:31:29.258551+00:00",
+  "claim_scope": "engineering_gate_only",
+  "page_cer": 0.4603174603174603,
+  "line_cer": 0.031746031746031744,
+  "line_cer_gate": 0.02,
+  "gate": "GATE_FAIL",
+  "product_pass": false,
+  "business_pass": false,
+  "teds_gt_pages": 0,
+  "pages": [
+    {
+      "doc_id": "sandbox-public-001",
+      "page": 1,
+      "page_cer": 0.5957446808510638,
+      "line_cer": 0.02127659574468085
+    },
+    {
+      "doc_id": "sandbox-public-002",
+      "page": 1,
+      "page_cer": 0.09090909090909091,
+      "line_cer": 0.09090909090909091
+    },
+    {
+      "doc_id": "sandbox-weak-001",
+      "page": 1,
+      "page_cer": 0.0,
+      "line_cer": 0.0
+    }
+  ],
+  "annotations": "work/eval/fixtures/sandbox_pages.jsonl",
+  "hypotheses": "work/eval/fixtures/sandbox_hypotheses.jsonl",
+  "page_edits": 29,
+  "page_denom": 63,
+  "line_edits": 2,
+  "line_denom": 63
+}
