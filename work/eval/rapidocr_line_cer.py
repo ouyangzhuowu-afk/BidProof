@@ -20,6 +20,7 @@ from typing import Any
 
 from work.eval.ocr_benchmark import _norm, levenshtein
 from work.eval.page_annotation import load_annotations
+from work.eval.teds_gt import has_teds_gt
 
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_ANNOTATIONS = ROOT / "work" / "eval" / "fixtures" / "sandbox_pages.jsonl"
@@ -122,8 +123,8 @@ def _hyp_key(row: dict[str, Any]) -> tuple[str, int]:
 
 
 def _teds_gt(record: dict[str, Any]) -> bool:
-    html = record.get("table_html")
-    return isinstance(html, str) and "<table" in html.lower()
+    """Minimal S-A-06 counting hook: a page counts iff table_html contains <table>."""
+    return has_teds_gt(record)
 
 
 def _pct(value: float | None) -> str:

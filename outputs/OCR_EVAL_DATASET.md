@@ -11,8 +11,8 @@
 | Training line crops | 4316 train / 480 val | work/training-corpus/paddle-rec/ | Weak labels from PDF text dict |
 | RapidOCR CER baseline | 18 pages x2 modes | outputs/ocr-benchmark/RAPIDOCR_CER_REPORT.md | Mean CER ~18% clean / ~17% synthetic - gate fail |
 | Scanned OCR cache | 78 pages / 1 doc | `work/ocr/akss-water-it/` | **PII — internal only**; no char-level GT |
-| Synthetic degraded / fax / handwriting / seals | Partial | work/training-corpus/tender-public/synthetic-scans/ + JSONL flags | JPEG Q40 CER probes; no seal/HW GT |
-| Table structure GT (TEDS) | **0** | `table_html` null in sandbox | Gap |
+| Synthetic degraded / fax / handwriting / seals | Partial | `work/training-corpus/tender-public/synthetic-scans/` + JSONL flags | JPEG Q40 CER probes; seal/HW GT still gap |
+| Table structure GT (TEDS) | **16 pages** (12 public + 4 synthetic) | `work/eval/fixtures/teds_gt.jsonl` | S-A-05 Week-1 single-page seed; TEDS score **not** evaluated |
 
 Sandbox engineering only. This file does **not** record a product PASS, T-005 business PASS, or enterprise acceptance.
 
@@ -23,7 +23,7 @@ First customer ICP: **医疗器械经销 → 医院招标**. Prefer hybrid local
 
 - 医院设备/耗材招标、集采代理文件
 - 扫描件授权委托书、注册证复印件、经营许可证
-- 开标一览表 / 报价明细表（仍无 TEDS GT）
+- 开标一览表 / 报价明细表（S-A-05 已有 Week-1 单页 GT；跨页表仍缺）
 
 ## Coverage matrix (target vs have)
 
@@ -33,7 +33,7 @@ First customer ICP: **医疗器械经销 → 医院招标**. Prefer hybrid local
 | Scanned PDF | Partial | 1 AKSS cache; source PDF may be absent from `work/uploads` (gitignored) |
 | Photo / fax / low-quality copy | No | |
 | Multi-column / TOC | Yes (proxy) | Shaanxi TOC page exposes VL truncation |
-| Tables (报价/偏离/评分) | No GT | Extraction has no table model; TEDS GT = 0 |
+| Tables (报价/偏离/评分) | Week-1 seed (16 pages) | S-A-05 `table_html` GT; TEDS ≥90% **not** measured |
 | Seals / signatures / handwriting | No | Schema flags exist; no labeled pixels |
 | Bid response / 技术标 / 商务标 pairs | No | Only tender side |
 
@@ -74,7 +74,7 @@ Canonical labels: `work/eval/fixtures/key_field_gt.jsonl` (S-A-01 page JSONL).
 Frozen names: `work/eval/key_field_names.json` and `page_annotation.schema.json` `$defs.key_field_name`.  
 Runbook: `work/eval/KEY_FIELD_GT.md`.
 
-S-A-03 F1 **must** use this enum. Unknown names fail closed. Legacy aliases `bond` / `bond_required` / `bond_section` / `no_bond` are not part of F1 vocabulary. `table_title` remains allowed on page JSONL for later TEDS, not as a key field.
+S-A-03 F1 **must** use this enum. Unknown names fail closed. Legacy aliases `bond` / `bond_required` / `bond_section` / `no_bond` are not part of F1 vocabulary. `table_title` remains allowed on page JSONL for TEDS pages, not as a key field.
 
 Public rows are traceable to `work/public-eval/manifest.json` `source_url` + `sha256`. Synthetic rows use `origin=synthetic` and `doc_id` prefix `synthetic-`. Seed minima: **5 public documents** and **30 unique labeled key fields**. Below that the report is `INSUFFICIENT` (missing GT), never a fabricated F1.
 
@@ -86,6 +86,22 @@ uv run python -m work.eval.page_annotation work/eval/fixtures/key_field_gt.jsonl
 Exit `0` = schema valid and seed minima met (`SUFFICIENT_SEED`). Exit `2` = `INSUFFICIENT`. Exit `1` = validation error.  
 `SUFFICIENT_SEED` is **not** F1 ≥ 97% and **not** a product/business PASS. T-005 ledgers are not written.
 
+## TEDS table-structure GT seed (S-A-05)
+
+Canonical labels: `work/eval/fixtures/teds_gt.jsonl` (S-A-01 page JSONL).  
+Runbook: `work/eval/TEDS_GT.md`.  
+Report: `outputs/ocr-benchmark/teds-gt-report.md`.
+
+Public rows are traceable to `work/public-eval/manifest.json` `source_url` + `sha256`. Synthetic rows use `origin=synthetic` and `doc_id` prefix `synthetic-`. Week-1 labels are **single-page complete tables** only. Seed minima: **15 TEDS GT pages** and **3 public documents**. Below that the report is `INSUFFICIENT` (missing GT), never a fabricated TEDS score.
+
+```bash
+uv run python -m work.eval.teds_gt
+uv run python -m work.eval.page_annotation work/eval/fixtures/teds_gt.jsonl
+```
+
+Exit `0` = schema valid and seed minima met (`SUFFICIENT_SEED`). Exit `2` = `INSUFFICIENT`. Exit `1` = validation error.  
+`SUFFICIENT_SEED` is **not** TEDS ≥ 90% and **not** a product/business PASS. T-005 ledgers are not written. S-A-06 similarity harness is out of scope beyond the `has_teds_gt` count hook.
+
 ## Line-CER harness (S-A-02)
 
 `work/eval/rapidocr_line_cer.py` compares annotation `text_gt` to hypothesis `text_hyp` / `lines_hyp`.
@@ -93,10 +109,10 @@ Exit `0` = schema valid and seed minima met (`SUFFICIENT_SEED`). Exit `2` = `INS
 - `page_cer` and `line_cer` are computed separately and never mixed.
 - Engineering gate: **line CER ≤ 2%**. If not met the report is `GATE_FAIL`.
 - `GATE_PASS` is an engineering threshold only. The harness always sets `product_pass=false` and `business_pass=false`.
-- TEDS / key-field F1 ≥ 97% are later gates; this command does not claim them.
+- Key-field F1 ≥ 97% is a later gate; this command does not claim it. TEDS GT counting uses `has_teds_gt`; the ≥90% TEDS score is still later (S-A-06).
 - Writes only under `outputs/ocr-benchmark/` (or `--out-dir`). Refuses paths containing `pilot-ledger` or `icp-outreach`.
 
-Prior RapidOCR soak baseline (not this sandbox fixture): page CER ≈ 18%, line CER ≈ 8.9%, TEDS GT = 0.
+Prior RapidOCR soak baseline (not this sandbox fixture): page CER ≈ 18%, line CER ≈ 8.9%. TEDS GT seed (S-A-05) lives in `work/eval/fixtures/teds_gt.jsonl` (16 pages); the sandbox line-CER fixture still has `table_html=null`.
 
 ```bash
 uv run python -m work.eval.rapidocr_line_cer
@@ -134,7 +150,7 @@ uv run python -m work.eval.collect_public_tenders --check
 
 See `work/public-eval/FETCH.md`.
 3. Render 10% pages to images; create **synthetic scan** by downsample+JPEG Q40 for CER without customer data.
-4. Add key-field pages to `work/eval/fixtures/key_field_gt.jsonl` using the frozen enum (`work/eval/KEY_FIELD_GT.md`). Then label 50 table pages for TEDS (`table_html` with a `<table>`).
+4. Add key-field pages to `work/eval/fixtures/key_field_gt.jsonl` using the frozen enum (`work/eval/KEY_FIELD_GT.md`). TEDS Week-1 seed is `work/eval/fixtures/teds_gt.jsonl` (16 single-page tables). Expand toward 50 pages later; cross-page tables stay out of scope until S-A-06.
 5. Keep AKSS only for internal soak; replace with redacted clone before any share.
 6. Keep new pages in the S-A-01 JSONL contract; bump `schema_version` only when adding required fields.
 
@@ -144,7 +160,9 @@ See `work/public-eval/FETCH.md`.
 uv run python -m work.eval.collect_public_tenders --check
 uv run python -m work.eval.page_annotation work/eval/fixtures/sandbox_pages.jsonl
 uv run python -m work.eval.page_annotation work/eval/fixtures/key_field_gt.jsonl
+uv run python -m work.eval.page_annotation work/eval/fixtures/teds_gt.jsonl
 uv run python -m work.eval.key_field_gt
+uv run python -m work.eval.teds_gt
 uv run python -m work.eval.rapidocr_line_cer
 uv run python -m work.eval.ocr_benchmark --skip-live
 ```
