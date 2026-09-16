@@ -8,8 +8,10 @@
 | Requirement quote GT | 15 rows (5×3) | `work/ground-truth/fixture-00*.md` | Draft; needs second reviewer |
 | Key-field labels | **7 public docs / 78 unique `(doc, name)` + 1 synthetic page** | `work/eval/fixtures/key_field_gt.jsonl` | S-A-04 seed; frozen enum; F1 **not** evaluated; engineering only |
 | Page JSONL schema + sandbox samples | 3 pages | `work/eval/fixtures/sandbox_pages.jsonl` | Synthetic/public; S-A-01 contract |
+| Training line crops | 4316 train / 480 val | work/training-corpus/paddle-rec/ | Weak labels from PDF text dict |
+| RapidOCR CER baseline | 18 pages x2 modes | outputs/ocr-benchmark/RAPIDOCR_CER_REPORT.md | Mean CER ~18% clean / ~17% synthetic - gate fail |
 | Scanned OCR cache | 78 pages / 1 doc | `work/ocr/akss-water-it/` | **PII — internal only**; no char-level GT |
-| Synthetic degraded / fax / handwriting / seals | **0** (flags only) | `has_seal` / `has_hw` on JSONL | Gap |
+| Synthetic degraded / fax / handwriting / seals | Partial | `work/training-corpus/tender-public/synthetic-scans/` + JSONL flags | JPEG Q40 CER probes; seal/HW GT still gap |
 | Table structure GT (TEDS) | **16 pages** (12 public + 4 synthetic) | `work/eval/fixtures/teds_gt.jsonl` | S-A-05 Week-1 single-page seed; TEDS score **not** evaluated |
 
 Sandbox engineering only. This file does **not** record a product PASS, T-005 business PASS, or enterprise acceptance.

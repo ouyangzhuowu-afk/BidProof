@@ -6,7 +6,7 @@ from app.workflow import load_state, next_action, validate_state
 def test_persistent_workflow_state_is_valid():
     state = load_state()
     assert validate_state(state) == []
-    assert next_action(state)["task_id"] == "S-A-04"
+    assert next_action(state)["task_id"] == "S-A-05"
     t005 = next(task for task in state["backlog"] if task.get("id") == "T-005")
     assert t005["status"] == "blocked"
     assert all(task.get("id") != "T-005" for task in state["completed"])
