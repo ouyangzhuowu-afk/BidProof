@@ -472,6 +472,25 @@
       ],
       "validation": "PR #7 merged at 3d12b2b: coverage SUFFICIENT_SEED (7 public docs / 78 unique (doc, name) + 1 synthetic); f1_status=NOT_EVALUATED (gate F1>=97% unevaluated); product_pass=false; not a product PASS; no pilot/ICP ledger writes; T-005 not bumped. OCR gates unchanged.",
       "pr": "https://github.com/ouyangzhuowu-afk/BidProof/pull/7"
+    },
+    {
+      "id": "S-A-05",
+      "title": "TEDS 表结构 GT 种子",
+      "status": "verified",
+      "priority": "P0",
+      "campaign": "A",
+      "owner": "Javis",
+      "dependencies": [
+        "S-A-01"
+      ],
+      "artifacts": [
+        "outputs/ocr-benchmark/teds-gt-report.md",
+        "work/eval/fixtures/teds_gt.jsonl",
+        "work/eval/teds_gt.py",
+        "work/eval/TEDS_GT.md"
+      ],
+      "validation": "PR #9 squash-merged to main at bdef153: coverage SUFFICIENT_SEED (16 table pages / 6 public docs + 4 synthetic); teds_status=NOT_EVALUATED (gate TEDS>=90% unevaluated); product_pass=false; not a product PASS; no pilot/ICP ledger writes; T-005 not bumped. OCR gates unchanged.",
+      "pr": "https://github.com/ouyangzhuowu-afk/BidProof/pull/9"
     }
   ],
   "backlog": [
@@ -499,17 +518,6 @@
     {
       "id": "S-A-03",
       "title": "Key-field F1 harness",
-      "status": "pending",
-      "priority": "P0",
-      "dependencies": [
-        "S-A-01"
-      ],
-      "owner": "Javis",
-      "campaign": "A"
-    },
-    {
-      "id": "S-A-05",
-      "title": "TEDS 表结构 GT 种子",
       "status": "pending",
       "priority": "P0",
       "dependencies": [
@@ -882,12 +890,36 @@
       "kind": "key-field-gt-runbook",
       "status": "verified",
       "note": "S-A-04 reproduce runbook"
+    },
+    {
+      "path": "outputs/ocr-benchmark/teds-gt-report.md",
+      "kind": "teds-gt-coverage-report",
+      "status": "verified",
+      "note": "S-A-05: SUFFICIENT_SEED; TEDS NOT_EVALUATED; not a product PASS"
+    },
+    {
+      "path": "work/eval/fixtures/teds_gt.jsonl",
+      "kind": "teds-gt-seed",
+      "status": "verified",
+      "note": "S-A-05 canonical seed JSONL"
+    },
+    {
+      "path": "work/eval/teds_gt.py",
+      "kind": "teds-gt-validator",
+      "status": "verified",
+      "note": "S-A-05 fail-closed seed CLI"
+    },
+    {
+      "path": "work/eval/TEDS_GT.md",
+      "kind": "teds-gt-runbook",
+      "status": "verified",
+      "note": "S-A-05 reproduce runbook"
     }
   ],
   "next_best_action": {
-    "task_id": "S-A-05",
-    "title": "TEDS 表结构 GT 种子",
-    "reason": "S-A-04 key-field GT seed merged (SUFFICIENT_SEED; F1 NOT_EVALUATED). Next: TEDS table GT seeds (S-A-05), then TEDS harness (S-A-06).",
+    "task_id": "S-A-06",
+    "title": "TEDS harness + 门禁接线",
+    "reason": "S-A-05 TEDS GT seed merged via PR #9 (SUFFICIENT_SEED; TEDS NOT_EVALUATED). Next: TEDS harness + gate wiring (S-A-06).",
     "blocked_by": [],
     "parallel": [
       "S-A-07",
@@ -895,7 +927,7 @@
     ],
     "note": "T-005 remains blocked; product path forced NEEDS_REVIEW while CER/F1/TEDS unmet. Do not relax OCR gates."
   },
-  "updated_at": "2026-09-16T15:35:00Z",
+  "updated_at": "2026-09-16T17:05:00Z",
   "sandbox_roadmap": {
     "locked_at": "2026-09-16",
     "gates": {
