@@ -393,6 +393,42 @@
       "validation": "Fail-closed JSONL validator + line-CER report with page_cer/line_cer separated and GATE_FAIL vs ≤2%. Engineering only; not a product PASS; no pilot/ICP ledger writes. T-005 still blocked on real enterprise input."
     },
     {
+      "id": "S-A-01",
+      "title": "Page JSONL schema",
+      "status": "verified",
+      "priority": "P0",
+      "campaign": "A",
+      "owner": "Javis",
+      "dependencies": [
+        "C-006"
+      ],
+      "artifacts": [
+        "work/eval/page_annotation.py",
+        "work/eval/page_annotation.schema.json",
+        "work/eval/fixtures/sandbox_pages.jsonl",
+        "outputs/OCR_EVAL_DATASET.md"
+      ],
+      "validation": "Delivered as C-023. Fail-closed JSONL validator. Engineering only; not a product PASS; no pilot/ICP writes; T-005 still blocked.",
+      "note": "Completed alias of C-023 schema slice so remaining S-A-* dependencies resolve."
+    },
+    {
+      "id": "S-A-02",
+      "title": "line-CER harness",
+      "status": "verified",
+      "priority": "P0",
+      "campaign": "A",
+      "owner": "Javis",
+      "dependencies": [
+        "S-A-01"
+      ],
+      "artifacts": [
+        "work/eval/rapidocr_line_cer.py",
+        "outputs/ocr-benchmark/line-cer-report.md"
+      ],
+      "validation": "Delivered as C-023. GATE_FAIL vs ≤2%; Audit §5 honest GATE_FAIL line_cer=3.17%; continue forced NEEDS_REVIEW. Not a product PASS; T-005 not bumped.",
+      "note": "Completed alias of C-023 CER harness slice."
+    },
+    {
       "id": "C-024",
       "title": "S-A-08 门禁产品化验收规格（Audit）",
       "status": "verified",
