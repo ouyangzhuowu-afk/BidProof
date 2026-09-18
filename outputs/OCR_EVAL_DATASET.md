@@ -86,6 +86,17 @@ uv run python -m work.eval.page_annotation work/eval/fixtures/key_field_gt.jsonl
 Exit `0` = schema valid and seed minima met (`SUFFICIENT_SEED`). Exit `2` = `INSUFFICIENT`. Exit `1` = validation error.  
 `SUFFICIENT_SEED` is **not** F1 ≥ 97% and **not** a product/business PASS. T-005 ledgers are not written.
 
+## Key-field F1 harness (S-A-03)
+
+`work/eval/key_field_f1.py` scores micro-averaged F1 on frozen `(doc_id, name)` with NFKC value match.
+
+- Engineering gate: **F1 ≥ 97%**. Sandbox hypotheses intentionally below → `GATE_FAIL` (observed ≈76%).
+- Report: `outputs/ocr-benchmark/key-field-f1-report.md`. Product snapshot reads it via `app/quality_gates.py`.
+
+```bash
+uv run python -m work.eval.key_field_f1
+```
+
 ## TEDS table-structure GT seed (S-A-05)
 
 Canonical labels: `work/eval/fixtures/teds_gt.jsonl` (S-A-01 page JSONL).  

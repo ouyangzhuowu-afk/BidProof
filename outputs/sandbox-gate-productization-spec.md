@@ -7,7 +7,7 @@ Engineering / sandbox only. This is **not** a product PASS and **not** T-005.
 | Gate | Threshold | Harness |
 |---|---|---|
 | Line CER | ≤ 2% | `uv run python -m work.eval.rapidocr_line_cer` |
-| Key-field F1 | ≥ 97% | S-A-03 (pending) |
+| Key-field F1 | ≥ 97% | `uv run python -m work.eval.key_field_f1` |
 | TEDS | ≥ 90% | `uv run python -m work.eval.teds_harness` |
 
 Any **evaluated** gate below threshold, or any gate still **unevaluated**, keeps the product path on `NEEDS_REVIEW`.

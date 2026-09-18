@@ -1,0 +1,564 @@
+{
+  "generated_at": "2026-09-18T14:13:17.137714+00:00",
+  "claim_scope": "engineering_gate_only",
+  "key_field_f1": 0.76,
+  "key_field_f1_min": 0.97,
+  "precision": 0.7916666666666666,
+  "recall": 0.7307692307692307,
+  "tp": 57,
+  "fp": 15,
+  "fn": 21,
+  "gt_count": 78,
+  "hyp_count": 72,
+  "gate": "GATE_FAIL",
+  "product_pass": false,
+  "business_pass": false,
+  "forced_requirement_status": "NEEDS_REVIEW",
+  "annotations": "work/eval/fixtures/key_field_gt.jsonl",
+  "hypotheses": "work/eval/fixtures/key_field_hypotheses.jsonl",
+  "aggregate_engineering_gates": {
+    "line_cer_max": 0.02,
+    "key_field_f1_min": 0.97,
+    "teds_min": 0.9,
+    "line_cer": null,
+    "key_field_f1": 0.76,
+    "teds": null,
+    "failures": [
+      "key_field_f1"
+    ],
+    "unevaluated": [
+      "line_cer",
+      "teds"
+    ],
+    "engineering_gate": "GATE_FAIL",
+    "product_pass": false,
+    "business_pass": false,
+    "forced_requirement_status": "NEEDS_REVIEW",
+    "claim_scope": "engineering_gate_only",
+    "note": "Hard OR of evaluated CER/F1/TEDS failures, plus fail-closed on unevaluated gates. Not T-005."
+  },
+  "details": [
+    {
+      "doc_id": "fixture-001",
+      "name": "bid_bond",
+      "result": "tp"
+    },
+    {
+      "doc_id": "fixture-001",
+      "name": "budget",
+      "result": "tp"
+    },
+    {
+      "doc_id": "fixture-001",
+      "name": "contract_end",
+      "result": "tp"
+    },
+    {
+      "doc_id": "fixture-001",
+      "name": "deadline",
+      "result": "tp"
+    },
+    {
+      "doc_id": "fixture-001",
+      "name": "procurement_method",
+      "result": "fn",
+      "gt_value": "竞争性磋商",
+      "hyp_value": "竞争性磋商（错）"
+    },
+    {
+      "doc_id": "fixture-001",
+      "name": "project_name",
+      "result": "tp"
+    },
+    {
+      "doc_id": "fixture-001",
+      "name": "qualification_ref",
+      "result": "tp"
+    },
+    {
+      "doc_id": "fixture-002",
+      "name": "agent",
+      "result": "fn",
+      "gt_value": "陕西省省级单位政府采购中心",
+      "hyp_value": "虚构代理机构"
+    },
+    {
+      "doc_id": "fixture-002",
+      "name": "bid_bond",
+      "result": "fn",
+      "gt_value": "不收取投标保证金",
+      "hyp_value": "不收取投标保证金（错）"
+    },
+    {
+      "doc_id": "fixture-002",
+      "name": "budget",
+      "result": "tp"
+    },
+    {
+      "doc_id": "fixture-002",
+      "name": "deadline",
+      "result": "tp"
+    },
+    {
+      "doc_id": "fixture-002",
+      "name": "procurement_method",
+      "result": "fn",
+      "gt_value": "公开招标",
+      "hyp_value": null
+    },
+    {
+      "doc_id": "fixture-002",
+      "name": "project_code",
+      "result": "tp"
+    },
+    {
+      "doc_id": "fixture-002",
+      "name": "project_name",
+      "result": "tp"
+    },
+    {
+      "doc_id": "fixture-002",
+      "name": "purchaser",
+      "result": "tp"
+    },
+    {
+      "doc_id": "fixture-002",
+      "name": "qualification_ref",
+      "result": "tp"
+    },
+    {
+      "doc_id": "fixture-003",
+      "name": "agent",
+      "result": "tp"
+    },
+    {
+      "doc_id": "fixture-003",
+      "name": "bid_bond",
+      "result": "fn",
+      "gt_value": "本项目不适用",
+      "hyp_value": "本项目不适用（错）"
+    },
+    {
+      "doc_id": "fixture-003",
+      "name": "budget",
+      "result": "tp"
+    },
+    {
+      "doc_id": "fixture-003",
+      "name": "contract_end",
+      "result": "fn",
+      "gt_value": "2024 年11 月18 日至2025 年9 月30 日",
+      "hyp_value": null
+    },
+    {
+      "doc_id": "fixture-003",
+      "name": "deadline",
+      "result": "tp"
+    },
+    {
+      "doc_id": "fixture-003",
+      "name": "project_code",
+      "result": "tp"
+    },
+    {
+      "doc_id": "fixture-003",
+      "name": "project_name",
+      "result": "fn",
+      "gt_value": "信息化项目预算评估和效能考核",
+      "hyp_value": "信息化项目预算评估和效能考核（错）"
+    },
+    {
+      "doc_id": "fixture-003",
+      "name": "purchaser",
+      "result": "tp"
+    },
+    {
+      "doc_id": "fixture-003",
+      "name": "qualification_ref",
+      "result": "tp"
+    },
+    {
+      "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
+      "name": "agent",
+      "result": "tp"
+    },
+    {
+      "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
+      "name": "bid_bond",
+      "result": "tp"
+    },
+    {
+      "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
+      "name": "budget",
+      "result": "fn",
+      "gt_value": "378.9 万元",
+      "hyp_value": "378.9 万元（错）"
+    },
+    {
+      "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
+      "name": "ceiling",
+      "result": "tp"
+    },
+    {
+      "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
+      "name": "contract_end",
+      "result": "tp"
+    },
+    {
+      "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
+      "name": "deadline",
+      "result": "fn",
+      "gt_value": "2026 年1 月27 日9 时00 分",
+      "hyp_value": "2026 年1 月27 日9 时00 分（错）"
+    },
+    {
+      "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
+      "name": "device_license",
+      "result": "tp"
+    },
+    {
+      "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
+      "name": "procurement_method",
+      "result": "tp"
+    },
+    {
+      "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
+      "name": "project_code",
+      "result": "tp"
+    },
+    {
+      "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
+      "name": "project_name",
+      "result": "tp"
+    },
+    {
+      "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
+      "name": "purchaser",
+      "result": "tp"
+    },
+    {
+      "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
+      "name": "qualification_ref",
+      "result": "fn",
+      "gt_value": "政府采购法》第二十二条",
+      "hyp_value": null
+    },
+    {
+      "doc_id": "pub-gx-qintang-flow-cytometer",
+      "name": "agent",
+      "result": "tp"
+    },
+    {
+      "doc_id": "pub-gx-qintang-flow-cytometer",
+      "name": "bid_bond",
+      "result": "fn",
+      "gt_value": "无需缴纳竞谈保证金",
+      "hyp_value": "无需缴纳竞谈保证金（错）"
+    },
+    {
+      "doc_id": "pub-gx-qintang-flow-cytometer",
+      "name": "budget",
+      "result": "tp"
+    },
+    {
+      "doc_id": "pub-gx-qintang-flow-cytometer",
+      "name": "ceiling",
+      "result": "fn",
+      "gt_value": "590000.00 元",
+      "hyp_value": null
+    },
+    {
+      "doc_id": "pub-gx-qintang-flow-cytometer",
+      "name": "contract_end",
+      "result": "tp"
+    },
+    {
+      "doc_id": "pub-gx-qintang-flow-cytometer",
+      "name": "deadline",
+      "result": "tp"
+    },
+    {
+      "doc_id": "pub-gx-qintang-flow-cytometer",
+      "name": "device_license",
+      "result": "tp"
+    },
+    {
+      "doc_id": "pub-gx-qintang-flow-cytometer",
+      "name": "procurement_method",
+      "result": "tp"
+    },
+    {
+      "doc_id": "pub-gx-qintang-flow-cytometer",
+      "name": "project_code",
+      "result": "fn",
+      "gt_value": "GGZC2026-J1-040027-GXXY",
+      "hyp_value": "GGZC2026-J1-040027-GXXY（错）"
+    },
+    {
+      "doc_id": "pub-gx-qintang-flow-cytometer",
+      "name": "project_name",
+      "result": "tp"
+    },
+    {
+      "doc_id": "pub-gx-qintang-flow-cytometer",
+      "name": "purchaser",
+      "result": "tp"
+    },
+    {
+      "doc_id": "pub-gx-qintang-flow-cytometer",
+      "name": "qualification_ref",
+      "result": "tp"
+    },
+    {
+      "doc_id": "pub-gx-ventilator-monitors",
+      "name": "agent",
+      "result": "tp"
+    },
+    {
+      "doc_id": "pub-gx-ventilator-monitors",
+      "name": "bid_bond",
+      "result": "tp"
+    },
+    {
+      "doc_id": "pub-gx-ventilator-monitors",
+      "name": "budget",
+      "result": "tp"
+    },
+    {
+      "doc_id": "pub-gx-ventilator-monitors",
+      "name": "ceiling",
+      "result": "fn",
+      "gt_value": "4250000.00",
+      "hyp_value": "4250000.00（错）"
+    },
+    {
+      "doc_id": "pub-gx-ventilator-monitors",
+      "name": "contract_end",
+      "result": "fn",
+      "gt_value": "自签订合同之日起60 天内",
+      "hyp_value": null
+    },
+    {
+      "doc_id": "pub-gx-ventilator-monitors",
+      "name": "deadline",
+      "result": "fn",
+      "gt_value": "2026 年7 月8 日9 时30 分",
+      "hyp_value": "2026 年7 月8 日9 时30 分（错）"
+    },
+    {
+      "doc_id": "pub-gx-ventilator-monitors",
+      "name": "device_license",
+      "result": "tp"
+    },
+    {
+      "doc_id": "pub-gx-ventilator-monitors",
+      "name": "procurement_method",
+      "result": "tp"
+    },
+    {
+      "doc_id": "pub-gx-ventilator-monitors",
+      "name": "project_code",
+      "result": "tp"
+    },
+    {
+      "doc_id": "pub-gx-ventilator-monitors",
+      "name": "project_name",
+      "result": "tp"
+    },
+    {
+      "doc_id": "pub-gx-ventilator-monitors",
+      "name": "purchaser",
+      "result": "tp"
+    },
+    {
+      "doc_id": "pub-gx-ventilator-monitors",
+      "name": "qualification_ref",
+      "result": "tp"
+    },
+    {
+      "doc_id": "pub-gx-youjiang-ultrasound",
+      "name": "agent",
+      "result": "tp"
+    },
+    {
+      "doc_id": "pub-gx-youjiang-ultrasound",
+      "name": "bid_bond",
+      "result": "tp"
+    },
+    {
+      "doc_id": "pub-gx-youjiang-ultrasound",
+      "name": "budget",
+      "result": "tp"
+    },
+    {
+      "doc_id": "pub-gx-youjiang-ultrasound",
+      "name": "ceiling",
+      "result": "tp"
+    },
+    {
+      "doc_id": "pub-gx-youjiang-ultrasound",
+      "name": "contract_end",
+      "result": "fn",
+      "gt_value": "自合同签订之日起45 日内",
+      "hyp_value": null
+    },
+    {
+      "doc_id": "pub-gx-youjiang-ultrasound",
+      "name": "deadline",
+      "result": "tp"
+    },
+    {
+      "doc_id": "pub-gx-youjiang-ultrasound",
+      "name": "device_license",
+      "result": "tp"
+    },
+    {
+      "doc_id": "pub-gx-youjiang-ultrasound",
+      "name": "project_code",
+      "result": "tp"
+    },
+    {
+      "doc_id": "pub-gx-youjiang-ultrasound",
+      "name": "project_name",
+      "result": "tp"
+    },
+    {
+      "doc_id": "pub-gx-youjiang-ultrasound",
+      "name": "purchaser",
+      "result": "fn",
+      "gt_value": "右江民族医学院附属医院",
+      "hyp_value": "右江民族医学院附属医院（错）"
+    },
+    {
+      "doc_id": "pub-gx-youjiang-ultrasound",
+      "name": "qualification_ref",
+      "result": "fn",
+      "gt_value": "政府采购法》第二十二条",
+      "hyp_value": "政府采购法》第二十二条（错）"
+    },
+    {
+      "doc_id": "synthetic-keyfield-001",
+      "name": "bid_bond",
+      "result": "fn",
+      "gt_value": "不收取投标保证金",
+      "hyp_value": null
+    },
+    {
+      "doc_id": "synthetic-keyfield-001",
+      "name": "budget",
+      "result": "fn",
+      "gt_value": "88.00 万元",
+      "hyp_value": "88.00 万元（错）"
+    },
+    {
+      "doc_id": "synthetic-keyfield-001",
+      "name": "deadline",
+      "result": "tp"
+    },
+    {
+      "doc_id": "synthetic-keyfield-001",
+      "name": "project_code",
+      "result": "tp"
+    },
+    {
+      "doc_id": "synthetic-keyfield-001",
+      "name": "project_name",
+      "result": "tp"
+    },
+    {
+      "doc_id": "synthetic-keyfield-001",
+      "name": "qualification_ref",
+      "result": "tp"
+    },
+    {
+      "doc_id": "fixture-001",
+      "name": "ceiling",
+      "result": "fp",
+      "hyp_value": "虚构限价999万元"
+    },
+    {
+      "doc_id": "fixture-001",
+      "name": "procurement_method",
+      "result": "fp",
+      "hyp_value": "竞争性磋商（错）"
+    },
+    {
+      "doc_id": "fixture-002",
+      "name": "agent",
+      "result": "fp",
+      "hyp_value": "虚构代理机构"
+    },
+    {
+      "doc_id": "fixture-002",
+      "name": "bid_bond",
+      "result": "fp",
+      "hyp_value": "不收取投标保证金（错）"
+    },
+    {
+      "doc_id": "fixture-003",
+      "name": "bid_bond",
+      "result": "fp",
+      "hyp_value": "本项目不适用（错）"
+    },
+    {
+      "doc_id": "fixture-003",
+      "name": "project_name",
+      "result": "fp",
+      "hyp_value": "信息化项目预算评估和效能考核（错）"
+    },
+    {
+      "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
+      "name": "budget",
+      "result": "fp",
+      "hyp_value": "378.9 万元（错）"
+    },
+    {
+      "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
+      "name": "deadline",
+      "result": "fp",
+      "hyp_value": "2026 年1 月27 日9 时00 分（错）"
+    },
+    {
+      "doc_id": "pub-gx-qintang-flow-cytometer",
+      "name": "bid_bond",
+      "result": "fp",
+      "hyp_value": "无需缴纳竞谈保证金（错）"
+    },
+    {
+      "doc_id": "pub-gx-qintang-flow-cytometer",
+      "name": "project_code",
+      "result": "fp",
+      "hyp_value": "GGZC2026-J1-040027-GXXY（错）"
+    },
+    {
+      "doc_id": "pub-gx-ventilator-monitors",
+      "name": "ceiling",
+      "result": "fp",
+      "hyp_value": "4250000.00（错）"
+    },
+    {
+      "doc_id": "pub-gx-ventilator-monitors",
+      "name": "deadline",
+      "result": "fp",
+      "hyp_value": "2026 年7 月8 日9 时30 分（错）"
+    },
+    {
+      "doc_id": "pub-gx-youjiang-ultrasound",
+      "name": "purchaser",
+      "result": "fp",
+      "hyp_value": "右江民族医学院附属医院（错）"
+    },
+    {
+      "doc_id": "pub-gx-youjiang-ultrasound",
+      "name": "qualification_ref",
+      "result": "fp",
+      "hyp_value": "政府采购法》第二十二条（错）"
+    },
+    {
+      "doc_id": "synthetic-keyfield-001",
+      "name": "budget",
+      "result": "fp",
+      "hyp_value": "88.00 万元（错）"
+    }
+  ]
+}
