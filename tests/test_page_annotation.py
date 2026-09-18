@@ -119,4 +119,4 @@ def test_sandbox_fixture_is_valid_public_jsonl():
 
 
 def test_page_types_match_documented_enum():
-    assert PAGE_TYPES == {"cover", "toc", "body", "table", "seal"}
+    assert PAGE_TYPES == {"cover", "toc", "body", "table", "seal", "handwriting"}

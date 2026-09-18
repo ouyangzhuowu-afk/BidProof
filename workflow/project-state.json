@@ -533,6 +533,25 @@
       ],
       "validation": "Micro F1=0.76 GATE_FAIL vs ≥97% (honest; TP/FP/FN=57/15/21); product_pass=false; quality_gates now evaluates all three CER/F1/TEDS as GATE_FAIL; no pilot/ICP writes; T-005 not bumped.",
       "note": "Engineering GATE_FAIL is expected on sandbox hypotheses; not a product PASS."
+    },
+    {
+      "id": "S-A-07",
+      "title": "印章/手写 page_type 槽位标注",
+      "status": "verified",
+      "priority": "P1",
+      "campaign": "A",
+      "owner": "Javis",
+      "dependencies": [
+        "S-A-01"
+      ],
+      "artifacts": [
+        "outputs/ocr-benchmark/seal-hw-gt-report.md",
+        "work/eval/fixtures/seal_hw_gt.jsonl",
+        "work/eval/seal_hw_gt.py",
+        "work/eval/SEAL_HW_GT.md"
+      ],
+      "validation": "SUFFICIENT_SEED: seal_pages=10, hw_pages=4, page_type_seal=7, page_type_handwriting=3, public_docs=4 + 6 synthetic; detection_status=NOT_EVALUATED (no pixel GT); product_pass=false; schema page_type adds handwriting; no pilot/ICP writes; T-005 not bumped.",
+      "note": "Page-type slot seed only; not seal/handwriting detection PASS."
     }
   ],
   "backlog": [
@@ -554,19 +573,8 @@
         "work/icp-row.template.json"
       ],
       "validation": "已建立 14 字段 pilot 台账、11 字段 ICP 触达台账、fail-closed 校验、快速追加 CLI 与 intake 模板；当前 0 条真实任务、0 条 ICP 触达、0 条付款意愿，等待首批真实企业输入",
-      "blocked_reason": "Sandbox phase locked 2026-09-16: human enterprise pilot deferred from this phase KPIs. Do not write real enterprise rows into pilot-ledger / icp-outreach.",
+      "blocked_reason": "Sandbox phase locked 2026-09-16: human enterprise pilot deferred from this phase KPIs. Do not write real enterprise rows into pilot-ledger / icp-outreach. Campaign A engineering leaves (S-A-01..07 except open quality gates) are seeded; OCR CER/F1/TEDS still GATE_FAIL.",
       "note": "deferred_for_sandbox_phase (status=blocked; not cancelled)"
-    },
-    {
-      "id": "S-A-07",
-      "title": "印章/手写 page_type 槽位标注",
-      "status": "pending",
-      "priority": "P1",
-      "dependencies": [
-        "S-A-01"
-      ],
-      "owner": "Javis",
-      "campaign": "A"
     }
   ],
   "dependencies": [
@@ -1000,17 +1008,44 @@
       "kind": "key-field-f1-runbook",
       "status": "verified",
       "note": "S-A-03 reproduce runbook"
+    },
+    {
+      "path": "outputs/ocr-benchmark/seal-hw-gt-report.md",
+      "kind": "seal-hw-gt-report",
+      "status": "verified",
+      "note": "S-A-07: SUFFICIENT_SEED; detection NOT_EVALUATED"
+    },
+    {
+      "path": "work/eval/fixtures/seal_hw_gt.jsonl",
+      "kind": "seal-hw-gt-seed",
+      "status": "verified",
+      "note": "S-A-07 page-type slot seed"
+    },
+    {
+      "path": "work/eval/seal_hw_gt.py",
+      "kind": "seal-hw-gt-validator",
+      "status": "verified",
+      "note": "S-A-07 fail-closed seed CLI"
+    },
+    {
+      "path": "work/eval/SEAL_HW_GT.md",
+      "kind": "seal-hw-gt-runbook",
+      "status": "verified",
+      "note": "S-A-07 reproduce runbook"
     }
   ],
   "next_best_action": {
-    "task_id": "S-A-07",
-    "title": "印章/手写 page_type 槽位标注",
-    "reason": "S-A-03 key-field F1 harness landed (honest GATE_FAIL F1=0.76). CER/F1/TEDS all evaluated and failing; next Campaign A leaf is seal/handwriting page_type slots (S-A-07).",
-    "blocked_by": [],
+    "task_id": "T-005",
+    "title": "建立真实任务验收台账与 45 天 ICP 试运行",
+    "reason": "Campaign A engineering leaves S-A-01..S-A-07 are seeded/harnessed. OCR CER/F1/TEDS remain honest GATE_FAIL. Next business leaf is T-005 real-enterprise pilot (blocked on real input).",
+    "blocked_by": [
+      "real enterprise pilot input",
+      "OCR gates CER/F1/TEDS unmet"
+    ],
     "parallel": [],
-    "note": "T-005 remains blocked; product path forced NEEDS_REVIEW while CER/F1/TEDS unmet. Do not relax OCR gates."
+    "note": "Do not write demo rows into pilot/ICP ledgers. Do not claim product PASS. Engineering fallback: improve OCR until gates pass while waiting for T-005 input."
   },
-  "updated_at": "2026-09-18T14:20:00Z",
+  "updated_at": "2026-09-18T14:35:00Z",
   "sandbox_roadmap": {
     "locked_at": "2026-09-16",
     "gates": {

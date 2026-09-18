@@ -11,7 +11,7 @@
 | Training line crops | 4316 train / 480 val | work/training-corpus/paddle-rec/ | Weak labels from PDF text dict |
 | RapidOCR CER baseline | 18 pages x2 modes | outputs/ocr-benchmark/RAPIDOCR_CER_REPORT.md | Mean CER ~18% clean / ~17% synthetic - gate fail |
 | Scanned OCR cache | 78 pages / 1 doc | `work/ocr/akss-water-it/` | **PII — internal only**; no char-level GT |
-| Synthetic degraded / fax / handwriting / seals | Partial | `work/training-corpus/tender-public/synthetic-scans/` + JSONL flags | JPEG Q40 CER probes; seal/HW GT still gap |
+| Synthetic degraded / fax / handwriting / seals | Partial | `work/eval/fixtures/seal_hw_gt.jsonl` + synthetic-scans | S-A-07 page-type slots seeded; pixel GT still gap |
 | Table structure GT (TEDS) | **16 pages** (12 public + 4 synthetic) | `work/eval/fixtures/teds_gt.jsonl` | S-A-05 Week-1 single-page seed; TEDS score **not** evaluated |
 
 Sandbox engineering only. This file does **not** record a product PASS, T-005 business PASS, or enterprise acceptance.
@@ -34,7 +34,7 @@ First customer ICP: **医疗器械经销 → 医院招标**. Prefer hybrid local
 | Photo / fax / low-quality copy | No | |
 | Multi-column / TOC | Yes (proxy) | Shaanxi TOC page exposes VL truncation |
 | Tables (报价/偏离/评分) | Week-1 seed (16 pages) | S-A-05 `table_html` GT; TEDS ≥90% **not** measured |
-| Seals / signatures / handwriting | No | Schema flags exist; no labeled pixels |
+| Seals / signatures / handwriting | Week-1 seed | S-A-07 `page_type` slots + flags; detection **not** measured |
 | Bid response / 技术标 / 商务标 pairs | No | Only tender side |
 
 ## Page-level JSONL schema (S-A-01)
@@ -53,7 +53,7 @@ One JSON object per line. Current version is `1.0`. Weak `0.1` labels (or a miss
 | `schema_version` | required | `1.0` current; `0.1` weak-compatible |
 | `doc_id` | required | Non-empty string |
 | `page` | required | Positive integer |
-| `page_type` | required | `cover` \| `toc` \| `body` \| `table` \| `seal` |
+| `page_type` | required | `cover` \| `toc` \| `body` \| `table` \| `seal` \| `handwriting` |
 | `text_gt` | required | Page ground-truth text |
 | `fields` | required | List of `{name, value}` objects |
 | `table_html` | required | HTML string or `null` (null ⇒ no TEDS GT) |
@@ -95,6 +95,18 @@ Exit `0` = schema valid and seed minima met (`SUFFICIENT_SEED`). Exit `2` = `INS
 
 ```bash
 uv run python -m work.eval.key_field_f1
+```
+
+## Seal / handwriting page-type slots (S-A-07)
+
+Canonical labels: `work/eval/fixtures/seal_hw_gt.jsonl`.  
+Runbook: `work/eval/SEAL_HW_GT.md`.  
+Report: `outputs/ocr-benchmark/seal-hw-gt-report.md`.
+
+Fills `page_type` slots `seal` / `handwriting` and `has_seal` / `has_hw`. Seed minima: 6 seal slots, 3 handwriting slots, 3 public docs. Detection accuracy stays `NOT_EVALUATED` (no pixel GT).
+
+```bash
+uv run python -m work.eval.seal_hw_gt
 ```
 
 ## TEDS table-structure GT seed (S-A-05)
