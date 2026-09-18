@@ -436,8 +436,8 @@
         "C-023"
       ],
       "artifacts": [],
-      "validation": "Audit S-A-08 gate productization accepted (hard OR CER/F1/TEDS => NEEDS_REVIEW; demo!=T-005). Spec file outputs/sandbox-gate-productization-spec.md not yet on assessment tip; re-commit when local tip reconciles. Does NOT claim OCR gates met; does NOT bump T-005.",
-      "note": "Spec may live only in orchestration history if file not yet on tip; re-commit if missing."
+      "validation": "Audit S-A-08 gate productization accepted (hard OR CER/F1/TEDS => NEEDS_REVIEW; demo!=T-005). Spec landed as outputs/sandbox-gate-productization-spec.md with S-A-06 wiring. Does NOT claim OCR gates met; does NOT bump T-005.",
+      "note": "Spec + app/quality_gates.py + work/eval/sandbox_gates.py."
     },
     {
       "id": "C-025",
@@ -491,6 +491,28 @@
       ],
       "validation": "PR #9 squash-merged to main at bdef153: coverage SUFFICIENT_SEED (16 table pages / 6 public docs + 4 synthetic); teds_status=NOT_EVALUATED (gate TEDS>=90% unevaluated); product_pass=false; not a product PASS; no pilot/ICP ledger writes; T-005 not bumped. OCR gates unchanged.",
       "pr": "https://github.com/ouyangzhuowu-afk/BidProof/pull/9"
+    },
+    {
+      "id": "S-A-06",
+      "title": "TEDS harness + 门禁接线",
+      "status": "verified",
+      "priority": "P0",
+      "campaign": "A",
+      "owner": "Javis",
+      "dependencies": [
+        "S-A-05"
+      ],
+      "artifacts": [
+        "outputs/ocr-benchmark/teds-report.md",
+        "work/eval/teds_harness.py",
+        "work/eval/teds_score.py",
+        "work/eval/sandbox_gates.py",
+        "app/quality_gates.py",
+        "outputs/sandbox-gate-productization-spec.md",
+        "work/eval/TEDS_HARNESS.md"
+      ],
+      "validation": "TEDS harness mean teds=0.8785 GATE_FAIL vs ≥90% (honest); product_pass=false; hard-OR aggregator + scan_quality.ocr_engineering_gates force NEEDS_REVIEW; no pilot/ICP writes; T-005 not bumped.",
+      "note": "Engineering GATE_FAIL is expected on sandbox hypotheses; not a product PASS."
     }
   ],
   "backlog": [
@@ -522,17 +544,6 @@
       "priority": "P0",
       "dependencies": [
         "S-A-01"
-      ],
-      "owner": "Javis",
-      "campaign": "A"
-    },
-    {
-      "id": "S-A-06",
-      "title": "TEDS harness + 门禁接线",
-      "status": "pending",
-      "priority": "P0",
-      "dependencies": [
-        "S-A-05"
       ],
       "owner": "Javis",
       "campaign": "A"
@@ -914,20 +925,61 @@
       "kind": "teds-gt-runbook",
       "status": "verified",
       "note": "S-A-05 reproduce runbook"
+    },
+    {
+      "path": "outputs/ocr-benchmark/teds-report.md",
+      "kind": "teds-harness-report",
+      "status": "verified",
+      "note": "S-A-06: honest GATE_FAIL mean teds≈87.8%; not a product PASS"
+    },
+    {
+      "path": "work/eval/teds_harness.py",
+      "kind": "teds-harness",
+      "status": "verified",
+      "note": "S-A-06 CLI + report writer"
+    },
+    {
+      "path": "work/eval/teds_score.py",
+      "kind": "teds-scorer",
+      "status": "verified",
+      "note": "S-A-06 HTML-table tree TEDS"
+    },
+    {
+      "path": "work/eval/sandbox_gates.py",
+      "kind": "sandbox-gate-aggregator",
+      "status": "verified",
+      "note": "Hard OR CER/F1/TEDS; fail-closed unevaluated"
+    },
+    {
+      "path": "app/quality_gates.py",
+      "kind": "product-gate-wiring",
+      "status": "verified",
+      "note": "scan_quality.ocr_engineering_gates → NEEDS_REVIEW"
+    },
+    {
+      "path": "outputs/sandbox-gate-productization-spec.md",
+      "kind": "sandbox-gate-spec",
+      "status": "verified",
+      "note": "S-A-08/S-A-06 productization spec"
+    },
+    {
+      "path": "work/eval/TEDS_HARNESS.md",
+      "kind": "teds-harness-runbook",
+      "status": "verified",
+      "note": "S-A-06 reproduce runbook"
     }
   ],
   "next_best_action": {
-    "task_id": "S-A-06",
-    "title": "TEDS harness + 门禁接线",
-    "reason": "S-A-05 TEDS GT seed merged via PR #9 (SUFFICIENT_SEED; TEDS NOT_EVALUATED). Next: TEDS harness + gate wiring (S-A-06).",
+    "task_id": "S-A-03",
+    "title": "Key-field F1 harness",
+    "reason": "S-A-06 TEDS harness landed (honest GATE_FAIL; product NEEDS_REVIEW wiring). Next: key-field F1 harness (S-A-03) so the F1≥97% gate is evaluated instead of unevaluated.",
     "blocked_by": [],
     "parallel": [
-      "S-A-07",
-      "S-A-03"
+      "S-A-07"
     ],
     "note": "T-005 remains blocked; product path forced NEEDS_REVIEW while CER/F1/TEDS unmet. Do not relax OCR gates."
   },
-  "updated_at": "2026-09-16T17:05:00Z",
+  "updated_at": "2026-09-18T09:45:00Z",
   "sandbox_roadmap": {
     "locked_at": "2026-09-16",
     "gates": {

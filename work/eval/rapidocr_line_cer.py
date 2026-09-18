@@ -20,13 +20,13 @@ from typing import Any
 
 from work.eval.ocr_benchmark import _norm, levenshtein
 from work.eval.page_annotation import load_annotations
+from work.eval.sandbox_gates import LINE_CER_MAX as LINE_CER_GATE
 from work.eval.teds_gt import has_teds_gt
 
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_ANNOTATIONS = ROOT / "work" / "eval" / "fixtures" / "sandbox_pages.jsonl"
 DEFAULT_HYPOTHESES = ROOT / "work" / "eval" / "fixtures" / "sandbox_hypotheses.jsonl"
 DEFAULT_OUT_DIR = ROOT / "outputs" / "ocr-benchmark"
-LINE_CER_GATE = 0.02
 FORBIDDEN_OUTPUT_TOKENS = ("pilot-ledger", "icp-outreach")
 
 

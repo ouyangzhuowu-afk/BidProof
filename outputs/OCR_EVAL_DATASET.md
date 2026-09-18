@@ -100,7 +100,19 @@ uv run python -m work.eval.page_annotation work/eval/fixtures/teds_gt.jsonl
 ```
 
 Exit `0` = schema valid and seed minima met (`SUFFICIENT_SEED`). Exit `2` = `INSUFFICIENT`. Exit `1` = validation error.  
-`SUFFICIENT_SEED` is **not** TEDS ≥ 90% and **not** a product/business PASS. T-005 ledgers are not written. S-A-06 similarity harness is out of scope beyond the `has_teds_gt` count hook.
+`SUFFICIENT_SEED` is **not** TEDS ≥ 90% and **not** a product/business PASS. T-005 ledgers are not written.
+
+## TEDS harness (S-A-06)
+
+`work/eval/teds_harness.py` scores HTML-table TEDS (tree edit similarity) against S-A-05 GT.
+
+- Engineering gate: **mean TEDS ≥ 90%**. Sandbox hypotheses are intentionally below → `GATE_FAIL`.
+- Hard OR with line CER / key-field F1: `work/eval/sandbox_gates.py`; product snapshot `app/quality_gates.py` forces `NEEDS_REVIEW` while gates fail or stay unevaluated.
+- Always `product_pass=false` / `business_pass=false`. Spec: `outputs/sandbox-gate-productization-spec.md`.
+
+```bash
+uv run python -m work.eval.teds_harness
+```
 
 ## Line-CER harness (S-A-02)
 
@@ -109,7 +121,7 @@ Exit `0` = schema valid and seed minima met (`SUFFICIENT_SEED`). Exit `2` = `INS
 - `page_cer` and `line_cer` are computed separately and never mixed.
 - Engineering gate: **line CER ≤ 2%**. If not met the report is `GATE_FAIL`.
 - `GATE_PASS` is an engineering threshold only. The harness always sets `product_pass=false` and `business_pass=false`.
-- Key-field F1 ≥ 97% is a later gate; this command does not claim it. TEDS GT counting uses `has_teds_gt`; the ≥90% TEDS score is still later (S-A-06).
+- Key-field F1 ≥ 97% is a later gate (S-A-03). TEDS ≥ 90% is evaluated by S-A-06.
 - Writes only under `outputs/ocr-benchmark/` (or `--out-dir`). Refuses paths containing `pilot-ledger` or `icp-outreach`.
 
 Prior RapidOCR soak baseline (not this sandbox fixture): page CER ≈ 18%, line CER ≈ 8.9%. TEDS GT seed (S-A-05) lives in `work/eval/fixtures/teds_gt.jsonl` (16 pages); the sandbox line-CER fixture still has `table_html=null`.

@@ -1,0 +1,117 @@
+{
+  "generated_at": "2026-09-18T09:37:10.338210+00:00",
+  "claim_scope": "engineering_gate_only",
+  "teds": 0.8784546114752891,
+  "teds_min": 0.9,
+  "gate": "GATE_FAIL",
+  "product_pass": false,
+  "business_pass": false,
+  "forced_requirement_status": "NEEDS_REVIEW",
+  "teds_gt_pages": 16,
+  "pages_scored": 16,
+  "pages": [
+    {
+      "doc_id": "fixture-001",
+      "page": 14,
+      "teds": 1.0
+    },
+    {
+      "doc_id": "fixture-001",
+      "page": 32,
+      "teds": 0.7333333333333334
+    },
+    {
+      "doc_id": "fixture-002",
+      "page": 33,
+      "teds": 0.873015873015873
+    },
+    {
+      "doc_id": "fixture-002",
+      "page": 37,
+      "teds": 1.0
+    },
+    {
+      "doc_id": "fixture-003",
+      "page": 29,
+      "teds": 1.0
+    },
+    {
+      "doc_id": "fixture-003",
+      "page": 35,
+      "teds": 0.7333333333333334
+    },
+    {
+      "doc_id": "pub-gx-nanning-vascular-doppler",
+      "page": 3,
+      "teds": 1.0
+    },
+    {
+      "doc_id": "pub-gx-nanning-vascular-doppler",
+      "page": 16,
+      "teds": 0.75
+    },
+    {
+      "doc_id": "pub-gx-nanning-vascular-doppler",
+      "page": 17,
+      "teds": 0.9431818181818182
+    },
+    {
+      "doc_id": "pub-gx-ventilator-monitors",
+      "page": 15,
+      "teds": 1.0
+    },
+    {
+      "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
+      "page": 51,
+      "teds": 0.7413793103448276
+    },
+    {
+      "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
+      "page": 73,
+      "teds": 0.8157894736842105
+    },
+    {
+      "doc_id": "synthetic-teds-bid-opening",
+      "page": 1,
+      "teds": 1.0
+    },
+    {
+      "doc_id": "synthetic-teds-quote-detail",
+      "page": 1,
+      "teds": 0.6470588235294117
+    },
+    {
+      "doc_id": "synthetic-teds-score",
+      "page": 1,
+      "teds": 0.8181818181818181
+    },
+    {
+      "doc_id": "synthetic-teds-deviation",
+      "page": 1,
+      "teds": 1.0
+    }
+  ],
+  "annotations": "work/eval/fixtures/teds_gt.jsonl",
+  "hypotheses": "work/eval/fixtures/teds_hypotheses.jsonl",
+  "aggregate_engineering_gates": {
+    "line_cer_max": 0.02,
+    "key_field_f1_min": 0.97,
+    "teds_min": 0.9,
+    "line_cer": null,
+    "key_field_f1": null,
+    "teds": 0.8784546114752891,
+    "failures": [
+      "teds"
+    ],
+    "unevaluated": [
+      "line_cer",
+      "key_field_f1"
+    ],
+    "engineering_gate": "GATE_FAIL",
+    "product_pass": false,
+    "business_pass": false,
+    "forced_requirement_status": "NEEDS_REVIEW",
+    "claim_scope": "engineering_gate_only",
+    "note": "Hard OR of evaluated CER/F1/TEDS failures, plus fail-closed on unevaluated gates. Not T-005."
+  }
+}
