@@ -11,7 +11,7 @@
 | Training line crops | 4316 train / 480 val | work/training-corpus/paddle-rec/ | Weak labels from PDF text dict |
 | RapidOCR CER baseline | 18 pages x2 modes | outputs/ocr-benchmark/RAPIDOCR_CER_REPORT.md | Mean CER ~18% clean / ~17% synthetic - gate fail |
 | Scanned OCR cache | 78 pages / 1 doc | `work/ocr/akss-water-it/` | **PII — internal only**; no char-level GT |
-| Synthetic degraded / fax / handwriting / seals | Partial | `work/training-corpus/tender-public/synthetic-scans/` + JSONL flags | JPEG Q40 CER probes; seal/HW GT still gap |
+| Synthetic degraded / fax / handwriting / seals | Partial | `work/eval/fixtures/seal_hw_gt.jsonl` + synthetic-scans | S-A-07 page-type slots seeded; pixel GT still gap |
 | Table structure GT (TEDS) | **16 pages** (12 public + 4 synthetic) | `work/eval/fixtures/teds_gt.jsonl` | S-A-05 Week-1 single-page seed; TEDS score **not** evaluated |
 
 Sandbox engineering only. This file does **not** record a product PASS, T-005 business PASS, or enterprise acceptance.
@@ -34,7 +34,7 @@ First customer ICP: **医疗器械经销 → 医院招标**. Prefer hybrid local
 | Photo / fax / low-quality copy | No | |
 | Multi-column / TOC | Yes (proxy) | Shaanxi TOC page exposes VL truncation |
 | Tables (报价/偏离/评分) | Week-1 seed (16 pages) | S-A-05 `table_html` GT; TEDS ≥90% **not** measured |
-| Seals / signatures / handwriting | No | Schema flags exist; no labeled pixels |
+| Seals / signatures / handwriting | Week-1 seed | S-A-07 `page_type` slots + flags; detection **not** measured |
 | Bid response / 技术标 / 商务标 pairs | No | Only tender side |
 
 ## Page-level JSONL schema (S-A-01)
@@ -53,7 +53,7 @@ One JSON object per line. Current version is `1.0`. Weak `0.1` labels (or a miss
 | `schema_version` | required | `1.0` current; `0.1` weak-compatible |
 | `doc_id` | required | Non-empty string |
 | `page` | required | Positive integer |
-| `page_type` | required | `cover` \| `toc` \| `body` \| `table` \| `seal` |
+| `page_type` | required | `cover` \| `toc` \| `body` \| `table` \| `seal` \| `handwriting` |
 | `text_gt` | required | Page ground-truth text |
 | `fields` | required | List of `{name, value}` objects |
 | `table_html` | required | HTML string or `null` (null ⇒ no TEDS GT) |
@@ -86,6 +86,29 @@ uv run python -m work.eval.page_annotation work/eval/fixtures/key_field_gt.jsonl
 Exit `0` = schema valid and seed minima met (`SUFFICIENT_SEED`). Exit `2` = `INSUFFICIENT`. Exit `1` = validation error.  
 `SUFFICIENT_SEED` is **not** F1 ≥ 97% and **not** a product/business PASS. T-005 ledgers are not written.
 
+## Key-field F1 harness (S-A-03)
+
+`work/eval/key_field_f1.py` scores micro-averaged F1 on frozen `(doc_id, name)` with NFKC value match.
+
+- Engineering gate: **F1 ≥ 97%**. Sandbox hypotheses intentionally below → `GATE_FAIL` (observed ≈76%).
+- Report: `outputs/ocr-benchmark/key-field-f1-report.md`. Product snapshot reads it via `app/quality_gates.py`.
+
+```bash
+uv run python -m work.eval.key_field_f1
+```
+
+## Seal / handwriting page-type slots (S-A-07)
+
+Canonical labels: `work/eval/fixtures/seal_hw_gt.jsonl`.  
+Runbook: `work/eval/SEAL_HW_GT.md`.  
+Report: `outputs/ocr-benchmark/seal-hw-gt-report.md`.
+
+Fills `page_type` slots `seal` / `handwriting` and `has_seal` / `has_hw`. Seed minima: 6 seal slots, 3 handwriting slots, 3 public docs. Detection accuracy stays `NOT_EVALUATED` (no pixel GT).
+
+```bash
+uv run python -m work.eval.seal_hw_gt
+```
+
 ## TEDS table-structure GT seed (S-A-05)
 
 Canonical labels: `work/eval/fixtures/teds_gt.jsonl` (S-A-01 page JSONL).  
@@ -100,7 +123,19 @@ uv run python -m work.eval.page_annotation work/eval/fixtures/teds_gt.jsonl
 ```
 
 Exit `0` = schema valid and seed minima met (`SUFFICIENT_SEED`). Exit `2` = `INSUFFICIENT`. Exit `1` = validation error.  
-`SUFFICIENT_SEED` is **not** TEDS ≥ 90% and **not** a product/business PASS. T-005 ledgers are not written. S-A-06 similarity harness is out of scope beyond the `has_teds_gt` count hook.
+`SUFFICIENT_SEED` is **not** TEDS ≥ 90% and **not** a product/business PASS. T-005 ledgers are not written.
+
+## TEDS harness (S-A-06)
+
+`work/eval/teds_harness.py` scores HTML-table TEDS (tree edit similarity) against S-A-05 GT.
+
+- Engineering gate: **mean TEDS ≥ 90%**. Sandbox hypotheses are intentionally below → `GATE_FAIL`.
+- Hard OR with line CER / key-field F1: `work/eval/sandbox_gates.py`; product snapshot `app/quality_gates.py` forces `NEEDS_REVIEW` while gates fail or stay unevaluated.
+- Always `product_pass=false` / `business_pass=false`. Spec: `outputs/sandbox-gate-productization-spec.md`.
+
+```bash
+uv run python -m work.eval.teds_harness
+```
 
 ## Line-CER harness (S-A-02)
 
@@ -109,7 +144,7 @@ Exit `0` = schema valid and seed minima met (`SUFFICIENT_SEED`). Exit `2` = `INS
 - `page_cer` and `line_cer` are computed separately and never mixed.
 - Engineering gate: **line CER ≤ 2%**. If not met the report is `GATE_FAIL`.
 - `GATE_PASS` is an engineering threshold only. The harness always sets `product_pass=false` and `business_pass=false`.
-- Key-field F1 ≥ 97% is a later gate; this command does not claim it. TEDS GT counting uses `has_teds_gt`; the ≥90% TEDS score is still later (S-A-06).
+- Key-field F1 ≥ 97% is a later gate (S-A-03). TEDS ≥ 90% is evaluated by S-A-06.
 - Writes only under `outputs/ocr-benchmark/` (or `--out-dir`). Refuses paths containing `pilot-ledger` or `icp-outreach`.
 
 Prior RapidOCR soak baseline (not this sandbox fixture): page CER ≈ 18%, line CER ≈ 8.9%. TEDS GT seed (S-A-05) lives in `work/eval/fixtures/teds_gt.jsonl` (16 pages); the sandbox line-CER fixture still has `table_html=null`.

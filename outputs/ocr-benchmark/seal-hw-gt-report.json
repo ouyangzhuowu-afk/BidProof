@@ -1,0 +1,34 @@
+{
+  "coverage_status": "SUFFICIENT_SEED",
+  "seal_pages": 10,
+  "hw_pages": 4,
+  "page_type_seal": 7,
+  "page_type_handwriting": 3,
+  "public_documents": 4,
+  "synthetic_documents": 6,
+  "min_seal_pages": 6,
+  "min_hw_pages": 3,
+  "min_page_type_seal": 3,
+  "min_page_type_handwriting": 2,
+  "min_public_docs": 3,
+  "product_pass": false,
+  "business_pass": false,
+  "detection_status": "NOT_EVALUATED",
+  "public_doc_ids": [
+    "fixture-001",
+    "fixture-002",
+    "fixture-003",
+    "pub-gx-ventilator-monitors"
+  ],
+  "synthetic_doc_ids": [
+    "synthetic-hw-authorization",
+    "synthetic-hw-deviation-note",
+    "synthetic-hw-score-sheet",
+    "synthetic-seal-bid-opening",
+    "synthetic-seal-company-chop",
+    "synthetic-seal-hw-mixed"
+  ],
+  "generated_at": "2026-09-18T14:31:51.740071+00:00",
+  "source": "work/eval/fixtures/seal_hw_gt.jsonl",
+  "claim_scope": "engineering_seed_only"
+}

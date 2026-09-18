@@ -17,7 +17,7 @@ from typing import Any
 CURRENT_SCHEMA_VERSION = "1.0"
 WEAK_SCHEMA_VERSION = "0.1"
 COMPATIBLE_SCHEMA_VERSIONS = frozenset({WEAK_SCHEMA_VERSION, CURRENT_SCHEMA_VERSION})
-PAGE_TYPES = frozenset({"cover", "toc", "body", "table", "seal"})
+PAGE_TYPES = frozenset({"cover", "toc", "body", "table", "seal", "handwriting"})
 REQUIRED_V1 = (
     "schema_version",
     "doc_id",
