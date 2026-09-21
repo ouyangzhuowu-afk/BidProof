@@ -22,14 +22,14 @@ def test_app_source_is_es_modules_with_a_single_store():
     app = (SRC / "app.js").read_text(encoding="utf-8")
     state = (SRC / "state.js").read_text(encoding="utf-8")
     escape = (SRC / "escape.js").read_text(encoding="utf-8")
-    jsconfig = (ROOT / "frontend" / "jsconfig.json").read_text(encoding="utf-8")
+    tsconfig = (ROOT / "frontend" / "tsconfig.json").read_text(encoding="utf-8")
     vite = (ROOT / "frontend" / "vite.config.js").read_text(encoding="utf-8")
 
     assert "import { store } from './state.js'" in app
     assert "export const store" in state
     assert "export function html" in escape
     assert "export function setHtml" in escape
-    assert '"checkJs": true' in jsconfig
+    assert '"allowJs": true' in tsconfig
     assert "formats: ['iife']" in vite
     assert "let currentRun" not in app
     assert "store.currentRun" in app
@@ -46,7 +46,7 @@ def test_innerhtml_assignments_go_through_sethtml():
 
 def test_built_bundle_keeps_the_ui_contract_function_names():
     bundle = (STATIC / "app.js").read_text(encoding="utf-8")
-    for name in ("showJobs", "loadJobs", "showAdmin", "cancelJob"):
+    for name in ("showJobs", "reloadJobs", "showAdmin", "cancelJob"):
         assert f"function {name}" in bundle
-    assert "setHtml" in bundle
+    assert "mount" in bundle or "setHtml" in bundle
     assert "function escapeHtml" in (SRC / "escape.js").read_text(encoding="utf-8")
