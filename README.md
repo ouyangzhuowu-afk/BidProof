@@ -19,7 +19,7 @@
 | 健康检查 | `/healthz` | 部署与试用探活 |
 
 公网试点跑在 Render 免费 Web Service（新加坡节点）：空闲约 15 分钟休眠，下次请求约 1 分钟冷启动，Free Postgres 自创建起 30 天到期；**不是高可用生产托管**。
-本机备用：`.scriptsstart-pilot.ps1`（Cloudflare Tunnel + HTTP/2）。
+本机备用：`.\scripts\start-pilot.ps1`（Cloudflare Tunnel + HTTP/2）。
 
 ## 账号流程
 
@@ -105,7 +105,7 @@ OCR 质量门禁现状（如实记录，不掩盖）：
 | 方式 | 文件 / 命令 | 状态 |
 |------|-------------|------|
 | 公网试点 | `render.yaml`（Render Blueprint，免费档 + Free Postgres） | 已上线 |
-| 本机备用 | `.scriptsstart-pilot.ps1`（Tunnel 回源 127.0.0.1:8016） | 可用 |
+| 本机备用 | `.\scripts\start-pilot.ps1`（Tunnel 回源 127.0.0.1:8016） | 可用 |
 | 容器 | `docker-compose.yml`（扫描作业在独立 `worker` 进程：`python -m app.worker`） | 可用 |
 | 私有化 | `scripts/preflight.py` + 离线包 | 需按客户环境验证 |
 
