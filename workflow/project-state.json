@@ -283,7 +283,7 @@
         "static/style.css",
         "outputs/enterprise-completion-acceptance-2026-08-27.md",
         "work/backups/20260826T163038Z",
-        "work/restore-drill-20260827"
+        "work/restore-drill-20260827/README.md"
       ],
       "validation": "本地和公网未登录及伪造身份头访问均返回 401；报告列名使用定位；作业进度和失败原因可见；站内提醒可见；备份 valid=true，隔离恢复 23 个任务/40 个上传文件且 integrity_check=ok；node --check 通过，pytest 96 passed"
     },
@@ -552,6 +552,28 @@
       ],
       "validation": "SUFFICIENT_SEED: seal_pages=10, hw_pages=4, page_type_seal=7, page_type_handwriting=3, public_docs=4 + 6 synthetic; detection_status=NOT_EVALUATED (no pixel GT); product_pass=false; schema page_type adds handwriting; no pilot/ICP writes; T-005 not bumped.",
       "note": "Page-type slot seed only; not seal/handwriting detection PASS."
+    },
+    {
+      "id": "C-026",
+      "title": "GitHub 同步与过期内容清扫（仓库卫生）",
+      "status": "verified",
+      "dependencies": [
+        "C-017",
+        "S-A-07"
+      ],
+      "artifacts": [
+        ".gitignore",
+        "README.md",
+        "AGENTS.md",
+        "docs/README.md",
+        "docs/archive/README.md",
+        "work/restore-drill-20260827/README.md",
+        "outputs/handover-2026-09-23/HANDOVER.md",
+        "outputs/handover-2026-09-23/frontend-handover-analysis-2026-09-23.md",
+        "outputs/case-studies/public-tender-invalidation-reconstruction-report.md"
+      ],
+      "validation": "恢复演练的真实上传副本 40 个文件（work/restore-drill-20260827/uploads/）与 3 份逐字节重复的公开 fixture PDF 从当前分支移除并改写记录；回退补丁材料与旧前端打包说明移入 docs/archive/；.gitignore 新增真实 upload、第三方克隆、训练语料二进制、zip/tgz、覆盖率与日志门禁；本地隔离区 _cleanup-archive-2026-09-23/ 保存全部移出文件（149 MB，可回滚）；uv run --group dev pytest -q = 303 passed, 11 skipped；workflow check = PASS；README / AGENTS 刷新到 2026-09-23 状态；git push origin main 完成。",
+      "note": "仓库卫生，不是业务验收，T-005 未推进。历史提交中的副本字节未清理（需人工决定是否重写历史）。前端交接包仍未合并，见 Q-HANDOVER-1。"
     }
   ],
   "backlog": [
@@ -641,6 +663,12 @@
       "question": "沙箱 OCR egress 密钥与 BIDPROOF_OCR_EGRESS_ALLOWED 由谁持有/如何轮换？",
       "status": "open",
       "owner": "Joe"
+    },
+    {
+      "id": "Q-HANDOVER-1",
+      "question": "2026-09-23 前端交接代码包是否合并、以什么方式合并？（它整页替换详情视图，与 C-022 回退决定冲突）",
+      "status": "open",
+      "owner": "user"
     }
   ],
   "risks": [
@@ -1043,9 +1071,10 @@
       "OCR gates CER/F1/TEDS unmet"
     ],
     "parallel": [],
-    "note": "Do not write demo rows into pilot/ICP ledgers. Do not claim product PASS. Engineering fallback: improve OCR until gates pass while waiting for T-005 input."
+    "fallback": "Engineering leaves while T-005 input is missing: raise OCR quality until line CER <= 2%, key-field F1 >= 97%, TEDS >= 90%; keep CI and repo hygiene green.",
+    "note": "Do not write demo rows into pilot/ICP ledgers. Do not claim product PASS. Pending human decision: how to merge the 2026-09-23 frontend handover package (conflicts with the C-022 revert), see Q-HANDOVER-1."
   },
-  "updated_at": "2026-09-18T14:35:00Z",
+  "updated_at": "2026-09-22T17:45:00Z",
   "sandbox_roadmap": {
     "locked_at": "2026-09-16",
     "gates": {
