@@ -23,7 +23,7 @@
 
 - **P1 / 进行中**：`sandbox-campaign-A` 沙箱工程门禁（S-A-01..07）。OCR 三项门禁现状：行级 CER `GATE_FAIL`（3.17% / 阈值 ≤ 2%）、关键字段 F1 `GATE_FAIL`（76.00% / 阈值 ≥ 97%）、TEDS `NOT_EVALUATED`；未达标时产品侧强制 `NEEDS_REVIEW`，不得当作通过。
 - **阻塞**：`T-005` 真实任务验收与 45 天 ICP 试运行——沙箱阶段已推迟（2026-09-16 决策），尚无首批真实企业任务，不可用 demo 冒充。
-- **待裁决**：2026-09-23 前端交接代码包（`outputs/handover-2026-09-23/`）**未合并**；它整页替换详情视图，与 C-022 回退决定冲突，先定合并方式再动代码。
+- **已合并并上线（2026-09-23）**：GPT-6 Astra 第二轮前端包（`BidProof-frontend-redesign-round2-20260923.zip`）已并入 `main` 并部署到 `bidproof.marketcase.net` 的 `/` 与 `/app`；决策见 `D-ASTRA-MERGE-2026-09-23`，范围与验收见 `docs/astra-frontend-round2-2026-09-23.md`。核对显示该包只替换详情视图，C-022 的扫描任务页布局未被改动。
 - **可做**：工程优化、CI、台账工具、文档、性能；收到真实输入后追加 `pilot-row.json` / `icp-row.json`
 - **已回退（C-022）**：工作台补丁 002 打乱扫描任务页对齐，已恢复 `4516b3f` 布局；相关材料已移入 `docs/archive/`，勿整页落地
 
