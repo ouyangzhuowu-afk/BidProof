@@ -1,0 +1,213 @@
+{
+  "date": "2026-09-23",
+  "baseline_archive": "BidProof-frontend-redesign-20260922.zip",
+  "baseline_archive_sha256": "83745ff46cd718a20dbc29177c692473c020470ef8fbc7f9d8a4db48df1a1850",
+  "changed_files": [
+    {
+      "path": "START-HERE.md",
+      "change": "modified",
+      "sha256": "cc47b3d0d51e4ef78c3d391f26169d81d48648f9402f54177ab175cd6d88cf75"
+    },
+    {
+      "path": "app/services/scan_service.py",
+      "change": "modified",
+      "sha256": "c057a5a7fa37873088ef19a5cdda17d69c27c1cac51819e2bfaaed86978ce398"
+    },
+    {
+      "path": "docs/ui-hardening-round2-2026-09-22.md",
+      "change": "added",
+      "sha256": "a3756a8197ab64b28f470400944afe2c15cb0f6bfca7a3da36393471a31ad8a4"
+    },
+    {
+      "path": "docs/ui-redesign-2026-09-22.md",
+      "change": "modified",
+      "sha256": "fce7bdc9d5248447d3e7d55049c59f6f338b1c9c5703ae531084b2930f8cb0e6"
+    },
+    {
+      "path": "frontend/package.json",
+      "change": "modified",
+      "sha256": "5a5a1736269a51cdbdfedd28bf7fe6cd4ee2b084d5c5823a41432b9e1206ba60"
+    },
+    {
+      "path": "frontend/scripts/stamp-assets.mjs",
+      "change": "added",
+      "sha256": "1848f698d0c7532ab7fc76737afad975dda57c9abd9b0dc5c73a8e4af10ca77b"
+    },
+    {
+      "path": "frontend/scripts/test-app-smoke-dom.mjs",
+      "change": "modified",
+      "sha256": "872ea348017dac057005c583fcdf014116c4a5f0e5b0c874038510b853caaa9b"
+    },
+    {
+      "path": "frontend/scripts/test-http-reliability.mjs",
+      "change": "added",
+      "sha256": "50cd9aad632b0a7dbdcbd6c00372ed0647f7875a4b37f4150f7ed2d38cebb581"
+    },
+    {
+      "path": "frontend/scripts/test-intake-lifecycle-dom.mjs",
+      "change": "added",
+      "sha256": "c70d80f1debbe5f50ff3551accbb3e3225844c3910a9950e22e55fcde1481e3c"
+    },
+    {
+      "path": "frontend/scripts/test-reader-navigation-dom.mjs",
+      "change": "added",
+      "sha256": "199daea1cef140c2dd460054892aa24262f41d9b63bf826da0452e9161c109b3"
+    },
+    {
+      "path": "frontend/scripts/test-review-navigation-round2.mjs",
+      "change": "added",
+      "sha256": "4dcf45702c7344d09c712ce508badff034ef3570974b5927524936e8a1214c36"
+    },
+    {
+      "path": "frontend/src/app.js",
+      "change": "modified",
+      "sha256": "817bbea204caa04c04b04adfdd0c5f06f2cc6940ab57c82816595603e8a53507"
+    },
+    {
+      "path": "frontend/src/core/http.js",
+      "change": "modified",
+      "sha256": "4243a98f3e29d8f6e184f29c04fc651ac2ddcb9ce5166415f3535220c8bd2d71"
+    },
+    {
+      "path": "frontend/src/core/theme.js",
+      "change": "modified",
+      "sha256": "4ce241ed4a943042e18ef79715b7047633a5e909bfb916ea4c846d876a340864"
+    },
+    {
+      "path": "frontend/src/features/runs/evidence-reader.js",
+      "change": "modified",
+      "sha256": "5ea2299b16b7bddb555e5a601f2be50396ec5ed178a73faccd2929612cfeb0ec"
+    },
+    {
+      "path": "frontend/src/features/runs/matrix.js",
+      "change": "modified",
+      "sha256": "d9b9d88d4fe90084f5a69bee10fd9cad264d7961c6a4ca97ed8877d9adf607d0"
+    },
+    {
+      "path": "frontend/src/features/runs/review-model.js",
+      "change": "modified",
+      "sha256": "b908f8866ba345af5a15762c699cf49e6e3f0cf54bb0a772a8a09b11528c58eb"
+    },
+    {
+      "path": "frontend/src/features/scan/intake.js",
+      "change": "modified",
+      "sha256": "fb31f0200a1d2d0629abf0e893aeba1292f012343b18b195c1503e219737b180"
+    },
+    {
+      "path": "frontend/src/features/scan/watcher.js",
+      "change": "modified",
+      "sha256": "69671d777bb9bb3bdab0b7bae3a7307fba8ee73abcfc464d857583932b7e36b5"
+    },
+    {
+      "path": "frontend/src/styles/base.css",
+      "change": "modified",
+      "sha256": "332ce9dacdae68f9bd77ba2c58d917b09bf76084fe607c85196b2151a7345172"
+    },
+    {
+      "path": "frontend/src/styles/index.css",
+      "change": "modified",
+      "sha256": "5363fd5a8bef9fcd52bbc28dfd5508004c1f93a8fa7ddc6b311f47c601e16291"
+    },
+    {
+      "path": "frontend/src/styles/tokens.css",
+      "change": "modified",
+      "sha256": "c067af3de3f1664be205317029dbcb4ef8a947c8859b8a8ca1053bd504891a43"
+    },
+    {
+      "path": "frontend/src/styles/views/intake.css",
+      "change": "modified",
+      "sha256": "c074b2eeb70307812f12db15f268d22fd8f540f8192b742eb099d8888e54439c"
+    },
+    {
+      "path": "frontend/src/styles/views/reader-navigation.css",
+      "change": "added",
+      "sha256": "77f3b9ca14cf487a474faa053be305b631aaa70250953bb7e76a1c903342a584"
+    },
+    {
+      "path": "frontend/src/styles/views/review-cards.css",
+      "change": "modified",
+      "sha256": "c642cd72a72ee62842430dd320b7e1d8990b1358c754c573d334819d9b931324"
+    },
+    {
+      "path": "frontend/src/styles/views/workbench.css",
+      "change": "modified",
+      "sha256": "96519c1b002e77853f1bbfa3ebebc762c93c21c1368cbc6674cc26ba146ef8e7"
+    },
+    {
+      "path": "outputs/ui-redesign-round2/browser-checks.json",
+      "change": "added",
+      "sha256": "8e026c4760cf8cbbde276a5bc97efdc11dca16350b3c7865f413bfe8dc809a63"
+    },
+    {
+      "path": "outputs/ui-redesign-round2/desktop-dark-1440.jpg",
+      "change": "added",
+      "sha256": "6b341edb67b54f0b68152432058d7a47a6a8b195a44fe3ae686daf041c53968d"
+    },
+    {
+      "path": "outputs/ui-redesign-round2/desktop-light-1440.jpg",
+      "change": "added",
+      "sha256": "0210d61a7a19ce5b0997a89a6dc0d2e3a6730ba0384024150ecb476ec6bd42b6"
+    },
+    {
+      "path": "outputs/ui-redesign-round2/mobile-390.jpg",
+      "change": "added",
+      "sha256": "8e03385b826d11974714c81296191640a7cbf2a8b4f113fefb636ffc82338b79"
+    },
+    {
+      "path": "outputs/ui-redesign-round2/mobile-light-320.jpg",
+      "change": "added",
+      "sha256": "bba7baf55647d088bae052326c87e7925b3a5ca32eea74839b2a66c462d07400"
+    },
+    {
+      "path": "outputs/ui-redesign-round2/tablet-light-768.jpg",
+      "change": "added",
+      "sha256": "12bd3e085cac18b8efbf0039344e28c0ae936dd8e63b2d4afb643535ffa6b436"
+    },
+    {
+      "path": "outputs/ui-redesign-round2/upload-light-1440.jpg",
+      "change": "added",
+      "sha256": "3ab3152efc7a033ce56330ac5385615d08d64e219a011c3c9bf161ac33b0040b"
+    },
+    {
+      "path": "outputs/ui-redesign-round2/verification-summary.json",
+      "change": "added",
+      "sha256": "81e03886de7844df080d8811346cf8d191a8c4f72588aa5b1072bbfcb527c634"
+    },
+    {
+      "path": "static/app.js",
+      "change": "modified",
+      "sha256": "ac20b47279ebd7f352399c2141d4a86aabd831d5e78251c910c7950b750bce48"
+    },
+    {
+      "path": "static/app.js.map",
+      "change": "modified",
+      "sha256": "2511fd3dec92398a5b87776b3f51165e3ad0a80d2c9dcee170f8f983ebda92c0"
+    },
+    {
+      "path": "static/index.html",
+      "change": "modified",
+      "sha256": "3132868e3fbcfe2357bd415721b8756ef3f9f1dd4af8bb063dc5cda293f4a21b"
+    },
+    {
+      "path": "static/style.css",
+      "change": "modified",
+      "sha256": "0a26625bfbdf43a7d7d0dc5fff806bd6a6255d364f4c130469c25057d5c26faf"
+    },
+    {
+      "path": "tests/test_api.py",
+      "change": "modified",
+      "sha256": "906735f9cc795724701b7ea2351dfb642dd371431a9aebcd0eba0a04b755e5d1"
+    },
+    {
+      "path": "tests/test_upload_source_identity.py",
+      "change": "added",
+      "sha256": "a726c15694eee6dabef6280856375d1e13cc2275c6ed07783a43fecb7534cb7f"
+    },
+    {
+      "path": "workflow/project-state.json",
+      "change": "modified",
+      "sha256": "bc981c450d743287e5f54c120dfb108e50667a449b21c3c229fd64ce58977a0b"
+    }
+  ],
+  "excluded_from_comparison": "This manifest itself; delivery exclusions are documented in the external archive acceptance report."
+}

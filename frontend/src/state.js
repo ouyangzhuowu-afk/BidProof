@@ -1,3 +1,5 @@
+import { store as sharedStore } from './core/store.js';
+
 /**
  * Mutable UI state lives here instead of as module-level `let` bindings in app.js.
  * Views read and write through this object so there is a single mutation surface.
@@ -60,3 +62,13 @@ export const store = {
   runSort: 'updated_desc',
   runSearchTimer: null,
 };
+
+// Compatibility accessors keep migrated and legacy views on one source of truth.
+for (const key of ['currentRun', 'currentUser']) {
+  Object.defineProperty(store, key, {
+    enumerable: true,
+    configurable: false,
+    get: () => sharedStore.get()[key],
+    set: (value) => sharedStore.set({ [key]: value }),
+  });
+}

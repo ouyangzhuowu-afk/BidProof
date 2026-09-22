@@ -1,0 +1,92 @@
+{
+  "date": "2026-09-23",
+  "checks": [
+    {
+      "client": 753,
+      "mode": "tablet-light",
+      "overflow": [],
+      "scroll": 753,
+      "viewport": [
+        768,
+        1024
+      ]
+    },
+    {
+      "bodyMin": "0px",
+      "client": 375,
+      "mode": "phone-light-390",
+      "scroll": 375,
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "canvas": "#0e151c",
+      "client": 1425,
+      "h1": "rgb(246, 249, 252)",
+      "mode": "desktop-dark",
+      "scroll": 1425,
+      "viewport": [
+        1440,
+        1000
+      ]
+    },
+    {
+      "client": 305,
+      "health": {
+        "bottom": 605.96875,
+        "height": 277.375,
+        "left": 16,
+        "right": 289,
+        "top": 328.59375,
+        "width": 273,
+        "x": 16,
+        "y": 328.59375
+      },
+      "mode": "phone-light-320",
+      "rootMin": "0px",
+      "scroll": 305,
+      "viewport": [
+        320,
+        740
+      ]
+    },
+    {
+      "active": null,
+      "brand": "#0f766e",
+      "canvas": "#f4f5f7",
+      "client": 1425,
+      "font": "20px",
+      "lineHeight": "30px",
+      "mode": "desktop-light",
+      "scroll": 1425,
+      "sidebar": 208,
+      "sourceImages": [
+        {
+          "alt": "政务协同平台建设项目_示例招标.pdf，原始 PDF 第 1 页",
+          "loaded": true,
+          "width": 893
+        },
+        {
+          "alt": "企业资质包_示例.pdf，原始 PDF 第 1 页",
+          "loaded": true,
+          "width": 893
+        }
+      ],
+      "viewport": [
+        1440,
+        1000
+      ]
+    }
+  ],
+  "uploadPrimary": {
+    "background": "rgb(15, 118, 110)",
+    "color": "rgb(255, 255, 255)",
+    "height": 43
+  },
+  "limits": [
+    "No full keyboard accessibility audit",
+    "Reduced motion supported in CSS; OS preference not emulated"
+  ]
+}

@@ -32,7 +32,7 @@ export function apply() {
   document.documentElement.dataset.theme = theme;
   const meta = document.querySelector('meta[name="theme-color"]');
   // 与 tokens.css 中的 --canvas 保持一致。
-  meta?.setAttribute('content', theme === 'dark' ? '#0e151c' : '#eceef1');
+  meta?.setAttribute('content', theme === 'dark' ? '#0e151c' : '#f4f5f7');
 }
 
 /** @param {ThemePreference} next */

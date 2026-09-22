@@ -1,0 +1,227 @@
+{
+  "baseline": "desktop downloaded BidProof-main, preserved",
+  "date": "2026-09-22",
+  "changed_files": [
+    {
+      "path": "START-HERE.md",
+      "change": "added",
+      "sha256": "7505985e74b076bc2ab8f3d7abbb0bb6860f00d46bdbc18780301ed30b7adaaf"
+    },
+    {
+      "path": "app/api/runs.py",
+      "change": "modified",
+      "sha256": "553caf93d28a563243ee3c95fc263d0240c1efcb62902799323871f585cf7496"
+    },
+    {
+      "path": "app/services/document_service.py",
+      "change": "added",
+      "sha256": "b6f914268352f4710b6cca1aef86dd64401ef29c8de74c690ca444bc546a8f8b"
+    },
+    {
+      "path": "docs/design-tokens.md",
+      "change": "added",
+      "sha256": "49166af0cf741561420eed80612f80456f0343b46cdc95d76d500d865a55da4b"
+    },
+    {
+      "path": "docs/ui-redesign-2026-09-22.md",
+      "change": "added",
+      "sha256": "da131599bf55e8c4cf8819d42bf785f494e2563cc8d2b9b41e38a57d21c256c4"
+    },
+    {
+      "path": "frontend/scripts/test-app-smoke-dom.mjs",
+      "change": "added",
+      "sha256": "1edf575624497e298454e7d87257fafd78a590ed8b557c2d81a838f710132f5c"
+    },
+    {
+      "path": "frontend/scripts/test-review-workbench.mjs",
+      "change": "added",
+      "sha256": "8907d79b466baaadf5da2b1e894651feb8301b9cb90742630fb19a3f521bef4e"
+    },
+    {
+      "path": "frontend/scripts/test-workbench-dom.mjs",
+      "change": "added",
+      "sha256": "68f114e1e37e962b156c58ebd575839fbe75345218ed8d07baf8696ac3d4f9bf"
+    },
+    {
+      "path": "frontend/src/api/runs.js",
+      "change": "modified",
+      "sha256": "7ed9d63cc7e76e0a7280588bb79eacfbd05d3234352a0c43b95f9cf26018bd12"
+    },
+    {
+      "path": "frontend/src/app.js",
+      "change": "modified",
+      "sha256": "4b35e30b316086435e8454bdfe55f793456013f08bccd5bbc262ec677e4c5476"
+    },
+    {
+      "path": "frontend/src/core/format.js",
+      "change": "modified",
+      "sha256": "9226928257db4fff73b2f0319c4d81c99e18667f2081e3ea1f645e7bd9eceba7"
+    },
+    {
+      "path": "frontend/src/core/icons.js",
+      "change": "modified",
+      "sha256": "eaabcff90f5f0d12ba0cd1804d8bc7cbe8ce4fcf65de0cd42d387a2ba602c247"
+    },
+    {
+      "path": "frontend/src/features/runs/evidence-reader.js",
+      "change": "added",
+      "sha256": "e88758f8530ffd53ba3cd44e594ed5519a7497b79d271f0b93a5069094f7522d"
+    },
+    {
+      "path": "frontend/src/features/runs/matrix.js",
+      "change": "modified",
+      "sha256": "6210f33871f5dc6df30d8a9c8768075554029bced061b687347fae36894462d5"
+    },
+    {
+      "path": "frontend/src/features/runs/review-model.js",
+      "change": "added",
+      "sha256": "43822ed34a851af6730b02267e7adbf04791a51142c6176c08e97b46aba8e82a"
+    },
+    {
+      "path": "frontend/src/features/scan/intake.js",
+      "change": "added",
+      "sha256": "6c7691ac2a04369c0e6921172424fad8b793d7e21035d731aade3ca9a632803a"
+    },
+    {
+      "path": "frontend/src/state.js",
+      "change": "modified",
+      "sha256": "b94a012188b886b0607e4178340803741f1296e020813d8f90b5dd4e273e454c"
+    },
+    {
+      "path": "frontend/src/styles/index.css",
+      "change": "modified",
+      "sha256": "5c4aa70dba2dd30d1429c3d26843188217e7aec6835d92a9139a2b931ab9884d"
+    },
+    {
+      "path": "frontend/src/styles/tokens.css",
+      "change": "modified",
+      "sha256": "61cac05778a6dc32b442a1e19daaec1221048fbdf38770f98d2a40c8b2e4a4a8"
+    },
+    {
+      "path": "frontend/src/styles/views/intake.css",
+      "change": "added",
+      "sha256": "bd1597c46285905c58e54da1f17163a31644a108b0a522a19c9b29d832dceb9d"
+    },
+    {
+      "path": "frontend/src/styles/views/review-cards.css",
+      "change": "added",
+      "sha256": "e9c6eddb3078307b438d2562cd4671f3e4d038e56a6804deee913208b92559b7"
+    },
+    {
+      "path": "frontend/src/styles/views/workbench.css",
+      "change": "added",
+      "sha256": "525324bb53a6ef879d0ac9f76bab88b94f82630df35cd9333060b6870eadbb49"
+    },
+    {
+      "path": "frontend/src/ui/render.js",
+      "change": "modified",
+      "sha256": "c560b088537ddd065a1b0c132b7041be8e7401baeeb674b20471a5cccf9351d1"
+    },
+    {
+      "path": "frontend/types/api.d.ts",
+      "change": "modified",
+      "sha256": "decbec39ab797cb791da542100b2a6bfef9d480fc11d94481357dbf5f9b5f828"
+    },
+    {
+      "path": "outputs/ui-redesign/baseline-index.html",
+      "change": "added",
+      "sha256": "a46025b0cdc264a97110b992a86f7a011b8934496b54757aff27d4f4cde038c7"
+    },
+    {
+      "path": "outputs/ui-redesign/baseline-style.css",
+      "change": "added",
+      "sha256": "0b89def58fbd1a2ea21f5453dc0bc10b963f595efd529a12cd7683e68bafecc6"
+    },
+    {
+      "path": "outputs/ui-redesign/http-smoke.json",
+      "change": "added",
+      "sha256": "c4c1bccfba8fb842b7d19ddd55ac30401a78e5cc07d128eae499ffa806e24569"
+    },
+    {
+      "path": "outputs/ui-redesign/ruff-baseline.json",
+      "change": "added",
+      "sha256": "51506cfeb4436710f4c7423e3c115a10465a5a09b9c6103ffde300815d231023"
+    },
+    {
+      "path": "outputs/ui-redesign/ruff-current.json",
+      "change": "added",
+      "sha256": "6f04a71ea2aa0f034211b78b299826641cd3bc3a51501bdc6eca6a12d9ce27b3"
+    },
+    {
+      "path": "outputs/ui-redesign/verification-summary.json",
+      "change": "added",
+      "sha256": "160e3e945043cefe800a4667069def975783fe2382721e6fad0d317ba69222b9"
+    },
+    {
+      "path": "scripts/seed-ui-review.py",
+      "change": "added",
+      "sha256": "db47b7d4b532cb7aac1a0684a87ef298b67ca11576a6886ff6e4779f89a74052"
+    },
+    {
+      "path": "static/app.js",
+      "change": "modified",
+      "sha256": "b736b74265b6c3979694cdc2491de6a6a7c29d1b072cafc40ff7f19c1c217816"
+    },
+    {
+      "path": "static/app.js.map",
+      "change": "modified",
+      "sha256": "aefb7cca1875f4201c883c7240e3d64a9ba17be4e1c456faebebe8b8434bcd18"
+    },
+    {
+      "path": "static/index.html",
+      "change": "modified",
+      "sha256": "ce8ec00d3eaef40c00eff7787bb1c0b2a4a1671653ad07896196d822f7f36522"
+    },
+    {
+      "path": "static/style.css",
+      "change": "modified",
+      "sha256": "d582e5bb930d9d26c7fdbd772a6d1eb7ba49c705b7c3267f06f8056f28d92f25"
+    },
+    {
+      "path": "tests/test_architecture_boundaries.py",
+      "change": "modified",
+      "sha256": "2c74cece83f6671c2416187f0caa0b3bc1022091dbe26612eb7713c2c8abca83"
+    },
+    {
+      "path": "tests/test_queue_observability.py",
+      "change": "modified",
+      "sha256": "6a585c2be452ddfae719c2bb0b2b1bbd4334515a4c086272fcd26d646b3ae570"
+    },
+    {
+      "path": "tests/test_source_page_preview.py",
+      "change": "added",
+      "sha256": "aff16b4054f11fa06b769bc3fd55e4a66353f64a11e4f6d730597d7d07a29869"
+    },
+    {
+      "path": "workflow/project-state.json",
+      "change": "modified",
+      "sha256": "653d97d30f6298090e61321287f8752338effa61b055ffdcb378b1a99190fccf"
+    }
+  ],
+  "packaging_exclusions": [
+    ".cloudflared",
+    ".git",
+    ".idea",
+    ".mypy_cache",
+    ".playwright-cli",
+    ".pytest_cache",
+    ".ruff_cache",
+    ".venv",
+    ".vscode",
+    ".wrangler",
+    "__pycache__",
+    "_zip-sync",
+    "aicodex-image-inspection",
+    "backups",
+    "data",
+    "job-staging",
+    "models",
+    "node_modules",
+    "ocr",
+    "previews",
+    "restore-drill-20260827",
+    "uploads",
+    "outputs/playwright* (historical visual captures)"
+  ],
+  "note": "Manifest excludes itself; only packaged source/artifacts are compared. Runtime and historical restore uploads are excluded."
+}

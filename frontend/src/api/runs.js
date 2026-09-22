@@ -133,11 +133,15 @@ export function saveMetadata(runId, body) {
  * @param {object} body
  * @param {string} body.requirement_id
  * @param {import('../../types/api.js').ReviewDecision} body.decision
- * @param {number} [body.revision] 当前 Run.revision
+ * @param {number} body.revision 当前 Run.revision，前端必须传入有效正整数
+ * @param {import('../../types/api.js').RequirementStatus} [body.new_status] CONFIRM 通过须明确传 PASS
  * @param {string} [body.note]
  * @returns {Promise<Run>} 返回整个 Run，不是单条要求项
  */
 export function reviewRequirement(runId, body) {
+  if (!Number.isInteger(body.revision) || body.revision < 1) {
+    return Promise.reject(new Error('任务版本信息不完整，请重新打开任务后复核。'));
+  }
   return json(paths.runs.review(runId), 'POST', { note: '', ...body });
 }
 

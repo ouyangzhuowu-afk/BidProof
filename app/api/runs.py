@@ -5,7 +5,8 @@ from __future__ import annotations
 from typing import Annotated
 
 from fastapi import APIRouter, File, Form, Query, Request, UploadFile
-from fastapi.responses import FileResponse
+from fastapi import Path as PathParam
+from fastapi.responses import FileResponse, Response
 
 from .. import presenters
 from ..authz import Permission, require
@@ -21,8 +22,7 @@ from ..schemas import (
     ReviewRequest,
     RunMetadataRequest,
 )
-from ..services import run_service, scan_service
-
+from ..services import document_service, run_service, scan_service
 
 router = APIRouter(prefix="/api/runs", tags=["runs"])
 
@@ -100,6 +100,24 @@ def download_run_file(request: Request, run_id: str, source_id: str) -> FileResp
     run = runs.require_scoped(run_id, principal)
     path, filename = run_service.source_file(run, source_id)
     return FileResponse(path, filename=filename, media_type="application/octet-stream")
+
+
+@router.get("/{run_id}/files/{source_id}/pages/{page_number}")
+def preview_source_page(
+    request: Request,
+    run_id: str,
+    source_id: str,
+    page_number: Annotated[int, PathParam(ge=1)],
+) -> Response:
+    principal = principal_of(request)
+    require(principal, Permission.EVIDENCE_DOWNLOAD)
+    run = runs.require_scoped(run_id, principal)
+    image = document_service.source_page_png(run, source_id, page_number)
+    return Response(
+        content=image,
+        media_type="image/png",
+        headers={"Cache-Control": "private, no-store", "X-Content-Type-Options": "nosniff"},
+    )
 
 
 @router.post("/{run_id}/rescan")

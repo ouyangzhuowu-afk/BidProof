@@ -4,7 +4,7 @@
   "version": "0.5.0",
   "type": "module",
   "scripts": {
-    "build": "npm run build:css && npm run build:js",
+    "build": "npm run build:css && npm run build:js && node scripts/stamp-assets.mjs",
     "build:js": "vite build",
     "build:css": "node scripts/build-css.mjs",
     "dev": "vite build --watch",

@@ -9,7 +9,8 @@
   *::after { box-sizing: border-box; }
 
   html {
-    min-width: 320px;
+    /* Let a 320px viewport also fit when its scrollbar occupies layout space. */
+    min-width: 0;
     background: var(--canvas);
     -webkit-text-size-adjust: 100%;
   }

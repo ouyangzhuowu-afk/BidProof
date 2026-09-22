@@ -105,15 +105,20 @@ export interface Project {
 export interface Locator {
   /** 「第 12 页」「段落 8」「工作表 X · B17」——已由后端本地化。 */
   label: string;
+  kind?: string;
+  index?: number;
 }
 
 export interface SourceReference {
   quote?: string;
   locator?: Locator;
+  source_id?: string;
+  page?: number;
 }
 
 export interface EvidenceReference extends SourceReference {
   filename: string;
+  matched_terms?: string[];
 }
 
 export interface Requirement {
@@ -133,7 +138,7 @@ export interface Requirement {
 export interface SourceDocument {
   source_id: string;
   filename?: string;
-  role: 'tender' | 'evidence' | (string & {});
+  role: 'tender' | 'evidence' | 'enterprise_evidence' | (string & {});
   file_type?: string;
   pages?: number;
   sha256?: string;
@@ -182,6 +187,17 @@ export interface Run extends RunSummary {
   source_documents?: SourceDocument[];
   scan_quality?: ScanQuality;
   duplicate_run_ids?: string[];
+  /** Backend review events, independent of comments and machine-generated statuses. */
+  review?: { items: ReviewEvent[]; updated_at?: string | null };
+}
+
+export interface ReviewEvent {
+  requirement_id: string;
+  decision: ReviewDecision | RequirementStatus;
+  old_status: RequirementStatus;
+  new_status: RequirementStatus;
+  note?: string;
+  reviewed_at?: string;
 }
 
 export interface RunDiff {

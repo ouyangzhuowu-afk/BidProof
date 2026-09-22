@@ -28,3 +28,8 @@
 @import "./views/collab.css";
 @import "./views/admin.css";
 @import "./views/auth.css";
+
+@import "./views/workbench.css";
+@import "./views/review-cards.css";
+@import "./views/reader-navigation.css";
+@import "./views/intake.css";

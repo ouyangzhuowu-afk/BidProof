@@ -6,10 +6,10 @@
   <meta name="theme-color" content="#eef1f5">
   <title>BidProof 企业证据工作台</title>
   <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/static/style.css?v=20260914-layout1">
+  <link rel="stylesheet" href="/static/style.css?v=0a26625bfbdf">
 </head>
 <body>
-<div id="loading-overlay" class="loading-overlay" hidden><div class="loading-spinner"></div></div>
+<div id="loading-overlay" class="loading-overlay" role="status" aria-label="正在读取审查结果" hidden><div class="detail-loading"><span class="skeleton skeleton--line"></span><span class="skeleton skeleton--card"></span><span class="skeleton skeleton--card"></span><p>正在读取审查结果…</p></div></div>
   <a class="skip-link" href="#app-main">跳到主要内容</a>
   <div class="app-shell">
     <aside class="sidebar">
@@ -34,7 +34,7 @@
       <header class="topbar">
         <div class="mobile-brand"><span class="brand-symbol"><i data-lucide="scan-search"></i></span><strong>BidProof</strong></div>
         <div class="topbar-context"><span>工作台</span><i data-lucide="chevron-right"></i><strong id="page-context">扫描任务</strong></div>
-        <button class="button primary compact-action" id="top-new-scan" type="button"><i data-lucide="plus"></i><span>新建扫描</span></button>
+        <button class="button primary compact-action" id="top-new-scan" type="button" aria-label="新建扫描"><i data-lucide="plus" aria-hidden="true"></i><span>新建扫描</span></button>
       </header>
 
       <main class="content" id="app-main" tabindex="-1">
@@ -430,25 +430,30 @@
           </div>
         </section>
 
-        <section id="detail-view" class="view" hidden>
-          <div class="breadcrumb-bar"><button class="text-button" id="back-home" type="button"><i data-lucide="arrow-left"></i><span>扫描任务</span></button><span id="detail-updated"></span></div>
+        <section id="detail-view" class="view review-workbench" aria-labelledby="detail-title" hidden>
+          <div class="breadcrumb-bar"><button class="text-button" id="back-home" type="button"><i data-lucide="arrow-left"></i><span>全部扫描任务</span></button><span id="detail-updated"></span></div>
           <header class="page-header detail-header">
-            <div><div class="title-row"><span class="file-icon"><i data-lucide="file-search"></i></span><div><p class="eyebrow">扫描详情</p><h1 id="detail-title">扫描任务</h1></div></div><p class="lede" id="detail-subtitle"></p></div>
-            <div class="header-actions"><button class="button secondary" id="report-missed" type="button"><i data-lucide="message-circle-warning"></i><span>报告漏项</span></button><button class="button secondary" id="rescan-run" type="button"><i data-lucide="refresh-ccw"></i><span>重新扫描</span></button><button class="button secondary" id="export-pdf" type="button"><i data-lucide="file-text"></i><span>导出 PDF</span></button><button class="button secondary" id="export-html" type="button"><i data-lucide="file-down"></i><span>HTML</span></button><button class="button secondary" id="export-csv" type="button"><i data-lucide="table-2"></i><span>CSV</span></button><button class="button secondary" id="open-decision" type="button"><i data-lucide="clipboard-check"></i><span>记录人工决策</span></button></div>
+            <div class="detail-heading"><p class="eyebrow">投标审查工作台</p><h1 id="detail-title">扫描任务</h1><p class="lede" id="detail-subtitle"></p></div>
+            <div class="header-actions">
+              <button class="button secondary" id="export-pdf" type="button"><i data-lucide="file-down"></i><span>导出报告</span></button>
+              <button class="button primary" id="open-decision" type="button"><i data-lucide="clipboard-check"></i><span>记录投标决策</span></button>
+              <details class="detail-more"><summary aria-label="更多任务操作"><i data-lucide="ellipsis"></i></summary><div class="detail-more__menu">
+                <button class="button secondary" id="report-missed" type="button">报告漏项</button>
+                <button class="button secondary" id="rescan-run" type="button">重新扫描</button>
+                <button class="button secondary" id="export-html" type="button">导出 HTML</button>
+                <button class="button secondary" id="export-csv" type="button">导出 CSV</button>
+              </div></details>
+            </div>
           </header>
           <div id="duplicate-warning" class="inline-alert warning" hidden></div>
-          <div id="detail-summary" class="metric-grid"></div>
-          <section class="surface source-files-panel" aria-labelledby="source-files-title"><div class="surface-header"><div><p class="eyebrow">原始材料</p><h2 id="source-files-title">招标与企业证据</h2></div><i class="section-icon" data-lucide="files"></i></div><div id="source-files" class="source-files-list"></div></section>
-          <section id="version-diff" class="surface version-diff" hidden aria-labelledby="version-diff-title"><div class="surface-header"><div><p class="eyebrow">版本追踪</p><h2 id="version-diff-title">与上一版本的差异</h2></div><i class="section-icon" data-lucide="git-compare-arrows"></i></div><div id="version-diff-content" class="diff-grid"></div></section>
-          <div class="detail-layout">
-            <section class="surface priority-section" aria-labelledby="priority-title">
-              <div class="surface-header"><div><p class="eyebrow">优先处置</p><h2 id="priority-title">高风险与证据缺口</h2></div><span class="guardrail"><i data-lucide="shield-alert"></i> 规则命中不自动通过</span></div>
-              <div id="risk-list" class="risk-list"></div>
-            </section>
-            <aside class="surface audit-aside" aria-label="审计摘要"><p class="eyebrow">审计状态</p><h2>本次扫描</h2><div id="audit-summary"></div><div id="quality-summary" class="quality-summary"></div><form id="run-metadata-form" class="compact-form"><label for="run-assignee">负责人</label><select id="run-assignee" name="assignee_id"><option value="">未分配</option></select><label for="run-reviewer">独立复核人</label><select id="run-reviewer" name="reviewer_id"><option value="">未分配</option></select><label for="run-tags">标签</label><input id="run-tags" name="tags" placeholder="逗号分隔"><label class="toggle-row"><input id="run-favorite" name="favorite" type="checkbox"><span>收藏任务</span></label><button class="button secondary full-width" type="submit"><i data-lucide="save"></i><span>保存协作信息</span></button></form><button class="button secondary full-width" id="aside-decision" type="button"><i data-lucide="clipboard-check"></i><span>进入人工决策</span></button></aside>
-          </div>
-          <section class="collaboration-grid" aria-label="协作与审计"><div class="surface collaboration-panel"><div class="surface-header"><div><p class="eyebrow">团队协作</p><h2>评论</h2></div></div><form id="comment-form" class="comment-form"><label for="comment-body" class="sr-only">添加评论</label><textarea id="comment-body" rows="3" placeholder="记录复核结论、待补材料和责任人"></textarea><button class="button primary" type="submit"><i data-lucide="message-square-plus"></i><span>添加评论</span></button></form><div id="comments-list" class="activity-list"></div></div><div class="surface collaboration-panel"><div class="surface-header"><div><p class="eyebrow">操作留痕</p><h2>审计记录</h2></div></div><div id="audit-events" class="activity-list"></div></div></section>
-          <section class="surface remediation-panel" aria-labelledby="remediation-panel-title"><div class="surface-header"><div><p class="eyebrow">整改行动</p><h2 id="remediation-panel-title">证据缺口处理</h2></div><span class="guardrail">负责人和截止日期</span></div><form id="remediation-form" class="inline-admin-form remediation-form"><label for="remediation-title-input">行动</label><input id="remediation-title-input" required maxlength="300" placeholder="例如：补充营业执照原件"><label for="remediation-requirement">关联要求</label><select id="remediation-requirement"><option value="">不关联具体要求</option></select><label for="remediation-owner">负责人</label><select id="remediation-owner"></select><label for="remediation-due">截止日期</label><input id="remediation-due" type="date"><button class="button primary" type="submit"><i data-lucide="clipboard-plus"></i><span>创建整改项</span></button></form><div id="remediations-list" class="operations-list"></div></section>
+          <section id="detail-summary" class="review-health" aria-label="本轮审查概览" aria-live="polite"></section>
+          <div class="review-columns">
+            <div class="review-stream">
+              <nav id="review-navigation" aria-label="审查条款导航"></nav>
+              <section class="priority-section" aria-labelledby="priority-title">
+                <div class="review-section-head"><div><h2 id="priority-title">优先处理</h2><p>先核验可能影响投标资格的条款。</p></div><span class="section-kicker">风险优先排序</span></div>
+                <div id="risk-list" class="risk-list"></div>
+              </section>
           <section class="surface matrix-section" aria-labelledby="matrix-title">
             <div class="matrix-head">
               <div class="page-head__text">
@@ -474,11 +479,26 @@
               </label>
             </div>
 
-            <div class="tabs" id="matrix-filters" role="tablist" aria-label="按类别筛选"></div>
+            <div class="tabs" id="matrix-filters" role="group" aria-label="按类别筛选"></div>
 
             <div id="requirements" aria-label="要求项列表"></div>
             <nav class="pager" id="matrix-pagination" aria-label="要求项分页"></nav>
           </section>
+
+            </div>
+            <aside id="evidence-reader" class="evidence-reader surface" aria-label="双向原文对照"><div class="state"><p class="state__title">原文对照</p><p class="state__body">选择审查凭证的出处，在这里核对两侧原文。</p></div></aside>
+          </div>
+          <details class="review-support"><summary><i data-lucide="files"></i><span>原始材料与扫描质量</span><span class="hint">文件、解析质量、版本差异</span><i data-lucide="chevron-down"></i></summary><div class="review-support__body">
+          <section class="surface source-files-panel" aria-labelledby="source-files-title"><div class="surface-header"><div><p class="eyebrow">原始材料</p><h2 id="source-files-title">招标与企业证据</h2></div><i class="section-icon" data-lucide="files"></i></div><div id="source-files" class="source-files-list"></div></section>
+          <section id="version-diff" class="surface version-diff" hidden aria-labelledby="version-diff-title"><div class="surface-header"><div><p class="eyebrow">版本追踪</p><h2 id="version-diff-title">与上一版本的差异</h2></div><i class="section-icon" data-lucide="git-compare-arrows"></i></div><div id="version-diff-content" class="diff-grid"></div></section>
+<div id="quality-summary" class="quality-summary"></div>
+          </div></details>
+          <details class="review-support"><summary><i data-lucide="users-round"></i><span>协作与处理记录</span><span class="hint">责任人、备注、整改与审计</span><i data-lucide="chevron-down"></i></summary><div class="review-support__body">
+            <section class="surface audit-aside" aria-label="审计摘要"><p class="eyebrow">审计状态</p><h2>本次扫描</h2><div id="audit-summary"></div><form id="run-metadata-form" class="compact-form"><label for="run-assignee">负责人</label><select id="run-assignee" name="assignee_id"><option value="">未分配</option></select><label for="run-reviewer">独立复核人</label><select id="run-reviewer" name="reviewer_id"><option value="">未分配</option></select><label for="run-tags">标签</label><input id="run-tags" name="tags" placeholder="逗号分隔"><label class="toggle-row"><input id="run-favorite" name="favorite" type="checkbox"><span>收藏任务</span></label><button class="button secondary full-width" type="submit"><i data-lucide="save"></i><span>保存协作信息</span></button></form><button class="button secondary full-width" id="aside-decision" type="button"><i data-lucide="clipboard-check"></i><span>进入人工决策</span></button></section>
+          <section class="collaboration-grid" aria-label="协作与审计"><div class="surface collaboration-panel"><div class="surface-header"><div><p class="eyebrow">团队协作</p><h2>评论</h2></div></div><form id="comment-form" class="comment-form"><label for="comment-body" class="sr-only">添加评论</label><textarea id="comment-body" rows="3" placeholder="记录复核结论、待补材料和责任人"></textarea><button class="button primary" type="submit"><i data-lucide="message-square-plus"></i><span>添加评论</span></button></form><div id="comments-list" class="activity-list"></div></div><div class="surface collaboration-panel"><div class="surface-header"><div><p class="eyebrow">操作留痕</p><h2>审计记录</h2></div></div><div id="audit-events" class="activity-list"></div></div></section>
+          <section class="surface remediation-panel" aria-labelledby="remediation-panel-title"><div class="surface-header"><div><p class="eyebrow">整改行动</p><h2 id="remediation-panel-title">证据缺口处理</h2></div><span class="guardrail">负责人和截止日期</span></div><form id="remediation-form" class="inline-admin-form remediation-form"><label for="remediation-title-input">行动</label><input id="remediation-title-input" required maxlength="300" placeholder="例如：补充营业执照原件"><label for="remediation-requirement">关联要求</label><select id="remediation-requirement"><option value="">不关联具体要求</option></select><label for="remediation-owner">负责人</label><select id="remediation-owner"></select><label for="remediation-due">截止日期</label><input id="remediation-due" type="date"><button class="button primary" type="submit"><i data-lucide="clipboard-plus"></i><span>创建整改项</span></button></form><div id="remediations-list" class="operations-list"></div></section>
+
+          </div></details>
         </section>
 
         <section id="decision-view" class="view stack" hidden>
@@ -568,12 +588,18 @@
   <dialog class="intake-dialog" id="intake-panel" aria-labelledby="intake-title">
     <div class="dialog-header"><div><p class="eyebrow">新建任务</p><h2 id="intake-title">上传投标材料</h2><p>招标文件为必填，企业证据可多选。</p></div><button class="icon-button" id="close-intake" type="button" aria-label="关闭上传窗口" title="关闭"><i data-lucide="x"></i></button></div>
     <form id="scan-form">
-      <label for="company-name">企业名称</label><input id="company-name" name="company_name" placeholder="例如：某某软件服务有限公司" autocomplete="organization">
-      <label for="tender-project">所属项目</label><select id="tender-project" name="project_id" required><option value="">正在加载项目...</option></select>
-      <label for="tender-file">招标文件 <span class="required-mark">必填 · PDF / DOCX / XLSX / PPTX / TXT / MD</span></label>
-      <div class="drop-zone" data-target="tender-file"><span class="drop-zone-hint"><i data-lucide="upload-cloud" aria-hidden="true"></i> 拖拽文件到此处，或点击选择</span><input id="tender-file" required type="file" name="tender" accept=".pdf,.docx,.xlsx,.pptx,.txt,.md"></div>
-      <label for="evidence-files">企业证据 <span class="field-hint">PDF / DOCX / XLSX / PPTX / TXT / MD，可多选</span></label>
-      <div class="drop-zone" data-target="evidence-files"><span class="drop-zone-hint"><i data-lucide="upload-cloud" aria-hidden="true"></i> 拖拽文件到此处，或点击选择</span><input id="evidence-files" type="file" name="evidence" accept=".pdf,.docx,.xlsx,.pptx,.txt,.md" multiple></div>
+      <div class="intake-context-fields">
+        <div class="intake-context-field"><label for="company-name">企业名称</label><input id="company-name" name="company_name" placeholder="例如：某某软件服务有限公司" autocomplete="organization"></div>
+        <div class="intake-context-field"><label for="tender-project">所属项目</label><select id="tender-project" name="project_id" required><option value="">正在加载项目...</option></select></div>
+      </div>
+      <div class="intake-files">
+        <div class="intake-file-group"><label for="tender-file">招标文件 <span class="required-mark">必填 · 1 份</span></label>
+          <div class="drop-zone" data-target="tender-file"><span class="drop-zone-icon"><i data-lucide="file-search" aria-hidden="true"></i></span><strong class="drop-zone-title">放入招标文件</strong><span class="drop-zone-hint" data-intake-file-hint>拖拽到这里，或点击选择</span><span class="drop-zone-meta">PDF、Office 文档或文本</span><input id="tender-file" required type="file" name="tender" accept=".pdf,.docx,.xlsx,.pptx,.txt,.md"></div>
+        </div>
+        <div class="intake-file-group"><label for="evidence-files">企业资质与证明 <span class="field-hint">可选 · 支持多份</span></label>
+          <div class="drop-zone" data-target="evidence-files"><span class="drop-zone-icon"><i data-lucide="folder-check" aria-hidden="true"></i></span><strong class="drop-zone-title">放入企业证据</strong><span class="drop-zone-hint" data-intake-file-hint>资质证书、业绩合同、承诺函</span><span class="drop-zone-meta">PDF、Office 文档或文本</span><input id="evidence-files" type="file" name="evidence" accept=".pdf,.docx,.xlsx,.pptx,.txt,.md" multiple></div>
+        </div>
+      </div>
       <details class="advanced-fields"><summary>高级设置</summary><div><label for="evidence-metadata">证据元数据 JSON</label><textarea id="evidence-metadata" name="evidence_metadata" rows="3" placeholder='{"证书.pdf":{"category":"CREDENTIAL","valid_until":"2027-12-31"}}'></textarea></div></details>
       <div class="form-actions dialog-actions"><button class="button secondary" id="cancel-intake" type="button">取消</button><button class="button primary" type="submit"><i data-lucide="scan-line"></i><span>开始扫描</span></button></div><span id="message" aria-live="polite"></span>
     </form>
@@ -711,6 +737,6 @@
   </dialog>
   <div id="app-toast" class="toast" role="status" aria-live="polite" hidden></div>
   <script src="/static/vendor/lucide.min.js"></script>
-  <script src="/static/app.js?v=20260914-layout1"></script>
+  <script src="/static/app.js?v=ac20b47279eb"></script>
 </body>
 </html>

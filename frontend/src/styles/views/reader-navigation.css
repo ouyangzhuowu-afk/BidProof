@@ -1,0 +1,82 @@
+/* Reader controls extend review-cards.css; no global layout or verdict styling. */
+@layer views {
+  #detail-view .reader-evidence-picker {
+    display: grid;
+    gap: 8px;
+    padding: 12px;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    background: var(--paper-sunken);
+  }
+  #detail-view .reader-evidence-picker label {
+    color: var(--ink-soft);
+    font-size: 12px;
+    font-weight: 500;
+  }
+  #detail-view .reader-evidence-picker select {
+    min-width: 0;
+    width: 100%;
+    min-height: 44px;
+    padding: 8px 10px;
+    border: 1px solid var(--rule-strong);
+    border-radius: 6px;
+    color: var(--ink);
+    background: var(--paper);
+    font: inherit;
+    font-size: 12px;
+  }
+  #detail-view .reader-evidence-picker p {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--ink-muted);
+  }
+  #detail-view .reader-page-navigation {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 10px 0;
+  }
+  #detail-view .reader-page-navigation button,
+  #detail-view .reader-page-retry {
+    min-height: 40px;
+    padding: 8px 10px;
+    border: 1px solid var(--rule-strong);
+    border-radius: 6px;
+    background: var(--paper);
+    color: var(--ink-soft);
+    font: inherit;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  #detail-view .reader-page-navigation button:hover:not(:disabled),
+  #detail-view .reader-page-retry:hover { border-color: var(--brand); color: var(--brand); }
+  #detail-view .reader-page-navigation button:disabled { color: var(--ink-muted); opacity: .55; cursor: default; }
+  #detail-view .reader-page-navigation button:focus-visible,
+  #detail-view .reader-page-retry:focus-visible,
+  #detail-view .reader-evidence-picker select:focus-visible,
+  #detail-view .reader-page-position:focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 3px;
+  }
+  #detail-view .reader-page-position { display: grid; gap: 4px; margin: 8px 0; font-size: 12px; line-height: 1.6; }
+  #detail-view .reader-page-position strong { color: var(--ink-soft); font-weight: 500; }
+  #detail-view .reader-page-position span,
+  #detail-view .reader-load-status { color: var(--ink-muted); }
+  #detail-view .reader-context-notice {
+    margin: 8px 0;
+    padding: 8px 10px;
+    border-left: 2px solid var(--brand-line);
+    background: var(--paper-sunken);
+    color: var(--ink-soft);
+    font-size: 12px;
+    line-height: 1.6;
+  }
+  #detail-view .reader-load-status { margin: 4px 0 8px; font-size: 12px; line-height: 1.6; }
+  #detail-view .reader-page-retry { margin: 0 10px 10px; color: var(--brand); }
+  #detail-view .reader-page[aria-busy="true"] img { min-height: 80px; }
+  @media (max-width: 640px) {
+    #detail-view .reader-page-navigation button,
+    #detail-view .reader-page-retry { min-height: 44px; }
+  }
+}

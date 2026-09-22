@@ -91,7 +91,9 @@ async def create_run(
 
     run_dir = config.UPLOAD_DIR / run_id
     run_dir.mkdir(parents=True, exist_ok=False)
-    tender_path = run_dir / safe_filename(tender.filename)
+    # Source identity, not a user-supplied filename, separates stored originals.
+    # Same-named evidence must never overwrite the tender or another attachment.
+    tender_path = run_dir / f"tender-{safe_filename(tender.filename)}"
     try:
         tender_sha256 = await save_upload(tender, tender_path)
         validate_upload_content(tender_path)
@@ -113,7 +115,7 @@ async def create_run(
             remove_tree(run_dir)
             jobs.update(job_id, "FAILED", attempts=1, error="UNSUPPORTED_EVIDENCE_FORMAT", progress_message="企业证据格式不受支持")
             raise HTTPException(status_code=400, detail="企业证据支持 PDF、DOCX、XLSX、PPTX、TXT、MD")
-        target = run_dir / safe_filename(upload.filename)
+        target = run_dir / f"evidence-{index:03d}-{safe_filename(upload.filename)}"
         try:
             sha256 = await save_upload(upload, target)
             validate_upload_content(target)

@@ -2,10 +2,11 @@
 // Strangler leftover: keep checkJs off until remaining detail/intake logic moves to features/.
 import { html, mount as setHtml } from './ui/render.js';
 import { store } from './state.js';
-import { t, formatDateTime } from './i18n/index.js';
+import { formatDateTime } from './i18n/index.js';
 import * as theme from './core/theme.js';
 import { renderIcons } from './core/icons.js';
 import { setLoading } from './core/dom.js';
+import { register } from './core/router.js';
 // Confirm / secret-reveal callers moved to admin; app.js no longer imports them.
 import { setCurrentRole } from './core/permissions.js';
 import {
@@ -40,6 +41,8 @@ import { mountCollab, unmountCollab, loadCollab } from './features/runs/collab.j
 import { mountJobsView, unmountJobsView, reloadJobs } from './features/jobs/index.js';
 import { mountAdminView, unmountAdminView, reloadAdmin } from './features/admin/index.js';
 import { watchScanJob } from './features/scan/watcher.js';
+import { mountIntakeFiles, refreshIntakeFiles, setIntakeBusy, isIntakeBusy } from './features/scan/intake.js';
+import { getReviewProgress } from './features/runs/review-model.js';
 
 const views = {
   home: document.querySelector('#home-view'),
@@ -49,6 +52,8 @@ const views = {
   decision: document.querySelector('#decision-view'),
 };
 const missedDialog = document.querySelector('#missed-panel');
+let activeViewName = 'home';
+let pendingRunLoad = null;
 
 const intakeDialog = document.querySelector('#intake-panel');
 const openIntakeButtons = ['#new-scan-button', '#top-new-scan', '#nav-new-scan'];
@@ -75,9 +80,20 @@ document.querySelector('#cancel-missed').addEventListener('click', () => missedD
 document.querySelector('#missed-form').addEventListener('submit', submitMissedFeedback);
 document.querySelector('#theme-toggle')?.addEventListener('click', () => {
   theme.cycle();
-  const label = document.querySelector('#theme-toggle span');
-  if (label) label.textContent = theme.resolved() === 'dark' ? t('nav.theme.toLight') : t('nav.theme.toDark');
+  renderThemeControl();
 });
+renderThemeControl();
+
+function renderThemeControl() {
+  const button = document.querySelector('#theme-toggle');
+  if (!button) return;
+  const labels = { light: '浅色', dark: '深色', system: '跟随系统' };
+  const next = { light: 'dark', dark: 'system', system: 'light' };
+  const current = theme.preference();
+  button.querySelector('span').textContent = `外观：${labels[current]}`;
+  button.setAttribute('aria-label', `当前外观：${labels[current]}，切换为${labels[next[current]]}`);
+  button.title = `切换为${labels[next[current]]}`;
+}
 document.querySelector('#back-home').addEventListener('click', showHome);
 document.querySelector('#open-decision').addEventListener('click', showDecision);
 document.querySelector('#aside-decision').addEventListener('click', showDecision);
@@ -87,15 +103,13 @@ intakeDialog.addEventListener('click', (event) => {
   if (event.target === intakeDialog) closeIntake();
 });
 
-document.querySelectorAll('.drop-zone').forEach((zone) => {
-  zone.addEventListener('dragover', (e) => { e.preventDefault(); zone.classList.add('drag-over'); });
-  zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
-  zone.addEventListener('drop', (e) => {
-    e.preventDefault();
-    zone.classList.remove('drag-over');
-    const input = zone.querySelector('input[type="file"]');
-    if (e.dataTransfer.files.length) input.files = e.dataTransfer.files;
-  });
+mountIntakeFiles();
+intakeDialog.addEventListener('cancel', (event) => { if (isIntakeBusy()) event.preventDefault(); });
+window.addEventListener('bidproof:comments-changed', () => loadCollab());
+window.addEventListener('bidproof:unauthorized', cancelRunLoad);
+window.addEventListener('bidproof:review-changed', () => {
+  renderDetailSummary();
+  loadCollab();
 });
 
 refreshIcons();
@@ -145,6 +159,7 @@ async function startSampleScan() {
     const transfer = new DataTransfer();
     transfer.items.add(file);
     input.files = transfer.files;
+    refreshIntakeFiles();
     store.rescanParentId = null;
     await openIntake();
     showToast('已填入样例招标文件，确认后即可开始扫描。');
@@ -164,6 +179,7 @@ async function openIntake() {
 }
 
 function closeIntake() {
+  if (isIntakeBusy()) return;
   if (intakeDialog.open) intakeDialog.close();
   document.querySelector('#message').textContent = '';
 }
@@ -178,11 +194,13 @@ async function submitScan(event) {
   const form = event.currentTarget;
   const button = form.querySelector('button[type="submit"]');
   const message = document.querySelector('#message');
-  setButtonLoading(button, true, '正在扫描');
-  message.textContent = '正在抽取页级证据并建立索引，请勿关闭窗口。';
+  if (isIntakeBusy()) return;
+  setButtonLoading(button, true, '正在提交');
+  message.textContent = '';
   try {
     const formData = new FormData(form);
     if (!document.querySelector('#evidence-files').files.length) formData.delete('evidence');
+    setIntakeBusy(true);
     if (store.rescanParentId) {
       store.currentRun = await request(`/api/runs/${encodeURIComponent(store.rescanParentId)}/rescan`, { method: 'POST', body: formData, timeoutMs: UPLOAD_TIMEOUT_MS });
     } else {
@@ -191,6 +209,7 @@ async function submitScan(event) {
       // 详见 features/scan/watcher.js 顶部说明。
       const job = await request('/api/jobs', { method: 'POST', body: formData, timeoutMs: UPLOAD_TIMEOUT_MS });
       const filename = document.querySelector('#tender-file')?.files?.[0]?.name || '招标文件';
+      setIntakeBusy(false);
       form.reset();
       closeIntake();
       store.rescanParentId = null;
@@ -200,6 +219,7 @@ async function submitScan(event) {
       return;
     }
     // 重扫是同步契约，直接拿到 Run。
+    setIntakeBusy(false);
     form.reset();
     closeIntake();
     store.rescanParentId = null;
@@ -210,6 +230,7 @@ async function submitScan(event) {
   } catch (error) {
     message.textContent = `${error.message}。请检查文件格式后重试。`;
   } finally {
+    setIntakeBusy(false);
     setButtonLoading(button, false);
   }
 }
@@ -232,19 +253,40 @@ function exportCurrentRun(format) {
   link.remove();
 }
 
-async function openRun(runId) {
+async function openRun(runId, destination = 'detail') {
+  cancelRunLoad();
+  const controller = new AbortController();
+  pendingRunLoad = controller;
   const overlay = document.getElementById('loading-overlay');
   if (overlay) overlay.hidden = false;
   try {
-    store.currentRun = await request(`/api/runs/${encodeURIComponent(runId)}`);
+    const run = await request(`/api/runs/${encodeURIComponent(runId)}`, { signal: controller.signal });
+    // A slow earlier task must not replace a newer task or pull the user back
+    // after they navigated away. Some transports may settle after cancellation.
+    if (pendingRunLoad !== controller) return;
+    if (run?.run_id !== runId || !Array.isArray(run.requirements)) throw new Error('任务结果不完整');
+    pendingRunLoad = null;
+    if (overlay) overlay.hidden = true;
+    store.currentRun = run;
     resetMatrixView();
     document.querySelector('#requirement-search').value = '';
-    showDetail();
+    if (destination === 'decision') showDecision();
+    else showDetail();
   } catch (error) {
-    showToast(`${error.message}，请刷新任务列表后重试。`);
+    if (pendingRunLoad === controller && !error.isAborted) showToast(`${error.message}，请刷新任务列表后重试。`);
   } finally {
-    if (overlay) overlay.hidden = true;
+    if (pendingRunLoad === controller) {
+      pendingRunLoad = null;
+      if (overlay) overlay.hidden = true;
+    }
   }
+}
+
+function cancelRunLoad() {
+  pendingRunLoad?.abort();
+  pendingRunLoad = null;
+  const overlay = document.getElementById('loading-overlay');
+  if (overlay) overlay.hidden = true;
 }
 
 
@@ -295,8 +337,8 @@ function memberOptionList(placeholder) {
 function showHome() {
   // 视图切换仍由 app.js 的 showView 负责（路由迁移见批次 5）。
   // 这里只保证进入本视图时新模块被挂载、离开时被卸载。
-  void ensureFilterOptions().then(mountRunsView);
   showView('home', '扫描任务');
+  void ensureFilterOptions().then(() => { if (activeViewName === 'home') mountRunsView(); });
   reloadRuns();
 }
 
@@ -351,12 +393,14 @@ function showDetail() {
   mountMatrix();
   mountCollab();
   if (!store.currentRun) return showHome();
-  showView('detail', '扫描详情');
+  showView('detail', '审查工作台');
   renderDetail();
 }
 
 
 function showView(name, context, pushHash = true) {
+  cancelRunLoad();
+  activeViewName = name;
   if (name !== 'home') unmountRunsView();
   if (name !== 'detail') unmountMatrix();
   if (name !== 'jobs') unmountJobsView();
@@ -370,12 +414,12 @@ function showView(name, context, pushHash = true) {
     const hash = (name === 'detail' || name === 'decision') && runId ? `#${name}/${runId}` : `#${name}`;
     if (location.hash !== hash) history.pushState(null, '', hash);
   }
-  document.querySelector('#nav-runs').classList.toggle('active', name === 'home');
-  document.querySelector('#nav-runs').toggleAttribute('aria-current', name === 'home');
+  document.querySelector('#nav-runs').classList.toggle('active', ['home', 'detail', 'decision'].includes(name));
+  setNavCurrent(document.querySelector('#nav-runs'), name === 'home' || name === 'detail' || name === 'decision');
   for (const [navId, viewName] of [['nav-jobs', 'jobs'], ['nav-admin', 'admin']]) {
     const nav = document.querySelector(`#${navId}`);
     nav.classList.toggle('active', name === viewName);
-    nav.toggleAttribute('aria-current', name === viewName);
+    setNavCurrent(nav, name === viewName);
   }
   document.querySelectorAll('[data-mobile-view]').forEach((button) => button.classList.toggle('active', button.dataset.mobileView === name || (button.dataset.mobileView === 'home' && ['detail', 'decision'].includes(name))));
   window.scrollTo({ top: 0, behavior: 'instant' });
@@ -383,14 +427,19 @@ function showView(name, context, pushHash = true) {
   refreshIcons();
 }
 
+function setNavCurrent(node, current) {
+  if (current) node.setAttribute('aria-current', 'page');
+  else node.removeAttribute('aria-current');
+}
+
 function navigateFromHash() {
   const hash = location.hash.replace(/^#/, '');
-  if (!hash) return;
+  if (!hash) return showHome();
   const [view, id] = hash.split('/');
   if (view === 'home') showHome();
   else if (view === 'jobs') showJobs();
   else if (view === 'admin') showAdmin();
-  else if ((view === 'detail' || view === 'decision') && id) openRun(id);
+  else if ((view === 'detail' || view === 'decision') && id) openRun(id, view);
 }
 
 window.addEventListener('popstate', navigateFromHash);
@@ -398,22 +447,11 @@ window.addEventListener('popstate', navigateFromHash);
 
 function renderDetail() {
   document.querySelector('#detail-title').textContent = store.currentRun.tender_filename;
-  document.querySelector('#detail-subtitle').textContent = `${store.currentRun.run_id.slice(0, 12)} · 版本 ${store.currentRun.version_number || 1} · ${store.currentRun.requirement_count} 项要求 · ${store.currentRun.evidence_assets.length} 份企业证据`;
+  document.querySelector('#detail-subtitle').textContent = `第 ${store.currentRun.version_number || 1} 轮审查 · ${store.currentRun.requirement_count} 项要求 · ${store.currentRun.evidence_assets.length} 份企业证据`;
   document.querySelector('#detail-updated').textContent = `更新于 ${formatDate(store.currentRun.updated_at)}`;
-  const metrics = [
-    ['致命风险', store.currentRun.blocker_count, 'danger', 'shield-alert'],
-    ['待复核', store.currentRun.unresolved_count, 'warning', 'circle-help'],
-    ['要求项', store.currentRun.requirement_count, 'neutral', 'list-checks'],
-    ['人工决定', decisionLabel(store.currentRun.decision?.decision || '未记录'), 'decision', 'clipboard-check'],
-  ];
-  document.querySelector('#detail-summary').replaceChildren(...metrics.map(([label, value, tone, icon]) => {
-    const card = document.createElement('div');
-    card.className = `metric ${tone}`;
-setHtml(card, html`<span class="metric-icon"><i data-lucide="${icon}"></i></span><span><span>${label}</span><strong>${String(value)}</strong></span>`);
-    return card;
-  }));
+  renderDetailSummary();
   renderSourceFiles();
-setHtml(document.querySelector('#audit-summary'), html`<div class="audit-metric"><span>企业证据</span><strong>${store.currentRun.evidence_assets.length}</strong></div><div class="audit-metric"><span>高风险项</span><strong>${store.currentRun.blocker_count}</strong></div><div class="audit-metric"><span>待复核项</span><strong>${store.currentRun.unresolved_count}</strong></div><p class="audit-copy">只有招标原文与企业证据均有页码引用时，要求项才允许判定为 PASS。</p>`);
+
   const quality = store.currentRun.scan_quality || {};
 setHtml(document.querySelector('#quality-summary'), html`<p class="eyebrow">文本质量</p><p>${quality.total_pages || 0} 页 · ${quality.ocr_required_pages || 0} 页需 OCR · ${quality.ocr_failed_pages || 0} 页 OCR 失败</p><small>${quality.interpretation || '规则初筛结果，需人工复核。'}</small>`);
   const duplicateWarning = document.querySelector('#duplicate-warning');
@@ -426,6 +464,36 @@ setHtml(duplicateWarning, duplicateWarning.hidden ? '' : html`<i data-lucide="co
   loadCollab();
   loadVersionDiff();
   refreshIcons();
+}
+
+function renderDetailSummary() {
+  const run = store.currentRun;
+  if (!run) return;
+  const items = run.requirements || [];
+  const fatal = items.filter((item) => item.category === 'FATAL' && item.status !== 'PASS').length;
+  const unresolved = items.filter((item) => item.status !== 'PASS').length;
+  const pending = items.filter((item) => ['UNKNOWN', 'NEEDS_REVIEW'].includes(item.status)).length;
+  const progress = getReviewProgress(run);
+  const quality = run.scan_quality || {};
+  const gates = quality.ocr_engineering_gates || {};
+  const incomplete = Number(quality.ocr_failed_pages || 0) > 0 || Number(quality.low_text_confidence_pages || 0) > 0;
+  const qualityPending = incomplete || gates.forced_requirement_status === 'NEEDS_REVIEW';
+  let title = fatal ? `仍有 ${fatal} 项废标风险待处理` : unresolved ? `还有 ${unresolved} 项需要核验` : progress.pending ? '初检完成，请继续人工核验' : '本轮人工审查已完成';
+  let note = fatal ? '优先核对红线条款及对应证据，再完成其他审查项。' : '逐项对照原文，记录判断依据与处理结果。';
+  if (!items.length) { title = '尚无可核验的审查项'; note = '请检查上传材料与扫描质量，空结果不代表无风险。'; }
+  else if (incomplete) { note = '部分原文识别不完整，请先检查扫描质量并核对原页。'; if (!unresolved) title = '原文识别仍需核验'; }
+  else if (gates.forced_requirement_status === 'NEEDS_REVIEW' && !unresolved) { title = '条款已处理，扫描质量仍待复核'; }
+  const target = document.querySelector('#detail-summary');
+  target.dataset.tone = fatal ? 'fatal' : (!items.length || unresolved || qualityPending || progress.pending ? 'review' : 'pass');
+  setHtml(target, html`
+    <div class="health-verdict"><span class="health-verdict__icon"><i data-lucide="${fatal ? 'shield-alert' : 'clipboard-check'}" aria-hidden="true"></i></span><div><strong>${title}</strong><p>${note}</p></div></div>
+    <dl class="health-metrics">
+      <div><dt>未解除废标风险</dt><dd class="${fatal ? 'is-danger' : ''}">${fatal}<small> 项</small></dd></div>
+      <div><dt>待复核 / 补证据</dt><dd class="${pending ? 'is-review' : ''}">${pending}<small> 项</small></dd></div>
+      <div><dt>人工审查进度</dt><dd>${progress.reviewed}<small> / ${progress.total} 项已处理</small></dd><progress max="${Math.max(1, progress.total)}" value="${progress.reviewed}" aria-label="人工已处理 ${progress.reviewed} / ${progress.total} 项"></progress></div>
+    </dl>`);
+  const audit = document.querySelector('#audit-summary');
+  setHtml(audit, html`<p class="audit-copy">人工已处理包括确认与驳回；处理进度不代表风险已经解除。通过需具备招标和企业证据的双侧定位与原文。</p>`);
 }
 
 function renderSourceFiles() {
@@ -445,21 +513,25 @@ setHtml(target, documents.map((item) => {
 }
 
 async function loadAssigneeOptions() {
+  const run = store.currentRun;
   const assignee = document.querySelector('#run-assignee');
   const reviewer = document.querySelector('#run-reviewer');
   try {
     if (!store.membersCache.length) store.membersCache = (await request('/api/members')).members;
+    if (store.currentRun?.run_id !== run.run_id || activeViewName !== 'detail') return;
     setHtml(assignee, memberOptionList('未分配'));
     setHtml(reviewer, memberOptionList('未分配'));
     assignee.value = store.currentRun.assignee_id || '';
     reviewer.value = store.currentRun.reviewer_id || '';
   } catch (_error) {
+    if (store.currentRun?.run_id !== run.run_id || activeViewName !== 'detail') return;
 setHtml(assignee, html`<option value="${store.currentRun.assignee_id || ''}">${store.currentRun.assignee_id || '未分配'}</option>`);
 setHtml(reviewer, html`<option value="${store.currentRun.reviewer_id || ''}">${store.currentRun.reviewer_id || '未分配'}</option>`);
   }
 }
 
 async function loadVersionDiff() {
+  const run = store.currentRun;
   const section = document.querySelector('#version-diff');
   if (!store.currentRun?.parent_run_id) {
     section.hidden = true;
@@ -469,10 +541,14 @@ async function loadVersionDiff() {
   const target = document.querySelector('#version-diff-content');
 setHtml(target, html`<div class="run-skeleton"></div>`);
   try {
-    const diff = await request(`/api/runs/${encodeURIComponent(store.currentRun.run_id)}/diff/${encodeURIComponent(store.currentRun.parent_run_id)}`);
+    const diff = await request(`/api/runs/${encodeURIComponent(run.run_id)}/diff/${encodeURIComponent(run.parent_run_id)}`);
+    if (store.currentRun?.run_id !== run.run_id || activeViewName !== 'detail') return;
     const items = [['新增', diff.added, 'plus'], ['移除', diff.removed, 'minus'], ['状态变化', diff.changed, 'refresh-ccw']];
 setHtml(target, items.map(([label, values, icon]) => html`<div class="diff-block"><span><i data-lucide="${icon}"></i>${label}</span><strong>${values.length}</strong><small>${values.slice(0, 3).map((item) => (item.after || item).title || '').join('；') || '无'}</small></div>`));
-  } catch (error) {setHtml(target, html`<div class="empty-state error-text">${error.message}，版本差异加载失败。</div>`); }
+  } catch (error) {
+    if (store.currentRun?.run_id !== run.run_id || activeViewName !== 'detail') return;
+    setHtml(target, html`<div class="empty-state error-text">${error.message}，版本差异加载失败。</div>`);
+  }
   refreshIcons();
 }
 
@@ -480,12 +556,15 @@ async function saveRunMetadata(event) {
   event.preventDefault();
   const form = event.currentTarget;
   const button = form.querySelector('button[type="submit"]');
+  const runId = store.currentRun.run_id;
   setButtonLoading(button, true, '保存中');
   try {
-    store.currentRun = await request(`/api/runs/${encodeURIComponent(store.currentRun.run_id)}/metadata`, {
+    const updated = await request(`/api/runs/${encodeURIComponent(runId)}/metadata`, {
       method: 'PATCH', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ assignee_id: document.querySelector('#run-assignee').value.trim() || null, reviewer_id: document.querySelector('#run-reviewer').value.trim() || null, tags: document.querySelector('#run-tags').value.split(',').map((tag) => tag.trim()).filter(Boolean), favorite: document.querySelector('#run-favorite').checked }),
     });
+    if (store.currentRun?.run_id !== runId) return;
+    if (Number(updated.revision) >= Number(store.currentRun.revision)) store.currentRun = updated;
     showToast('协作信息已保存。');
     loadCollab();
   } catch (error) { showToast(`${error.message}，保存失败。`); }
@@ -579,3 +658,11 @@ window.addEventListener('bidproof:start-sample-scan', () => { void startSampleSc
 // 矩阵里的检出质量反馈会影响准确率面板，但两者分属不同视图。
 // 用事件通知，避免 matrix.js 反向依赖任务列表模块。
 window.addEventListener('bidproof:accuracy-changed', () => { void reloadAccuracy(); });
+
+// Migrated views navigate through core/router; register the legacy entry points too.
+// This preserves real task links and decision links during incremental migration.
+register({ name: 'home', title: '扫描任务', enter: () => showHome() });
+register({ name: 'jobs', title: '扫描作业', enter: () => showJobs() });
+register({ name: 'admin', title: '成员与设置', enter: () => showAdmin() });
+register({ name: 'detail', title: '审查工作台', takesId: true, enter: (id) => openRun(id) });
+register({ name: 'decision', title: '人工决策', takesId: true, enter: (id) => openRun(id, 'decision') });

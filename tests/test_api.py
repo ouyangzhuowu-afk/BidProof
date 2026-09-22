@@ -71,7 +71,7 @@ def test_structured_indexes_filters_and_manual_decision(monkeypatch):
     client = TestClient(main.app)
 
     def fake_extract(path):
-        if path.name == "tender.pdf":
+        if path.suffix == ".pdf":
             return [{"page": 1, "text": "投标人资格要求：提供营业执照。出现以下情形的，否决投标。", "has_text": True, "char_count": 30}]
         return [{"page": 2, "text": "本公司营业执照已提供。", "has_text": True, "char_count": 12}]
 

@@ -1,0 +1,118 @@
+/* Upload intake: quiet surfaces, native keyboard access, truthful waiting states. */
+@layer views {
+  #intake-panel {
+    width: min(800px, calc(100vw - var(--space-8)));
+    max-height: calc(100dvh - var(--space-8));
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-overlay);
+    background: var(--paper);
+    color: var(--ink);
+    box-shadow: var(--shadow-overlay);
+  }
+
+  #intake-panel .dialog-header { padding: var(--space-6) var(--space-8); border-color: var(--rule); }
+  #intake-panel .dialog-header h2 { color: var(--ink-strong); font-size: var(--text-2xl); }
+  #intake-panel .dialog-header p:not(.eyebrow) { max-width: none; font-size: var(--text-sm); color: var(--ink-muted); }
+  #intake-panel .eyebrow { color: var(--brand); font-size: var(--text-xs); }
+  #scan-form { display: grid; gap: var(--space-3); padding: var(--space-6) var(--space-8); }
+  #scan-form > label { margin: 0; color: var(--ink-soft); font-size: var(--text-sm); }
+  #scan-form input:not([type="file"]),
+  #scan-form select,
+  #scan-form textarea {
+    width: 100%; min-width: 0; min-height: var(--tap-target);
+    border: 1px solid var(--rule-strong); border-radius: var(--radius-control);
+    background: var(--paper); color: var(--ink);
+    padding: var(--space-2) var(--space-3); font-size: var(--text-sm);
+  }
+  #scan-form input::placeholder, #scan-form textarea::placeholder { color: var(--ink-muted); }
+
+  .intake-context-fields { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-5); }
+  .intake-context-field { display: grid; align-content: start; gap: var(--space-2); min-width: 0; }
+  .intake-context-field > label { font-size: var(--text-sm); font-weight: var(--weight-medium); color: var(--ink-soft); }
+  .intake-files { display: grid; grid-template-columns: 1fr 1fr; align-items: start; gap: var(--space-5); margin-block: var(--space-3); }
+  .intake-file-group { min-width: 0; }
+  .intake-file-group > label { display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-3); color: var(--ink-strong); font-size: var(--text-sm); font-weight: var(--weight-medium); }
+  .intake-file-group .required-mark { font-size: var(--text-xs); font-weight: var(--weight-regular); color: var(--brand); }
+  .intake-file-group .field-hint { font-size: var(--text-xs); font-weight: var(--weight-regular); color: var(--ink-muted); }
+
+  #scan-form .drop-zone {
+    position: relative; display: flex; flex-direction: column; justify-content: center; align-items: center;
+    gap: var(--space-2); min-width: 0; min-height: 184px;
+    padding: var(--space-5) var(--space-4); border: 1px dashed var(--rule-strong);
+    border-radius: var(--radius-card); background: var(--paper-sunken); text-align: center;
+    transition: border-color var(--dur-fast) ease, background var(--dur-fast) ease;
+  }
+  #scan-form .drop-zone:hover,
+  #scan-form .drop-zone.drag-over { border-color: var(--brand); background: var(--brand-wash); }
+  #scan-form .drop-zone:focus-within { outline: 2px solid var(--brand); outline-offset: 3px; }
+  #scan-form .drop-zone.has-files { border-style: solid; border-color: var(--brand-line); }
+  #scan-form .drop-zone.has-error { border-color: var(--signal-danger); }
+  #scan-form .drop-zone.is-busy { background: var(--paper-sunken); border-color: var(--rule); cursor: wait; }
+  #scan-form .drop-zone > :not(input) { pointer-events: none; }
+  #scan-form .drop-zone input[type="file"] {
+    position: absolute; inset: 0; display: block; width: 100%; height: 100%; margin: 0;
+    opacity: 0; cursor: pointer;
+  }
+  #scan-form .drop-zone input[type="file"]:disabled { cursor: wait; }
+  .drop-zone-icon { display: grid; place-items: center; width: 40px; height: 40px; margin-bottom: var(--space-1); border: 1px solid var(--rule); border-radius: var(--radius-card); background: var(--paper); color: var(--brand); }
+  .drop-zone-icon svg { width: 20px; height: 20px; }
+  .drop-zone-title { color: var(--ink-strong); font-size: var(--text-sm); font-weight: var(--weight-medium); }
+  #scan-form .drop-zone-hint { display: block; color: var(--ink-muted); font-size: var(--text-xs); }
+  .drop-zone-meta { color: var(--ink-muted); font-size: var(--text-xs); }
+  .intake-format-hint { color: var(--ink-muted); font-size: var(--text-xs); line-height: var(--leading-body); }
+
+  .intake-file-feedback { min-width: 0; }
+  .intake-file-summary { margin-top: var(--space-2); color: var(--ink-muted); font-size: var(--text-xs); }
+  .intake-file-summary:empty { margin-top: 0; }
+  .intake-file-notice { display: block; margin-top: var(--space-1); color: var(--ink-soft); }
+  .intake-file-error { display: flex; align-items: start; gap: var(--space-2); padding: var(--space-3); margin-top: var(--space-2); border-radius: var(--radius-control); background: var(--signal-danger-wash); color: var(--signal-danger); font-size: var(--text-xs); overflow-wrap: anywhere; }
+  .intake-file-error > i { flex: 0 0 16px; margin-top: 2px; }
+  .intake-file-list { display: grid; gap: var(--space-2); max-height: 210px; overflow-y: auto; margin-top: var(--space-2); padding: 0; list-style: none; }
+  .intake-file-row { display: flex; align-items: center; gap: var(--space-2); min-width: 0; padding: var(--space-2); border: 1px solid var(--rule); border-radius: var(--radius-control); background: var(--paper); }
+  .intake-file-icon { display: grid; place-items: center; flex: 0 0 28px; color: var(--ink-muted); }
+  .intake-file-info { flex: 1; display: grid; min-width: 0; }
+  .intake-file-name { min-width: 0; color: var(--ink-soft); font-size: var(--text-xs); overflow-wrap: anywhere; }
+  .intake-file-size { color: var(--ink-muted); font-size: var(--text-xs); }
+  .intake-file-remove { display: grid; place-items: center; flex: 0 0 var(--tap-target); width: var(--tap-target); height: var(--tap-target); border-radius: var(--radius-control); color: var(--ink-muted); }
+  .intake-file-remove:hover { color: var(--signal-danger); background: var(--signal-danger-wash); }
+  .intake-file-remove:disabled { opacity: .4; cursor: wait; }
+
+  #scan-form .advanced-fields { background: var(--paper-sunken); border-color: var(--rule); border-radius: var(--radius-card); }
+  #scan-form .advanced-fields summary { color: var(--ink-muted); font-size: var(--text-xs); font-weight: var(--weight-regular); }
+  #scan-form .advanced-fields > div { border-color: var(--rule); }
+  #scan-form .advanced-fields label { color: var(--ink-soft); font-size: var(--text-xs); }
+  #scan-form .dialog-actions { margin: var(--space-3) 0 0; padding: var(--space-5) 0 0; border-color: var(--rule); }
+  #scan-form #message { color: var(--signal-danger); font-size: var(--text-sm); overflow-wrap: anywhere; }
+  #scan-form #message:empty { display: none; }
+  #scan-form input:disabled, #scan-form select:disabled, #scan-form textarea:disabled {
+    cursor: wait; opacity: .7;
+  }
+  #intake-panel #close-intake:disabled { cursor: wait; opacity: .45; }
+
+  .intake-transfer { display: grid; gap: var(--space-3); padding: var(--space-4); border: 1px solid var(--brand-line); border-radius: var(--radius-card); background: var(--brand-wash); }
+  .intake-transfer-heading { display: flex; align-items: center; gap: var(--space-2); color: var(--ink-strong); font-size: var(--text-sm); }
+  .intake-transfer-heading strong { font-weight: var(--weight-medium); }
+  .intake-transfer p { color: var(--ink-muted); font-size: var(--text-xs); }
+  .intake-transfer-indicator { width: 8px; height: 8px; flex: 0 0 8px; border-radius: var(--radius-full); background: var(--brand); }
+  .intake-transfer-track { height: 4px; overflow: hidden; border-radius: var(--radius-full); background: var(--paper); }
+  .intake-transfer-track > span { display: block; width: 35%; height: 100%; background: var(--brand); border-radius: inherit; animation: intake-pending 1.8s ease-in-out infinite; }
+  .intake-transfer-skeleton { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--space-2); }
+  .intake-transfer-skeleton > span { height: 24px; border-radius: var(--radius-control); background: var(--paper); animation: intake-breathe 1.8s ease-in-out infinite; }
+  .intake-transfer-skeleton > span:nth-child(2) { animation-delay: .15s; }
+  .intake-transfer-skeleton > span:nth-child(3) { animation-delay: .3s; }
+  @keyframes intake-pending { from { transform: translateX(-110%); } to { transform: translateX(390%); } }
+  @keyframes intake-breathe { 0%, 100% { opacity: .55; } 50% { opacity: 1; } }
+
+  @media (max-width: 640px) {
+    #intake-panel { width: calc(100vw - var(--space-4)); max-height: calc(100dvh - var(--space-4)); }
+    #intake-panel .dialog-header { padding: var(--space-5) var(--space-4); }
+    #scan-form { padding: var(--space-5) var(--space-4); }
+    .intake-context-fields, .intake-files { grid-template-columns: minmax(0, 1fr); gap: var(--space-4); }
+    #scan-form .drop-zone { min-height: 150px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #scan-form .drop-zone { transition: none; }
+    .intake-transfer-track > span, .intake-transfer-skeleton > span { animation: none; }
+  }
+}

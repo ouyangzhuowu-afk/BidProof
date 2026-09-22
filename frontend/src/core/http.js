@@ -111,25 +111,37 @@ function buildSignal(external, timeoutMs) {
   };
   external.addEventListener('abort', forward, { once: true });
   timeout.addEventListener('abort', forward, { once: true });
+  if (external.aborted) controller.abort(external.reason);
   return {
     signal: controller.signal,
-    dispose: () => external.removeEventListener('abort', forward),
+    dispose: () => {
+      external.removeEventListener('abort', forward);
+      timeout.removeEventListener('abort', forward);
+    },
   };
 }
 
 /**
  * @param {Response} response
+ * @param {string} url
  * @returns {Promise<{ detail?: string, code?: string, [k: string]: unknown }>}
  */
-async function readPayload(response) {
+async function readPayload(response, url) {
+  if (response.status === 204) return {};
   const contentType = response.headers.get('content-type') || '';
   if (contentType.includes('application/json')) {
     try {
       return await response.json();
-    } catch {
-      return { detail: '' };
+    } catch (error) {
+      const aborted = error?.name === 'AbortError';
+      const timedOut = error?.name === 'TimeoutError';
+      throw new ApiError({
+        message: aborted ? '请求已取消。' : timedOut ? '读取结果超时，请重试。' : '服务返回了不完整的结果，请刷新重试。',
+        status: response.ok ? 0 : response.status, url, code: aborted ? 'ABORTED' : timedOut ? 'TIMEOUT' : 'INVALID_RESPONSE',
+      });
     }
   }
+  if (response.ok) throw new ApiError({ message: '服务未返回可读取的结果，请刷新重试。', status: 0, url, code: 'INVALID_RESPONSE' });
   return { detail: await response.text() };
 }
 
@@ -211,7 +223,7 @@ function handleUnauthorized(url, status) {
   }
 }
 
-const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+const sleep = (ms) => new Promise((resolve) => { setTimeout(resolve, ms); });
 
 /** @type {Map<string, Promise<unknown>>} */
 const inFlight = new Map();
@@ -235,7 +247,7 @@ const inFlight = new Map();
  * @param {RequestOptions} [options]
  * @returns {Promise<T>}
  */
-export async function request(url, options = {}) {
+export function request(url, options = {}) {
   const method = (options.method || 'GET').toUpperCase();
   const idempotent = IDEMPOTENT_METHODS.has(method);
   const dedupe = options.dedupe !== false && idempotent && !options.signal;
@@ -247,7 +259,10 @@ export async function request(url, options = {}) {
   const run = executeJson(url, method, idempotent, options);
   if (dedupe) {
     inFlight.set(url, run);
-    run.finally(() => inFlight.delete(url));
+    // Both outcomes consume the cleanup promise: an ignored finally() would
+    // create an unhandled rejection even when the caller caught the request.
+    const cleanup = () => { if (inFlight.get(url) === run) inFlight.delete(url); };
+    void run.then(cleanup, cleanup);
   }
   return /** @type {Promise<T>} */ (run);
 }
@@ -265,23 +280,19 @@ async function executeJson(url, method, idempotent, options) {
   for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
     try {
       const response = await send(url, method, options);
-      if (response.ok) return await readPayload(response);
+      if (response.ok) return await readPayload(response, url);
 
-      const payload = await readPayload(response);
       handleUnauthorized(url, response.status);
+      const payload = await readPayload(response, url);
       const error = toApiError(response, url, payload);
 
-      if (idempotent && RETRYABLE_STATUS.has(response.status) && attempt < maxAttempts - 1) {
-        lastError = error;
-        await sleep(backoff(attempt));
-        continue;
-      }
       throw error;
     } catch (error) {
       if (error instanceof ApiError) {
         if (error.isAborted) throw error;
         lastError = error;
-        if (!idempotent || attempt === maxAttempts - 1) throw error;
+        const retryable = error.isNetwork || RETRYABLE_STATUS.has(error.status);
+        if (!idempotent || !retryable || attempt === maxAttempts - 1) throw error;
         await sleep(backoff(attempt));
         continue;
       }
@@ -362,7 +373,7 @@ export async function requestBlob(url, options = {}) {
     timeoutMs: options.timeoutMs ?? EXPORT_TIMEOUT_MS,
   });
   if (!response.ok) {
-    const payload = await readPayload(response);
+    const payload = await readPayload(response, url);
     handleUnauthorized(url, response.status);
     throw toApiError(response, url, payload);
   }

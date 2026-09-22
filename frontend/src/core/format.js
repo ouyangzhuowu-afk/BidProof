@@ -201,5 +201,6 @@ export function riskRank(item) {
   const byCategory = { FATAL: 0, QUALIFICATION: 1, DEADLINE: 2, BOND: 3 };
   const status = byStatus[/** @type {keyof typeof byStatus} */ (item.status)] ?? 9;
   const category = byCategory[/** @type {keyof typeof byCategory} */ (item.category)] ?? 9;
-  return status * 10 + category;
+  // Unresolved fatal clauses are the first attention anchor; passed items stay last.
+  return item.status === 'PASS' ? 1000 + category : category * 10 + status;
 }

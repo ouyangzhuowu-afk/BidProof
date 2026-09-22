@@ -1,0 +1,32 @@
+{
+  "date": "2026-09-22",
+  "backend": {
+    "passed": 310,
+    "skipped": 12,
+    "command": ".venv/bin/python -m pytest -q"
+  },
+  "frontend": {
+    "build": "passed",
+    "type_check": "passed",
+    "eslint_errors": 0,
+    "eslint_baseline_warnings": 4,
+    "logic_tests": 14,
+    "dom_behavior_tests": 13,
+    "app_entry_tests": 4,
+    "dom_environment": "jsdom, HTTP stubbed; no browser rendering"
+  },
+  "original_page_specialists": {
+    "passed": 9,
+    "included_in_backend_total": true
+  },
+  "browser_visual_acceptance": {
+    "status": "not_verified",
+    "reason": "Browser administrator policy verification unavailable; page access denied including localhost."
+  },
+  "ruff": {
+    "changed_original_page_files": "passed",
+    "whole_repository_issues": 140,
+    "baseline_issues": 141
+  },
+  "remote_changes": "none"
+}

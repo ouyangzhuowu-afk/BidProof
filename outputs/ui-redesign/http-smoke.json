@@ -1,0 +1,12 @@
+{
+  "health": 200,
+  "app": 200,
+  "anonymous_page": 401,
+  "authenticated_original_page": 200,
+  "confirm_to_pass": 200,
+  "stale_revision": 409,
+  "reject_to_review": 200,
+  "comment": 200,
+  "comment_preserves_verdicts": true,
+  "missing_evidence_gate": 422
+}

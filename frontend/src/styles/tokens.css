@@ -7,9 +7,9 @@
    2. --verdict-* 只用于要求项的判定结论（PASS / FAIL / REVIEW / UNKNOWN）。
       禁止把它们当作通用的绿/红/黄拿去装饰卡片。
    3. --signal-* 用于与判定无关的系统信号（危险操作、逾期、服务降级）。
-   4. 层级靠「尺寸 + 字重 + 1px 边框」建立，不靠阴影。
-      --shadow-* 仅允许出现在浮层（dialog / toast / popover）上。
-   5. 圆角分三层：控件 4px、卡片 8px、浮层 14px。不存在「全局一个圆角」。
+   4. 层级通过尺寸、字重、边框与留白建立；卡片使用轻微 --shadow-card。
+      较强的 --shadow-overlay / --shadow-toast 仅用于浮层。
+   5. 圆角分三层：控件 6px、卡片 12px、浮层 14px。
 
    深色模式通过 html[data-theme="dark"] 覆盖同名变量，组件样式一律只引用变量。
    ========================================================================== */
@@ -31,20 +31,20 @@
     "SF Mono", "JetBrains Mono", "Cascadia Mono", Consolas,
     "PingFang SC", "Microsoft YaHei", monospace;
 
-  /* 1.22 minor third。信息密集的复核台，比常见的 1.25 更紧。 */
-  --text-2xs: 0.6875rem;  /* 11px  仅用于定位号 chip */
-  --text-xs:  0.75rem;    /* 12px  辅助说明 */
-  --text-sm:  0.8125rem;  /* 13px  表格、控件 */
-  --text-md:  0.9375rem;  /* 15px  正文基准 */
-  --text-lg:  1.0625rem;  /* 17px  小标题 */
-  --text-xl:  1.3125rem;  /* 21px  区块标题 */
-  --text-2xl: 1.5625rem;  /* 25px  页标题 */
-  --text-3xl: 1.9375rem;  /* 31px  仅登录/空状态 */
+  /* 四档字号，旧字号名称保留为兼容映射。 */
+  --text-2xs: 0.75rem;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-md: 0.875rem;
+  --text-lg: 1rem;
+  --text-xl: 1rem;
+  --text-2xl: 1.25rem;
+  --text-3xl: 1.25rem;
 
-  --leading-tight: 1.25;
-  --leading-snug: 1.4;
-  --leading-body: 1.65;   /* 中文正文需要比西文更松 */
-  --leading-cite: 1.75;   /* 引文最松，方便逐字比对 */
+  --leading-tight: 1.5;
+  --leading-snug: 1.5;
+  --leading-body: 1.6;
+  --leading-cite: 1.6;
 
   --tracking-tight: -0.012em;  /* 大字号收紧 */
   --tracking-normal: 0;
@@ -69,29 +69,29 @@
 
   /* --- 纸面 ------------------------------------------------------------------
      冷灰蓝，不是暖米色。招投标是公文语境，不是笔记软件。 */
-  --canvas:        #eceef1;   /* 页面底色 */
+  --canvas: #f4f5f7;
   --paper:         #ffffff;   /* 卡片 / 表面 */
-  --paper-sunken:  #f4f6f8;   /* 表头、内嵌区、代码块 */
+  --paper-sunken: #fafafa;
   --paper-raised:  #ffffff;   /* 浮层 */
 
-  --ink:        #111b26;   /* 正文 */
-  --ink-strong: #06101a;   /* 标题与数字 */
-  --ink-soft:   #3a4a5c;   /* 次要正文 */
-  --ink-muted:  #5c6b7c;   /* 说明文字（对 --paper 对比度 5.4:1） */
+  --ink: #243237;
+  --ink-strong: #1f2c30;
+  --ink-soft: #526168;
+  --ink-muted: #68757b;
   --ink-faint:  #7c8899;   /* 占位符、禁用（仅用于非必读信息） */
   --ink-invert: #ffffff;
 
-  --rule:        #e2e6eb;  /* 默认 1px 分隔线 */
-  --rule-strong: #c6cdd6;  /* 输入框边框、需要被看见的边界 */
+  --rule: #e5e7eb;
+  --rule-strong: #d1d5db;
   --rule-gutter: #d4dae1;  /* 对照块中缝——设计中唯一被强调的分隔线 */
 
   /* --- 品牌 ------------------------------------------------------------------
      保留原青绿族作为品牌锚点（换品牌色是产品决策，不由重构单方面决定），
      但压深一档以满足 4.5:1 文字对比度。 */
-  --brand:       #076e63;
-  --brand-hover: #05564e;
+  --brand: #0f766e;
+  --brand-hover: #115e59;
   --brand-press: #04443e;
-  --brand-wash:  #e6f2f0;
+  --brand-wash: #edf6f4;
   --brand-line:  #8cc6bd;
   --brand-on:    #ffffff;
 
@@ -100,17 +100,17 @@
        UNKNOWN      = 系统没找到证据（中性灰，"还没有信息"）
        NEEDS_REVIEW = 找到了但要人确认（琥珀，"等你动手"）
      只有 NEEDS_REVIEW 会催人，所以只有它是暖色。 */
-  --verdict-pass:       #1a7f43;
-  --verdict-pass-wash:  #e8f6ed;
-  --verdict-pass-line:  #9bd7b2;
+  --verdict-pass: #087f5b;
+  --verdict-pass-wash: #ecfdf5;
+  --verdict-pass-line: #bfe5d5;
 
-  --verdict-fail:       #a8231a;
-  --verdict-fail-wash:  #fdeeed;
-  --verdict-fail-line:  #f0b8b3;
+  --verdict-fail: #b42332;
+  --verdict-fail-wash: #fef2f2;
+  --verdict-fail-line: #f2ccd0;
 
-  --verdict-review:     #9a4a06;
-  --verdict-review-wash:#fdf3e6;
-  --verdict-review-line:#f2ca94;
+  --verdict-review: #996014;
+  --verdict-review-wash: #fffbeb;
+  --verdict-review-line: #eeddb6;
 
   --verdict-unknown:      #4c5a68;
   --verdict-unknown-wash: #eef1f4;
@@ -126,19 +126,19 @@
   --signal-info-wash:    #ebf3fd;
   --signal-ok-wash:      #e8f6ed;
 
-  /* --- 导航（常暗，不随主题切换）------------------------------------------- */
-  --nav-bg:     #0d1720;
-  --nav-line:   rgba(255, 255, 255, 0.09);
-  --nav-text:   #c2cddb;
-  --nav-muted:  #7b8a9b;
-  --nav-active: rgba(255, 255, 255, 0.08);
+  /* --- 导航（浅色表面；深色模式在下面覆写）------------------------------- */
+  --nav-bg: #fafafa;
+  --nav-line: #e5e7eb;
+  --nav-text: #526168;
+  --nav-muted: #68757b;
+  --nav-active: #edf6f4;
   /* 导航里的最高对比文字（品牌名、当前页、成员名）。
-     常暗底色下它就是纯白，但仍然走变量——layout.css 里不允许出现裸色值。 */
-  --nav-strong: #ffffff;
+     随主题切换，始终通过变量保持文字与背景的对比。 */
+  --nav-strong: #243237;
 
   /* --- 圆角（分层，不是一个值）---------------------------------------------- */
-  --radius-control: 4px;   /* input / chip / 小按钮 */
-  --radius-card: 8px;      /* surface / 行 */
+  --radius-control: 6px;
+  --radius-card: 12px;
   --radius-overlay: 14px;  /* dialog / toast */
   --radius-full: 999px;
 
@@ -152,11 +152,11 @@
   --ease-out: cubic-bezier(0.22, 0.9, 0.3, 1);
   --ease-in-out: cubic-bezier(0.5, 0, 0.2, 1);
   --dur-instant: 90ms;
-  --dur-fast: 150ms;
+  --dur-fast: 160ms;
   --dur-slow: 240ms;
 
   /* --- 布局 ------------------------------------------------------------------ */
-  --sidebar-w: 232px;
+  --sidebar-w: 208px;
   --topbar-h: 56px;
   --content-max: 1360px;
   --measure: 68ch;        /* 正文最大行宽 */
@@ -173,6 +173,7 @@
 
 html[data-theme="dark"] {
   color-scheme: dark;
+  --quote-highlight: #514828;
 
   --canvas:       #0e151c;
   --paper:        #161f29;
@@ -223,6 +224,10 @@ html[data-theme="dark"] {
   --signal-ok-wash:      #12301f;
 
   --nav-bg:   #0a1119;
+  --nav-text: #bfcada;
+  --nav-muted: #93a2b4;
+  --nav-strong: #f6f9fc;
+  --nav-active: #10302c;
   --nav-line: rgba(255, 255, 255, 0.08);
 
   --shadow-overlay: 0 16px 48px -12px rgba(0, 0, 0, 0.7),
@@ -239,3 +244,23 @@ html[data-theme="dark"] {
     --ink-faint: #4c5a68;
   }
 }
+
+/* Shared aliases for views that still use the older class vocabulary. */
+:root {
+  --primary: var(--brand); --primary-hover: var(--brand-hover); --primary-soft: var(--brand-wash);
+  --primary-line: var(--brand-line); --surface: var(--paper); --surface-soft: var(--paper-sunken);
+  --muted: var(--ink-muted); --subtle: var(--ink-muted); --line: var(--rule); --line-strong: var(--rule-strong);
+  --nav: var(--nav-bg); --sidebar-width: var(--sidebar-w); --topbar-height: 60px;
+  --pass: var(--verdict-pass); --pass-soft: var(--verdict-pass-wash); --pass-line: var(--verdict-pass-line);
+  --fail: var(--verdict-fail); --fail-soft: var(--verdict-fail-wash); --fail-line: var(--verdict-fail-line);
+  --review: var(--verdict-review); --review-soft: var(--verdict-review-wash); --review-line: var(--verdict-review-line);
+  --unknown: var(--verdict-unknown); --unknown-soft: var(--verdict-unknown-wash); --unknown-line: var(--verdict-unknown-line);
+  --radius: var(--radius-card); --radius-sm: var(--radius-control);
+  --shadow-card: 0 1px 3px rgb(0 0 0 / 5%), 0 10px 15px -5px rgb(0 0 0 / 2%);
+  --quote-highlight: #f3e8b7;
+}
+@media (prefers-reduced-motion: reduce) {
+  :root { --dur-instant: 0ms; --dur-fast: 0ms; --dur-slow: 0ms; }
+}
+
+html[data-theme="dark"] { --quote-highlight: #655529; }

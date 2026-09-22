@@ -573,7 +573,7 @@
         "outputs/case-studies/public-tender-invalidation-reconstruction-report.md"
       ],
       "validation": "恢复演练的真实上传副本 40 个文件（work/restore-drill-20260827/uploads/）与 3 份逐字节重复的公开 fixture PDF 从当前分支移除并改写记录；回退补丁材料与旧前端打包说明移入 docs/archive/；.gitignore 新增真实 upload、第三方克隆、训练语料二进制、zip/tgz、覆盖率与日志门禁；本地隔离区 _cleanup-archive-2026-09-23/ 保存全部移出文件（149 MB，可回滚）；uv run --group dev pytest -q = 303 passed, 11 skipped；workflow check = PASS；README / AGENTS 刷新到 2026-09-23 状态；git push origin main 完成。",
-      "note": "仓库卫生，不是业务验收，T-005 未推进。历史提交中的副本字节未清理（需人工决定是否重写历史）。前端交接包仍未合并，见 Q-HANDOVER-1。"
+      "note": "仓库卫生，不是业务验收，T-005 未推进。历史提交中的副本字节未清理（需人工决定是否重写历史）。前端交接包在本项完成时仍未合并，后于 2026-09-23 由 D-ASTRA-MERGE-2026-09-23 合并上线。"
     }
   ],
   "backlog": [
@@ -643,6 +643,14 @@
       "decision": "Audit §5 on PR#4: honest GATE_FAIL line_cer=3.17%; continue forced NEEDS_REVIEW.",
       "date": "2026-09-16",
       "source": "Audit"
+    },
+    {
+      "id": "D-ASTRA-MERGE-2026-09-23",
+      "decision": "合并 GPT-6 Astra 第二轮前端交付包（BidProof-frontend-redesign-round2-20260923.zip）并部署到 bidproof.marketcase.net 的 / 与 /app；不推翻 C-022。",
+      "reason": "用户要求把 Astra 重构后的产品同步上线。按分叉点 e484a2f 逐文件比对：包内 static/index.html 的差异只落在详情视图（新增审查工作台）与上传表单，扫描任务页布局未动，C-022 的回退结果仍在。只取包内改动（24 项改写 + 39 项新增）；仓库后续更新过的 .gitignore/README/AGENTS/docs/README/docs/archive 保持仓库版本；包内的 restore-drill 真实客户材料副本明确不回填。",
+      "date": "2026-09-23",
+      "decided_by": "user",
+      "evidence": "docs/astra-frontend-round2-2026-09-23.md"
     }
   ],
   "open_questions": [
@@ -667,7 +675,8 @@
     {
       "id": "Q-HANDOVER-1",
       "question": "2026-09-23 前端交接代码包是否合并、以什么方式合并？（它整页替换详情视图，与 C-022 回退决定冲突）",
-      "status": "open",
+      "status": "resolved",
+      "resolution": "2026-09-23 用户裁决：直接合并到 main 并上线两地（见 D-ASTRA-MERGE-2026-09-23）。逐文件比对显示该包只替换详情视图，未触碰 C-022 涉及的扫描任务页布局。",
       "owner": "user"
     }
   ],
@@ -1072,9 +1081,9 @@
     ],
     "parallel": [],
     "fallback": "Engineering leaves while T-005 input is missing: raise OCR quality until line CER <= 2%, key-field F1 >= 97%, TEDS >= 90%; keep CI and repo hygiene green.",
-    "note": "Do not write demo rows into pilot/ICP ledgers. Do not claim product PASS. Pending human decision: how to merge the 2026-09-23 frontend handover package (conflicts with the C-022 revert), see Q-HANDOVER-1."
+    "note": "Do not write demo rows into pilot/ICP ledgers. Do not claim product PASS. The 2026-09-23 Astra frontend package is merged and live (D-ASTRA-MERGE-2026-09-23); CI rebuilds static/ on Linux, so keep committed artifacts Linux-consistent."
   },
-  "updated_at": "2026-09-22T17:45:00Z",
+  "updated_at": "2026-09-22T18:05:00Z",
   "sandbox_roadmap": {
     "locked_at": "2026-09-16",
     "gates": {

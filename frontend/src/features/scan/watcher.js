@@ -1,23 +1,7 @@
 /**
- * 后台扫描监视器。
- *
- * 【这是本次重构里影响最大的一处行为改变，需要产品确认】
- *
- * 旧实现的 waitForJob()：提交扫描后弹出全屏遮罩，用 EventSource 等作业结束，
- * 超时时间是 **30 分钟**。这期间整个应用不可操作 —— 用户不能去看别的任务、
- * 不能改成员、什么都做不了，只能盯着一个进度百分比。
- *
- * 但扫描在契约上本来就是后台作业（POST /api/jobs 立刻返回 job_id），
- * 后端从来没有要求前端必须等。遮罩是前端自己加的限制。
- *
- * 现在：提交后立刻关闭弹窗，任务进入右下角的「进行中」停靠区，
- * 用户继续做别的事，完成时用提示告知并给出跳转。
- *
- * 其它修掉的问题：
- *   - 旧实现里用户离开页面/关闭弹窗时 Promise 永不 settle，EventSource 一直挂着。
- *     现在所有连接登记在 watchers 里，pagehide 时统一关闭。
- *   - 旧实现同时开多个扫描会开多条连接且互相覆盖 #message 文本。
- *     现在每个作业一张卡片，各自独立。
+ * 后台扫描监视器。上传取得 job_id 后按服务端进度展示独立卡片。
+ * 收起卡片仅隐藏界面，监视继续；完成或失败仍提示，但不会重建已收起卡片。
+ * pagehide 统一关闭所有连接，避免遗留订阅。
  */
 
 import { html, mount } from '../../ui/render.js';
@@ -30,6 +14,7 @@ const MAX_WATCHERS = 5;
 
 /** @type {Map<string, { stop: () => void, filename: string }>} */
 const watchers = new Map();
+const hiddenJobs = new Set();
 
 /** @type {HTMLElement | null} */
 let dock = null;
@@ -52,18 +37,24 @@ export function watchScanJob(jobId, filename, onOpen) {
     return;
   }
 
+  hiddenJobs.delete(jobId);
   renderCard(jobId, filename, { status: 'PENDING' });
 
   const stop = jobsApi.watchScan(jobId, {
-    onProgress: (job) => renderCard(jobId, filename, job),
+    onProgress: (job) => { if (!hiddenJobs.has(jobId)) renderCard(jobId, filename, job); },
     onDone: (run) => {
+      const hidden = hiddenJobs.has(jobId);
       release(jobId);
+      hiddenJobs.delete(jobId);
       toastSuccess(`「${filename}」扫描完成。`);
-      renderDone(jobId, filename, run.run_id, onOpen);
+      if (!hidden) renderDone(jobId, filename, run.run_id, onOpen);
     },
     onError: (error) => {
+      const hidden = hiddenJobs.has(jobId);
       release(jobId);
-      renderFailed(jobId, filename, error.message);
+      hiddenJobs.delete(jobId);
+      if (hidden) toast(`「${filename}」扫描未完成：${error.message || '请在扫描作业中查看原因。'}`, 'error');
+      else renderFailed(jobId, filename, error.message);
     },
   });
 
@@ -82,6 +73,7 @@ export function hasActiveScans() {
 export function stopAllScans() {
   for (const { stop } of watchers.values()) stop();
   watchers.clear();
+  hiddenJobs.clear();
 }
 
 // 关闭 / 前后台切换都要收干净。用 pagehide 而不是 unload：
@@ -202,6 +194,7 @@ function renderFailed(jobId, filename, reason) {
  * @param {string} jobId
  */
 function dismiss(jobId) {
+  if (watchers.has(jobId)) hiddenJobs.add(jobId);
   document.getElementById(`scancard-${jobId}`)?.remove();
   if (dock && !dock.childElementCount) { dock.remove(); dock = null; }
 }

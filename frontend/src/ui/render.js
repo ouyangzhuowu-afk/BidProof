@@ -17,6 +17,9 @@ import { t } from '../i18n/index.js';
  * @property {string} value
  */
 
+// Only objects minted by this module may cross the trusted markup boundary.
+const trustedMarkup = new WeakSet();
+
 const ESCAPES = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
 
 /** @param {unknown} value */
@@ -31,14 +34,16 @@ export function escapeHtml(value) {
  * @returns {SafeHtml}
  */
 export function raw(value) {
-  return { __safe: true, value: String(value ?? '') };
+  const markup = Object.freeze({ __safe: true, value: String(value ?? '') });
+  trustedMarkup.add(markup);
+  return markup;
 }
 
 /** @param {unknown} value */
 export function toHtml(value) {
   if (value == null || value === false) return '';
   if (Array.isArray(value)) return value.map(toHtml).join('');
-  if (typeof value === 'object' && /** @type {SafeHtml} */ (value).__safe) {
+  if (typeof value === 'object' && trustedMarkup.has(value)) {
     return /** @type {SafeHtml} */ (value).value;
   }
   return escapeHtml(value);

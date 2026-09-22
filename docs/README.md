@@ -15,6 +15,10 @@
 - 源码唯一真源：`frontend/src/`；`static/` 是 Vite 构建产物，**不要手改**。
 - [前端迁移说明](frontend-MIGRATION.md) — 视图模块化迁移记录、验证方式与回滚路径
 - [BATCH8 设计](frontend-BATCH8-DESIGN.md) — 批次 8 的界面设计与契约
+- [色彩、尺寸与排版 Token](design-tokens.md) — 对应 `frontend/src/styles/tokens.css`
+- [第一版设计（2026-09-22）](ui-redesign-2026-09-22.md) — GPT-6 Astra 首轮重构的设计依据
+- [第二轮交付记录（2026-09-22）](ui-hardening-round2-2026-09-22.md) — 第二轮交互、修复与测试复现，以本轮结果为准
+- [Astra 第二轮合并与上线（2026-09-23）](astra-frontend-round2-2026-09-23.md) — 合并范围、C-022 证据与上线验收
 - 构建：`npm ci --prefix frontend && npm run build --prefix frontend`（CI 会校验产物与源码一致）
 
 ## 内部材料（不作为交付物）
