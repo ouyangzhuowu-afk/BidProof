@@ -44,6 +44,13 @@ def _tile_count() -> int:
         return 3
 
 
+def _sparse_char_threshold() -> int:
+    try:
+        return max(0, int(os.getenv("BID_SPARSE_THRESHOLD", "50")))
+    except ValueError:
+        return 50
+
+
 def _needs_page_tiling(result: OCRResult, page_height: float) -> bool:
     if not _ocr_tiles_enabled():
         return False
@@ -227,9 +234,24 @@ def extract_pdf(path: Path, ocr_adapter: OCRAdapter | None = None) -> list[dict[
         document = fitz.open(path)
     except Exception as exc:
         raise ExtractionError(f"Cannot open PDF: {exc}") from exc
+
+    sparse_threshold = _sparse_char_threshold()
+    markdown_chunks: list[dict[str, Any]] | None = None
+    try:
+        import pymupdf4llm
+
+        markdown_chunks = pymupdf4llm.helpers.pymupdf_rag.to_markdown(document, page_chunks=True)
+    except Exception as exc:
+        logger.debug("pymupdf4llm extraction not available: %s", exc)
+        markdown_chunks = None
+
     with document:
         for index, page in enumerate(document):
             text = unicodedata.normalize("NFKC", page.get_text("text") or "")
+            page_chunk = markdown_chunks[index] if markdown_chunks and index < len(markdown_chunks) else {}
+            page_markdown = page_chunk.get("text", "")
+            page_tables = page_chunk.get("tables", [])
+
             blocks: list[dict[str, Any]] = []
             try:
                 for block_index, raw in enumerate(page.get_text("dict").get("blocks", []), 1):
@@ -258,13 +280,21 @@ def extract_pdf(path: Path, ocr_adapter: OCRAdapter | None = None) -> list[dict[
                     )
             except (AttributeError, TypeError, ValueError):
                 blocks = []
+
+            stripped_text = text.strip()
+            is_empty = not bool(stripped_text)
+            is_sparse = (0 < len(stripped_text) < sparse_threshold) if not is_empty else False
+
             page_data = {
                     "page": index + 1,
                     "locator": {"kind": "page", "label": f"第 {index + 1} 页", "index": index + 1},
                     "text": text,
-                    "has_text": bool(text.strip()),
-                    "ocr_required": not bool(text.strip()),
-                    "low_text_confidence": 0 < len(text.strip()) < 20,
+                    "markdown": unicodedata.normalize("NFKC", page_markdown) if page_markdown else text,
+                    "tables": page_tables,
+                    "has_text": not is_empty,
+                    "ocr_required": is_empty,
+                    "sparse": is_sparse,
+                    "low_text_confidence": is_sparse,
                     "char_count": len(text),
                     "blocks": blocks,
                 }
@@ -278,6 +308,7 @@ def extract_pdf(path: Path, ocr_adapter: OCRAdapter | None = None) -> list[dict[
                         page_data["ocr_egress"] = "none"
                         page_data["ocr_egress_mode"] = egress_mode()
                     page_data["text"] = result.text
+                    page_data["markdown"] = result.text
                     page_data["has_text"] = True
                     page_data["ocr_status"] = "EXTRACTED"
                     page_data["ocr_provider"] = result.provider
