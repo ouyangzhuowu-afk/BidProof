@@ -6,7 +6,7 @@ Canonical registry: `work/public-eval/manifest.json`
 PDF store: `work/public-eval/pdfs/`  
 Candidate catalog: `work/eval/public_tender_candidates.json`
 
-`work/fixtures/public-eval/` remains a legacy duplicate of the original three IT fixtures. New S-A-09 files live only in the canonical tree so we do not double-commit binaries.
+`work/fixtures/public-eval/` was a legacy duplicate of the original three IT fixtures. Its three duplicated PDFs were removed on 2026-09-23 (the same files stay in the canonical `work/public-eval/pdfs/` store, plus the original `work/fixtures/*.pdf` registered copies); the manifest stays for provenance. New S-A-09 files live only in the canonical tree so we do not double-commit binaries.
 
 ## Rules
 
