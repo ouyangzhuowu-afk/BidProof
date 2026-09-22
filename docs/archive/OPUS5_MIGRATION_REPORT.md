@@ -97,7 +97,10 @@ git checkout main -- frontend static/index.html static/style.css static/app.js s
 # or revert commits on refactor/opus5-frontend
 ```
 
-Keep `_opus5_refactor/` (gitignored) and Downloads zips as cold backup.
+The `_opus5_refactor/` staging tree (gitignored) was moved to the local quarantine
+`_cleanup-archive-2026-09-23/` during the 2026-09-23 stale-content sweep: every batch it
+carried is merged into `main`, and the quarantine folder can be deleted once the team no
+longer needs a cold copy.
 
 ---
 
