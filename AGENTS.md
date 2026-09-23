@@ -45,7 +45,7 @@ uv run python -m work.icp_ledger --render-review
 - 测试：`BIDPROOF_ENV=test`，`BIDPROOF_ALLOW_TRUSTED_HEADERS=1`（见 `tests/conftest.py`）
 - 真实 upload PDF 不在 Git 中；完整回归：`.\scripts\sync-real-upload-fixtures.ps1`
 - 公网试点：Render 免费 Web Service（`render.yaml`）；本机备用 `.\scripts\start-pilot.ps1`（Tunnel HTTP/2）
-- 试用加入码（试点）：`BIDPROOF_TRIAL_JOIN_CODE=BidProof-Trial-2026`
+- 生产环境**不使用共享试用码**：新版在 `BIDPROOF_ENV=production` 下遇到 `BIDPROOF_TRIAL_JOIN_CODE` 非空会直接拒绝启动（2026-09-24 现场日志已确认）。试用入口改为个人注册（`BIDPROOF_PERSONAL_SIGNUP=1`，独立工作区）或管理员邀请；部署前必须在 Render 服务里删除该环境变量，删仓库里的 `render.yaml` 配置不会自动移除已存在的服务变量。
 - 新增 gitignore 门禁（2026-09-23）：`work/uploads/*`、`work/backups/`、`work/restore-drill-*/uploads/`、`third_party/`、训练语料二进制、zip/tgz、覆盖率与日志均不入库
 - 本地隔离区：`_cleanup-archive-2026-09-23/`（2026-09-23 清扫移出的过期文件，已被忽略，确认后可整体删除）
 
