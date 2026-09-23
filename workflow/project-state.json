@@ -607,6 +607,23 @@
       ],
       "validation": "恢复演练的真实上传副本 40 个文件（work/restore-drill-20260827/uploads/）与 3 份逐字节重复的公开 fixture PDF 从当前分支移除并改写记录；回退补丁材料与旧前端打包说明移入 docs/archive/；.gitignore 新增真实 upload、第三方克隆、训练语料二进制、zip/tgz、覆盖率与日志门禁；本地隔离区 _cleanup-archive-2026-09-23/ 保存全部移出文件（149 MB，可回滚）；pytest 303 passed / 11 skipped；workflow check = PASS；README / AGENTS 刷新到 2026-09-23 状态；git push origin main 完成。",
       "note": "仓库卫生，不是业务验收，T-005 未推进。历史提交中的副本字节未清理（需人工决定是否重写历史）。前端交接包在本项完成时仍未合并，后于 2026-09-23 由 D-ASTRA-MERGE-2026-09-23 合并上线。"
+    },
+    {
+      "id": "C-RENDER-LIVE-2026-09-24",
+      "title": "最新版在 Render 上线并通过线上验收",
+      "status": "verified",
+      "dependencies": [
+        "C-PROD-20260923",
+        "D-DEPLOY-RENDER-2026-09-24"
+      ],
+      "artifacts": [
+        "render.yaml",
+        "Dockerfile.render",
+        "scripts/render-serve.sh",
+        "docs/production/render-pilot-2026-09-24.md"
+      ],
+      "validation": "线上验收（2026-09-24）：/、/app、/healthz、/readyz、/robots.txt、/sitemap.xml、/privacy、/api/privacy 全 200；匿名 GET /api/runs 返回 401；用旧的共享试用码调用 /api/auth/trial-join 返回 403「试用加入未开放」；/static/app.js、/static/style.css、/static/index.html 与 static/marketing/* 与仓库提交逐字节一致（app.js 仅差镜像刻意剥离的 sourcemap 指针）；连续 6 次 healthz+readyz 探测均 200。",
+      "note": "工程验收，不是业务验收。排障要点：Render 蓝本只新增/更新、不删除已存在的服务变量，残留的共享试用码曾让启动被拒（见 D-RENDER-TRIALCODE-2026-09-24）。免费实例磁盘临时、空闲休眠，上传的原始 PDF 在重新部署后不保留。"
     }
   ],
   "backlog": [
@@ -1194,9 +1211,9 @@
       "OCR gates CER/F1/TEDS unmet"
     ],
     "parallel": [],
-    "note": "Do not write demo rows into pilot/ICP ledgers. Do not claim product PASS. Engineering fallback: improve OCR until gates pass while waiting for T-005 input."
+    "note": "Do not write demo rows into pilot/ICP ledgers. Do not claim product PASS. Engineering fallback: improve OCR until gates pass while waiting for T-005 input. The production candidate is live on Render (C-RENDER-LIVE-2026-09-24); Render's blueprint sync never deletes an existing service variable, so a stale BIDPROOF_TRIAL_JOIN_CODE is dropped with a warning instead of blocking boot (D-RENDER-TRIALCODE-2026-09-24)."
   },
-  "updated_at": "2026-09-24T04:10:00+00:00",
+  "updated_at": "2026-09-24T04:25:00+00:00",
   "sandbox_roadmap": {
     "locked_at": "2026-09-16",
     "gates": {
