@@ -24,7 +24,7 @@
 - **P1 / 进行中**：`sandbox-campaign-A` 沙箱工程门禁（S-A-01..07）。OCR 三项门禁现状：行级 CER `GATE_FAIL`（3.17% / 阈值 ≤ 2%）、关键字段 F1 `GATE_FAIL`（76.00% / 阈值 ≥ 97%）、TEDS `NOT_EVALUATED`；未达标时产品侧强制 `NEEDS_REVIEW`，不得当作通过。
 - **阻塞**：`T-005` 真实任务验收与 45 天 ICP 试运行——沙箱阶段已推迟（2026-09-16 决策），尚无首批真实企业任务，不可用 demo 冒充。
 - **已合并并上线（2026-09-23）**：GPT-6 Astra 第二轮前端包（`BidProof-frontend-redesign-round2-20260923.zip`）已并入 `main` 并部署到 `bidproof.marketcase.net` 的 `/` 与 `/app`；决策见 `D-ASTRA-MERGE-2026-09-23`，范围与验收见 `docs/astra-frontend-round2-2026-09-23.md`。核对显示该包只替换详情视图，C-022 的扫描任务页布局未被改动。
-- **待改造后上线（2026-09-24）**：生产候选版（`BidProof-production-candidate-20260923.zip`，新 Landing + 安全加固）已在分支 `codex/production-candidate-20260923` 合入并本地验证（ruff 全绿、pytest 376 passed / 11 skipped、前端 124/124、landing 10/10、端到端冒烟 9 项全过），报告见 `docs/production-candidate-merge-2026-09-24.md`。**不要合并到 `main`**：新版在 production 下强制要求 `BIDPROOF_PUBLIC_ORIGIN`、`BIDPROOF_ALLOWED_HOSTS`、空 `BIDPROOF_TRIAL_JOIN_CODE`、独立 worker 与显式 bootstrap token，现有 `render.yaml` 不满足，推送即触发 Render 启动失败。
+- **上线方式已定（2026-09-24，选项 A）**：生产候选版（新 Landing + 安全加固）已在分支 `codex/production-candidate-20260923` 本地验证通过（ruff 全绿、pytest 376 passed / 11 skipped、前端 124/124、landing 10/10、端到端冒烟 9 项全过），报告见 `docs/production-candidate-merge-2026-09-24.md`，操作单见 `docs/production/deploy-runbook-marketcase-2026-09-24.md`。部署目标为单机 Docker Compose（Caddy + Web + 独立 Worker + PostgreSQL）。**目标主机验收通过前不要合并到 `main`**：新版在 production 下强制要求 `BIDPROOF_PUBLIC_ORIGIN`、`BIDPROOF_ALLOWED_HOSTS`、空 `BIDPROOF_TRIAL_JOIN_CODE`、独立 worker 与显式 bootstrap token，现有 `render.yaml` 不满足，推送即触发 Render 启动失败。
 - **可做**：工程优化、CI、台账工具、文档、性能；收到真实输入后追加 `pilot-row.json` / `icp-row.json`
 - **已回退（C-022）**：工作台补丁 002 打乱扫描任务页对齐，已恢复 `4516b3f` 布局；相关材料已移入 `docs/archive/`，勿整页落地
 

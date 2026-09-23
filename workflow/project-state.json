@@ -684,6 +684,14 @@
       "date": "2026-09-23",
       "decided_by": "user",
       "evidence": "docs/astra-frontend-round2-2026-09-23.md"
+    },
+    {
+      "id": "D-DEPLOY-A-2026-09-24",
+      "decision": "生产候选版按选项 A 上线：单机 Docker Compose（Caddy HTTPS → Web → 独立 Worker → PostgreSQL 16），不再用 Render 免费 Web Service 承载生产。",
+      "reason": "新版在 production 下 fail-closed：要求 BIDPROOF_PUBLIC_ORIGIN / BIDPROOF_ALLOWED_HOSTS、禁用共享试用码、必须有独立 worker 与一次性迁移，Render 免费单服务无法满足；用户 2026-09-24 选定 A。本机已完成上线准备：.env.production 写入 3 个独立随机密钥、compose 配置校验通过、Dockerfile COPY 源与 worker --healthcheck 核对通过、代码包 bidproof-deploy-2026-09-24.tgz（sha256 42cadb70…3249）就绪。",
+      "date": "2026-09-24",
+      "decided_by": "user",
+      "evidence": "docs/production/deploy-runbook-marketcase-2026-09-24.md"
     }
   ],
   "open_questions": [
@@ -740,7 +748,7 @@
       "risk": "生产候选版直接并入 main 会导致公网服务启动失败（production fail-closed 检查缺 BIDPROOF_PUBLIC_ORIGIN / BIDPROOF_ALLOWED_HOSTS、共享试用码仍配置、无独立 worker 与一次性迁移）",
       "probability": "high",
       "impact": "high",
-      "mitigation": "该版本先停在分支 codex/production-candidate-20260923；上线前按 docs/production-candidate-merge-2026-09-24.md 的 Action Required 决定部署路径（推荐单机 Caddy + Web + Worker + PostgreSQL），修好配置再合并 main"
+      "mitigation": "2026-09-24 用户选定单机方案（见 D-DEPLOY-A-2026-09-24）：代码停在分支 codex/production-candidate-20260923，按 docs/production/deploy-runbook-marketcase-2026-09-24.md 在目标主机部署；目标主机验收通过前不要合并 main，也不要保留会触发 Render 自动部署的推送路径"
     }
   ],
   "artifacts": [
@@ -1144,6 +1152,16 @@
       "path": "outputs/ui-redesign-round2/browser-checks.json",
       "kind": "ui-redesign",
       "status": "verified"
+    },
+    {
+      "path": "docs/production-candidate-merge-2026-09-24.md",
+      "kind": "integration-report",
+      "status": "verified"
+    },
+    {
+      "path": "docs/production/deploy-runbook-marketcase-2026-09-24.md",
+      "kind": "deployment-runbook",
+      "status": "verified"
     }
   ],
   "next_best_action": {
@@ -1157,7 +1175,7 @@
     "parallel": [],
     "note": "Do not write demo rows into pilot/ICP ledgers. Do not claim product PASS. Engineering fallback: improve OCR until gates pass while waiting for T-005 input."
   },
-  "updated_at": "2026-09-23T18:40:00+00:00",
+  "updated_at": "2026-09-24T02:45:00+00:00",
   "sandbox_roadmap": {
     "locked_at": "2026-09-16",
     "gates": {
