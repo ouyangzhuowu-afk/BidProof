@@ -1,6 +1,7 @@
 # Build context is an allowlist. No runtime, personal documents or environment files.
 **
 !Dockerfile
+!Dockerfile.render
 !.dockerignore
 !requirements-production.lock
 !alembic.ini

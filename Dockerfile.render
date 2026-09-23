@@ -1,0 +1,46 @@
+# Render build for the public pilot.
+#
+# The repository commits the built workbench and landing assets (static/), and the
+# preview host rebuilds them only to keep the Compose deployment reproducible. That
+# Node toolchain stage is unnecessary here and is the slowest, most fragile part of
+# the build, so this image starts from the same Python runtime and copies the
+# committed assets instead. ./Dockerfile stays the source of truth for Compose and
+# for anyone who wants to rebuild the assets from source.
+FROM python:3.12-slim-trixie
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1 \
+    BIDPROOF_DATA_ROOT=/data \
+    BIDPROOF_JOB_RUNNER=worker
+
+WORKDIR /app
+
+RUN apt-get update \
+    && apt-get install --no-install-recommends -y ca-certificates postgresql-client \
+    && rm -rf /var/lib/apt/lists/* \
+    && groupadd --gid 10001 bidproof \
+    && useradd --uid 10001 --gid bidproof --no-create-home --shell /usr/sbin/nologin bidproof
+
+COPY requirements-production.lock ./
+RUN pip install --no-cache-dir -r requirements-production.lock
+
+COPY app ./app
+COPY migrations ./migrations
+COPY alembic.ini ./
+COPY static ./static
+# Only the runtime-imported helpers. Never copy work uploads, corpora, models or backups.
+COPY work/backup_restore.py ./work/backup_restore.py
+COPY work/eval/sandbox_gates.py ./work/eval/sandbox_gates.py
+COPY scripts/entrypoint.sh scripts/serve.sh scripts/render-serve.sh ./scripts/
+RUN chmod 0555 scripts/entrypoint.sh scripts/serve.sh scripts/render-serve.sh \
+    && mkdir -p /data/uploads /data/backups /data/job-staging /data/audit-worm \
+    && chown -R 10001:10001 /data \
+    && python -c "from pathlib import Path; [p.unlink() for p in Path('static').rglob('*.map')]; p=Path('static/app.js'); p.write_text('\n'.join(line for line in p.read_text().splitlines() if not line.startswith('//# sourceMappingURL='))+'\n')"
+
+USER 10001:10001
+EXPOSE 8080
+HEALTHCHECK --interval=30s --timeout=5s --start-period=30s --retries=3 \
+    CMD python -c "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/readyz', timeout=4)" || exit 1
+ENTRYPOINT ["./scripts/entrypoint.sh"]
+CMD ["./scripts/serve.sh"]

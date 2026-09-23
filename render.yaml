@@ -12,6 +12,7 @@ services:
   - type: web
     name: bidproof
     runtime: docker
+    dockerfilePath: ./Dockerfile.render
     plan: free
     region: singapore
     healthCheckPath: /readyz
