@@ -17,6 +17,7 @@
 !scripts/
 !scripts/entrypoint.sh
 !scripts/serve.sh
+!scripts/render-serve.sh
 !work/
 !work/backup_restore.py
 !work/eval/
