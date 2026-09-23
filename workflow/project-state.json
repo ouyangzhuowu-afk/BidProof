@@ -613,8 +613,7 @@
       "title": "最新版在 Render 上线并通过线上验收",
       "status": "verified",
       "dependencies": [
-        "C-PROD-20260923",
-        "D-DEPLOY-RENDER-2026-09-24"
+        "C-PROD-20260923"
       ],
       "artifacts": [
         "render.yaml",
