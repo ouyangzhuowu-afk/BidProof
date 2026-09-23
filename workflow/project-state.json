@@ -687,11 +687,19 @@
     },
     {
       "id": "D-DEPLOY-A-2026-09-24",
-      "decision": "生产候选版按选项 A 上线：单机 Docker Compose（Caddy HTTPS → Web → 独立 Worker → PostgreSQL 16），不再用 Render 免费 Web Service 承载生产。",
+      "decision": "生产候选版曾按选项 A 规划：单机 Docker Compose（Caddy HTTPS → Web → 独立 Worker → PostgreSQL 16）。（当日改为继续 Render，见 D-DEPLOY-RENDER-2026-09-24；单机操作单保留给后续正式部署。）",
       "reason": "新版在 production 下 fail-closed：要求 BIDPROOF_PUBLIC_ORIGIN / BIDPROOF_ALLOWED_HOSTS、禁用共享试用码、必须有独立 worker 与一次性迁移，Render 免费单服务无法满足；用户 2026-09-24 选定 A。本机已完成上线准备：.env.production 写入 3 个独立随机密钥、compose 配置校验通过、Dockerfile COPY 源与 worker --healthcheck 核对通过、代码包 bidproof-deploy-2026-09-24.tgz（sha256 42cadb70…3249）就绪。",
       "date": "2026-09-24",
       "decided_by": "user",
       "evidence": "docs/production/deploy-runbook-marketcase-2026-09-24.md"
+    },
+    {
+      "id": "D-DEPLOY-RENDER-2026-09-24",
+      "decision": "最新版继续部署在 Render 免费 Web Service 上，先不采购服务器。",
+      "reason": "免费单容器没有 Background Worker，而生产要求独立 worker 与最新迁移。因此 render.yaml 补齐 BIDPROOF_PUBLIC_ORIGIN 与 BIDPROOF_ALLOWED_HOSTS、删除共享试用码、healthCheckPath 改为 /readyz，并新增 scripts/render-serve.sh 在容器内执行一次性迁移并守护扫描 worker；Render 健康检查会带已验证的自定义域名作为 Host 头，故该域名必须进白名单。本机 production 模式实测：生产闸门通过、/readyz（自定义域 Host）200、未知 Host 400、HTTPS 端到端冒烟 9 项全过且队列由独立 worker 消费。",
+      "date": "2026-09-24",
+      "decided_by": "user",
+      "evidence": "docs/production/render-pilot-2026-09-24.md"
     }
   ],
   "open_questions": [
@@ -748,7 +756,7 @@
       "risk": "生产候选版直接并入 main 会导致公网服务启动失败（production fail-closed 检查缺 BIDPROOF_PUBLIC_ORIGIN / BIDPROOF_ALLOWED_HOSTS、共享试用码仍配置、无独立 worker 与一次性迁移）",
       "probability": "high",
       "impact": "high",
-      "mitigation": "2026-09-24 用户选定单机方案（见 D-DEPLOY-A-2026-09-24）：代码停在分支 codex/production-candidate-20260923，按 docs/production/deploy-runbook-marketcase-2026-09-24.md 在目标主机部署；目标主机验收通过前不要合并 main，也不要保留会触发 Render 自动部署的推送路径"
+      "mitigation": "2026-09-24 改为继续 Render（见 D-DEPLOY-RENDER-2026-09-24）：render.yaml 已补齐生产边界、healthCheckPath 改为 /readyz、共享试用码删除，并由 scripts/render-serve.sh 在单容器内跑一次性迁移与守护 worker；本机 production 模式已通过 9 项端到端冒烟。剩余风险是免费实例的临时磁盘、空闲休眠与单容器共享 CPU，与启动失败无关。"
     }
   ],
   "artifacts": [
@@ -1162,6 +1170,11 @@
       "path": "docs/production/deploy-runbook-marketcase-2026-09-24.md",
       "kind": "deployment-runbook",
       "status": "verified"
+    },
+    {
+      "path": "docs/production/render-pilot-2026-09-24.md",
+      "kind": "deployment-record",
+      "status": "verified"
     }
   ],
   "next_best_action": {
@@ -1175,7 +1188,7 @@
     "parallel": [],
     "note": "Do not write demo rows into pilot/ICP ledgers. Do not claim product PASS. Engineering fallback: improve OCR until gates pass while waiting for T-005 input."
   },
-  "updated_at": "2026-09-24T02:45:00+00:00",
+  "updated_at": "2026-09-24T03:30:00+00:00",
   "sandbox_roadmap": {
     "locked_at": "2026-09-16",
     "gates": {

@@ -2,6 +2,8 @@
 
 适用方案：**选项 A**，单机 Docker Compose（Caddy HTTPS → Web → 独立 Worker → PostgreSQL）。上层依据是 \`docs/production/deployment.md\`，本文件只把它落成可执行步骤，并写明哪些步骤需要人来操作。
 
+> 2026-09-24 更新：用户决定先不采购服务器，试点继续用 Render 免费实例（见 \`docs/production/render-pilot-2026-09-24.md\`）。本操作单保留给后续正式部署，步骤本身仍然有效。
+
 ## 本机已经准备好的东西
 
 | 项 | 位置 |

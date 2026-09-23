@@ -1,13 +1,21 @@
 # BidProof public pilot on Render's free compute plan.
 # Cold start after ~15 minutes idle; Free Postgres expires 30 days after creation.
 # Connect this repo in the Render Dashboard: New → Blueprint.
+#
+# Production hardening requires the boundaries below; the app refuses to start
+# without them (see app/config.py validate_runtime_security). Render's free
+# instance type has no Background Worker, so scripts/render-serve.sh applies the
+# migration and supervises the scan worker inside the web container, and the
+# health check uses /readyz, which fails until the database revision, the data
+# directory and the worker heartbeat are all healthy.
 services:
   - type: web
     name: bidproof
     runtime: docker
     plan: free
     region: singapore
-    healthCheckPath: /healthz
+    healthCheckPath: /readyz
+    dockerCommand: sh ./scripts/render-serve.sh
     envVars:
       - key: BIDPROOF_ENV
         value: production
@@ -15,6 +23,12 @@ services:
         value: /data
       - key: BIDPROOF_JOB_RUNNER
         value: worker
+      - key: BIDPROOF_PUBLIC_ORIGIN
+        value: https://bidproof.marketcase.net
+      # Render sends a verified custom domain as the Host header for health checks,
+      # and the loopback entries cover in-container probes.
+      - key: BIDPROOF_ALLOWED_HOSTS
+        value: bidproof.marketcase.net,127.0.0.1,localhost
       - key: BIDPROOF_METRICS
         value: "1"
       - key: BIDPROOF_DATA_REGION
@@ -23,8 +37,8 @@ services:
         value: "1"
       - key: BIDPROOF_JSON_LOGS
         value: "1"
-      - key: BIDPROOF_TRIAL_JOIN_CODE
-        value: BidProof-Trial-2026
+      # Shared trial join codes are rejected in production; trial access now goes
+      # through personal (isolated workspace) signup or an administrator invitation.
       - key: BIDPROOF_BOOTSTRAP_TOKEN
         generateValue: true
       - key: DATABASE_URL
