@@ -44,4 +44,22 @@ Render 免费实例没有 Background Worker，而生产又要求独立 worker，
 
 ## 与单机方案的关系
 
+## 2026-09-24 追加：共享试用码改为"生产丢弃 + 告警"，不再阻止启动
+
+现场现象：新版镜像构建成功、数据库迁移在线上 PostgreSQL 上执行成功，但容器启动时在 `config.py` 抛
+`RuntimeError: Shared trial join codes are disabled in production`，连续三次部署失败，服务一度完全打不开。
+
+根因：交付包的设计是"production 下配了共享试用码就拒绝启动"，而 Render 的蓝本同步**只应用新增与更新，
+不会删除已存在的服务变量**。所以服务上一直留着 `BIDPROOF_TRIAL_JOIN_CODE=BidProof-Trial-2026`，新版每次
+启动都主动退出（日志里 `config.py` 第 73 行可直接看到）。
+
+处理：`app/config.py` 的生产校验从"抛错"改为"把共享试用码置空并打印 WARNING"。安全效果与删除该变量完全
+一致——生产环境永远不会认可共享码——但不会再让服务离线。
+
+本机验证（production 模式 + 故意设置该变量）：启动成功并打印告警；`/api/auth/status` 返回
+`trial_join_enabled: false`；用旧码调用 `/api/auth/trial-join` 返回 403「试用加入未开放」；`/healthz` 200；
+完整回归 376 passed / 11 skipped；ruff 全绿。
+
+要恢复"严格拒绝启动"的行为，在 Render 面板删除该变量即可：告警消失，行为不变。
+
 \`docs/production/deploy-runbook-marketcase-2026-09-24.md\`（单机 Caddy + Web + Worker + PostgreSQL）没有被废弃：需要正式部署、独立 worker、持久磁盘与 HTTPS 证书时按它执行，本文件只描述当前试点方案。

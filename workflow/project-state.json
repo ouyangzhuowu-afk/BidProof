@@ -700,6 +700,14 @@
       "date": "2026-09-24",
       "decided_by": "user",
       "evidence": "docs/production/render-pilot-2026-09-24.md"
+    },
+    {
+      "id": "D-RENDER-TRIALCODE-2026-09-24",
+      "decision": "生产环境遇到已配置的共享试用码时改为「置空并告警」，不再拒绝启动。",
+      "reason": "Render 蓝本同步只应用新增与更新、不删除已有服务变量，服务上残留 BIDPROOF_TRIAL_JOIN_CODE 使新版每次启动都抛错，连续三次部署失败后站点一度完全打不开。置空后安全效果与删除该变量一致（生产永不认可共享码），本机 production 模式验证：启动成功并告警、auth/status 的 trial_join_enabled=false、旧码调用 /api/auth/trial-join 返回 403、/healthz 200；完整回归 376 passed / 11 skipped、ruff 全绿。",
+      "date": "2026-09-24",
+      "decided_by": "agent",
+      "evidence": "docs/production/render-pilot-2026-09-24.md"
     }
   ],
   "open_questions": [
@@ -756,7 +764,7 @@
       "risk": "生产候选版直接并入 main 会导致公网服务启动失败（production fail-closed 检查缺 BIDPROOF_PUBLIC_ORIGIN / BIDPROOF_ALLOWED_HOSTS、共享试用码仍配置、无独立 worker 与一次性迁移）",
       "probability": "high",
       "impact": "high",
-      "mitigation": "2026-09-24 改为继续 Render（见 D-DEPLOY-RENDER-2026-09-24）：render.yaml 已补齐生产边界、healthCheckPath 改为 /readyz、共享试用码删除，并由 scripts/render-serve.sh 在单容器内跑一次性迁移与守护 worker；本机 production 模式已通过 9 项端到端冒烟。剩余风险是免费实例的临时磁盘、空闲休眠与单容器共享 CPU，与启动失败无关。"
+      "mitigation": "2026-09-24 改为继续 Render（见 D-DEPLOY-RENDER-2026-09-24）：render.yaml 已补齐生产边界、healthCheckPath 改为 /readyz，由 scripts/render-serve.sh 在单容器内跑一次性迁移与守护 worker，共享试用码改为置空告警（见 D-RENDER-TRIALCODE-2026-09-24）。剩余风险是免费实例的临时磁盘、空闲休眠与单容器共享 CPU，与启动失败无关。"
     }
   ],
   "artifacts": [
@@ -1188,7 +1196,7 @@
     "parallel": [],
     "note": "Do not write demo rows into pilot/ICP ledgers. Do not claim product PASS. Engineering fallback: improve OCR until gates pass while waiting for T-005 input."
   },
-  "updated_at": "2026-09-24T03:30:00+00:00",
+  "updated_at": "2026-09-24T04:10:00+00:00",
   "sandbox_roadmap": {
     "locked_at": "2026-09-16",
     "gates": {

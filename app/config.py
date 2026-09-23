@@ -1,6 +1,9 @@
+import logging
 import os
 from pathlib import Path
 from urllib.parse import urlsplit
+
+logger = logging.getLogger("bidproof.config")
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 _configured_root = os.environ.get("BIDPROOF_DATA_ROOT")
@@ -51,6 +54,8 @@ FEDERATED_WORKSPACE_ID = os.environ.get("BIDPROOF_FEDERATED_WORKSPACE_ID", "").s
 
 def validate_runtime_security() -> None:
     """Fail startup before accepting traffic when a production boundary is ambiguous."""
+    global TRIAL_JOIN_CODE
+
     if ENVIRONMENT not in {"development", "test", "production"}:
         raise RuntimeError("BIDPROOF_ENV must be development, test or production")
     if JOB_RUNNER not in {"inline", "worker"}:
@@ -70,7 +75,17 @@ def validate_runtime_security() -> None:
     if _TRUSTED_HEADERS_REQUESTED:
         raise RuntimeError("Test identity headers must not be configured in production")
     if TRIAL_JOIN_CODE:
-        raise RuntimeError("Shared trial join codes are disabled in production")
+        # A shared join code lets anyone add themselves to the primary workspace, so production
+        # never honours one. Hosting dashboards can keep an environment variable alive after it
+        # is deleted from render.yaml, and refusing to boot leaves the service offline, so the
+        # configured code is dropped here instead. The trial-join path stays disabled either way
+        # (auth_service reads config.TRIAL_JOIN_CODE on every call); remove the variable in the
+        # hosting dashboard to silence this warning.
+        TRIAL_JOIN_CODE = ""
+        logger.warning(
+            "BIDPROOF_TRIAL_JOIN_CODE is configured but ignored: production never honours a "
+            "shared trial join code. Remove the variable from the hosting dashboard."
+        )
     if BOOTSTRAP_TOKEN and len(BOOTSTRAP_TOKEN) < 32:
         raise RuntimeError("BIDPROOF_BOOTSTRAP_TOKEN must contain at least 32 characters")
     if JOB_RUNNER != "worker":
