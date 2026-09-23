@@ -13,7 +13,6 @@ from fastapi import FastAPI
 from app.api import register_routers
 from app.main import app
 
-
 APP_ROOT = Path(__file__).resolve().parents[1] / "app"
 MAIN = APP_ROOT / "main.py"
 

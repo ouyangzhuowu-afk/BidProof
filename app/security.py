@@ -10,7 +10,6 @@ import base64
 import hashlib
 import secrets
 
-
 PBKDF2_ITERATIONS = 600_000
 SESSION_TOKEN_BYTES = 32
 ACTION_TOKEN_BYTES = 32

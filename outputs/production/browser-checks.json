@@ -1,0 +1,70 @@
+{
+  "date": "2026-09-23",
+  "scope": "synthetic_engineering_only",
+  "business_acceptance": false,
+  "preview_origin": "http://127.0.0.1:8770",
+  "landing": {
+    "viewports": [
+      {
+        "width": 1280,
+        "height": 720,
+        "scroll_width": 1265
+      },
+      {
+        "width": 768,
+        "height": 1024,
+        "scroll_width": 753
+      },
+      {
+        "width": 390,
+        "height": 844,
+        "scroll_width": 375
+      },
+      {
+        "width": 320,
+        "height": 740,
+        "scroll_width": 320
+      }
+    ],
+    "horizontal_overflow": false,
+    "passed": [
+      "primary CTA enters real /app",
+      "missing evidence cannot confirm",
+      "matched evidence confirms and progress becomes 1/3",
+      "revert confirmed item to needs review",
+      "note saves with visible confirmation",
+      "mobile menu expands",
+      "FAQ expands",
+      "console has no error or warning during checked interactions"
+    ],
+    "inline_screenshots": [
+      "desktop hero",
+      "390px mobile hero"
+    ]
+  },
+  "workbench": {
+    "passed": [
+      "existing isolated account login",
+      "run list loads",
+      "detail risk dashboard and evidence reader load",
+      "PDF page image loads with visible success",
+      "comment form submits and persisted text appears",
+      "remediation form creates item",
+      "remediation status saves DONE and UI selects 已完成",
+      "HOLD decision saves with revision and visible last-decision state"
+    ],
+    "console_errors": 0
+  },
+  "final_recheck": {
+    "status": "blocked_by_browser_policy_verification_unavailable",
+    "attempts": 2,
+    "controls_bypassed": false,
+    "scope": "final bundle with binary-download cleanup and cross-tab broadcast was automated-tested but not rechecked in the browser"
+  },
+  "not_covered": [
+    "real OS offline/reduced-motion setting change",
+    "complete keyboard-only user journey",
+    "public network/real-user Core Web Vitals",
+    "real enterprise review outcome"
+  ]
+}

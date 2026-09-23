@@ -1,0 +1,39 @@
+
+> bidproof-marketing@1.0.0 verify
+> npm run check && npm test && vite build
+
+
+> bidproof-marketing@1.0.0 check
+> tsc --noEmit
+
+
+> bidproof-marketing@1.0.0 test
+> node --import tsx --test tests/demo.test.ts
+
+✔ missing evidence and an expiry conflict cannot be confirmed through direct events (71.437417ms)
+✔ the matched example has both citations and can be confirmed exactly once (22.45425ms)
+✔ a doubtful review reverses the confirmed progress and focuses the note editor (21.605209ms)
+✔ notes remain scoped to each case and untrusted markup stays plain text (22.6655ms)
+✔ restoring examples clears notes and confirmation without persistent storage (17.696041ms)
+✔ keyboard arrows wrap scenarios with one roving tab stop (14.505917ms)
+✔ teardown removes listeners so a fresh mount does not duplicate review actions (22.253292ms)
+✔ marketing events contain only enumerated placement/action without note content (19.769791ms)
+✔ domain model guards conflicts and duplicate confirmations independently from UI (0.075333ms)
+✔ all anchors resolve and FAQ/CTAs work without inline script or an email detour (10.222291ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 757.731375
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+../static/marketing/index.html                 23.91 kB │ gzip: 8.32 kB
+../static/marketing/assets/index-BBUKyzI9.css  35.68 kB │ gzip: 8.91 kB
+../static/marketing/assets/index-szMXYQcy.js    9.54 kB │ gzip: 4.28 kB
+✓ built in 115ms

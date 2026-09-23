@@ -14,7 +14,6 @@ from sqlalchemy.dialects import postgresql, sqlite
 
 from app import database, db, models
 
-
 PROJECT_ROOT = database.config.PROJECT_ROOT
 
 

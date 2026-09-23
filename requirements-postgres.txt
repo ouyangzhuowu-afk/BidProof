@@ -2,3 +2,6 @@
 # PostgreSQL; SQLite-only installs do not need it.
 -r requirements.txt
 psycopg[binary]>=3.1
+
+# Pin explicitly in the lock across macOS and Linux; SQLAlchemy selects it by platform.
+greenlet>=3.5.6

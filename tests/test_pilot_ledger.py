@@ -3,8 +3,12 @@ from pathlib import Path
 
 import pytest
 
-from work.pilot_ledger import REQUIRED_FIELDS, append_row, summarize_file, validate_ledger
-
+from work.pilot_ledger import (
+    REQUIRED_FIELDS,
+    append_row,
+    summarize_file,
+    validate_ledger,
+)
 
 ROOT = Path(__file__).parents[1]
 

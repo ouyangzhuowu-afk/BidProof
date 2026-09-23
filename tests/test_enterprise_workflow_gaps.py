@@ -3,9 +3,18 @@ import sqlite3
 from fastapi.testclient import TestClient
 
 from app import config, main
+from app.db import (
+    cancel_scan_job,
+    create_auth_session,
+    create_scan_job,
+    create_user,
+    init_db,
+    load_scan_job,
+    start_scan_job,
+    update_scan_job,
+)
 from app.security import password_hash
 from app.services import scan_service
-from app.db import cancel_scan_job, create_auth_session, create_scan_job, create_user, init_db, load_scan_job, start_scan_job, update_scan_job
 
 
 def _pdf_bytes(text: str) -> bytes:
@@ -34,7 +43,7 @@ def test_run_source_files_are_downloadable_only_with_workspace_scope(monkeypatch
         headers=owner,
         files=[
             ("tender", ("tender.pdf", _pdf_bytes("资格要求"), "application/pdf")),
-            ("evidence", ("proof.txt", "营业执照有效".encode("utf-8"), "text/plain")),
+            ("evidence", ("proof.txt", "营业执照有效".encode(), "text/plain")),
         ],
     )
     assert created.status_code == 200
@@ -47,7 +56,7 @@ def test_run_source_files_are_downloadable_only_with_workspace_scope(monkeypatch
 
     evidence = client.get(f"/api/runs/{run_id}/files/EVD-001", headers=owner)
     assert evidence.status_code == 200
-    assert evidence.content == "营业执照有效".encode("utf-8")
+    assert evidence.content == "营业执照有效".encode()
 
     foreign = {**owner, "X-Workspace-ID": "other-ws"}
     assert client.get(f"/api/runs/{run_id}/files/TENDER-001", headers=foreign).status_code == 404

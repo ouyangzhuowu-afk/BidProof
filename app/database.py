@@ -18,7 +18,6 @@ from sqlalchemy.pool import StaticPool
 from . import config
 from .models import metadata
 
-
 DATABASE_URL_ENV = "BIDPROOF_DATABASE_URL"
 POOL_SIZE = int(os.environ.get("BIDPROOF_DB_POOL_SIZE", "20"))
 MAX_OVERFLOW = int(os.environ.get("BIDPROOF_DB_MAX_OVERFLOW", "20"))

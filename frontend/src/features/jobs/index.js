@@ -18,6 +18,7 @@ import { toast, toastFromError } from '../../core/toast.js';
 import { formatRelative, shortId, jobStatusLabel } from '../../core/format.js';
 import { jobsApi } from '../../api/index.js';
 import { confirmAction } from '../../ui/confirm.js';
+import { sessionVersion, isSessionCurrent } from '../../core/session.js';
 
 /** @typedef {import('../../../types/api.js').ScanJob} ScanJob */
 
@@ -29,8 +30,11 @@ const LIVE = new Set(['PENDING', 'RUNNING']);
 
 /** @type {(() => void)[]} */
 let teardown = [];
-/** @type {ReturnType<typeof setInterval> | null} */
+/** @type {ReturnType<typeof setTimeout> | null} */
 let poller = null;
+let generation = 0;
+/** @type {AbortController | null} */
+let inflight = null;
 
 export function mountJobsView() {
   if (teardown.length) return;
@@ -47,6 +51,8 @@ export function mountJobsView() {
 }
 
 export function unmountJobsView() {
+  generation += 1;
+  inflight?.abort(); inflight = null;
   stopPolling();
   for (const off of teardown) off();
   teardown = [];
@@ -59,14 +65,21 @@ export function unmountJobsView() {
 /** @param {boolean} [silent] 轮询刷新不显示骨架屏，否则列表每 5 秒闪一次 */
 async function load(silent = false) {
   const target = el('#jobs-list');
-  if (!target) return;
+  if (!target || !teardown.length) return;
+  stopPolling();
+  inflight?.abort();
+  const controller = new AbortController();
+  inflight = controller;
+  const current = generation;
+  const active = () => current === generation && inflight === controller && !controller.signal.aborted && teardown.length > 0;
 
   if (!silent) mount(target, skeleton('row', 3));
   const refresh = /** @type {HTMLButtonElement | null} */ (el('#refresh-jobs'));
   if (refresh) refresh.disabled = true;
 
   try {
-    const { jobs } = await jobsApi.listJobs({ limit: 200 });
+    const { jobs } = await jobsApi.listJobs({ limit: 200 }, { signal: controller.signal });
+    if (!active()) return;
     const count = el('#jobs-count');
     if (count) count.textContent = `${jobs.length} 个作业`;
 
@@ -85,23 +98,30 @@ async function load(silent = false) {
     if (jobs.some((job) => LIVE.has(job.status))) startPolling();
     else stopPolling();
   } catch (error) {
+    if (!active()) return;
     stopPolling();
     // 轮询失败不要把已经渲染好的列表替换成错误态 —— 那会让用户以为数据没了。
-    if (silent) return;
+    if (silent) {
+      // Keep previous rows, but expose that progress is stale and offer a manual retry.
+      const count = el('#jobs-count');
+      if (count) count.textContent = '连接中断，进度可能已过期。请点刷新重试。';
+      return;
+    }
     mount(target, errorState({ title: '作业记录加载失败', error, retryId: 'jobs-retry-load' }));
   } finally {
-    if (refresh) refresh.disabled = false;
+    if (active() && refresh) refresh.disabled = false;
+    if (inflight === controller) inflight = null;
   }
 }
 
 function startPolling() {
-  if (poller) return;
-  poller = setInterval(() => { void load(true); }, POLL_MS);
+  if (poller || !teardown.length) return;
+  poller = setTimeout(() => { poller = null; void load(true); }, POLL_MS);
 }
 
 function stopPolling() {
   if (!poller) return;
-  clearInterval(poller);
+  clearTimeout(poller);
   poller = null;
 }
 
@@ -191,6 +211,8 @@ function toneOf(status) {
  * @param {HTMLButtonElement} button
  */
 async function act(kind, button) {
+  const current = generation;
+  const session = sessionVersion();
   const jobId = kind === 'retry' ? button.dataset.retryJob : button.dataset.cancelJob;
 
   if (kind === 'cancel') {
@@ -202,15 +224,17 @@ async function act(kind, button) {
       confirmLabel: '取消作业',
       cancelLabel: '继续运行',
     });
-    if (!ok) return;
+    if (!ok || current !== generation || !isSessionCurrent(session)) return;
   }
 
   await withLoading(button, async () => {
     try {
       await (kind === 'retry' ? jobsApi.retryJob(jobId) : jobsApi.cancelJob(jobId));
+      if (!isSessionCurrent(session)) return;
       toast(kind === 'retry' ? '作业已重新进入队列。' : '作业已取消。', 'success');
-      await load(true);
+      if (current === generation) await load(true);
     } catch (error) {
+      if (!isSessionCurrent(session)) return;
       toastFromError(error, kind === 'retry' ? '重试未启动。' : '取消未生效。');
     }
   });

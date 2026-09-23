@@ -6,9 +6,9 @@ import fitz
 from fastapi.testclient import TestClient
 
 from app import main, uploads
+from app.config import DB_PATH
 from app.repositories import runs as runs_repo
 from app.services import scan_service
-from app.config import DB_PATH
 
 
 def _pdf_bytes(text: str) -> bytes:

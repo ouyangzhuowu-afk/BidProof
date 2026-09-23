@@ -1,0 +1,76 @@
+{
+  "environment": "Docker Linux ARM64 + Python3.12 + PostgreSQL16 + Caddy internal TLS",
+  "tls_verified": true,
+  "production_mode": true,
+  "nonroot_uid": 10001,
+  "ephemeral_synthetic_data_only": true,
+  "business_acceptance": false,
+  "exit_code": 0,
+  "checks": [
+    {
+      "check": "health_readiness_and_anonymous_access_denied",
+      "status": "passed"
+    },
+    {
+      "check": "cookie_auth_and_csrf_rejection",
+      "status": "passed"
+    },
+    {
+      "check": "queue_upload_and_completion",
+      "status": "passed"
+    },
+    {
+      "check": "evidence_index_original_bytes_and_page_previews",
+      "status": "passed"
+    },
+    {
+      "check": "manual_review_with_revision",
+      "status": "passed"
+    },
+    {
+      "check": "decision_revision_and_stale_write_rejection",
+      "status": "passed"
+    },
+    {
+      "check": "pdf_and_csv_exports",
+      "status": "passed"
+    },
+    {
+      "check": "delete_and_verify_absence",
+      "status": "passed"
+    },
+    {
+      "check": "logout",
+      "status": "passed"
+    },
+    {
+      "status": "passed",
+      "scope": "synthetic_engineering_only",
+      "business_acceptance": false
+    }
+  ],
+  "smoke_image": "bidproof:production-hardening-20260923",
+  "smoke_image_manifest": "sha256:e72f85321e5241c89591b010e13a5e9e9256d9a76b760ac458e41836f3f15a85",
+  "final_image_manifest": "sha256:2333af50080f66e5a3fc12ab99340d2936ad9a5381c6cc4b3d421f79f96f2ace",
+  "final_frozen_source_verification": {
+    "runtime_and_asset_files_compared": 95,
+    "hash_mismatches": 0,
+    "normalization": "app.js sourceMappingURL removed by Dockerfile; sourcemap files intentionally excluded"
+  },
+  "final_rebuild_followup": "Final source freeze includes deployment region default, privacy copy and session-channel frontend changes; full API smoke ran before that final rebuild, unchanged API workflow covered by the preceding run.",
+  "runtime_pip_check": "passed",
+  "post_smoke_cleanup": {
+    "runs": 0,
+    "scan_jobs": 0,
+    "upload_entries": 0,
+    "staging_entries": 0
+  },
+  "temporary_infrastructure_removed": true,
+  "temporary_infrastructure_cleanup": {
+    "containers_removed": 4,
+    "network_removed": true,
+    "volume_removed": true,
+    "temporary_credentials_and_ca_removed": true,
+    "existing_previews_untouched": true
+  }
+}

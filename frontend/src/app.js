@@ -1,11 +1,15 @@
-// @ts-nocheck
-// Strangler leftover: keep checkJs off until remaining detail/intake logic moves to features/.
+// Legacy orchestration is migrated incrementally; critical runtime contracts are checked in core/validators.js.
 import { html, mount as setHtml } from './ui/render.js';
-import { store } from './state.js';
+import { store, clearLegacySessionState } from './state.js';
+import { clearSessionState } from './core/store.js';
+import { sessionVersion, isSessionCurrent } from './core/session.js';
+import { assertRunEnvelope } from './core/validators.js';
 import { formatDateTime } from './i18n/index.js';
 import * as theme from './core/theme.js';
 import { renderIcons } from './core/icons.js';
-import { setLoading } from './core/dom.js';
+import { setLoading, resetDomCache } from './core/dom.js';
+import { clearToasts, toastError, toastFromError } from './core/toast.js';
+import { exportRun } from './api/runs.js';
 import { register } from './core/router.js';
 // Confirm / secret-reveal callers moved to admin; app.js no longer imports them.
 import { setCurrentRole } from './core/permissions.js';
@@ -17,6 +21,7 @@ import {
   saveBlob,
   watchJob,
   UPLOAD_TIMEOUT_MS,
+  resetSessionTransport,
 } from './core/http.js';
 import { configureAuth, startAuth } from './features/auth/index.js';
 import {
@@ -40,8 +45,8 @@ import {
 import { mountCollab, unmountCollab, loadCollab } from './features/runs/collab.js';
 import { mountJobsView, unmountJobsView, reloadJobs } from './features/jobs/index.js';
 import { mountAdminView, unmountAdminView, reloadAdmin } from './features/admin/index.js';
-import { watchScanJob } from './features/scan/watcher.js';
-import { mountIntakeFiles, refreshIntakeFiles, setIntakeBusy, isIntakeBusy } from './features/scan/intake.js';
+import { watchScanJob, stopAllScans } from './features/scan/watcher.js';
+import { mountIntakeFiles, refreshIntakeFiles, clearIntakeFiles, setIntakeBusy, isIntakeBusy } from './features/scan/intake.js';
 import { getReviewProgress } from './features/runs/review-model.js';
 
 const views = {
@@ -54,6 +59,7 @@ const views = {
 const missedDialog = document.querySelector('#missed-panel');
 let activeViewName = 'home';
 let pendingRunLoad = null;
+let sessionLocked = false;
 
 const intakeDialog = document.querySelector('#intake-panel');
 const openIntakeButtons = ['#new-scan-button', '#top-new-scan', '#nav-new-scan'];
@@ -106,28 +112,58 @@ intakeDialog.addEventListener('click', (event) => {
 mountIntakeFiles();
 intakeDialog.addEventListener('cancel', (event) => { if (isIntakeBusy()) event.preventDefault(); });
 window.addEventListener('bidproof:comments-changed', () => loadCollab());
-window.addEventListener('bidproof:unauthorized', cancelRunLoad);
+window.addEventListener('bidproof:unauthorized', clearPrivateSession);
+window.addEventListener('bidproof:session-ended', clearPrivateSession);
 window.addEventListener('bidproof:review-changed', () => {
   renderDetailSummary();
   loadCollab();
 });
 
 refreshIcons();
-initializeApp();
+export const ready = initializeApp();
 
 async function initializeApp() {
   // 鉴权全部收进 features/auth/：四种模式、MFA 两步、以及从 URL 进入的
   // 激活 / 重置，都由那边的状态机决定。这里只提供「登录之后做什么」。
   configureAuth({
     onAuthenticated: async (user) => {
+      if (sessionLocked) { window.location.replace('/app'); return; }
       store.currentUser = user;
+      const version = sessionVersion();
       renderCurrentUser();
       await loadProjects();
+      if (!isSessionCurrent(version)) return;
       await reloadRuns();
+      if (!isSessionCurrent(version)) return;
       navigateFromHash();
     },
   });
   await startAuth();
+  const entryUrl = new URL(window.location.href);
+  if (entryUrl.searchParams.get('logout') === 'unconfirmed') {
+    toastError('服务端未确认退出，本地内容已重新加载。若仍显示已登录，请恢复连接后再次退出。');
+    entryUrl.searchParams.delete('logout');
+    history.replaceState(null, '', `${entryUrl.pathname}${entryUrl.search}${entryUrl.hash}`);
+  }
+}
+
+/** Remove private DOM before a replacement identity can authenticate. A successful
+ * reauthentication reloads a fresh application, rebuilding listeners and caches. */
+function clearPrivateSession() {
+  if (sessionLocked) return;
+  sessionLocked = true;
+  cancelRunLoad();
+  unmountRunsView(); unmountMatrix(); unmountDecisionView(); unmountCollab(); unmountJobsView(); unmountAdminView();
+  stopAllScans(); resetSessionTransport(); clearSessionState();
+  clearLegacySessionState(); clearIntakeFiles();
+  // Keep only the authentication forms alive until the fresh application loads.
+  for (const form of document.querySelectorAll('form:not(#auth-form):not(#account-action-form)')) form.reset();
+  for (const dialog of document.querySelectorAll('dialog:not(#auth-panel):not(#account-action-panel)')) if (dialog.open) dialog.close();
+  for (const view of Object.values(views)) view?.replaceChildren();
+  document.querySelector('#app-main')?.replaceChildren();
+  document.querySelector('#toast')?.replaceChildren();
+  clearToasts(); resetDomCache();
+  renderCurrentUser();
 }
 
 
@@ -144,16 +180,20 @@ function renderCurrentUser() {
   document.querySelector('#logout-button').hidden = !store.currentUser;
   document.querySelector('#current-username').textContent = store.currentUser?.username || '';
   document.querySelector('#current-user-role').textContent = store.currentUser ? roleLabel(store.currentUser.role) : '';
-  document.querySelector('#password-username').value = store.currentUser?.username || '';
+  const passwordUsername = document.querySelector('#password-username');
+  if (passwordUsername) passwordUsername.value = store.currentUser?.username || '';
 }
 
 
 
 
 async function startSampleScan() {
+  if (sessionLocked) return;
+  const version = sessionVersion();
   try {
     const response = await requestBlob('/api/sample-tender');
     const blob = await response.blob();
+    if (!isSessionCurrent(version)) return;
     const file = new File([blob], 'sample-tender.pdf', { type: 'application/pdf' });
     const input = document.querySelector('#tender-file');
     const transfer = new DataTransfer();
@@ -164,6 +204,7 @@ async function startSampleScan() {
     await openIntake();
     showToast('已填入样例招标文件，确认后即可开始扫描。');
   } catch (error) {
+    if (!isSessionCurrent(version)) return;
     showToast(`${error.message}，请手动上传招标文件。`);
     store.rescanParentId = null;
     await openIntake();
@@ -171,7 +212,10 @@ async function startSampleScan() {
 }
 
 async function openIntake() {
+  if (sessionLocked) return;
+  const version = sessionVersion();
   await loadProjects();
+  if (!isSessionCurrent(version)) return;
   if (store.rescanParentId && store.currentRun?.project_id) document.querySelector('#tender-project').value = store.currentRun.project_id;
   if (!intakeDialog.open) intakeDialog.showModal();
   document.querySelector('#company-name').focus();
@@ -191,47 +235,35 @@ function closeIntake() {
 
 async function submitScan(event) {
   event.preventDefault();
+  if (sessionLocked || isIntakeBusy()) return;
   const form = event.currentTarget;
   const button = form.querySelector('button[type="submit"]');
   const message = document.querySelector('#message');
-  if (isIntakeBusy()) return;
+  const session = sessionVersion();
+  const parentId = store.rescanParentId;
+  const filename = document.querySelector('#tender-file')?.files?.[0]?.name || '招标文件';
   setButtonLoading(button, true, '正在提交');
   message.textContent = '';
   try {
     const formData = new FormData(form);
     if (!document.querySelector('#evidence-files').files.length) formData.delete('evidence');
+    if (parentId) formData.set('parent_run_id', parentId);
     setIntakeBusy(true);
-    if (store.rescanParentId) {
-      store.currentRun = await request(`/api/runs/${encodeURIComponent(store.rescanParentId)}/rescan`, { method: 'POST', body: formData, timeoutMs: UPLOAD_TIMEOUT_MS });
-    } else {
-      // 【行为改变】提交后立刻放行，不再用全屏遮罩把应用锁住 30 分钟。
-      // 扫描在后台跑，进度显示在右下角停靠区，完成时提示并可跳转。
-      // 详见 features/scan/watcher.js 顶部说明。
-      const job = await request('/api/jobs', { method: 'POST', body: formData, timeoutMs: UPLOAD_TIMEOUT_MS });
-      const filename = document.querySelector('#tender-file')?.files?.[0]?.name || '招标文件';
-      setIntakeBusy(false);
-      form.reset();
-      closeIntake();
-      store.rescanParentId = null;
-      watchScanJob(job.job_id, filename, (runId) => { void openRun(runId); });
-      showToast('扫描已进入后台队列，完成后会通知你。');
-      await reloadRuns();
-      return;
-    }
-    // 重扫是同步契约，直接拿到 Run。
+    const job = await request('/api/jobs', { method: 'POST', body: formData, timeoutMs: UPLOAD_TIMEOUT_MS });
+    if (!isSessionCurrent(session)) return;
+    if (typeof job?.job_id !== 'string' || !job.job_id) throw new Error('提交结果未能确认，请先在扫描作业中核对，避免重复提交');
     setIntakeBusy(false);
-    form.reset();
-    closeIntake();
-    store.rescanParentId = null;
-    resetMatrixView();
-    showDetail();
+    form.reset(); closeIntake(); store.rescanParentId = null;
+    watchScanJob(job.job_id, filename, (runId) => { if (isSessionCurrent(session)) void openRun(runId); });
+    showToast(parentId ? '新版本已进入后台队列，完成后可对比原版本。' : '扫描已进入后台队列，完成后会通知你。');
     await reloadRuns();
-    showToast('重新扫描完成，已生成新版本证据链。');
   } catch (error) {
-    message.textContent = `${error.message}。请检查文件格式后重试。`;
+    if (isSessionCurrent(session)) message.textContent = `${error.message}。如提交超时，请先在扫描作业中核对结果。`;
   } finally {
-    setIntakeBusy(false);
-    setButtonLoading(button, false);
+    if (isSessionCurrent(session)) {
+      setIntakeBusy(false);
+      setButtonLoading(button, false);
+    }
   }
 }
 
@@ -243,17 +275,14 @@ async function submitScan(event) {
 
 
 
-function exportCurrentRun(format) {
-  if (!store.currentRun) return;
-  const link = document.createElement('a');
-  link.href = `/api/runs/${encodeURIComponent(store.currentRun.run_id)}/report.${format}`;
-  link.download = `bidproof-${store.currentRun.run_id.slice(0, 12)}.${format}`;
-  document.body.appendChild(link);
-  link.click();
-  link.remove();
+async function exportCurrentRun(format) {
+  if (sessionLocked || !store.currentRun) return;
+  try { await exportRun(store.currentRun.run_id, format); }
+  catch (error) { toastFromError(error, '报告未能下载，请重试。'); }
 }
 
 async function openRun(runId, destination = 'detail') {
+  if (sessionLocked) return;
   cancelRunLoad();
   const controller = new AbortController();
   pendingRunLoad = controller;
@@ -264,7 +293,7 @@ async function openRun(runId, destination = 'detail') {
     // A slow earlier task must not replace a newer task or pull the user back
     // after they navigated away. Some transports may settle after cancellation.
     if (pendingRunLoad !== controller) return;
-    if (run?.run_id !== runId || !Array.isArray(run.requirements)) throw new Error('任务结果不完整');
+    assertRunEnvelope(run, runId);
     pendingRunLoad = null;
     if (overlay) overlay.hidden = true;
     store.currentRun = run;
@@ -335,6 +364,7 @@ function memberOptionList(placeholder) {
 }
 
 function showHome() {
+  if (sessionLocked) return;
   // 视图切换仍由 app.js 的 showView 负责（路由迁移见批次 5）。
   // 这里只保证进入本视图时新模块被挂载、离开时被卸载。
   showView('home', '扫描任务');
@@ -343,6 +373,7 @@ function showHome() {
 }
 
 function showJobs() {
+  if (sessionLocked) return;
   showView('jobs', '扫描作业');
   mountJobsView();
   void reloadJobs();
@@ -352,6 +383,7 @@ function showJobs() {
 
 
 function showAdmin() {
+  if (sessionLocked) return;
   showView('admin', '成员与设置');
   // 四个面板各自取数、各自显示状态。旧实现用一个 Promise.all 拉五个接口，
   // 任何一个挂掉五块一起变错误态 —— 而其中四块的数据其实已经拿到了。
@@ -383,6 +415,7 @@ function showAdmin() {
 
 
 function showDecision() {
+  if (sessionLocked) return;
   if (!store.get?.().currentRun && !store.currentRun) return;
   showView('decision', '人工决策');
   mountDecisionView();
@@ -390,6 +423,7 @@ function showDecision() {
 }
 
 function showDetail() {
+  if (sessionLocked) return;
   mountMatrix();
   mountCollab();
   if (!store.currentRun) return showHome();
@@ -521,6 +555,8 @@ async function loadAssigneeOptions() {
     if (store.currentRun?.run_id !== run.run_id || activeViewName !== 'detail') return;
     setHtml(assignee, memberOptionList('未分配'));
     setHtml(reviewer, memberOptionList('未分配'));
+    const owner = document.querySelector('#remediation-owner');
+    if (owner) { const selected = owner.value; setHtml(owner, memberOptionList('未分配')); owner.value = selected; }
     assignee.value = store.currentRun.assignee_id || '';
     reviewer.value = store.currentRun.reviewer_id || '';
   } catch (_error) {

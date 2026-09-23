@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#eef1f5">
   <title>BidProof 企业证据工作台</title>
   <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/static/style.css?v=0a26625bfbdf">
+  <link rel="stylesheet" href="/static/style.css?v=f0d121951f55">
 </head>
 <body>
 <div id="loading-overlay" class="loading-overlay" role="status" aria-label="正在读取审查结果" hidden><div class="detail-loading"><span class="skeleton skeleton--line"></span><span class="skeleton skeleton--card"></span><span class="skeleton skeleton--card"></span><p>正在读取审查结果…</p></div></div>
@@ -416,6 +416,15 @@
                     <input class="input" id="token-name" name="name" required maxlength="80"
                            placeholder="例如：归档同步脚本">
                   </p>
+                  <fieldset class="stack stack--tight">
+                    <legend>允许此令牌执行哪些操作</legend>
+                    <p class="hint">请按用途明确勾选；未选中的权限不会授予。令牌权限不会超过你的账户权限。</p>
+                    <label><input type="checkbox" name="permissions" value="run:read"> 读取任务与审查结果（只读）</label>
+                    <label><input type="checkbox" name="permissions" value="job:read"> 读取扫描进度（只读）</label>
+                    <label><input type="checkbox" name="permissions" value="report:export"> 下载审查报告</label>
+                    <label><input type="checkbox" name="permissions" value="evidence:download"> 下载原始证据文件</label>
+                    <label><input type="checkbox" name="permissions" value="run:create"> 创建扫描任务</label>
+                  </fieldset>
                   <div class="row">
                     <button class="btn btn--secondary btn--sm" type="submit">
                       <i data-lucide="key"></i><span>创建令牌</span>
@@ -495,8 +504,8 @@
           </div></details>
           <details class="review-support"><summary><i data-lucide="users-round"></i><span>协作与处理记录</span><span class="hint">责任人、备注、整改与审计</span><i data-lucide="chevron-down"></i></summary><div class="review-support__body">
             <section class="surface audit-aside" aria-label="审计摘要"><p class="eyebrow">审计状态</p><h2>本次扫描</h2><div id="audit-summary"></div><form id="run-metadata-form" class="compact-form"><label for="run-assignee">负责人</label><select id="run-assignee" name="assignee_id"><option value="">未分配</option></select><label for="run-reviewer">独立复核人</label><select id="run-reviewer" name="reviewer_id"><option value="">未分配</option></select><label for="run-tags">标签</label><input id="run-tags" name="tags" placeholder="逗号分隔"><label class="toggle-row"><input id="run-favorite" name="favorite" type="checkbox"><span>收藏任务</span></label><button class="button secondary full-width" type="submit"><i data-lucide="save"></i><span>保存协作信息</span></button></form><button class="button secondary full-width" id="aside-decision" type="button"><i data-lucide="clipboard-check"></i><span>进入人工决策</span></button></section>
-          <section class="collaboration-grid" aria-label="协作与审计"><div class="surface collaboration-panel"><div class="surface-header"><div><p class="eyebrow">团队协作</p><h2>评论</h2></div></div><form id="comment-form" class="comment-form"><label for="comment-body" class="sr-only">添加评论</label><textarea id="comment-body" rows="3" placeholder="记录复核结论、待补材料和责任人"></textarea><button class="button primary" type="submit"><i data-lucide="message-square-plus"></i><span>添加评论</span></button></form><div id="comments-list" class="activity-list"></div></div><div class="surface collaboration-panel"><div class="surface-header"><div><p class="eyebrow">操作留痕</p><h2>审计记录</h2></div></div><div id="audit-events" class="activity-list"></div></div></section>
-          <section class="surface remediation-panel" aria-labelledby="remediation-panel-title"><div class="surface-header"><div><p class="eyebrow">整改行动</p><h2 id="remediation-panel-title">证据缺口处理</h2></div><span class="guardrail">负责人和截止日期</span></div><form id="remediation-form" class="inline-admin-form remediation-form"><label for="remediation-title-input">行动</label><input id="remediation-title-input" required maxlength="300" placeholder="例如：补充营业执照原件"><label for="remediation-requirement">关联要求</label><select id="remediation-requirement"><option value="">不关联具体要求</option></select><label for="remediation-owner">负责人</label><select id="remediation-owner"></select><label for="remediation-due">截止日期</label><input id="remediation-due" type="date"><button class="button primary" type="submit"><i data-lucide="clipboard-plus"></i><span>创建整改项</span></button></form><div id="remediations-list" class="operations-list"></div></section>
+          <section class="collaboration-grid" aria-label="协作与审计"><div class="surface collaboration-panel"><div class="surface-header"><div><p class="eyebrow">团队协作</p><h2>评论</h2></div></div><form id="comment-form" class="comment-form"><label for="comment-body" class="sr-only">添加评论</label><textarea id="comment-body" name="body" required maxlength="4000" rows="3" placeholder="记录复核结论、待补材料和责任人"></textarea><button class="button primary" type="submit"><i data-lucide="message-square-plus"></i><span>添加评论</span></button></form><div id="comments-list" class="activity-list"></div></div><div class="surface collaboration-panel"><div class="surface-header"><div><p class="eyebrow">操作留痕</p><h2>审计记录</h2></div></div><div id="audit-events" class="activity-list"></div></div></section>
+          <section class="surface remediation-panel" aria-labelledby="remediation-panel-title"><div class="surface-header"><div><p class="eyebrow">整改行动</p><h2 id="remediation-panel-title">证据缺口处理</h2></div><span class="guardrail">负责人和截止日期</span></div><form id="remediation-form" class="inline-admin-form remediation-form"><label for="remediation-title-input">行动</label><input id="remediation-title-input" name="title" required maxlength="300" placeholder="例如：补充营业执照原件"><label for="remediation-requirement">关联要求</label><select id="remediation-requirement" name="requirement_id"><option value="">不关联具体要求</option></select><label for="remediation-owner">负责人</label><select id="remediation-owner" name="owner_id"><option value="">未分配</option></select><label for="remediation-due">截止日期</label><input id="remediation-due" name="due_date" type="date"><button class="button primary" type="submit"><i data-lucide="clipboard-plus"></i><span>创建整改项</span></button></form><div id="remediations-list" class="operations-list"></div></section>
 
           </div></details>
         </section>
@@ -737,6 +746,6 @@
   </dialog>
   <div id="app-toast" class="toast" role="status" aria-live="polite" hidden></div>
   <script src="/static/vendor/lucide.min.js"></script>
-  <script src="/static/app.js?v=ac20b47279eb"></script>
+  <script src="/static/app.js?v=5cc7cc7a24d6"></script>
 </body>
 </html>

@@ -77,6 +77,7 @@ export interface ApiTokenSummary {
   name: string;
   token_prefix: string;
   revoked_at: string | null;
+  permissions?: string[];
   /** Present only on create response; optional on list rows. */
   token?: string;
 }

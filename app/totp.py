@@ -14,7 +14,6 @@ import struct
 import time
 from urllib.parse import quote
 
-
 DIGITS = 6
 PERIOD_SECONDS = 30
 # One step either side, which covers clock skew between the server and an authenticator app.

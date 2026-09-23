@@ -5,17 +5,16 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-import pytest
-
 from work.eval.page_annotation import PAGE_TYPES, load_annotations
 from work.eval.seal_hw_gt import (
     coverage_report,
     has_hw_slot,
     has_seal_slot,
-    main as seal_hw_main,
     validate_seal_hw_seed,
 )
-
+from work.eval.seal_hw_gt import (
+    main as seal_hw_main,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 JSONL = ROOT / "work" / "eval" / "fixtures" / "seal_hw_gt.jsonl"

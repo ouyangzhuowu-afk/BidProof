@@ -28,6 +28,7 @@ import {
 } from './view.js';
 import { MODE_ENDPOINT, buildPayload, needsConfirm, clampMode } from './state.js';
 import { assertPasswordPolicy } from '../../core/password.js';
+import { openSessionChannel } from '../../core/session-channel.js';
 
 /** @typedef {import('../../../types/api.js').AuthStatus} AuthStatus */
 /** @typedef {import('../../../types/api.js').CurrentUser} CurrentUser */
@@ -38,21 +39,30 @@ let mode = 'login';
 let pendingMfaToken = '';
 /** @type {{ token: string, action: string } | null} */
 let accountAction = null;
-/** @type {(user: CurrentUser) => void} */
+/** @type {(user: CurrentUser) => void | Promise<void>} */
 let onAuthenticated = () => {};
 let bound = false;
+let expiryPending = false;
+let sessionChannel = null;
 
 /* ═══════════════════════════════════════════════════════════════════════════
    装配
    ═══════════════════════════════════════════════════════════════════════ */
 
 /**
- * @param {{ onAuthenticated: (user: CurrentUser) => void }} handlers
+ * @param {{ onAuthenticated: (user: CurrentUser) => void | Promise<void> }} handlers
  */
 export function configureAuth(handlers) {
   onAuthenticated = handlers.onAuthenticated;
   if (bound) return;
   bound = true;
+  sessionChannel = openSessionChannel(() => {
+    window.dispatchEvent(new CustomEvent('bidproof:session-ended'));
+    accountAction = null;
+    /** @type {HTMLFormElement | null} */ (el('#account-action-form'))?.reset();
+    closeDialog(/** @type {HTMLDialogElement | null} */ (el('#account-action-panel')));
+    void reopenAfterExpiry('登录状态已在其他窗口改变，请重新登录。', true);
+  });
 
   bind('#auth-form', 'submit', (event) => { void submit(event); });
   delegate('#auth-mode-wrap', 'click', '[data-auth-mode]', (_e, node) => {
@@ -85,13 +95,18 @@ export function configureAuth(handlers) {
  * 重新拉一次 status 而不是直接开框：过期期间管理员可能改过开关
  * （关掉了个人注册、启用了 OIDC），用旧的 status 渲染会给出已经不存在的入口。
  */
-async function reopenAfterExpiry() {
-  if (/** @type {HTMLDialogElement | null} */ (el('#auth-panel'))?.open) return;
+async function reopenAfterExpiry(message = '登录状态已过期，请重新登录。', force = false) {
+  if (expiryPending || (!force && /** @type {HTMLDialogElement | null} */ (el('#auth-panel'))?.open)) return;
+  expiryPending = true;
   pendingMfaToken = '';
+  status = null;
+  clearAuthForm();
+  open('login', message);
   try {
     status = await authApi.getStatus();
-  } catch { /* 拿不到就用上一次的 status 兜底 */ }
-  open('login', '登录状态已过期，请重新登录。');
+    open('login', message);
+  } catch { /* Keep the login entry visible even when status cannot be fetched. */ }
+  finally { expiryPending = false; }
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -136,7 +151,7 @@ export async function startAuth() {
     return false;
   }
 
-  onAuthenticated(/** @type {CurrentUser} */ (status.user));
+  await onAuthenticated(/** @type {CurrentUser} */ (status.user));
   return true;
 }
 
@@ -203,7 +218,8 @@ async function submit(event) {
       pendingMfaToken = '';
       clearAuthForm();
       closeAuthDialog();
-      onAuthenticated(outcome.user);
+      sessionChannel?.publish();
+      await onAuthenticated(outcome.user);
     } catch (error) {
       fail(error);
     }
@@ -331,7 +347,8 @@ async function submitAccountAction(event) {
       window.history.replaceState({}, '', '/app');
       form.reset();
       closeDialog(/** @type {HTMLDialogElement | null} */ (el('#account-action-panel')));
-      onAuthenticated(user);
+      sessionChannel?.publish();
+      await onAuthenticated(user);
     } catch (error) {
       accountMessage(error instanceof Error ? error.message : '设置失败，请重试。', 'danger');
     }
@@ -353,13 +370,16 @@ function accountMessage(message, tone = 'danger') {
    ═══════════════════════════════════════════════════════════════════════ */
 
 async function logout() {
+  sessionChannel?.publish();
+  window.dispatchEvent(new CustomEvent('bidproof:session-ended'));
+  let confirmed = false;
   try {
     await authApi.logout();
-  } finally {
-    // 整页跳转而不是切视图：这是最省心的会话清理方式，
-    // 内存里残留的任何任务数据、证据引文都会随之丢掉。
-    window.location.replace('/app');
+    confirmed = true;
+  } catch { /* Navigation rechecks the server session; never announce a failed logout as successful. */
   }
+  // 整页跳转清理内存；失败通过无敏感信息的标记在新页面明确提示。
+  window.location.replace(confirmed ? '/app' : '/app?logout=unconfirmed');
 }
 
 /* ── 小工具 ─────────────────────────────────────────────────────────────── */

@@ -1,0 +1,28 @@
+.............s.......................................................... [ 18%]
+.......................s.s..s........................................... [ 37%]
+.....................s.................................................. [ 55%]
+........................................................................ [ 74%]
+...............ss....................................................... [ 93%]
+...........................                                              [100%]
+=============================== warnings summary ===============================
+<frozen importlib._bootstrap>:241
+<frozen importlib._bootstrap>:241
+  <frozen importlib._bootstrap>:241: DeprecationWarning: builtin type SwigPyPacked has no __module__ attribute
+
+<frozen importlib._bootstrap>:241
+<frozen importlib._bootstrap>:241
+  <frozen importlib._bootstrap>:241: DeprecationWarning: builtin type SwigPyObject has no __module__ attribute
+
+<frozen importlib._bootstrap>:241
+  <frozen importlib._bootstrap>:241: DeprecationWarning: builtin type swigvarlink has no __module__ attribute
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+SKIPPED [1] tests/test_apply_independent_reviews.py:35: work/uploads fixture PDFs are not present in this checkout
+SKIPPED [1] tests/test_ground_truth_workflow.py:16: work/uploads fixture PDFs are not present in this checkout
+SKIPPED [1] tests/test_ground_truth_workflow.py:37: work/uploads fixture PDFs are not present in this checkout
+SKIPPED [1] tests/test_ground_truth_workflow.py:75: work/uploads fixture PDFs are not present in this checkout
+SKIPPED [1] tests/test_ocr.py:183: could not import 'numpy': No module named 'numpy'
+SKIPPED [1] tests/test_real_fixture_manifest.py:12: work/uploads fixture PDFs are not present in this checkout
+SKIPPED [1] tests/test_real_fixture_manifest.py:29: work/uploads fixture PDFs are not present in this checkout
+380 passed, 7 skipped, 5 warnings in 8.65s

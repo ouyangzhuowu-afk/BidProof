@@ -22,6 +22,7 @@
 
 import { html, mount } from './render.js';
 import { toastSuccess } from '../core/toast.js';
+import { sessionVersion, isSessionCurrent } from '../core/session.js';
 
 /**
  * @typedef {object} SecretHandle
@@ -112,10 +113,13 @@ export function revealSecret(target, {
  * @param {string} text
  */
 async function copy(text) {
+  const session = sessionVersion();
   try {
     await navigator.clipboard.writeText(text);
+    if (!isSessionCurrent(session)) return;
     toastSuccess('已复制到剪贴板。');
   } catch {
+    if (!isSessionCurrent(session)) return;
     window.prompt('自动复制失败，请手动复制以下内容', text);
   }
 }

@@ -74,11 +74,14 @@ export function stopAllScans() {
   for (const { stop } of watchers.values()) stop();
   watchers.clear();
   hiddenJobs.clear();
+  dock?.remove(); dock = null;
 }
 
 // 关闭 / 前后台切换都要收干净。用 pagehide 而不是 unload：
 // 后者在 iOS Safari 的 bfcache 下不可靠。
 window.addEventListener('pagehide', stopAllScans);
+window.addEventListener('bidproof:session-ended', stopAllScans);
+window.addEventListener('bidproof:unauthorized', stopAllScans);
 
 /* ═══════════════════════════════════════════════════════════════════════════
    停靠区

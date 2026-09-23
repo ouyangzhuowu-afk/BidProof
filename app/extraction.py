@@ -1,11 +1,11 @@
-from pathlib import Path
-from typing import Any
 import logging
 import os
-import unicodedata
 import re
-import zipfile
+import unicodedata
 import xml.etree.ElementTree as ET
+import zipfile
+from pathlib import Path
+from typing import Any
 
 from .ocr import (
     OCRAdapter,
@@ -24,7 +24,6 @@ from .ocr_privacy import (
     redact_png_bytes,
     should_escalate_to_cloud,
 )
-
 
 logger = logging.getLogger("bidproof.extraction")
 
@@ -241,7 +240,7 @@ def extract_pdf(path: Path, ocr_adapter: OCRAdapter | None = None) -> list[dict[
         import pymupdf4llm
 
         markdown_chunks = pymupdf4llm.helpers.pymupdf_rag.to_markdown(document, page_chunks=True)
-    except Exception as exc:
+    except Exception as exc:  # noqa: BLE001 — optional parser must fall back to primary extraction
         logger.debug("pymupdf4llm extraction not available: %s", exc)
         markdown_chunks = None
 
@@ -325,7 +324,7 @@ def extract_pdf(path: Path, ocr_adapter: OCRAdapter | None = None) -> list[dict[
                             egress=str(page_data.get("ocr_egress") or "none"),
                         )
                     except Exception:  # noqa: BLE001 — metrics must never break extraction
-                        pass
+                        logger.debug("ocr_metric_record_failed")
                 except OCRUnavailable:
                     page_data["ocr_status"] = "FAILED"
                     page_data["ocr_error"] = "OCR_UNAVAILABLE"

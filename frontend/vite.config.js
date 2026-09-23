@@ -19,17 +19,12 @@ export default defineConfig({
       '@features': resolve(root, 'src/features'),
     },
   },
-  esbuild: {
-    // 保留可读的函数名：线上错误栈是排障的唯一线索，这个体积代价值得。
-    minifyIdentifiers: false,
-    legalComments: 'none',
-  },
   build: {
     // 目标对齐企业内网常见浏览器：Chrome 111 起支持 CSS @layer / color-mix，
     // 与 tokens.css 的用法一致。
     target: ['chrome111', 'edge111', 'firefox113', 'safari16.4'],
     emptyOutDir: false,
-    minify: 'esbuild',
+    minify: 'oxc',
     // 打开 sourcemap：旧版关闭后，线上 app.js 的报错完全无法定位。
     // 若不希望对外暴露源码，改为 'hidden' 并只上传给监控系统。
     sourcemap: true,
@@ -41,9 +36,9 @@ export default defineConfig({
       fileName: () => 'app.js',
     },
     outDir: resolve(root, '../static'),
-    rollupOptions: {
+    rolldownOptions: {
       output: {
-        inlineDynamicImports: true,
+        minify: { mangle: false },
         entryFileNames: 'app.js',
         // 防呆：lib 模式下若有人从 JS 里 import CSS，产物会叫 style.css，
         // 正好覆盖线上服役中的样式表。显式改名，让事故变成可见的多余文件。

@@ -18,7 +18,6 @@ from alembic.script import ScriptDirectory
 from .config import PROJECT_ROOT
 from .database import configured_url, engine_for
 
-
 ALEMBIC_INI = PROJECT_ROOT / "alembic.ini"
 MIGRATIONS_DIR = PROJECT_ROOT / "migrations"
 VERSION_TABLE = "alembic_version"

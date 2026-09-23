@@ -10,9 +10,10 @@ from __future__ import annotations
 import hashlib
 import threading
 import uuid
-from datetime import datetime, timezone
+from collections.abc import Iterable, Sequence
+from datetime import UTC, datetime
 from pathlib import Path
-from typing import Any, Iterable, Sequence
+from typing import Any
 
 import sqlalchemy as sa
 from sqlalchemy.dialects import postgresql, sqlite
@@ -27,21 +28,22 @@ from .models import (
     auth_action_tokens,
     auth_sessions,
     comments,
-    identity_bindings,
     idempotency_keys,
+    identity_bindings,
     login_flows,
     project_members,
     projects,
     rate_limit_hits,
     remediations,
-    runs as runs_table,
     scan_jobs,
     user_mfa,
     users,
     workspace_members,
     workspaces,
 )
-
+from .models import (
+    runs as runs_table,
+)
 
 ACCURACY_MIN_SAMPLE_SIZE = 20
 
@@ -81,7 +83,7 @@ RUN_LIST_COLUMNS = (
 
 
 def _now() -> str:
-    return datetime.now(timezone.utc).isoformat()
+    return datetime.now(UTC).isoformat()
 
 
 def _new_id() -> str:
@@ -647,7 +649,7 @@ def verify_audit_chain(workspace_id: str, path: Path | str | None = None) -> dic
     previous = None
     for row in rows:
         expected = hashlib.sha256(
-            f"{previous or ''}|{row['event_id']}|{row['event_type']}|{row['created_at']}|{row['outcome']}".encode("utf-8")
+            f"{previous or ''}|{row['event_id']}|{row['event_type']}|{row['created_at']}|{row['outcome']}".encode()
         ).hexdigest()
         if row.get("event_hash") != expected or (row.get("prev_hash") or None) != previous:
             return {"ok": False, "broken_event_id": row["event_id"], "checked": len(rows)}
@@ -783,7 +785,7 @@ def start_scan_job(
             sa.update(scan_jobs)
             .where(
                 scan_jobs.c.job_id == job_id,
-                scan_jobs.c.status.in_(("PENDING", "RUNNING")),
+                scan_jobs.c.status == "PENDING",
                 scan_jobs.c.cancel_requested == 0,
             )
             .values(**values)
@@ -811,7 +813,7 @@ def requeue_stale_scan_jobs(max_age_seconds: int, path: Path | str | None = None
     `updated_at` is an ISO timestamp; jobs newer than the cutoff are assumed to still be live.
     """
     cutoff = datetime.fromtimestamp(
-        datetime.now(timezone.utc).timestamp() - max_age_seconds, timezone.utc
+        datetime.now(UTC).timestamp() - max_age_seconds, UTC
     ).isoformat()
     requeued = 0
     dead = 0
@@ -827,19 +829,19 @@ def requeue_stale_scan_jobs(max_age_seconds: int, path: Path | str | None = None
         )
         for job in stale:
             if int(job.get("attempts") or 0) >= MAX_JOB_ATTEMPTS:
-                connection.execute(
+                result = connection.execute(
                     sa.update(scan_jobs)
-                    .where(scan_jobs.c.job_id == job["job_id"])
-                    .values(status="DEAD", progress_message="超过重试上限，已转入死信", updated_at=_now())
+                    .where(scan_jobs.c.job_id == job["job_id"], scan_jobs.c.status == "RUNNING", scan_jobs.c.updated_at < cutoff)
+                    .values(status="DEAD", lease_token=None, progress_message="超过重试上限，已转入死信", updated_at=_now())
                 )
-                dead += 1
+                dead += result.rowcount
             else:
-                connection.execute(
+                result = connection.execute(
                     sa.update(scan_jobs)
-                    .where(scan_jobs.c.job_id == job["job_id"])
-                    .values(status="PENDING", progress_message="工作进程中断，已重新排队", updated_at=_now())
+                    .where(scan_jobs.c.job_id == job["job_id"], scan_jobs.c.status == "RUNNING", scan_jobs.c.updated_at < cutoff)
+                    .values(status="PENDING", lease_token=None, progress_message="工作进程中断，已重新排队", updated_at=_now())
                 )
-                requeued += 1
+                requeued += result.rowcount
     return requeued
 
 
@@ -1523,12 +1525,13 @@ def list_api_tokens(workspace_id: str, path: Path | str | None = None) -> list[d
 
 def load_api_token_by_hash(token_digest: str, now: str, path: Path | str | None = None) -> dict[str, Any] | None:
     statement = (
-        sa.select(api_tokens, users.c.active, users.c.username)
+        sa.select(api_tokens, users.c.active, users.c.username, users.c.role.label("current_role"))
         .select_from(api_tokens.join(users, users.c.user_id == api_tokens.c.user_id))
         .where(
             api_tokens.c.token_hash == token_digest,
             api_tokens.c.revoked_at.is_(None),
             users.c.active == 1,
+            users.c.workspace_id == api_tokens.c.workspace_id,
         )
     )
     with engine(path).connect() as connection:
@@ -1619,6 +1622,27 @@ def update_user_mfa_counter(
         values["recovery_codes_json"] = recovery_codes
     with connect(path) as connection:
         connection.execute(sa.update(user_mfa).where(user_mfa.c.user_id == user_id).values(**values))
+
+
+def consume_mfa_snapshot(
+    user_id: str, snapshot: dict[str, Any], *, counter: int, recovery_codes: list[str],
+    confirm: bool = False, path: Path | str | None = None,
+) -> bool:
+    """Only one request can consume the exact verified authenticator state."""
+    values: dict[str, Any] = {"last_counter": counter, "recovery_codes_json": recovery_codes}
+    if confirm:
+        values["confirmed_at"] = _now()
+    with connect(path) as connection:
+        updated = connection.execute(
+            sa.update(user_mfa).where(
+                user_mfa.c.user_id == user_id,
+                user_mfa.c.secret == snapshot["secret"],
+                user_mfa.c.last_counter == int(snapshot.get("last_counter") or 0),
+                user_mfa.c.recovery_codes_json == (snapshot.get("recovery_codes_json") or []),
+                user_mfa.c.confirmed_at == snapshot.get("confirmed_at"),
+            ).values(**values)
+        )
+    return updated.rowcount == 1
 
 
 def delete_user_mfa(user_id: str, path: Path | str | None = None) -> None:
@@ -1723,8 +1747,13 @@ def consume_login_flow(state: str, provider: str, now: str, path: Path | str | N
         )
         if row is None:
             return None
-        connection.execute(sa.update(login_flows).where(login_flows.c.state == state).values(consumed_at=now))
-    return row
+        consumed = connection.execute(
+            sa.update(login_flows).where(
+                login_flows.c.state == state, login_flows.c.provider == provider,
+                login_flows.c.consumed_at.is_(None), login_flows.c.expires_at > now,
+            ).values(consumed_at=now)
+        )
+    return row if consumed.rowcount == 1 else None
 
 
 def list_project_members(project_id: str, path: Path | str | None = None) -> list[dict[str, Any]]:
@@ -1800,8 +1829,8 @@ def cleanup_expired(*, path: Path | str | None = None) -> dict[str, int]:
     """Remove expired sessions, consumed/expired login flows, and stale rate-limit hits."""
     import datetime as _dt
 
-    now = _dt.datetime.now(_dt.timezone.utc).isoformat()
-    cutoff = (_dt.datetime.now(_dt.timezone.utc) - _dt.timedelta(hours=1)).isoformat()
+    now = _dt.datetime.now(_dt.UTC).isoformat()
+    cutoff = (_dt.datetime.now(_dt.UTC) - _dt.timedelta(hours=1)).isoformat()
     counts: dict[str, int] = {}
     with connect(path) as connection:
         r = connection.execute(sa.delete(auth_sessions).where(auth_sessions.c.expires_at < now))
@@ -1814,7 +1843,7 @@ def cleanup_expired(*, path: Path | str | None = None) -> dict[str, int]:
         counts["login_flows"] = r.rowcount  # type: ignore[assignment]
         r = connection.execute(sa.delete(rate_limit_hits).where(rate_limit_hits.c.occurred_at < cutoff))
         counts["rate_limit_hits"] = r.rowcount  # type: ignore[assignment]
-        stale_keys = (_dt.datetime.now(_dt.timezone.utc) - _dt.timedelta(hours=24)).isoformat()
+        stale_keys = (_dt.datetime.now(_dt.UTC) - _dt.timedelta(hours=24)).isoformat()
         r = connection.execute(sa.delete(idempotency_keys).where(idempotency_keys.c.created_at < stale_keys))
         counts["idempotency_keys"] = r.rowcount  # type: ignore[assignment]
     return counts

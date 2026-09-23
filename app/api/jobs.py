@@ -6,21 +6,30 @@ import asyncio
 import json
 from typing import Annotated
 
-from fastapi import APIRouter, BackgroundTasks, File, Form, HTTPException, Query, Request, UploadFile
+from fastapi import (
+    APIRouter,
+    BackgroundTasks,
+    File,
+    Form,
+    HTTPException,
+    Query,
+    Request,
+    UploadFile,
+)
 from fastapi.responses import StreamingResponse
 
+from .. import job_leases
 from ..authz import Permission, require
 from ..identity import principal_of
 from ..queue import dispatch
 from ..repositories import audit, jobs
 from ..services import scan_service
 
-
 router = APIRouter(prefix="/api/jobs", tags=["jobs"])
 
 
 def _without_payload(job: dict) -> dict:
-    return {key: value for key, value in job.items() if key != "payload"}
+    return {key: value for key, value in job.items() if key not in {"payload", "lease_token"}}
 
 
 @router.get("")
@@ -70,6 +79,7 @@ async def enqueue_scan_job(
     company_name: Annotated[str, Form()] = "未填写企业",
     evidence_metadata: Annotated[str | None, Form()] = None,
     project_id: Annotated[str | None, Form()] = None,
+    parent_run_id: Annotated[str | None, Form(max_length=64)] = None,
 ) -> dict:
     principal = principal_of(request)
     require(principal, Permission.JOB_MANAGE)
@@ -80,6 +90,7 @@ async def enqueue_scan_job(
         company_name=company_name,
         evidence_metadata=evidence_metadata,
         project_id=project_id,
+        parent_run_id=parent_run_id,
     )
     dispatch(job_id, background_tasks)
     return {"job_id": job_id, "status": "PENDING"}
@@ -94,7 +105,8 @@ def retry_scan_job(request: Request, job_id: str, background_tasks: BackgroundTa
         raise HTTPException(status_code=409, detail="当前作业状态不可重试")
     if int(job.get("attempts") or 0) >= jobs.MAX_ATTEMPTS:
         raise HTTPException(status_code=409, detail="该作业已超过重试上限")
-    jobs.update(job_id, "PENDING", attempts=int(job.get("attempts", 0)), error=None, cancel_requested=False, progress_message="已重新排队")
+    if not job_leases.retry(job_id):
+        raise HTTPException(status_code=409, detail="作业状态已变化，请刷新后查看")
     dispatch(job_id, background_tasks)
     return {"job_id": job_id, "status": "PENDING"}
 

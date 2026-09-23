@@ -21,12 +21,13 @@ from work.eval.teds_gt import (
     count_teds_gt_pages,
     evaluate_coverage,
     has_teds_gt,
-    main as teds_gt_main,
     rows_to_table_html,
     validate_seed,
     write_report,
 )
-
+from work.eval.teds_gt import (
+    main as teds_gt_main,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 SEED_JSONL = ROOT / "work" / "eval" / "fixtures" / "teds_gt.jsonl"

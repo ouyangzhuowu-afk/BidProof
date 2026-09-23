@@ -1,8 +1,13 @@
 #!/bin/sh
-# Bind to the platform PORT (Render defaults to 10000; local Docker stays 8080).
+# This process serves HTTP only. The worker is a separate supervised container.
 set -eu
-PORT="${PORT:-8080}"
-if [ "${BIDPROOF_JOB_RUNNER:-worker}" = "worker" ]; then
-  python -m app.worker &
-fi
-exec uvicorn app.main:app --host 0.0.0.0 --port "$PORT" --proxy-headers --forwarded-allow-ips='*'
+_bidproof_port="${PORT:-8080}"
+_bidproof_proxy_ips="${BIDPROOF_TRUSTED_PROXY_IPS:-127.0.0.1}"
+case "$_bidproof_proxy_ips" in
+  *\**) echo 'Wildcard proxy trust is not supported' >&2; exit 1 ;;
+esac
+exec uvicorn app.main:app --host 0.0.0.0 --port "$_bidproof_port" \
+  --workers "${BIDPROOF_WEB_CONCURRENCY:-2}" \
+  --proxy-headers --forwarded-allow-ips "$_bidproof_proxy_ips" \
+  --limit-concurrency 64 --backlog 128 \
+  --timeout-keep-alive 10 --no-access-log

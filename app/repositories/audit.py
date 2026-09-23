@@ -5,10 +5,10 @@ P3 extends the recorded envelope with request IP, user agent and request id.
 
 from __future__ import annotations
 
-from typing import Any
-from pathlib import Path
 import hashlib
 import json
+from pathlib import Path
+from typing import Any
 
 from .. import config, db
 

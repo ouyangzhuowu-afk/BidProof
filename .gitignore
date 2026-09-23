@@ -23,6 +23,7 @@ work/*.err.log
 .env
 .env.*
 !.env.example
+!.env.production.example
 .cloudflared/*.json
 
 # Node (Cloudflare deploy skeleton)

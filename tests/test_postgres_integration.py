@@ -16,7 +16,6 @@ import sqlalchemy as sa
 
 from app import database, db, dbctl
 
-
 POSTGRES_URL = os.environ.get("BIDPROOF_TEST_POSTGRES_URL", "").strip()
 
 requires_postgres = pytest.mark.skipif(

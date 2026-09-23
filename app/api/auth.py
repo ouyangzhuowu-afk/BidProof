@@ -20,7 +20,6 @@ from ..schemas import (
 )
 from ..services import auth_service
 
-
 router = APIRouter(prefix="/api/auth", tags=["auth"])
 
 
@@ -83,7 +82,9 @@ def complete_password_reset(request: Request, response: Response, payload: AuthA
 
 @router.get("/oidc/start")
 def oidc_start(request: Request) -> RedirectResponse:
-    return RedirectResponse(auth_service.start_oidc(request), status_code=302)
+    redirect = RedirectResponse("/app", status_code=302)
+    redirect.headers["location"] = auth_service.start_oidc(request, redirect)
+    return redirect
 
 
 @router.get("/oidc/callback")
@@ -95,7 +96,7 @@ def oidc_callback(
     redirect = RedirectResponse("/app", status_code=303)
     result = auth_service.complete_oidc(request, redirect, code, state)
     if result.get("mfa_required"):
-        return RedirectResponse(f"/app?mfa_token={result['mfa_token']}", status_code=303)
+        redirect.headers["location"] = f"/app?mfa_token={result['mfa_token']}"
     return redirect
 
 

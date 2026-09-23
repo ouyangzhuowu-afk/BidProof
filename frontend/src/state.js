@@ -32,8 +32,8 @@ import { store as sharedStore } from './core/store.js';
  * @property {ReturnType<typeof setTimeout> | null} runSearchTimer
  */
 
-/** @type {AppStore} */
-export const store = {
+/** @returns {AppStore} */
+const initialLegacyState = () => ({
   currentRun: null,
   // ⚠️ 以下字段已随任务列表与要求项矩阵迁出，仅为兼容尚未迁移的代码保留。
   // 真正在用的是 core/store.js。app.js 清空后整组删除。
@@ -61,7 +61,15 @@ export const store = {
   runFavoriteOnly: false,
   runSort: 'updated_desc',
   runSearchTimer: null,
-};
+});
+
+export const store = initialLegacyState();
+
+/** Reset compatibility fields along with core/store; never retain old filters or timers. */
+export function clearLegacySessionState() {
+  clearTimeout(store.toastTimer); clearTimeout(store.runSearchTimer);
+  Object.assign(store, initialLegacyState());
+}
 
 // Compatibility accessors keep migrated and legacy views on one source of truth.
 for (const key of ['currentRun', 'currentUser']) {

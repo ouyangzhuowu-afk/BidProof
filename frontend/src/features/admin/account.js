@@ -315,7 +315,7 @@ async function loadTokens() {
       mount(target, emptyState({
         icon: 'key',
         title: '还没有 API 令牌',
-        body: '令牌用于让外部系统读取扫描结果，权限与创建者相同。',
+        body: '为每个集成单独创建令牌，并明确选择它需要的权限。',
       }));
       return;
     }
@@ -327,6 +327,7 @@ async function loadTokens() {
           <small>
             <span class="chip chip--mono">${token.token_prefix}…</span>
             ${token.revoked_at ? `已于 ${formatDate(token.revoked_at)} 撤销` : '有效'}
+            ${Array.isArray(token.permissions) ? ` · 授权范围：${token.permissions.join('、') || '无'}` : ' · 历史令牌，请核对权限范围'}
           </small>
         </span>
         ${token.revoked_at
@@ -351,11 +352,17 @@ async function createToken(event) {
   const input = /** @type {HTMLInputElement} */ (form.querySelector('#token-name'));
   const name = input.value.trim();
   if (!name) return;
+  const permissions = new FormData(form).getAll('permissions').map(String);
+  if (!permissions.length) {
+    mount(el('#token-message'), html`<p class="callout" data-tone="warning">请至少选择一项允许此令牌执行的操作。</p>`);
+    /** @type {HTMLInputElement | null} */ (form.querySelector('[name="permissions"]'))?.focus();
+    return;
+  }
 
   await withLoading(form.querySelector('button[type="submit"]'), async () => {
     try {
-      const created = await authApi.createToken({ name });
-      input.value = '';
+      const created = await authApi.createToken({ name, permissions });
+      form.reset();
       revealSecret(el('#token-message'), {
         title: `API 令牌 · ${created.name}`,
         note: '服务端只保存哈希，这是唯一一次能看到明文的机会。',

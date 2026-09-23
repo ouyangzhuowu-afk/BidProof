@@ -3,7 +3,12 @@ import sqlite3
 from fastapi.testclient import TestClient
 
 from app import config, main
-from work.backup_restore import create_backup, record_backup_verification, restore_backup, verify_backup
+from work.backup_restore import (
+    create_backup,
+    record_backup_verification,
+    restore_backup,
+    verify_backup,
+)
 
 
 def test_backup_can_be_verified_and_restored(tmp_path):

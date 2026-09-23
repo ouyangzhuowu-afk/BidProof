@@ -1,0 +1,189 @@
+
+> bidproof-frontend@0.5.0 verify
+> npm run check && npm run check:boundaries && npm test && npm run build && npm run lint
+
+
+> bidproof-frontend@0.5.0 check
+> tsc -p tsconfig.json --noEmit
+
+
+> bidproof-frontend@0.5.0 check:boundaries
+> tsc -p tsconfig.boundaries.json --noEmit
+
+
+> bidproof-frontend@0.5.0 test
+> node --test scripts/test-*.mjs
+
+▶ complete app boots at /app and actual run-list click reaches review workbench
+  ✔ authenticated no-hash startup binds the rendered task list (104.698084ms)
+  ✔ card review updates the app summary through the shared state bridge (29.20075ms)
+  ✔ registered decision route renders current data and returns to detail (27.654917ms)
+  ✔ home route rebinds the list after leaving and supports a second real click (54.417792ms)
+  ✔ slower earlier task cannot overwrite the latest selected task (15.18875ms)
+  ✔ leaving during a pending read keeps the destination and removes its overlay (6.99175ms)
+  ✔ rescans submit real FormData to the background queue with the captured parent (1577.894417ms)
+  ✔ cross-tab auth changes clear private state and DOM and block late task responses (13.83125ms)
+✔ complete app boots at /app and actual run-list click reaches review workbench (1883.582167ms)
+✔ HTTP 401 is reported once without blind retry (19.11375ms)
+✔ HTTP 403 is reported once without blind retry (0.38675ms)
+✔ HTTP 404 is reported once without blind retry (0.387042ms)
+✔ HTTP 409 is reported once without blind retry (0.29325ms)
+✔ HTTP 422 is reported once without blind retry (0.27475ms)
+✔ HTTP 500 is reported once without blind retry (1.760584ms)
+✔ transient GET 503 retries then returns the actual response (417.176ms)
+✔ a failed mutation is never automatically replayed (0.517542ms)
+✔ a transient network failure retries only for read requests (439.822708ms)
+✔ concurrent identical reads share one request and cleanup after success (0.3315ms)
+✔ caught failures clean dedupe state without a second unhandled rejection (0.9985ms)
+✔ a truncated successful JSON response retries and never resolves as an empty result (428.445958ms)
+✔ a malformed mutation response is an error and never replays the write (0.264292ms)
+✔ malformed forbidden response preserves HTTP rejection without retry (0.137042ms)
+✔ HTML with HTTP 200 cannot impersonate a JSON result (0.117084ms)
+✔ an explicit empty 204 response remains a supported success (0.068958ms)
+✔ pre-aborted requests never reach the network (0.108958ms)
+✔ Safari-compatible cancellation stays connected through JSON body reading (0.1645ms)
+✔ session reset rejects a late successful response and frees GET deduplication (0.174708ms)
+✔ binary responses keep bytes and server filename headers (1.247083ms)
+✔ binary downloads cannot resolve after their session is invalidated (0.248541ms)
+✔ Safari-compatible cancellation stays attached while the binary body is read (0.111208ms)
+✔ binary body timeout is reported without replaying an export (6.13275ms)
+✔ export checks its original session immediately before creating a download URL (0.996209ms)
+✔ session reset immediately revokes any pending download object URL (0.101917ms)
+✔ session reset closes subscriptions and ignores queued SSE messages (0.334917ms)
+▶ intake selection, accessibility and busy-state contracts
+  ✔ repeated mount preserves configured cap and does not duplicate feedback (14.104416ms)
+  ✔ evidence supports additive selection and announces retained duplicates without replacing them (6.806958ms)
+  ✔ different documents sharing a filename and tender/evidence collisions preserve earlier choices (6.414708ms)
+  ✔ dragging many tenders or unsupported files cannot replace a valid previous choice (9.073083ms)
+  ✔ removal restores keyboard focus and announces the last removed material (8.05375ms)
+  ✔ captured FormData remains correct while every editable upload field is locked and restored (13.543791ms)
+  ✔ native required errors are described inline and clear on a valid replacement (13.173084ms)
+  ✔ programmatically assigned colliding files are still rejected at submit (5.180292ms)
+  ✔ filenames stay text and a native reset clears selections and stale messages (12.89175ms)
+✔ intake selection, accessibility and busy-state contracts (90.729459ms)
+▶ background scan card dismissal persists through real job events
+  ✔ hidden scan stays hidden on progress and completion, while completion is announced (18.126917ms)
+  ✔ hidden scan failure is announced without restoring the card (7.483708ms)
+  ✔ visible scan still exposes its result and rewatching a completed id starts visibly (13.955167ms)
+✔ background scan card dismissal persists through real job events (39.966625ms)
+✔ a decision response cannot replace another task selected while saving (28.895042ms)
+✔ a decision response cannot roll back a newer same-task revision (8.437916ms)
+✔ a 409 preserves the draft and explicitly reloads the version without replaying the decision (14.998833ms)
+✔ a failed decision never mutates the task or clears the draft (4.434042ms)
+✔ decision edits typed during a save remain visibly unsaved (5.443833ms)
+✔ all collaboration panels reject late results from a different task (5.795208ms)
+✔ saving an old comment cannot clear a new task draft (2.051083ms)
+✔ a new session viewing the same task cannot receive old collaboration responses (2.632917ms)
+✔ comment saving preserves text edited during the same-task request (1.971083ms)
+✔ one failed collaboration panel exposes retry while the other panels remain usable (3.641042ms)
+✔ remediation inputs reach the API and status choices match the backend contract (7.265916ms)
+✔ API tokens require an explicit scope selection and only send selected permissions (9.4715ms)
+✔ jobs cannot restart polling or render after unmount (1.456ms)
+✔ a delayed clipboard failure cannot reveal a previous session secret (1.548542ms)
+✔ global runtime errors and offline changes provide safe recoverable notices (4.551292ms)
+▶ original evidence reader navigation
+  ✔ previous / next respect recorded bounds and return to the real citation (35.195958ms)
+  ✔ unknown total stays unknown, including after a page-load failure (10.730333ms)
+  ✔ conflicting recorded total never relocates the citation or invents a page count (6.956ms)
+  ✔ invalid total metadata is not promoted to a document page count (19.065166ms)
+  ✔ many evidence entries render only the selected original and preserve each reading position (11.751ms)
+  ✔ stale image events cannot replace a newly selected page with a false failure (5.554417ms)
+  ✔ same-clause rerender retains the page while a different clause opens its citation (8.550208ms)
+  ✔ text-only and missing-page references do not invent image locations (8.328958ms)
+  ✔ ambiguous sources keep their quotation without guessing which original to browse (2.680958ms)
+  ✔ filenames, option labels and excerpts stay escaped during navigation and selection (6.144959ms)
+✔ original evidence reader navigation (116.336458ms)
+▶ round-two review navigation and draft retention
+  ✔ human confirmation is distinct from machine PASS and rejected reviews (155.606792ms)
+  ✔ priority batches expose every risk and preserve source navigation (70.292833ms)
+  ✔ task-wide next to-do crosses pages and focuses an open target without confirming (55.103167ms)
+  ✔ previous respects task ordering and can reveal a target hidden by filters (71.315333ms)
+  ✔ unsaved note survives next/previous navigation and hidden status filters (131.4645ms)
+  ✔ note and rejection drafts survive switching editor modes independently (63.23175ms)
+  ✔ confirm updates human filters while retaining a separate unsaved note (104.053375ms)
+  ✔ a delayed review response cannot overwrite a newer revision already displayed (67.571375ms)
+  ✔ an in-flight note locks both copies of its editor while preserving other drafts (105.364ms)
+  ✔ read-only users can navigate but cannot acquire editable review controls (109.1355ms)
+  ✔ empty runs disable navigation without declaring human completion (31.033459ms)
+✔ round-two review navigation and draft retention (965.553083ms)
+✔ untrusted quotations and filenames remain text in SafeHtml templates (0.851583ms)
+✔ nested safe highlights retain markup while every dynamic fragment is escaped (0.129625ms)
+✔ untrusted API objects cannot forge a SafeHtml capability or mutate minted markup (0.291333ms)
+✔ legacy run writes notify migrated views once and migrated review writes remain visible (0.195333ms)
+✔ current user and logout changes propagate in both state interfaces (0.132375ms)
+✔ upload preflight accepts the six actual server formats, case insensitively (0.729584ms)
+✔ unsupported and empty inputs are rejected before upload (0.161875ms)
+✔ one tender and multiple evidence documents follow different selection contracts (0.718584ms)
+✔ server-provided size cap is exact, per-file, and not fabricated when unknown (0.146833ms)
+✔ machine PASS and ordinary comments do not increment human review progress (0.369834ms)
+✔ progress counts each current requirement once and ignores obsolete review events (0.110583ms)
+✔ empty and fully reviewed runs produce bounded, finite progress (0.054625ms)
+✔ PASS needs both locatable tender text and at least one locatable evidence quotation (0.092542ms)
+✔ a filename, source id, or page number alone cannot bypass the dual quotation gate (0.057875ms)
+✔ critical task validation rejects a different task, missing revision and invalid verdict (0.782083ms)
+✔ decision commands require known intent, bounded input and a positive revision (0.167583ms)
+✔ diagnostics never retain message, stack, request URL, form data or arbitrary context (1.319333ms)
+✔ diagnostic repetition and high volume are bounded, and sink failure is isolated (2.690375ms)
+✔ optional telemetry transport refuses foreign origins and query strings (12.610167ms)
+✔ disabled browser storage falls back to a per-tab preference (0.21375ms)
+✔ two tabs exchange only a fixed invalidation signal without echo or private data (0.9315ms)
+✔ page lifecycle closes channels, ignores queued old events and revalidates on bfcache restore (0.159584ms)
+✔ unsupported or blocked BroadcastChannel leaves the local auth flow usable (0.144167ms)
+▶ workbench DOM interaction contract (stubbed HTTP, no browser)
+  ✔ initial cards separate priority risk from compact complete matrix (55.139792ms)
+  ✔ malicious quotation remains literal text, including highlighted fragments (39.511625ms)
+  ✔ confirm sends one explicit PASS with revision and collapses the saved card (67.7315ms)
+  ✔ reject requires a nonblank reason and preserves it in the review request (47.907375ms)
+  ✔ adding a note uses the comments endpoint and changes neither status nor human progress (30.3245ms)
+  ✔ category filter and debounced search narrow the matrix and can be cleared (582.513583ms)
+  ✔ source selection updates both reader sides and exposes only real page URLs (19.305333ms)
+  ✔ source buttons focus their respective reader sides and return focuses the current card (18.872167ms)
+  ✔ page zoom toggles accessibly and becomes unavailable when the original page fails (12.85025ms)
+  ✔ failed rejection keeps its typed reason available for an intentional retry (42.188167ms)
+  ✔ server failure keeps the original verdict and allows an intentional retry (41.449375ms)
+  ✔ a conflict refreshes the latest run without resubmitting or claiming success (25.619958ms)
+  ✔ read-only role keeps every review and note action disabled (19.363583ms)
+✔ workbench DOM interaction contract (stubbed HTTP, no browser) (1004.317375ms)
+ℹ tests 124
+ℹ suites 0
+ℹ pass 124
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2442.949083
+
+> bidproof-frontend@0.5.0 build
+> npm run build:css && npm run build:js && node scripts/stamp-assets.mjs
+
+
+> bidproof-frontend@0.5.0 build:css
+> node scripts/build-css.mjs
+
+build:css → static/style.css (199.4 kB)
+
+> bidproof-frontend@0.5.0 build:js
+> vite build
+
+vite v8.3.0 building client environment for production...
+transforming...
+✓ 47 modules transformed.
+rendering chunks...
+computing gzip size...
+../static/app.js  217.74 kB │ gzip: 64.20 kB │ map: 544.97 kB
+
+✓ built in 24ms
+build:stamp → asset URLs match built content
+
+> bidproof-frontend@0.5.0 lint
+> eslint src scripts
+
+
+/Users/g71/.codex/.chatgpt-projects/g-p-6ab22da760fc8191a03c7c2745fdc4ee/BidProof/frontend/scripts/build-css.mjs
+  63:1  warning  Unexpected console statement. Only these console methods are allowed: warn, error  no-console
+
+/Users/g71/.codex/.chatgpt-projects/g-p-6ab22da760fc8191a03c7c2745fdc4ee/BidProof/frontend/src/features/runs/list.js
+  116:1  warning  Async function 'loadSidePanels' has no 'await' expression  require-await
+
+✖ 2 problems (0 errors, 2 warnings)
+

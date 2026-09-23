@@ -2,16 +2,15 @@
 
 from __future__ import annotations
 
-import sqlalchemy.exc
 import uuid
 
+import sqlalchemy.exc
 from fastapi import APIRouter, HTTPException, Query, Request
 
 from ..authz import Permission, require
 from ..identity import principal_of
 from ..repositories import audit, projects
 from ..schemas import ProjectCreateRequest, ProjectUpdateRequest
-
 
 router = APIRouter(prefix="/api/projects", tags=["projects"])
 

@@ -5,7 +5,6 @@ import pytest
 
 from work.icp_ledger import REQUIRED_FIELDS, append_row, render_review, validate_ledger
 
-
 ROOT = Path(__file__).parents[1]
 
 

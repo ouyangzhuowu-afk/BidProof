@@ -140,6 +140,11 @@ const initial = {
 
 export const store = createStore(initial);
 
+/** Authentication boundary: never reuse another principal's task, caches or filters. */
+export function clearSessionState() {
+  store.reset({ ...initial, selectedRunIds: new Set(), runFilters: { ...initial.runFilters }, members: [], projects: [] });
+}
+
 /** 成员/项目缓存的有效期。旧实现是「取过就永不再取」，改名后下拉框一直是旧值。 */
 export const CACHE_TTL_MS = 60_000;
 

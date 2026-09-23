@@ -36,10 +36,11 @@ export function submitScan(form, options = {}) {
 
 /**
  * @param {{ limit?: number }} [params]
+ * @param {{ signal?: AbortSignal }} [options]
  * @returns {Promise<{ jobs: Job[] }>}
  */
-export function listJobs(params = { limit: 200 }) {
-  return request(paths.jobs.list(params));
+export function listJobs(params = { limit: 200 }, options = {}) {
+  return request(paths.jobs.list(params), options);
 }
 
 /** @param {string} jobId @returns {Promise<Job>} */

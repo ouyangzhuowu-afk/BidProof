@@ -26,6 +26,7 @@ let region = null;
 /** @type {{ message: string, tone: ToastTone, action: ToastAction }[]} */
 const queue = [];
 let visible = 0;
+const timers = new Set();
 
 function ensureRegion() {
   if (region?.isConnected) return region;
@@ -90,6 +91,7 @@ export const toastError = (/** @type {string} */ m) => toast(m, 'error');
  * @param {string} [fallback]
  */
 export function toastFromError(error, fallback = '操作未完成，请重试。') {
+  if (error && typeof error === 'object' && 'code' in error && error.code === 'ABORTED') return;
   const message = error instanceof Error && error.name === 'ApiError'
     ? error.message
     : fallback;
@@ -128,6 +130,7 @@ function show(message, tone, action = null) {
   ensureRegion().append(node);
 
   const dismiss = () => {
+    timers.delete(timer);
     if (!node.isConnected) return;
     node.remove();
     visible -= 1;
@@ -136,12 +139,15 @@ function show(message, tone, action = null) {
   };
 
   const timer = setTimeout(dismiss, DURATION[tone] ?? DURATION.info);
+  timers.add(timer);
   // 点击即关。长文案的错误提示用户可能来不及读完，也可能想马上清掉。
   node.addEventListener('click', () => { clearTimeout(timer); dismiss(); });
 }
 
 /** 路由切换时清空，避免上一页的提示叠在新页面上。 */
 export function clearToasts() {
+  for (const timer of timers) clearTimeout(timer);
+  timers.clear();
   queue.length = 0;
   region?.replaceChildren();
   visible = 0;

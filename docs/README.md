@@ -19,7 +19,18 @@
 - [第一版设计（2026-09-22）](ui-redesign-2026-09-22.md) — GPT-6 Astra 首轮重构的设计依据
 - [第二轮交付记录（2026-09-22）](ui-hardening-round2-2026-09-22.md) — 第二轮交互、修复与测试复现，以本轮结果为准
 - [Astra 第二轮合并与上线（2026-09-23）](astra-frontend-round2-2026-09-23.md) — 合并范围、C-022 证据与上线验收
+- [前端生产边界](frontend-production-boundaries.md) — 严格类型范围、状态与监控的已知边界
 - 构建：`npm ci --prefix frontend && npm run build --prefix frontend`（CI 会校验产物与源码一致）
+
+## 生产候选（2026-09-23）
+
+- [生产候选版集成报告（2026-09-24）](../docs/production-candidate-merge-2026-09-24.md) — 合并范围、门禁结果、上线前必须处理的生产配置
+- [系统审计与改造路径](production/system-audit.md) — P0/P1 问题与处置
+- [Landing 文案与组件蓝图](production/landing-blueprint.md) — 新首页 `landing/` 的设计依据
+- [改造前后与验收边界](production/acceptance.md) — 验证范围与未覆盖项
+- [生产部署、升级与回退](production/deployment.md) — Caddy → Web + Worker → PostgreSQL
+- [API 端到端烟测与 CI](production/api-smoke.md) — 真 HTTP 排队扫描链路与 CI 门禁
+- [安全加固记录](security-hardening-2026-09-23.md) — 身份、会话与请求预算加固
 
 ## 内部材料（不作为交付物）
 

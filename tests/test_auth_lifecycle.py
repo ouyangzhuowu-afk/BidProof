@@ -6,10 +6,10 @@ import pytest
 from fastapi.testclient import TestClient
 
 from app import config, identity, main
-from app.repositories import accounts
-from app.security import password_hash
 from app.config import DB_PATH
 from app.db import create_user, ensure_workspace
+from app.repositories import accounts
+from app.security import password_hash
 
 
 def _remove_workspace(workspace_id: str) -> None:

@@ -10,7 +10,7 @@ from __future__ import annotations
 import os
 import uuid
 from dataclasses import dataclass
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 
 import sqlalchemy as sa
 from fastapi import HTTPException
@@ -46,7 +46,7 @@ EXPORT = Limit(
 
 
 def _now() -> datetime:
-    return datetime.now(timezone.utc)
+    return datetime.now(UTC)
 
 
 def _cutoff(limit: Limit, moment: datetime) -> str:

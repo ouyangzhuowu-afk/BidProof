@@ -6,10 +6,10 @@ import logging
 import sys
 from collections import defaultdict
 from contextlib import contextmanager
+from datetime import UTC, datetime
 from threading import Lock
 
 from . import config, request_context
-
 
 _configured = False
 _lock = Lock()
@@ -32,6 +32,7 @@ class JsonFormatter(logging.Formatter):
         import json
 
         payload = {
+            "timestamp": datetime.now(UTC).isoformat(),
             "level": record.levelname,
             "logger": record.name,
             "message": record.getMessage(),
@@ -39,6 +40,9 @@ class JsonFormatter(logging.Formatter):
             "method": getattr(record, "method", "-"),
             "path": getattr(record, "path", "-"),
         }
+        for field in ("duration_ms", "status_code", "error_code"):
+            if hasattr(record, field):
+                payload[field] = getattr(record, field)
         if record.exc_info:
             payload["exc_info"] = self.formatException(record.exc_info)
         return json.dumps(payload, ensure_ascii=False)

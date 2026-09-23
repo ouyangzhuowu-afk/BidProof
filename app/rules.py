@@ -1,7 +1,6 @@
 import re
 from typing import Any
 
-
 REQUIREMENT_PATTERNS: list[tuple[str, str, str]] = [
     ("资格条件", "QUALIFICATION", r"资格条件|资格要求|投标人资格|供应商资格"),
     ("废标/否决", "FATAL", r"废标|否决投标|无效投标|不得参与|一票否决"),
@@ -14,8 +13,8 @@ REQUIREMENT_PATTERNS: list[tuple[str, str, str]] = [
     (
         "医疗器械资质",
         "CREDENTIAL",
-        r"医疗器械经营许可证|医疗器械注册证|医疗器械备案|第二类医疗器械|第三类医疗器械|"
-        r"医疗器械生产许可证|生产企业许可证|ISO\s*13485|产品注册证",
+        (r"医疗器械经营许可证|医疗器械注册证|医疗器械备案|第二类医疗器械|第三类医疗器械|"
+        r"医疗器械生产许可证|生产企业许可证|ISO\s*13485|产品注册证"),
     ),
     (
         "授权配送",

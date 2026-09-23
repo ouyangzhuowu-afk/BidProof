@@ -8,6 +8,8 @@
  * 系统已是深色的用户每次打开工作台都会被闪一下。
  */
 
+import { readPreference, writePreference } from './storage.js';
+
 const STORAGE_KEY = 'bidproof-theme';
 
 /** @typedef {'light' | 'dark' | 'system'} ThemePreference */
@@ -16,7 +18,7 @@ const media = window.matchMedia('(prefers-color-scheme: dark)');
 
 /** @returns {ThemePreference} */
 export function preference() {
-  const stored = localStorage.getItem(STORAGE_KEY);
+  const stored = readPreference(STORAGE_KEY);
   return stored === 'dark' || stored === 'light' ? stored : 'system';
 }
 
@@ -37,8 +39,7 @@ export function apply() {
 
 /** @param {ThemePreference} next */
 export function set(next) {
-  if (next === 'system') localStorage.removeItem(STORAGE_KEY);
-  else localStorage.setItem(STORAGE_KEY, next);
+  writePreference(STORAGE_KEY, next === 'system' ? null : next);
   apply();
 }
 

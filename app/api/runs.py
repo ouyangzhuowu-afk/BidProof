@@ -4,11 +4,11 @@ from __future__ import annotations
 
 from typing import Annotated
 
-from fastapi import APIRouter, File, Form, Query, Request, UploadFile
+from fastapi import APIRouter, File, Form, HTTPException, Query, Request, UploadFile
 from fastapi import Path as PathParam
 from fastapi.responses import FileResponse, Response
 
-from .. import presenters
+from .. import config, presenters
 from ..authz import Permission, require
 from ..identity import principal_of
 from ..repositories import audit, collaboration, runs
@@ -38,6 +38,8 @@ async def create_run(
 ) -> dict:
     principal = principal_of(request)
     require(principal, Permission.RUN_CREATE)
+    if config.ENVIRONMENT == "production":
+        raise HTTPException(409, "生产扫描使用异步队列，请调用 POST /api/jobs")
     return await scan_service.create_run(
         principal=principal,
         tender=tender,
@@ -133,6 +135,8 @@ async def rescan_run(
     principal = principal_of(request)
     require(principal, Permission.RUN_CREATE)
     parent = runs.require_scoped(run_id, principal)
+    if config.ENVIRONMENT == "production":
+        raise HTTPException(409, "生产版本扫描使用 POST /api/jobs 并提供 parent_run_id")
     return await scan_service.rescan_run(
         principal=principal,
         parent=parent,

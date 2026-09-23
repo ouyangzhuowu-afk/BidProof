@@ -29,11 +29,15 @@ import { toastSuccess, toastFromError } from '../../core/toast.js';
 import { statusLabel, decisionLabel, formatDate } from '../../core/format.js';
 import { runsApi } from '../../api/index.js';
 import { confirmAction } from '../../ui/confirm.js';
+import { sessionVersion, isSessionCurrent } from '../../core/session.js';
+import { assertRunEnvelope, revisionOf } from '../../core/validators.js';
 
 /** @typedef {import('../../../types/api.js').Run} Run */
 
 /** @type {(() => void)[]} */
 let teardown = [];
+let generation = 0;
+let submitting = false;
 
 export function mountDecisionView() {
   if (teardown.length) return;
@@ -41,11 +45,13 @@ export function mountDecisionView() {
     bind('#decision-form', 'submit', (event) => { void submit(event); }),
     // 选中数量要实时反映在标题上，否则用户滚到下面就忘了勾了几个。
     delegate('#unresolved-items', 'change', 'input[type="checkbox"]', updateSelectedCount),
+    delegate('#decision-message', 'click', '[data-decision-refresh]', () => { void refreshConflict(); }),
   ];
   render();
 }
 
 export function unmountDecisionView() {
+  generation += 1;
   for (const off of teardown) off();
   teardown = [];
 }
@@ -177,14 +183,25 @@ function updateSelectedCount() {
 /** @param {Event} event */
 async function submit(event) {
   event.preventDefault();
+  if (submitting) return;
+  submitting = true;
+  try { await performSubmission(event); }
+  finally { submitting = false; }
+}
+
+async function performSubmission(event) {
   const run = store.get().currentRun;
   if (!run) return;
+  const epoch = generation;
+  const session = sessionVersion();
+  const active = () => epoch === generation && isSessionCurrent(session) && store.get().currentRun?.run_id === run.run_id;
 
   const form = /** @type {HTMLFormElement} */ (event.currentTarget);
   const data = new FormData(form);
-  const decision = String(data.get('decision') || '');
+  const decision = /** @type {import('../../core/contracts.js').DecisionValue} */ (String(data.get('decision') || ''));
   const note = String(data.get('note') || '').trim();
   const unresolved = data.getAll('unresolved_requirement_ids').map(String);
+  const submittedDraft = JSON.stringify([...data.entries()]);
 
   // 停止投标意味着放弃一个机会。它和另外两项不是同一量级的动作。
   if (decision === 'STOP') {
@@ -196,7 +213,7 @@ async function submit(event) {
       cancelLabel: '再想想',
       tone: 'danger',
     });
-    if (!ok) return;
+    if (!ok || !active()) return;
   }
 
   // 说明不是必填字段（后端不要求），但空说明的决策在审计上没有价值。
@@ -208,7 +225,7 @@ async function submit(event) {
       confirmLabel: '不填写，直接保存',
       cancelLabel: '返回填写',
     });
-    if (!ok) {
+    if (!ok || !active()) {
       /** @type {HTMLTextAreaElement | null} */ (el('#decision-note'))?.focus();
       return;
     }
@@ -223,14 +240,28 @@ async function submit(event) {
         decision,
         note,
         unresolved_requirement_ids: unresolved,
+        revision: revisionOf(run.revision) ?? 0,
       });
+      if (!isSessionCurrent(session)) return;
+      if (!active()) { toastSuccess('决策已记录，可重新打开对应任务查看。'); return; }
+      if (Number(updated.revision) < Number(store.get().currentRun?.revision || 0)) {
+        toastSuccess('决策已记录，当前任务已包含更新的修改。'); return;
+      }
       store.set({ currentRun: updated });
+      if (JSON.stringify([...new FormData(form).entries()]) !== submittedDraft) {
+        renderContext(updated);
+        mount(el('#decision-message'), html`<p class="callout" data-tone="warning">提交时的决策已记录，等待期间的新编辑仍未保存。请核对后再次保存。</p>`);
+        toastSuccess('提交时的决策已记录，当前编辑仍未保存。');
+        return;
+      }
       // 停在本页并重渲染，用户能看见自己刚存进去的东西。
       // 旧实现直接跳回详情页，保存结果不可见，只能靠一句 toast。
       render();
       toastSuccess(`已记录「${decisionLabel(decision)}」。`);
     } catch (error) {
-      showError(error);
+      if (!isSessionCurrent(session)) return;
+      if (active()) showError(error);
+      else toastFromError(error, '上一任务的决策未保存，请重新打开核对。');
     }
   });
 }
@@ -242,12 +273,34 @@ function showError(error) {
   mount(target, html`
     <p class="callout" data-tone="danger" tabindex="-1" id="decision-error">
       <i data-lucide="triangle-alert"></i>
-      <span>${error instanceof Error ? error.message : '未知错误'}，决策未保存，请重试。</span>
+      <span>${error?.status === 409 ? '任务已有新修改，本次决策未保存。输入已保留，请读取最新版本并重新核对。' : `${error instanceof Error ? error.message : '未知错误'}，决策未保存，请重试。`}</span>
+      ${error?.status === 409 ? html`<button type="button" class="btn btn--secondary" data-decision-refresh>刷新任务版本，保留输入</button>` : ''}
     </p>
   `);
   // 把焦点移到错误处：表单很长，提交按钮在底部，
   // 错误若渲染在别处，键盘与读屏用户不会知道发生了什么。
   /** @type {HTMLElement | null} */ (el('#decision-error'))?.focus();
+}
+
+async function refreshConflict() {
+  const run = store.get().currentRun;
+  if (!run) return;
+  const epoch = generation;
+  const session = sessionVersion();
+  const acknowledged = new Set([...document.querySelectorAll('#unresolved-items input:checked')].map((node) => node.value));
+  try {
+    const latest = await runsApi.getRun(run.run_id);
+    assertRunEnvelope(latest, run.run_id);
+    if (epoch !== generation || !isSessionCurrent(session) || store.get().currentRun?.run_id !== run.run_id) return;
+    if (Number(latest.revision) < Number(store.get().currentRun?.revision || 0)) return;
+    store.set({ currentRun: latest });
+    renderContext(latest); renderUnresolved(latest);
+    document.querySelectorAll('#unresolved-items input').forEach((node) => { node.checked = acknowledged.has(node.value); });
+    updateSelectedCount(); clearError();
+    mount(el('#decision-message'), html`<p class="callout" data-tone="warning">已读取最新版本，决策和说明仍保留。请重新核对风险与未解决项，再点击保存。</p>`);
+  } catch (error) {
+    if (epoch === generation && isSessionCurrent(session)) showError(error);
+  }
 }
 
 function clearError() {

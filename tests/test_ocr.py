@@ -200,8 +200,8 @@ def test_rapidocr_adapter_from_png_bytes(monkeypatch):
 
 
 def test_ocr_lines_become_localized_blocks_and_emit_metrics(tmp_path, monkeypatch):
-    from app.ocr_privacy import OCRLine
     from app import observability
+    from app.ocr_privacy import OCRLine
 
     observability.reset_for_tests()
     monkeypatch.setenv("BIDPROOF_OCR_EGRESS_ALLOWED", "0")

@@ -57,6 +57,6 @@ curl -sS -b cookies.txt "$HOST/api/runs"
 公开隐私页：`GET /privacy`（HTML）。机器可读：`GET /api/privacy`。
 作业进度：`GET /api/jobs/{id}/events`（SSE），或轮询 `GET /api/jobs/{id}`。
 API 版本：`/api/v1/*` 与 `/api/*` 等价；`GET /api/v1/healthz` 映射到 `GET /healthz`。
-写接口可携带 `Idempotency-Key`（JSON 成功响应会被缓存）。
+此版本不支持 `Idempotency-Key`。写接口携带该请求头会返回 `501`，且不会执行写入。请勿自动重放写请求；网络中断后应先读取任务状态确认结果。读取请求可以按 `Retry-After` 或指数退避重试。旧版按客户端标头索引的响应缓存已移除。
 登录设备：`GET /api/auth/sessions`、`DELETE /api/auth/sessions/{id}`、`POST /api/auth/sessions/revoke-others`。
 审计链：`GET /api/audit/chain`；只追加导出：`GET /api/audit/export`（OWNER/ADMIN）。

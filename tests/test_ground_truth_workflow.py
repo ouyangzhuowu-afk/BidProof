@@ -3,10 +3,14 @@ from pathlib import Path
 
 import pytest
 
-from tests.conftest import requires_real_uploads
-from work.ground_truth_review import apply_independent_reviews, build_ledger, metric_eligible_entries
-from work.ocr_batch import run
 from app.ocr import OCRResult
+from tests.conftest import requires_real_uploads
+from work.ground_truth_review import (
+    apply_independent_reviews,
+    build_ledger,
+    metric_eligible_entries,
+)
+from work.ocr_batch import run
 
 
 @requires_real_uploads

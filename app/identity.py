@@ -10,17 +10,22 @@ from __future__ import annotations
 import os
 import time
 from dataclasses import dataclass, field
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from typing import Any
 
 from fastapi import HTTPException, Request, Response
 
 from . import config, csrf, ratelimit
-from .db import create_auth_session, ensure_workspace, load_auth_action_token, load_session_user
+from .authz import permissions_for
+from .db import (
+    create_auth_session,
+    ensure_workspace,
+    load_auth_action_token,
+    load_session_user,
+)
 from .repositories import identity as identity_store
 from .security import new_session_token, token_hash
 from .state import utc_now
-
 
 MUTATING_ROLES = {"OWNER", "ADMIN", "REVIEWER"}
 ADMIN_ROLES = {"OWNER", "ADMIN"}
@@ -98,16 +103,22 @@ def _principal_from_api_token(request: Request, token: str) -> dict[str, Any]:
         ratelimit.register_failure(ratelimit.TOKEN_AUTH, bucket, detail="令牌校验过于频繁，请稍后再试")
         raise HTTPException(status_code=401, detail="令牌无效或已过期")
     identity_store.touch_token(record["token_id"])
-    permissions = record.get("permissions_json") or []
+    # Empty scopes grant nothing. Always intersect with the live account role so a
+    # demotion takes effect immediately; a promotion cannot expand a previously issued key.
+    permissions = set(record.get("permissions_json") or [])
+    granted = {item.value for item in permissions_for(record["role"])}
+    current = {item.value for item in permissions_for(record["current_role"])}
+    # Project membership checks also inspect role. Keep their administrative bypass
+    # bounded by the signing role, rather than only limiting action permissions.
+    effective_role = min((record["role"], record["current_role"]), key=lambda role: len(permissions_for(role)))
     principal: dict[str, Any] = {
         "workspace_id": record["workspace_id"],
         "user_id": record["user_id"],
-        "role": record["role"],
+        "role": effective_role,
         "auth_method": "token",
         "token_id": record["token_id"],
+        "permissions": sorted(permissions & granted & current),
     }
-    if permissions:
-        principal["permissions"] = permissions
     return principal
 
 
@@ -146,7 +157,7 @@ def require_role(principal: dict[str, Any], roles: set[str] = MUTATING_ROLES) ->
 
 def issue_session(response: Response, user_id: str, secure: bool) -> None:
     token = new_session_token()
-    expires = datetime.now(timezone.utc) + timedelta(hours=SESSION_HOURS)
+    expires = datetime.now(UTC) + timedelta(hours=SESSION_HOURS)
     create_auth_session(token_hash(token), user_id, expires.isoformat())
     response.set_cookie(
         SESSION_COOKIE,
@@ -166,7 +177,7 @@ def clear_session(response: Response) -> None:
 
 
 def request_is_secure(request: Request) -> bool:
-    return request.url.scheme == "https" or request.headers.get("X-Forwarded-Proto") == "https"
+    return config.ENVIRONMENT == "production" or request.url.scheme == "https"
 
 
 def session_token(request: Request) -> str | None:

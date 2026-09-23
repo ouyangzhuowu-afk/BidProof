@@ -7,13 +7,13 @@ request object through the call chain.
 
 from __future__ import annotations
 
+import re
 import uuid
 from contextlib import contextmanager
 from contextvars import ContextVar
 from dataclasses import dataclass
 
 from fastapi import Request
-
 
 REQUEST_ID_HEADER = "X-Request-ID"
 FORWARDED_FOR_HEADER = "X-Forwarded-For"
@@ -57,8 +57,10 @@ def from_request(request: Request) -> RequestContext:
     it is length-capped because it ends up in stored audit rows.
     """
     inbound = (request.headers.get(REQUEST_ID_HEADER) or "").strip()
+    request_id = inbound if re.fullmatch(r"[A-Za-z0-9._-]{1,64}", inbound) else new_request_id()
+    request.state.request_id = request_id
     return RequestContext(
-        request_id=inbound[:64] or new_request_id(),
+        request_id=request_id,
         client_ip=client_ip(request),
         user_agent=(request.headers.get("User-Agent") or "")[:400] or None,
         method=request.method,
@@ -67,17 +69,9 @@ def from_request(request: Request) -> RequestContext:
 
 
 def client_ip(request: Request) -> str | None:
-    """The caller's address, preferring proxy headers when the app runs behind one.
+    """Use the ASGI peer resolved by the server's explicitly trusted proxy policy.
 
-    Only the left-most entry of X-Forwarded-For is used; the rest are appended by intermediate
-    hops and are not more trustworthy than the first.
+    Uvicorn may replace this peer only for configured --forwarded-allow-ips. Reading raw
+    forwarded headers here would bypass that trust decision and let callers reset limits.
     """
-    forwarded = request.headers.get(FORWARDED_FOR_HEADER)
-    if forwarded:
-        first = forwarded.split(",")[0].strip()
-        if first:
-            return first[:64]
-    real_ip = (request.headers.get(REAL_IP_HEADER) or "").strip()
-    if real_ip:
-        return real_ip[:64]
     return request.client.host if request.client else None

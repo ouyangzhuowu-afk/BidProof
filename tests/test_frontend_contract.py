@@ -1,8 +1,7 @@
 """Frontend engineering constraints: Vite modules, escaped render, shipping palette."""
 
-from pathlib import Path
 import re
-
+from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 SRC = ROOT / "frontend" / "src"
@@ -25,7 +24,7 @@ def test_app_source_is_es_modules_with_a_single_store():
     tsconfig = (ROOT / "frontend" / "tsconfig.json").read_text(encoding="utf-8")
     vite = (ROOT / "frontend" / "vite.config.js").read_text(encoding="utf-8")
 
-    assert "import { store } from './state.js'" in app
+    assert re.search(r"import\s*\{[^}]*\bstore\b[^}]*\}\s*from\s*[\"']\./state\.js[\"']", app)
     assert "export const store" in state
     assert "export function html" in escape
     assert "export function setHtml" in escape

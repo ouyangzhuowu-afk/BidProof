@@ -1,6 +1,5 @@
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
-
 
 PAGE_WIDTH = 595
 PAGE_HEIGHT = 842
@@ -57,7 +56,7 @@ def build_pdf_report(run: dict[str, Any]) -> bytes:
             page.insert_text((MARGIN + 8, y + line_index * 12), line, fontsize=8.5 if line_index else 9.5, fontname=FONT_NAME, color=(0.12, 0.15, 0.18))
         y += block_height + 7
 
-    generated_at = datetime.now(timezone.utc).isoformat()
+    generated_at = datetime.now(UTC).isoformat()
     for page_index, report_page in enumerate(document, 1):
         report_page.insert_text((MARGIN, PAGE_HEIGHT - 24), f"生成时间 {generated_at}    第 {page_index}/{document.page_count} 页", fontsize=7.5, fontname=FONT_NAME, color=(0.35, 0.38, 0.42))
     payload = document.tobytes(garbage=4, deflate=True)

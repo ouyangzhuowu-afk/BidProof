@@ -6,12 +6,11 @@ cannot commit a partial evidence chain.
 
 from __future__ import annotations
 
+from collections.abc import Iterator
 from contextlib import contextmanager
 from contextvars import ContextVar
-from typing import Iterator
 
 from sqlalchemy.engine import Connection
-
 
 _active: ContextVar[Connection | None] = ContextVar("bidproof_uow", default=None)
 

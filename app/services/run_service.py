@@ -6,7 +6,7 @@ from pathlib import Path
 
 from fastapi import HTTPException
 
-from .. import presenters
+from .. import config, presenters
 from ..repositories import audit, collaboration, runs
 from ..schemas import (
     AccuracyFeedbackRequest,
@@ -193,6 +193,8 @@ def review(principal: dict[str, str], run: dict, payload: ReviewRequest) -> dict
 
 
 def record_decision(principal: dict[str, str], run: dict, payload: DecisionRequest) -> dict:
+    if config.ENVIRONMENT == "production" and payload.revision is None:
+        raise HTTPException(status_code=422, detail="记录人工决策必须提供任务版本 revision，请刷新工作台后重新核对")
     known_ids = {item["requirement_id"] for item in run["requirements"]}
     unknown_ids = sorted(set(payload.unresolved_requirement_ids) - known_ids)
     if unknown_ids:
@@ -210,7 +212,7 @@ def record_decision(principal: dict[str, str], run: dict, payload: DecisionReque
         {"action": payload.decision, "owner": "user", "created_at": now, "note": payload.note.strip()}
     ]
     run["updated_at"] = now
-    runs.save(run)
+    runs.save(run, expected_revision=payload.revision if payload.revision is not None else run.get("revision"))
     audit.record(
         principal["workspace_id"],
         principal["user_id"],

@@ -1,6 +1,5 @@
-from pathlib import Path, PurePosixPath
 import zipfile
-
+from pathlib import Path, PurePosixPath
 
 MAX_ARCHIVE_ENTRIES = 10_000
 MAX_ARCHIVE_UNCOMPRESSED_BYTES = 250 * 1024 * 1024
@@ -11,9 +10,8 @@ PDF_ACTIVE_TOKENS = (b"/JavaScript", b"/JS", b"/OpenAction", b"/Launch", b"/Embe
 def scan_upload_safety(path: Path) -> list[str]:
     issues: list[str] = []
     suffix = path.suffix.lower()
-    if suffix == ".pdf":
-        if _pdf_contains_active_content(path):
-            issues.append("PDF 包含 JavaScript、自动打开动作或嵌入文件等活动内容")
+    if suffix == ".pdf" and _pdf_contains_active_content(path):
+        issues.append("PDF 包含 JavaScript、自动打开动作或嵌入文件等活动内容")
     if suffix in {".docx", ".xlsx", ".pptx"}:
         issues.extend(_scan_ooxml(path))
     return issues

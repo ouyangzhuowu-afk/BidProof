@@ -43,6 +43,10 @@ def update_mfa(user_id: str, last_counter: int, recovery_codes: list[str] | None
     db.update_user_mfa_counter(user_id, last_counter, recovery_codes)
 
 
+def consume_mfa(user_id: str, snapshot: dict, *, counter: int, recovery_codes: list[str], confirm: bool = False) -> bool:
+    return db.consume_mfa_snapshot(user_id, snapshot, counter=counter, recovery_codes=recovery_codes, confirm=confirm)
+
+
 def delete_mfa(user_id: str) -> None:
     db.delete_user_mfa(user_id)
 

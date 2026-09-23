@@ -13,10 +13,11 @@ from work.eval.rapidocr_line_cer import (
     LINE_CER_GATE,
     ForbiddenOutputError,
     evaluate_line_cer,
-    main as line_cer_main,
     write_report,
 )
-
+from work.eval.rapidocr_line_cer import (
+    main as line_cer_main,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 SANDBOX_PAGES = ROOT / "work" / "eval" / "fixtures" / "sandbox_pages.jsonl"

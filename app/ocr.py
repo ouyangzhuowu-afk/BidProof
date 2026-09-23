@@ -29,7 +29,6 @@ from typing import Any, Protocol
 
 from .ocr_privacy import OCRLine, parse_lines_from_rapid_rows
 
-
 logger = logging.getLogger("bidproof.ocr")
 
 
@@ -159,10 +158,11 @@ def _image_bytes_to_rgb_array(image_bytes: bytes):
             return np.stack([array, array, array], axis=-1)
         array = np.frombuffer(pixmap.samples, dtype=np.uint8).reshape(pixmap.h, pixmap.w, pixmap.n)
         return array[:, :, :3]
-    except Exception:
+    except (ImportError, RuntimeError, ValueError):
         try:
-            from PIL import Image
             import io
+
+            from PIL import Image
 
             return np.array(Image.open(io.BytesIO(image_bytes)).convert("RGB"))
         except ImportError as exc:
@@ -197,9 +197,10 @@ class PaddleOCRAdapter:
 
     def extract(self, image_bytes: bytes, page_number: int) -> OCRResult:
         try:
+            import io
+
             import numpy as np
             from PIL import Image
-            import io
         except ImportError as exc:
             raise OCRUnavailable("PaddleOCR adapter requires pillow and numpy") from exc
         try:
@@ -209,7 +210,7 @@ class PaddleOCRAdapter:
             raw = engine.ocr(array, cls=True)
         except OCRUnavailable:
             raise
-        except Exception as exc:  # noqa: BLE001 — vendor SDK failures must stay fail-closed
+        except Exception as exc:
             raise OCRUnavailable(f"PaddleOCR failed on page {page_number}") from exc
         lines: list[str] = []
         confidences: list[float] = []
@@ -275,8 +276,8 @@ class RapidOCRAdapter:
 
     def extract(self, image_bytes: bytes, page_number: int) -> OCRResult:
         try:
-            import numpy as np
             import fitz
+            import numpy as np
         except ImportError as exc:
             raise OCRUnavailable("RapidOCR adapter requires pymupdf and numpy") from exc
         try:
@@ -288,7 +289,7 @@ class RapidOCRAdapter:
             raw = engine(array)
         except OCRUnavailable:
             raise
-        except Exception as exc:  # noqa: BLE001
+        except Exception as exc:
             raise OCRUnavailable(f"RapidOCR failed on page {page_number}") from exc
 
         # rapidocr_onnxruntime → (result, elapse); result is list of [box, text, score]

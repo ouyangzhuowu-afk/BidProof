@@ -9,7 +9,6 @@ from __future__ import annotations
 
 from . import config
 
-
 LICENSE_PREFIX = "bp-lic-"
 
 

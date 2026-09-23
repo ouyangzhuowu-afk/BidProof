@@ -208,7 +208,7 @@ export function listTokens() {
  * UI 必须在这一刻让用户复制走，不能指望之后再查。
  * @returns {Promise<ApiToken>}
  */
-export function createToken(/** @type {{ name: string }} */ body) {
+export function createToken(/** @type {{ name: string, permissions: string[] }} */ body) {
   return json(paths.auth.tokens, 'POST', body);
 }
 

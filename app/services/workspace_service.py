@@ -2,15 +2,15 @@
 
 from __future__ import annotations
 
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
+
+from work.backup_restore import list_backup_records
 
 from .. import config, db
 from ..repositories import audit, collaboration, jobs, runs, workspaces
-from ..uploads import remove_tree
 from ..state import utc_now
-from work.backup_restore import list_backup_records
-
+from ..uploads import remove_tree
 
 ACCURACY_MIN_SAMPLE_SIZE = 20
 NOTIFICATION_DUE_WINDOW_DAYS = 3
@@ -30,7 +30,7 @@ def privacy(workspace_id: str) -> dict:
 
 def retention_candidates(workspace_id: str) -> tuple[str, list[str]]:
     settings = workspaces.settings(workspace_id) or {"retention_days": 365}
-    cutoff = (datetime.now(timezone.utc) - timedelta(days=int(settings["retention_days"]))).isoformat()
+    cutoff = (datetime.now(UTC) - timedelta(days=int(settings["retention_days"]))).isoformat()
     return cutoff, runs.expired_archived_ids(workspace_id, cutoff)
 
 
@@ -47,7 +47,7 @@ def purge_retention(principal: dict[str, str]) -> dict:
 
 
 def notifications(workspace_id: str) -> dict:
-    today = datetime.now(timezone.utc).date()
+    today = datetime.now(UTC).date()
     items: list[dict] = []
     for item in collaboration.workspace_remediations(workspace_id):
         if item["status"] in {"DONE", "CANCELLED"} or not item.get("due_date"):
@@ -121,7 +121,7 @@ def health_detail() -> dict:
     try:
         db.ping()
         response["database"] = "ok"
-    except Exception:
+    except Exception:  # noqa: BLE001 — readiness must degrade without exposing infrastructure details
         response["status"] = "degraded"
         response["database"] = "error"
     backups = list_backup_records(config.BACKUP_ROOT)
@@ -134,7 +134,7 @@ def health_detail() -> dict:
     response["backup_age_hours"] = None
     if verified and verified.get("verified_at"):
         try:
-            age = datetime.now(timezone.utc) - datetime.fromisoformat(verified["verified_at"])
+            age = datetime.now(UTC) - datetime.fromisoformat(verified["verified_at"])
             response["backup_age_hours"] = round(age.total_seconds() / 3600, 2)
         except ValueError:
             response["backup_age_hours"] = None
@@ -167,3 +167,27 @@ def touch(run: dict) -> str:
     run["updated_at"] = now
     runs.save(run)
     return now
+
+
+def is_ready() -> bool:
+    """Internal readiness probe; never expose dependency failures or filesystem paths."""
+    import tempfile
+    import time
+
+    from .. import dbctl
+
+    try:
+        if not db.ping():
+            return False
+        if config.ENVIRONMENT == "production" and dbctl.current_revision() != dbctl.head_revision():
+            return False
+        with tempfile.TemporaryFile(dir=config.DATA_DIR) as probe:
+            probe.write(b"ready")
+            probe.flush()
+        if config.ENVIRONMENT == "production" and config.JOB_RUNNER == "worker":
+            heartbeat = config.DATA_DIR / "worker-heartbeat"
+            if not heartbeat.exists() or time.time() - heartbeat.stat().st_mtime > 30:
+                return False
+    except Exception:  # noqa: BLE001 — readiness must degrade without exposing infrastructure details
+        return False
+    return True

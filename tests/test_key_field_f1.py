@@ -10,13 +10,14 @@ import pytest
 from work.eval.key_field_f1 import (
     ForbiddenOutputError,
     evaluate_key_field_f1,
-    main as f1_main,
     score_key_field_f1,
     write_report,
 )
+from work.eval.key_field_f1 import (
+    main as f1_main,
+)
 from work.eval.page_annotation import load_annotations
 from work.eval.sandbox_gates import KEY_FIELD_F1_MIN
-
 
 ROOT = Path(__file__).resolve().parents[1]
 GT = ROOT / "work" / "eval" / "fixtures" / "key_field_gt.jsonl"

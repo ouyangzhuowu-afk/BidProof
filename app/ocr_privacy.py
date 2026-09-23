@@ -13,7 +13,6 @@ import re
 from dataclasses import dataclass, field
 from typing import Any
 
-
 REDACTION_VERSION = "t1-redact-v1"
 
 # Pages that must never escalate — seals / ID / license photocopies.
@@ -38,7 +37,7 @@ PII_LINE_PATTERNS: list[re.Pattern[str]] = [
     re.compile(r"\d{17}[\dXx]"),
     re.compile(r"[\u4e00-\u9fff]{1,3}(?:女士|先生|主任|科长)"),
     re.compile(r"(?:联系人|电话|地址|邮箱|E-?mail)\s*[:：]"),
-    re.compile(r"https?://|www\.", re.I),
+    re.compile(r"https?://|www\.", re.IGNORECASE),
 ]
 
 

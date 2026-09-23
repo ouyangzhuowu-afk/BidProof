@@ -1,11 +1,11 @@
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 from app.db import accuracy_metrics, add_accuracy_feedback, init_db, save_run
 from app.rules import extract_requirements, match_evidence
 
 
 def _save_metric_run(path, workspace_id: str, run_id: str, requirement_count: int) -> None:
-    now = datetime.now(timezone.utc).isoformat()
+    now = datetime.now(UTC).isoformat()
     requirements = [
         {
             "requirement_id": f"REQ-{index:04d}",

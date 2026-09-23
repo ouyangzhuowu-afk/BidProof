@@ -2,14 +2,15 @@
 
 from __future__ import annotations
 
-import json
 import logging
 import os
+import time
 
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import JSONResponse
+from starlette.middleware.trustedhost import TrustedHostMiddleware
 
-from . import config, csrf, identity, idempotency, observability, ratelimit, request_context
+from . import config, csrf, identity, observability, ratelimit, request_context
 
 logger = logging.getLogger("bidproof.http")
 
@@ -38,7 +39,7 @@ SECURITY_HEADERS = {
     "X-Frame-Options": "DENY",
     "Referrer-Policy": "strict-origin-when-cross-origin",
     "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
-    "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-ancestors 'none'",
+    "Content-Security-Policy": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'",
 }
 
 
@@ -47,16 +48,22 @@ def install_middleware(app: FastAPI) -> None:
     async def unhandled_exception_handler(request: Request, exc: Exception):
         rid = getattr(request.state, "request_id", "unknown")
         logger.exception("Unhandled exception on %s %s [%s]", request.method, request.url.path, rid)
-        return JSONResponse(status_code=500, content={"detail": "服务器内部错误，请稍后重试"})
+        response = JSONResponse(status_code=500, content={"detail": "服务器内部错误，请稍后重试", "request_id": rid})
+        response.headers.update(SECURITY_HEADERS)
+        response.headers[request_context.REQUEST_ID_HEADER] = rid
+        return response
 
     @app.middleware("http")
     async def request_guards(request: Request, call_next):
+        request.state.started_at = time.perf_counter()
         context = request_context.from_request(request)
         with request_context.bind(context):
             observability.bind_log_context()
             try:
                 _check_csrf(request)
                 _check_action_limits(request)
+                _reject_unsupported_idempotency(request)
+                response = await call_next(request)
             except HTTPException as exc:
                 response = JSONResponse(
                     status_code=exc.status_code,
@@ -65,7 +72,12 @@ def install_middleware(app: FastAPI) -> None:
                 )
                 _finalize_response(request, response, context)
                 return response
-            response = await call_next(request)
+            except Exception:
+                logger.exception("request_failed")
+                response = JSONResponse(
+                    status_code=500,
+                    content={"detail": "服务器内部错误，请稍后重试", "request_id": context.request_id},
+                )
             if request.method.upper() in csrf.SAFE_METHODS and csrf.COOKIE_NAME not in request.cookies:
                 csrf.issue(response, secure=identity.request_is_secure(request))
             _finalize_response(request, response, context)
@@ -80,41 +92,29 @@ def install_middleware(app: FastAPI) -> None:
             request.scope["path"] = "/api/" + path[len("/api/v1/") :] if path.startswith("/api/v1/") else "/api"
         return await call_next(request)
 
-    @app.middleware("http")
-    async def idempotency_guard(request: Request, call_next):
-        key = (request.headers.get("Idempotency-Key") or "").strip()
-        if not key or request.method.upper() not in WRITE_METHODS or not (request.scope.get("path") or "").startswith("/api/"):
-            return await call_next(request)
-        if "/api/auth/" in (request.scope.get("path") or ""):
-            return await call_next(request)
-        body = await request.body()
+    if config.ENVIRONMENT == "production" and config.ALLOWED_HOSTS:
+        app.add_middleware(TrustedHostMiddleware, allowed_hosts=list(config.ALLOWED_HOSTS), www_redirect=False)
 
-        async def receive():
-            return {"type": "http.request", "body": body, "more_body": False}
 
-        request = Request(request.scope, receive)
-        request_hash = idempotency.hash_body(body)
-        cached = idempotency.lookup(request, key, request_hash)
-        if cached is not None:
-            return cached
-        response = await call_next(request)
-        if 200 <= response.status_code < 300 and isinstance(response, JSONResponse):
-            payload = None
-            if getattr(response, "media_type", "").startswith("application/json"):
-                try:
-                    payload = json.loads(bytes(response.body).decode("utf-8"))
-                except Exception:
-                    payload = {"status": response.status_code}
-            else:
-                payload = {"status": response.status_code}
-            idempotency.remember(request, key, request_hash, response.status_code, payload)
-        return response
+def _reject_unsupported_idempotency(request: Request) -> None:
+    """Reject explicitly instead of silently performing duplicate or cross-tenant writes.
+
+    The old cache ran before authentication and keyed on caller-controlled workspace headers.
+    Atomic, authenticated request claims are not yet supported. No request body is buffered.
+    """
+    if (request.headers.get("Idempotency-Key") is not None
+            and request.method.upper() in WRITE_METHODS and request.url.path.startswith("/api/")):
+        if not request.url.path.startswith("/api/auth/"):
+            identity.principal_of(request)
+        raise HTTPException(status_code=501, detail="此版本不支持 Idempotency-Key；请求未执行，请勿自动重试写入")
 
 
 def _finalize_response(request: Request, response, context) -> None:
     for hdr, val in SECURITY_HEADERS.items():
         response.headers.setdefault(hdr, val)
     response.headers[request_context.REQUEST_ID_HEADER] = context.request_id
+    if config.ENVIRONMENT == "production":
+        response.headers.setdefault("Strict-Transport-Security", "max-age=31536000")
     observability.record_http(request.method, response.status_code)
     path = request.url.path
     if path.startswith("/static/") or path == "/metrics":
@@ -124,7 +124,8 @@ def _finalize_response(request: Request, response, context) -> None:
         request.method,
         path,
         response.status_code,
-        extra={"request_id": context.request_id},
+        extra={"request_id": context.request_id, "status_code": response.status_code,
+               "duration_ms": round((time.perf_counter() - request.state.started_at) * 1000, 2)},
     )
 
 

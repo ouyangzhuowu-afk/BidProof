@@ -11,7 +11,6 @@ from pathlib import Path
 
 import pytest
 
-from work.eval.page_annotation import PAGE_TYPES, load_annotations, validate_record
 from work.eval.key_field_gt import (
     FORBIDDEN_OUTPUT_TOKENS,
     KEY_FIELD_NAMES,
@@ -21,11 +20,13 @@ from work.eval.key_field_gt import (
     KeyFieldGtError,
     evaluate_coverage,
     load_key_field_names,
-    main as key_field_gt_main,
     validate_seed,
     write_report,
 )
-
+from work.eval.key_field_gt import (
+    main as key_field_gt_main,
+)
+from work.eval.page_annotation import PAGE_TYPES, load_annotations, validate_record
 
 ROOT = Path(__file__).resolve().parents[1]
 SCHEMA = ROOT / "work" / "eval" / "page_annotation.schema.json"

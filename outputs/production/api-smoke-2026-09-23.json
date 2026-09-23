@@ -1,0 +1,64 @@
+{
+  "recorded_at": "2026-09-23T08:56:25.433955+00:00",
+  "python": "3.11.16",
+  "host": "Darwin",
+  "scope": "synthetic_engineering_only",
+  "business_acceptance": false,
+  "executions": [
+    {
+      "environment": "development",
+      "transport": "http_loopback",
+      "job_runner": "independent_worker",
+      "database": "sqlite",
+      "exit_code": 0,
+      "checks": [
+        "health_readiness_and_anonymous_access_denied",
+        "cookie_auth_and_csrf_rejection",
+        "queue_upload_and_completion",
+        "evidence_index_original_bytes_and_page_previews",
+        "manual_review_with_revision",
+        "decision_revision_and_stale_write_rejection",
+        "pdf_and_csv_exports",
+        "delete_and_verify_absence",
+        "logout"
+      ]
+    },
+    {
+      "environment": "production",
+      "transport": "https_loopback_verified_temporary_ca",
+      "job_runner": "independent_worker_and_supervised_child",
+      "database": "sqlite_at_migration_head",
+      "exit_code": 0,
+      "checks": [
+        "health_readiness_and_anonymous_access_denied",
+        "cookie_auth_and_csrf_rejection",
+        "queue_upload_and_completion",
+        "evidence_index_original_bytes_and_page_previews",
+        "manual_review_with_revision",
+        "decision_revision_and_stale_write_rejection",
+        "pdf_and_csv_exports",
+        "delete_and_verify_absence",
+        "logout"
+      ],
+      "cleanup": {
+        "runs": 0,
+        "scan_jobs": 0,
+        "upload_entries": 0,
+        "staging_entries": 0
+      }
+    }
+  ],
+  "readiness_tests": {
+    "passed": 9
+  },
+  "remote_ci_executed": false,
+  "not_covered": [
+    "GitHub hosted runner",
+    "PostgreSQL smoke execution",
+    "Docker execution",
+    "public network",
+    "load testing",
+    "external OCR",
+    "real enterprise business acceptance"
+  ]
+}

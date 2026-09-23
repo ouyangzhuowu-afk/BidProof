@@ -12,11 +12,12 @@ from work.eval.sandbox_gates import TEDS_MIN
 from work.eval.teds_harness import (
     ForbiddenOutputError,
     evaluate_teds,
-    main as teds_main,
     write_report,
 )
+from work.eval.teds_harness import (
+    main as teds_main,
+)
 from work.eval.teds_score import teds
-
 
 ROOT = Path(__file__).resolve().parents[1]
 TEDS_GT = ROOT / "work" / "eval" / "fixtures" / "teds_gt.jsonl"

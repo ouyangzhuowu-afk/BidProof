@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import json
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 
 from fastapi.testclient import TestClient
 
@@ -34,7 +34,7 @@ def test_stale_running_jobs_are_returned_to_pending(tmp_path):
     init_db(database)
     create_scan_job("fresh", "ws", None, "RUNNING", {}, database)
     create_scan_job("stale", "ws", None, "RUNNING", {}, database)
-    stale_time = (datetime.now(timezone.utc) - timedelta(seconds=120)).isoformat()
+    stale_time = (datetime.now(UTC) - timedelta(seconds=120)).isoformat()
     update_scan_job("stale", "RUNNING", path=database)
     with db.connect(database) as connection:
         connection.execute(

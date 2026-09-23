@@ -20,15 +20,22 @@ import { html, mount, emptyState, errorState, skeleton } from '../../ui/render.j
 import { toastSuccess, toastFromError } from '../../core/toast.js';
 import { formatRelative, formatDate } from '../../core/format.js';
 import { runsApi } from '../../api/index.js';
+import { sessionVersion, isSessionCurrent } from '../../core/session.js';
 
 /** @type {(() => void)[]} */
 let teardown = [];
+let generation = 0;
+const reads = new Map();
+const writes = new Set();
 
 export function mountCollab() {
   if (teardown.length) return;
   teardown = [
     bind('#comment-form', 'submit', (event) => { void postComment(event); }),
     bind('#remediation-form', 'submit', (event) => { void createRemediation(event); }),
+    delegate('#detail-view', 'click', '#collab-retry-comments', () => { void loadComments(); }),
+    delegate('#detail-view', 'click', '#collab-retry-audit', () => { void loadAudit(); }),
+    delegate('#detail-view', 'click', '#collab-retry-remediations', () => { void loadRemediations(); }),
     delegate('#remediations-list', 'change', '[data-remediation-status]', (event, node) => {
       void patchRemediation(
         /** @type {HTMLElement} */ (node).dataset.remediationStatus,
@@ -40,8 +47,29 @@ export function mountCollab() {
 }
 
 export function unmountCollab() {
+  generation += 1;
+  for (const controller of reads.values()) controller.abort();
+  reads.clear();
   for (const off of teardown) off();
   teardown = [];
+}
+
+function contextFor(runId) {
+  const epoch = generation;
+  const session = sessionVersion();
+  return {
+    session,
+    active: () => teardown.length > 0 && epoch === generation && isSessionCurrent(session) && store.get().currentRun?.run_id === runId,
+  };
+}
+
+function startRead(panel, runId) {
+  reads.get(panel)?.abort();
+  const controller = new AbortController();
+  reads.set(panel, controller);
+  const context = contextFor(runId);
+  return { signal: controller.signal,
+    active: () => context.active() && reads.get(panel) === controller && !controller.signal.aborted };
 }
 
 /**
@@ -61,11 +89,13 @@ export function loadCollab() {
 async function loadComments() {
   const target = el('#comments-list');
   const run = store.get().currentRun;
-  if (!target || !run) return;
+  if (!target || !run || !teardown.length) return;
+  const read = startRead('comments', run.run_id);
 
   mount(target, skeleton('line', 2));
   try {
-    const { comments } = await runsApi.listComments(run.run_id);
+    const { comments } = await runsApi.listComments(run.run_id, { signal: read.signal });
+    if (!read.active()) return;
     if (!comments.length) {
       mount(target, emptyState({
         icon: 'message-square',
@@ -89,7 +119,7 @@ async function loadComments() {
       </article>
     `));
   } catch (error) {
-    mount(target, errorState({ title: '评论加载失败', error }));
+    if (read.active()) mount(target, errorState({ title: '评论加载失败', error, retryId: 'collab-retry-comments' }));
   }
 }
 
@@ -98,19 +128,27 @@ async function postComment(event) {
   event.preventDefault();
   const run = store.get().currentRun;
   if (!run) return;
+  const context = contextFor(run.run_id);
+  const key = `comment:${context.session}:${run.run_id}`;
+  if (writes.has(key)) return;
 
   const form = /** @type {HTMLFormElement} */ (event.currentTarget);
   const input = /** @type {HTMLTextAreaElement} */ (form.querySelector('[name="body"]'));
   const body = input.value.trim();
   if (!body) { input.focus(); return; }
+  const draft = input.value;
+  writes.add(key);
 
   await withLoading(form.querySelector('button[type="submit"]'), async () => {
     try {
       await runsApi.addComment(run.run_id, { body });
-      input.value = '';
+      if (!context.active()) return;
+      if (input.value === draft) input.value = '';
       await loadComments();
     } catch (error) {
-      toastFromError(error, '评论未发送。');
+      if (isSessionCurrent(context.session)) toastFromError(error, '评论未发送。');
+    } finally {
+      writes.delete(key);
     }
   });
 }
@@ -125,6 +163,7 @@ const AUDIT_LABELS = {
   RUN_RESCANNED: '重新扫描',
   REQUIREMENT_REVIEWED: '复核要求项',
   DECISION_RECORDED: '记录决策',
+  RUN_DECISION_RECORDED: '记录决策',
   METADATA_UPDATED: '更新任务信息',
   RUN_ARCHIVED: '归档',
   RUN_RESTORED: '恢复',
@@ -135,11 +174,13 @@ const AUDIT_LABELS = {
 async function loadAudit() {
   const target = el('#audit-events');
   const run = store.get().currentRun;
-  if (!target || !run) return;
+  if (!target || !run || !teardown.length) return;
+  const read = startRead('audit', run.run_id);
 
   mount(target, skeleton('line', 3));
   try {
-    const { events } = await runsApi.listAudit(run.run_id);
+    const { events } = await runsApi.listAudit(run.run_id, { signal: read.signal });
+    if (!read.active()) return;
     if (!events.length) {
       mount(target, emptyState({ icon: 'scroll-text', title: '暂无审计记录' }));
       return;
@@ -166,7 +207,7 @@ async function loadAudit() {
         : ''}
     `);
   } catch (error) {
-    mount(target, errorState({ title: '审计记录加载失败', error }));
+    if (read.active()) mount(target, errorState({ title: '审计记录加载失败', error, retryId: 'collab-retry-audit' }));
   }
 }
 
@@ -174,23 +215,25 @@ async function loadAudit() {
    整改项
    ═══════════════════════════════════════════════════════════════════════ */
 
-const REMEDIATION_STATUSES = ['OPEN', 'IN_PROGRESS', 'RESOLVED', 'WAIVED'];
+const REMEDIATION_STATUSES = ['OPEN', 'IN_PROGRESS', 'DONE', 'CANCELLED'];
 const REMEDIATION_LABELS = {
-  OPEN: '待处理', IN_PROGRESS: '进行中', RESOLVED: '已解决', WAIVED: '已豁免',
+  OPEN: '待处理', IN_PROGRESS: '进行中', DONE: '已完成', CANCELLED: '已取消',
 };
 
 async function loadRemediations() {
   const target = el('#remediations-list');
   const run = store.get().currentRun;
-  if (!target || !run) return;
+  if (!target || !run || !teardown.length) return;
+  const read = startRead('remediations', run.run_id);
 
   mount(target, skeleton('row', 2));
   try {
-    const { remediations } = await runsApi.listRemediations(run.run_id);
+    const { remediations } = await runsApi.listRemediations(run.run_id, { signal: read.signal });
+    if (!read.active()) return;
     renderRemediations(remediations || []);
     fillRequirementOptions(run);
   } catch (error) {
-    mount(target, errorState({ title: '整改项加载失败', error }));
+    if (read.active()) mount(target, errorState({ title: '整改项加载失败', error, retryId: 'collab-retry-remediations' }));
   }
 }
 
@@ -218,7 +261,7 @@ function renderRemediations(items) {
           ${item.due_date ? ` · 截止 ${formatDate(item.due_date, { withTime: false })}` : ''}
         </small>
       </div>
-      <select class="select" data-remediation-status="${item.remediation_id}"
+      <select class="select" data-remediation-status="${item.remediation_id}" data-previous="${item.status}"
               aria-label="修改「${item.title}」的状态">
         ${REMEDIATION_STATUSES.map((value) => html`
           <option value="${value}" ${item.status === value ? 'selected' : ''}>
@@ -253,11 +296,16 @@ async function createRemediation(event) {
   event.preventDefault();
   const run = store.get().currentRun;
   if (!run) return;
+  const context = contextFor(run.run_id);
+  const key = `remediation:${context.session}:${run.run_id}`;
+  if (writes.has(key)) return;
 
   const form = /** @type {HTMLFormElement} */ (event.currentTarget);
   const data = new FormData(form);
   const title = String(data.get('title') || '').trim();
   if (!title) return;
+  const draft = JSON.stringify([...data.entries()]);
+  writes.add(key);
 
   await withLoading(form.querySelector('button[type="submit"]'), async () => {
     try {
@@ -267,11 +315,14 @@ async function createRemediation(event) {
         owner_id: data.get('owner_id') || null,
         due_date: data.get('due_date') || null,
       });
-      form.reset();
+      if (!context.active()) return;
+      if (JSON.stringify([...new FormData(form).entries()]) === draft) form.reset();
       await loadRemediations();
       toastSuccess('整改项已创建。');
     } catch (error) {
-      toastFromError(error, '整改项未创建。');
+      if (isSessionCurrent(context.session)) toastFromError(error, '整改项未创建。');
+    } finally {
+      writes.delete(key);
     }
   });
 }
@@ -282,15 +333,20 @@ async function createRemediation(event) {
  * @param {Element} control
  */
 async function patchRemediation(remediationId, payload, control) {
+  const run = store.get().currentRun;
+  if (!run) return;
+  const context = contextFor(run.run_id);
   const select = /** @type {HTMLSelectElement} */ (control);
   const previous = select.dataset.previous || '';
   select.disabled = true;
   try {
     await runsApi.updateRemediation(remediationId, payload);
+    if (!context.active()) return;
     select.closest('.remediation')?.setAttribute('data-status', String(payload.status));
     select.dataset.previous = select.value;
     toastSuccess('整改项已更新。');
   } catch (error) {
+    if (!context.active()) return;
     // 状态没存上就把下拉还原，否则界面在说谎。
     if (previous) select.value = previous;
     toastFromError(error, '状态未更新。');

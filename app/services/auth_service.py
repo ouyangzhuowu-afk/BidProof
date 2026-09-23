@@ -3,17 +3,17 @@
 from __future__ import annotations
 
 import secrets
-import sqlalchemy.exc
 import uuid
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 
+import sqlalchemy.exc
 from fastapi import HTTPException, Request, Response
 
-from .. import config, directory, identity, oidc, totp
+from .. import config, directory, identity, oidc, totp, uow
 from ..authz import permissions_for
-from ..repositories import accounts, audit, identity as identity_store, workspaces
+from ..repositories import accounts, audit, workspaces
+from ..repositories import identity as identity_store
 from ..schemas import (
-    password_meets_policy,
     ApiTokenCreateRequest,
     AuthActionCompleteRequest,
     AuthBootstrapRequest,
@@ -25,6 +25,7 @@ from ..schemas import (
     PasswordChangeRequest,
     PersonalRegisterRequest,
     TrialJoinRequest,
+    password_meets_policy,
 )
 from ..security import (
     UNUSABLE_PASSWORD,
@@ -36,7 +37,6 @@ from ..security import (
     verify_password,
 )
 from ..state import utc_now
-
 
 INVITATION_VALID_HOURS = 72
 RESET_VALID_HOURS = 1
@@ -139,7 +139,7 @@ def _complete_login(request: Request, response: Response, user: dict) -> dict:
     mfa = identity_store.load_mfa(user["user_id"])
     if mfa and mfa.get("confirmed_at"):
         challenge = secrets.token_urlsafe(24)
-        expires_at = (datetime.now(timezone.utc) + timedelta(minutes=MFA_CHALLENGE_MINUTES)).isoformat()
+        expires_at = (datetime.now(UTC) + timedelta(minutes=MFA_CHALLENGE_MINUTES)).isoformat()
         identity_store.start_flow(challenge, "MFA", nonce=user["user_id"], expires_at=expires_at)
         return {"mfa_required": True, "mfa_token": challenge, "username": user["username"]}
     identity.issue_session(response, user["user_id"], identity.request_is_secure(request))
@@ -179,20 +179,27 @@ def _provision_federated_user(
         user = accounts.by_id(binding["user_id"])
         if user is None or not bool(user.get("active", 1)):
             raise HTTPException(status_code=401, detail="用户名或密码错误")
+        if not config.FEDERATED_WORKSPACE_ID or user["workspace_id"] != config.FEDERATED_WORKSPACE_ID:
+            raise HTTPException(status_code=403, detail="企业身份不属于当前配置的工作空间")
         identity_store.remember_binding(user["user_id"], provider, issuer, subject)
         return user
-    existing = accounts.by_username(username)
-    if existing:
-        if not bool(existing.get("active", 1)):
-            raise HTTPException(status_code=401, detail="用户名或密码错误")
-        identity_store.remember_binding(existing["user_id"], provider, issuer, subject)
-        return existing
-    workspace_id = workspaces.primary_id()
-    if not workspace_id:
-        raise HTTPException(status_code=503, detail="企业空间尚未初始化，请先完成管理员开通")
-    user = accounts.create(workspace_id, username, UNUSABLE_PASSWORD, role)
-    workspaces.ensure(workspace_id, user["user_id"], role)
-    identity_store.remember_binding(user["user_id"], provider, issuer, subject)
+    # A mutable provider username is not proof of ownership of a local account. Binding a
+    # colliding name would let an external subject inherit another tenant's OWNER account.
+    if accounts.by_username(username):
+        raise HTTPException(status_code=409, detail="企业身份尚未绑定，且账号名称已存在，请联系管理员")
+    workspace_id = config.FEDERATED_WORKSPACE_ID
+    if not workspace_id or not workspaces.members(workspace_id):
+        raise HTTPException(status_code=503, detail="尚未配置企业身份对应的工作空间")
+    if role not in {"REVIEWER", "VIEWER"}:
+        raise HTTPException(status_code=403, detail="企业身份首次开通仅允许审核员或只读角色")
+    # The account, membership and subject binding either all commit or none do.
+    try:
+        with uow.transaction():
+            user = accounts.create(workspace_id, username, UNUSABLE_PASSWORD, role)
+            workspaces.ensure(workspace_id, user["user_id"], role)
+            identity_store.remember_binding(user["user_id"], provider, issuer, subject)
+    except sqlalchemy.exc.IntegrityError as exc:
+        raise HTTPException(status_code=409, detail="账号已存在或身份绑定发生冲突，请重新登录") from exc
     audit.record(
         workspace_id,
         user["user_id"],
@@ -289,7 +296,7 @@ def create_invitation(principal: dict[str, str], payload: InvitationCreateReques
     if accounts.by_username(username, principal["workspace_id"]):
         raise HTTPException(status_code=409, detail="用户名已存在")
     raw_token = new_action_token()
-    expires_at = (datetime.now(timezone.utc) + timedelta(hours=INVITATION_VALID_HOURS)).isoformat()
+    expires_at = (datetime.now(UTC) + timedelta(hours=INVITATION_VALID_HOURS)).isoformat()
     accounts.create_action_token(
         token_hash(raw_token),
         principal["workspace_id"],
@@ -348,7 +355,7 @@ def issue_password_reset(principal: dict[str, str], user_id: str) -> dict:
     if member["role"] == "OWNER" and principal["role"] != "OWNER":
         raise HTTPException(status_code=403, detail="只有所有者可以重置所有者密码")
     raw_token = new_action_token()
-    expires_at = (datetime.now(timezone.utc) + timedelta(hours=RESET_VALID_HOURS)).isoformat()
+    expires_at = (datetime.now(UTC) + timedelta(hours=RESET_VALID_HOURS)).isoformat()
     accounts.create_action_token(
         token_hash(raw_token),
         principal["workspace_id"],
@@ -435,7 +442,8 @@ def verify_mfa_login(request: Request, response: Response, payload: MfaCodeReque
     if user is None or not bool(user.get("active", 1)):
         raise HTTPException(status_code=401, detail="二次验证已过期，请重新登录")
     _accept_mfa_code(user["user_id"], payload.code, bucket)
-    identity_store.consume_flow(payload.mfa_token, "MFA", utc_now())
+    if identity_store.consume_flow(payload.mfa_token, "MFA", utc_now()) is None:
+        raise HTTPException(status_code=401, detail="二次验证已使用，请重新登录")
     identity.issue_session(response, user["user_id"], identity.request_is_secure(request))
     audit.record(user["workspace_id"], user["user_id"], "AUTH_LOGIN", None, {"mfa": True})
     return _account_response(user, user["workspace_id"])
@@ -460,6 +468,10 @@ def enroll_mfa(principal: dict) -> dict:
 
 
 def confirm_mfa(principal: dict, payload: MfaCodeRequest) -> dict:
+    from .. import ratelimit
+
+    bucket = f"mfa-enroll:{principal['user_id']}"
+    ratelimit.enforce(ratelimit.MFA, bucket, detail="验证码尝试过多，请稍后再试", consume=True)
     record = identity_store.load_mfa(principal["user_id"])
     if record is None:
         raise HTTPException(status_code=400, detail="请先开始二次验证绑定")
@@ -468,7 +480,12 @@ def confirm_mfa(principal: dict, payload: MfaCodeRequest) -> dict:
     counter = totp.verify(record["secret"], payload.code, last_counter=int(record.get("last_counter") or 0))
     if counter is None:
         raise HTTPException(status_code=401, detail="验证码无效")
-    identity_store.confirm_mfa(principal["user_id"], counter)
+    if not identity_store.consume_mfa(
+        principal["user_id"], record, counter=counter,
+        recovery_codes=list(record.get("recovery_codes_json") or []), confirm=True,
+    ):
+        raise HTTPException(status_code=409, detail="二次验证设置已变更，请重新绑定")
+    ratelimit.clear(ratelimit.MFA, bucket)
     audit.record(principal["workspace_id"], principal["user_id"], "AUTH_MFA_CONFIRMED")
     return {"mfa_enabled": True}
 
@@ -489,7 +506,9 @@ def _accept_mfa_code(user_id: str, code: str, bucket: str) -> None:
         raise HTTPException(status_code=400, detail="尚未启用二次验证")
     counter = totp.verify(record["secret"], code, last_counter=int(record.get("last_counter") or 0))
     if counter is not None:
-        identity_store.update_mfa(user_id, counter)
+        if not identity_store.consume_mfa(user_id, record, counter=counter,
+                                           recovery_codes=list(record.get("recovery_codes_json") or [])):
+            raise HTTPException(status_code=401, detail="验证码已使用，请等待新的验证码")
         ratelimit.clear(ratelimit.MFA, bucket)
         return
     remaining = list(record.get("recovery_codes_json") or [])
@@ -499,11 +518,12 @@ def _accept_mfa_code(user_id: str, code: str, bucket: str) -> None:
         ratelimit.register_failure(ratelimit.MFA, bucket, detail="验证码尝试过多，请稍后再试")
         raise HTTPException(status_code=401, detail="验证码无效")
     remaining.remove(matched)
-    identity_store.update_mfa(user_id, int(record.get("last_counter") or 0), remaining)
+    if not identity_store.consume_mfa(user_id, record, counter=int(record.get("last_counter") or 0), recovery_codes=remaining):
+        raise HTTPException(status_code=401, detail="恢复码已使用，请使用其他恢复码")
     ratelimit.clear(ratelimit.MFA, bucket)
 
 
-def start_oidc(request: Request) -> str:
+def start_oidc(request: Request, response: Response) -> str:
     settings = oidc.settings_from_env()
     if not settings.enabled:
         raise HTTPException(status_code=404, detail="未配置企业身份提供方")
@@ -515,7 +535,7 @@ def start_oidc(request: Request) -> str:
     nonce = oidc.new_nonce()
     verifier = oidc.new_code_verifier()
     redirect_uri = _oidc_redirect_uri(request)
-    expires_at = (datetime.now(timezone.utc) + timedelta(minutes=OIDC_FLOW_MINUTES)).isoformat()
+    expires_at = (datetime.now(UTC) + timedelta(minutes=OIDC_FLOW_MINUTES)).isoformat()
     identity_store.start_flow(
         state,
         "OIDC",
@@ -523,6 +543,13 @@ def start_oidc(request: Request) -> str:
         redirect_uri=redirect_uri,
         nonce=nonce,
         expires_at=expires_at,
+    )
+    # Lax is required for the top-level redirect back from the identity provider. This
+    # cookie binds state to the browser that started login, preventing login-CSRF.
+    response.set_cookie(
+        "bidproof_oidc_flow", state, max_age=OIDC_FLOW_MINUTES * 60,
+        httponly=True, secure=identity.request_is_secure(request), samesite="lax",
+        path="/api/auth/oidc",
     )
     try:
         return oidc.authorization_url(
@@ -536,6 +563,10 @@ def complete_oidc(request: Request, response: Response, code: str, state: str) -
     settings = oidc.settings_from_env()
     if not settings.enabled:
         raise HTTPException(status_code=404, detail="未配置企业身份提供方")
+    browser_state = request.cookies.get("bidproof_oidc_flow", "")
+    if not state or not browser_state or not secrets.compare_digest(state, browser_state):
+        raise HTTPException(status_code=401, detail="登录来源校验失败，请从当前浏览器重新登录")
+    response.delete_cookie("bidproof_oidc_flow", path="/api/auth/oidc")
     flow = identity_store.consume_flow(state, "OIDC", utc_now())
     if flow is None or not code:
         raise HTTPException(status_code=401, detail="登录已过期，请重试")
@@ -549,7 +580,7 @@ def complete_oidc(request: Request, response: Response, code: str, state: str) -
             verifier=flow["code_verifier"],
         )
         id_token = str(token_payload.get("id_token") or "")
-        claims = oidc.validate_claims(oidc.decode_id_token_claims(id_token), settings, nonce=flow["nonce"])
+        claims = oidc.verify_id_token(id_token, settings, document, nonce=flow["nonce"])
         username = oidc.username_from_claims(claims, settings)
     except oidc.OIDCError as exc:
         raise HTTPException(status_code=401, detail="企业身份校验失败") from exc
@@ -564,7 +595,10 @@ def complete_oidc(request: Request, response: Response, code: str, state: str) -
 
 
 def _oidc_redirect_uri(request: Request) -> str:
-    return str(request.base_url).rstrip("/") + "/api/auth/oidc/callback"
+    origin = config.PUBLIC_ORIGIN
+    if not origin:
+        raise HTTPException(status_code=503, detail="企业登录尚未配置公开访问地址")
+    return origin + "/api/auth/oidc/callback"
 
 
 def list_tokens(principal: dict) -> dict:
@@ -573,11 +607,18 @@ def list_tokens(principal: dict) -> dict:
 
 def create_token(principal: dict, payload: ApiTokenCreateRequest) -> dict:
     allowed = {item.value for item in permissions_for(principal["role"])}
-    requested = [item for item in payload.permissions if item in allowed]
+    # Token-authenticated callers cannot mint a token wider than their own scopes.
+    if "permissions" in principal:
+        allowed &= set(principal["permissions"])
+    if any(item not in allowed for item in payload.permissions):
+        raise HTTPException(status_code=422, detail="令牌权限包含未知权限或超出当前账号授权范围")
+    if not payload.permissions:
+        raise HTTPException(status_code=422, detail="请为令牌显式选择至少一项权限")
+    requested = sorted(set(payload.permissions))
     raw = API_TOKEN_PREFIX + secrets.token_urlsafe(32)
     expires_at = None
     if payload.expires_days:
-        expires_at = (datetime.now(timezone.utc) + timedelta(days=payload.expires_days)).isoformat()
+        expires_at = (datetime.now(UTC) + timedelta(days=payload.expires_days)).isoformat()
     record = identity_store.create_token(
         token_hash=token_hash(raw),
         token_prefix=raw[:10],

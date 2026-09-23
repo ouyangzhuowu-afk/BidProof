@@ -5,8 +5,8 @@ import zipfile
 from fastapi.testclient import TestClient
 
 from app import main
-from app.services import scan_service
 from app.extraction import ExtractionError, extract_file
+from app.services import scan_service
 
 
 def _pdf_bytes(text: str) -> bytes:

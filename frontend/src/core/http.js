@@ -16,6 +16,10 @@
  *   - 401 处理通过 onUnauthorized 注入，http 层不认识 UI。
  */
 
+import { sessionVersion, isSessionCurrent, invalidateSession } from './session.js';
+import { reportDiagnostic } from './telemetry.js';
+import { isRecord } from './validators.js';
+
 /** @typedef {import('../../types/api.js').ApiErrorShape} ApiErrorShape */
 
 const CSRF_COOKIE = 'bidproof_csrf';
@@ -39,14 +43,16 @@ export class ApiError extends Error {
    * @param {string} init.url
    * @param {string} [init.code]   服务端业务错误码（若返回）
    * @param {unknown} [init.payload]
+   * @param {string} [init.requestId]
    */
-  constructor({ message, status, url, code, payload }) {
+  constructor({ message, status, url, code, payload, requestId }) {
     super(message);
     this.name = 'ApiError';
     this.status = status;
     this.url = url;
     this.code = code ?? '';
     this.payload = payload;
+    this.requestId = requestId || '';
   }
 
   /** 网络不可达 / 超时 / 被取消，而不是服务端拒绝。 */
@@ -74,7 +80,8 @@ function csrfToken() {
   const row = document.cookie
     .split('; ')
     .find((entry) => entry.startsWith(`${CSRF_COOKIE}=`));
-  return row ? decodeURIComponent(row.slice(CSRF_COOKIE.length + 1)) : '';
+  try { return row ? decodeURIComponent(row.slice(CSRF_COOKIE.length + 1)) : ''; }
+  catch { return ''; }
 }
 
 /**
@@ -137,7 +144,7 @@ async function readPayload(response, url) {
       const timedOut = error?.name === 'TimeoutError';
       throw new ApiError({
         message: aborted ? '请求已取消。' : timedOut ? '读取结果超时，请重试。' : '服务返回了不完整的结果，请刷新重试。',
-        status: response.ok ? 0 : response.status, url, code: aborted ? 'ABORTED' : timedOut ? 'TIMEOUT' : 'INVALID_RESPONSE',
+        status: response.ok ? 0 : response.status, url, code: aborted ? 'ABORTED' : timedOut ? 'TIMEOUT' : 'INVALID_RESPONSE', requestId: response.headers.get('x-request-id') || '',
       });
     }
   }
@@ -214,6 +221,7 @@ function toApiError(response, url, payload) {
     url,
     code: typeof body.code === 'string' ? body.code : '',
     payload,
+    requestId: response.headers.get('x-request-id') || '',
   });
 }
 
@@ -227,6 +235,44 @@ const sleep = (ms) => new Promise((resolve) => { setTimeout(resolve, ms); });
 
 /** @type {Map<string, Promise<unknown>>} */
 const inFlight = new Map();
+const activeRequests = new Set();
+const activeSubscriptions = new Set();
+const downloadUrls = new Map();
+
+/** Invalidate every response started by the previous principal, including bodies/retries. */
+export function resetSessionTransport() {
+  invalidateSession();
+  for (const controller of activeRequests) controller.abort();
+  for (const stop of [...activeSubscriptions]) stop();
+  for (const [url, timer] of downloadUrls) { clearTimeout(timer); URL.revokeObjectURL(url); }
+  downloadUrls.clear();
+  activeRequests.clear(); inFlight.clear();
+}
+
+function abortedRequest(url) {
+  return new ApiError({ message: '请求已取消。', status: 0, url, code: 'ABORTED' });
+}
+
+async function scopedRequest(url, method, idempotent, options, execute = executeJson) {
+  const version = sessionVersion();
+  const controller = new AbortController();
+  const forward = () => controller.abort(options.signal?.reason);
+  if (options.signal?.aborted) forward();
+  else options.signal?.addEventListener('abort', forward, { once: true });
+  activeRequests.add(controller);
+  try {
+    if (controller.signal.aborted) throw abortedRequest(url);
+    const result = await execute(url, method, idempotent, { ...options, signal: controller.signal });
+    if (!isSessionCurrent(version) || controller.signal.aborted) throw abortedRequest(url);
+    return result;
+  } catch (error) {
+    if (!isSessionCurrent(version)) throw abortedRequest(url);
+    throw error;
+  } finally {
+    options.signal?.removeEventListener('abort', forward);
+    activeRequests.delete(controller);
+  }
+}
 
 /**
  * @typedef {object} RequestOptions
@@ -256,7 +302,7 @@ export function request(url, options = {}) {
     return /** @type {Promise<T>} */ (inFlight.get(url));
   }
 
-  const run = executeJson(url, method, idempotent, options);
+  const run = scopedRequest(url, method, idempotent, options);
   if (dedupe) {
     inFlight.set(url, run);
     // Both outcomes consume the cleanup promise: an ignored finally() would
@@ -278,21 +324,24 @@ async function executeJson(url, method, idempotent, options) {
   let lastError;
 
   for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
+    if (options.signal?.aborted) throw abortedRequest(url);
     try {
-      const response = await send(url, method, options);
-      if (response.ok) return await readPayload(response, url);
-
-      handleUnauthorized(url, response.status);
-      const payload = await readPayload(response, url);
-      const error = toApiError(response, url, payload);
-
-      throw error;
+      return await send(url, method, options, async (response) => {
+        if (response.ok) return readPayload(response, url);
+        handleUnauthorized(url, response.status);
+        const payload = await readPayload(response, url);
+        throw toApiError(response, url, payload);
+      });
     } catch (error) {
       if (error instanceof ApiError) {
         if (error.isAborted) throw error;
         lastError = error;
         const retryable = error.isNetwork || RETRYABLE_STATUS.has(error.status);
-        if (!idempotent || !retryable || attempt === maxAttempts - 1) throw error;
+        if (!idempotent || !retryable || attempt === maxAttempts - 1) {
+          if (error.isNetwork || error.isServer) reportDiagnostic(error, { module: 'network',
+            code: error.isTimeout ? 'TIMEOUT' : error.code === 'INVALID_RESPONSE' ? 'INVALID_RESPONSE' : error.isNetwork ? 'NETWORK' : 'SERVER_ERROR', status: error.status, requestId: error.requestId });
+          throw error;
+        }
         await sleep(backoff(attempt));
         continue;
       }
@@ -310,19 +359,21 @@ const backoff = (attempt) => Math.min(4000, 400 * 2 ** attempt) + Math.random() 
  * @param {RequestOptions} options
  * @returns {Promise<Response>}
  */
-async function send(url, method, options) {
+async function send(url, method, options, consume = (response) => response) {
   const { signal, dispose } = buildSignal(
     options.signal,
     options.timeoutMs ?? DEFAULT_TIMEOUT_MS,
   );
   try {
-    return await fetch(url, withCredentials({
+    const response = await fetch(url, withCredentials({
       method,
       body: options.body,
       headers: options.headers,
       signal,
     }));
+    return await consume(response);
   } catch (error) {
+    if (error instanceof ApiError) throw error;
     const aborted = error instanceof DOMException && error.name === 'AbortError';
     const timedOut = error instanceof DOMException && error.name === 'TimeoutError';
     throw new ApiError({
@@ -366,18 +417,24 @@ export function json(url, method, body, options = {}) {
  * @param {RequestOptions} [options]
  * @returns {Promise<Response>}
  */
-export async function requestBlob(url, options = {}) {
+export function requestBlob(url, options = {}) {
   const method = (options.method || 'GET').toUpperCase();
-  const response = await send(url, method, {
+  return scopedRequest(url, method, false, {
     ...options,
     timeoutMs: options.timeoutMs ?? EXPORT_TIMEOUT_MS,
-  });
-  if (!response.ok) {
-    const payload = await readPayload(response, url);
-    handleUnauthorized(url, response.status);
-    throw toApiError(response, url, payload);
-  }
-  return response;
+  }, (path, verb, _idempotent, scopedOptions) => send(path, verb, scopedOptions, async (response) => {
+    if (!response.ok) {
+      handleUnauthorized(path, response.status);
+      const payload = await readPayload(response, path);
+      throw toApiError(response, path, payload);
+    }
+    // Keep cancellation/timeout attached until the binary body has arrived, too.
+    // Consumers still receive a standard Response with the server's filename headers.
+    const body = await response.blob();
+    return new Response([204, 205].includes(response.status) ? null : body, {
+      status: response.status, statusText: response.statusText, headers: response.headers,
+    });
+  }));
 }
 
 /**
@@ -385,18 +442,21 @@ export async function requestBlob(url, options = {}) {
  * 旧实现有三处重复的 createElement('a') 片段，其中两处漏了 revokeObjectURL。
  * @param {Blob} blob
  * @param {string} filename
+ * @param {number} [session] Session captured before starting the download.
  */
-export function saveBlob(blob, filename) {
+export function saveBlob(blob, filename, session = sessionVersion()) {
+  if (!isSessionCurrent(session)) throw abortedRequest('');
   const href = URL.createObjectURL(blob);
   const link = document.createElement('a');
   link.href = href;
   link.download = filename;
   link.rel = 'noopener';
-  document.body.append(link);
-  link.click();
-  link.remove();
   // Safari 需要等一帧再释放，否则下载会被中断。
-  setTimeout(() => URL.revokeObjectURL(href), 0);
+  downloadUrls.set(href, setTimeout(() => {
+    URL.revokeObjectURL(href); downloadUrls.delete(href);
+  }, 0));
+  try { document.body.append(link); link.click(); }
+  finally { link.remove(); }
 }
 
 /**
@@ -419,15 +479,28 @@ export function watchJob(jobId, { onProgress, onDone, onError }) {
   let closed = false;
   let source = /** @type {EventSource | null} */ (null);
   let pollTimer = /** @type {ReturnType<typeof setTimeout> | null} */ (null);
+  let wakePoll = null;
+  let polling = false;
+  const controller = new AbortController();
 
   const cancel = () => {
     closed = true;
     source?.close();
     if (pollTimer) clearTimeout(pollTimer);
+    wakePoll?.(); wakePoll = null;
+    controller.abort();
+    activeSubscriptions.delete(cancel);
   };
+  activeSubscriptions.add(cancel);
 
   const settle = (job) => {
-    if (closed) return;
+    if (closed) return true;
+    if (!isRecord(job) || typeof job.status !== 'string'
+      || !['PENDING', 'RUNNING', 'COMPLETED', ...terminal].includes(job.status)
+      || (job.status === 'COMPLETED' && (typeof job.run_id !== 'string' || !job.run_id))) {
+      cancel(); onError(new ApiError({ message: '扫描进度返回异常，请在作业记录中刷新查看。', status: 0, url: `/api/jobs/${encoded}`, code: 'INVALID_RESPONSE' }));
+      return true;
+    }
     if (job.status === 'COMPLETED' && job.run_id) { cancel(); onDone(job); return true; }
     if (terminal.has(job.status)) {
       cancel();
@@ -444,17 +517,21 @@ export function watchJob(jobId, { onProgress, onDone, onError }) {
   };
 
   const poll = async () => {
+    if (polling || closed) return;
+    polling = true;
     let delay = 750;
     for (let attempt = 0; attempt < 240 && !closed; attempt += 1) {
       try {
-        const job = await request(`/api/jobs/${encoded}`);
+        const job = await request(`/api/jobs/${encoded}`, { signal: controller.signal });
         if (settle(job)) return;
       } catch (error) {
         if (closed) return;
-        if (error instanceof ApiError && error.isUnauthorized) { cancel(); onError(error); return; }
+        if (error instanceof ApiError && [401, 403, 404].includes(error.status)) { cancel(); onError(error); return; }
         // 单次轮询失败不终止，网络抖动比作业失败常见得多。
       }
-      await new Promise((resolve) => { pollTimer = setTimeout(resolve, delay); });
+      if (closed) return;
+      await new Promise((resolve) => { wakePoll = resolve; pollTimer = setTimeout(resolve, delay); });
+      wakePoll = null; pollTimer = null;
       delay = Math.min(5000, Math.round(delay * 1.4));
     }
     if (!closed) {

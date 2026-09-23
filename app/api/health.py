@@ -2,22 +2,60 @@
 
 from __future__ import annotations
 
+import html
+
 from fastapi import APIRouter, HTTPException, Query, Request
-from fastapi.responses import FileResponse, PlainTextResponse, Response
+from fastapi.responses import (
+    FileResponse,
+    HTMLResponse,
+    JSONResponse,
+    PlainTextResponse,
+    Response,
+)
 
 from .. import config, observability
-from ..config import PROJECT_ROOT
 from ..authz import Permission, require
+from ..config import PROJECT_ROOT
 from ..identity import principal_of
 from ..services import workspace_service
-
 
 router = APIRouter()
 
 
 @router.get("/", include_in_schema=False)
-def landing() -> FileResponse:
-    return FileResponse(PROJECT_ROOT / "static" / "landing.html")
+def landing() -> HTMLResponse:
+    entry = PROJECT_ROOT / "static" / "marketing" / "index.html"
+    if not entry.exists():
+        return HTMLResponse("产品页面正在构建，请稍后再试。", status_code=503)
+    origin = config.PUBLIC_ORIGIN
+    source = entry.read_text(encoding="utf-8").replace("__PUBLIC_ORIGIN__", html.escape(origin, quote=True))
+    # Local previews are not canonical public deployments.
+    return HTMLResponse(source, headers={"Cache-Control": "no-cache"})
+
+
+@router.get("/robots.txt", include_in_schema=False)
+def robots() -> PlainTextResponse:
+    if not config.PUBLIC_ORIGIN:
+        return PlainTextResponse("User-agent: *\nDisallow: /\n")
+    return PlainTextResponse("User-agent: *\nAllow: /\nDisallow: /app\nDisallow: /api/\n"
+                             f"Sitemap: {config.PUBLIC_ORIGIN}/sitemap.xml\n")
+
+
+@router.get("/sitemap.xml", include_in_schema=False)
+def sitemap() -> Response:
+    urls = "".join(f"<url><loc>{html.escape(config.PUBLIC_ORIGIN + path)}</loc></url>"
+                   for path in ("/", "/privacy")) if config.PUBLIC_ORIGIN else ""
+    return Response('<?xml version="1.0" encoding="UTF-8"?>'
+                    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+                    + urls + '</urlset>', media_type="application/xml")
+
+
+@router.get("/readyz", include_in_schema=False)
+def readyz() -> JSONResponse:
+    if not workspace_service.is_ready():
+        return JSONResponse({"status": "not_ready"}, status_code=503,
+                            headers={"Cache-Control": "no-store"})
+    return JSONResponse({"status": "ready"}, headers={"Cache-Control": "no-store"})
 
 
 @router.get("/app", include_in_schema=False)

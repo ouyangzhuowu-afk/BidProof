@@ -5,10 +5,21 @@ import sqlite3
 from fastapi.testclient import TestClient
 
 from app import config, main
-from app.services import scan_service
-from app.db import create_scan_job, init_db, list_recoverable_jobs, load_scan_job, record_audit_event, update_scan_job
+from app.db import (
+    create_scan_job,
+    init_db,
+    list_recoverable_jobs,
+    load_scan_job,
+    record_audit_event,
+    update_scan_job,
+)
 from app.extraction import ExtractionError
-from work.backup_restore import create_backup, record_backup_verification, restore_backup
+from app.services import scan_service
+from work.backup_restore import (
+    create_backup,
+    record_backup_verification,
+    restore_backup,
+)
 
 
 def test_scan_job_persists_progress_and_recovery_state(tmp_path):

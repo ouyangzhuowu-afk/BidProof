@@ -238,6 +238,15 @@ export function refreshIntakeFiles() {
   }
 }
 
+/** Authentication reset must release native FileList and cached File references synchronously. */
+export function clearIntakeFiles() {
+  for (const field of fields.values()) {
+    field.input.value = '';
+    field.files = []; field.errors = []; field.notice = '';
+  }
+  setIntakeBusy(false);
+}
+
 /** Recheck at submit; the server remains the authority for format and size. */
 export function validateIntakeFiles() {
   let valid = true;

@@ -10,7 +10,6 @@ from ..repositories import workspaces
 from ..schemas import MemberCreateRequest, MemberUpdateRequest
 from ..services import auth_service
 
-
 router = APIRouter(prefix="/api/members", tags=["members"])
 
 

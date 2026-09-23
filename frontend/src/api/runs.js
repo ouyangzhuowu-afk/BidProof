@@ -11,6 +11,8 @@
 
 import { request, json, requestBlob, saveBlob, UPLOAD_TIMEOUT_MS, EXPORT_TIMEOUT_MS } from '../core/http.js';
 import { paths } from './paths.js';
+import { assertDecisionCommand, assertRunEnvelope } from '../core/validators.js';
+import { sessionVersion } from '../core/session.js';
 
 /** @typedef {import('../../types/api.js').Run} Run */
 /** @typedef {import('../../types/api.js').RunSummary} RunSummary */
@@ -106,11 +108,14 @@ export function rescan(parentRunId, form) {
  * 调用方必须已经做过二次确认。
  *
  * @param {string} runId
- * @param {{ decision: string, note: string, unresolved_requirement_ids: string[] }} body
+ * @param {import('../core/contracts.js').DecisionCommand} body
  * @returns {Promise<Run>}
  */
-export function saveDecision(runId, body) {
-  return json(paths.runs.decision(runId), 'POST', body);
+export async function saveDecision(runId, body) {
+  assertDecisionCommand(body);
+  const run = await json(paths.runs.decision(runId), 'POST', body);
+  assertRunEnvelope(run, runId);
+  return /** @type {Run} */ (run);
 }
 
 /**
@@ -181,8 +186,8 @@ export function submitAccuracyFeedback(runId, body) {
  * @param {string} runId
  * @returns {Promise<{ comments: import('../../types/api.js').Comment[] }>}
  */
-export function listComments(runId) {
-  return request(paths.runs.comments(runId));
+export function listComments(runId, options = {}) {
+  return request(paths.runs.comments(runId), options);
 }
 
 /** @param {string} runId @param {{ body: string }} body */
@@ -194,16 +199,16 @@ export function addComment(runId, body) {
  * @param {string} runId
  * @returns {Promise<{ events: import('../../types/api.js').AuditEvent[] }>}
  */
-export function listAudit(runId) {
-  return request(paths.runs.audit(runId));
+export function listAudit(runId, options = {}) {
+  return request(paths.runs.audit(runId), options);
 }
 
 /**
  * @param {string} runId
  * @returns {Promise<{ remediations: import('../../types/api.js').Remediation[] }>}
  */
-export function listRemediations(runId) {
-  return request(paths.runs.remediations(runId));
+export function listRemediations(runId, options = {}) {
+  return request(paths.runs.remediations(runId), options);
 }
 
 /** @param {string} runId @param {Record<string, unknown>} body */
@@ -242,13 +247,14 @@ export function bulkManage(action, runIds) {
  * @param {string[]} runIds
  */
 export async function bulkExport(runIds) {
+  const session = sessionVersion();
   const response = await requestBlob(paths.runs.bulkReport, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ run_ids: runIds }),
     timeoutMs: EXPORT_TIMEOUT_MS,
   });
-  saveBlob(await response.blob(), filenameFrom(response, 'bidproof-reports.zip'));
+  saveBlob(await response.blob(), filenameFrom(response, 'bidproof-reports.zip'), session);
 }
 
 /**
@@ -257,8 +263,9 @@ export async function bulkExport(runIds) {
  * @param {ExportFormat} format
  */
 export async function exportRun(runId, format) {
+  const session = sessionVersion();
   const response = await requestBlob(paths.runs.report(runId, format));
-  saveBlob(await response.blob(), filenameFrom(response, `bidproof-${runId.slice(0, 12)}.${format}`));
+  saveBlob(await response.blob(), filenameFrom(response, `bidproof-${runId.slice(0, 12)}.${format}`), session);
 }
 
 /**

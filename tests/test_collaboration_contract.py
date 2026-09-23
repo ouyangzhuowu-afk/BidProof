@@ -1,11 +1,11 @@
 import uuid
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 
 from fastapi.testclient import TestClient
 
 from app import main
-from app.services import scan_service
 from app.db import create_scan_job
+from app.services import scan_service
 
 
 def _pdf_bytes(text: str) -> bytes:
@@ -65,7 +65,7 @@ def test_notifications_surface_overdue_remediations_and_failed_jobs(monkeypatch)
     workspace = f"notifications-{uuid.uuid4().hex}"
     headers = {"X-Workspace-ID": workspace, "X-User-ID": "owner", "X-User-Role": "OWNER"}
     run = client.post("/api/runs", headers=headers, files={"tender": ("tender.pdf", _pdf_bytes("资格要求"), "application/pdf")}).json()
-    due = (datetime.now(timezone.utc) - timedelta(days=1)).date().isoformat()
+    due = (datetime.now(UTC) - timedelta(days=1)).date().isoformat()
     created = client.post(f"/api/runs/{run['run_id']}/remediations", headers=headers, json={"title": "补齐证据", "due_date": due})
     assert created.status_code == 201
     create_scan_job(f"failed-{uuid.uuid4().hex}", workspace, None, "FAILED", {"error": "parse"})

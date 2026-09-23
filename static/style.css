@@ -2766,6 +2766,13 @@ html[data-theme="dark"] { --quote-highlight: #655529; }
   }
   .secret__spacer { flex: 1 1 auto; }
 }
+@layer components {
+  .runtime-notices { position: sticky; top: 0; z-index: 90; }
+  .runtime-notice { margin: 0; padding: 12px 24px; background: var(--verdict-review-wash, #fffbeb); color: var(--ink, #243237); border-bottom: 1px solid var(--rule, #e5e7eb); font-size: 14px; line-height: 1.6; }
+  .runtime-notice--error { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .runtime-notice--error > span { flex: 1 1 280px; }
+  .runtime-notice[hidden] { display: none; }
+}
 
 /* ─── src/styles/views/runs.css ─── */
 /* =============================================================================

@@ -1,0 +1,29 @@
+{
+	email {$ACME_EMAIL}
+	admin off
+	servers {
+		timeouts {
+			read_header 10s
+			read_body 60s
+			idle 2m
+		}
+	}
+}
+
+http://127.0.0.1 {
+	respond /healthz "ok" 200
+}
+
+{$BIDPROOF_DOMAIN} {
+	encode zstd gzip
+	request_body {
+		max_size 115343360
+	}
+	reverse_proxy web:8080 {
+		flush_interval -1
+		transport http {
+			dial_timeout 5s
+			response_header_timeout 90s
+		}
+	}
+}

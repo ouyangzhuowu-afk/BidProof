@@ -16,10 +16,11 @@ import * as theme from './core/theme.js';
 import { renderIcons } from './core/icons.js';
 import { onUnauthorized } from './core/http.js';
 import { setLang, currentLang } from './i18n/index.js';
+import { installRuntimeBoundary } from './core/runtime.js';
+import { reportDiagnostic } from './core/telemetry.js';
 
 // 主题必须在首帧之前生效，否则深色用户会被白屏闪一下。
-theme.start();
-setLang(currentLang());
+installRuntimeBoundary();
 
 /** app.js 在被导入时会挂载所有事件与初始化逻辑。 */
 async function boot() {
@@ -28,12 +29,14 @@ async function boot() {
     window.dispatchEvent(new CustomEvent('bidproof:unauthorized'));
   });
 
-  renderIcons(document);
-
   try {
-    await import('./app.js');
+    theme.start();
+    setLang(currentLang());
+    renderIcons(document);
+    const application = await import('./app.js');
+    await application.ready;
   } catch (error) {
-    console.error('[bidproof] 工作台初始化失败', error);
+    reportDiagnostic(error, { module: 'boot', code: 'BOOT_FAILED' });
     showBootFailure(error);
   }
 }
@@ -45,8 +48,7 @@ async function boot() {
 function showBootFailure(error) {
   const main = document.querySelector('#app-main');
   if (!main) return;
-  const detail = error instanceof Error ? error.message : String(error);
-  main.innerHTML = '';
+  main.replaceChildren();
   const block = document.createElement('div');
   block.className = 'state state--error';
   block.setAttribute('role', 'alert');
@@ -58,7 +60,7 @@ function showBootFailure(error) {
   const body = document.createElement('p');
   body.className = 'state__body';
   // textContent：错误信息可能包含来自响应体的内容，不走 HTML 解析。
-  body.textContent = `${detail}。请刷新页面重试；若反复出现，请把这条信息提供给管理员。`;
+  body.textContent = '工作台初始化未完成。请刷新页面重试；若反复出现，请联系管理员检查应用版本与连接。';
 
   const retry = document.createElement('button');
   retry.className = 'btn btn--secondary';

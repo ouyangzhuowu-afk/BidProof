@@ -1,6 +1,6 @@
 import io
-from pathlib import Path
 import zipfile
+from pathlib import Path
 
 from app.extraction import extract_file
 from app.reporting import _locator_label as report_locator_label

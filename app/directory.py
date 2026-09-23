@@ -8,7 +8,9 @@ deployment that does not use a directory need not install it.
 from __future__ import annotations
 
 import os
+import ssl
 from dataclasses import dataclass
+from urllib.parse import urlsplit
 
 
 class DirectoryError(RuntimeError):
@@ -42,6 +44,16 @@ def settings_from_env() -> DirectorySettings:
     )
 
 
+def validate_settings(settings: DirectorySettings) -> None:
+    uri = urlsplit(settings.server_uri)
+    if (not settings.enabled or not settings.use_tls or uri.scheme != "ldaps" or not uri.hostname
+            or uri.username or uri.password or uri.query or uri.fragment
+            or settings.default_role not in {"REVIEWER", "VIEWER"}):
+        raise DirectoryError("Directory login requires certificate-verified LDAPS and a non-administrative default role")
+    if settings.user_dn_template.count("{username}") != 1:
+        raise DirectoryError("Directory bind template must contain one username placeholder")
+
+
 def ldap_filter_escape(value: str) -> str:
     """Escape RFC 4515 special characters so a DN cannot alter a search filter."""
     return (
@@ -73,6 +85,7 @@ def authenticate(settings: DirectorySettings, username: str, password: str, *, c
     """
     if not settings.enabled:
         raise DirectoryError("directory authentication is not configured")
+    validate_settings(settings)
     if not password:
         return {}
     connect = connector or _ldap3_connector
@@ -85,7 +98,10 @@ def _ldap3_connector(settings: DirectorySettings, bind_dn: str, password: str) -
     except ImportError as exc:  # pragma: no cover - exercised only without the extra installed
         raise DirectoryError("ldap3 is not installed; install the 'ldap' extra to use directory login") from exc
 
-    server = ldap3.Server(settings.server_uri, use_ssl=settings.use_tls, get_info=ldap3.NONE)
+    server = ldap3.Server(
+        settings.server_uri, use_ssl=True, get_info=ldap3.NONE,
+        tls=ldap3.Tls(validate=ssl.CERT_REQUIRED), connect_timeout=10,
+    )
     connection = ldap3.Connection(server, user=bind_dn, password=password, raise_exceptions=False)
     if not connection.bind():
         return {}

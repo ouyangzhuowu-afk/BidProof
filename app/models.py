@@ -10,12 +10,11 @@ future monthly partitions can use native time types; SQLite keeps TEXT for the s
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 import sqlalchemy as sa
 from sqlalchemy.dialects import postgresql
 from sqlalchemy.types import TypeDecorator
-
 
 metadata = sa.MetaData()
 
@@ -37,17 +36,17 @@ class IsoTimestamp(TypeDecorator):
         if dialect.name == "postgresql":
             if isinstance(value, datetime):
                 if value.tzinfo is None:
-                    return value.replace(tzinfo=timezone.utc)
+                    return value.replace(tzinfo=UTC)
                 return value
             text = str(value).replace("Z", "+00:00")
             parsed = datetime.fromisoformat(text)
             if parsed.tzinfo is None:
-                parsed = parsed.replace(tzinfo=timezone.utc)
+                parsed = parsed.replace(tzinfo=UTC)
             return parsed
         if isinstance(value, datetime):
             if value.tzinfo is None:
-                value = value.replace(tzinfo=timezone.utc)
-            return value.astimezone(timezone.utc).isoformat()
+                value = value.replace(tzinfo=UTC)
+            return value.astimezone(UTC).isoformat()
         return value
 
     def process_result_value(self, value, dialect):
@@ -55,8 +54,8 @@ class IsoTimestamp(TypeDecorator):
             return None
         if isinstance(value, datetime):
             if value.tzinfo is None:
-                value = value.replace(tzinfo=timezone.utc)
-            return value.astimezone(timezone.utc).isoformat()
+                value = value.replace(tzinfo=UTC)
+            return value.astimezone(UTC).isoformat()
         return value
 
 
@@ -181,6 +180,7 @@ scan_jobs = sa.Table(
     sa.Column("progress_total", sa.Integer, nullable=False, server_default="0"),
     sa.Column("progress_message", sa.Text, nullable=False, server_default=""),
     sa.Column("cancel_requested", sa.Integer, nullable=False, server_default="0"),
+    sa.Column("lease_token", sa.Text),
     sa.Column("payload_json", json_column(), nullable=False, server_default="{}"),
     sa.Column("created_at", IsoTimestamp(), nullable=False),
     sa.Column("updated_at", IsoTimestamp(), nullable=False),

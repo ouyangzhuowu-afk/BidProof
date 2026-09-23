@@ -2,10 +2,8 @@ import hashlib
 import json
 from pathlib import Path
 
-
 from app.extraction import extract_pdf
 from tests.conftest import requires_real_uploads
-
 
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "tests" / "fixtures" / "real-upload" / "ground-truth-candidates.json"

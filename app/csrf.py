@@ -14,7 +14,6 @@ import secrets
 
 from fastapi import HTTPException, Request, Response
 
-
 COOKIE_NAME = "bidproof_csrf"
 HEADER_NAME = "X-CSRF-Token"
 SAFE_METHODS = frozenset({"GET", "HEAD", "OPTIONS", "TRACE"})

@@ -7,16 +7,15 @@ synthetic request, which is why identity had to be replayed through headers.
 
 from __future__ import annotations
 
+import asyncio
 import logging
 import uuid
-
-logger = logging.getLogger("bidproof.scan")
 from contextlib import ExitStack
 from pathlib import Path
 
 from fastapi import HTTPException, UploadFile
 
-from .. import config, presenters, uow
+from .. import config, job_leases, presenters, uow
 from ..extraction import ExtractionError, extract_file
 from ..identity import InternalJobContext
 from ..repositories import audit, jobs, projects, runs
@@ -28,9 +27,11 @@ from ..uploads import (
     remove_tree,
     safe_filename,
     save_upload,
+    validate_intake,
     validate_upload_content,
 )
 
+logger = logging.getLogger("bidproof.scan")
 
 TENDER_SOURCE_ID = "TENDER-001"
 
@@ -50,13 +51,18 @@ def parse_evidence_metadata(raw: str | None) -> dict[str, EvidenceMetadata]:
     for filename, value in payload.items():
         if not isinstance(filename, str) or not isinstance(value, dict):
             raise HTTPException(status_code=400, detail="evidence_metadata 格式无效")
-        result[filename] = EvidenceMetadata(**value)
+        try:
+            result[filename] = EvidenceMetadata(**value)
+        except ValueError as exc:
+            raise HTTPException(422, "证据元数据字段无效") from exc
     return result
 
 
 def _resolve_project(principal: dict[str, str], project_id: str | None) -> dict:
     project = projects.ensure_default(principal["workspace_id"]) if not project_id else projects.load(project_id)
     if project is None or project["workspace_id"] != principal["workspace_id"]:
+        raise HTTPException(status_code=404, detail="项目不存在")
+    if not runs.can_access_project(principal, project["project_id"]):
         raise HTTPException(status_code=404, detail="项目不存在")
     if project["archived_at"]:
         raise HTTPException(status_code=409, detail="归档项目不能创建新扫描")
@@ -72,20 +78,33 @@ async def create_run(
     evidence_metadata: str | None = None,
     project_id: str | None = None,
     queued_job_id: str | None = None,
+    lease_token: str | None = None,
+    parent_run_id: str | None = None,
 ) -> dict:
     """Scan one tender plus its supporting evidence and persist the resulting run.
 
     `queued_job_id` binds the run to an already queued job; it must only ever come from a
     server-constructed job context, never from client input.
     """
+    def update_job(status: str, **fields):
+        if lease_token:
+            fields.pop("attempts", None)
+            if not job_leases.update(job_id, lease_token, status=status, **fields):
+                raise job_leases.LeaseLost("Scan attempt no longer active")
+        else:
+            jobs.update(job_id, status, **fields)
+
+    evidence = [upload for upload in evidence or [] if upload.filename]
+    validate_intake(tender, evidence, company_name, evidence_metadata)
     project = _resolve_project(principal, project_id)
+    parent = runs.require_scoped(parent_run_id, principal) if parent_run_id else None
     if not is_supported(tender.filename):
         raise HTTPException(status_code=400, detail="招标文件支持 PDF、DOCX、XLSX、PPTX、TXT、MD")
     metadata = parse_evidence_metadata(evidence_metadata)
-    run_id = uuid.uuid4().hex
+    run_id = job_leases.attempt_run_id(queued_job_id, lease_token) if queued_job_id and lease_token else uuid.uuid4().hex
     job_id = queued_job_id or uuid.uuid4().hex
     if queued_job_id:
-        jobs.update(job_id, "RUNNING")
+        update_job("RUNNING")
     else:
         jobs.create(job_id, principal["workspace_id"], None, "RUNNING")
 
@@ -99,7 +118,7 @@ async def create_run(
         validate_upload_content(tender_path)
     except HTTPException:
         remove_tree(run_dir)
-        jobs.update(job_id, "FAILED", attempts=1, error="UPLOAD_REJECTED")
+        update_job("FAILED", attempts=1, error="UPLOAD_REJECTED")
         raise
 
     duplicate_run_ids = runs.find_duplicates(principal["workspace_id"], tender_sha256)
@@ -113,7 +132,7 @@ async def create_run(
         suffix = Path(upload.filename).suffix.lower()
         if not is_supported(upload.filename):
             remove_tree(run_dir)
-            jobs.update(job_id, "FAILED", attempts=1, error="UNSUPPORTED_EVIDENCE_FORMAT", progress_message="企业证据格式不受支持")
+            update_job("FAILED", attempts=1, error="UNSUPPORTED_EVIDENCE_FORMAT", progress_message="企业证据格式不受支持")
             raise HTTPException(status_code=400, detail="企业证据支持 PDF、DOCX、XLSX、PPTX、TXT、MD")
         target = run_dir / f"evidence-{index:03d}-{safe_filename(upload.filename)}"
         try:
@@ -121,14 +140,14 @@ async def create_run(
             validate_upload_content(target)
         except HTTPException:
             remove_tree(run_dir)
-            jobs.update(job_id, "FAILED", attempts=1, error="UPLOAD_REJECTED")
+            update_job("FAILED", attempts=1, error="UPLOAD_REJECTED")
             raise
         asset_id = f"EVD-{index:03d}"
         try:
             pages = extract_file(target)
         except ExtractionError as exc:
             remove_tree(run_dir)
-            jobs.update(job_id, "FAILED", attempts=1, error="EVIDENCE_EXTRACTION_FAILED", progress_message="企业证据解析失败")
+            update_job("FAILED", attempts=1, error="EVIDENCE_EXTRACTION_FAILED", progress_message="企业证据解析失败")
             raise HTTPException(status_code=422, detail=str(exc)) from exc
         for page in pages:
             page["source_filename"] = upload.filename
@@ -154,7 +173,7 @@ async def create_run(
         tender_pages = extract_file(tender_path)
     except ExtractionError as exc:
         remove_tree(run_dir)
-        jobs.update(job_id, "FAILED", attempts=1, error="TENDER_EXTRACTION_FAILED", progress_message="招标文件解析失败")
+        update_job("FAILED", attempts=1, error="TENDER_EXTRACTION_FAILED", progress_message="招标文件解析失败")
         raise HTTPException(status_code=422, detail=str(exc)) from exc
     for page in tender_pages:
         page["source_id"] = TENDER_SOURCE_ID
@@ -211,8 +230,8 @@ async def create_run(
         "run_id": run_id,
         "workspace_id": principal["workspace_id"],
         "owner_id": principal["user_id"],
-        "parent_run_id": None,
-        "version_number": 1,
+        "parent_run_id": parent_run_id,
+        "version_number": int(parent.get("version_number", 1)) + 1 if parent else 1,
         "job_id": job_id,
         "assignee_id": principal["user_id"],
         "reviewer_id": None,
@@ -235,11 +254,18 @@ async def create_run(
         "requirements": requirements,
         "review": {"items": [], "updated_at": now},
     }
-    with uow.transaction():
-        runs.save(run)
-        jobs.link_run(job_id, run_id)
-        jobs.update(job_id, "COMPLETED", attempts=1)
-        audit.record(principal["workspace_id"], principal["user_id"], "RUN_CREATED", run_id, {"filename": tender.filename, "version_number": 1})
+    try:
+        with uow.transaction():
+            job_leases.fence_publication(job_id, lease_token)
+            runs.save(run)
+            jobs.link_run(job_id, run_id)
+            update_job("COMPLETED", attempts=1, progress_current=len(evidence_files) + 2,
+                       progress_total=len(evidence_files) + 2, progress_message="扫描完成")
+            audit.record(principal["workspace_id"], principal["user_id"], "RUN_CREATED", run_id,
+                         {"filename": tender.filename, "version_number": run["version_number"]})
+    except job_leases.LeaseLost:
+        remove_tree(run_dir)
+        raise
     return presenters.public_run(run)
 
 
@@ -283,8 +309,16 @@ async def stage_job(
     company_name: str,
     evidence_metadata: str | None,
     project_id: str | None,
+    parent_run_id: str | None = None,
 ) -> str:
     """Persist uploads to the staging area and queue a job. Returns the job id."""
+    evidence = [upload for upload in evidence or [] if upload.filename]
+    validate_intake(tender, evidence, company_name, evidence_metadata)
+    parse_evidence_metadata(evidence_metadata)
+    if parent_run_id:
+        parent = runs.require_scoped(parent_run_id, principal)
+        project_id = project_id or parent.get("project_id")
+    _resolve_project(principal, project_id)
     if not is_supported(tender.filename):
         raise HTTPException(status_code=400, detail="招标文件格式不受支持")
     job_id = uuid.uuid4().hex
@@ -293,7 +327,7 @@ async def stage_job(
     tender_target = staging / f"tender-{safe_filename(tender.filename)}"
     try:
         await save_upload(tender, tender_target)
-        validate_upload_content(tender_target)
+        validate_upload_content(tender_target, inspect_pdf=False)
         evidence_records = []
         for index, upload in enumerate(evidence or [], 1):
             if not upload.filename:
@@ -302,7 +336,7 @@ async def stage_job(
                 raise HTTPException(status_code=400, detail="企业证据格式不受支持")
             target = staging / f"evidence-{index:03d}-{safe_filename(upload.filename)}"
             await save_upload(upload, target)
-            validate_upload_content(target)
+            validate_upload_content(target, inspect_pdf=False)
             evidence_records.append({"path": str(target), "filename": upload.filename})
     except Exception:
         remove_tree(staging)
@@ -316,6 +350,7 @@ async def stage_job(
         "user_id": principal["user_id"],
         "role": principal["role"],
         "project_id": project_id,
+        "parent_run_id": parent_run_id,
     }
     jobs.create(job_id, principal["workspace_id"], None, "PENDING", payload)
     jobs.update(job_id, "PENDING", progress_total=max(2, len(evidence_records) + 2), progress_message="文件已接收，等待解析")
@@ -323,70 +358,45 @@ async def stage_job(
     return job_id
 
 
-async def process_job(job_id: str) -> None:
-    """Execute one queued scan job.
-
-    Runs under the identity captured when the job was queued, rebuilt as an InternalJobContext
-    so the principal is explicit rather than reconstructed from request headers.
-    """
-    job = jobs.load(job_id)
+async def process_job(job_id: str, lease_token: str | None = None) -> None:
+    """Run only an atomically claimed attempt; publication checks its lease again."""
+    if lease_token is None:
+        job = job_leases.claim(job_id)
+    else:
+        job = jobs.load(job_id)
+        if job is not None and (job.get("lease_token") != lease_token or job["status"] != "RUNNING"
+                                or job.get("cancel_requested")):
+            return
     if job is None:
         return
+    token = job["lease_token"]
     payload = job["payload"]
-    if job.get("status") == "CANCELLED" or job.get("cancel_requested"):
-        staged_tender = payload.get("tender_path")
-        if staged_tender:
-            remove_tree(Path(staged_tender).parent)
-        return
-    attempts = int(job.get("attempts", 0)) + 1
     progress_total = max(2, len(payload.get("evidence", [])) + 2)
-    if not jobs.start(job_id, attempts=attempts, progress_total=progress_total, progress_message="准备解析文件"):
-        return
-    jobs.update(job_id, "RUNNING", attempts=attempts, progress_current=0, progress_total=progress_total, progress_message="准备解析文件")
-    context = InternalJobContext(
-        workspace_id=job["workspace_id"],
-        user_id=payload.get("user_id", "local-owner"),
-        role=payload.get("role", "OWNER"),
-        job_id=job_id,
-    )
+    job_leases.update(job_id, token, progress_total=progress_total, progress_current=1,
+                     progress_message="解析招标文件与企业证据")
+    context = InternalJobContext(workspace_id=job["workspace_id"],
+                                 user_id=payload.get("user_id", "local-owner"),
+                                 role=payload.get("role", "OWNER"), job_id=job_id)
     try:
         with ExitStack() as stack:
-            tender_handle = stack.enter_context(Path(payload["tender_path"]).open("rb"))
-            tender = UploadFile(filename=payload["tender_filename"], file=tender_handle)
-            evidence_uploads = []
-            for item in payload.get("evidence", []):
-                handle = stack.enter_context(Path(item["path"]).open("rb"))
-                evidence_uploads.append(UploadFile(filename=item["filename"], file=handle))
-            jobs.update(job_id, "RUNNING", progress_current=1, progress_total=progress_total, progress_message="解析招标文件与企业证据")
-            if (jobs.load(job_id) or {}).get("status") == "CANCELLED":
-                remove_tree(Path(payload["tender_path"]).parent)
-                return
-            result = await create_run(
-                principal=context.principal(),
-                tender=tender,
-                evidence=evidence_uploads,
-                company_name=payload.get("company_name", "未填写企业"),
-                evidence_metadata=payload.get("evidence_metadata"),
-                project_id=payload.get("project_id"),
-                queued_job_id=context.job_id,
-            )
-        jobs.link_run(job_id, result["run_id"])
-        jobs.update(job_id, "RUNNING", attempts=attempts, progress_current=max(1, progress_total - 1), progress_total=progress_total, progress_message="保存证据链结果")
-        jobs.update(job_id, "COMPLETED", attempts=attempts, progress_current=progress_total, progress_total=progress_total, progress_message="扫描完成")
-        audit.record(job["workspace_id"], payload.get("user_id", "local-owner"), "SCAN_JOB_COMPLETED", result["run_id"], {"job_id": job_id, "attempts": attempts})
+            tender = UploadFile(filename=payload["tender_filename"],
+                                file=stack.enter_context(await asyncio.to_thread(Path(payload["tender_path"]).open, "rb")))
+            evidence_uploads = [UploadFile(filename=item["filename"],
+                                          file=stack.enter_context(await asyncio.to_thread(Path(item["path"]).open, "rb")))
+                                for item in payload.get("evidence", [])]
+            await create_run(principal=context.principal(), tender=tender, evidence=evidence_uploads,
+                             company_name=payload.get("company_name", "未填写企业"),
+                             evidence_metadata=payload.get("evidence_metadata"),
+                             project_id=payload.get("project_id"), queued_job_id=job_id,
+                             lease_token=token, parent_run_id=payload.get("parent_run_id"))
         remove_tree(Path(payload["tender_path"]).parent)
+    except job_leases.LeaseLost:
+        # A different worker may be using the staging files. Only cancellation permits cleanup.
+        current = jobs.load(job_id) or {}
+        if current.get("status") == "CANCELLED":
+            remove_tree(Path(payload["tender_path"]).parent)
+        logger.info("scan_attempt_stopped", extra={"job_id": job_id})
     except Exception as exc:
-        logger.exception("process_job %s failed: %s", job_id, exc)
-        current_job = jobs.load(job_id) or {}
-        if current_job.get("status") == "CANCELLED" or current_job.get("cancel_requested"):
-            return
-        jobs.update(
-            job_id,
-            "FAILED",
-            attempts=attempts,
-            error=current_job.get("error") or type(exc).__name__,
-            progress_current=0,
-            progress_total=progress_total,
-            progress_message=current_job.get("progress_message") or "处理失败，可重试",
-        )
-        audit.record(job["workspace_id"], payload.get("user_id", "local-owner"), "SCAN_JOB_FAILED", None, {"job_id": job_id, "attempts": attempts, "error": type(exc).__name__})
+        logger.exception("scan_attempt_failed", extra={"job_id": job_id})
+        job_leases.update(job_id, token, status="FAILED", error=type(exc).__name__,
+                         progress_message="处理失败，可重试")

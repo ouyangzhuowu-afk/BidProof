@@ -2,7 +2,6 @@ from typing import Annotated, Literal
 
 from pydantic import AfterValidator, BaseModel, Field
 
-
 # Single source of truth for the account password policy. Applied wherever a password is set;
 # on login it is enforced in the handler so an under-policy value still fails as a 401.
 MIN_PASSWORD_LENGTH = 8
@@ -55,6 +54,7 @@ class DecisionRequest(BaseModel):
     decision: Literal["CONTINUE", "HOLD", "STOP"]
     note: str = Field(default="", max_length=4000)
     unresolved_requirement_ids: list[str] = Field(default_factory=list, max_length=500)
+    revision: int | None = Field(default=None, ge=1)
 
 
 class BulkRunRequest(BaseModel):

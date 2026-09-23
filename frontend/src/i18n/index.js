@@ -196,11 +196,13 @@ export const en = {
   'pagination.range': 'Showing {start}–{end} of {total}',
 };
 
+import { readPreference, writePreference } from '../core/storage.js';
+
 const dictionaries = { zh, en };
 
 /** @returns {'zh' | 'en'} */
 export function currentLang() {
-  return localStorage.getItem(STORAGE_KEY) === 'en' ? 'en' : 'zh';
+  return readPreference(STORAGE_KEY) === 'en' ? 'en' : 'zh';
 }
 
 /**
@@ -222,7 +224,7 @@ export function t(key, params) {
 /** @param {'zh' | 'en'} lang */
 export function setLang(lang) {
   const next = lang === 'en' ? 'en' : 'zh';
-  localStorage.setItem(STORAGE_KEY, next);
+  writePreference(STORAGE_KEY, next);
   document.documentElement.lang = next === 'en' ? 'en' : 'zh-CN';
 }
 

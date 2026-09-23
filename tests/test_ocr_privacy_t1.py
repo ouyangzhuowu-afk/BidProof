@@ -1,13 +1,13 @@
 import fitz
 
-from app.ocr import OCRResult, get_cloud_ocr_adapter, get_ocr_adapter
+from app.extraction import extract_pdf
+from app.ocr import OCRResult, get_cloud_ocr_adapter
 from app.ocr_privacy import (
     OCRLine,
     classify_page_text,
     redact_png_bytes,
     should_escalate_to_cloud,
 )
-from app.extraction import extract_pdf
 
 
 def test_classify_blocks_license_and_contact_pages():

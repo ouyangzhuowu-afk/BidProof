@@ -5,62 +5,147 @@ on:
     branches: [main, master]
   pull_request:
 
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  test:
+  verify:
     runs-on: ubuntu-latest
+    timeout-minutes: 25
     services:
       postgres:
         image: postgres:16
         env:
           POSTGRES_USER: bidproof
-          POSTGRES_PASSWORD: bidproof
+          POSTGRES_PASSWORD: bidproof-ci-only
           POSTGRES_DB: bidproof
         ports:
           - 5432:5432
         options: >-
           --health-cmd "pg_isready -U bidproof"
-          --health-interval 10s
+          --health-interval 5s
           --health-timeout 5s
-          --health-retries 5
+          --health-retries 10
     env:
       BIDPROOF_ENV: test
       BIDPROOF_ALLOW_TRUSTED_HEADERS: "1"
-      BIDPROOF_TEST_POSTGRES_URL: postgresql+psycopg://bidproof:bidproof@localhost:5432/bidproof
+      BIDPROOF_TEST_POSTGRES_URL: postgresql+psycopg://bidproof:bidproof-ci-only@localhost:5432/bidproof
+      BIDPROOF_DATA_ROOT: ${{ runner.temp }}/bidproof-ci
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements-production.lock
       - uses: actions/setup-node@v4
         with:
-          node-version: "20"
-      - name: Install Python dependencies
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: |
+            frontend/package-lock.json
+            landing/package-lock.json
+      - name: Install locked production and test dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements-postgres.txt pytest httpx ruff pip-audit
-      - name: Lint
-        run: python -m ruff check app tests
-      - name: Dependency audit
-        run: pip-audit -r requirements.txt
+          python -m pip install -r requirements-production.lock
+          python -m pip install pytest 'httpx2>=2.12' ruff pip-audit
+          python -m pip check
+      - name: Python lint and production dependency audit
+        run: |
+          python -m ruff check app tests scripts/production-smoke.py
+          pip-audit -r requirements-production.lock
+      - name: Workbench quality gates
+        working-directory: frontend
+        run: |
+          npm ci
+          npm run check
+          npm run check:boundaries
+          npm test
+          npm run lint
+          npm run build
+          npm audit --audit-level=high
+      - name: Marketing quality gates
+        working-directory: landing
+        run: |
+          npm ci
+          npm run verify
+          npm audit --audit-level=high
       - name: Workflow state check
         run: python -m app.workflow check
-      - name: Migrations apply to empty SQLite
+      - name: Migrate empty SQLite and verify current revision
         env:
           BIDPROOF_DATABASE_URL: sqlite+pysqlite:///${{ runner.temp }}/ci-migrations.sqlite3
         run: |
           python -m app.dbctl upgrade
           python -m app.dbctl current
-      - name: Migrations apply to PostgreSQL
+          python -c 'from app import dbctl; assert dbctl.current_revision() == dbctl.head_revision()'
+      - name: Migrate PostgreSQL and verify current revision
         env:
-          BIDPROOF_DATABASE_URL: postgresql+psycopg://bidproof:bidproof@localhost:5432/bidproof
+          BIDPROOF_DATABASE_URL: postgresql+psycopg://bidproof:bidproof-ci-only@localhost:5432/bidproof
         run: |
           python -m app.dbctl upgrade
           python -m app.dbctl current
-      - name: Frontend build
+          python -c 'from app import dbctl; assert dbctl.current_revision() == dbctl.head_revision()'
+      - name: Backend regression including PostgreSQL integration
+        run: python -m pytest -q
+      - name: Real HTTP queue smoke with isolated synthetic materials
+        shell: bash
+        env:
+          BIDPROOF_ENV: production
+          BIDPROOF_ALLOW_TRUSTED_HEADERS: "0"
+          BIDPROOF_DATA_ROOT: ${{ runner.temp }}/bidproof-smoke
+          BIDPROOF_DATABASE_URL: ""
+          DATABASE_URL: ""
+          BIDPROOF_JOB_RUNNER: worker
+          BID_OCR_PROVIDER: disabled
+          BIDPROOF_PUBLIC_ORIGIN: https://127.0.0.1:8769
+          BIDPROOF_ALLOWED_HOSTS: 127.0.0.1
+          BIDPROOF_SMOKE_USERNAME: ci-smoke
         run: |
-          npm ci --prefix frontend
-          npm run build --prefix frontend
-          node --check static/app.js
-          git diff --exit-code -- static/app.js static/style.css
-      - name: Run tests
-        run: pytest -q
+          set -euo pipefail
+          BIDPROOF_SMOKE_PASSWORD="$(python -c 'import secrets; print("CI-" + secrets.token_urlsafe(30) + "-9")')"
+          BIDPROOF_BOOTSTRAP_TOKEN="$(python -c 'import secrets; print(secrets.token_urlsafe(48))')"
+          export BIDPROOF_SMOKE_PASSWORD BIDPROOF_BOOTSTRAP_TOKEN
+          echo "::add-mask::$BIDPROOF_BOOTSTRAP_TOKEN"
+          mkdir -p "$RUNNER_TEMP/smoke-tls"
+          openssl req -x509 -newkey rsa:2048 -nodes -days 1 -subj '/CN=127.0.0.1' \
+            -addext 'subjectAltName=IP:127.0.0.1' \
+            -keyout "$RUNNER_TEMP/smoke-tls/key.pem" -out "$RUNNER_TEMP/smoke-tls/cert.pem" 2>/dev/null
+          export SSL_CERT_FILE="$RUNNER_TEMP/smoke-tls/cert.pem"
+          echo "::add-mask::$BIDPROOF_SMOKE_PASSWORD"
+          python -m app.dbctl upgrade
+          python -m uvicorn app.main:app --host 127.0.0.1 --port 8769 --ssl-keyfile "$RUNNER_TEMP/smoke-tls/key.pem" --ssl-certfile "$SSL_CERT_FILE" > "$RUNNER_TEMP/smoke-api.log" 2>&1 &
+          api_pid=$!
+          python -m app.worker > "$RUNNER_TEMP/smoke-worker.log" 2>&1 &
+          worker_pid=$!
+          trap 'kill "$api_pid" "$worker_pid" 2>/dev/null || true' EXIT
+          python - <<'PY'
+          import json, os, time, urllib.error, urllib.request
+          origin = 'https://127.0.0.1:8769'
+          for attempt in range(60):
+              try:
+                  with urllib.request.urlopen(origin + '/readyz', timeout=2) as response:
+                      if response.status == 200:
+                          break
+              except (OSError, urllib.error.URLError):
+                  pass
+              time.sleep(0.5)
+          else:
+              raise SystemExit('CI service readiness timed out')
+          payload = json.dumps({'username': os.environ['BIDPROOF_SMOKE_USERNAME'],
+                                'password': os.environ['BIDPROOF_SMOKE_PASSWORD'],
+                                'workspace_name': 'CI synthetic checks only',
+                                'bootstrap_token': os.environ['BIDPROOF_BOOTSTRAP_TOKEN']}).encode()
+          request = urllib.request.Request(origin + '/api/auth/bootstrap', data=payload,
+                                           headers={'Content-Type': 'application/json'}, method='POST')
+          with urllib.request.urlopen(request, timeout=15) as response:
+              assert response.status == 200
+          PY
+          python scripts/production-smoke.py --url https://127.0.0.1:8769 --timeout 120
+      - name: Build production container
+        run: docker build --tag bidproof:ci .

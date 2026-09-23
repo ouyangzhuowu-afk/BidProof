@@ -1,5 +1,5 @@
-from fastapi.testclient import TestClient
 import fitz
+from fastapi.testclient import TestClient
 
 from app import main
 from app.services import scan_service
@@ -18,7 +18,7 @@ def test_healthz():
 def test_upload_accepts_supported_text_tender(monkeypatch):
     client = TestClient(main.app)
     monkeypatch.setattr(scan_service, "extract_file", lambda _path: [{"page": 1, "text": "资格要求", "has_text": True, "char_count": 4, "blocks": []}])
-    response = client.post("/api/runs", files={"tender": ("tender.txt", "资格要求".encode("utf-8"), "text/plain")})
+    response = client.post("/api/runs", files={"tender": ("tender.txt", "资格要求".encode(), "text/plain")})
     assert response.status_code == 200
     client.delete(f"/api/runs/{response.json()['run_id']}")
 
@@ -50,7 +50,7 @@ def test_upload_review_and_delete_lifecycle(monkeypatch):
         data={"company_name": "示例软件服务有限公司"},
         files=[
             ("tender", ("tender.pdf", _pdf_bytes("投标人资格要求：提供营业执照。投标截止时间：2026年9月1日。"), "application/pdf")),
-            ("evidence", ("company.txt", "本公司营业执照及软件服务能力证明。".encode("utf-8"), "text/plain")),
+            ("evidence", ("company.txt", "本公司营业执照及软件服务能力证明。".encode(), "text/plain")),
         ],
     )
     assert response.status_code == 200, response.text
@@ -84,7 +84,7 @@ def test_structured_indexes_filters_and_manual_decision(monkeypatch):
         },
         files=[
             ("tender", ("tender.pdf", _pdf_bytes("资格要求"), "application/pdf")),
-            ("evidence", ("certificate.txt", "营业执照".encode("utf-8"), "text/plain")),
+            ("evidence", ("certificate.txt", "营业执照".encode(), "text/plain")),
         ],
     )
     assert response.status_code == 200, response.text

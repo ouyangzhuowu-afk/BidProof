@@ -18,7 +18,6 @@ from app.db import create_scan_job, load_scan_job
 from app.schemas import MIN_PASSWORD_LENGTH, password_meets_policy
 from app.services import scan_service
 
-
 ROOT = Path(__file__).resolve().parents[1]
 
 
@@ -139,7 +138,7 @@ def test_client_cannot_bind_a_run_to_an_arbitrary_scan_job(monkeypatch):
     created = client.post(
         "/api/runs",
         headers={**attacker, "X-BidProof-Job-ID": "victim-job"},
-        files={"tender": ("tender.txt", "资格要求".encode("utf-8"), "text/plain")},
+        files={"tender": ("tender.txt", "资格要求".encode(), "text/plain")},
     )
 
     assert created.status_code == 200

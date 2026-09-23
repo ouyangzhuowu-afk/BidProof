@@ -1,0 +1,86 @@
+{
+  "date": "2026-09-23",
+  "release": "production-candidate",
+  "baseline": "round2",
+  "source_frozen": true,
+  "public_deployment": false,
+  "backend": {
+    "passed": 380,
+    "failed": 0,
+    "skipped": 7,
+    "postgres_integration_included": 5,
+    "skip_reasons": {
+      "real_upload_fixtures_unavailable": 6,
+      "optional_numpy_for_ocr_unavailable": 1
+    }
+  },
+  "frontend": {
+    "node_total": 124,
+    "substantive_scenarios": 118,
+    "suite_containers": 6,
+    "failed": 0,
+    "legacy_typecheck": "passed",
+    "strict_boundary_typecheck": "passed",
+    "lint_errors": 0,
+    "existing_lint_warnings": 2,
+    "production_build": "passed"
+  },
+  "landing": {
+    "tests": 10,
+    "strict_types": "passed",
+    "production_build": "passed",
+    "assets": [
+      {
+        "path": "static/marketing/assets/index-BBUKyzI9.css",
+        "bytes": 35681,
+        "gzip_bytes": 8884
+      },
+      {
+        "path": "static/marketing/assets/index-szMXYQcy.js",
+        "bytes": 9543,
+        "gzip_bytes": 4146
+      }
+    ]
+  },
+  "python_lint": "passed",
+  "python_environment": "pip check passed",
+  "dependency_audits": {
+    "python_known_vulnerabilities": 0,
+    "frontend_npm_vulnerabilities": 0,
+    "landing_npm_vulnerabilities": 0,
+    "checked_at": "2026-09-23",
+    "statement": "Known advisory checks only; not a guarantee of no vulnerabilities"
+  },
+  "api_e2e": {
+    "development_http_sqlite": "passed",
+    "production_https_sqlite": "passed",
+    "production_container_https_postgres": "passed",
+    "stages_per_run": 9,
+    "tls_verification_disabled": false
+  },
+  "container": {
+    "nonroot_uid": 10001,
+    "python": "3.12",
+    "platform": "linux/arm64",
+    "readonly_root": "passed",
+    "runtime_allowlist": "passed",
+    "migration": "passed",
+    "worker_health": "passed",
+    "readiness": "passed",
+    "final_image_record": "container-smoke-2026-09-23.json",
+    "final_image_file_hashes_aligned": 95,
+    "final_incremental_verification": "build and source/static hashes; full API flow was run on the immediately preceding image",
+    "temporary_test_resources": "cleaned"
+  },
+  "browser_record": "browser-checks.json",
+  "workflow_check": "passed",
+  "remote_github_ci_executed": false,
+  "business_acceptance": false,
+  "external_gates": [
+    "public deployment environment",
+    "OCR CER/F1/TEDS",
+    "real enterprise T-005 pilot",
+    "real prices and customer claims",
+    "real-user CWV and load/recovery acceptance"
+  ]
+}

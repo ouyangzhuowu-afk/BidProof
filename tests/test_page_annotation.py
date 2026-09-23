@@ -16,7 +16,6 @@ from work.eval.page_annotation import (
     validate_record,
 )
 
-
 ROOT = Path(__file__).resolve().parents[1]
 SANDBOX_PAGES = ROOT / "work" / "eval" / "fixtures" / "sandbox_pages.jsonl"
 
@@ -88,7 +87,7 @@ def test_missing_schema_version_is_treated_as_weak_compatible_label():
     ],
 )
 def test_illegal_samples_are_rejected_fail_closed(illegal):
-    result = validate_record(illegal) if isinstance(illegal, dict) else validate_record(illegal)
+    result = validate_record(illegal)
     assert result.ok is False
     assert result.issues
 
@@ -96,7 +95,7 @@ def test_illegal_samples_are_rejected_fail_closed(illegal):
 def test_jsonl_rejects_duplicate_doc_page_and_bad_json():
     good = json.dumps(_v1(), ensure_ascii=False)
     dup = json.dumps(_v1(text_gt="duplicate page"), ensure_ascii=False)
-    result = validate_jsonl_text("\n".join([good, "not-json", dup, ""]))
+    result = validate_jsonl_text(f"{good}\nnot-json\n{dup}\n")
     assert result.ok is False
     codes = {issue.code for issue in result.issues}
     assert "invalid_json" in codes

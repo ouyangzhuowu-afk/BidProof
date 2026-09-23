@@ -16,7 +16,6 @@ from . import config
 from .api import register_routers
 from .http import install_middleware
 
-
 logger = logging.getLogger("bidproof")
 
 VERSION = "0.4.0"
@@ -27,6 +26,7 @@ async def lifespan(_app: FastAPI):
     from . import db, license, observability, queue
 
     observability.configure()
+    config.validate_runtime_security()
     license.check_on_startup()
     try:
         cleaned = db.cleanup_expired()
@@ -40,8 +40,10 @@ async def lifespan(_app: FastAPI):
             config.ENVIRONMENT,
         )
     tasks = await queue.start_inline_recovery()
-    yield
-    await queue.stop_inline_recovery(tasks)
+    try:
+        yield
+    finally:
+        await queue.stop_inline_recovery(tasks)
 
 
 def create_app() -> FastAPI:
@@ -55,6 +57,8 @@ def create_app() -> FastAPI:
         openapi_url=None if production else "/openapi.json",
     )
     install_middleware(app)
+    from .request_limits import RequestBudgetMiddleware
+    app.add_middleware(RequestBudgetMiddleware)
     app.mount("/static", StaticFiles(directory=config.PROJECT_ROOT / "static"), name="static")
     register_routers(app)
     return app

@@ -1,12 +1,11 @@
 """Private-delivery artefacts: preflight, helm chart, offline pack, license gate."""
 
-from pathlib import Path
 import json
 import subprocess
 import sys
+from pathlib import Path
 
 from app.license import valid_key
-
 
 ROOT = Path(__file__).resolve().parents[1]
 

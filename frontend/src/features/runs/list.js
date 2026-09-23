@@ -105,8 +105,7 @@ async function load() {
       retryId: 'runs-retry',
     }));
   } finally {
-    if (inflight === controller) inflight = null;
-    setBusy(false);
+    if (inflight === controller) { inflight = null; setBusy(false); }
   }
 }
 

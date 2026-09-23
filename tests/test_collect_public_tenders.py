@@ -14,12 +14,13 @@ from work.eval.collect_public_tenders import (
     completed_documents,
     failed_records,
     load_manifest,
-    main as collect_main,
     run_collection,
     summarize,
     validate_manifest,
 )
-
+from work.eval.collect_public_tenders import (
+    main as collect_main,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 CANONICAL_MANIFEST = ROOT / "work" / "public-eval" / "manifest.json"

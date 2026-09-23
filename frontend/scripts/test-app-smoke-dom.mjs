@@ -10,13 +10,22 @@ import { pathToFileURL } from 'node:url';
 import test from 'node:test';
 
 const dependency = process.env.JSDOM_MODULE || 'jsdom';
-const { JSDOM } = await import(isAbsolute(dependency) ? pathToFileURL(dependency).href : dependency);
+const apiUrl = isAbsolute(dependency) ? pathToFileURL(dependency).href : import.meta.resolve(dependency);
+const { JSDOM } = await import(apiUrl);
+let fileListFactory; let idl;
+try {
+  fileListFactory = (await import(new URL('./generated/idl/FileList.js', apiUrl).href)).default;
+  idl = (await import(new URL('./generated/idl/utils.js', apiUrl).href)).default;
+} catch {
+  fileListFactory = (await import(new URL('./jsdom/living/generated/FileList.js', apiUrl).href)).default;
+  idl = (await import(new URL('./jsdom/living/generated/utils.js', apiUrl).href)).default;
+}
 const source = await readFile(new URL('../../static/index.html', import.meta.url), 'utf8');
 const dom = new JSDOM(source, { url: 'https://bidproof.invalid/app', pretendToBeVisual: true });
 const { window } = dom;
 const originals = new Map();
 for (const key of ['window', 'document', 'location', 'history', 'navigator', 'localStorage', 'Element', 'HTMLElement',
-  'HTMLInputElement', 'HTMLButtonElement', 'HTMLFormElement', 'HTMLDialogElement', 'Event', 'CustomEvent', 'MouseEvent', 'FormData']) {
+  'HTMLInputElement', 'HTMLButtonElement', 'HTMLFormElement', 'HTMLDialogElement', 'Event', 'CustomEvent', 'MouseEvent', 'FormData', 'File', 'DataTransfer', 'EventSource']) {
   originals.set(key, Object.getOwnPropertyDescriptor(globalThis, key));
   Object.defineProperty(globalThis, key, { configurable: true, writable: true, value: key === 'window' ? window : window[key] });
 }
@@ -24,6 +33,22 @@ window.matchMedia = (query) => ({ matches: query.includes('prefers-reduced-motio
   addEventListener() {}, removeEventListener() {} });
 window.scrollTo = () => {};
 window.HTMLElement.prototype.scrollIntoView = function () {};
+window.HTMLDialogElement.prototype.showModal = function () { this.setAttribute('open', ''); };
+window.HTMLDialogElement.prototype.close = function () { this.removeAttribute('open'); this.dispatchEvent(new window.Event('close')); };
+globalThis.DataTransfer = class {
+  constructor() {
+    this.files = fileListFactory.create(window);
+    this.items = { add: (file) => idl.implForWrapper(this.files).push(idl.implForWrapper(file)) };
+  }
+};
+const sources = [];
+globalThis.EventSource = class { constructor() { sources.push(this); } close() { this.closed = true; } };
+const authChannels = [];
+window.BroadcastChannel = class {
+  constructor() { authChannels.push(this); }
+  postMessage(data) { assert.equal(data, 'session-changed'); }
+  close() { this.closed = true; }
+};
 const user = { user_id: 'qa-user', workspace_id: 'qa-space', username: '测试复核人', role: 'REVIEWER', active: true };
 const project = { project_id: 'qa-project', code: 'DEFAULT', name: '测试项目', archived_at: null };
 const reference = (source_id, filename, page, quote) => ({ source_id, filename, page, quote,
@@ -58,7 +83,7 @@ const reply = (value, status = 200) => Promise.resolve(new Response(JSON.stringi
 globalThis.fetch = (input, options = {}) => {
   const url = new URL(String(input), window.location.origin);
   const method = options.method || 'GET';
-  const body = options.body ? JSON.parse(options.body) : null;
+  const body = options.body instanceof window.FormData ? Object.fromEntries(options.body.entries()) : options.body ? JSON.parse(options.body) : null;
   requests.push({ path: url.pathname, method, body });
   if (deferredRuns.has(url.pathname)) return deferredRuns.get(url.pathname);
   if (url.pathname === '/api/auth/status') return reply({ authenticated: true, setup_required: false, user });
@@ -67,7 +92,7 @@ globalThis.fetch = (input, options = {}) => {
   if (url.pathname === '/api/runs') return reply([run]);
   if (url.pathname === '/api/notifications') return reply({ notifications: [], count: 0 });
   if (url.pathname === '/api/accuracy/metrics') return reply({ review_population_complete: false, sample_size: 0, precision: null, recall: null });
-  if (url.pathname === '/api/jobs') return reply({ jobs: [] });
+  if (url.pathname === '/api/jobs') return method === 'POST' ? reply({ job_id: 'queued-rescan', status: 'PENDING' }, 202) : reply({ jobs: [] });
   if (url.pathname === '/api/runs/smoke-run' && method === 'GET') return reply(run);
   if (/^\/api\/runs\/race-[ab]\/(comments|audit|remediations)$/.test(url.pathname)) return reply({ comments: [], events: [], remediations: [] });
   if (url.pathname === '/api/runs/smoke-run/comments') return reply({ comments: [] });
@@ -190,6 +215,51 @@ try {
       assert.equal(window.location.hash, '#home');
       assert.equal(store.get().currentRun.run_id, 'race-b');
       assert.equal(query('#nav-runs').getAttribute('aria-current'), 'page');
+    });
+    await suite.test('rescans submit real FormData to the background queue with the captured parent', async () => {
+      await navigate('detail', 'race-b');
+      query('#rescan-run').click(); await waitFor(() => query('#intake-panel').open, 'Rescan opens intake');
+      const transfer = new DataTransfer(); transfer.items.add(new window.File(['pdf test'], 'rescan.pdf', { type: 'application/pdf' }));
+      query('#tender-file').files = transfer.files;
+      query('#tender-file').dispatchEvent(new window.Event('change', { bubbles: true }));
+      query('#company-name').value = '界面测试';
+      query('#scan-form').dispatchEvent(new window.Event('submit', { bubbles: true, cancelable: true }));
+      await waitFor(() => window.document.querySelector('#scancard-queued-rescan'), 'Rescan should be monitored in background');
+      const sent = requests.filter((entry) => entry.path === '/api/jobs' && entry.method === 'POST');
+      assert.equal(sent.length, 1); assert.equal(sent[0].body.parent_run_id, 'race-b');
+      assert.equal(sent[0].body.tender.name, 'rescan.pdf');
+      assert.equal(requests.some((entry) => entry.path.endsWith('/rescan')), false);
+      assert.equal(store.get().currentRun.run_id, 'race-b'); assert.equal(legacy.rescanParentId, null);
+      assert.equal(query('#intake-panel').open, false);
+    });
+    await suite.test('cross-tab auth changes clear private state and DOM and block late task responses', async () => {
+      let finish;
+      deferredRuns.set('/api/runs/race-a', new Promise((done) => { finish = done; }));
+      const pending = navigate('detail', 'race-a');
+      legacy.membersCache = [user]; legacy.projectsCache = [project];
+      legacy.searchTerm = 'private clause'; legacy.runSearch = 'private project'; legacy.runTagFilter = 'private tag';
+      legacy.pendingMfaToken = 'private MFA token';
+      store.set({ members: [user], projects: [project] });
+      const transfer = new DataTransfer(); transfer.items.add(new window.File(['private PDF'], 'private.pdf'));
+      query('#tender-file').files = transfer.files;
+      query('#tender-file').dispatchEvent(new window.Event('change', { bubbles: true }));
+      assert.equal(authChannels.length, 1);
+      authChannels[0].onmessage({ data: 'session-changed' });
+      assert.equal(query('#auth-panel').open, true, 'Remote session invalidation exposes login immediately.');
+      window.dispatchEvent(new window.CustomEvent('bidproof:unauthorized'));
+      assert.equal(store.get().currentRun, null); assert.equal(store.get().currentUser, null);
+      assert.deepEqual(store.get().members, []); assert.deepEqual(store.get().projects, []);
+      assert.deepEqual(legacy.membersCache, []); assert.deepEqual(legacy.projectsCache, []);
+      assert.equal(legacy.searchTerm, ''); assert.equal(legacy.runSearch, ''); assert.equal(legacy.runTagFilter, '');
+      assert.equal(legacy.pendingMfaToken, '');
+      assert.equal(query('#tender-file').files.length, 0, 'FileList clears synchronously, before queued form-reset work.');
+      assert.equal(query('#tender-file-feedback').textContent.includes('private.pdf'), false);
+      assert.equal(query('#app-main').childElementCount, 0);
+      assert.equal(window.document.querySelector('.scandock'), null); assert.equal(sources[0].closed, true);
+      finish(await reply({ ...run, run_id: 'race-a' })); await pending;
+      await waitFor(() => query('#auth-panel').open, 'Expiry must expose authentication');
+      assert.equal(store.get().currentRun, null); assert.equal(query('#app-main').childElementCount, 0);
+      assert.deepEqual(domErrors, []);
     });
   });
 } finally {

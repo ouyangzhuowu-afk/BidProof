@@ -6,7 +6,6 @@ import pytest
 from tests.conftest import requires_real_uploads
 from work.apply_independent_reviews import submit_reviews
 
-
 ROOT = Path(__file__).parents[1]
 
 

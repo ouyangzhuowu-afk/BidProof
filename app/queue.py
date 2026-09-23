@@ -12,10 +12,9 @@ import logging
 
 from fastapi import BackgroundTasks
 
-from . import config, observability
+from . import config, job_leases, observability
 from .repositories import jobs
 from .services import scan_service
-
 
 logger = logging.getLogger("bidproof.queue")
 
@@ -31,16 +30,22 @@ def dispatch(job_id: str, background_tasks: BackgroundTasks | None = None) -> No
 
 async def run_one() -> str | None:
     """Claim and execute a single job. Returns the job id, or None if the queue was empty."""
-    claimed = jobs.claim_next()
+    claimed = job_leases.claim()
     if claimed is None:
         return None
     observability.record_job_claim()
-    await scan_service.process_job(claimed["job_id"])
+    if config.ENVIRONMENT == "production":
+        from .job_runner import supervise
+        await supervise(claimed)
+    else:
+        await scan_service.process_job(claimed["job_id"], claimed["lease_token"])
     return claimed["job_id"]
 
 
 async def start_inline_recovery() -> list[asyncio.Task]:
     """Re-drive leftover jobs in the API process, only when this process is the runner."""
+    if config.JOB_RUNNER != "inline":
+        return []
     requeued = jobs.requeue_stale(config.JOB_STALE_SECONDS)
     if requeued:
         logger.info("requeued_stale_jobs", extra={"count": requeued})

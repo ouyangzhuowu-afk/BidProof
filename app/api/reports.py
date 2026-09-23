@@ -11,7 +11,6 @@ from ..repositories import runs
 from ..schemas import BulkReportRequest
 from ..services import report_service
 
-
 router = APIRouter(tags=["reports"])
 
 
