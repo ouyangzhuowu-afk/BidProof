@@ -7,7 +7,7 @@
  * 缓存策略现在归 core/store.js 的 TTL 管，这一层只负责取数。
  */
 
-import { request, json } from '../core/http.js';
+import { request, requestBlob, json } from '../core/http.js';
 import { paths } from './paths.js';
 
 /** @typedef {import('../../types/api.js').Member} Member */
@@ -107,8 +107,10 @@ export function getAccuracyMetrics() {
 }
 
 /** 示例招标文件，用于空状态的一键试跑。 */
-export function getSampleTender() {
-  return request(paths.sampleTender);
+export async function getSampleTender(scenario = 'software', kind = 'tender') {
+  const query = new URLSearchParams({ scenario, kind });
+  const response = await requestBlob(`${paths.sampleTender}?${query}`);
+  return response.blob();
 }
 
 /* ── 工作区设置 ─────────────────────────────────────────────────────────── */

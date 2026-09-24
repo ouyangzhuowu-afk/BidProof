@@ -49,6 +49,8 @@ export function renderAuth(status, mode, pendingMfa, message = '') {
   text('#auth-submit-label', view.submitLabel);
   text('#auth-help', view.helpText);
   toggle('#auth-help', view.helpVisible);
+  toggle('#auth-username-field', !pendingMfa);
+  toggle('#auth-password-field', !pendingMfa);
 
   for (const [key, selector] of Object.entries(BLOCKS)) {
     toggle(selector, view.visible[key]);

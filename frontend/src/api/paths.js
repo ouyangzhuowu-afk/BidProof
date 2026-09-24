@@ -37,6 +37,8 @@ export const paths = {
   auth: {
     status: '/api/auth/status',
     login: '/api/auth/login',
+    challenges: '/api/auth/challenges',
+    verifyChallenge: '/api/auth/challenges/verify',
     logout: '/api/auth/logout',
     register: '/api/auth/register',
     bootstrap: '/api/auth/bootstrap',

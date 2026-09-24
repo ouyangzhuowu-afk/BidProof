@@ -64,7 +64,11 @@ def test_registered_route_surface_is_stable():
         if method in {"get", "post", "patch", "delete", "put"}
     }
 
-    assert len(operations) == 80
+    assert len(operations) == 84
+    assert 'POST /api/auth/challenges' in operations
+    assert 'POST /api/auth/challenges/verify' in operations
+    assert 'GET /api/auth/oauth/{provider}/start' in operations
+    assert 'GET /api/auth/oauth/{provider}/callback' in operations
     assert "GET /api/runs/{run_id}/files/{source_id}/pages/{page_number}" in operations
     assert "POST /api/runs" in operations
     # A literal path registered after its parameterised sibling would be shadowed by it.
@@ -95,7 +99,7 @@ def test_services_take_a_principal_rather_than_a_request():
     `create_run` serve an interactive upload and a queued job.
     """
     for path in (APP_ROOT / "services").glob("*.py"):
-        if path.stem == "auth_service":
+        if path.stem in {"auth_service", "passwordless_service", "social_auth_service"}:
             # Login and session issuance legitimately read cookies and set the session cookie.
             continue
         assert _parameters_annotated_as_request(path) == set(), path.name

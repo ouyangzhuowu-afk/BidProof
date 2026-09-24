@@ -430,3 +430,34 @@ JSON_COLUMNS: dict[str, tuple[str, ...]] = {
     "api_tokens": ("permissions_json",),
     "idempotency_keys": ("response_json",),
 }
+
+
+# Short-lived passwordless challenges. HMAC digests use a server-held pepper; a database
+# leak alone must not permit brute-forcing the six-digit code offline.
+auth_challenges = sa.Table(
+    "auth_challenges", metadata,
+    sa.Column("challenge_id", sa.Text, primary_key=True),
+    sa.Column("channel", sa.Text, nullable=False),
+    sa.Column("identifier", sa.Text, nullable=False),
+    sa.Column("identifier_digest", sa.Text, nullable=False),
+    sa.Column("code_digest", sa.Text, nullable=False),
+    sa.Column("attempts", sa.Integer, nullable=False, server_default="0"),
+    sa.Column("delivered", sa.Integer, nullable=False, server_default="0"),
+    sa.Column("expires_at", IsoTimestamp(), nullable=False),
+    sa.Column("created_at", IsoTimestamp(), nullable=False),
+    sa.Column("consumed_at", IsoTimestamp()),
+    sa.Index("idx_auth_challenges_identifier", "identifier_digest", "created_at"),
+)
+
+auth_delivery_guards = sa.Table(
+    "auth_delivery_guards", metadata,
+    sa.Column("bucket", sa.Text, primary_key=True),
+    sa.Column("sent_at", IsoTimestamp(), nullable=False),
+)
+
+auth_rate_limits = sa.Table(
+    "auth_rate_limits", metadata,
+    sa.Column("bucket", sa.Text, primary_key=True),
+    sa.Column("window_started_at", IsoTimestamp(), nullable=False),
+    sa.Column("hits", sa.Integer, nullable=False),
+)

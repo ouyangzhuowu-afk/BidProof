@@ -131,3 +131,39 @@ def test_job_claim_is_atomic(postgres_url):
     assert first is True
     # A cancelled job must not be restartable, or a cancel would silently be undone.
     assert after_cancel is False
+
+
+@requires_postgres
+def test_passwordless_postgres_migration_and_cross_connection_atomicity(postgres_url, monkeypatch):
+    from concurrent.futures import ThreadPoolExecutor
+    from contextlib import nullcontext
+    from datetime import UTC, datetime, timedelta
+
+    from app.models import auth_challenges, auth_delivery_guards, auth_rate_limits
+    from app.repositories import challenges
+    monkeypatch.setenv('BIDPROOF_DATABASE_URL', postgres_url)
+    # PostgreSQL workers do not share the per-process Python lock. Exercise the SQL
+    # transaction boundaries directly rather than accidentally serializing this test.
+    monkeypatch.setattr(challenges, '_lock', nullcontext())
+    now = datetime.now(UTC)
+    suffix = uuid.uuid4().hex
+    fields = {'challenge_id': suffix, 'channel': 'email', 'identifier': 'pg@example.test',
+              'identifier_digest': suffix, 'code_digest': 'a' * 64,
+              'created_at': now.isoformat(), 'expires_at': (now + timedelta(minutes=5)).isoformat()}
+    assert all(sa.inspect(database.engine_for(postgres_url)).has_table(table.name)
+               for table in (auth_challenges, auth_delivery_guards, auth_rate_limits))
+    assert dbctl.current_revision(postgres_url) == dbctl.head_revision()
+    with ThreadPoolExecutor(max_workers=6) as pool:
+        reserved = list(pool.map(lambda i: challenges.reserve({**fields, 'challenge_id': suffix + str(i)}, now, 60), range(6)))
+    assert reserved.count(0) == 1
+    with db.engine().connect() as connection:
+        challenge_id = connection.execute(sa.select(auth_challenges.c.challenge_id).where(
+            auth_challenges.c.identifier_digest == suffix)).scalar_one()
+    challenges.mark_delivery(challenge_id, successful=True)
+    with ThreadPoolExecutor(max_workers=6) as pool:
+        outcomes = list(pool.map(lambda _: challenges.verify(challenge_id, 'a' * 64, now)[0], range(6)))
+    assert outcomes.count('verified') == 1
+    assert outcomes.count('expired') == 5
+    with db.engine().begin() as connection:
+        connection.execute(sa.delete(auth_challenges).where(auth_challenges.c.identifier_digest == suffix))
+        connection.execute(sa.delete(auth_delivery_guards).where(auth_delivery_guards.c.bucket == suffix))

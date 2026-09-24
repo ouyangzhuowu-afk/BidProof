@@ -17,7 +17,7 @@ from .. import config, observability
 from ..authz import Permission, require
 from ..config import PROJECT_ROOT
 from ..identity import principal_of
-from ..services import workspace_service
+from ..services import starter_service, workspace_service
 
 router = APIRouter()
 
@@ -80,22 +80,14 @@ def public_privacy() -> dict:
 
 
 @router.get("/api/sample-tender")
-def sample_tender(request: Request) -> Response:
-    """A one-page public-procurement-style PDF so a new owner can try a scan immediately."""
+def sample_tender(request: Request, scenario: starter_service.Scenario = "software",
+                  kind: starter_service.DocumentKind = "tender") -> Response:
+    """Readable synthetic tender/evidence pairs for the first-run experience."""
     principal = principal_of(request)
     require(principal, Permission.RUN_CREATE)
-    import fitz
-
-    document = fitz.open()
-    page = document.new_page()
-    page.insert_text(
-        (72, 72),
-        "招标文件（样例）\n资格要求：投标人须提供有效营业执照。\n交货期：合同签订后 30 日内。\n",
-        fontsize=12,
-    )
-    payload = document.tobytes()
-    document.close()
-    return Response(content=payload, media_type="application/pdf", headers={"Content-Disposition": 'attachment; filename="sample-tender.pdf"'})
+    return Response(content=starter_service.document(scenario, kind), media_type="application/pdf",
+                    headers={"Content-Disposition": f'attachment; filename="sample-{scenario}-{kind}.pdf"',
+                             "Cache-Control": "private, no-store"})
 
 
 @router.get("/healthz")

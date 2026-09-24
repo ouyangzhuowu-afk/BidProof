@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#eef1f5">
   <title>BidProof 企业证据工作台</title>
   <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/static/style.css?v=f0d121951f55">
+  <link rel="stylesheet" href="/static/style.css?v=0f6f635128d3">
 </head>
 <body>
 <div id="loading-overlay" class="loading-overlay" role="status" aria-label="正在读取审查结果" hidden><div class="detail-loading"><span class="skeleton skeleton--line"></span><span class="skeleton skeleton--card"></span><span class="skeleton skeleton--card"></span><p>正在读取审查结果…</p></div></div>
@@ -38,6 +38,7 @@
       </header>
 
       <main class="content" id="app-main" tabindex="-1">
+        <div id="first-run-guide"></div>
         <!-- ═══════════════════════════════════════════════════════════════
              任务列表 · 由 frontend/src/features/runs/list.js 驱动
              标记契约的权威样板在 frontend/preview/index.html。
@@ -620,6 +621,7 @@
        计算，view.js 只负责刷 DOM。这里不要写任何内联条件。
        ════════════════════════════════════════════════════════════════ -->
   <dialog class="dialog auth-dialog" id="auth-panel" aria-labelledby="auth-title">
+    <section id="auth-unified-root" class="auth-simple" hidden></section>
     <form id="auth-form" class="auth-form">
       <header class="auth-form__head">
         <p class="page-head__eyebrow">BidProof 安全入口</p>
@@ -658,12 +660,12 @@
         <span class="hint">默认「个人空间 · 用户名」。个人工作区与企业空间隔离。</span>
       </p>
 
-      <p class="field">
+      <p class="field" id="auth-username-field">
         <label for="auth-username">用户名</label>
         <input class="input" id="auth-username" required autocomplete="username">
       </p>
 
-      <p class="field">
+      <p class="field" id="auth-password-field">
         <label for="auth-password">密码</label>
         <span class="password-field">
           <input class="input" id="auth-password" required type="password" minlength="1" autocomplete="current-password">
@@ -746,6 +748,6 @@
   </dialog>
   <div id="app-toast" class="toast" role="status" aria-live="polite" hidden></div>
   <script src="/static/vendor/lucide.min.js"></script>
-  <script src="/static/app.js?v=5cc7cc7a24d6"></script>
+  <script src="/static/app.js?v=940691a75b72"></script>
 </body>
 </html>

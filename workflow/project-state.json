@@ -623,6 +623,28 @@
       ],
       "validation": "线上验收（2026-09-24）：/、/app、/healthz、/readyz、/robots.txt、/sitemap.xml、/privacy、/api/privacy 全 200；匿名 GET /api/runs 返回 401；用旧的共享试用码调用 /api/auth/trial-join 返回 403「试用加入未开放」；/static/app.js、/static/style.css、/static/index.html 与 static/marketing/* 与仓库提交逐字节一致（app.js 仅差镜像刻意剥离的 sourcemap 指针）；连续 6 次 healthz+readyz 探测均 200。",
       "note": "工程验收，不是业务验收。排障要点：Render 蓝本只新增/更新、不删除已存在的服务变量，残留的共享试用码曾让启动被拒（见 D-RENDER-TRIALCODE-2026-09-24）。免费实例磁盘临时、空闲休眠，上传的原始 PDF 在重新部署后不保留。"
+    },
+    {
+      "id": "C-UX-AUTH-2026-09-24",
+      "title": "0924 极简首页、统一认证与首次使用代码及自动化验收",
+      "status": "verified",
+      "artifacts": [
+        "docs/ux-0924/README.md",
+        "docs/ux-0924/landing-blueprint.md",
+        "docs/ux-0924/auth-flow.md",
+        "docs/ux-0924/acceptance.md",
+        "docs/production/passwordless-auth-2026-09-24.md",
+        "landing/",
+        "frontend/src/features/auth/unified.js",
+        "frontend/src/features/auth/passwordless-state.js",
+        "frontend/src/features/runs/onboarding.js",
+        "app/services/passwordless_service.py",
+        "app/auth_delivery.py",
+        "scripts/start-smoke.ps1",
+        "outputs/playwright/0924-integration-landing-desktop-1440.png"
+      ],
+      "validation": "物料包并入主分支后重跑：pytest 409 passed/13 skipped；frontend verify 145 passed + tsc/边界/构建/ESLint 0 error；landing verify 11 passed + tsc/构建；workflow check PASS。真实浏览器走通落地页 -> /app -> 邮箱验证码（回环 SMTP 实投）-> 工作台首屏 0/3 引导，390px 与 1440px 截图见 outputs/playwright/0924-integration-*。空邮箱点击发送显示内联「请输入邮箱。」且不投递。真实供应商投递与 OAuth 回调仍待运营配置，见 T-UX-AUTH-EXTERNAL-2026-09-24。",
+      "note": "旧营销页 static/landing.html 与 static/landing.js 已删除，static/landing.css 改名 static/legal.css 只服务 /privacy。上一轮 C-027/C-028 清晰度改动保存在本地分支 backup/ux-clarity-c027-c028-20260924，其中两处文案（任务导航计数、检出质量说明）已并入本轮。"
     }
   ],
   "backlog": [
@@ -646,6 +668,15 @@
       "validation": "已建立 14 字段 pilot 台账、11 字段 ICP 触达台账、fail-closed 校验、快速追加 CLI 与 intake 模板；当前 0 条真实任务、0 条 ICP 触达、0 条付款意愿，等待首批真实企业输入",
       "blocked_reason": "Sandbox phase locked 2026-09-16: human enterprise pilot deferred from this phase KPIs. Do not write real enterprise rows into pilot-ledger / icp-outreach. Campaign A engineering leaves (S-A-01..07 except open quality gates) are seeded; OCR CER/F1/TEDS still GATE_FAIL.",
       "note": "deferred_for_sandbox_phase (status=blocked; not cancelled)"
+    },
+    {
+      "id": "T-UX-AUTH-EXTERNAL-2026-09-24",
+      "title": "配置真实认证供应商并验收浏览器与公开环境",
+      "status": "needs_verification",
+      "dependencies": [
+        "C-UX-AUTH-2026-09-24"
+      ],
+      "validation": "本轮没有供应商密钥；浏览器管理员策略校验不可用。待真实投递/OAuth/桌面手机人工验收，不改变T-005与OCR门禁。"
     }
   ],
   "dependencies": [
@@ -1199,6 +1230,11 @@
       "path": "docs/production/render-pilot-2026-09-24.md",
       "kind": "deployment-record",
       "status": "verified"
+    },
+    {
+      "path": "docs/ux-0924/README.md",
+      "status": "verified",
+      "description": "0924 物料包导航、认证渠道配置与验收边界"
     }
   ],
   "next_best_action": {
@@ -1210,9 +1246,9 @@
       "OCR gates CER/F1/TEDS unmet"
     ],
     "parallel": [],
-    "note": "Do not write demo rows into pilot/ICP ledgers. Do not claim product PASS. Engineering fallback: improve OCR until gates pass while waiting for T-005 input. The production candidate is live on Render (C-RENDER-LIVE-2026-09-24); Render's blueprint sync never deletes an existing service variable, so a stale BIDPROOF_TRIAL_JOIN_CODE is dropped with a warning instead of blocking boot (D-RENDER-TRIALCODE-2026-09-24)."
+    "note": "Do not write demo rows into pilot/ICP ledgers. Do not claim product PASS. Engineering fallback: improve OCR until gates pass while waiting for T-005 input. The production candidate is live on Render (C-RENDER-LIVE-2026-09-24); Render's blueprint sync never deletes an existing service variable, so a stale BIDPROOF_TRIAL_JOIN_CODE is dropped with a warning instead of blocking boot (D-RENDER-TRIALCODE-2026-09-24). Since 2026-09-24 the shipped landing and unified auth are C-UX-AUTH-2026-09-24; turning the one-time-code and OAuth entry points on is an operator action (T-UX-AUTH-EXTERNAL-2026-09-24) that needs real provider credentials, and no repository change can substitute for it."
   },
-  "updated_at": "2026-09-24T04:25:00+00:00",
+  "updated_at": "2026-09-24T09:05:00+00:00",
   "sandbox_roadmap": {
     "locked_at": "2026-09-16",
     "gates": {

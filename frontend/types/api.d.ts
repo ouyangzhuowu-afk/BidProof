@@ -36,6 +36,11 @@ export interface AuthStatus {
   trial_join_enabled?: boolean;
   oidc_enabled?: boolean;
   mfa_enabled?: boolean;
+  passwordless?: {
+    email: boolean;
+    phone: boolean;
+    oauth: { id: 'google' | 'github'; label: string; url: string }[];
+  };
   user?: CurrentUser;
 }
 

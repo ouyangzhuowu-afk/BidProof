@@ -69,3 +69,31 @@ def load_flow(state: str, provider: str, now: str) -> dict[str, Any] | None:
 
 def consume_flow(state: str, provider: str, now: str) -> dict[str, Any] | None:
     return db.consume_login_flow(state, provider, now)
+
+
+def bind_new(user_id: str, provider: str, issuer: str, subject: str) -> None:
+    """Insert a verified binding within the caller's transaction; never replace its owner."""
+    import uuid
+    from datetime import UTC, datetime
+
+    import sqlalchemy as sa
+
+    from ..models import identity_bindings
+
+    now = datetime.now(UTC).isoformat()
+    with db.connect() as connection:
+        connection.execute(sa.insert(identity_bindings).values(
+            binding_id=uuid.uuid4().hex, user_id=user_id, provider=provider,
+            issuer=issuer, subject=subject, created_at=now, last_seen_at=now,
+        ))
+
+
+def purge_expired_flows(provider: str, now: str) -> None:
+    import sqlalchemy as sa
+
+    from ..models import login_flows
+
+    with db.connect() as connection:
+        connection.execute(sa.delete(login_flows).where(
+            login_flows.c.provider == provider, login_flows.c.expires_at <= now,
+        ))

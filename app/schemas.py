@@ -119,7 +119,7 @@ class AuthBootstrapRequest(BaseModel):
 
 
 class LoginRequest(BaseModel):
-    username: str = Field(min_length=1, max_length=80)
+    username: str = Field(min_length=1, max_length=254)
     # Deliberately permissive: a credential that fails policy must fail as a normal 401 in the
     # login handler, not as a 422, so response codes cannot be used to probe password policy.
     password: str = Field(min_length=1, max_length=MAX_PASSWORD_LENGTH)
@@ -187,3 +187,13 @@ class ProjectCreateRequest(BaseModel):
 class ProjectUpdateRequest(BaseModel):
     name: str | None = Field(default=None, min_length=1, max_length=120)
     archived: bool | None = None
+
+
+class AuthChallengeRequest(BaseModel):
+    channel: Literal["email", "sms"]
+    identifier: str = Field(min_length=1, max_length=254)
+
+
+class AuthChallengeVerifyRequest(BaseModel):
+    challenge_id: str = Field(min_length=20, max_length=100)
+    code: str = Field(pattern=r"^[0-9]{6}$")

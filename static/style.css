@@ -19,7 +19,7 @@
 /* legacy 排在最前 = 优先级最低。未迁移视图靠它兜底，新层永远胜出。 */
 @layer legacy, reset, base, layout, components, views, utilities;
 
-/* ─── src/styles/legacy.css → @layer legacy ─── */
+/* ─── src\styles\legacy.css → @layer legacy ─── */
 @layer legacy {
 /* =============================================================================
    旧版 static/style.css 的原样归档（过渡层）。
@@ -832,7 +832,7 @@ html[data-theme="dark"] .remediation-row.is-overdue { background: #2a1818; }
 html[data-theme="dark"] .requirement-row[open] { background: #141c28; }
 
 }
-/* ─── src/styles/tokens.css ─── */
+/* ─── src\styles\tokens.css ─── */
 /* =============================================================================
    BidProof 设计令牌 · v3「对照卷宗」
    -----------------------------------------------------------------------------
@@ -1100,7 +1100,7 @@ html[data-theme="dark"] {
 
 html[data-theme="dark"] { --quote-highlight: #655529; }
 
-/* ─── src/styles/base.css ─── */
+/* ─── src\styles\base.css ─── */
 /* =============================================================================
    BidProof 基础层 · reset + 排版 + 状态原语
    只依赖 tokens.css 中的变量。不出现裸色值。
@@ -1568,7 +1568,7 @@ html[data-theme="dark"] { --quote-highlight: #655529; }
   }
 }
 
-/* ─── src/styles/layout.css ─── */
+/* ─── src\styles\layout.css ─── */
 /* =============================================================================
    BidProof 布局层 · 应用外壳
    -----------------------------------------------------------------------------
@@ -1946,7 +1946,7 @@ html[data-theme="dark"] { --quote-highlight: #655529; }
   }
 }
 
-/* ─── src/styles/components.css ─── */
+/* ─── src\styles\components.css ─── */
 /* =============================================================================
    BidProof 组件层
    -----------------------------------------------------------------------------
@@ -2774,7 +2774,7 @@ html[data-theme="dark"] { --quote-highlight: #655529; }
   .runtime-notice[hidden] { display: none; }
 }
 
-/* ─── src/styles/views/runs.css ─── */
+/* ─── src\styles\views\runs.css ─── */
 /* =============================================================================
    视图层 · 任务列表
    -----------------------------------------------------------------------------
@@ -2787,6 +2787,28 @@ html[data-theme="dark"] { --quote-highlight: #655529; }
    ========================================================================== */
 
 @layer views {
+
+  #first-run-guide:empty { display: none; }
+  .first-run { margin-bottom: var(--space-5); padding: var(--space-4) var(--space-5); border: 1px solid var(--brand-line); border-radius: var(--radius-card); background: var(--paper); }
+  .first-run summary { display: flex; justify-content: space-between; gap: var(--space-4); cursor: pointer; color: var(--ink-strong); font-size: var(--text-sm); font-weight: var(--weight-medium); list-style: none; }
+  .first-run summary::-webkit-details-marker { display: none; }
+  .first-run__count { color: var(--ink-muted); font-size: var(--text-xs); white-space: nowrap; }
+  .first-run ol { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-3); padding: var(--space-4) 0 0; margin: 0; list-style: none; }
+  .first-run li { display: flex; gap: var(--space-2); align-items: center; color: var(--ink-muted); font-size: var(--text-xs); }
+  .first-run li[aria-current="step"], .first-run li[data-complete="true"] { color: var(--brand); }
+  .first-run__number { display: grid; place-items: center; width: 24px; height: 24px; flex-shrink: 0; border: 1px solid var(--rule); border-radius: 50%; font-variant-numeric: tabular-nums; }
+  .first-run li[data-complete="true"] .first-run__number { background: var(--brand-wash); border-color: var(--brand-line); }
+  .starter-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-3); width: 100%; margin-top: var(--space-3); }
+  .starter-card { display: grid; align-content: start; gap: var(--space-3); padding: var(--space-5) var(--space-4); border: 1px solid var(--rule); border-radius: var(--radius-card); background: var(--paper); text-align: left; color: var(--ink-strong); cursor: pointer; transition: border-color 160ms ease, background 160ms ease; }
+  .starter-card:hover { border-color: var(--brand); background: var(--brand-wash); }
+  .starter-card:focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; }
+  .starter-card:disabled { opacity: .6; cursor: wait; }
+  .starter-card svg { width: 22px; height: 22px; color: var(--brand); }
+  .starter-card strong { font-size: var(--text-sm); font-weight: var(--weight-strong); }
+  .starter-card span, .starter-card small { font-size: var(--text-xs); line-height: 1.5; color: var(--ink-muted); }
+  @media (max-width: 720px) { .starter-grid { grid-template-columns: 1fr; } .starter-card { padding: var(--space-4); gap: var(--space-2); } }
+  @media (max-width: 460px) { .first-run ol { grid-template-columns: 1fr; } }
+  @media (prefers-reduced-motion: reduce) { .starter-card { transition: none; } }
 
   /* 列表容器。分隔线由 .run-row 自己画，容器不再重复画边框 ——
      旧版容器和行都有 border-bottom，最后一行下面是 2px 的粗线。 */
@@ -2920,7 +2942,7 @@ html[data-theme="dark"] { --quote-highlight: #655529; }
   }
 }
 
-/* ─── src/styles/views/detail.css ─── */
+/* ─── src\styles\views\detail.css ─── */
 /* =============================================================================
    视图层 · 任务详情（要求项对照矩阵）
    -----------------------------------------------------------------------------
@@ -3127,7 +3149,7 @@ html[data-theme="dark"] { --quote-highlight: #655529; }
   }
 }
 
-/* ─── src/styles/views/jobs.css ─── */
+/* ─── src\styles\views\jobs.css ─── */
 /* =============================================================================
    视图层 · 扫描作业与后台扫描停靠区
    ========================================================================== */
@@ -3314,7 +3336,7 @@ html[data-theme="dark"] { --quote-highlight: #655529; }
   .context-metric[data-tone="warning"][data-nonzero="true"] strong { color: var(--verdict-review); }
 }
 
-/* ─── src/styles/views/collab.css ─── */
+/* ─── src\styles\views\collab.css ─── */
 /* =============================================================================
    视图层 · 协作区与决策确认清单
    ========================================================================== */
@@ -3494,7 +3516,7 @@ html[data-theme="dark"] { --quote-highlight: #655529; }
   }
 }
 
-/* ─── src/styles/views/admin.css ─── */
+/* ─── src\styles\views\admin.css ─── */
 /* =============================================================================
    视图层 · 管理页（成员 / 项目 / 运维 / 账号安全）
    -----------------------------------------------------------------------------
@@ -3658,7 +3680,7 @@ html[data-theme="dark"] { --quote-highlight: #655529; }
   }
 }
 
-/* ─── src/styles/views/auth.css ─── */
+/* ─── src\styles\views\auth.css ─── */
 /* =============================================================================
    视图层 · 鉴权与账号动作对话框
    -----------------------------------------------------------------------------
@@ -3671,6 +3693,42 @@ html[data-theme="dark"] { --quote-highlight: #655529; }
 @layer views {
 
   .auth-dialog { width: min(420px, calc(100vw - var(--space-6))); }
+
+  .auth-simple { padding: 28px; display: grid; gap: 22px; }
+  .auth-simple[hidden], .auth-form[hidden] { display: none; }
+  .auth-simple__top { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+  .auth-simple__brand { color: var(--ink); font-size: 16px; font-weight: 650; text-decoration: none; letter-spacing: -.02em; }
+  .auth-simple__brand span { display: block; margin-top: 2px; color: var(--ink-muted); font-size: 12px; font-weight: 400; letter-spacing: 0; }
+  .auth-simple__home { color: var(--ink-muted); font-size: 12px; text-underline-offset: 3px; padding: 5px 0; }
+  .auth-simple__heading { display: grid; gap: 8px; }
+  .auth-simple__heading h2 { font-size: 20px; line-height: 1.5; font-weight: 600; letter-spacing: -.02em; margin: 0; }
+  .auth-simple__heading p { margin: 0; font-size: 14px; line-height: 1.6; color: var(--ink-muted); overflow-wrap: anywhere; }
+  .auth-simple__providers { display: grid; gap: 10px; }
+  .auth-simple__providers a { justify-content: center; min-height: 44px; color: var(--ink); text-decoration: none; }
+  .auth-simple__provider-mark { font-weight: 650; min-width: 24px; font-size: 14px; }
+  .auth-simple__divider { position: relative; text-align: center; font-size: 12px; color: var(--ink-muted); }
+  .auth-simple__divider::before { position: absolute; top: 50%; left: 0; right: 0; height: 1px; background: var(--rule); content: ''; }
+  .auth-simple__divider span { background: var(--surface); padding: 0 12px; position: relative; }
+  .auth-simple__form { display: grid; gap: 16px; }
+  .auth-simple__form .field { margin: 0; }
+  .auth-simple__form .input { min-height: 46px; width: 100%; }
+  .auth-simple__form input[aria-invalid="true"] { border-color: var(--verdict-fail); }
+  .auth-simple__form > .btn { min-height: 46px; width: 100%; justify-content: center; }
+  .auth-simple__switch { display: grid; grid-template-columns: 1fr 1fr; padding: 4px; border-radius: 8px; background: var(--surface-soft); gap: 4px; }
+  .auth-simple__switch button { min-height: 36px; border: 0; border-radius: 6px; color: var(--ink-muted); background: transparent; font: inherit; font-size: 14px; cursor: pointer; }
+  .auth-simple__switch button[aria-pressed="true"] { background: var(--surface); color: var(--brand); box-shadow: 0 1px 3px rgb(0 0 0 / 5%); }
+  .auth-simple__code { letter-spacing: .38em; font-size: 20px; font-variant-numeric: tabular-nums; text-align: center; }
+  .auth-simple__error { font-size: 12px; line-height: 1.6; margin: 0; color: var(--verdict-fail); overflow-wrap: anywhere; }
+  .auth-simple__error:empty { display: none; }
+  .auth-simple__alternatives { display: flex; justify-content: center; gap: 10px 20px; flex-wrap: wrap; }
+  .auth-simple__alternatives:empty { display: none; }
+  .auth-simple__link { color: var(--brand); font: inherit; font-size: 12px; background: none; border: 0; padding: 4px 0; text-decoration: none; cursor: pointer; min-height: 32px; }
+  .auth-simple__link:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .auth-simple__link:disabled { cursor: default; color: var(--ink-muted); text-decoration: none; }
+  .auth-simple__privacy { margin: 0; text-align: center; color: var(--ink-muted); font-size: 12px; line-height: 1.7; }
+  .auth-simple__privacy a { color: inherit; text-underline-offset: 3px; }
+  .auth-simple :focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; }
+  #auth-panel:has(.auth-simple:not([hidden])) { width: min(448px, calc(100vw - 32px)); }
 
   .auth-form {
     display: grid;
@@ -3736,11 +3794,12 @@ html[data-theme="dark"] { --quote-highlight: #655529; }
 
   @media (max-width: 480px) {
     .auth-form { padding: var(--space-5) var(--space-4); }
+    .auth-simple { padding: 24px 20px; gap: 20px; }
   }
 }
 
 
-/* ─── src/styles/views/workbench.css ─── */
+/* ─── src\styles\views\workbench.css ─── */
 /* The production app-shell and detail-view share the same calm surface system. */
 @layer components {
   /* Dialogs sit outside app-shell. Keep their existing button vocabulary usable
@@ -3868,7 +3927,7 @@ html[data-theme="dark"] { --quote-highlight: #655529; }
   @media (prefers-reduced-motion: reduce) { .review-workbench *, .detail-loading * { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
 }
 
-/* ─── src/styles/views/review-cards.css ─── */
+/* ─── src\styles\views\review-cards.css ─── */
 /* Review cards and two-sided evidence reader; intentionally scoped to the detail view. */
 @layer views {
   #detail-view .review-card {
@@ -4027,7 +4086,7 @@ html[data-theme="dark"] { --quote-highlight: #655529; }
   }
 }
 
-/* ─── src/styles/views/reader-navigation.css ─── */
+/* ─── src\styles\views\reader-navigation.css ─── */
 /* Reader controls extend review-cards.css; no global layout or verdict styling. */
 @layer views {
   #detail-view .reader-evidence-picker {
@@ -4111,7 +4170,7 @@ html[data-theme="dark"] { --quote-highlight: #655529; }
   }
 }
 
-/* ─── src/styles/views/intake.css ─── */
+/* ─── src\styles\views\intake.css ─── */
 /* Upload intake: quiet surfaces, native keyboard access, truthful waiting states. */
 @layer views {
   #intake-panel {

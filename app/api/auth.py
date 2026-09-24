@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from fastapi import APIRouter, Query, Request, Response
+from fastapi import APIRouter, HTTPException, Query, Request, Response
 from fastapi.responses import RedirectResponse
 
 from ..authz import Permission, require
@@ -11,6 +11,8 @@ from ..schemas import (
     ApiTokenCreateRequest,
     AuthActionCompleteRequest,
     AuthBootstrapRequest,
+    AuthChallengeRequest,
+    AuthChallengeVerifyRequest,
     InvitationCreateRequest,
     LoginRequest,
     MfaCodeRequest,
@@ -18,7 +20,7 @@ from ..schemas import (
     PersonalRegisterRequest,
     TrialJoinRequest,
 )
-from ..services import auth_service
+from ..services import auth_service, passwordless_service, social_auth_service
 
 router = APIRouter(prefix="/api/auth", tags=["auth"])
 
@@ -154,3 +156,46 @@ def revoke_session(request: Request, session_id: str) -> dict:
 @router.post("/sessions/revoke-others")
 def revoke_other_sessions(request: Request) -> dict:
     return auth_service.revoke_other_sessions(request)
+
+
+@router.post("/challenges")
+def request_challenge(request: Request, payload: AuthChallengeRequest) -> dict:
+    return passwordless_service.request_challenge(request, payload.channel, payload.identifier)
+
+
+@router.post("/challenges/verify")
+def verify_challenge(request: Request, response: Response, payload: AuthChallengeVerifyRequest) -> dict:
+    return passwordless_service.verify_challenge(request, response, payload.challenge_id, payload.code)
+
+
+@router.get("/oauth/{provider}/start")
+def social_start(request: Request, provider: str) -> RedirectResponse:
+    redirect = RedirectResponse("/app", status_code=302)
+    try:
+        redirect.headers["location"] = social_auth_service.start(request, redirect, provider)
+    except HTTPException:
+        redirect.headers["location"] = "/app?auth_error=unavailable"
+    return redirect
+
+
+@router.get("/oauth/{provider}/callback")
+def social_callback(
+    request: Request, provider: str,
+    code: str = Query(default="", max_length=2000),
+    state: str = Query(default="", max_length=200),
+    error: str = Query(default="", max_length=200),
+) -> RedirectResponse:
+    redirect = RedirectResponse("/app", status_code=303)
+    try:
+        result = social_auth_service.complete(request, redirect, provider, code, state, error)
+        if result.get("mfa_required"):
+            redirect.headers["location"] = f"/app?mfa_token={result['mfa_token']}"
+    except HTTPException as exc:
+        code = exc.detail.get("code", "") if isinstance(exc.detail, dict) else ""
+        reason = {"SOCIAL_CANCELLED": "cancelled", "SOCIAL_EXPIRED": "expired",
+                  "PROVIDER_UNAVAILABLE": "unavailable", "SIGNUP_CLOSED": "signup_closed",
+                  "ACCOUNT_LINK_REQUIRED": "account_link_required"}.get(code, "provider")
+        redirect.headers["location"] = "/app?auth_error=" + reason
+    if provider in social_auth_service.PROVIDERS:
+        redirect.delete_cookie("bidproof_social_" + provider, path=f"/api/auth/oauth/{provider}")
+    return redirect

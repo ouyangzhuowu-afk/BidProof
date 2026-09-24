@@ -471,7 +471,7 @@ def list_expired_archived_run_ids(workspace_id: str, cutoff: str, path: Path | s
 def ensure_workspace(workspace_id: str, user_id: str, role: str, name: str | None = None, path: Path | str | None = None) -> None:
     bound = engine(path)
     now = _now()
-    with bound.begin() as connection:
+    with connect(path) as connection:
         insert = sqlite.insert if bound.dialect.name == "sqlite" else postgresql.insert
         connection.execute(
             insert(workspaces)
@@ -1735,25 +1735,12 @@ def load_login_flow(state: str, provider: str, now: str, path: Path | str | None
 
 def consume_login_flow(state: str, provider: str, now: str, path: Path | str | None = None) -> dict[str, Any] | None:
     with connect(path) as connection:
-        row = _row(
-            connection.execute(
-                sa.select(login_flows).where(
-                    login_flows.c.state == state,
-                    login_flows.c.provider == provider,
-                    login_flows.c.consumed_at.is_(None),
-                    login_flows.c.expires_at > now,
-                )
-            )
-        )
-        if row is None:
-            return None
-        consumed = connection.execute(
+        return _row(connection.execute(
             sa.update(login_flows).where(
                 login_flows.c.state == state, login_flows.c.provider == provider,
                 login_flows.c.consumed_at.is_(None), login_flows.c.expires_at > now,
-            ).values(consumed_at=now)
-        )
-    return row if consumed.rowcount == 1 else None
+            ).values(consumed_at=now).returning(login_flows)
+        ))
 
 
 def list_project_members(project_id: str, path: Path | str | None = None) -> list[dict[str, Any]]:

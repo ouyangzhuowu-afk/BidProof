@@ -139,7 +139,10 @@ export function needsConfirm(mode) {
  * @returns {AuthView}
  */
 export function resolveAuthView(status, requestedMode, pendingMfa) {
-  const mode = clampMode(status, requestedMode);
+  // OTP can create the first personal account after a setup_required status was
+  // fetched. A pending MFA challenge is already past setup/registration; never
+  // leave hidden workspace or password-confirm fields required in this step.
+  const mode = pendingMfa ? 'login' : clampMode(status, requestedMode);
   const setupRequired = Boolean(status?.setup_required);
   const personal = Boolean(status?.personal_signup_enabled);
   const trial = Boolean(status?.trial_join_enabled) && !setupRequired;

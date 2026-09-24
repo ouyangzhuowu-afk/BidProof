@@ -1,10 +1,10 @@
 # BidProof public page
 
-A static, progressively enhanced product page built with Vite 7, strict TypeScript and Tailwind CSS 4. It shares the existing FastAPI origin and requires no Node process in production. The existing application under `frontend/` is independent.
+A short, progressively enhanced product page using Vite 7, strict TypeScript and Tailwind CSS 4. It shares the FastAPI origin, requires no Node process in production, and links to the application in `frontend/`.
 
 ## Build and verify
 
-Use Node 22.12+ (Node 24 is used for local verification):
+Use Node 22.12+ (local verification uses Node 24):
 
 ```sh
 cd landing
@@ -12,27 +12,26 @@ npm ci
 npm run verify
 ```
 
-The build writes `static/marketing/index.html`, content-hashed JS/CSS, and public assets. Serve `/` through the FastAPI public-page route and `/static/marketing/*` through the existing static mount. `npm run dev` is an isolated development preview; `/app` and `/privacy` require the backend origin.
+The build writes `static/marketing/index.html` and content-hashed JS/CSS. Serve `/` through the FastAPI public-page route and `/static/marketing/*` through the static mount. The development server previews the landing; `/app` and `/privacy` require the backend origin.
 
-All public metadata uses `__PUBLIC_ORIGIN__`, replaced by the backend from the configured public origin. Do not serve the unprocessed index as the production root. This avoids hard-coded third-party canonical URLs. No inline scripts, CDN libraries, remote fonts, or external analytics are required.
+Metadata uses `__PUBLIC_ORIGIN__`, replaced by the backend from its configured origin. Do not serve the unprocessed index as the production root. The page needs no inline scripts, remote images, CDN libraries, external fonts or analytics SDKs.
 
 ## Structure
 
-- `index.html`: readable semantic content, real `/app` CTAs, native FAQ and mobile menu; visible static evidence example without JS.
-- `src/demo-model.ts`: typed synthetic cases and fail-closed confirmation eligibility.
-- `src/demo.ts`: safe DOM rendering, scoped local notes, keyboard navigation and live status.
-- `src/tracking.ts`: optional `bidproof:marketing` CustomEvent hook containing only enumerated `placement` and `action`. It sends no network request; never attach notes, filenames, account IDs or document text.
-- `src/main.ts`: isolated demonstration fallback, finite viewport entry animations, reduced-motion and lifecycle cleanup.
-- `src/style.css`: Tailwind import, shared marketing tokens and responsive styling.
-- `public/social-card.svg`: editable, code-native 1200×630 Open Graph artwork. `social-card.png` is the export used by metadata.
-- `tests/demo.test.ts`: domain and DOM tests for rejection guards, confirmation, note isolation/XSS, keyboard flow, reset, listener teardown, telemetry minimization and working links.
+- `index.html`: one outcome-focused Hero, one main `/app` CTA, a static-first example, three short feature cards, and a privacy link.
+- `src/demo-model.ts`: fixed illustrative timeline, with no actual scan-performance claim.
+- `src/demo.ts`: safe `textContent` rendering, finite playback, reduced-motion handling, visibility cleanup and accessible busy/status feedback.
+- `src/tracking.ts`: optional local `bidproof:marketing` events with enumerated `placement` and `action` only; no network or account/document fields.
+- `src/main.ts`: fallback and lifecycle cleanup; page controls survive back/forward-cache restores.
+- `src/style.css`: Tailwind import, design tokens and mobile/desktop layouts.
+- `tests/demo.test.ts`: static fallback, single-flight timing, reduced motion, page lifecycle, teardown, keyboard semantics and telemetry privacy tests.
 
-The Tailwind Vite setup follows the [official installation guide](https://tailwindcss.com/docs/installation/using-vite). Dependencies are development-only and pinned by `package-lock.json`.
+Copy comparison, wireframe and component decisions are in `docs/ux-0924/landing-blueprint.md`.
 
 ## Content boundaries
 
-All demonstration documents and task counts are visibly labelled synthetic. The demonstration does not call audit APIs, upload files, write workspace records, or retain data in local/session storage. Notes live only in the page and are cleared by reload/reset. Missing evidence and expired-certificate examples cannot be confirmed. A human can confirm the matched example or return it to a doubtful state.
+All preview inputs and results are synthetic. Playback does not call audit APIs, upload files, write records or use local/session storage. Result rows continue to say missing material or needs review; a matched citation does not become an automatic pass. The displayed 2.4-second playback is an illustration, not an actual processing-time guarantee.
 
-The current product is a pilot. Pricing is not publicly committed, there is no payment checkout, and no customer logos, testimonials, certification badges or measured efficiency claims are invented. The page links to existing authentication, which determines whether personal registration, invitation, trial code or login is available.
+No pricing, customer logos, testimonials, certification badges or measured efficiency claims are invented. Authentication and provider availability are determined by the application and server configuration.
 
-The automated suite verifies behavior and static contracts. It does not prove production field Core Web Vitals, commercial conversion rates, OCR accuracy, business acceptance or complete accessibility conformance. Those need field measurement and user evaluation.
+Automated checks verify behavior and static contracts. Field Core Web Vitals, conversion rate, OCR accuracy, commercial acceptance and full accessibility conformance still require separate measurement.

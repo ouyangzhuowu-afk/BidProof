@@ -86,3 +86,14 @@ _cleanup-archive-*/
 # Restore-drill copies of real uploads must never enter Git (real customer data)
 work/restore-drill-*/uploads/
 
+# 任何本地 data root 都可能收到真实客户材料：BIDPROOF_DATA_ROOT 指到 work/ 下时，
+# uploads/ 与 SQLite 文件必须留在本地（历史事故见 AGENTS.md）。
+work/*/uploads/
+work/*/*.sqlite3*
+
+# 2026-09-24 物料包原件与解包目录（zip 已在上面按 *.zip 忽略）
+_incoming-*/
+
+# 本机验证日志（命令输出、回环验证码、一次性驱动脚本）
+outputs/verify-logs/
+

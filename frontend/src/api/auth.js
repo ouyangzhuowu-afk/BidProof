@@ -33,9 +33,25 @@ export function getStatus() {
  * @param {{ username: string, password: string }} body
  * @returns {Promise<LoginOutcome>}
  */
-export async function login(body) {
-  const payload = await json(paths.auth.login, 'POST', body);
+export async function login(body, options = {}) {
+  const payload = await json(paths.auth.login, 'POST', body, options);
   return toOutcome(payload);
+}
+
+/** @param {{channel: 'email' | 'sms', identifier: string}} body @param {{signal?: AbortSignal}} [options] */
+export async function requestChallenge(body, options = {}) {
+  const result = await json(paths.auth.challenges, 'POST', body, options);
+  if (!result || typeof result.challenge_id !== 'string' || typeof result.masked_identifier !== 'string'
+    || !Number.isFinite(result.expires_in) || result.expires_in <= 0
+    || !Number.isFinite(result.resend_after) || result.resend_after < 0) {
+    throw new Error('验证码发送结果无法确认，请稍后重试。');
+  }
+  return result;
+}
+
+/** @param {{challenge_id: string, code: string}} body @param {{signal?: AbortSignal}} [options] @returns {Promise<LoginOutcome>} */
+export async function verifyChallenge(body, options = {}) {
+  return toOutcome(await json(paths.auth.verifyChallenge, 'POST', body, options));
 }
 
 /**

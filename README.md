@@ -1,5 +1,7 @@
 # BidProof — 投标证据链 Agent
 
+> **2026-09-24 极简体验与统一认证交付**：从 [docs/ux-0924/README.md](docs/ux-0924/README.md) 查看文案对照、线框、认证状态机与配置，验收边界见 [docs/ux-0924/acceptance.md](docs/ux-0924/acceptance.md)。首页来源为 BID_0924.zip 物料包，已并入主分支；验证码与 OAuth 需要运营方配置真实供应商后才会对外展示。
+
 > **2026-09-23 生产候选版**：新 Landing、工作台加固、单机 Docker Compose 与完整验证入口见 [START-HERE.md](START-HERE.md)。本轮部署以该入口和 `docs/production/` 为准，下面保留历史产品说明。
 
 面向 IT 服务、软件实施类中小企业的投标资格与废标风险扫描工具：上传招标文件与企业证据后，逐页抽出要求项，给出带双向页码引用的风险结论。

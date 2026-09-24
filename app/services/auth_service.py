@@ -55,12 +55,18 @@ def _account_response(user: dict, workspace_id: str) -> dict:
 
 
 def status(request: Request) -> dict:
+    from .. import auth_delivery
+    from . import social_auth_service
+
+    passwordless = {"email": auth_delivery.enabled("email"), "phone": auth_delivery.enabled("sms"),
+                    "oauth": social_auth_service.available()}
     users = accounts.count()
     trial_join_enabled = bool(config.TRIAL_JOIN_CODE) and users > 0
     personal_signup_enabled = bool(config.PERSONAL_SIGNUP)
     if users == 0:
         return {
             "setup_required": True,
+            "passwordless": passwordless,
             "authenticated": False,
             "bootstrap_token_required": config.ENVIRONMENT == "production",
             "bootstrap_locked": identity.bootstrap_locked(),
@@ -74,6 +80,7 @@ def status(request: Request) -> dict:
     mfa_enabled = bool(user and (identity_store.load_mfa(user["user_id"]) or {}).get("confirmed_at"))
     return {
         "setup_required": False,
+        "passwordless": passwordless,
         "authenticated": bool(user),
         "trial_join_enabled": trial_join_enabled,
         "personal_signup_enabled": personal_signup_enabled,
@@ -105,6 +112,12 @@ def login(request: Request, response: Response, payload: LoginRequest) -> dict:
     username = payload.username.strip()
     workspace_hint = (payload.workspace_id or "").strip() or None
     user = accounts.by_username(username, workspace_hint)
+    if "@" in username:
+        binding = identity_store.load_binding("EMAIL", "bidproof", username.casefold())
+        if binding:
+            bound_user = accounts.by_id(binding["user_id"])
+            if bound_user and (not workspace_hint or bound_user["workspace_id"] == workspace_hint):
+                user = bound_user
     meets_policy = password_meets_policy(payload.password)
     if user and not bool(user.get("active", 1)):
         _fail_login(attempt_key, user, username)
@@ -197,7 +210,7 @@ def _provision_federated_user(
         with uow.transaction():
             user = accounts.create(workspace_id, username, UNUSABLE_PASSWORD, role)
             workspaces.ensure(workspace_id, user["user_id"], role)
-            identity_store.remember_binding(user["user_id"], provider, issuer, subject)
+            identity_store.bind_new(user["user_id"], provider, issuer, subject)
     except sqlalchemy.exc.IntegrityError as exc:
         raise HTTPException(status_code=409, detail="账号已存在或身份绑定发生冲突，请重新登录") from exc
     audit.record(

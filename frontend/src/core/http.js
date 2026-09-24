@@ -44,8 +44,9 @@ export class ApiError extends Error {
    * @param {string} [init.code]   服务端业务错误码（若返回）
    * @param {unknown} [init.payload]
    * @param {string} [init.requestId]
+   * @param {number} [init.retryAfter]
    */
-  constructor({ message, status, url, code, payload, requestId }) {
+  constructor({ message, status, url, code, payload, requestId, retryAfter }) {
     super(message);
     this.name = 'ApiError';
     this.status = status;
@@ -53,6 +54,7 @@ export class ApiError extends Error {
     this.code = code ?? '';
     this.payload = payload;
     this.requestId = requestId || '';
+    this.retryAfter = retryAfter || 0;
   }
 
   /** 网络不可达 / 超时 / 被取消，而不是服务端拒绝。 */
@@ -175,6 +177,7 @@ const VALIDATION_FIELD_LABELS = {
  */
 export function formatErrorDetail(detail) {
   if (typeof detail === 'string' && detail.trim()) return detail.trim();
+  if (isRecord(detail) && typeof detail.message === 'string') return detail.message.trim();
   if (!Array.isArray(detail) || detail.length === 0) return '';
 
   const messages = [];
@@ -215,13 +218,18 @@ export function formatErrorDetail(detail) {
 function toApiError(response, url, payload) {
   const body = /** @type {Record<string, unknown>} */ (payload || {});
   const detail = formatErrorDetail(body.detail) || `请求失败（${response.status}）`;
+  const nested = isRecord(body.detail) ? body.detail : {};
+  const retry = response.headers.get('retry-after');
+  const retryAfter = retry && /^\d+$/.test(retry.trim()) ? Number(retry)
+    : retry ? Math.max(0, Math.ceil((Date.parse(retry) - Date.now()) / 1000)) : 0;
   return new ApiError({
     message: detail,
     status: response.status,
     url,
-    code: typeof body.code === 'string' ? body.code : '',
+    code: typeof body.code === 'string' ? body.code : typeof nested.code === 'string' ? nested.code : '',
     payload,
     requestId: response.headers.get('x-request-id') || '',
+    retryAfter: Number.isFinite(retryAfter) ? Math.min(retryAfter, 86400) : 0,
   });
 }
 

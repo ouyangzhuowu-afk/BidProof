@@ -29,6 +29,7 @@ import {
 import { MODE_ENDPOINT, buildPayload, needsConfirm, clampMode } from './state.js';
 import { assertPasswordPolicy } from '../../core/password.js';
 import { openSessionChannel } from '../../core/session-channel.js';
+import { createAuthModal } from './unified.js';
 
 /** @typedef {import('../../../types/api.js').AuthStatus} AuthStatus */
 /** @typedef {import('../../../types/api.js').CurrentUser} CurrentUser */
@@ -44,6 +45,7 @@ let onAuthenticated = () => {};
 let bound = false;
 let expiryPending = false;
 let sessionChannel = null;
+let unified = null;
 
 /* ═══════════════════════════════════════════════════════════════════════════
    装配
@@ -56,6 +58,26 @@ export function configureAuth(handlers) {
   onAuthenticated = handlers.onAuthenticated;
   if (bound) return;
   bound = true;
+  const dialog = el('#auth-panel');
+  const root = el('#auth-unified-root');
+  const legacyForm = el('#auth-form');
+  if (dialog && root && legacyForm) unified = createAuthModal({
+    dialog, root, legacyForm, api: authApi,
+    onLegacy: (requested) => open(requested),
+    onResume: () => reopenAfterExpiry('请重新验证身份。', true),
+    onOutcome: async (outcome) => {
+      clearAuthForm();
+      if (outcome.kind === 'mfa_required') {
+        pendingMfaToken = outcome.mfaToken;
+        open('login');
+        return;
+      }
+      pendingMfaToken = '';
+      closeAuthDialog();
+      sessionChannel?.publish();
+      await onAuthenticated(outcome.user);
+    },
+  });
   sessionChannel = openSessionChannel(() => {
     window.dispatchEvent(new CustomEvent('bidproof:session-ended'));
     accountAction = null;
@@ -134,20 +156,35 @@ export async function startAuth() {
 
   // 从 OIDC 回跳时可能带着 mfa_token：直接进第二步，不要求重新输密码。
   const fromUrl = new URLSearchParams(window.location.search).get('mfa_token');
+  const authError = new URLSearchParams(window.location.search).get('auth_error');
+  if (fromUrl || authError) {
+    const cleaned = new URL(window.location.href);
+    cleaned.searchParams.delete('mfa_token');
+    cleaned.searchParams.delete('auth_error');
+    window.history.replaceState({}, '', `${cleaned.pathname}${cleaned.search}${cleaned.hash}`);
+  }
   if (fromUrl && !status.authenticated) {
     pendingMfaToken = fromUrl;
     open('login');
     return false;
   }
 
-  if (status.setup_required) {
+  if (status.setup_required && !canStartPasswordless(status)) {
     open('setup', status.bootstrap_locked
       ? '生产环境尚未配置初始化令牌，请联系运维人员。'
       : '');
     return false;
   }
   if (!status.authenticated) {
-    open('login');
+    const errors = {
+      cancelled: '你已取消授权，可以重新选择进入方式。',
+      expired: '授权已过期，请重新继续。',
+      provider: '授权暂时未完成，请重试或使用验证码。',
+      unavailable: '该登录方式暂时不可用，请选择其他方式。',
+      signup_closed: '暂未开放新账号，请联系管理员获取邀请。',
+      account_link_required: '此邮箱已有账号，请使用原账号密码进入。',
+    };
+    open('login', errors[authError] || '');
     return false;
   }
 
@@ -157,6 +194,15 @@ export async function startAuth() {
 
 /** @param {string} requested @param {string} [message] */
 function open(requested, message = '') {
+  if (unified && requested === 'login' && !pendingMfaToken && (!status?.setup_required || canStartPasswordless(status))) {
+    mode = 'login';
+    unified.open(status, message);
+    return;
+  }
+  unified?.deactivate();
+  el('#auth-form')?.removeAttribute('hidden');
+  el('#auth-panel')?.setAttribute('aria-labelledby', 'auth-title');
+  el('#auth-panel')?.setAttribute('aria-describedby', 'auth-subtitle');
   mode = clampMode(status, requested);
   const view = renderAuth(status, mode, Boolean(pendingMfaToken), message);
   openAuthDialog(view.focus);
@@ -164,9 +210,7 @@ function open(requested, message = '') {
 
 /** @param {string} requested */
 function setMode(requested) {
-  mode = clampMode(status, requested);
-  const view = renderAuth(status, mode, Boolean(pendingMfaToken));
-  requestAnimationFrame(() => /** @type {HTMLElement | null} */ (el(view.focus))?.focus());
+  open(requested);
 }
 
 /**
@@ -178,8 +222,12 @@ function setMode(requested) {
 function cancelMfa() {
   pendingMfaToken = '';
   clearAuthForm();
-  const view = renderAuth(status, mode, false);
-  requestAnimationFrame(() => /** @type {HTMLElement | null} */ (el(view.focus))?.focus());
+  open('login');
+}
+
+function canStartPasswordless(authStatus) {
+  return Boolean(authStatus?.personal_signup_enabled && (authStatus?.passwordless?.email
+    || authStatus?.passwordless?.phone || authStatus?.passwordless?.oauth?.length));
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════

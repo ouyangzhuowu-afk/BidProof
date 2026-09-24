@@ -202,7 +202,7 @@ function renderNavigation() {
   const counts = getReviewQueueCounts(run);
   const busy = busyRunId === run.run_id;
   mount(target, html`<div class="review-navigation__context">
-      <span>全任务核验 · ${Math.max(0, current.index + 1)} / ${current.total}</span>
+      <span>${current.total ? `正在看第 ${Math.max(0, current.index + 1)} / ${current.total} 条` : '暂无可核验的条目'}</span>
       <strong>${current.current?.label || '选择一条要求开始核验'}</strong>
       <small>${!counts.total ? '尚未提取到要求项' : counts.pending ? `${counts.pending} 项待处理` : '全部条款已人工核销'}</small>
     </div><div class="review-navigation__actions">

@@ -50,6 +50,7 @@ def install_middleware(app: FastAPI) -> None:
         logger.exception("Unhandled exception on %s %s [%s]", request.method, request.url.path, rid)
         response = JSONResponse(status_code=500, content={"detail": "服务器内部错误，请稍后重试", "request_id": rid})
         response.headers.update(SECURITY_HEADERS)
+        response.headers['Cache-Control'] = 'no-store'
         response.headers[request_context.REQUEST_ID_HEADER] = rid
         return response
 
@@ -117,6 +118,9 @@ def _finalize_response(request: Request, response, context) -> None:
         response.headers.setdefault("Strict-Transport-Security", "max-age=31536000")
     observability.record_http(request.method, response.status_code)
     path = request.url.path
+    if path == '/app' or path.startswith(('/api/auth/', '/api/v1/auth/')):
+        response.headers['Cache-Control'] = 'no-store'
+        response.headers['Referrer-Policy'] = 'no-referrer'
     if path.startswith("/static/") or path == "/metrics":
         return
     logger.info(

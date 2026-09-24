@@ -1,0 +1,83 @@
+- generic [ref=f1e1]:
+  - region "连接与运行状态"
+  - link "跳到主要内容" [ref=f1e2] [cursor=pointer]:
+    - /url: "#app-main"
+  - generic [ref=f1e3]:
+    - complementary [ref=f1e4]:
+      - generic [ref=f1e15]:
+        - strong [ref=f1e16]: BidProof
+        - generic [ref=f1e17]: 企业投标证据工作台
+      - navigation "主导航" [ref=f1e18]:
+        - button "扫描任务" [ref=f1e19] [cursor=pointer]
+        - button "新建扫描" [ref=f1e25] [cursor=pointer]
+        - button "扫描作业" [ref=f1e31] [cursor=pointer]
+        - button "成员与设置" [ref=f1e37] [cursor=pointer]
+        - button "当前外观：跟随系统，切换为浅色" [ref=f1e44] [cursor=pointer]:
+          - generic [ref=f1e48]: 外观：跟随系统
+      - generic [ref=f1e51]:
+        - strong [ref=f1e52]: 服务连接正常
+        - generic [ref=f1e53]: 访问受企业权限保护
+      - generic [ref=f1e54]: BidProof · 企业试点版
+    - generic [ref=f1e55]:
+      - banner [ref=f1e56]:
+        - generic [ref=f1e57]:
+          - generic [ref=f1e58]: 工作台
+          - strong [ref=f1e62]: 扫描任务
+        - button "新建扫描" [ref=f1e63] [cursor=pointer]
+      - main [ref=f1e67]:
+        - generic [ref=f1e68]:
+          - generic [ref=f1e69]:
+            - generic [ref=f1e70]:
+              - paragraph [ref=f1e71]: 任务总览
+              - heading "扫描任务" [level=1] [ref=f1e72]
+              - paragraph [ref=f1e73]: 集中查看投标风险、证据缺口与人工决策状态。
+            - button "新建扫描" [ref=f1e75] [cursor=pointer]
+          - generic "任务概览" [ref=f1e81]
+          - generic [ref=f1e86]:
+            - region [ref=f1e87]:
+              - heading "扫描记录" [level=2] [ref=f1e89]
+              - generic [ref=f1e90]:
+                - searchbox "搜索任务" [ref=f1e92]
+                - radiogroup "任务范围" [ref=f1e93]:
+                  - radio "未归档" [checked] [ref=f1e94] [cursor=pointer]
+                  - radio "已归档" [ref=f1e95] [cursor=pointer]
+                  - radio "全部" [ref=f1e96] [cursor=pointer]
+                - button "刷新任务列表" [ref=f1e97] [cursor=pointer]
+              - group [ref=f1e104]:
+                - generic "更多筛选" [ref=f1e105] [cursor=pointer]
+                - option "全部项目" [selected]
+                - option "全部负责人" [selected]
+                - option "全部复核人" [selected]
+                - option "最近更新" [selected]
+                - option "文件名"
+              - generic "扫描任务列表" [ref=f1e113]
+            - complementary "辅助信息" [ref=f1e117]:
+              - region [ref=f1e118]:
+                - heading "待处理提醒" [level=2] [ref=f1e120]
+              - region [ref=f1e123]:
+                - heading "检出质量" [level=2] [ref=f1e125]
+  - dialog [ref=f1e146]:
+    - generic [ref=f1e129]:
+      - generic [ref=f1e147]:
+        - link "BidProof 首页" [ref=f1e148] [cursor=pointer]:
+          - /url: /
+          - text: BidProof
+          - generic [ref=f1e149]: 投标材料检查
+        - link "返回首页" [ref=f1e150] [cursor=pointer]:
+          - /url: /
+      - generic [ref=f1e151]:
+        - heading "查看你的验证码" [level=2] [ref=f1e152]
+        - paragraph [ref=f1e153]: 验证码已发送至 s***@example.test
+      - generic [ref=f1e154]:
+        - generic [ref=f1e155]:
+          - generic [ref=f1e156]: 6 位验证码
+          - textbox "6 位验证码" [active] [ref=f1e157]
+          - status [ref=f1e158]: 验证码仅用于本次进入，请勿转发。
+        - button "验证并进入" [ref=f1e159] [cursor=pointer]
+      - generic [ref=f1e160]:
+        - button "60 秒后重新发送" [disabled] [ref=f1e161]
+        - button "修改邮箱" [ref=f1e162] [cursor=pointer]
+      - paragraph [ref=f1e163]:
+        - text: 不需要填写公司或职位。
+        - link "隐私说明" [ref=f1e164] [cursor=pointer]:
+          - /url: /privacy

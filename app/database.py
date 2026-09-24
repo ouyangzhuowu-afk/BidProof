@@ -13,7 +13,7 @@ from pathlib import Path
 
 import sqlalchemy as sa
 from sqlalchemy.engine import Engine, make_url
-from sqlalchemy.pool import StaticPool
+from sqlalchemy.pool import QueuePool, StaticPool
 
 from . import config
 from .models import metadata
@@ -23,6 +23,8 @@ POOL_SIZE = int(os.environ.get("BIDPROOF_DB_POOL_SIZE", "20"))
 MAX_OVERFLOW = int(os.environ.get("BIDPROOF_DB_MAX_OVERFLOW", "20"))
 POOL_TIMEOUT_SECONDS = int(os.environ.get("BIDPROOF_DB_POOL_TIMEOUT", "30"))
 SQLITE_BUSY_TIMEOUT_MS = int(os.environ.get("BIDPROOF_SQLITE_BUSY_TIMEOUT_MS", "5000"))
+SQLITE_POOL_SIZE = int(os.environ.get("BIDPROOF_SQLITE_POOL_SIZE", "5"))
+SQLITE_MAX_OVERFLOW = int(os.environ.get("BIDPROOF_SQLITE_MAX_OVERFLOW", "10"))
 
 _engines: dict[str, Engine] = {}
 
@@ -62,6 +64,12 @@ def is_sqlite(url: str) -> bool:
     return make_url(url).get_backend_name() == "sqlite"
 
 
+def is_in_memory_sqlite(url: str) -> bool:
+    """True for SQLite URLs whose database only lives as long as its connection."""
+    database = make_url(url).database or ""
+    return database in {"", ":memory:"} or "mode=memory" in database
+
+
 def engine_for(target: Path | str | None = None) -> Engine:
     """Return the cached engine for a URL, a SQLite file path, or the configured default."""
     if target is None:
@@ -79,14 +87,31 @@ def engine_for(target: Path | str | None = None) -> Engine:
 
 def _create_engine(url: str) -> Engine:
     if is_sqlite(url):
+        # A file database needs one connection per concurrent request. FastAPI runs the
+        # synchronous routes in worker threads, so a single shared connection let two threads
+        # drive the same cursor and raised "sqlite3.InterfaceError: bad parameter or other API
+        # misuse". Callers saw that as 500s, and the follow-up session lookup also failed,
+        # which returned 401 and threw the reviewer back to the login dialog mid-task.
+        # In-memory databases still keep one shared connection: a fresh connection would
+        # otherwise open an empty database with no tables.
+        if is_in_memory_sqlite(url):
+            pool_options: dict[str, object] = {"poolclass": StaticPool}
+        else:
+            pool_options = {
+                "poolclass": QueuePool,
+                "pool_size": SQLITE_POOL_SIZE,
+                "max_overflow": SQLITE_MAX_OVERFLOW,
+                "pool_timeout": POOL_TIMEOUT_SECONDS,
+            }
         engine = sa.create_engine(
             url,
             future=True,
             json_serializer=_json_dumps,
-            # A single shared connection keeps SQLite's one-writer model predictable and lets
-            # WAL and busy_timeout apply consistently.
-            poolclass=StaticPool,
+            # Connections outlive the thread that created them, so the thread check cannot
+            # apply. WAL plus busy_timeout keep concurrent readers and the single writer
+            # ordered instead.
             connect_args={"check_same_thread": False, "timeout": SQLITE_BUSY_TIMEOUT_MS / 1000},
+            **pool_options,
         )
         sa.event.listen(engine, "connect", _apply_sqlite_pragmas)
         return engine

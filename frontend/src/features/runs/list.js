@@ -178,7 +178,7 @@ async function loadAccuracy() {
         <p class="accuracy__caveat">
           ${verified
             ? `基于 ${summary.sample_size ?? 0} 条已完成全量复核的样本。`
-            : '复核样本尚未覆盖全量，以上为抽样估计，不能作为对外承诺的指标。'}
+            : '还没有足够的真实样本，这两项暂时算不出来。样本积累后会显示在这里。'}
         </p>
       </div>
     `);
@@ -292,15 +292,14 @@ function renderEmpty(list) {
   }
   mount(list, html`
     <div class="runs-onboarding">
-      <p class="title-section">还没有扫描任务</p>
-      <ol class="runs-onboarding__steps">
-        <li>新建扫描，选择要核查的招标文件</li>
-        <li>一并上传已有的企业资质与业绩材料</li>
-        <li>在作业页查看进度，完成后逐条复核证据</li>
-      </ol>
-      <button class="btn btn--primary" type="button" id="runs-try-sample">
-        <i data-lucide="file-plus-2"></i><span>用一份示例招标文件试跑</span>
-      </button>
+      <h2 class="title-section">从一份材料开始</h2>
+      <p class="hint">先用示例熟悉流程，也可以直接上传自己的文件。</p>
+      ${store.get().currentUser?.role === 'VIEWER' ? html`<p class="hint">当前为只读账号，请联系团队成员创建检查任务。</p>` : html`
+        <div class="starter-grid">
+          <button class="starter-card" type="button" data-starter="software"><i data-lucide="monitor"></i><strong>软件实施项目</strong><span>检查资格与漏交材料</span><small>合成示例 · 已备好文件</small></button>
+          <button class="starter-card" type="button" data-starter="operations"><i data-lucide="server"></i><strong>系统运维项目</strong><span>核对业绩证明要求</span><small>合成示例 · 已备好文件</small></button>
+          <button class="starter-card" type="button" data-starter="own"><i data-lucide="upload"></i><strong>上传自己的材料</strong><span>招标文件 + 企业资料</span><small>开始第一次检查</small></button>
+        </div>`}
     </div>
   `);
 }
@@ -390,8 +389,10 @@ function bindList() {
     // 空状态与错误态里的按钮是渲染出来的，只能用委托。
     delegate('#runs-list', 'click', '#runs-clear-filters', clearFilters),
     delegate('#runs-list', 'click', '#runs-retry', () => { void load(); }),
-    delegate('#runs-list', 'click', '#runs-try-sample', (event) => {
-      void withLoading(/** @type {Element} */ (event.target).closest('button'), startSample);
+    delegate('#runs-list', 'click', '[data-starter]', (_event, node) => {
+      window.dispatchEvent(new CustomEvent('bidproof:start-sample-scan', {
+        detail: { scenario: /** @type {HTMLElement} */ (node).dataset.starter },
+      }));
     }),
   ];
 }
@@ -540,16 +541,6 @@ async function runBulk(action, button) {
       toastFromError(error);
     }
   });
-}
-
-/** 空状态的一键试跑。取回示例文件后交给扫描弹窗。 */
-async function startSample() {
-  try {
-    const sample = await workspaceApi.getSampleTender();
-    window.dispatchEvent(new CustomEvent('bidproof:start-sample-scan', { detail: sample }));
-  } catch (error) {
-    toastFromError(error, '示例文件暂不可用。');
-  }
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════

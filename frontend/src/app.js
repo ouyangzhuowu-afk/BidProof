@@ -10,6 +10,8 @@ import { renderIcons } from './core/icons.js';
 import { setLoading, resetDomCache } from './core/dom.js';
 import { clearToasts, toastError, toastFromError } from './core/toast.js';
 import { exportRun } from './api/runs.js';
+import { getSampleTender } from './api/workspace.js';
+import { startOnboarding, advanceOnboarding, stopOnboarding } from './features/runs/onboarding.js';
 import { register } from './core/router.js';
 // Confirm / secret-reveal callers moved to admin; app.js no longer imports them.
 import { setCurrentRole } from './core/permissions.js';
@@ -17,7 +19,6 @@ import {
   ApiError,
   json,
   request,
-  requestBlob,
   saveBlob,
   watchJob,
   UPLOAD_TIMEOUT_MS,
@@ -60,6 +61,7 @@ const missedDialog = document.querySelector('#missed-panel');
 let activeViewName = 'home';
 let pendingRunLoad = null;
 let sessionLocked = false;
+let loadingStarter = false;
 
 const intakeDialog = document.querySelector('#intake-panel');
 const openIntakeButtons = ['#new-scan-button', '#top-new-scan', '#nav-new-scan'];
@@ -129,6 +131,7 @@ async function initializeApp() {
     onAuthenticated: async (user) => {
       if (sessionLocked) { window.location.replace('/app'); return; }
       store.currentUser = user;
+      startOnboarding(user);
       const version = sessionVersion();
       renderCurrentUser();
       await loadProjects();
@@ -152,6 +155,7 @@ async function initializeApp() {
 function clearPrivateSession() {
   if (sessionLocked) return;
   sessionLocked = true;
+  stopOnboarding();
   cancelRunLoad();
   unmountRunsView(); unmountMatrix(); unmountDecisionView(); unmountCollab(); unmountJobsView(); unmountAdminView();
   stopAllScans(); resetSessionTransport(); clearSessionState();
@@ -187,27 +191,44 @@ function renderCurrentUser() {
 
 
 
-async function startSampleScan() {
-  if (sessionLocked) return;
+async function startSampleScan(scenario = 'software') {
+  if (sessionLocked || loadingStarter || isIntakeBusy()) return;
+  if (!['software', 'operations', 'own'].includes(scenario)) return;
+  if (scenario === 'own') { store.rescanParentId = null; await openIntake(); return; }
   const version = sessionVersion();
+  loadingStarter = true;
+  for (const button of document.querySelectorAll('[data-starter]')) button.disabled = true;
+  showToast('正在准备示例文件…');
   try {
-    const response = await requestBlob('/api/sample-tender');
-    const blob = await response.blob();
+    const [tender, evidence] = await Promise.all([
+      getSampleTender(scenario, 'tender'), getSampleTender(scenario, 'evidence'),
+    ]);
     if (!isSessionCurrent(version)) return;
-    const file = new File([blob], 'sample-tender.pdf', { type: 'application/pdf' });
-    const input = document.querySelector('#tender-file');
-    const transfer = new DataTransfer();
-    transfer.items.add(file);
-    input.files = transfer.files;
+    // Never replace files a person has already selected while a request was pending.
+    if (document.querySelector('#tender-file').files.length || document.querySelector('#evidence-files').files.length) {
+      await openIntake();
+      showToast('已保留你选好的材料。清空文件后可重新选择示例。');
+      return;
+    }
+    const label = scenario === 'software' ? '软件实施' : '系统运维';
+    for (const [selector, blob, suffix] of [['#tender-file', tender, '招标文件'], ['#evidence-files', evidence, '企业材料']]) {
+      const transfer = new DataTransfer();
+      transfer.items.add(new File([blob], `【合成示例】${label}-${suffix}.pdf`, { type: 'application/pdf' }));
+      document.querySelector(selector).files = transfer.files;
+    }
+    if (!document.querySelector('#company-name').value) document.querySelector('#company-name').value = '示例软件服务企业';
     refreshIntakeFiles();
     store.rescanParentId = null;
     await openIntake();
-    showToast('已填入样例招标文件，确认后即可开始扫描。');
+    showToast('两份合成示例已备好，点击“开始审查”查看结果。');
   } catch (error) {
     if (!isSessionCurrent(version)) return;
-    showToast(`${error.message}，请手动上传招标文件。`);
+    showToast(`${error.message}。可以重试，或上传自己的材料。`);
     store.rescanParentId = null;
     await openIntake();
+  } finally {
+    loadingStarter = false;
+    for (const button of document.querySelectorAll('[data-starter]')) button.disabled = false;
   }
 }
 
@@ -218,7 +239,9 @@ async function openIntake() {
   if (!isSessionCurrent(version)) return;
   if (store.rescanParentId && store.currentRun?.project_id) document.querySelector('#tender-project').value = store.currentRun.project_id;
   if (!intakeDialog.open) intakeDialog.showModal();
-  document.querySelector('#company-name').focus();
+  advanceOnboarding(1);
+  const ready = document.querySelector('#tender-file').files.length;
+  document.querySelector(ready ? '#scan-form button[type="submit"]' : '#tender-file').focus();
   refreshIcons();
 }
 
@@ -252,6 +275,7 @@ async function submitScan(event) {
     const job = await request('/api/jobs', { method: 'POST', body: formData, timeoutMs: UPLOAD_TIMEOUT_MS });
     if (!isSessionCurrent(session)) return;
     if (typeof job?.job_id !== 'string' || !job.job_id) throw new Error('提交结果未能确认，请先在扫描作业中核对，避免重复提交');
+    advanceOnboarding(2);
     setIntakeBusy(false);
     form.reset(); closeIntake(); store.rescanParentId = null;
     watchScanJob(job.job_id, filename, (runId) => { if (isSessionCurrent(session)) void openRun(runId); });
@@ -297,6 +321,7 @@ async function openRun(runId, destination = 'detail') {
     pendingRunLoad = null;
     if (overlay) overlay.hidden = true;
     store.currentRun = run;
+    advanceOnboarding(3);
     resetMatrixView();
     document.querySelector('#requirement-search').value = '';
     if (destination === 'decision') showDecision();
@@ -689,7 +714,7 @@ function formatDate(value) {
 
 // 空状态里的「用示例文件试跑」在 features/runs/list.js 中触发，
 // 但打开扫描弹窗的逻辑还在 app.js。用事件解耦，避免反向依赖。
-window.addEventListener('bidproof:start-sample-scan', () => { void startSampleScan(); });
+window.addEventListener('bidproof:start-sample-scan', (event) => { void startSampleScan(event.detail?.scenario); });
 
 // 矩阵里的检出质量反馈会影响准确率面板，但两者分属不同视图。
 // 用事件通知，避免 matrix.js 反向依赖任务列表模块。
