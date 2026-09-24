@@ -645,6 +645,21 @@
       ],
       "validation": "物料包并入主分支后重跑：pytest 409 passed/13 skipped；frontend verify 145 passed + tsc/边界/构建/ESLint 0 error；landing verify 11 passed + tsc/构建；workflow check PASS。真实浏览器走通落地页 -> /app -> 邮箱验证码（回环 SMTP 实投）-> 工作台首屏 0/3 引导，390px 与 1440px 截图见 outputs/playwright/0924-integration-*。空邮箱点击发送显示内联「请输入邮箱。」且不投递。真实供应商投递与 OAuth 回调仍待运营配置，见 T-UX-AUTH-EXTERNAL-2026-09-24。",
       "note": "旧营销页 static/landing.html 与 static/landing.js 已删除，static/landing.css 改名 static/legal.css 只服务 /privacy。上一轮 C-027/C-028 清晰度改动保存在本地分支 backup/ux-clarity-c027-c028-20260924，其中两处文案（任务导航计数、检出质量说明）已并入本轮。"
+    },
+    {
+      "id": "C-UX-AUTH-LIVE-2026-09-24",
+      "title": "0924 极简首页与统一认证已上线 bidproof.marketcase.net",
+      "status": "verified",
+      "dependencies": [
+        "C-UX-AUTH-2026-09-24"
+      ],
+      "artifacts": [
+        "outputs/playwright/0924-live-landing-desktop-1440.png",
+        "outputs/playwright/0924-live-landing-mobile-390.png",
+        "outputs/playwright/0924-live-app-auth-dialog.png"
+      ],
+      "validation": "main 0909587 推送后 Render 蓝本自动部署，约 3 分钟内切换：/ 开始提供 /static/marketing/assets/index-WmSIqwZA.css（旧包为 index-BBUKyzI9.css）。实测 /、/app、/healthz、/readyz、/privacy、/robots.txt、/sitemap.xml、/api/auth/status 全 200；匿名 GET /api/runs 401；已下线的 /static/landing.html 404；/static/legal.css 200。除 app.js 外静态资源与提交内容逐行一致（app.js 仅差镜像刻意剥离的 32 字节 sourcemap 指针，与 2026-09-24 记录一致）。真实浏览器 1440 与 390 视口加载新首页，点「开始检查」进入 /app 并弹出认证对话框。",
+      "note": "线上 /api/auth/status 返回 passwordless {email:false, phone:false, oauth:[]} 且 personal_signup_enabled=true——没有配置投递渠道时验证码与 OAuth 入口按设计不展示，认证对话框回落为密码登录；这不是故障，开启需要运营方提供真实密钥（T-UX-AUTH-EXTERNAL-2026-09-24）。验收为工程验收，不构成企业业务验收，也不改变 T-005 与 OCR 门禁状态。"
     }
   ],
   "backlog": [

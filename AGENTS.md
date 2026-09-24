@@ -27,6 +27,7 @@
 - **上线方式（2026-09-24）**：最新版（新 Landing + 安全加固）部署在 Render 免费 Web Service 上。生产闸门要求 `BIDPROOF_PUBLIC_ORIGIN`、显式 `BIDPROOF_ALLOWED_HOSTS`、空 `BIDPROOF_TRIAL_JOIN_CODE`、`JOB_RUNNER=worker` 与显式 `DATA_ROOT`，因此 `render.yaml` 已补齐、`healthCheckPath` 改为 `/readyz`，并由 `scripts/render-serve.sh` 在单容器内执行一次性迁移并守护扫描 worker（免费实例没有 Background Worker）。记录见 `docs/production/render-pilot-2026-09-24.md`；单机正式部署路径保留在 `docs/production/deploy-runbook-marketcase-2026-09-24.md`。
 - **已落地（2026-09-24，C-UX-AUTH-2026-09-24）**：`BidProof-0924-minimal-auth.zip` 物料包已并入主分支。首页换成极简落地页（H1「投标前，先查漏交材料。」+ 单个主 CTA「开始检查」+ 可玩示例 + 三张用途卡），删除旧的定价 / FAQ / 四步流程 / 轨道动效；认证收敛为统一 AuthModal（邮箱验证码、短信验证码、Google/GitHub OAuth），未配置渠道时自动回落到原密码入口。旧营销页 `static/landing.html`、`static/landing.js` 已下线，`static/landing.css` 改名 `static/legal.css` 只服务 `/privacy`。来源与取舍见 `docs/ux-0924/`、配置见 `docs/production/passwordless-auth-2026-09-24.md`。
 - **待运营配置（T-UX-AUTH-EXTERNAL-2026-09-24）**：仓库内没有任何真实投递密钥。未设置 `BIDPROOF_OTP_SECRET`（≥32 字符）与邮件 / 短信 / OAuth 供应商时，验证码与 OAuth 入口**不会展示**，线上仍是密码登录——这是设计行为，不是故障。Render 免费实例封禁常见 SMTP 出网端口，线上应走 Resend（HTTPS）。
+- **已上线（2026-09-24，C-UX-AUTH-LIVE-2026-09-24）**：`main` 推送后 Render 自动部署，`bidproof.marketcase.net` 的 `/` 已切到新极简首页（资源指纹 `index-WmSIqwZA.css`），`/app` 弹出统一认证对话框；已下线的 `/static/landing.html` 返回 404。线上 `/api/auth/status` 的 `passwordless` 仍全为 false，说明验证码 / OAuth 入口没有对外开启。证据见 `outputs/playwright/0924-live-*`。
 - **可做**：工程优化、CI、台账工具、文档、性能；收到真实输入后追加 `pilot-row.json` / `icp-row.json`
 - **已回退（C-022）**：工作台补丁 002 打乱扫描任务页对齐，已恢复 `4516b3f` 布局；相关材料已移入 `docs/archive/`，勿整页落地
 
