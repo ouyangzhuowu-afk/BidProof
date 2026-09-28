@@ -233,6 +233,6 @@ def test_scan_tasks_home_keeps_aligned_workbench_landmarks():
     assert 'id="runs-accuracy-body"' in html
     assert 'id="risk-summary"' not in html
     assert "/static/vendor/lucide.min.js" not in html
-    assert "renderIcons" in (ROOT / "frontend" / "src" / "core" / "icons.js").read_text(encoding="utf-8")
+    assert "renderIcons" in (FRONTEND_SRC / "core" / "icons.js").read_text(encoding="utf-8")
     assert ".metric-grid" in css or ".runs-list" in css
     assert "data-theme" in html or "[data-theme" in css
