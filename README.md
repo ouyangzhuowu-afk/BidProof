@@ -113,11 +113,12 @@ OCR 质量门禁现状（如实记录，不掩盖）：
 | 容器 | `docker-compose.yml`（扫描作业在独立 `worker` 进程：`python -m app.worker`） | 可用 |
 | 私有化 | `scripts/preflight.py` + 离线包 | 需按客户环境验证 |
 
-## 业务验收台账（T-005：当前 blocked）
+## 业务验收台账（T-005：in_progress，等待真实输入）
 
-真实企业试运行在本沙箱阶段被推迟（2026-09-16 决策），两张台账保持空置，**禁止**把测试或演示任务写进去：
+`D-T005-UNBLOCK-2026-09-28` 已解除沙箱流程门禁。两张台账脚手架就绪但仍为 **0 行**；**禁止**把测试或演示任务写进去。摄入清单：`docs/pilot/t005-intake-checklist.md`。
 
 ```bash
+uv run python -m work.pilot_readiness --json          # 只读就绪检查，不写业务行
 uv run python -m work.pilot_ledger --render-review    # outputs/pilot-ledger.csv
 uv run python -m work.icp_ledger --render-review      # outputs/icp-outreach.csv
 # 收到真实输入后：
@@ -125,7 +126,7 @@ uv run python -m work.pilot_ledger --row-json work/pilot-row.json
 uv run python -m work.icp_ledger --row-json work/icp-row.json
 ```
 
-缺少 `task_id` 或表头不匹配时命令会拒绝写入。
+缺少 `task_id` / `contact_id` 或表头不匹配时命令会拒绝写入。
 
 ## 仓库卫生与保密
 

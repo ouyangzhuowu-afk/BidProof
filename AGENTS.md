@@ -19,10 +19,10 @@
 3. `workflow/agent-operating-instructions.md` → 执行循环
 4. `uv run python -m app.workflow check`
 
-## 当前优先级（2026-09-24）
+## 当前优先级（2026-09-28）
 
-- **P1 / 进行中**：`sandbox-campaign-A` 沙箱工程门禁（S-A-01..07）。OCR 三项门禁现状：行级 CER `GATE_FAIL`（3.17% / 阈值 ≤ 2%）、关键字段 F1 `GATE_FAIL`（76.00% / 阈值 ≥ 97%）、TEDS `NOT_EVALUATED`；未达标时产品侧强制 `NEEDS_REVIEW`，不得当作通过。
-- **阻塞**：`T-005` 真实任务验收与 45 天 ICP 试运行——沙箱阶段已推迟（2026-09-16 决策），尚无首批真实企业任务，不可用 demo 冒充。
+- **P1 / 进行中**：`T-005` 真实任务验收与 45 天 ICP 试运行——流程门禁已由 `D-T005-UNBLOCK-2026-09-28`（Joe）解除；脚手架就绪，台账仍为 0 行，等待首批**真实**企业输入。禁止用 demo/测试行冒充验收。摄入清单见 `docs/pilot/t005-intake-checklist.md`。
+- **并行工程**：`sandbox-campaign-A` OCR 三项门禁仍为诚实失败态——行级 CER `GATE_FAIL`（3.17% / 阈值 ≤ 2%）、关键字段 F1 `GATE_FAIL`（76.00% / 阈值 ≥ 97%）、TEDS `GATE_FAIL`；未达标时产品侧强制 `NEEDS_REVIEW`，不得当作通过。
 - **已合并并上线（2026-09-23）**：GPT-6 Astra 第二轮前端包（`BidProof-frontend-redesign-round2-20260923.zip`）已并入 `main` 并部署到 `bidproof.marketcase.net` 的 `/` 与 `/app`；决策见 `D-ASTRA-MERGE-2026-09-23`，范围与验收见 `docs/astra-frontend-round2-2026-09-23.md`。核对显示该包只替换详情视图，C-022 的扫描任务页布局未被改动。
 - **上线方式（2026-09-24）**：最新版（新 Landing + 安全加固）部署在 Render 免费 Web Service 上。生产闸门要求 `BIDPROOF_PUBLIC_ORIGIN`、显式 `BIDPROOF_ALLOWED_HOSTS`、空 `BIDPROOF_TRIAL_JOIN_CODE`、`JOB_RUNNER=worker` 与显式 `DATA_ROOT`，因此 `render.yaml` 已补齐、`healthCheckPath` 改为 `/readyz`，并由 `scripts/render-serve.sh` 在单容器内执行一次性迁移并守护扫描 worker（免费实例没有 Background Worker）。记录见 `docs/production/render-pilot-2026-09-24.md`；单机正式部署路径保留在 `docs/production/deploy-runbook-marketcase-2026-09-24.md`。
 - **已落地（2026-09-24，C-UX-AUTH-2026-09-24）**：`BidProof-0924-minimal-auth.zip` 物料包已并入主分支。首页换成极简落地页（H1「投标前，先查漏交材料。」+ 单个主 CTA「开始检查」+ 可玩示例 + 三张用途卡），删除旧的定价 / FAQ / 四步流程 / 轨道动效；认证收敛为统一 AuthModal（邮箱验证码、短信验证码、Google/GitHub OAuth），未配置渠道时自动回落到原密码入口。旧营销页 `static/landing.html`、`static/landing.js` 已下线，`static/landing.css` 改名 `static/legal.css` 只服务 `/privacy`。来源与取舍见 `docs/ux-0924/`、配置见 `docs/production/passwordless-auth-2026-09-24.md`。
@@ -41,6 +41,7 @@ uv run --group dev pytest -q
 npm ci --prefix frontend && npm run build --prefix frontend   # 产物写入 static/，勿手改
 npm ci --prefix landing && npm run build --prefix landing     # 首页产物写入 static/marketing/，勿手改
 .scriptsstart-smoke.ps1                                      # 本机回环 SMTP + 应用，验证验证码链路（状态写 %TEMP%）
+uv run python -m work.pilot_readiness --json
 uv run python -m work.pilot_ledger --render-review
 uv run python -m work.icp_ledger --render-review
 ```
