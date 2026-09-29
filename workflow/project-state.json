@@ -37,7 +37,7 @@
         "outputs/ocr-benchmark/public-expand-report.md",
         "outputs/ocr-benchmark/public-expand-report.json"
       ],
-      "validation": "Live RapidOCR vs text-layer GT. Prior public-eval docs 12. New completed PDFs 7, new not-scored HTML notices 2, one CCGP HTTPS fetch HTTP 403 not counted. Old set reproduced CER 3.17% / F1 76.00% / TEDS 87.85%, all GATE_FAIL. Expanded public set CER 15.19% GATE_FAIL, F1 97.17% GATE_PASS, TEDS 44.03% GATE_FAIL (19 pages). Overall GATE_FAIL. product_pass=false. Synthetic rows excluded from the gate. Joe local PDF intake 2026-09-29: 12/12 duplicate by filename and sha256, 0 newly added, 0 provenance-unverified. No pilot/ICP ledger writes. T-005 not modified.",
+      "validation": "Live RapidOCR vs text-layer GT. Prior public-eval docs 12. New completed PDFs 7, new not-scored HTML notices 2, one CCGP HTTPS fetch HTTP 403 not counted. Old set unchanged: CER 3.17% / F1 76.00% / TEDS 87.85%, all GATE_FAIL. Expanded public set on the same pages: CER 4.96% GATE_FAIL (54 pages), F1 97.17% GATE_PASS, TEDS 95.80% GATE_PASS (19 pages). Overall GATE_FAIL. product_pass=false. Synthetic rows excluded from the gate. Joe local PDF intake 2026-09-29: 12/12 duplicate by filename and sha256, 0 newly added, 0 provenance-unverified. No pilot/ICP ledger writes. T-005 not modified.",
       "note": "pending_audit only. Not a product PASS and not a business unblock."
     }
   ],

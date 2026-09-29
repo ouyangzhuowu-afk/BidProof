@@ -1,6 +1,6 @@
 {
   "leaf_id": "S-A-OCR-PUBLIC-EXPAND",
-  "generated_at": "2026-09-29T07:29:53.997545+00:00",
+  "generated_at": "2026-09-29T09:06:12.123118+00:00",
   "claim_scope": "engineering_gate_only",
   "product_pass": false,
   "business_pass": false,
@@ -253,7 +253,7 @@
     "note": "Synthetic sandbox rows and synthetic scan material are excluded from the gate."
   },
   "expanded_with_frozen_hypotheses": {
-    "line_cer": 0.1519424984077882,
+    "line_cer": 0.14696873199284263,
     "line_cer_gate": "GATE_FAIL",
     "line_cer_pages": 54,
     "page_cer": 0.15148758074788463,
@@ -267,8 +267,8 @@
       "ceiling": 1,
       "project_code": 1
     },
-    "teds": 0.5070172110689756,
-    "teds_gate": "GATE_FAIL",
+    "teds": 0.9677534377328016,
+    "teds_gate": "GATE_PASS",
     "teds_pages_scored": 31,
     "cer_pages": [
       {
@@ -281,7 +281,7 @@
         "doc_id": "fixture-001",
         "page": 3,
         "page_cer": 0.0021929824561403508,
-        "line_cer": 0.08114035087719298
+        "line_cer": 0.0021929824561403508
       },
       {
         "doc_id": "fixture-001",
@@ -305,13 +305,13 @@
         "doc_id": "fixture-002",
         "page": 3,
         "page_cer": 0.019230769230769232,
-        "line_cer": 0.2
+        "line_cer": 0.023076923076923078
       },
       {
         "doc_id": "fixture-002",
         "page": 6,
         "page_cer": 0.07845433255269321,
-        "line_cer": 0.1721311475409836
+        "line_cer": 0.15807962529274006
       },
       {
         "doc_id": "fixture-002",
@@ -443,7 +443,7 @@
         "doc_id": "pub-gx-ventilator-monitors",
         "page": 5,
         "page_cer": 0.03339041095890411,
-        "line_cer": 0.06335616438356165
+        "line_cer": 0.04280821917808219
       },
       {
         "doc_id": "pub-gx-ventilator-monitors",
@@ -605,12 +605,12 @@
       {
         "doc_id": "fixture-001",
         "page": 32,
-        "teds": 0.2857142857142857
+        "teds": 0.9333333333333333
       },
       {
         "doc_id": "fixture-002",
         "page": 33,
-        "teds": 0.27322404371584696
+        "teds": 1.0
       },
       {
         "doc_id": "fixture-002",
@@ -620,17 +620,17 @@
       {
         "doc_id": "fixture-003",
         "page": 29,
-        "teds": 0.5555555555555556
+        "teds": 1.0
       },
       {
         "doc_id": "fixture-003",
         "page": 35,
-        "teds": 0.8666666666666667
+        "teds": 1.0
       },
       {
         "doc_id": "pub-gx-nanning-vascular-doppler",
         "page": 3,
-        "teds": 0.3356643356643356
+        "teds": 0.9855072463768116
       },
       {
         "doc_id": "pub-gx-nanning-vascular-doppler",
@@ -640,22 +640,22 @@
       {
         "doc_id": "pub-gx-nanning-vascular-doppler",
         "page": 17,
-        "teds": 0.787037037037037
+        "teds": 0.9772727272727273
       },
       {
         "doc_id": "pub-gx-ventilator-monitors",
         "page": 15,
-        "teds": 0.24528301886792447
+        "teds": 0.9811320754716981
       },
       {
         "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
         "page": 51,
-        "teds": 0.7941176470588236
+        "teds": 1.0
       },
       {
         "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
         "page": 73,
-        "teds": 0.2093023255813954
+        "teds": 0.9210526315789473
       },
       {
         "doc_id": "fixture-001",
@@ -665,12 +665,12 @@
       {
         "doc_id": "fixture-001",
         "page": 32,
-        "teds": 0.2857142857142857
+        "teds": 0.9333333333333333
       },
       {
         "doc_id": "fixture-002",
         "page": 33,
-        "teds": 0.27322404371584696
+        "teds": 1.0
       },
       {
         "doc_id": "fixture-002",
@@ -680,27 +680,27 @@
       {
         "doc_id": "fixture-003",
         "page": 29,
-        "teds": 0.5555555555555556
+        "teds": 1.0
       },
       {
         "doc_id": "fixture-003",
         "page": 35,
-        "teds": 0.8666666666666667
+        "teds": 1.0
       },
       {
         "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
         "page": 51,
-        "teds": 0.7941176470588236
+        "teds": 1.0
       },
       {
         "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
         "page": 73,
-        "teds": 0.2093023255813954
+        "teds": 0.9210526315789473
       },
       {
         "doc_id": "pub-gx-nanning-vascular-doppler",
         "page": 3,
-        "teds": 0.3356643356643356
+        "teds": 0.9855072463768116
       },
       {
         "doc_id": "pub-gx-nanning-vascular-doppler",
@@ -710,56 +710,56 @@
       {
         "doc_id": "pub-gx-nanning-vascular-doppler",
         "page": 17,
-        "teds": 0.787037037037037
+        "teds": 0.9772727272727273
       },
       {
         "doc_id": "pub-gx-ventilator-monitors",
         "page": 15,
-        "teds": 0.24528301886792447
+        "teds": 0.9811320754716981
       },
       {
         "doc_id": "pub-gx-tianlin-yuegui-devices-2026",
         "page": 8,
-        "teds": 0.0337078651685393
+        "teds": 0.75
       },
       {
         "doc_id": "pub-gx-nanxishan-dr-mammo-2026",
         "page": 9,
-        "teds": 0.06756756756756754
+        "teds": 0.9047619047619048
       },
       {
         "doc_id": "pub-gx-minzu-ultrasound-2026",
         "page": 6,
-        "teds": 0.04054054054054057
+        "teds": 0.9333333333333333
       },
       {
         "doc_id": "pub-gx-hechi-mine-safety-2026",
         "page": 3,
-        "teds": 0.12643678160919536
+        "teds": 1.0
       },
       {
         "doc_id": "pub-gx-info-center-compute-2026",
         "page": 5,
-        "teds": 0.08620689655172409
+        "teds": 0.9090909090909091
       },
       {
         "doc_id": "pub-gx-yibiatong-phase2-2026",
         "page": 3,
-        "teds": 0.14583333333333337
+        "teds": 1.0
       },
       {
         "doc_id": "pub-gx-nonggang-patrol-2026",
         "page": 9,
-        "teds": 0.5121107266435987
+        "teds": 0.9065743944636678
       }
     ],
     "note": "Diagnostic mix of frozen sandbox hypotheses and new rows. Not the live OCR gate."
   },
   "expanded": {
-    "line_cer": 0.1519424984077882,
+    "line_cer": 0.04963968493380258,
     "line_cer_gate": "GATE_FAIL",
     "line_cer_pages": 54,
-    "page_cer": 0.15148758074788463,
+    "page_cer": 0.06371711077593431,
     "key_field_f1": 0.9716981132075472,
     "key_field_f1_gate": "GATE_PASS",
     "tp": 103,
@@ -770,8 +770,8 @@
       "ceiling": 1,
       "project_code": 1
     },
-    "teds": 0.44026150669875636,
-    "teds_gate": "GATE_FAIL",
+    "teds": 0.9580030818780702,
+    "teds_gate": "GATE_PASS",
     "teds_pages_scored": 19,
     "cer_pages": [
       {
@@ -784,7 +784,7 @@
         "doc_id": "fixture-001",
         "page": 3,
         "page_cer": 0.0021929824561403508,
-        "line_cer": 0.08114035087719298
+        "line_cer": 0.0021929824561403508
       },
       {
         "doc_id": "fixture-001",
@@ -808,13 +808,13 @@
         "doc_id": "fixture-002",
         "page": 3,
         "page_cer": 0.019230769230769232,
-        "line_cer": 0.2
+        "line_cer": 0.023076923076923078
       },
       {
         "doc_id": "fixture-002",
         "page": 6,
         "page_cer": 0.07845433255269321,
-        "line_cer": 0.1721311475409836
+        "line_cer": 0.15807962529274006
       },
       {
         "doc_id": "fixture-002",
@@ -946,7 +946,7 @@
         "doc_id": "pub-gx-ventilator-monitors",
         "page": 5,
         "page_cer": 0.03339041095890411,
-        "line_cer": 0.06335616438356165
+        "line_cer": 0.04280821917808219
       },
       {
         "doc_id": "pub-gx-ventilator-monitors",
@@ -975,7 +975,7 @@
       {
         "doc_id": "pub-gx-youjiang-ultrasound",
         "page": 6,
-        "page_cer": 0.03923444976076555,
+        "page_cer": 0.05071770334928229,
         "line_cer": 0.08995215311004785
       },
       {
@@ -987,8 +987,8 @@
       {
         "doc_id": "pub-gx-tianlin-yuegui-devices-2026",
         "page": 2,
-        "page_cer": 0.8326100433973962,
-        "line_cer": 0.8908865468071916
+        "page_cer": 0.03787878787878788,
+        "line_cer": 0.045454545454545456
       },
       {
         "doc_id": "pub-gx-tianlin-yuegui-devices-2026",
@@ -1005,8 +1005,8 @@
       {
         "doc_id": "pub-gx-nanxishan-dr-mammo-2026",
         "page": 2,
-        "page_cer": 0.7371428571428571,
-        "line_cer": 0.8038095238095239
+        "page_cer": 0.041666666666666664,
+        "line_cer": 0.041666666666666664
       },
       {
         "doc_id": "pub-gx-nanxishan-dr-mammo-2026",
@@ -1041,8 +1041,8 @@
       {
         "doc_id": "pub-gx-hechi-mine-safety-2026",
         "page": 2,
-        "page_cer": 0.7267080745341615,
-        "line_cer": 0.9099378881987578
+        "page_cer": 0.047058823529411764,
+        "line_cer": 0.047058823529411764
       },
       {
         "doc_id": "pub-gx-hechi-mine-safety-2026",
@@ -1071,8 +1071,8 @@
       {
         "doc_id": "pub-gx-yibiatong-phase2-2026",
         "page": 2,
-        "page_cer": 0.8413361169102297,
-        "line_cer": 0.9331941544885177
+        "page_cer": 0.06172839506172839,
+        "line_cer": 0.09876543209876543
       },
       {
         "doc_id": "pub-gx-yibiatong-phase2-2026",
@@ -1083,8 +1083,8 @@
       {
         "doc_id": "pub-gx-nonggang-patrol-2026",
         "page": 2,
-        "page_cer": 0.8938156359393232,
-        "line_cer": 0.9311551925320887
+        "page_cer": 0.023809523809523808,
+        "line_cer": 0.023809523809523808
       },
       {
         "doc_id": "pub-gx-nonggang-patrol-2026",
@@ -1108,12 +1108,12 @@
       {
         "doc_id": "fixture-001",
         "page": 32,
-        "teds": 0.2857142857142857
+        "teds": 0.9333333333333333
       },
       {
         "doc_id": "fixture-002",
         "page": 33,
-        "teds": 0.27322404371584696
+        "teds": 1.0
       },
       {
         "doc_id": "fixture-002",
@@ -1123,27 +1123,27 @@
       {
         "doc_id": "fixture-003",
         "page": 29,
-        "teds": 0.5555555555555556
+        "teds": 1.0
       },
       {
         "doc_id": "fixture-003",
         "page": 35,
-        "teds": 0.8666666666666667
+        "teds": 1.0
       },
       {
         "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
         "page": 51,
-        "teds": 0.7941176470588236
+        "teds": 1.0
       },
       {
         "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
         "page": 73,
-        "teds": 0.2093023255813954
+        "teds": 0.9210526315789473
       },
       {
         "doc_id": "pub-gx-nanning-vascular-doppler",
         "page": 3,
-        "teds": 0.3356643356643356
+        "teds": 0.9855072463768116
       },
       {
         "doc_id": "pub-gx-nanning-vascular-doppler",
@@ -1153,47 +1153,47 @@
       {
         "doc_id": "pub-gx-nanning-vascular-doppler",
         "page": 17,
-        "teds": 0.787037037037037
+        "teds": 0.9772727272727273
       },
       {
         "doc_id": "pub-gx-ventilator-monitors",
         "page": 15,
-        "teds": 0.24528301886792447
+        "teds": 0.9811320754716981
       },
       {
         "doc_id": "pub-gx-tianlin-yuegui-devices-2026",
         "page": 8,
-        "teds": 0.0337078651685393
+        "teds": 0.75
       },
       {
         "doc_id": "pub-gx-nanxishan-dr-mammo-2026",
         "page": 9,
-        "teds": 0.06756756756756754
+        "teds": 0.9047619047619048
       },
       {
         "doc_id": "pub-gx-minzu-ultrasound-2026",
         "page": 6,
-        "teds": 0.04054054054054057
+        "teds": 0.9333333333333333
       },
       {
         "doc_id": "pub-gx-hechi-mine-safety-2026",
         "page": 3,
-        "teds": 0.12643678160919536
+        "teds": 1.0
       },
       {
         "doc_id": "pub-gx-info-center-compute-2026",
         "page": 5,
-        "teds": 0.08620689655172409
+        "teds": 0.9090909090909091
       },
       {
         "doc_id": "pub-gx-yibiatong-phase2-2026",
         "page": 3,
-        "teds": 0.14583333333333337
+        "teds": 1.0
       },
       {
         "doc_id": "pub-gx-nonggang-patrol-2026",
         "page": 9,
-        "teds": 0.5121107266435987
+        "teds": 0.9065743944636678
       }
     ],
     "note": "Live RapidOCR hypotheses versus text-layer or published-table GT. Synthetic rows excluded. Thresholds unchanged."
@@ -1310,40 +1310,40 @@
   "failure_causes": [
     {
       "metric": "line_cer",
-      "cause": "Most pages are near the 2% line-CER band, but table-of-contents pages blow up the micro-average. The text layer splits 目录 and keeps dot leaders; RapidOCR drops the dots and merges the title with the page number, so greedy line alignment charges almost the whole leader string as an edit.",
+      "cause": "TOC pages still count. Before alignment, split 目录 headings are joined, dot leaders are removed, and a bare OCR page number is put back on the preceding title. Line CER remains above 2% on the same pages because non-leader characters still disagree.",
       "evidence": [
         {
-          "doc_id": "pub-gx-yibiatong-phase2-2026",
-          "page": 2,
-          "line_cer": 0.9331941544885177,
-          "page_cer": 0.8413361169102297
-        },
-        {
-          "doc_id": "pub-gx-nonggang-patrol-2026",
-          "page": 2,
-          "line_cer": 0.9311551925320887,
-          "page_cer": 0.8938156359393232
-        },
-        {
-          "doc_id": "pub-gx-hechi-mine-safety-2026",
-          "page": 2,
-          "line_cer": 0.9099378881987578,
-          "page_cer": 0.7267080745341615
-        },
-        {
           "doc_id": "pub-gx-tianlin-yuegui-devices-2026",
-          "page": 2,
-          "line_cer": 0.8908865468071916,
-          "page_cer": 0.8326100433973962
+          "page": 1,
+          "line_cer": 0.425,
+          "page_cer": 0.425
         },
         {
-          "doc_id": "pub-gx-nanxishan-dr-mammo-2026",
+          "doc_id": "fixture-003",
+          "page": 5,
+          "line_cer": 0.3521923620933522,
+          "page_cer": 0.21357850070721357
+        },
+        {
+          "doc_id": "fixture-003",
+          "page": 4,
+          "line_cer": 0.2199367088607595,
+          "page_cer": 0.1819620253164557
+        },
+        {
+          "doc_id": "pub-gx-minzu-ultrasound-2026",
           "page": 2,
-          "line_cer": 0.8038095238095239,
-          "page_cer": 0.7371428571428571
+          "line_cer": 0.18463073852295409,
+          "page_cer": 0.046906187624750496
+        },
+        {
+          "doc_id": "fixture-001",
+          "page": 32,
+          "line_cer": 0.1717171717171717,
+          "page_cer": 0.494949494949495
         }
       ],
-      "pages_above_10_percent": 14,
+      "pages_above_10_percent": 8,
       "pages": 54,
       "toc_like_pages": [
         "pub-gx-daxin-ultrasound-anesthesia#p51",
@@ -1365,50 +1365,18 @@
       "tp": 103,
       "fp": 3,
       "fn": 3
-    },
-    {
-      "metric": "teds",
-      "cause": "Box clustering inside the text-layer table region splits multi-line cells and does not recover merged headers, so tree edit distance stays high.",
-      "evidence": [
-        {
-          "doc_id": "pub-gx-tianlin-yuegui-devices-2026",
-          "page": 8,
-          "teds": 0.0337078651685393
-        },
-        {
-          "doc_id": "pub-gx-minzu-ultrasound-2026",
-          "page": 6,
-          "teds": 0.04054054054054057
-        },
-        {
-          "doc_id": "pub-gx-nanxishan-dr-mammo-2026",
-          "page": 9,
-          "teds": 0.06756756756756754
-        },
-        {
-          "doc_id": "pub-gx-info-center-compute-2026",
-          "page": 5,
-          "teds": 0.08620689655172409
-        },
-        {
-          "doc_id": "pub-gx-hechi-mine-safety-2026",
-          "page": 3,
-          "teds": 0.12643678160919536
-        }
-      ],
-      "mean_teds": 0.44026150669875636
     }
   ],
   "improvement_directions": [
     "Keep thresholds at CER≤2%, F1≥97%, TEDS≥90%. Do not drop low-scoring public pages.",
-    "Segment headers, footers, and dot-leader tables of contents before line CER so reading-order noise is not scored as character error.",
+    "TOC dot leaders are already segmented before line CER. Further CER gains have to come from the characters RapidOCR still misses on the same pages.",
     "Normalize key-field hypotheses with a constrained parser (amount, date, project code) instead of exact full-span equality, and keep the text-layer string as GT.",
-    "Replace y/x box clustering with a table-structure model or ruling-line grid, scored against the same single-page text-layer HTML.",
+    "Table hypotheses already use the PDF ruling-line grid. Remaining TEDS misses are OCR characters inside those cells, still scored against the text-layer HTML.",
     "Leave image-only pages not-scored until a human transcript exists. Do not promote OCR text to ground truth.",
     "Keep training-corpus PDFs and synthetic scans out of this gate so later fine-tunes cannot leak into the reported numbers."
   ],
   "gt_policy": "embedded PDF text layer or PyMuPDF table extract confirmed against that text layer; published HTML for not-scored notices. OCR is never GT.",
-  "hypothesis_policy": "rapidocr_onnxruntime on a 1.5x render of the official PDF page. Table hypotheses are box-clustered inside the text-layer table region.",
+  "hypothesis_policy": "rapidocr_onnxruntime on a 1.5x render of the official PDF page. TOC dot leaders are segmented before line CER. Table hypotheses place OCR text into the PDF ruling-line grid. Ground truth stays the text layer.",
   "gate": "GATE_FAIL",
   "joe_local_pdf_intake": {
     "intake_id": "joe-local-pdfs-2026-09-29",

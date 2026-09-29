@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-09-29T07:29:53.997545+00:00",
+  "generated_at": "2026-09-29T09:06:12.123118+00:00",
   "claim_scope": "engineering_gate_only",
-  "line_cer": 0.1519424984077882,
+  "line_cer": 0.04963968493380258,
   "gate": "GATE_FAIL",
   "product_pass": false,
   "business_pass": false,
@@ -29,7 +29,7 @@
       "doc_id": "fixture-001",
       "page": 3,
       "page_cer": 0.0021929824561403508,
-      "line_cer": 0.08114035087719298
+      "line_cer": 0.0021929824561403508
     },
     {
       "doc_id": "fixture-001",
@@ -53,13 +53,13 @@
       "doc_id": "fixture-002",
       "page": 3,
       "page_cer": 0.019230769230769232,
-      "line_cer": 0.2
+      "line_cer": 0.023076923076923078
     },
     {
       "doc_id": "fixture-002",
       "page": 6,
       "page_cer": 0.07845433255269321,
-      "line_cer": 0.1721311475409836
+      "line_cer": 0.15807962529274006
     },
     {
       "doc_id": "fixture-002",
@@ -191,7 +191,7 @@
       "doc_id": "pub-gx-ventilator-monitors",
       "page": 5,
       "page_cer": 0.03339041095890411,
-      "line_cer": 0.06335616438356165
+      "line_cer": 0.04280821917808219
     },
     {
       "doc_id": "pub-gx-ventilator-monitors",
@@ -220,7 +220,7 @@
     {
       "doc_id": "pub-gx-youjiang-ultrasound",
       "page": 6,
-      "page_cer": 0.03923444976076555,
+      "page_cer": 0.05071770334928229,
       "line_cer": 0.08995215311004785
     },
     {
@@ -232,8 +232,8 @@
     {
       "doc_id": "pub-gx-tianlin-yuegui-devices-2026",
       "page": 2,
-      "page_cer": 0.8326100433973962,
-      "line_cer": 0.8908865468071916
+      "page_cer": 0.03787878787878788,
+      "line_cer": 0.045454545454545456
     },
     {
       "doc_id": "pub-gx-tianlin-yuegui-devices-2026",
@@ -250,8 +250,8 @@
     {
       "doc_id": "pub-gx-nanxishan-dr-mammo-2026",
       "page": 2,
-      "page_cer": 0.7371428571428571,
-      "line_cer": 0.8038095238095239
+      "page_cer": 0.041666666666666664,
+      "line_cer": 0.041666666666666664
     },
     {
       "doc_id": "pub-gx-nanxishan-dr-mammo-2026",
@@ -286,8 +286,8 @@
     {
       "doc_id": "pub-gx-hechi-mine-safety-2026",
       "page": 2,
-      "page_cer": 0.7267080745341615,
-      "line_cer": 0.9099378881987578
+      "page_cer": 0.047058823529411764,
+      "line_cer": 0.047058823529411764
     },
     {
       "doc_id": "pub-gx-hechi-mine-safety-2026",
@@ -316,8 +316,8 @@
     {
       "doc_id": "pub-gx-yibiatong-phase2-2026",
       "page": 2,
-      "page_cer": 0.8413361169102297,
-      "line_cer": 0.9331941544885177
+      "page_cer": 0.06172839506172839,
+      "line_cer": 0.09876543209876543
     },
     {
       "doc_id": "pub-gx-yibiatong-phase2-2026",
@@ -328,8 +328,8 @@
     {
       "doc_id": "pub-gx-nonggang-patrol-2026",
       "page": 2,
-      "page_cer": 0.8938156359393232,
-      "line_cer": 0.9311551925320887
+      "page_cer": 0.023809523809523808,
+      "line_cer": 0.023809523809523808
     },
     {
       "doc_id": "pub-gx-nonggang-patrol-2026",

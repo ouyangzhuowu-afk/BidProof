@@ -14,10 +14,14 @@ from work.eval.public_expand import (
     fields_from_text,
     is_forbidden_source,
     is_synthetic_row,
+    is_toc_page,
     load_joe_local_pdf_intake,
     looks_like_pii,
+    ocr_lines_into_cell_grid,
+    prepare_expanded_cer,
     redact_text,
     score_bundle,
+    segment_toc_lines,
     table_supported_by_text_layer,
 )
 from work.eval.sandbox_gates import KEY_FIELD_F1_MIN, LINE_CER_MAX, TEDS_MIN
@@ -146,6 +150,57 @@ def test_expand_fixtures_do_not_use_training_corpus_or_synthetic_gt(tmp_path):
         assert not looks_like_pii(json.dumps(row, ensure_ascii=False))
 
 
+def test_toc_segmentation_keeps_the_page_and_drops_dot_leaders():
+    text = "1\n目\n录\n第一章\n招标公告..............2\n第二章\n采购需求..............5"
+    assert is_toc_page(text)
+    assert not is_toc_page("采购人：右江民族医学院附属医院\n项目编号：ABC-1")
+    segmented = segment_toc_lines([line for line in text.splitlines() if line.strip()])
+    assert "目录" in segmented
+    assert "第一章招标公告2" in segmented
+    assert "第二章采购需求5" in segmented
+    assert all("..." not in line for line in segmented)
+    hyp = segment_toc_lines(["第一章招标公告", "2", "第二章采购需求", "5"])
+    assert hyp == ["第一章招标公告2", "第二章采购需求5"]
+
+
+def test_ruling_grid_joins_multiline_cells_and_splits_a_wide_header():
+    grid = [[(0.0, 0.0, 10.0, 10.0), (10.0, 0.0, 20.0, 10.0)]]
+    html = ocr_lines_into_cell_grid(
+        [{"text": "数量单位", "bbox": (0.0, 0.0, 20.0, 10.0)}],
+        grid,
+        1.0,
+    )
+    assert "数量" in html and "单位" in html
+    assert html.count("<th>") == 2
+    body = [[(0.0, 0.0, 30.0, 40.0)]]
+    joined = ocr_lines_into_cell_grid(
+        [
+            {"text": "手术动力", "bbox": (1.0, 2.0, 20.0, 12.0)},
+            {"text": "装置", "bbox": (1.0, 16.0, 16.0, 28.0)},
+        ],
+        body,
+        1.0,
+    )
+    assert "手术动力装置" in joined
+    assert joined.count("<th>") == 1
+
+
+def test_toc_prepare_does_not_drop_pages():
+    gt = [
+        {"doc_id": "a", "page": 1, "text_gt": "目\n录\n第一章\n招标公告..........2"},
+        {"doc_id": "b", "page": 2, "text_gt": "采购人：医院\n预算金额：10万元"},
+    ]
+    hyp = [
+        {"doc_id": "a", "page": 1, "lines_hyp": ["目录", "第一章招标公告", "2"], "text_hyp": "x"},
+        {"doc_id": "b", "page": 2, "lines_hyp": ["采购人：医院", "预算金额：10万元"], "text_hyp": "y"},
+    ]
+    prepared_gt, prepared_hyp = prepare_expanded_cer(gt, hyp)
+    assert [(row["doc_id"], row["page"]) for row in prepared_gt] == [("a", 1), ("b", 2)]
+    assert len(prepared_hyp) == 2
+    assert "...." not in prepared_gt[0]["text_gt"]
+    assert prepared_gt[1]["text_gt"].startswith("采购人")
+
+
 def test_unlisted_pdf_without_a_public_url_is_provenance_unverified():
     classified = classify_local_pdf_intake(
         [{"filename": "unknown-tender.pdf", "sha256": "ab" * 32}],
@@ -202,6 +257,11 @@ def test_report_keeps_product_pass_false_and_separates_synthetic():
     assert report["old_set"]["key_field_f1_gate"] == "GATE_FAIL"
     assert report["old_set"]["teds_gate"] == "GATE_FAIL"
     assert report["synthetic_appendix"]["line_cer_pages"] == 3
+    assert report["expanded"]["line_cer_pages"] == 54
+    assert report["expanded"]["teds_pages_scored"] == 19
+    assert report["old_set"]["line_cer"] == pytest.approx(0.031746031746031744)
+    assert report["old_set"]["key_field_f1"] == pytest.approx(0.76)
+    assert report["old_set"]["teds"] == pytest.approx(0.8784546114752891, rel=1e-6)
     rebuilt = build_report_from_fixtures()
     assert rebuilt["joe_local_pdf_intake"]["counts"]["duplicate"] == 12
     assert rebuilt["joe_local_pdf_intake"]["counts"]["newly_added_scored"] == 0
