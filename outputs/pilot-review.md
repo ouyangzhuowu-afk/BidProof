@@ -2,10 +2,10 @@
 
 ## 当前状态
 
-- 当前记录：0 / 10 条真实任务
+- 当前记录：1 / 10 条真实任务
 - 已有人工确认任务：0 条
 - 已记录付款意愿信号：0 条
-- 业务验收结论：`NOT_STARTED`
+- 业务验收结论：`IN_PROGRESS`
 
 ## 使用边界
 
@@ -13,7 +13,7 @@
 
 ## 下一步
 
-距离 10 个真实任务目标还差 10 条记录。
+距离 10 个真实任务目标还差 9 条记录。
 收到首个真实企业任务后，复制 `work/pilot-row.template.json` 并填写字段，运行：
 `uv run python -m work.pilot_ledger --row-json work/pilot-row.json`
 刷新本报告：`uv run python -m work.pilot_ledger --render-review`

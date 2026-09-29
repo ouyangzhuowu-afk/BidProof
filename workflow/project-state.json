@@ -1315,6 +1315,12 @@
       "audited_by": "Audit",
       "pull_request": "https://github.com/ouyangzhuowu-afk/BidProof/pull/13",
       "merge_commit": "792ff23189281f22c75d3539302f43aba7fe2552"
+    },
+    {
+      "path": "docs/pilot/intake/yueyang-cryostat-consultation-redacted.md",
+      "kind": "t005-pending-intake",
+      "status": "pending_audit",
+      "note": "Purchaser-side competitive consultation for 岳阳市中医医院病理科冷冻切片机, agency SMD-CG-202549. Source enterprise is unknown-enterprise. This is a demand-side consultation, not the enterprise bid, and there is no enterprise feedback. Contact names and phones are placeholders; scan found no real personal phone, email, or ID number. Ledger row CONSULT-SMD-CG-202549 is human_confirmation=pending. Not verified. Does not unblock T-005. Not added to any public or OCR eval set."
     }
   ],
   "next_best_action": {
@@ -1332,7 +1338,7 @@
     ],
     "note": "Do not write demo/test rows into pilot/ICP ledgers. Do not claim business TARGET_MET. Pilot scan results are always NEEDS_REVIEW and cannot count as accuracy acceptance. On real input: copy template → fill → pilot_ledger/icp_ledger --row-json. Readiness: uv run python -m work.pilot_readiness --json."
   },
-  "updated_at": "2026-09-29T05:15:00+00:00",
+  "updated_at": "2026-09-29T07:24:00+00:00",
   "sandbox_roadmap": {
     "locked_at": "2026-09-16",
     "gates": {

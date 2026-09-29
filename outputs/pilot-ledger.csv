@@ -1,1 +1,2 @@
 task_id,received_at,tender_filename,enterprise_name,input_scope,output_run_id,requirement_count,unresolved_count,human_confirmation,failure_reason,elapsed_minutes,payment_signal,payment_note,evidence_boundary
+CONSULT-SMD-CG-202549,2026-09-29T07:24:00+00:00,docs/pilot/intake/yueyang-cryostat-consultation-redacted.md,unknown-enterprise,需求侧竞争性磋商文件；非企业投标；无企业反馈,,,,pending,,,,,来源 unknown-enterprise。采购方竞争性磋商文件（需求侧，岳阳市中医医院病理科冷冻切片机，代理编号 SMD-CG-202549），不是企业投标。无企业反馈。联系人与电话为占位符。状态 pending，未核实，不解除 T-005。未进入公开语料或 OCR 评测集。

@@ -13,14 +13,24 @@ from work.pilot_ledger import (
 ROOT = Path(__file__).parents[1]
 
 
-def test_empty_pilot_ledger_has_a_business_handoff_contract():
+def test_pending_consultation_row_is_not_business_validation():
     ledger = ROOT / "outputs" / "pilot-ledger.csv"
     with ledger.open(encoding="utf-8", newline="") as handle:
         reader = csv.DictReader(handle)
         assert reader.fieldnames == REQUIRED_FIELDS
         rows = list(reader)
-    assert rows == []
-    assert validate_ledger(rows) == {"rows": 0, "confirmed_tasks": 0, "payment_signals": 0}
+    assert len(rows) == 1
+    row = rows[0]
+    assert row["task_id"] == "CONSULT-SMD-CG-202549"
+    assert row["enterprise_name"] == "unknown-enterprise"
+    assert row["human_confirmation"] == "pending"
+    assert row["payment_signal"] == ""
+    assert row["payment_note"] == ""
+    assert row["output_run_id"] == ""
+    assert "不是企业投标" in row["evidence_boundary"]
+    assert "无企业反馈" in row["evidence_boundary"]
+    assert "不解除 T-005" in row["evidence_boundary"]
+    assert validate_ledger(rows) == {"rows": 1, "confirmed_tasks": 0, "payment_signals": 0}
 
 
 def test_unconfirmed_task_cannot_count_as_business_validation():
