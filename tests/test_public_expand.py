@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 from pathlib import Path
 
@@ -12,6 +13,7 @@ from work.eval.public_expand import (
     build_report_from_fixtures,
     classify_local_pdf_intake,
     fields_from_text,
+    form_visual_lines,
     is_forbidden_source,
     is_synthetic_row,
     is_toc_page,
@@ -273,3 +275,116 @@ def test_report_keeps_product_pass_false_and_separates_synthetic():
             assert row.get("source_url")
             assert row.get("fetched_at")
             assert row.get("license_or_usage_note")
+    formation = report["line_formation"]
+    assert formation["one_box_one_line_in_engine_order"] is True
+    assert formation["boundary_edit_claim"]["confirmed"] is False
+    assert formation["before"]["pages"] == 54
+    assert formation["after"]["pages"] == 54
+    assert formation["before"]["line_edits"] == 1481
+    assert formation["before"]["line_denom"] == 29835
+    assert formation["after"]["line_cer_gate"] == report["expanded"]["line_cer_gate"]
+    assert report["expanded"]["key_field_f1"] == pytest.approx(formation["after"]["key_field_f1"])
+    assert report["expanded"]["teds"] == pytest.approx(formation["after"]["teds"])
+    assert report["gate"] == "GATE_FAIL"
+    callouts = {(row["doc_id"], row["page"]): row for row in formation["callouts"]}
+    assert set(callouts) == {
+        ("fixture-003", 4),
+        ("fixture-003", 5),
+        ("pub-gx-minzu-ultrasound-2026", 2),
+        ("pub-gx-tianlin-yuegui-devices-2026", 1),
+    }
+
+
+def test_stored_boxes_keep_every_ocr_line_and_do_not_join_this_set():
+    path = ROOT / "work" / "eval" / "fixtures" / "public_expand_hypotheses.jsonl"
+    rows = [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
+    assert len(rows) == 54
+    for row in rows:
+        boxes = row["line_boxes"]
+        stored = [str(item) for item in row["lines_hyp"]]
+        assert [str(item["text"]) for item in boxes] == stored
+        assert all(len(item["bbox"]) == 4 for item in boxes)
+        assert sorted(form_visual_lines(boxes)) == sorted(stored)
+
+
+def test_text_layer_ground_truth_bytes_stay_put():
+    pages = ROOT / "work" / "eval" / "fixtures" / "public_expand_pages.jsonl"
+    key_gt = ROOT / "work" / "eval" / "fixtures" / "public_expand_key_field_gt.jsonl"
+    teds_gt = ROOT / "work" / "eval" / "fixtures" / "public_expand_teds_gt.jsonl"
+    assert hashlib.sha256(pages.read_bytes()).hexdigest() == (
+        "50a6e7e229049f72100bacd43d3946e5a1e186b6d131c3b643caba68a40a47d9"
+    )
+    assert hashlib.sha256(key_gt.read_bytes()).hexdigest() == (
+        "fa42e91f78ba33ffa8460bd55213051ba4f1221b2cfa42eeeb38bd5da67488ed"
+    )
+    assert hashlib.sha256(teds_gt.read_bytes()).hexdigest() == (
+        "e154422548e6b34e4e6e526bd8ccb5b038fae73aaf83f55b3a3874dc657a0a4b"
+    )
+
+
+def test_visual_lines_join_a_cracked_row_and_split_columns():
+    joined = form_visual_lines(
+        [
+            {"text": "cd", "bbox": (46.0, 0.0, 90.0, 20.0)},
+            {"text": "ab", "bbox": (0.0, 0.0, 40.0, 20.0)},
+        ]
+    )
+    assert joined == ["abcd"]
+    split = form_visual_lines(
+        [
+            {"text": "left", "bbox": (0.0, 0.0, 40.0, 20.0)},
+            {"text": "right", "bbox": (240.0, 0.0, 300.0, 20.0)},
+        ]
+    )
+    assert split == ["left", "right"]
+    table = form_visual_lines(
+        [
+            {"text": "a", "bbox": (0.0, 0.0, 40.0, 18.0)},
+            {"text": "b", "bbox": (60.0, 0.0, 100.0, 18.0)},
+            {"text": "c", "bbox": (0.0, 40.0, 40.0, 58.0)},
+            {"text": "d", "bbox": (60.0, 40.0, 100.0, 58.0)},
+            {"text": "pad", "bbox": (800.0, 0.0, 880.0, 18.0)},
+        ]
+    )
+    assert table == ["a", "b", "pad", "c", "d"]
+    stacked = form_visual_lines(
+        [
+            {"text": "one", "bbox": (0.0, 0.0, 80.0, 18.0)},
+            {"text": "two", "bbox": (0.0, 30.0, 80.0, 48.0)},
+        ]
+    )
+    assert stacked == ["one", "two"]
+    bleed = form_visual_lines(
+        [
+            {"text": "套", "bbox": (10.0, 0.0, 28.0, 18.0)},
+            {"text": "套工业", "bbox": (20.0, 0.0, 90.0, 18.0)},
+        ]
+    )
+    assert bleed == ["套", "套工业"]
+    assert "".join(bleed) == "套套工业"
+
+
+def test_visual_lines_run_before_toc_segmentation_and_keep_every_box():
+    gt = [{"doc_id": "toc", "page": 1, "text_gt": "目\n录\n第三章\n投标人须知..........77"}]
+    boxes = [
+        {"text": "目", "bbox": (10.0, 0.0, 30.0, 16.0)},
+        {"text": "录", "bbox": (40.0, 0.0, 60.0, 16.0)},
+        {"text": "第三章", "bbox": (10.0, 40.0, 50.0, 58.0)},
+        {"text": "投标人须知.", "bbox": (56.0, 40.0, 140.0, 58.0)},
+        {"text": "77", "bbox": (400.0, 40.0, 430.0, 58.0)},
+    ]
+    hyp = [{"doc_id": "toc", "page": 1, "lines_hyp": [item["text"] for item in boxes], "line_boxes": boxes, "text_hyp": "x"}]
+    prepared_gt, prepared_hyp = prepare_expanded_cer(gt, hyp)
+    assert len(prepared_gt) == 1
+    assert "第三章投标人须知77" in prepared_hyp[0]["lines_hyp"]
+    assert "目录" in prepared_gt[0]["text_gt"]
+    body_gt = [{"doc_id": "b", "page": 1, "text_gt": "甲乙"}]
+    body_boxes = [
+        {"text": "甲", "bbox": (0.0, 0.0, 20.0, 16.0)},
+        {"text": "乙", "bbox": (24.0, 0.0, 44.0, 16.0)},
+    ]
+    body_hyp = [{"doc_id": "b", "page": 1, "lines_hyp": ["甲", "乙"], "line_boxes": body_boxes, "text_hyp": "x"}]
+    formed = prepare_expanded_cer(body_gt, body_hyp, form_lines=True)
+    raw = prepare_expanded_cer(body_gt, body_hyp, form_lines=False)
+    assert formed[1][0]["lines_hyp"] == ["甲乙"]
+    assert raw[1][0]["lines_hyp"] == ["甲", "乙"]

@@ -262,6 +262,179 @@ def _ocr_lines(raw: Any) -> list[dict[str, Any]]:
     return lines
 
 
+# A box joins a row when it covers at least half of the shorter vertical span.
+# Column gutters are wide gaps, or narrower gaps that recur down the page.
+_VISUAL_ROW_OVERLAP = 0.5
+_VISUAL_WIDE_GAP_RATIO = 0.12
+_VISUAL_RECURRING_GAP_MIN = 8.0
+
+
+def _bbox4(box: Any) -> tuple[float, float, float, float] | None:
+    if not isinstance(box, (list, tuple)) or len(box) != 4:
+        return None
+    try:
+        x0, y0, x1, y1 = (float(box[0]), float(box[1]), float(box[2]), float(box[3]))
+    except (TypeError, ValueError):
+        return None
+    if x1 < x0 or y1 < y0:
+        return None
+    return x0, y0, x1, y1
+
+
+def _y_overlap_ratio(
+    box: tuple[float, float, float, float], other: tuple[float, float, float, float]
+) -> float:
+    overlap = min(box[3], other[3]) - max(box[1], other[1])
+    if overlap <= 0:
+        return 0.0
+    shorter = min(box[3] - box[1], other[3] - other[1])
+    if shorter <= 0:
+        return 0.0
+    return overlap / shorter
+
+
+def _median_band(boxes: list[tuple[float, float, float, float]]) -> tuple[float, float]:
+    y0 = sorted(box[1] for box in boxes)
+    y1 = sorted(box[3] for box in boxes)
+    mid = len(boxes) // 2
+    return y0[mid], y1[mid]
+
+
+def _cluster_rows(boxed: list[dict[str, Any]]) -> list[list[dict[str, Any]]]:
+    """Group boxes that share a baseline. The row band is the median, not the union."""
+    ordered = sorted(boxed, key=lambda item: ((item["bbox"][1] + item["bbox"][3]) / 2, item["bbox"][0]))
+    rows: list[list[dict[str, Any]]] = []
+    bands: list[tuple[float, float]] = []
+    for item in ordered:
+        box = item["bbox"]
+        best_idx: int | None = None
+        best_ratio = _VISUAL_ROW_OVERLAP
+        for idx, band in enumerate(bands):
+            ratio = _y_overlap_ratio(box, (0.0, band[0], 0.0, band[1]))
+            if ratio >= best_ratio:
+                best_ratio = ratio
+                best_idx = idx
+        if best_idx is None:
+            rows.append([item])
+            bands.append((box[1], box[3]))
+            continue
+        rows[best_idx].append(item)
+        bands[best_idx] = _median_band([member["bbox"] for member in rows[best_idx]])
+    order = sorted(range(len(rows)), key=lambda index: (bands[index][0], bands[index][1]))
+    return [rows[index] for index in order]
+
+
+def _positive_gaps(row: list[dict[str, Any]]) -> list[tuple[float, float]]:
+    ordered = sorted(row, key=lambda item: item["bbox"][0])
+    gaps: list[tuple[float, float]] = []
+    for prev, cur in zip(ordered, ordered[1:]):
+        left = float(prev["bbox"][2])
+        right = float(cur["bbox"][0])
+        if right > left:
+            gaps.append((left, right))
+    return gaps
+
+
+def _column_cuts(rows: list[list[dict[str, Any]]]) -> list[tuple[float, float]]:
+    """Gutters that separate columns. A one-off crack inside a line is not a gutter."""
+    boxes = [item["bbox"] for row in rows for item in row]
+    if len(boxes) < 2:
+        return []
+    content_width = max(1.0, max(box[2] for box in boxes) - min(box[0] for box in boxes))
+    wide = _VISUAL_WIDE_GAP_RATIO * content_width
+    located = [(row_index, gap) for row_index, row in enumerate(rows) for gap in _positive_gaps(row)]
+    cuts: list[tuple[float, float]] = []
+    for row_index, gap in located:
+        width = gap[1] - gap[0]
+        if width >= wide:
+            cuts.append(gap)
+            continue
+        if width < _VISUAL_RECURRING_GAP_MIN:
+            continue
+        for other_index, other in located:
+            if other_index == row_index or other[1] - other[0] < _VISUAL_RECURRING_GAP_MIN:
+                continue
+            if min(gap[1], other[1]) > max(gap[0], other[0]):
+                cuts.append(gap)
+                break
+    if not cuts:
+        return []
+    cuts.sort()
+    merged: list[tuple[float, float]] = [cuts[0]]
+    for left, right in cuts[1:]:
+        if left <= merged[-1][1]:
+            merged[-1] = (merged[-1][0], max(merged[-1][1], right))
+        else:
+            merged.append((left, right))
+    return merged
+
+
+def _gap_crosses_cut(left: float, right: float, cuts: list[tuple[float, float]]) -> bool:
+    if right <= left:
+        return False
+    return any(min(right, cut[1]) > max(left, cut[0]) for cut in cuts)
+
+
+def _split_row(
+    row: list[dict[str, Any]], cuts: list[tuple[float, float]]
+) -> list[list[dict[str, Any]]]:
+    ordered = sorted(row, key=lambda item: (item["bbox"][0], item["bbox"][2]))
+    segments: list[list[dict[str, Any]]] = [[ordered[0]]]
+    for prev, cur in zip(ordered, ordered[1:]):
+        left = float(prev["bbox"][2])
+        right = float(cur["bbox"][0])
+        if right > left:
+            # A gap of at least 8px at the 1.5x render is a column boundary.
+            # Only a crack smaller than that is one visual line.
+            separate = (right - left) >= _VISUAL_RECURRING_GAP_MIN or _gap_crosses_cut(left, right, cuts)
+        else:
+            # Overlapping boxes are a neighboring cell or a second detection.
+            # Keep both texts. Do not concatenate them and do not drop either.
+            separate = True
+        if separate:
+            segments.append([cur])
+        else:
+            segments[-1].append(cur)
+    return segments
+
+
+def form_visual_lines(items: list[dict[str, Any]]) -> list[str]:
+    """Rebuild hypothesis lines from RapidOCR boxes.
+
+    Cluster boxes by vertical overlap, split column gutters, then emit one
+    visual line per row segment, left to right. Every non-empty box is kept.
+    This does not delete a line for being absent from the text layer, and it
+    does not change the line-CER metric.
+    """
+    boxed: list[dict[str, Any]] = []
+    loose: list[str] = []
+    for item in items:
+        text = str(item.get("text") or "")
+        bbox = _bbox4(item.get("bbox"))
+        if bbox is None:
+            if text.strip():
+                loose.append(text)
+            continue
+        if not text.strip():
+            continue
+        boxed.append({"text": text, "bbox": bbox})
+    lines: list[str] = []
+    rows = _cluster_rows(boxed)
+    cuts = _column_cuts(rows)
+    for row in rows:
+        for segment in _split_row(row, cuts):
+            lines.append("".join(str(part["text"]) for part in segment))
+    lines.extend(loose)
+    return lines
+
+
+def line_boxes_from_hypothesis(row: dict[str, Any]) -> list[dict[str, Any]] | None:
+    boxes = row.get("line_boxes")
+    if not isinstance(boxes, list) or not boxes:
+        return None
+    return [item for item in boxes if isinstance(item, dict)]
+
+
 def table_supported_by_text_layer(rows: list[list[str]], page_text: str) -> bool:
     cells = [_norm(cell) for row in rows for cell in row if _norm(cell)]
     if len(cells) < 2:
@@ -556,8 +729,27 @@ def segment_toc_lines(lines: list[str]) -> list[str]:
     return merged
 
 
+def hypothesis_source_lines(hyp: dict[str, Any], *, form_lines: bool) -> list[str] | None:
+    """Lines fed to TOC segmentation and line CER.
+
+    `form_lines` rebuilds one visual line per row from `line_boxes`. The stored
+    `lines_hyp` stays one RapidOCR box per line, in engine order, so the
+    one-box baseline can still be scored.
+    """
+    boxes = line_boxes_from_hypothesis(hyp)
+    if form_lines and boxes is not None:
+        return form_visual_lines(boxes)
+    raw_lines = hyp.get("lines_hyp")
+    if isinstance(raw_lines, list):
+        return [str(item) for item in raw_lines]
+    return None
+
+
 def prepare_expanded_cer(
-    gt_rows: list[dict[str, Any]], hyp_rows: list[dict[str, Any]]
+    gt_rows: list[dict[str, Any]],
+    hyp_rows: list[dict[str, Any]],
+    *,
+    form_lines: bool = True,
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     """Segment TOC lines on the expanded set only. Every page is still scored."""
     hyp_by = {(str(row.get("doc_id")), int(row.get("page") or 0)): row for row in hyp_rows}
@@ -566,8 +758,7 @@ def prepare_expanded_cer(
     for gt in gt_rows:
         key = (str(gt.get("doc_id")), int(gt.get("page") or 0))
         hyp = dict(hyp_by.get(key, {}))
-        raw_lines = hyp.get("lines_hyp")
-        source_lines = [str(item) for item in raw_lines] if isinstance(raw_lines, list) else None
+        source_lines = hypothesis_source_lines(hyp, form_lines=form_lines)
         text_gt = str(gt.get("text_gt") or "")
         if is_toc_page(text_gt):
             gt_lines = segment_toc_lines([line for line in text_gt.splitlines() if _norm(line)])
@@ -611,6 +802,8 @@ def score_bundle(
         }
     return {
         "line_cer": None if cer is None else cer["line_cer"],
+        "line_edits": 0 if cer is None else cer["line_edits"],
+        "line_denom": 0 if cer is None else cer["line_denom"],
         "line_cer_gate": _gate_cer(None if cer is None else cer["line_cer"]),
         "line_cer_pages": 0 if cer is None else len(cer["pages"]),
         "page_cer": None if cer is None else cer["page_cer"],
@@ -798,6 +991,15 @@ def build_report_from_fixtures() -> dict[str, Any]:
     real_cer_gt = [row for row in new_cer_gt if row.get("scored") is not False and not is_synthetic_row(row)]
     real_teds_gt = [row for row in new_teds_gt if row.get("scored") is not False and not is_synthetic_row(row)]
     real_kf_gt = [row for row in new_kf_gt if row.get("scored") is not False and not is_synthetic_row(row)]
+    real_before = score_bundle(
+        real_cer_gt,
+        new_cer_hyp,
+        real_teds_gt,
+        new_teds_hyp,
+        real_kf_gt,
+        new_kf_hyp,
+        prepare_cer=lambda gt, hyp: prepare_expanded_cer(gt, hyp, form_lines=False),
+    )
     real = score_bundle(
         real_cer_gt,
         new_cer_hyp,
@@ -896,8 +1098,16 @@ def build_report_from_fixtures() -> dict[str, Any]:
         "failure_causes": failures,
         "improvement_directions": improvement_directions(failures),
         "gt_policy": "embedded PDF text layer or PyMuPDF table extract confirmed against that text layer; published HTML for not-scored notices. OCR is never GT.",
-        "hypothesis_policy": "rapidocr_onnxruntime on a 1.5x render of the official PDF page. TOC dot leaders are segmented before line CER. Table hypotheses place OCR text into the PDF ruling-line grid. Ground truth stays the text layer.",
+        "hypothesis_policy": (
+            "rapidocr_onnxruntime on a 1.5x render of the official PDF page. "
+            "Before line CER, boxes are clustered by vertical overlap, column gutters are split, "
+            "and one visual line is emitted per row segment. "
+            "TOC dot leaders are segmented after that, only on TOC pages. "
+            "Table hypotheses still place per-box OCR text into the PDF ruling-line grid. "
+            "Ground truth stays the text layer."
+        ),
     }
+    report["line_formation"] = _line_formation_block(real_before, real)
     report["gate"] = (
         "GATE_PASS"
         if report["expanded"]["line_cer_gate"] == "GATE_PASS"
@@ -905,13 +1115,116 @@ def build_report_from_fixtures() -> dict[str, Any]:
         and report["expanded"]["teds_gate"] == "GATE_PASS"
         else "GATE_FAIL"
     )
+    report["product_pass"] = report["gate"] == "GATE_PASS"
     report["joe_local_pdf_intake"] = load_joe_local_pdf_intake(manifest)
     return report
+
+
+_LINE_FORMATION_CALLOUTS = (
+    (
+        "fixture-003",
+        4,
+        "Unchanged. Extra letterhead lines and character mismatches, not a sub-column crack.",
+    ),
+    (
+        "fixture-003",
+        5,
+        "Unchanged. Letterhead insertions and a garbled OCR line. No same-row boxes were joined.",
+    ),
+    (
+        "pub-gx-minzu-ultrasound-2026",
+        2,
+        "Unchanged. Text-layer form blanks already sit inside single RapidOCR boxes, so row clustering cannot split them.",
+    ),
+    (
+        "pub-gx-tianlin-yuegui-devices-2026",
+        1,
+        "Unchanged, as expected. Letterhead insertions are OCR lines absent from the text layer and are kept.",
+    ),
+)
+
+
+def _page_cer_lookup(metrics: dict[str, Any]) -> dict[tuple[str, int], dict[str, Any]]:
+    return {(str(row.get("doc_id")), int(row.get("page") or 0)): row for row in metrics.get("cer_pages") or []}
+
+
+def _line_formation_block(before: dict[str, Any], after: dict[str, Any]) -> dict[str, Any]:
+    before_pages = _page_cer_lookup(before)
+    after_pages = _page_cer_lookup(after)
+    callouts = []
+    for doc_id, page, note in _LINE_FORMATION_CALLOUTS:
+        previous = before_pages.get((doc_id, page), {})
+        current = after_pages.get((doc_id, page), {})
+        callouts.append(
+            {
+                "doc_id": doc_id,
+                "page": page,
+                "before_line_cer": previous.get("line_cer"),
+                "after_line_cer": current.get("line_cer"),
+                "note": note,
+            }
+        )
+    before_edits = int(before.get("line_edits") or 0)
+    after_edits = int(after.get("line_edits") or 0)
+    return {
+        "method": "vertical_overlap_rows_then_column_split",
+        "when": "before TOC segmentation and before line CER",
+        "metric_unchanged": True,
+        "one_box_one_line_in_engine_order": True,
+        "boundary_edit_claim": {
+            "claimed_boundary_edits": 483,
+            "claimed_line_edits": 1481,
+            "claimed_reference_chars": 29835,
+            "claimed_pages": 54,
+            "confirmed": False,
+            "note": (
+                "The code does emit one RapidOCR box as one hypothesis line, in engine order. "
+                "That part of the diagnosis matches. A replay of the same RapidOCR pass at 1.5x matches those stored lines after redaction. "
+                "Clustering by vertical overlap and splitting column gaps of at least 8px does not remove about 483 edits: "
+                "on these 54 pages every same-row gap is a column boundary or an overlapping neighbor, so no box is joined. "
+                "The line-CER metric was not changed."
+            ),
+        },
+        "before": {
+            "line_edits": before_edits,
+            "line_denom": int(before.get("line_denom") or 0),
+            "line_cer": before.get("line_cer"),
+            "line_cer_gate": before.get("line_cer_gate"),
+            "pages": before.get("line_cer_pages"),
+            "key_field_f1": before.get("key_field_f1"),
+            "key_field_f1_gate": before.get("key_field_f1_gate"),
+            "tp": before.get("tp"),
+            "fp": before.get("fp"),
+            "fn": before.get("fn"),
+            "teds": before.get("teds"),
+            "teds_gate": before.get("teds_gate"),
+            "teds_pages_scored": before.get("teds_pages_scored"),
+        },
+        "after": {
+            "line_edits": after_edits,
+            "line_denom": int(after.get("line_denom") or 0),
+            "line_cer": after.get("line_cer"),
+            "line_cer_gate": after.get("line_cer_gate"),
+            "pages": after.get("line_cer_pages"),
+            "key_field_f1": after.get("key_field_f1"),
+            "key_field_f1_gate": after.get("key_field_f1_gate"),
+            "tp": after.get("tp"),
+            "fp": after.get("fp"),
+            "fn": after.get("fn"),
+            "teds": after.get("teds"),
+            "teds_gate": after.get("teds_gate"),
+            "teds_pages_scored": after.get("teds_pages_scored"),
+        },
+        "edit_delta": before_edits - after_edits,
+        "callouts": callouts,
+    }
 
 
 def _compact(metrics: dict[str, Any]) -> dict[str, Any]:
     return {
         "line_cer": metrics["line_cer"],
+        "line_edits": metrics["line_edits"],
+        "line_denom": metrics["line_denom"],
         "line_cer_gate": metrics["line_cer_gate"],
         "line_cer_pages": metrics["line_cer_pages"],
         "page_cer": metrics["page_cer"],
@@ -927,6 +1240,60 @@ def _compact(metrics: dict[str, Any]) -> dict[str, Any]:
         "cer_pages": metrics["cer_pages"],
         "teds_pages": metrics["teds_pages"],
     }
+
+
+def _line_formation_markdown(block: dict[str, Any]) -> str:
+    if not block:
+        return ""
+    before = block.get("before") or {}
+    after = block.get("after") or {}
+    claim = block.get("boundary_edit_claim") or {}
+    lines = [
+        "## Visual line formation (same 54 pages)",
+        "",
+        "Hypothesis lines are rebuilt from RapidOCR boxes before line CER: cluster by vertical overlap, "
+        "split column gutters, emit one visual line per row segment. The line-CER metric is unchanged. "
+        "TOC segmentation is unchanged and still runs after line formation, only on TOC pages. "
+        "Key-field F1 and TEDS still use per-box text and the ruling-line grid.",
+        "",
+        str(claim.get("note") or ""),
+        "",
+        "| Metric | Before (one box = one line) | After (visual lines) | Pages | Gate after |",
+        "|---|---:|---:|---:|---|",
+        (
+            f"| Line CER | {_pct(before.get('line_cer'))} "
+            f"({before.get('line_edits')}/{before.get('line_denom')}) | "
+            f"**{_pct(after.get('line_cer'))}** "
+            f"({after.get('line_edits')}/{after.get('line_denom')}) | "
+            f"{after.get('pages')} | {after.get('line_cer_gate')} |"
+        ),
+        (
+            f"| Key-field F1 | {_pct(before.get('key_field_f1'))} "
+            f"(TP {before.get('tp')} / FP {before.get('fp')} / FN {before.get('fn')}) | "
+            f"**{_pct(after.get('key_field_f1'))}** "
+            f"(TP {after.get('tp')} / FP {after.get('fp')} / FN {after.get('fn')}) | "
+            f"same rows | {after.get('key_field_f1_gate')} |"
+        ),
+        (
+            f"| TEDS | {_pct(before.get('teds'))} | **{_pct(after.get('teds'))}** | "
+            f"{after.get('teds_pages_scored')} | {after.get('teds_gate')} |"
+        ),
+        "",
+        f"Edit delta (before − after): **{block.get('edit_delta')}**. "
+        "product_pass is true only when line CER, key-field F1, and TEDS all pass. "
+        "A lower CER by itself is not a product pass.",
+        "",
+        "### Page callouts",
+        "",
+        "| page | CER before | CER after | note |",
+        "|---|---:|---:|---|",
+    ]
+    for row in block.get("callouts") or []:
+        lines.append(
+            f"| {row.get('doc_id')} p{row.get('page')} | {_pct(row.get('before_line_cer'))} | "
+            f"{_pct(row.get('after_line_cer'))} | {row.get('note')} |"
+        )
+    return "\n".join(lines)
 
 
 def failure_causes(metrics: dict[str, Any]) -> list[dict[str, Any]]:
@@ -953,7 +1320,7 @@ def failure_causes(metrics: dict[str, Any]) -> list[dict[str, Any]]:
                     "TOC pages still count. Before alignment, split 目录 headings are joined, dot leaders are removed, "
                     "and a bare OCR page number is put back on the preceding title. "
                     + (
-                        "Line CER remains above 2% on the same pages because non-leader characters still disagree."
+                        "Line CER remains above 2% on the same pages. Visual-line grouping was measured separately and does not remove the claimed 483 boundary edits."
                         if cer_gate != "GATE_PASS"
                         else "Line CER on the expanded set meets the 2% gate after that segmentation."
                     )
@@ -1001,7 +1368,7 @@ def failure_causes(metrics: dict[str, Any]) -> list[dict[str, Any]]:
 def improvement_directions(causes: list[dict[str, Any]]) -> list[str]:
     directions = [
         "Keep thresholds at CER≤2%, F1≥97%, TEDS≥90%. Do not drop low-scoring public pages.",
-        "TOC dot leaders are already segmented before line CER. Further CER gains have to come from the characters RapidOCR still misses on the same pages.",
+        "TOC dot leaders are already segmented before line CER, after visual lines are formed. Further CER gains have to come from characters RapidOCR still misses inside a single box, not from joining column gutters.",
         "Normalize key-field hypotheses with a constrained parser (amount, date, project code) instead of exact full-span equality, and keep the text-layer string as GT.",
         "Table hypotheses already use the PDF ruling-line grid. Remaining TEDS misses are OCR characters inside those cells, still scored against the text-layer HTML.",
         "Leave image-only pages not-scored until a human transcript exists. Do not promote OCR text to ground truth.",
@@ -1049,9 +1416,11 @@ def render_markdown(report: dict[str, Any]) -> str:
             f"{_pct(appendix['teds'])} | {appendix['teds_gate']} |"
         ),
         "",
-        f"Overall expanded gate: **{report['gate']}**. `product_pass=false`.",
+        f"Overall expanded gate: **{report['gate']}**. `product_pass={str(report['product_pass']).lower()}`.",
         "",
         f"Expanded F1 counts: TP {new['tp']} / FP {new['fp']} / FN {new['fn']}.",
+        "",
+        _line_formation_markdown(report.get("line_formation") or {}),
         "",
         "## Sources",
         "",
@@ -1197,6 +1566,21 @@ def _write_gate_snapshot(
         ),
         encoding="utf-8",
     )
+
+
+def _stored_line_boxes(lines: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Redacted box text plus bbox. Raw phone numbers are not stored."""
+    stored: list[dict[str, Any]] = []
+    for item in lines:
+        text = redact_text(str(item.get("text") or ""))
+        if not text.strip():
+            continue
+        entry: dict[str, Any] = {"text": text}
+        bbox = _bbox4(item.get("bbox"))
+        if bbox is not None:
+            entry["bbox"] = [round(value, 2) for value in bbox]
+        stored.append(entry)
+    return stored
 
 
 def _provenance(row: dict[str, Any], fetched_at: str) -> dict[str, Any]:
@@ -1357,6 +1741,7 @@ def build_samples(manifest: dict[str, Any]) -> dict[str, Any]:
                 "page": page_number,
                 "text_hyp": hyp_text,
                 "lines_hyp": [redact_text(str(item["text"])) for item in lines],
+                "line_boxes": _stored_line_boxes(lines),
                 "hypothesis_source": "rapidocr_onnxruntime",
                 "cohort": cohort,
             }
@@ -1526,6 +1911,7 @@ def build_samples(manifest: dict[str, Any]) -> dict[str, Any]:
                     "page": page_number,
                     "text_hyp": hyp_text,
                     "lines_hyp": [redact_text(str(item["text"])) for item in lines],
+                    "line_boxes": _stored_line_boxes(lines),
                     "hypothesis_source": "rapidocr_onnxruntime",
                     "cohort": "prior_public_ocr",
                 }
@@ -1768,7 +2154,7 @@ def main(argv: list[str] | None = None) -> int:
                         },
                         "new_completed_documents": report["new_completed_documents"],
                         "new_not_scored": report["new_not_scored"],
-                        "product_pass": False,
+                        "product_pass": report["product_pass"],
                     },
                     ensure_ascii=False,
                     indent=2,

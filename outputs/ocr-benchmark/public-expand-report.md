@@ -22,6 +22,29 @@ Overall expanded gate: **GATE_FAIL**. `product_pass=false`.
 
 Expanded F1 counts: TP 103 / FP 3 / FN 3.
 
+## Visual line formation (same 54 pages)
+
+Hypothesis lines are rebuilt from RapidOCR boxes before line CER: cluster by vertical overlap, split column gutters, emit one visual line per row segment. The line-CER metric is unchanged. TOC segmentation is unchanged and still runs after line formation, only on TOC pages. Key-field F1 and TEDS still use per-box text and the ruling-line grid.
+
+The code does emit one RapidOCR box as one hypothesis line, in engine order. That part of the diagnosis matches. A replay of the same RapidOCR pass at 1.5x matches those stored lines after redaction. Clustering by vertical overlap and splitting column gaps of at least 8px does not remove about 483 edits: on these 54 pages every same-row gap is a column boundary or an overlapping neighbor, so no box is joined. The line-CER metric was not changed.
+
+| Metric | Before (one box = one line) | After (visual lines) | Pages | Gate after |
+|---|---:|---:|---:|---|
+| Line CER | 4.96% (1481/29835) | **4.96%** (1481/29835) | 54 | GATE_FAIL |
+| Key-field F1 | 97.17% (TP 103 / FP 3 / FN 3) | **97.17%** (TP 103 / FP 3 / FN 3) | same rows | GATE_PASS |
+| TEDS | 95.80% | **95.80%** | 19 | GATE_PASS |
+
+Edit delta (before − after): **0**. product_pass is true only when line CER, key-field F1, and TEDS all pass. A lower CER by itself is not a product pass.
+
+### Page callouts
+
+| page | CER before | CER after | note |
+|---|---:|---:|---|
+| fixture-003 p4 | 21.99% | 21.99% | Unchanged. Extra letterhead lines and character mismatches, not a sub-column crack. |
+| fixture-003 p5 | 35.22% | 35.22% | Unchanged. Letterhead insertions and a garbled OCR line. No same-row boxes were joined. |
+| pub-gx-minzu-ultrasound-2026 p2 | 18.46% | 18.46% | Unchanged. Text-layer form blanks already sit inside single RapidOCR boxes, so row clustering cannot split them. |
+| pub-gx-tianlin-yuegui-devices-2026 p1 | 42.50% | 42.50% | Unchanged, as expected. Letterhead insertions are OCR lines absent from the text layer and are kept. |
+
 ## Sources
 
 | document | URL | fetched | license | scored |
@@ -60,13 +83,13 @@ Twelve PDFs from Joe's local `work/public-eval/pdfs`, approved by Edith for eval
 
 ## Failure causes
 
-- **line_cer**: TOC pages still count. Before alignment, split 目录 headings are joined, dot leaders are removed, and a bare OCR page number is put back on the preceding title. Line CER remains above 2% on the same pages because non-leader characters still disagree.
+- **line_cer**: TOC pages still count. Before alignment, split 目录 headings are joined, dot leaders are removed, and a bare OCR page number is put back on the preceding title. Line CER remains above 2% on the same pages. Visual-line grouping was measured separately and does not remove the claimed 483 boundary edits.
 - **key_field_f1**: Exact NFKC field match fails when RapidOCR drops or alters the authoritative span (dates, amounts, agency names).
 
 ## Improvement directions
 
 - Keep thresholds at CER≤2%, F1≥97%, TEDS≥90%. Do not drop low-scoring public pages.
-- TOC dot leaders are already segmented before line CER. Further CER gains have to come from the characters RapidOCR still misses on the same pages.
+- TOC dot leaders are already segmented before line CER, after visual lines are formed. Further CER gains have to come from characters RapidOCR still misses inside a single box, not from joining column gutters.
 - Normalize key-field hypotheses with a constrained parser (amount, date, project code) instead of exact full-span equality, and keep the text-layer string as GT.
 - Table hypotheses already use the PDF ruling-line grid. Remaining TEDS misses are OCR characters inside those cells, still scored against the text-layer HTML.
 - Leave image-only pages not-scored until a human transcript exists. Do not promote OCR text to ground truth.
@@ -79,4 +102,4 @@ uv run --extra ocr python -m work.eval.public_expand --build
 uv run python -m work.eval.public_expand --report
 ```
 
-Generated at `2026-09-29T09:06:12.123118+00:00`.
+Generated at `2026-09-29T18:04:38.074554+00:00`.

@@ -39,6 +39,24 @@
       ],
       "validation": "Live RapidOCR vs text-layer GT. Prior public-eval docs 12. New completed PDFs 7, new not-scored HTML notices 2, one CCGP HTTPS fetch HTTP 403 not counted. Old set unchanged: CER 3.17% / F1 76.00% / TEDS 87.85%, all GATE_FAIL. Expanded public set on the same pages: CER 4.96% GATE_FAIL (54 pages), F1 97.17% GATE_PASS, TEDS 95.80% GATE_PASS (19 pages). Overall GATE_FAIL. product_pass=false. Synthetic rows excluded from the gate. Joe local PDF intake 2026-09-29: 12/12 duplicate by filename and sha256, 0 newly added, 0 provenance-unverified. No pilot/ICP ledger writes. T-005 not modified.",
       "note": "pending_audit only. Not a product PASS and not a business unblock."
+    },
+    {
+      "id": "S-A-OCR-VISUAL-LINES",
+      "title": "Rebuild RapidOCR hypothesis lines from boxes before line CER",
+      "status": "pending_audit",
+      "priority": "P1",
+      "campaign": "A",
+      "dependencies": [
+        "S-A-OCR-PUBLIC-EXPAND"
+      ],
+      "artifacts": [
+        "work/eval/public_expand.py",
+        "work/eval/fixtures/public_expand_hypotheses.jsonl",
+        "outputs/ocr-benchmark/public-expand-report.md",
+        "outputs/ocr-benchmark/public-expand-report.json"
+      ],
+      "validation": "pending_audit. Same 54 pages, same thresholds, text-layer GT byte-unchanged. One box per line in engine order matches the code. Claimed 483-of-1481 boundary edits were not confirmed. Visual lines (vertical overlap, column split) do not join any box on this set: line CER stays 1481/29835 = 4.96% GATE_FAIL. F1 stays 97.17% GATE_PASS (TP 103 / FP 3 / FN 3). TEDS stays 95.80% GATE_PASS (19 pages). Overall GATE_FAIL. product_pass=false. Old published set unchanged: CER 3.17% / F1 76.00% / TEDS 87.85%. T-005 not modified. No pilot or ICP ledger writes.",
+      "note": "pending_audit only. Not verified. Not a product PASS."
     }
   ],
   "completed": [
@@ -1343,13 +1361,13 @@
       "path": "work/eval/public_expand.py",
       "kind": "ocr-public-expand",
       "status": "pending_audit",
-      "note": "S-A-OCR-PUBLIC-EXPAND live OCR eval. Not verified."
+      "note": "S-A-OCR-PUBLIC-EXPAND live OCR eval. Visual-line formation is pending_audit in S-A-OCR-VISUAL-LINES. Not verified."
     },
     {
       "path": "outputs/ocr-benchmark/public-expand-report.md",
       "kind": "ocr-public-expand-report",
       "status": "pending_audit",
-      "note": "Expanded CER/F1/TEDS. Overall GATE_FAIL. Not verified."
+      "note": "Expanded CER/F1/TEDS. Visual-line rescore is still 4.96% GATE_FAIL. Overall GATE_FAIL. Not verified."
     },
     {
       "path": "outputs/ocr-benchmark/public-expand-report.json",
@@ -1379,7 +1397,7 @@
     ],
     "note": "Do not write demo/test rows into pilot/ICP ledgers. Do not claim business TARGET_MET. Pilot scan results are always NEEDS_REVIEW and cannot count as accuracy acceptance. On real input: copy template → fill → pilot_ledger/icp_ledger --row-json. Readiness: uv run python -m work.pilot_readiness --json."
   },
-  "updated_at": "2026-09-29T07:20:00+00:00",
+  "updated_at": "2026-09-29T18:10:00+00:00",
   "sandbox_roadmap": {
     "locked_at": "2026-09-16",
     "gates": {
