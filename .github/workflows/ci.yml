@@ -34,8 +34,11 @@ jobs:
       BIDPROOF_ENV: test
       BIDPROOF_ALLOW_TRUSTED_HEADERS: "1"
       BIDPROOF_TEST_POSTGRES_URL: postgresql+psycopg://bidproof:bidproof-ci-only@localhost:5432/bidproof
-      BIDPROOF_DATA_ROOT: ${{ runner.temp }}/bidproof-ci
     steps:
+      # The runner context is not available in job-level env, so the data root is
+      # exported from the runner's own RUNNER_TEMP for every later step.
+      - name: Isolate CI data root
+        run: echo "BIDPROOF_DATA_ROOT=$RUNNER_TEMP/bidproof-ci" >> "$GITHUB_ENV"
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
