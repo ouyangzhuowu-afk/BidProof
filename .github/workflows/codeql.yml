@@ -12,6 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       security-events: write
+      # Required so codeql-action can call get-a-workflow-run while uploading results.
+      actions: read
       contents: read
     strategy:
       fail-fast: false
