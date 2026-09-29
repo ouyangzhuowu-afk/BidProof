@@ -19,30 +19,39 @@ ICP_LEDGER = ROOT / "outputs" / "icp-outreach.csv"
 INTAKE_CHECKLIST = ROOT / "docs" / "pilot" / "t005-intake-checklist.md"
 
 
-def _header_ok(path: Path, expected: list[str]) -> tuple[bool, str]:
+def _label(path: Path, project_root: Path) -> str:
+    try:
+        return path.resolve().relative_to(project_root.resolve()).as_posix()
+    except ValueError:
+        return path.as_posix()
+
+
+def _header_ok(path: Path, expected: list[str], project_root: Path) -> tuple[bool, str]:
+    label = _label(path, project_root)
     if not path.exists():
-        return False, f"missing {path.relative_to(ROOT)}"
+        return False, f"missing {label}"
     with path.open(encoding="utf-8", newline="") as handle:
         reader = csv.DictReader(handle)
         if reader.fieldnames != expected:
-            return False, f"header mismatch in {path.relative_to(ROOT)}"
+            return False, f"header mismatch in {label}"
         rows = list(reader)
-    return True, f"{path.relative_to(ROOT)} header ok; rows={len(rows)}"
+    return True, f"{label} header ok; rows={len(rows)}"
 
 
-def _template_ok(path: Path, required_keys: list[str]) -> tuple[bool, str]:
+def _template_ok(path: Path, required_keys: list[str], project_root: Path) -> tuple[bool, str]:
+    label = _label(path, project_root)
     if not path.exists():
-        return False, f"missing {path.relative_to(ROOT)}"
+        return False, f"missing {label}"
     try:
         payload = json.loads(path.read_text(encoding="utf-8"))
     except json.JSONDecodeError as exc:
-        return False, f"invalid JSON in {path.relative_to(ROOT)}: {exc}"
+        return False, f"invalid JSON in {label}: {exc}"
     if not isinstance(payload, dict):
-        return False, f"{path.relative_to(ROOT)} must be a JSON object"
+        return False, f"{label} must be a JSON object"
     missing = [key for key in required_keys if key not in payload]
     if missing:
-        return False, f"{path.relative_to(ROOT)} missing keys: {', '.join(missing)}"
-    return True, f"{path.relative_to(ROOT)} keys ok"
+        return False, f"{label} missing keys: {', '.join(missing)}"
+    return True, f"{label} keys ok"
 
 
 def check_readiness(project_root: Path = ROOT) -> dict[str, Any]:
@@ -52,13 +61,29 @@ def check_readiness(project_root: Path = ROOT) -> dict[str, Any]:
     def record(name: str, ok: bool, detail: str) -> None:
         checks.append({"name": name, "ok": ok, "detail": detail})
 
-    ok, detail = _template_ok(project_root / "work" / "pilot-row.template.json", pilot_ledger.REQUIRED_FIELDS)
+    ok, detail = _template_ok(
+        project_root / "work" / "pilot-row.template.json",
+        pilot_ledger.REQUIRED_FIELDS,
+        project_root,
+    )
     record("pilot_template", ok, detail)
-    ok, detail = _template_ok(project_root / "work" / "icp-row.template.json", icp_ledger.REQUIRED_FIELDS)
+    ok, detail = _template_ok(
+        project_root / "work" / "icp-row.template.json",
+        icp_ledger.REQUIRED_FIELDS,
+        project_root,
+    )
     record("icp_template", ok, detail)
-    ok, detail = _header_ok(project_root / "outputs" / "pilot-ledger.csv", pilot_ledger.REQUIRED_FIELDS)
+    ok, detail = _header_ok(
+        project_root / "outputs" / "pilot-ledger.csv",
+        pilot_ledger.REQUIRED_FIELDS,
+        project_root,
+    )
     record("pilot_ledger", ok, detail)
-    ok, detail = _header_ok(project_root / "outputs" / "icp-outreach.csv", icp_ledger.REQUIRED_FIELDS)
+    ok, detail = _header_ok(
+        project_root / "outputs" / "icp-outreach.csv",
+        icp_ledger.REQUIRED_FIELDS,
+        project_root,
+    )
     record("icp_ledger", ok, detail)
 
     checklist = project_root / "docs" / "pilot" / "t005-intake-checklist.md"
@@ -75,8 +100,9 @@ def check_readiness(project_root: Path = ROOT) -> dict[str, Any]:
         "ready": ready,
         "product_pass": False,
         "note": (
-            "Engineering scaffolds only. Empty ledgers are expected until Joe provides "
-            "real enterprise pilot / ICP inputs. Do not write demo or test rows."
+            "scaffold-only. Engineering scaffolds only; this is not a business unblock. "
+            "Pilot scan results are always NEEDS_REVIEW and cannot count as accuracy acceptance. "
+            "Do not write demo or test rows."
         ),
         "pilot": pilot_summary,
         "icp": icp_summary,
@@ -84,13 +110,14 @@ def check_readiness(project_root: Path = ROOT) -> dict[str, Any]:
     }
 
 
-def main() -> None:
+def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Check T-005 pilot/ICP ledger readiness without writing rows")
-    parser.parse_args()
+    parser.add_argument("--json", action="store_true", help="Print the readiness report as JSON")
+    parser.parse_args(argv)
     result = check_readiness()
     print(json.dumps(result, ensure_ascii=False, indent=2))
-    raise SystemExit(0 if result["ready"] else 1)
+    return 0 if result["ready"] else 1
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

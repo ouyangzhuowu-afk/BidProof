@@ -4,7 +4,7 @@
 
 ## 试点台账（T-005）
 
-- [解阻与就绪记录（2026-09-28）](pilot/t005-readiness-2026-09-28.md) — `D-T005-UNBLOCK-2026-09-28`
+- [试点脚手架记录（2026-09-29 更正）](pilot/t005-readiness-2026-09-28.md) — `D-T005-UNBLOCK-2026-09-28`，scope `scaffold-only`，不是业务解阻
 - [真实企业输入清单](pilot/t005-intake-checklist.md) — Joe 提供材料后的写入步骤；禁止 demo 行
 
 ## 交付文档（给客户与运维）

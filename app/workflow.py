@@ -13,7 +13,14 @@ from .config import PROJECT_ROOT
 WORKFLOW_ROOT = PROJECT_ROOT / "workflow"
 STATE_PATH = WORKFLOW_ROOT / "project-state.json"
 SCHEMA_PATH = WORKFLOW_ROOT / "schemas" / "project-state.schema.json"
-ALLOWED_STATUSES = {"pending", "in_progress", "completed", "blocked", "needs_verification"}
+ALLOWED_STATUSES = {
+    "pending",
+    "in_progress",
+    "completed",
+    "blocked",
+    "needs_verification",
+    "pending_audit",
+}
 REQUIRED_TOP_LEVEL = {
     "schema_version",
     "project_id",

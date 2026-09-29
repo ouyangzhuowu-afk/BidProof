@@ -93,7 +93,7 @@ OCR 质量门禁现状（如实记录，不掩盖）：
 |------|------|----------|------|
 | 行级 CER | ≤ 2% | 3.17% | `GATE_FAIL` |
 | 关键字段 F1 | ≥ 97% | 76.00% | `GATE_FAIL` |
-| 表格结构 TEDS | ≥ 90% | GT 种子 16 页 | `NOT_EVALUATED` |
+| 表格结构 TEDS | ≥ 90% | 87.85%（16 页，`outputs/ocr-benchmark/teds-report.json`） | `GATE_FAIL` |
 
 任一门禁未达标时，产品侧强制 `NEEDS_REVIEW`。这些是工程门禁，**不是**业务验收结论。
 
@@ -113,9 +113,9 @@ OCR 质量门禁现状（如实记录，不掩盖）：
 | 容器 | `docker-compose.yml`（扫描作业在独立 `worker` 进程：`python -m app.worker`） | 可用 |
 | 私有化 | `scripts/preflight.py` + 离线包 | 需按客户环境验证 |
 
-## 业务验收台账（T-005：in_progress，等待真实输入）
+## 业务验收台账（T-005：blocked，等待真实输入）
 
-`D-T005-UNBLOCK-2026-09-28` 已解除沙箱流程门禁。两张台账脚手架就绪但仍为 **0 行**；**禁止**把测试或演示任务写进去。摄入清单：`docs/pilot/t005-intake-checklist.md`。
+`D-T005-UNBLOCK-2026-09-28` 的范围是 `scaffold-only`（试点就绪脚手架），由 Edith 编排。Joe 没有在 2026-09-28 解除 T-005。沙箱推迟（`D-SANDBOX-2026-09-16`）仍然有效。两张台账脚手架仍为 **0 行**；**禁止**把测试或演示任务写进去。试点扫描结果始终是 `NEEDS_REVIEW`，不能算准确率验收。摄入清单：`docs/pilot/t005-intake-checklist.md`。
 
 ```bash
 uv run python -m work.pilot_readiness --json          # 只读就绪检查，不写业务行

@@ -1,6 +1,6 @@
 # T-005 真实企业输入清单（给 Joe）
 
-决策 `D-T005-UNBLOCK-2026-09-28` 已解除沙箱阶段对 T-005 的**流程门禁**。台账与 CLI 已就绪；**仍禁止**把 demo / 测试 / 内部演练写入 `outputs/pilot-ledger.csv` 或 `outputs/icp-outreach.csv`。
+`D-T005-UNBLOCK-2026-09-28` 的范围是 `scaffold-only`（试点就绪脚手架），由 Edith 编排。Joe 没有在 2026-09-28 解除 T-005。台账与 CLI 只是脚手架；**仍禁止**把 demo / 测试 / 内部演练写入 `outputs/pilot-ledger.csv` 或 `outputs/icp-outreach.csv`。试点扫描结果始终是 `NEEDS_REVIEW`，不能算准确率验收。
 
 ## 首批真实 pilot 任务（目标 10）
 
