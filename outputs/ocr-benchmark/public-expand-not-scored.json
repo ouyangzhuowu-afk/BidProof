@@ -1,0 +1,41 @@
+[
+  {
+    "document_id": "pub-gx-ventilator-monitors",
+    "page": 1,
+    "scored": false,
+    "reason": "embedded text layer too short; OCR was not used as ground truth",
+    "source_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1024FPA/undefined/450103/10007341141/20266/264475cd-19b9-493f-b4e3-142276a4f506.pdf",
+    "fetched_at": "2026-09-16T11:47:36Z",
+    "license_or_usage_note": "公开政府采购/公共资源交易平台公开发布的招标采购文件，仅作为内部工程能力回归的公开 DATA 备份；不用于对外产品承诺，不替代官方分发授权。"
+  },
+  {
+    "document_id": "pub-ccgp-zycg-ac-award-202609",
+    "title": "中央国家机关2026年空调批量集中采购项目-9月中标公告",
+    "publisher": "中国政府采购网",
+    "source_type": "national_public_procurement_portal",
+    "notice_kind": "award",
+    "source_url": "http://www.ccgp.gov.cn/cggg/zygg/zbgg/202609/t20260914_27319969.htm",
+    "scored": false,
+    "fetched_at": "2026-09-29T07:16:40Z",
+    "license_or_usage_note": "公开政府采购/公共资源交易平台公开发布的招标采购文件，仅作为内部工程能力回归的公开 DATA 备份；不用于对外产品承诺，不替代官方分发授权。",
+    "reason": "Published HTML is authoritative, but the notice has no official PDF page image. A synthetic render was not created and is excluded from CER/F1/TEDS.",
+    "stored_text": "work/public-eval/notices/pub-ccgp-zycg-ac-award-202609.txt",
+    "sha256": "0cf5bbafc6296acef88d65098947854aa27c63c899864d28b4e94180c822bf80",
+    "gt_source": "published_html"
+  },
+  {
+    "document_id": "pub-gxggzy-femtosecond-2026",
+    "title": "2026年广西大型医用设备（飞秒激光手术系统）集中采购公开招标公告",
+    "publisher": "广西壮族自治区公共资源交易中心",
+    "source_type": "provincial_public_resource_platform",
+    "notice_kind": "tender_announcement",
+    "source_url": "http://gxggzy.gxzf.gov.cn/yxcgptrk/yxcgpt_tzgg_234096/tzgg_hc/t28134257.shtml",
+    "scored": false,
+    "fetched_at": "2026-09-29T07:16:40Z",
+    "license_or_usage_note": "公开政府采购/公共资源交易平台公开发布的招标采购文件，仅作为内部工程能力回归的公开 DATA 备份；不用于对外产品承诺，不替代官方分发授权。",
+    "reason": "Published HTML is authoritative, but the notice has no official PDF page image. A synthetic render was not created and is excluded from CER/F1/TEDS.",
+    "stored_text": "work/public-eval/notices/pub-gxggzy-femtosecond-2026.txt",
+    "sha256": "72549172233827a5fbec5998f8f38a2b53db1f7dd4ecb5c0d8cb2aec6b94b733",
+    "gt_source": "published_html"
+  }
+]

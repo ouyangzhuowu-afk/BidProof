@@ -156,6 +156,94 @@
       "expect_failure": true
     },
     {
+      "candidate_id": "pub-gx-tianlin-yuegui-devices-2026",
+      "title": "田林县人民医院2026年粤桂协作医疗设备采购项目（重）",
+      "publisher": "广西政府采购云平台",
+      "source_type": "provincial_public_resource_platform",
+      "domain": "hospital_meddevice",
+      "notice_kind": "tender",
+      "source_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1024FPA/451002/10007840528/20269/f8eed91a-ced0-4f90-b3e5-3f52cb0310e8.pdf",
+      "file_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1024FPA/451002/10007840528/20269/f8eed91a-ced0-4f90-b3e5-3f52cb0310e8.pdf",
+      "leaf_id": "S-A-OCR-PUBLIC-EXPAND"
+    },
+    {
+      "candidate_id": "pub-gx-nanxishan-dr-mammo-2026",
+      "title": "南溪山医院医疗设备一批(七)(移动DR、数字化乳腺摄影系统)",
+      "publisher": "广西政府采购云平台",
+      "source_type": "provincial_public_resource_platform",
+      "domain": "hospital_meddevice",
+      "notice_kind": "tender",
+      "source_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1024FPA/undefined/451023/10007869185/20266/63b1529b-f21d-4882-9b25-8e28cd0ea795.pdf",
+      "file_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1024FPA/undefined/451023/10007869185/20266/63b1529b-f21d-4882-9b25-8e28cd0ea795.pdf",
+      "leaf_id": "S-A-OCR-PUBLIC-EXPAND"
+    },
+    {
+      "candidate_id": "pub-gx-minzu-ultrasound-2026",
+      "title": "广西壮族自治区民族医院2026年第一批医疗设备采购（重）预公示",
+      "publisher": "广西政府采购云平台",
+      "source_type": "provincial_public_resource_platform",
+      "domain": "hospital_meddevice",
+      "notice_kind": "tender_preview",
+      "source_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1024FPA/450105/10007739021/20268/73fe9f93-b477-45e4-aca4-82575e2fddb3.pdf",
+      "file_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1024FPA/450105/10007739021/20268/73fe9f93-b477-45e4-aca4-82575e2fddb3.pdf",
+      "leaf_id": "S-A-OCR-PUBLIC-EXPAND"
+    },
+    {
+      "candidate_id": "pub-gx-hechi-mine-safety-2026",
+      "title": "河池市非煤矿山信息化安全生产监管平台采购项目",
+      "publisher": "广西政府采购云平台",
+      "source_type": "provincial_public_resource_platform",
+      "domain": "it_procurement",
+      "notice_kind": "tender",
+      "source_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1024FPA/459900/10007955488/20268/f3024e4f-b0c8-4028-a41c-a104f84170ac.pdf",
+      "file_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1024FPA/459900/10007955488/20268/f3024e4f-b0c8-4028-a41c-a104f84170ac.pdf",
+      "leaf_id": "S-A-OCR-PUBLIC-EXPAND"
+    },
+    {
+      "candidate_id": "pub-gx-info-center-compute-2026",
+      "title": "广西壮族自治区信息中心智能算力服务采购预公示",
+      "publisher": "广西政府采购云平台",
+      "source_type": "provincial_public_resource_platform",
+      "domain": "it_procurement",
+      "notice_kind": "tender_preview",
+      "source_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1014AN/450105/10007739021/20264/0c3ffbda-fcea-4b8c-9c68-79ffa275b205.pdf",
+      "file_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1014AN/450105/10007739021/20264/0c3ffbda-fcea-4b8c-9c68-79ffa275b205.pdf",
+      "leaf_id": "S-A-OCR-PUBLIC-EXPAND"
+    },
+    {
+      "candidate_id": "pub-gx-yibiatong-phase2-2026",
+      "title": "广西“一表通”数据管理系统二期项目",
+      "publisher": "广西政府采购云平台",
+      "source_type": "provincial_public_resource_platform",
+      "domain": "it_procurement",
+      "notice_kind": "tender",
+      "source_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1023FP/450602/10007282833/20264/86bddd9d-c42f-4aff-bb47-0f411e1f0875.pdf",
+      "file_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1023FP/450602/10007282833/20264/86bddd9d-c42f-4aff-bb47-0f411e1f0875.pdf",
+      "leaf_id": "S-A-OCR-PUBLIC-EXPAND"
+    },
+    {
+      "candidate_id": "pub-gx-nonggang-patrol-2026",
+      "title": "广西弄岗国家级自然保护区信息化综合管护系统项目（重）",
+      "publisher": "广西政府采购云平台",
+      "source_type": "provincial_public_resource_platform",
+      "domain": "it_procurement",
+      "notice_kind": "tender",
+      "source_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1024FPA/undefined/451402/10011601115/20266/87f8411e-98ac-4d46-b6f1-5a029b9a9ace.pdf",
+      "file_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1024FPA/undefined/451402/10011601115/20266/87f8411e-98ac-4d46-b6f1-5a029b9a9ace.pdf",
+      "leaf_id": "S-A-OCR-PUBLIC-EXPAND"
+    },
+    {
+      "candidate_id": "pub-ccgp-desktop-award-202609-https",
+      "title": "中央国家机关2026年台式计算机批量集中采购项目-9月中标公告",
+      "publisher": "中国政府采购网",
+      "source_type": "national_public_procurement_portal",
+      "domain": "it_procurement",
+      "notice_kind": "award",
+      "source_url": "https://www.ccgp.gov.cn/cggg/zygg/zbgg/202609/t20260909_27293318.htm",
+      "file_url": "https://www.ccgp.gov.cn/cggg/zygg/zbgg/202609/t20260909_27293318.htm",
+      "leaf_id": "S-A-OCR-PUBLIC-EXPAND"
+    },
+    {
       "candidate_id": "pub-dead-url-probe",
       "title": "Intentional dead URL to prove failures are recorded and not counted",
       "publisher": "n/a",

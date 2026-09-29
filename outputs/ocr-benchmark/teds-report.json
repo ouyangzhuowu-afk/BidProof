@@ -1,14 +1,25 @@
 {
-  "generated_at": "2026-09-18T09:37:10.338210+00:00",
+  "generated_at": "2026-09-29T07:17:02.965131+00:00",
   "claim_scope": "engineering_gate_only",
-  "teds": 0.8784546114752891,
-  "teds_min": 0.9,
+  "teds": 0.44026150669875636,
   "gate": "GATE_FAIL",
   "product_pass": false,
   "business_pass": false,
   "forced_requirement_status": "NEEDS_REVIEW",
-  "teds_gt_pages": 16,
-  "pages_scored": 16,
+  "leaf_id": "S-A-OCR-PUBLIC-EXPAND",
+  "old_set": {
+    "line_cer": 0.031746031746031744,
+    "line_cer_gate": "GATE_FAIL",
+    "key_field_f1": 0.76,
+    "key_field_f1_gate": "GATE_FAIL",
+    "teds": 0.8784546114752891,
+    "teds_gate": "GATE_FAIL"
+  },
+  "synthetic_appendix_excluded_from_gate": true,
+  "note": "Top-level metric is the expanded public live-OCR set. Old published numbers are under old_set.",
+  "teds_min": 0.9,
+  "pages_scored": 19,
+  "teds_gt_pages": 19,
   "pages": [
     {
       "doc_id": "fixture-001",
@@ -18,12 +29,12 @@
     {
       "doc_id": "fixture-001",
       "page": 32,
-      "teds": 0.7333333333333334
+      "teds": 0.2857142857142857
     },
     {
       "doc_id": "fixture-002",
       "page": 33,
-      "teds": 0.873015873015873
+      "teds": 0.27322404371584696
     },
     {
       "doc_id": "fixture-002",
@@ -33,85 +44,77 @@
     {
       "doc_id": "fixture-003",
       "page": 29,
-      "teds": 1.0
+      "teds": 0.5555555555555556
     },
     {
       "doc_id": "fixture-003",
       "page": 35,
-      "teds": 0.7333333333333334
-    },
-    {
-      "doc_id": "pub-gx-nanning-vascular-doppler",
-      "page": 3,
-      "teds": 1.0
-    },
-    {
-      "doc_id": "pub-gx-nanning-vascular-doppler",
-      "page": 16,
-      "teds": 0.75
-    },
-    {
-      "doc_id": "pub-gx-nanning-vascular-doppler",
-      "page": 17,
-      "teds": 0.9431818181818182
-    },
-    {
-      "doc_id": "pub-gx-ventilator-monitors",
-      "page": 15,
-      "teds": 1.0
+      "teds": 0.8666666666666667
     },
     {
       "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
       "page": 51,
-      "teds": 0.7413793103448276
+      "teds": 0.7941176470588236
     },
     {
       "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
       "page": 73,
-      "teds": 0.8157894736842105
+      "teds": 0.2093023255813954
     },
     {
-      "doc_id": "synthetic-teds-bid-opening",
-      "page": 1,
+      "doc_id": "pub-gx-nanning-vascular-doppler",
+      "page": 3,
+      "teds": 0.3356643356643356
+    },
+    {
+      "doc_id": "pub-gx-nanning-vascular-doppler",
+      "page": 16,
       "teds": 1.0
     },
     {
-      "doc_id": "synthetic-teds-quote-detail",
-      "page": 1,
-      "teds": 0.6470588235294117
+      "doc_id": "pub-gx-nanning-vascular-doppler",
+      "page": 17,
+      "teds": 0.787037037037037
     },
     {
-      "doc_id": "synthetic-teds-score",
-      "page": 1,
-      "teds": 0.8181818181818181
+      "doc_id": "pub-gx-ventilator-monitors",
+      "page": 15,
+      "teds": 0.24528301886792447
     },
     {
-      "doc_id": "synthetic-teds-deviation",
-      "page": 1,
-      "teds": 1.0
+      "doc_id": "pub-gx-tianlin-yuegui-devices-2026",
+      "page": 8,
+      "teds": 0.0337078651685393
+    },
+    {
+      "doc_id": "pub-gx-nanxishan-dr-mammo-2026",
+      "page": 9,
+      "teds": 0.06756756756756754
+    },
+    {
+      "doc_id": "pub-gx-minzu-ultrasound-2026",
+      "page": 6,
+      "teds": 0.04054054054054057
+    },
+    {
+      "doc_id": "pub-gx-hechi-mine-safety-2026",
+      "page": 3,
+      "teds": 0.12643678160919536
+    },
+    {
+      "doc_id": "pub-gx-info-center-compute-2026",
+      "page": 5,
+      "teds": 0.08620689655172409
+    },
+    {
+      "doc_id": "pub-gx-yibiatong-phase2-2026",
+      "page": 3,
+      "teds": 0.14583333333333337
+    },
+    {
+      "doc_id": "pub-gx-nonggang-patrol-2026",
+      "page": 9,
+      "teds": 0.5121107266435987
     }
-  ],
-  "annotations": "work/eval/fixtures/teds_gt.jsonl",
-  "hypotheses": "work/eval/fixtures/teds_hypotheses.jsonl",
-  "aggregate_engineering_gates": {
-    "line_cer_max": 0.02,
-    "key_field_f1_min": 0.97,
-    "teds_min": 0.9,
-    "line_cer": null,
-    "key_field_f1": null,
-    "teds": 0.8784546114752891,
-    "failures": [
-      "teds"
-    ],
-    "unevaluated": [
-      "line_cer",
-      "key_field_f1"
-    ],
-    "engineering_gate": "GATE_FAIL",
-    "product_pass": false,
-    "business_pass": false,
-    "forced_requirement_status": "NEEDS_REVIEW",
-    "claim_scope": "engineering_gate_only",
-    "note": "Hard OR of evaluated CER/F1/TEDS failures, plus fail-closed on unevaluated gates. Not T-005."
-  }
+  ]
 }

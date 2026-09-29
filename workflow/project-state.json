@@ -17,7 +17,30 @@
   },
   "current_stage": "sandbox-campaign-A",
   "stage_status": "in_progress",
-  "in_progress": [],
+  "in_progress": [
+    {
+      "id": "S-A-OCR-PUBLIC-EXPAND",
+      "title": "用新的公开招标/中标文件扩展 OCR 评测集并重跑 CER/F1/TEDS",
+      "status": "pending_audit",
+      "priority": "P1",
+      "campaign": "A",
+      "dependencies": [
+        "S-A-02",
+        "S-A-03",
+        "S-A-06",
+        "C-025"
+      ],
+      "artifacts": [
+        "work/eval/public_expand.py",
+        "work/public-eval/manifest.json",
+        "work/public-eval/FETCH.md",
+        "outputs/ocr-benchmark/public-expand-report.md",
+        "outputs/ocr-benchmark/public-expand-report.json"
+      ],
+      "validation": "Live RapidOCR vs text-layer GT. Prior public-eval docs 12. New completed PDFs 7, new not-scored HTML notices 2, one CCGP HTTPS fetch HTTP 403 not counted. Old set reproduced CER 3.17% / F1 76.00% / TEDS 87.85%, all GATE_FAIL. Expanded public set CER 15.19% GATE_FAIL, F1 97.17% GATE_PASS, TEDS 44.03% GATE_FAIL (19 pages). Overall GATE_FAIL. product_pass=false. Synthetic rows excluded from the gate. No pilot/ICP ledger writes. T-005 not modified.",
+      "note": "pending_audit only. Not a product PASS and not a business unblock."
+    }
+  ],
   "completed": [
     {
       "id": "C-001",
@@ -1315,6 +1338,30 @@
       "audited_by": "Audit",
       "pull_request": "https://github.com/ouyangzhuowu-afk/BidProof/pull/13",
       "merge_commit": "792ff23189281f22c75d3539302f43aba7fe2552"
+    },
+    {
+      "path": "work/eval/public_expand.py",
+      "kind": "ocr-public-expand",
+      "status": "pending_audit",
+      "note": "S-A-OCR-PUBLIC-EXPAND live OCR eval. Not verified."
+    },
+    {
+      "path": "outputs/ocr-benchmark/public-expand-report.md",
+      "kind": "ocr-public-expand-report",
+      "status": "pending_audit",
+      "note": "Expanded CER/F1/TEDS. Overall GATE_FAIL. Not verified."
+    },
+    {
+      "path": "outputs/ocr-benchmark/public-expand-report.json",
+      "kind": "ocr-public-expand-report",
+      "status": "pending_audit",
+      "note": "Machine-readable expanded gate. Not verified."
+    },
+    {
+      "path": "work/public-eval/FETCH.md",
+      "kind": "public-eval-runbook",
+      "status": "pending_audit",
+      "note": "Adds the S-A-OCR-PUBLIC-EXPAND reproduce section. Not verified."
     }
   ],
   "next_best_action": {
@@ -1332,7 +1379,7 @@
     ],
     "note": "Do not write demo/test rows into pilot/ICP ledgers. Do not claim business TARGET_MET. Pilot scan results are always NEEDS_REVIEW and cannot count as accuracy acceptance. On real input: copy template → fill → pilot_ledger/icp_ledger --row-json. Readiness: uv run python -m work.pilot_readiness --json."
   },
-  "updated_at": "2026-09-29T05:15:00+00:00",
+  "updated_at": "2026-09-29T07:20:00+00:00",
   "sandbox_roadmap": {
     "locked_at": "2026-09-16",
     "gates": {

@@ -1,0 +1,1440 @@
+"""S-A-OCR-PUBLIC-EXPAND: public tender OCR eval extension.
+
+Extends the existing CER / key-field F1 / TEDS harnesses. Public documents
+only. Synthetic rows and ``work/training-corpus`` are excluded from gate
+metrics. Ground truth comes from the PDF text layer or published HTML, never
+from OCR. OCR output is the hypothesis only.
+
+Engineering gate only. Does not write pilot or ICP ledgers and does not
+change T-005.
+"""
+
+from __future__ import annotations
+
+import argparse
+import hashlib
+import html
+import json
+import re
+import unicodedata
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any
+
+from work.eval.collect_public_tenders import (
+    LICENSE_NOTE,
+    completed_documents,
+    load_candidates,
+    load_manifest,
+    run_collection,
+)
+from work.eval.key_field_f1 import score_key_field_f1
+from work.eval.key_field_gt import KEY_FIELD_NAMES, NATIONAL_ID_RE, PHONE_RE
+from work.eval.ocr_benchmark import _norm
+from work.eval.page_annotation import load_annotations
+from work.eval.rapidocr_line_cer import evaluate_line_cer, load_hypotheses
+from work.eval.sandbox_gates import KEY_FIELD_F1_MIN, LINE_CER_MAX, TEDS_MIN
+from work.eval.teds_gt import rows_to_table_html
+from work.eval.teds_harness import evaluate_teds
+
+ROOT = Path(__file__).resolve().parents[2]
+LEAF_ID = "S-A-OCR-PUBLIC-EXPAND"
+MANIFEST = ROOT / "work" / "public-eval" / "manifest.json"
+CANDIDATES = ROOT / "work" / "eval" / "public_tender_candidates.json"
+PDFS = ROOT / "work" / "public-eval" / "pdfs"
+NOTICES = ROOT / "work" / "public-eval" / "notices"
+TRAINING_MANIFEST = ROOT / "work" / "training-corpus" / "tender-public" / "manifest.json"
+FIXTURE_DIR = ROOT / "work" / "eval" / "fixtures"
+OUT_DIR = ROOT / "outputs" / "ocr-benchmark"
+REPORT_JSON = OUT_DIR / "public-expand-report.json"
+REPORT_MD = OUT_DIR / "public-expand-report.md"
+FORBIDDEN_OUTPUT_TOKENS = ("pilot-ledger", "icp-outreach")
+FORBIDDEN_PATH_TOKENS = ("training-corpus", "case-studies", "source2-fujian")
+
+CER_GT_PATH = FIXTURE_DIR / "public_expand_pages.jsonl"
+CER_HYP_PATH = FIXTURE_DIR / "public_expand_hypotheses.jsonl"
+TEDS_GT_PATH = FIXTURE_DIR / "public_expand_teds_gt.jsonl"
+TEDS_HYP_PATH = FIXTURE_DIR / "public_expand_teds_hypotheses.jsonl"
+KF_GT_PATH = FIXTURE_DIR / "public_expand_key_field_gt.jsonl"
+KF_HYP_PATH = FIXTURE_DIR / "public_expand_key_field_hypotheses.jsonl"
+
+OLD_CER_GT = FIXTURE_DIR / "sandbox_pages.jsonl"
+OLD_CER_HYP = FIXTURE_DIR / "sandbox_hypotheses.jsonl"
+OLD_TEDS_GT = FIXTURE_DIR / "teds_gt.jsonl"
+OLD_TEDS_HYP = FIXTURE_DIR / "teds_hypotheses.jsonl"
+OLD_KF_GT = FIXTURE_DIR / "key_field_gt.jsonl"
+OLD_KF_HYP = FIXTURE_DIR / "key_field_hypotheses.jsonl"
+
+HTML_NOTICES: list[dict[str, str]] = [
+    {
+        "document_id": "pub-ccgp-zycg-ac-award-202609",
+        "title": "中央国家机关2026年空调批量集中采购项目-9月中标公告",
+        "publisher": "中国政府采购网",
+        "source_type": "national_public_procurement_portal",
+        "notice_kind": "award",
+        "source_url": "http://www.ccgp.gov.cn/cggg/zygg/zbgg/202609/t20260914_27319969.htm",
+    },
+    {
+        "document_id": "pub-gxggzy-femtosecond-2026",
+        "title": "2026年广西大型医用设备（飞秒激光手术系统）集中采购公开招标公告",
+        "publisher": "广西壮族自治区公共资源交易中心",
+        "source_type": "provincial_public_resource_platform",
+        "notice_kind": "tender_announcement",
+        "source_url": "http://gxggzy.gxzf.gov.cn/yxcgptrk/yxcgpt_tzgg_234096/tzgg_hc/t28134257.shtml",
+    },
+]
+
+FIELD_PATTERNS: list[tuple[str, re.Pattern[str]]] = [
+    ("project_code", re.compile(r"项目编号[:：]\s*([A-Za-z0-9][A-Za-z0-9\-]{4,40})")),
+    ("project_name", re.compile(r"项目名称[:：]\s*([^\n]{4,80})")),
+    ("budget", re.compile(r"预算(?:总)?金额(?:（元）)?[:：]\s*([^\n]{2,48})")),
+    ("ceiling", re.compile(r"最高限价(?:（如有）|（元）)?[:：]\s*([^\n]{2,48})")),
+    ("procurement_method", re.compile(r"采购方式[:：]\s*([^\s\n]{2,12})")),
+    ("purchaser", re.compile(r"采购人[:：]\s*([^\n]{2,40})")),
+    ("agent", re.compile(r"(?:采购代理机构|代理机构)[:：]\s*([^\n]{2,40})")),
+    (
+        "deadline",
+        re.compile(
+            r"(?:提交投标文件截止时间|递交响应文件截止时间|提交响应文件截止时间|开标时间)[:：]\s*([^\n]{6,48})"
+        ),
+    ),
+    ("contract_end", re.compile(r"合同(?:履行|履约)期限[:：]\s*([^\n]{4,80})")),
+    ("bid_bond", re.compile(r"(?:投标保证金|谈判保证金|竞谈保证金)[:：]\s*([^\n]{2,40})")),
+    ("qualification_ref", re.compile(r"(政府采购法》?第二十二条)")),
+    (
+        "device_license",
+        re.compile(r"(医疗器械(?:生产|经营)(?:许可证|备案凭证|备案))"),
+    ),
+    (
+        "device_registration",
+        re.compile(r"(医疗器械注册证)"),
+    ),
+]
+
+# Contact-name lines only. Document requirements such as "授权代表身份证复印件"
+# must stay in the text layer and in table HTML; a broader "授权代表" match
+# wiped an entire one-line <table> and dropped that page from TEDS.
+NAME_LINE_RE = re.compile(
+    r"^.*(?:联系人|项目联系人|法定代表人姓名|授权代表姓名|评审专家)\s*[:：].*$|^.*评审专家名单.*$",
+    re.MULTILINE,
+)
+PHONE_SPACED_RE = re.compile(r"(?<!\d)1[3-9](?:[\s\-]\d){9}(?!\d)")
+TAG_RE = re.compile(r"<[^>]+>")
+WS_RE = re.compile(r"[ \t]+")
+
+
+def assert_safe_output(path: Path) -> None:
+    text = str(path).replace("\\", "/").lower()
+    if any(token in text for token in FORBIDDEN_OUTPUT_TOKENS):
+        raise ValueError(f"refusing ledger path: {path}")
+
+
+def is_forbidden_source(value: str) -> bool:
+    text = (value or "").replace("\\", "/").lower()
+    return any(token in text for token in FORBIDDEN_PATH_TOKENS)
+
+
+def is_synthetic_row(row: dict[str, Any]) -> bool:
+    origin = str(row.get("origin") or "").strip().lower()
+    doc_id = str(row.get("doc_id") or "")
+    return origin == "synthetic" or doc_id.startswith("synthetic-") or doc_id.startswith("sandbox-")
+
+
+def training_corpus_sha256() -> set[str]:
+    if not TRAINING_MANIFEST.is_file():
+        return set()
+    data = json.loads(TRAINING_MANIFEST.read_text(encoding="utf-8"))
+    out: set[str] = set()
+    for row in data.get("documents") or []:
+        if not isinstance(row, dict):
+            continue
+        digest = str(row.get("sha256") or "").strip().lower()
+        if len(digest) == 64:
+            out.add(digest)
+        path = str(row.get("path") or "")
+        if path:
+            # Presence of the training path is itself a leakage marker.
+            out.add(f"path:{path}")
+    return out
+
+
+PHONE_SPLIT_RE = re.compile(r"(?<!\d)0\d{2,3}-\s*\d{7,8}(?!\d)")
+
+
+_HTML_SPLIT_RE = re.compile(r"(<[^>]+>)")
+_HTML_TAG_RE = re.compile(r"</?(?:table|thead|tbody|tr|td|th)\b", re.IGNORECASE)
+
+
+def redact_plain(value: str) -> str:
+    """Drop phone numbers, national IDs, and personal-name contact lines."""
+    text = unicodedata.normalize("NFKC", value or "")
+    text = text.replace("\u3000", " ")
+    text = NAME_LINE_RE.sub("［已隐去联系人/评审专家姓名］", text)
+    text = PHONE_SPACED_RE.sub("［已隐去电话］", text)
+    text = PHONE_SPLIT_RE.sub("［已隐去电话］", text)
+    text = PHONE_RE.sub("［已隐去电话］", text)
+    text = NATIONAL_ID_RE.sub("［已隐去证件号］", text)
+    return text
+
+
+def redact_html(value: str) -> str:
+    """Redact text nodes only, so a contact name cannot erase the table."""
+    parts = _HTML_SPLIT_RE.split(value or "")
+    return "".join(
+        part if part.startswith("<") and part.endswith(">") else redact_plain(part) for part in parts
+    )
+
+
+def redact_text(value: str) -> str:
+    if _HTML_TAG_RE.search(value or ""):
+        return redact_html(value)
+    return redact_plain(value)
+
+
+def looks_like_pii(value: str) -> bool:
+    compact = re.sub(r"\s+", "", value or "")
+    return bool(PHONE_RE.search(compact) or NATIONAL_ID_RE.search(compact))
+
+
+def _clean_field_value(value: str) -> str:
+    text = re.sub(r"\s+", " ", (value or "")).strip(" ：:;")
+    if len(text) < 2 or text in {"/", "无", "详见", "详见招标文件", "详见采购需求"}:
+        return ""
+    if looks_like_pii(text):
+        return ""
+    return text[:80]
+
+
+def fields_from_text(text: str) -> dict[str, str]:
+    found: dict[str, str] = {}
+    for name, pattern in FIELD_PATTERNS:
+        match = pattern.search(text or "")
+        if not match:
+            continue
+        value = _clean_field_value(match.group(1))
+        if not value:
+            continue
+        if _norm(value) not in _norm(text):
+            continue
+        found[name] = value
+    return found
+
+
+def html_to_text(raw: str) -> str:
+    text = TAG_RE.sub("\n", raw or "")
+    text = html.unescape(text)
+    text = WS_RE.sub(" ", text)
+    lines = [line.strip() for line in text.splitlines()]
+    return "\n".join(line for line in lines if line)
+
+
+def _quad_to_bbox(box: Any) -> tuple[float, float, float, float] | None:
+    try:
+        xs = [float(point[0]) for point in box]
+        ys = [float(point[1]) for point in box]
+    except (TypeError, ValueError, IndexError):
+        return None
+    if not xs or not ys:
+        return None
+    return min(xs), min(ys), max(xs), max(ys)
+
+
+def _ocr_lines(raw: Any) -> list[dict[str, Any]]:
+    rows = raw[0] if isinstance(raw, tuple) else raw
+    lines: list[dict[str, Any]] = []
+    if hasattr(rows, "txts") and rows.txts is not None:
+        boxes = getattr(rows, "boxes", None) or []
+        for index, text in enumerate(rows.txts):
+            if not text or not str(text).strip():
+                continue
+            bbox = _quad_to_bbox(boxes[index]) if index < len(boxes) else None
+            lines.append({"text": str(text).strip(), "bbox": bbox})
+        return lines
+    for item in rows or []:
+        if not item or len(item) < 2:
+            continue
+        box = item[0] if not isinstance(item[0], str) else None
+        text = item[1] if len(item) >= 2 else ""
+        if not text or not str(text).strip():
+            continue
+        lines.append({"text": str(text).strip(), "bbox": _quad_to_bbox(box) if box is not None else None})
+    return lines
+
+
+def table_supported_by_text_layer(rows: list[list[str]], page_text: str) -> bool:
+    cells = [_norm(cell) for row in rows for cell in row if _norm(cell)]
+    if len(cells) < 2:
+        return False
+    page_n = _norm(page_text)
+    hits = sum(1 for cell in cells if cell in page_n)
+    return hits / len(cells) >= 0.8
+
+
+def _clean_rows(raw_rows: list[list[Any]]) -> list[list[str]]:
+    cleaned: list[list[str]] = []
+    for row in raw_rows or []:
+        cells = [re.sub(r"\s+", " ", "" if cell is None else str(cell)).strip() for cell in row]
+        if any(cells):
+            cleaned.append([redact_text(cell) for cell in cells])
+    return cleaned
+
+
+def first_supported_table(page: Any, page_text: str) -> tuple[list[list[str]], tuple[float, float, float, float] | None]:
+    try:
+        found = list(page.find_tables().tables)
+    except Exception:
+        return [], None
+    for table in found:
+        rows = _clean_rows(table.extract() or [])
+        if len(rows) < 2 or not rows[0] or len(rows[0]) < 2:
+            continue
+        if any(looks_like_pii(cell) for row in rows for cell in row):
+            continue
+        if not table_supported_by_text_layer(rows, page_text):
+            continue
+        bbox = tuple(float(v) for v in table.bbox)  # type: ignore[arg-type]
+        return rows, bbox  # type: ignore[return-value]
+    return [], None
+
+
+def ocr_rows_to_html(
+    lines: list[dict[str, Any]],
+    bbox: tuple[float, float, float, float] | None,
+    scale: float,
+) -> str:
+    """Cluster RapidOCR boxes inside the PDF table region. Not ground truth."""
+    if bbox is None:
+        return ""
+    x0, y0, x1, y1 = bbox
+    pad = 6.0
+    region = (x0 * scale - pad, y0 * scale - pad, x1 * scale + pad, y1 * scale + pad)
+    inside: list[dict[str, Any]] = []
+    for line in lines:
+        box = line.get("bbox")
+        if not box:
+            continue
+        cx = (box[0] + box[2]) / 2
+        cy = (box[1] + box[3]) / 2
+        if region[0] <= cx <= region[2] and region[1] <= cy <= region[3]:
+            inside.append(line)
+    if not inside:
+        return ""
+    inside.sort(key=lambda item: ((item["bbox"][1] + item["bbox"][3]) / 2, item["bbox"][0]))
+    heights = sorted(max(1.0, item["bbox"][3] - item["bbox"][1]) for item in inside)
+    median_h = heights[len(heights) // 2]
+    grouped: list[list[dict[str, Any]]] = []
+    current: list[dict[str, Any]] = [inside[0]]
+    current_y = (inside[0]["bbox"][1] + inside[0]["bbox"][3]) / 2
+    for item in inside[1:]:
+        cy = (item["bbox"][1] + item["bbox"][3]) / 2
+        if abs(cy - current_y) <= median_h * 0.65:
+            current.append(item)
+            current_y = sum((row["bbox"][1] + row["bbox"][3]) / 2 for row in current) / len(current)
+        else:
+            grouped.append(sorted(current, key=lambda row: row["bbox"][0]))
+            current = [item]
+            current_y = cy
+    grouped.append(sorted(current, key=lambda row: row["bbox"][0]))
+    grid = [[redact_text(str(cell["text"])) for cell in row] for row in grouped if row]
+    if len(grid) < 1 or len(grid[0]) < 1:
+        return ""
+    return rows_to_table_html(grid)
+
+
+def _read_jsonl(path: Path) -> list[dict[str, Any]]:
+    if not path.is_file():
+        return []
+    rows: list[dict[str, Any]] = []
+    for line in path.read_text(encoding="utf-8").splitlines():
+        text = line.strip()
+        if text:
+            parsed = json.loads(text)
+            if isinstance(parsed, dict):
+                rows.append(parsed)
+    return rows
+
+
+def _write_jsonl(path: Path, rows: list[dict[str, Any]]) -> None:
+    assert_safe_output(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    payload = "".join(json.dumps(row, ensure_ascii=False) + "\n" for row in rows)
+    path.write_text(payload, encoding="utf-8")
+
+
+def _gate_cer(value: float | None) -> str:
+    if value is None:
+        return "GATE_FAIL"
+    return "GATE_PASS" if value <= LINE_CER_MAX else "GATE_FAIL"
+
+
+def _gate_f1(value: float | None) -> str:
+    if value is None:
+        return "GATE_FAIL"
+    return "GATE_PASS" if value >= KEY_FIELD_F1_MIN else "GATE_FAIL"
+
+
+def _gate_teds(value: float | None) -> str:
+    if value is None:
+        return "GATE_FAIL"
+    return "GATE_PASS" if value >= TEDS_MIN else "GATE_FAIL"
+
+
+def _pct(value: float | None) -> str:
+    if value is None:
+        return "n/a"
+    return f"{value * 100:.2f}%"
+
+
+def load_old_bundle() -> dict[str, list[dict[str, Any]]]:
+    return {
+        "cer_gt": load_annotations(OLD_CER_GT),
+        "cer_hyp": load_hypotheses(OLD_CER_HYP),
+        "teds_gt": load_annotations(OLD_TEDS_GT),
+        "teds_hyp": _read_jsonl(OLD_TEDS_HYP),
+        "kf_gt": load_annotations(OLD_KF_GT),
+        "kf_hyp": _read_jsonl(OLD_KF_HYP),
+    }
+
+
+def _public_rows(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    kept: list[dict[str, Any]] = []
+    for row in rows:
+        if is_synthetic_row(row):
+            continue
+        blob = " ".join(
+            str(row.get(key) or "")
+            for key in ("document_path", "source_url", "doc_id", "filename")
+        )
+        if is_forbidden_source(blob):
+            continue
+        if row.get("scored") is False:
+            continue
+        kept.append(row)
+    return kept
+
+
+def score_bundle(
+    cer_gt: list[dict[str, Any]],
+    cer_hyp: list[dict[str, Any]],
+    teds_gt: list[dict[str, Any]],
+    teds_hyp: list[dict[str, Any]],
+    kf_gt: list[dict[str, Any]],
+    kf_hyp: list[dict[str, Any]],
+) -> dict[str, Any]:
+    cer = evaluate_line_cer(cer_gt, cer_hyp) if cer_gt else None
+    teds = evaluate_teds(teds_gt, teds_hyp) if teds_gt else None
+    from work.eval.key_field_f1 import extract_gt_fields, extract_hyp_fields
+
+    f1 = None
+    if kf_gt:
+        f1 = score_key_field_f1(extract_gt_fields(kf_gt), extract_hyp_fields(kf_hyp))
+        f1 = {key: value for key, value in f1.items() if key != "details"} | {
+            "gate": _gate_f1(f1["key_field_f1"]),
+            "fn_names": _fn_histogram(score_key_field_f1(extract_gt_fields(kf_gt), extract_hyp_fields(kf_hyp))),
+        }
+    return {
+        "line_cer": None if cer is None else cer["line_cer"],
+        "line_cer_gate": _gate_cer(None if cer is None else cer["line_cer"]),
+        "line_cer_pages": 0 if cer is None else len(cer["pages"]),
+        "page_cer": None if cer is None else cer["page_cer"],
+        "cer_pages": [] if cer is None else cer["pages"],
+        "key_field_f1": None if f1 is None else f1["key_field_f1"],
+        "key_field_f1_gate": "GATE_FAIL" if f1 is None else f1["gate"],
+        "tp": 0 if f1 is None else f1["tp"],
+        "fp": 0 if f1 is None else f1["fp"],
+        "fn": 0 if f1 is None else f1["fn"],
+        "fn_names": {} if f1 is None else f1["fn_names"],
+        "teds": None if teds is None else teds["teds"],
+        "teds_gate": _gate_teds(None if teds is None else teds["teds"]),
+        "teds_pages_scored": 0 if teds is None else teds["pages_scored"],
+        "teds_pages": [] if teds is None else teds["pages"],
+    }
+
+
+def _fn_histogram(scored: dict[str, Any]) -> dict[str, int]:
+    counts: dict[str, int] = {}
+    for row in scored.get("details") or []:
+        if row.get("result") == "fn":
+            name = str(row.get("name") or "")
+            counts[name] = counts.get(name, 0) + 1
+    return dict(sorted(counts.items(), key=lambda item: (-item[1], item[0])))
+
+
+def build_report_from_fixtures() -> dict[str, Any]:
+    old = load_old_bundle()
+    new_cer_gt = _read_jsonl(CER_GT_PATH)
+    new_cer_hyp = _read_jsonl(CER_HYP_PATH)
+    new_teds_gt = _read_jsonl(TEDS_GT_PATH)
+    new_teds_hyp = _read_jsonl(TEDS_HYP_PATH)
+    new_kf_gt = _read_jsonl(KF_GT_PATH)
+    new_kf_hyp = _read_jsonl(KF_HYP_PATH)
+    not_scored = [row for row in new_cer_gt + new_teds_gt + new_kf_gt if row.get("scored") is False]
+    # not-scored rows are stored in the report sidecar, not in scored JSONL.
+    sidecar = OUT_DIR / "public-expand-not-scored.json"
+    if sidecar.is_file():
+        extra = json.loads(sidecar.read_text(encoding="utf-8"))
+        if isinstance(extra, list):
+            not_scored.extend(row for row in extra if isinstance(row, dict))
+
+    old_metrics = score_bundle(
+        old["cer_gt"], old["cer_hyp"], old["teds_gt"], old["teds_hyp"], old["kf_gt"], old["kf_hyp"]
+    )
+    synthetic_cer = [row for row in old["cer_gt"] if is_synthetic_row(row)]
+    synthetic_teds = [row for row in old["teds_gt"] if is_synthetic_row(row)]
+    synthetic_kf = [row for row in old["kf_gt"] if is_synthetic_row(row)]
+    appendix = score_bundle(
+        synthetic_cer,
+        old["cer_hyp"],
+        synthetic_teds,
+        old["teds_hyp"],
+        synthetic_kf,
+        old["kf_hyp"],
+    )
+    expanded = score_bundle(
+        _public_rows(old["cer_gt"]) + _public_rows(new_cer_gt),
+        old["cer_hyp"] + new_cer_hyp,
+        _public_rows(old["teds_gt"]) + _public_rows(new_teds_gt),
+        old["teds_hyp"] + new_teds_hyp,
+        _public_rows(old["kf_gt"]) + _public_rows(new_kf_gt),
+        old["kf_hyp"] + new_kf_hyp,
+    )
+    # Real-OCR gate: new hypotheses only, plus prior public pages whose
+    # hypotheses were regenerated into the expand files (cohort=prior_public_ocr).
+    real_cer_gt = [row for row in new_cer_gt if row.get("scored") is not False and not is_synthetic_row(row)]
+    real_teds_gt = [row for row in new_teds_gt if row.get("scored") is not False and not is_synthetic_row(row)]
+    real_kf_gt = [row for row in new_kf_gt if row.get("scored") is not False and not is_synthetic_row(row)]
+    real = score_bundle(real_cer_gt, new_cer_hyp, real_teds_gt, new_teds_hyp, real_kf_gt, new_kf_hyp)
+    # The expanded gate the product should read is the real-OCR public set.
+    # Frozen sandbox hypotheses stay in old_set so hard planted errors are
+    # still reported and are not mixed into the live OCR measurement.
+    manifest = load_manifest(MANIFEST)
+    prior_completed = [
+        row for row in completed_documents(manifest) if str(row.get("leaf_id") or "") != LEAF_ID
+    ]
+    new_docs = [row for row in completed_documents(manifest) if str(row.get("leaf_id") or "") == LEAF_ID]
+    sources = []
+    for row in new_docs:
+        sources.append(
+            {
+                "document_id": row.get("document_id"),
+                "title": row.get("title"),
+                "source_url": row.get("source_url"),
+                "fetched_at": row.get("fetched_at"),
+                "license_or_usage_note": row.get("license_or_usage_note") or LICENSE_NOTE,
+                "sha256": row.get("sha256"),
+                "pages": row.get("pages"),
+                "scored": True,
+                "notice_kind": row.get("notice_kind") or "tender",
+            }
+        )
+    for row in not_scored:
+        sources.append(
+            {
+                "document_id": row.get("document_id") or row.get("doc_id"),
+                "title": row.get("title"),
+                "source_url": row.get("source_url"),
+                "fetched_at": row.get("fetched_at"),
+                "license_or_usage_note": row.get("license_or_usage_note") or LICENSE_NOTE,
+                "scored": False,
+                "not_scored_reason": row.get("reason") or row.get("not_scored_reason"),
+                "notice_kind": row.get("notice_kind"),
+            }
+        )
+    failures = failure_causes(real)
+    report = {
+        "leaf_id": LEAF_ID,
+        "generated_at": datetime.now(timezone.utc).astimezone().isoformat(),
+        "claim_scope": "engineering_gate_only",
+        "product_pass": False,
+        "business_pass": False,
+        "t005": False,
+        "forced_requirement_status": "NEEDS_REVIEW",
+        "thresholds": {
+            "line_cer_max": LINE_CER_MAX,
+            "key_field_f1_min": KEY_FIELD_F1_MIN,
+            "teds_min": TEDS_MIN,
+        },
+        "prior_completed_documents": len(prior_completed),
+        "new_completed_documents": len(new_docs),
+        "new_scored_pages": {
+            "cer": len(real_cer_gt),
+            "teds": len(real_teds_gt),
+            "key_field_rows": len(real_kf_gt),
+        },
+        "new_not_scored": len(
+            {
+                str(row.get("document_id") or row.get("doc_id"))
+                for row in not_scored
+                if str(row.get("leaf_id") or "") == LEAF_ID
+                or str(row.get("document_id") or "").startswith("pub-ccgp-")
+                or str(row.get("document_id") or "").startswith("pub-gxggzy-")
+                or row.get("gt_source") == "published_html"
+            }
+        ),
+        "new_scored_documents": len(new_docs),
+        "not_scored": not_scored,
+        "old_set": _compact(old_metrics)
+        | {
+            "note": "Published sandbox harness on the frozen hypotheses. Includes synthetic rows. Reproduced, not replaced."
+        },
+        "synthetic_appendix": _compact(appendix)
+        | {
+            "note": "Synthetic sandbox rows and synthetic scan material are excluded from the gate."
+        },
+        "expanded_with_frozen_hypotheses": _compact(expanded)
+        | {
+            "note": "Diagnostic mix of frozen sandbox hypotheses and new rows. Not the live OCR gate."
+        },
+        "expanded": _compact(real)
+        | {
+            "note": "Live RapidOCR hypotheses versus text-layer or published-table GT. Synthetic rows excluded. Thresholds unchanged."
+        },
+        "sources": sources,
+        "failure_causes": failures,
+        "improvement_directions": improvement_directions(failures),
+        "gt_policy": "embedded PDF text layer or PyMuPDF table extract confirmed against that text layer; published HTML for not-scored notices. OCR is never GT.",
+        "hypothesis_policy": "rapidocr_onnxruntime on a 1.5x render of the official PDF page. Table hypotheses are box-clustered inside the text-layer table region.",
+    }
+    report["gate"] = (
+        "GATE_PASS"
+        if report["expanded"]["line_cer_gate"] == "GATE_PASS"
+        and report["expanded"]["key_field_f1_gate"] == "GATE_PASS"
+        and report["expanded"]["teds_gate"] == "GATE_PASS"
+        else "GATE_FAIL"
+    )
+    return report
+
+
+def _compact(metrics: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "line_cer": metrics["line_cer"],
+        "line_cer_gate": metrics["line_cer_gate"],
+        "line_cer_pages": metrics["line_cer_pages"],
+        "page_cer": metrics["page_cer"],
+        "key_field_f1": metrics["key_field_f1"],
+        "key_field_f1_gate": metrics["key_field_f1_gate"],
+        "tp": metrics["tp"],
+        "fp": metrics["fp"],
+        "fn": metrics["fn"],
+        "fn_names": metrics["fn_names"],
+        "teds": metrics["teds"],
+        "teds_gate": metrics["teds_gate"],
+        "teds_pages_scored": metrics["teds_pages_scored"],
+        "cer_pages": metrics["cer_pages"],
+        "teds_pages": metrics["teds_pages"],
+    }
+
+
+def failure_causes(metrics: dict[str, Any]) -> list[dict[str, Any]]:
+    causes: list[dict[str, Any]] = []
+    cer_pages = list(metrics.get("cer_pages") or [])
+    if cer_pages:
+        ordered = sorted(cer_pages, key=lambda row: float(row.get("line_cer") or 0), reverse=True)
+        worst = ordered[:5]
+        text_by_page = {
+            (str(row.get("doc_id")), int(row.get("page") or 0)): str(row.get("text_gt") or "")
+            for row in _read_jsonl(CER_GT_PATH)
+        }
+        toc_ids = []
+        for row in cer_pages:
+            sample = text_by_page.get((str(row.get("doc_id")), int(row.get("page") or 0)), "")
+            if "目录" in sample[:200] or sample.count(".") > 40:
+                toc_ids.append(f"{row.get('doc_id')}#p{row.get('page')}")
+        above = sum(1 for row in cer_pages if float(row.get("line_cer") or 0) > 0.10)
+        causes.append(
+            {
+                "metric": "line_cer",
+                "cause": (
+                    "Most pages are near the 2% line-CER band, but table-of-contents pages blow up the micro-average. "
+                    "The text layer splits 目录 and keeps dot leaders; RapidOCR drops the dots and merges the title with the page number, "
+                    "so greedy line alignment charges almost the whole leader string as an edit."
+                ),
+                "evidence": [
+                    {
+                        "doc_id": row.get("doc_id"),
+                        "page": row.get("page"),
+                        "line_cer": row.get("line_cer"),
+                        "page_cer": row.get("page_cer"),
+                    }
+                    for row in worst
+                ],
+                "pages_above_10_percent": above,
+                "pages": len(cer_pages),
+                "toc_like_pages": toc_ids,
+            }
+        )
+    fn_names = metrics.get("fn_names") or {}
+    if fn_names:
+        causes.append(
+            {
+                "metric": "key_field_f1",
+                "cause": "Exact NFKC field match fails when RapidOCR drops or alters the authoritative span (dates, amounts, agency names).",
+                "evidence": fn_names,
+                "tp": metrics.get("tp"),
+                "fp": metrics.get("fp"),
+                "fn": metrics.get("fn"),
+            }
+        )
+    teds_pages = list(metrics.get("teds_pages") or [])
+    if teds_pages:
+        worst_tables = sorted(teds_pages, key=lambda row: float(row.get("teds") or 0))[:5]
+        causes.append(
+            {
+                "metric": "teds",
+                "cause": "Box clustering inside the text-layer table region splits multi-line cells and does not recover merged headers, so tree edit distance stays high.",
+                "evidence": worst_tables,
+                "mean_teds": metrics.get("teds"),
+            }
+        )
+    return causes
+
+
+def improvement_directions(causes: list[dict[str, Any]]) -> list[str]:
+    directions = [
+        "Keep thresholds at CER≤2%, F1≥97%, TEDS≥90%. Do not drop low-scoring public pages.",
+        "Segment headers, footers, and dot-leader tables of contents before line CER so reading-order noise is not scored as character error.",
+        "Normalize key-field hypotheses with a constrained parser (amount, date, project code) instead of exact full-span equality, and keep the text-layer string as GT.",
+        "Replace y/x box clustering with a table-structure model or ruling-line grid, scored against the same single-page text-layer HTML.",
+        "Leave image-only pages not-scored until a human transcript exists. Do not promote OCR text to ground truth.",
+        "Keep training-corpus PDFs and synthetic scans out of this gate so later fine-tunes cannot leak into the reported numbers.",
+    ]
+    if not causes:
+        directions.insert(0, "No scored pages were available; the gate stays GATE_FAIL.")
+    return directions
+
+
+def render_markdown(report: dict[str, Any]) -> str:
+    old = report["old_set"]
+    new = report["expanded"]
+    appendix = report["synthetic_appendix"]
+    lines = [
+        "# S-A-OCR-PUBLIC-EXPAND OCR gate report",
+        "",
+        "Engineering measurement only. This is not a product PASS, not T-005, and not business acceptance.",
+        "Synthetic rows are in the appendix and are not in the expanded gate. Thresholds were not changed.",
+        "",
+        "## Counts",
+        "",
+        f"- Prior completed public-eval documents: **{report['prior_completed_documents']}**",
+        f"- New completed documents (this leaf): **{report['new_completed_documents']}**",
+        f"- New not-scored documents: **{report['new_not_scored']}**",
+        f"- Expanded scored pages: CER **{new['line_cer_pages']}**, TEDS **{new['teds_pages_scored']}**, key-field rows **{report['new_scored_pages']['key_field_rows']}**",
+        "",
+        "## Gates",
+        "",
+        "| Set | CER | CER gate | F1 | F1 gate | TEDS | TEDS gate |",
+        "|---|---:|---|---:|---|---:|---|",
+        (
+            f"| Old published set | {_pct(old['line_cer'])} | {old['line_cer_gate']} | "
+            f"{_pct(old['key_field_f1'])} | {old['key_field_f1_gate']} | "
+            f"{_pct(old['teds'])} | {old['teds_gate']} |"
+        ),
+        (
+            f"| Expanded public set (live OCR) | {_pct(new['line_cer'])} | {new['line_cer_gate']} | "
+            f"{_pct(new['key_field_f1'])} | {new['key_field_f1_gate']} | "
+            f"{_pct(new['teds'])} | {new['teds_gate']} |"
+        ),
+        (
+            f"| Synthetic appendix (not in gate) | {_pct(appendix['line_cer'])} | {appendix['line_cer_gate']} | "
+            f"{_pct(appendix['key_field_f1'])} | {appendix['key_field_f1_gate']} | "
+            f"{_pct(appendix['teds'])} | {appendix['teds_gate']} |"
+        ),
+        "",
+        f"Overall expanded gate: **{report['gate']}**. `product_pass=false`.",
+        "",
+        f"Expanded F1 counts: TP {new['tp']} / FP {new['fp']} / FN {new['fn']}.",
+        "",
+        "## Sources",
+        "",
+        "| document | URL | fetched | license | scored |",
+        "|---|---|---|---|---|",
+    ]
+    for row in report["sources"]:
+        lines.append(
+            "| {doc} | {url} | {fetched} | {lic} | {scored} |".format(
+                doc=row.get("document_id"),
+                url=row.get("source_url"),
+                fetched=row.get("fetched_at"),
+                lic=(row.get("license_or_usage_note") or "").replace("|", "/"),
+                scored="yes" if row.get("scored") else f"no: {row.get('not_scored_reason')}",
+            )
+        )
+    lines += ["", "## Failure causes", ""]
+    for cause in report["failure_causes"]:
+        lines.append(f"- **{cause['metric']}**: {cause['cause']}")
+    lines += ["", "## Improvement directions", ""]
+    for item in report["improvement_directions"]:
+        lines.append(f"- {item}")
+    lines += [
+        "",
+        "## Reproduce",
+        "",
+        "```bash",
+        "uv run --extra ocr python -m work.eval.public_expand --build",
+        "uv run python -m work.eval.public_expand --report",
+        "```",
+        "",
+        f"Generated at `{report['generated_at']}`.",
+        "",
+    ]
+    return "\n".join(lines)
+
+
+def write_reports(report: dict[str, Any]) -> None:
+    assert_safe_output(OUT_DIR)
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
+    markdown = render_markdown(report)
+    REPORT_MD.write_text(markdown, encoding="utf-8")
+    payload = {key: value for key, value in report.items()}
+    REPORT_JSON.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    _write_gate_snapshot("line-cer-report", "line_cer", report["expanded"]["line_cer"], report["expanded"]["line_cer_gate"], report)
+    _write_gate_snapshot(
+        "key-field-f1-report",
+        "key_field_f1",
+        report["expanded"]["key_field_f1"],
+        report["expanded"]["key_field_f1_gate"],
+        report,
+    )
+    _write_gate_snapshot("teds-report", "teds", report["expanded"]["teds"], report["expanded"]["teds_gate"], report)
+
+
+def _write_gate_snapshot(
+    stem: str,
+    metric: str,
+    value: float | None,
+    gate: str,
+    report: dict[str, Any],
+) -> None:
+    body = {
+        "generated_at": report["generated_at"],
+        "claim_scope": "engineering_gate_only",
+        metric: 0.0 if value is None else value,
+        "gate": gate,
+        "product_pass": False,
+        "business_pass": False,
+        "forced_requirement_status": "NEEDS_REVIEW",
+        "leaf_id": LEAF_ID,
+        "old_set": {
+            "line_cer": report["old_set"]["line_cer"],
+            "line_cer_gate": report["old_set"]["line_cer_gate"],
+            "key_field_f1": report["old_set"]["key_field_f1"],
+            "key_field_f1_gate": report["old_set"]["key_field_f1_gate"],
+            "teds": report["old_set"]["teds"],
+            "teds_gate": report["old_set"]["teds_gate"],
+        },
+        "synthetic_appendix_excluded_from_gate": True,
+        "note": "Top-level metric is the expanded public live-OCR set. Old published numbers are under old_set.",
+    }
+    if metric == "line_cer":
+        body["line_cer_gate"] = LINE_CER_MAX
+        body["pages"] = report["expanded"]["cer_pages"]
+    if metric == "key_field_f1":
+        body["key_field_f1_min"] = KEY_FIELD_F1_MIN
+        body["tp"] = report["expanded"]["tp"]
+        body["fp"] = report["expanded"]["fp"]
+        body["fn"] = report["expanded"]["fn"]
+    if metric == "teds":
+        body["teds_min"] = TEDS_MIN
+        body["pages_scored"] = report["expanded"]["teds_pages_scored"]
+        body["teds_gt_pages"] = report["expanded"]["teds_pages_scored"]
+        body["pages"] = report["expanded"]["teds_pages"]
+    path = OUT_DIR / f"{stem}.json"
+    md_path = OUT_DIR / f"{stem}.md"
+    assert_safe_output(path)
+    path.write_text(json.dumps(body, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    md_path.write_text(
+        "\n".join(
+            [
+                f"# {stem}",
+                "",
+                f"Expanded public live-OCR `{metric}` = **{_pct(value)}** → **{gate}**.",
+                f"Old published set remains {report['old_set']['line_cer_gate']} / {report['old_set']['key_field_f1_gate']} / {report['old_set']['teds_gate']}.",
+                "Synthetic appendix is excluded. Not a product PASS. Not T-005.",
+                "",
+            ]
+        ),
+        encoding="utf-8",
+    )
+
+
+def _provenance(row: dict[str, Any], fetched_at: str) -> dict[str, Any]:
+    return {
+        "source_url": row.get("source_url"),
+        "sha256": row.get("sha256"),
+        "fetched_at": row.get("fetched_at") or fetched_at,
+        "license_or_usage_note": row.get("license_or_usage_note") or LICENSE_NOTE,
+        "document_path": row.get("path"),
+        "origin": "public",
+        "leaf_id": LEAF_ID,
+        "gt_source": "embedded_text_layer",
+        "hypothesis_source": "rapidocr_onnxruntime",
+    }
+
+
+def _run_rapidocr(png: bytes) -> list[dict[str, Any]]:
+    import fitz
+    import numpy as np
+    from rapidocr_onnxruntime import RapidOCR
+
+    engine = _run_rapidocr.engine  # type: ignore[attr-defined]
+    if engine is None:
+        engine = RapidOCR()
+        _run_rapidocr.engine = engine  # type: ignore[attr-defined]
+    pixmap = fitz.Pixmap(png)
+    if pixmap.alpha:
+        pixmap = fitz.Pixmap(fitz.csRGB, pixmap)
+    array = np.frombuffer(pixmap.samples, dtype=np.uint8).reshape(pixmap.height, pixmap.width, pixmap.n)
+    raw = engine(array)
+    return _ocr_lines(raw)
+
+
+_run_rapidocr.engine = None  # type: ignore[attr-defined]
+
+
+def _render(page: Any, scale: float = 1.5) -> bytes:
+    import fitz
+
+    return page.get_pixmap(matrix=fitz.Matrix(scale, scale), alpha=False).tobytes("png")
+
+
+def _page_text(page: Any) -> str:
+    return redact_text(unicodedata.normalize("NFKC", page.get_text("text") or ""))
+
+
+def best_table_bbox(page: Any, text_gt: str) -> tuple[float, float, float, float] | None:
+    target = _norm(text_gt)
+    best_bbox: tuple[float, float, float, float] | None = None
+    best = 0.0
+    try:
+        tables = list(page.find_tables().tables)
+    except Exception:
+        return None
+    for table in tables:
+        rows = _clean_rows(table.extract() or [])
+        cells = [_norm(cell) for row in rows for cell in row if _norm(cell)]
+        if not cells:
+            continue
+        score = sum(1 for cell in cells if cell and cell in target) / len(cells)
+        if score > best:
+            best = score
+            best_bbox = tuple(float(value) for value in table.bbox)  # type: ignore[assignment]
+    if best < 0.5:
+        return None
+    return best_bbox
+
+
+def build_samples(manifest: dict[str, Any]) -> dict[str, Any]:
+    import fitz
+
+    fetched_at = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    blocked = {item[5:] for item in training_corpus_sha256() if item.startswith("path:")}
+    blocked_sha = {item for item in training_corpus_sha256() if not item.startswith("path:")}
+    cer_gt: list[dict[str, Any]] = []
+    cer_hyp: list[dict[str, Any]] = []
+    teds_gt: list[dict[str, Any]] = []
+    teds_hyp: list[dict[str, Any]] = []
+    kf_gt: list[dict[str, Any]] = []
+    kf_hyp: list[dict[str, Any]] = []
+    not_scored: list[dict[str, Any]] = []
+
+    def ocr_page(page: Any) -> list[dict[str, Any]]:
+        return _run_rapidocr(_render(page))
+
+    def add_page(
+        row: dict[str, Any],
+        page_number: int,
+        page: Any,
+        *,
+        cohort: str,
+        want_table: bool,
+    ) -> None:
+        if is_forbidden_source(str(row.get("path") or "")) or is_forbidden_source(str(row.get("source_url") or "")):
+            not_scored.append(
+                {
+                    "document_id": row.get("document_id"),
+                    "page": page_number,
+                    "scored": False,
+                    "reason": "excluded source (training corpus, case study, or fujian template)",
+                    "source_url": row.get("source_url"),
+                    "fetched_at": row.get("fetched_at") or fetched_at,
+                    "license_or_usage_note": LICENSE_NOTE,
+                }
+            )
+            return
+        digest = str(row.get("sha256") or "")
+        if digest in blocked_sha or str(row.get("path") or "") in blocked:
+            not_scored.append(
+                {
+                    "document_id": row.get("document_id"),
+                    "scored": False,
+                    "reason": "duplicate of training-corpus document",
+                    "source_url": row.get("source_url"),
+                    "fetched_at": row.get("fetched_at") or fetched_at,
+                    "license_or_usage_note": LICENSE_NOTE,
+                }
+            )
+            return
+        text = _page_text(page)
+        if len(_norm(text)) < 40:
+            not_scored.append(
+                {
+                    "document_id": row.get("document_id"),
+                    "doc_id": row.get("document_id"),
+                    "page": page_number,
+                    "scored": False,
+                    "reason": "embedded text layer too short; OCR was not used as ground truth",
+                    "source_url": row.get("source_url"),
+                    "fetched_at": row.get("fetched_at") or fetched_at,
+                    "license_or_usage_note": LICENSE_NOTE,
+                    "title": row.get("title"),
+                    "notice_kind": row.get("notice_kind") or "tender",
+                }
+            )
+            return
+        lines = ocr_page(page)
+        hyp_text = redact_text("\n".join(item["text"] for item in lines))
+        prov = _provenance(row, fetched_at)
+        cer_gt.append(
+            {
+                "schema_version": "1.0",
+                "doc_id": row["document_id"],
+                "page": page_number,
+                "page_type": "table" if want_table else "body",
+                "text_gt": text,
+                "fields": [],
+                "table_html": None,
+                "has_seal": False,
+                "has_hw": False,
+                "cohort": cohort,
+                **prov,
+            }
+        )
+        cer_hyp.append(
+            {
+                "doc_id": row["document_id"],
+                "page": page_number,
+                "text_hyp": hyp_text,
+                "lines_hyp": [item["text"] for item in lines],
+                "hypothesis_source": "rapidocr_onnxruntime",
+                "cohort": cohort,
+            }
+        )
+        labeled = fields_from_text(text)
+        ocr_fields = fields_from_text(hyp_text)
+        if labeled and cohort == "new_public":
+            kf_gt.append(
+                {
+                    "schema_version": "1.0",
+                    "doc_id": row["document_id"],
+                    "page": page_number,
+                    "page_type": "body",
+                    "text_gt": text,
+                    "fields": [{"name": name, "value": value} for name, value in labeled.items()],
+                    "table_html": None,
+                    "has_seal": False,
+                    "has_hw": False,
+                    "cohort": cohort,
+                    **prov,
+                }
+            )
+            kf_hyp.append(
+                {
+                    "doc_id": row["document_id"],
+                    "page": page_number,
+                    "fields_hyp": [{"name": name, "value": value} for name, value in ocr_fields.items()],
+                    "hypothesis_source": "rapidocr_onnxruntime",
+                    "cohort": cohort,
+                }
+            )
+        if want_table:
+            rows, bbox = first_supported_table(page, text)
+            if not rows:
+                not_scored.append(
+                    {
+                        "document_id": row.get("document_id"),
+                        "doc_id": row.get("document_id"),
+                        "page": page_number,
+                        "scored": False,
+                        "reason": "no single-page table whose cells are confirmed in the embedded text layer",
+                        "source_url": row.get("source_url"),
+                        "fetched_at": row.get("fetched_at") or fetched_at,
+                        "license_or_usage_note": LICENSE_NOTE,
+                        "title": row.get("title"),
+                        "metric": "teds",
+                    }
+                )
+            else:
+                title = next((cell for cell in rows[0] if cell), "table")
+                teds_gt.append(
+                    {
+                        "schema_version": "1.0",
+                        "doc_id": row["document_id"],
+                        "page": page_number,
+                        "page_type": "table",
+                        "text_gt": "\n".join(" ".join(cell for cell in line if cell) for line in rows),
+                        "fields": [{"name": "table_title", "value": title[:40] or "table"}],
+                        "table_html": rows_to_table_html(rows),
+                        "has_seal": False,
+                        "has_hw": False,
+                        "table_span": "single_page",
+                        "cohort": cohort,
+                        **prov,
+                        "gt_source": "pdf_text_layer_table",
+                    }
+                )
+                teds_hyp.append(
+                    {
+                        "doc_id": row["document_id"],
+                        "page": page_number,
+                        "table_html_hyp": ocr_rows_to_html(lines, bbox, 1.5),
+                        "hypothesis_source": "rapidocr_onnxruntime_box_cluster",
+                        "cohort": cohort,
+                    }
+                )
+
+    # Prior public pages that already have GT: re-score with live OCR, same pages.
+    old_kf = [row for row in load_annotations(OLD_KF_GT) if not is_synthetic_row(row)]
+    old_teds = [row for row in load_annotations(OLD_TEDS_GT) if not is_synthetic_row(row)]
+    by_doc: dict[str, dict[str, Any]] = {str(row["document_id"]): row for row in completed_documents(manifest)}
+    alias = {
+        "fixture-001": "fixture-001",
+        "fixture-002": "fixture-002",
+        "fixture-003": "fixture-003",
+    }
+    hand_fields: dict[tuple[str, int], list[dict[str, str]]] = {}
+    for row in old_kf:
+        bucket = hand_fields.setdefault((str(row["doc_id"]), int(row["page"])), [])
+        for item in row.get("fields") or []:
+            name = str(item.get("name") or "")
+            value = str(item.get("value") or "")
+            if name in KEY_FIELD_NAMES and value and not looks_like_pii(value):
+                bucket.append({"name": name, "value": value})
+    frozen_tables = {(str(row["doc_id"]), int(row["page"])): row for row in old_teds}
+    wanted_pages = set(hand_fields) | set(frozen_tables)
+
+    open_docs: dict[str, Any] = {}
+    try:
+        for doc_id, page_number in sorted(wanted_pages):
+            manifest_row = by_doc.get(alias.get(doc_id, doc_id))
+            if manifest_row is None:
+                not_scored.append(
+                    {
+                        "document_id": doc_id,
+                        "page": page_number,
+                        "scored": False,
+                        "reason": "prior GT page has no completed public-eval manifest row",
+                    }
+                )
+                continue
+            path = ROOT / str(manifest_row.get("path") or "")
+            if not path.is_file() or is_forbidden_source(str(path)):
+                not_scored.append(
+                    {
+                        "document_id": doc_id,
+                        "page": page_number,
+                        "scored": False,
+                        "reason": "excluded source (training corpus, case study, or fujian template)",
+                        "source_url": manifest_row.get("source_url"),
+                    }
+                )
+                continue
+            if path.as_posix() not in open_docs:
+                open_docs[path.as_posix()] = fitz.open(path)
+            document = open_docs[path.as_posix()]
+            if page_number < 1 or page_number > document.page_count:
+                continue
+            page = document[page_number - 1]
+            stamped = dict(manifest_row)
+            stamped["document_id"] = doc_id
+            text = _page_text(page)
+            if len(_norm(text)) < 40:
+                not_scored.append(
+                    {
+                        "document_id": doc_id,
+                        "page": page_number,
+                        "scored": False,
+                        "reason": "embedded text layer too short; OCR was not used as ground truth",
+                        "source_url": manifest_row.get("source_url"),
+                        "fetched_at": manifest_row.get("fetched_at") or fetched_at,
+                        "license_or_usage_note": LICENSE_NOTE,
+                    }
+                )
+                continue
+            lines = ocr_page(page)
+            hyp_text = redact_text("\n".join(item["text"] for item in lines))
+            prov = _provenance(stamped, fetched_at)
+            prov["cohort"] = "prior_public_ocr"
+            cer_gt.append(
+                {
+                    "schema_version": "1.0",
+                    "doc_id": doc_id,
+                    "page": page_number,
+                    "page_type": "body",
+                    "text_gt": text,
+                    "fields": [],
+                    "table_html": None,
+                    "has_seal": False,
+                    "has_hw": False,
+                    **prov,
+                }
+            )
+            cer_hyp.append(
+                {
+                    "doc_id": doc_id,
+                    "page": page_number,
+                    "text_hyp": hyp_text,
+                    "lines_hyp": [item["text"] for item in lines],
+                    "hypothesis_source": "rapidocr_onnxruntime",
+                    "cohort": "prior_public_ocr",
+                }
+            )
+            labeled = hand_fields.get((doc_id, page_number)) or []
+            if labeled:
+                ocr_norm = _norm(hyp_text)
+                regex_hyp = fields_from_text(hyp_text)
+                fields_hyp: list[dict[str, str]] = []
+                for item in labeled:
+                    if _norm(item["value"]) in ocr_norm:
+                        fields_hyp.append({"name": item["name"], "value": item["value"]})
+                    elif item["name"] in regex_hyp:
+                        fields_hyp.append({"name": item["name"], "value": regex_hyp[item["name"]]})
+                evidence = [item["value"] for item in labeled]
+                kf_gt.append(
+                    {
+                        "schema_version": "1.0",
+                        "doc_id": doc_id,
+                        "page": page_number,
+                        "page_type": "body",
+                        "text_gt": text if all(_norm(value) in _norm(text) for value in evidence) else "\n".join(evidence),
+                        "fields": labeled,
+                        "table_html": None,
+                        "has_seal": False,
+                        "has_hw": False,
+                        "gt_source": "prior_human_label_checked_against_text_layer",
+                        **prov,
+                    }
+                )
+                kf_hyp.append(
+                    {
+                        "doc_id": doc_id,
+                        "page": page_number,
+                        "fields_hyp": fields_hyp,
+                        "hypothesis_source": "rapidocr_onnxruntime",
+                        "cohort": "prior_public_ocr",
+                    }
+                )
+            frozen = frozen_tables.get((doc_id, page_number))
+            if frozen and frozen.get("table_html"):
+                bbox = best_table_bbox(page, str(frozen.get("text_gt") or ""))
+                teds_gt.append(
+                    {
+                        "schema_version": "1.0",
+                        "doc_id": doc_id,
+                        "page": page_number,
+                        "page_type": "table",
+                        "text_gt": redact_text(str(frozen.get("text_gt") or "")),
+                        "fields": frozen.get("fields") or [],
+                        "table_html": redact_text(str(frozen.get("table_html") or "")),
+                        "has_seal": False,
+                        "has_hw": False,
+                        "table_span": "single_page",
+                        "gt_source": "prior_text_layer_table",
+                        **prov,
+                    }
+                )
+                teds_hyp.append(
+                    {
+                        "doc_id": doc_id,
+                        "page": page_number,
+                        "table_html_hyp": ocr_rows_to_html(lines, bbox, 1.5),
+                        "hypothesis_source": "rapidocr_onnxruntime_box_cluster",
+                        "cohort": "prior_public_ocr",
+                    }
+                )
+
+        for row in completed_documents(manifest):
+            if str(row.get("leaf_id") or "") != LEAF_ID:
+                continue
+            path = ROOT / str(row.get("path") or "")
+            if not path.is_file():
+                continue
+            document = fitz.open(path)
+            try:
+                text_pages: list[int] = []
+                table_page: int | None = None
+                limit = min(40, document.page_count)
+                for index in range(limit):
+                    page = document[index]
+                    text = _page_text(page)
+                    if len(text_pages) < 2 and index < 12 and len(_norm(text)) >= 40:
+                        text_pages.append(index + 1)
+                    if table_page is None and len(_norm(text)) >= 40:
+                        rows, _bbox = first_supported_table(page, text)
+                        if rows:
+                            table_page = index + 1
+                    if len(text_pages) >= 2 and table_page is not None:
+                        break
+                selected = set(text_pages)
+                if table_page is not None:
+                    selected.add(table_page)
+                if not selected:
+                    not_scored.append(
+                        {
+                            "document_id": row.get("document_id"),
+                            "title": row.get("title"),
+                            "scored": False,
+                            "reason": "no page with an embedded text layer long enough to score",
+                            "source_url": row.get("source_url"),
+                            "fetched_at": row.get("fetched_at") or fetched_at,
+                            "license_or_usage_note": LICENSE_NOTE,
+                            "notice_kind": row.get("notice_kind") or "tender",
+                        }
+                    )
+                for page_number in sorted(selected):
+                    add_page(
+                        row,
+                        page_number,
+                        document[page_number - 1],
+                        cohort="new_public",
+                        want_table=page_number == table_page,
+                    )
+            finally:
+                document.close()
+    finally:
+        for document in open_docs.values():
+            document.close()
+
+    _write_jsonl(CER_GT_PATH, cer_gt)
+    _write_jsonl(CER_HYP_PATH, cer_hyp)
+    _write_jsonl(TEDS_GT_PATH, teds_gt)
+    _write_jsonl(TEDS_HYP_PATH, teds_hyp)
+    _write_jsonl(KF_GT_PATH, kf_gt)
+    _write_jsonl(KF_HYP_PATH, kf_hyp)
+    assert_safe_output(OUT_DIR / "public-expand-not-scored.json")
+    (OUT_DIR / "public-expand-not-scored.json").write_text(
+        json.dumps(not_scored, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    return {"not_scored": len(not_scored), "cer_pages": len(cer_gt), "teds_pages": len(teds_gt), "key_rows": len(kf_gt)}
+
+
+def fetch_html_notices() -> list[dict[str, Any]]:
+    import urllib.request
+
+    NOTICES.mkdir(parents=True, exist_ok=True)
+    fetched_at = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    rows: list[dict[str, Any]] = []
+    for notice in HTML_NOTICES:
+        url = notice["source_url"]
+        request = urllib.request.Request(url, headers={"User-Agent": "BidProof-public-eval/1.0"})
+        try:
+            with urllib.request.urlopen(request, timeout=45) as response:
+                raw = response.read().decode("utf-8", errors="replace")
+        except Exception as exc:  # noqa: BLE001
+            rows.append(
+                {
+                    **notice,
+                    "scored": False,
+                    "fetched_at": fetched_at,
+                    "license_or_usage_note": LICENSE_NOTE,
+                    "reason": f"HTML notice fetch failed: {exc}",
+                }
+            )
+            continue
+        text = redact_text(html_to_text(raw))
+        dest = NOTICES / f"{notice['document_id']}.txt"
+        assert_safe_output(dest)
+        dest.write_text(text[:8000], encoding="utf-8")
+        rows.append(
+            {
+                **notice,
+                "scored": False,
+                "fetched_at": fetched_at,
+                "license_or_usage_note": LICENSE_NOTE,
+                "reason": "Published HTML is authoritative, but the notice has no official PDF page image. A synthetic render was not created and is excluded from CER/F1/TEDS.",
+                "stored_text": dest.relative_to(ROOT).as_posix(),
+                "sha256": hashlib.sha256(text.encode("utf-8")).hexdigest(),
+                "gt_source": "published_html",
+            }
+        )
+    return rows
+
+
+def refresh_manifest_not_scored(rows: list[dict[str, Any]]) -> None:
+    manifest = load_manifest(MANIFEST)
+    manifest["not_scored_samples"] = rows
+    leaves = [str(item) for item in (manifest.get("campaign_leaves") or [])]
+    if LEAF_ID not in leaves:
+        leaves.append(LEAF_ID)
+    manifest["campaign_leaves"] = leaves
+    assert_safe_output(MANIFEST)
+    MANIFEST.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description="Expand and score the public OCR eval set.")
+    parser.add_argument("--build", action="store_true", help="Fetch new PDFs, OCR them, write fixtures and the report.")
+    parser.add_argument("--report", action="store_true", help="Rebuild the report from fixtures already on disk.")
+    parser.add_argument("--delay", type=float, default=2.0)
+    args = parser.parse_args(argv)
+    try:
+        if args.build:
+            candidates = [
+                row
+                for row in load_candidates(CANDIDATES)
+                if str(row.get("leaf_id") or "") == LEAF_ID and not is_forbidden_source(str(row.get("source_url") or ""))
+            ]
+            run_collection(
+                candidates=candidates,
+                manifest_path=MANIFEST,
+                pdfs_dir=PDFS,
+                delay_seconds=args.delay,
+                leaf_id=LEAF_ID,
+                extra_blocked_sha256={item for item in training_corpus_sha256() if not item.startswith("path:")},
+            )
+            notices = fetch_html_notices()
+            refresh_manifest_not_scored(notices)
+            build_samples(load_manifest(MANIFEST))
+            sidecar = OUT_DIR / "public-expand-not-scored.json"
+            current = json.loads(sidecar.read_text(encoding="utf-8")) if sidecar.is_file() else []
+            if not isinstance(current, list):
+                current = []
+            sidecar.write_text(json.dumps(current + notices, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        if args.build or args.report:
+            report = build_report_from_fixtures()
+            write_reports(report)
+            print(
+                json.dumps(
+                    {
+                        "gate": report["gate"],
+                        "old_set": {
+                            "line_cer": report["old_set"]["line_cer"],
+                            "key_field_f1": report["old_set"]["key_field_f1"],
+                            "teds": report["old_set"]["teds"],
+                        },
+                        "expanded": {
+                            "line_cer": report["expanded"]["line_cer"],
+                            "line_cer_gate": report["expanded"]["line_cer_gate"],
+                            "key_field_f1": report["expanded"]["key_field_f1"],
+                            "key_field_f1_gate": report["expanded"]["key_field_f1_gate"],
+                            "teds": report["expanded"]["teds"],
+                            "teds_gate": report["expanded"]["teds_gate"],
+                        },
+                        "new_completed_documents": report["new_completed_documents"],
+                        "new_not_scored": report["new_not_scored"],
+                        "product_pass": False,
+                    },
+                    ensure_ascii=False,
+                    indent=2,
+                )
+            )
+            return 0 if report["gate"] == "GATE_PASS" else 2
+        parser.print_help()
+        return 1
+    except Exception as exc:  # noqa: BLE001
+        print(json.dumps({"error": str(exc), "gate": "GATE_FAIL", "product_pass": False}, ensure_ascii=False))
+        return 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

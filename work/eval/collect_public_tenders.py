@@ -302,6 +302,8 @@ def run_collection(
     delay_seconds: float = DEFAULT_DELAY_SECONDS,
     now: str | None = None,
     retry_failures: bool = False,
+    leaf_id: str = "S-A-09",
+    extra_blocked_sha256: set[str] | None = None,
 ) -> dict[str, Any]:
     fetch_fn = fetch if fetch is not None else default_fetch
     sleep_fn = sleeper if sleeper is not None else time.sleep
@@ -328,6 +330,29 @@ def run_collection(
         status, payload, content_type = fetch_fn(url)
         candidate_id = str(candidate.get("candidate_id") or f"pub-{remote_attempts:03d}")
         pages = pdf_page_count(payload) if status == 200 and is_pdf(payload) else None
+        digest = sha256_hex(payload) if status == 200 and is_pdf(payload) else ""
+        blocked = extra_blocked_sha256 or set()
+        known_sha = {str(row.get("sha256") or "") for row in completed_documents(manifest)}
+        if digest and (digest in known_sha or digest in blocked):
+            _upsert_failure(
+                manifest,
+                {
+                    "candidate_id": candidate_id,
+                    "title": candidate.get("title"),
+                    "publisher": candidate.get("publisher"),
+                    "source_url": str(candidate.get("source_url") or url),
+                    "file_url": url,
+                    "error": "duplicate_sha256",
+                    "http_status": status,
+                    "content_type": content_type,
+                    "failed_at": stamp,
+                    "counts_as_completed": False,
+                    "leaf_id": leaf_id,
+                    "note": "Duplicate of an existing public-eval or training-corpus document. Not counted.",
+                },
+            )
+            newly_failed += 1
+            continue
         if status != 200 or not is_pdf(payload) or pages is None:
             _upsert_failure(
                 manifest,
@@ -342,7 +367,7 @@ def run_collection(
                     "content_type": content_type,
                     "failed_at": stamp,
                     "counts_as_completed": False,
-                    "leaf_id": "S-A-09",
+                    "leaf_id": leaf_id,
                 },
             )
             newly_failed += 1
@@ -358,6 +383,7 @@ def run_collection(
             "publisher": candidate.get("publisher") or "",
             "source_type": candidate.get("source_type") or "public_government_tender",
             "domain": candidate.get("domain") or "hospital_meddevice",
+            "notice_kind": candidate.get("notice_kind") or "tender",
             "source_url": str(candidate.get("source_url") or url),
             "file_url": url,
             "pages": pages,
@@ -368,10 +394,10 @@ def run_collection(
             "reuse_of_repo_fixture": False,
             "internal_test_allowed": True,
             "enterprise_confidential": False,
-            "notes": "S-A-09 public government tender fetch; engineering fixture only. Not T-005.",
+            "notes": f"{leaf_id} public government tender fetch; engineering fixture only. Not T-005.",
             "path": rel_path,
             "status": "fetched",
-            "leaf_id": "S-A-09",
+            "leaf_id": leaf_id,
         }
         documents = [row for row in (manifest.get("documents") or []) if isinstance(row, dict)]
         documents.append(document)
@@ -381,20 +407,42 @@ def run_collection(
 
     counts = summarize(manifest, newly_added=newly_added, newly_failed=newly_failed)
     leaves = [str(item) for item in (manifest.get("campaign_leaves") or [])]
-    if "S-A-09" not in leaves:
-        leaves.append("S-A-09")
+    if leaf_id not in leaves:
+        leaves.append(leaf_id)
     manifest["campaign_leaves"] = leaves
-    manifest["s_a_09"] = {
-        "leaf_id": "S-A-09",
-        "purpose": "Public government tender corpus expansion (engineering fixtures only).",
-        "not_t005": True,
-        "product_pass": False,
-        "failed_urls_do_not_count_as_completed": True,
-        "rate_limit_seconds": delay_seconds,
-        "last_run_at": stamp,
-        "counts": counts,
-    }
-    manifest["counts"] = counts
+    if leaf_id == "S-A-09":
+        manifest["s_a_09"] = {
+            "leaf_id": "S-A-09",
+            "purpose": "Public government tender corpus expansion (engineering fixtures only).",
+            "not_t005": True,
+            "product_pass": False,
+            "failed_urls_do_not_count_as_completed": True,
+            "rate_limit_seconds": delay_seconds,
+            "last_run_at": stamp,
+            "counts": counts,
+        }
+        manifest["counts"] = counts
+    else:
+        prior_counts = manifest.get("counts") if isinstance(manifest.get("counts"), dict) else {}
+        manifest["counts"] = {
+            **prior_counts,
+            "completed_documents": counts["completed_documents"],
+            "failed_urls": counts["failed_urls"],
+            "product_pass": False,
+            "business_pass": False,
+            "t005": False,
+        }
+        manifest["s_a_ocr_public_expand"] = {
+            "leaf_id": leaf_id,
+            "purpose": "Additional public tender/award documents for OCR eval only.",
+            "not_t005": True,
+            "product_pass": False,
+            "failed_urls_do_not_count_as_completed": True,
+            "last_run_at": stamp,
+            "newly_added": newly_added,
+            "newly_failed": newly_failed,
+            "prior_completed_before_this_leaf": counts["completed_documents"] - newly_added,
+        }
     manifest_path.parent.mkdir(parents=True, exist_ok=True)
     manifest_path.write_text(
         json.dumps(manifest, ensure_ascii=False, indent=2) + "\n",
@@ -455,6 +503,7 @@ def main(argv: list[str] | None = None) -> int:
         action="store_true",
         help="Re-attempt URLs already listed in fetch_failures (default: skip them).",
     )
+    parser.add_argument("--leaf-id", default="S-A-09")
     parser.add_argument("--check", action="store_true", help="Validate the canonical manifest only.")
     args = parser.parse_args(argv)
 
@@ -479,6 +528,7 @@ def main(argv: list[str] | None = None) -> int:
             pdfs_dir=args.pdfs_dir,
             delay_seconds=args.delay,
             retry_failures=args.retry_failures,
+            leaf_id=str(args.leaf_id or "S-A-09"),
         )
         write_fetch_report(report, args.report_dir)
         print(json.dumps(report, ensure_ascii=False, indent=2))
