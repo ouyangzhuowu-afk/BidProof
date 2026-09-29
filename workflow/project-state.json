@@ -660,6 +660,30 @@
       ],
       "validation": "main 0909587 推送后 Render 蓝本自动部署，约 3 分钟内切换：/ 开始提供 /static/marketing/assets/index-WmSIqwZA.css（旧包为 index-BBUKyzI9.css）。实测 /、/app、/healthz、/readyz、/privacy、/robots.txt、/sitemap.xml、/api/auth/status 全 200；匿名 GET /api/runs 401；已下线的 /static/landing.html 404；/static/legal.css 200。除 app.js 外静态资源与提交内容逐行一致（app.js 仅差镜像刻意剥离的 32 字节 sourcemap 指针，与 2026-09-24 记录一致）。真实浏览器 1440 与 390 视口加载新首页，点「开始检查」进入 /app 并弹出认证对话框。",
       "note": "线上 /api/auth/status 返回 passwordless {email:false, phone:false, oauth:[]} 且 personal_signup_enabled=true——没有配置投递渠道时验证码与 OAuth 入口按设计不展示，认证对话框回落为密码登录；这不是故障，开启需要运营方提供真实密钥（T-UX-AUTH-EXTERNAL-2026-09-24）。验收为工程验收，不构成企业业务验收，也不改变 T-005 与 OCR 门禁状态。"
+    },
+    {
+      "id": "C-T005-READY-2026-09-28",
+      "title": "T-005 pilot readiness scaffolding only",
+      "status": "verified",
+      "dependencies": [
+        "T-002",
+        "C-005",
+        "C-013"
+      ],
+      "artifacts": [
+        "docs/pilot/t005-readiness-2026-09-28.md",
+        "docs/pilot/t005-intake-checklist.md",
+        "work/pilot_readiness.py",
+        "work/pilot-row.template.json",
+        "work/icp-row.template.json",
+        "outputs/pilot-ledger.csv",
+        "outputs/icp-outreach.csv"
+      ],
+      "validation": "Audit passed scaffold-only readiness on PR #13 (https://github.com/ouyangzhuowu-afk/BidProof/pull/13), squash-merged as 792ff23189281f22c75d3539302f43aba7fe2552. Not business acceptance. T-005 stays blocked.",
+      "note": "scaffold-only. Pilot scan results are always NEEDS_REVIEW and cannot count as accuracy acceptance.",
+      "audited_by": "Audit",
+      "pull_request": "https://github.com/ouyangzhuowu-afk/BidProof/pull/13",
+      "merge_commit": "792ff23189281f22c75d3539302f43aba7fe2552"
     }
   ],
   "backlog": [
@@ -683,27 +707,6 @@
       "validation": "Sandbox deferral D-SANDBOX-2026-09-16 still holds. D-T005-UNBLOCK-2026-09-28 is scaffold-only and is not a business unblock. Ledgers remain empty of business rows. Business acceptance remains NOT_STARTED. Demo/test rows forbidden. TEDS GATE_FAIL mean 87.85% on 16 pages (outputs/ocr-benchmark/teds-report.json).",
       "note": "deferred_for_sandbox_phase (status=blocked; not cancelled). Pilot scan results are always NEEDS_REVIEW and cannot count as accuracy acceptance.",
       "blocked_reason": "Sandbox phase locked 2026-09-16: human enterprise pilot deferred from this phase KPIs. Joe did not unblock T-005 on 2026-09-28. Do not write real enterprise rows into pilot-ledger / icp-outreach. OCR CER/F1/TEDS still GATE_FAIL; product forces NEEDS_REVIEW."
-    },
-    {
-      "id": "C-T005-READY-2026-09-28",
-      "title": "T-005 pilot readiness scaffolding only",
-      "status": "pending_audit",
-      "dependencies": [
-        "T-002",
-        "C-005",
-        "C-013"
-      ],
-      "artifacts": [
-        "docs/pilot/t005-readiness-2026-09-28.md",
-        "docs/pilot/t005-intake-checklist.md",
-        "work/pilot_readiness.py",
-        "work/pilot-row.template.json",
-        "work/icp-row.template.json",
-        "outputs/pilot-ledger.csv",
-        "outputs/icp-outreach.csv"
-      ],
-      "validation": "Scaffold files exist (intake checklist, readiness CLI, ledger headers and templates). Edith sets the audit result. Not business acceptance.",
-      "note": "scaffold-only. Pilot scan results are always NEEDS_REVIEW and cannot count as accuracy acceptance."
     },
     {
       "id": "T-UX-AUTH-EXTERNAL-2026-09-24",
@@ -1289,20 +1292,29 @@
     {
       "path": "docs/pilot/t005-readiness-2026-09-28.md",
       "kind": "pilot-readiness-record",
-      "status": "pending_audit",
-      "note": "scaffold-only"
+      "status": "verified",
+      "note": "scaffold-only",
+      "audited_by": "Audit",
+      "pull_request": "https://github.com/ouyangzhuowu-afk/BidProof/pull/13",
+      "merge_commit": "792ff23189281f22c75d3539302f43aba7fe2552"
     },
     {
       "path": "docs/pilot/t005-intake-checklist.md",
       "kind": "pilot-intake-checklist",
-      "status": "pending_audit",
-      "note": "scaffold-only"
+      "status": "verified",
+      "note": "scaffold-only",
+      "audited_by": "Audit",
+      "pull_request": "https://github.com/ouyangzhuowu-afk/BidProof/pull/13",
+      "merge_commit": "792ff23189281f22c75d3539302f43aba7fe2552"
     },
     {
       "path": "work/pilot_readiness.py",
       "kind": "pilot-readiness-cli",
-      "status": "pending_audit",
-      "note": "scaffold-only"
+      "status": "verified",
+      "note": "scaffold-only",
+      "audited_by": "Audit",
+      "pull_request": "https://github.com/ouyangzhuowu-afk/BidProof/pull/13",
+      "merge_commit": "792ff23189281f22c75d3539302f43aba7fe2552"
     }
   ],
   "next_best_action": {
@@ -1311,7 +1323,8 @@
     "reason": "D-SANDBOX-2026-09-16 still defers the human pilot. D-T005-UNBLOCK-2026-09-28 is scaffold-only (Edith orchestration) and is not a business unblock. Next business leaf is real enterprise input, not demo data.",
     "blocked_by": [
       "Joe: real enterprise pilot input",
-      "Joe: real ICP outreach input"
+      "Joe: real ICP outreach input",
+      "D-SANDBOX-2026-09-16"
     ],
     "parallel": [
       "OCR engineering gates still GATE_FAIL: line CER 3.17%, key-field F1 76.00%, TEDS 87.85% on 16 pages (outputs/ocr-benchmark/teds-report.json). Product forces NEEDS_REVIEW.",
@@ -1319,7 +1332,7 @@
     ],
     "note": "Do not write demo/test rows into pilot/ICP ledgers. Do not claim business TARGET_MET. Pilot scan results are always NEEDS_REVIEW and cannot count as accuracy acceptance. On real input: copy template → fill → pilot_ledger/icp_ledger --row-json. Readiness: uv run python -m work.pilot_readiness --json."
   },
-  "updated_at": "2026-09-29T04:10:00+00:00",
+  "updated_at": "2026-09-29T05:15:00+00:00",
   "sandbox_roadmap": {
     "locked_at": "2026-09-16",
     "gates": {

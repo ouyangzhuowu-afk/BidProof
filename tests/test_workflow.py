@@ -21,13 +21,16 @@ def test_persistent_workflow_state_is_valid():
     assert "blocked_reason" in t005
     assert "unblocked" not in t005.get("validation", "").lower()
     ready_group, ready = _find(state, "C-T005-READY-2026-09-28")
-    assert ready_group == "backlog"
-    assert ready["status"] == "pending_audit"
+    assert ready_group == "completed"
+    assert ready["status"] == "verified"
     assert "scaffold-only" in ready.get("note", "")
+    assert ready["audited_by"] == "Audit"
+    assert ready["pull_request"] == "https://github.com/ouyangzhuowu-afk/BidProof/pull/13"
+    assert ready["merge_commit"] == "792ff23189281f22c75d3539302f43aba7fe2552"
     blocked_by = next_action(state).get("blocked_by") or []
     assert any("real enterprise" in item.lower() or "Joe" in item for item in blocked_by)
+    assert "D-SANDBOX-2026-09-16" in blocked_by
     assert all(task.get("id") != "T-005" for task in state["completed"])
-    assert all(task.get("id") != "C-T005-READY-2026-09-28" for task in state["completed"])
     decision = next(item for item in state["decisions"] if item.get("id") == "D-T005-UNBLOCK-2026-09-28")
     assert decision["decided_by"] == "Edith (orchestration)"
     assert decision["scope"] == "scaffold-only"
