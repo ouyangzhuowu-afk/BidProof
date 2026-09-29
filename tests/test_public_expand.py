@@ -10,9 +10,11 @@ import pytest
 from work.eval.public_expand import (
     LEAF_ID,
     build_report_from_fixtures,
+    classify_local_pdf_intake,
     fields_from_text,
     is_forbidden_source,
     is_synthetic_row,
+    load_joe_local_pdf_intake,
     looks_like_pii,
     redact_text,
     score_bundle,
@@ -144,6 +146,50 @@ def test_expand_fixtures_do_not_use_training_corpus_or_synthetic_gt(tmp_path):
         assert not looks_like_pii(json.dumps(row, ensure_ascii=False))
 
 
+def test_unlisted_pdf_without_a_public_url_is_provenance_unverified():
+    classified = classify_local_pdf_intake(
+        [{"filename": "unknown-tender.pdf", "sha256": "ab" * 32}],
+        {"documents": []},
+        scored_pages={},
+    )
+    assert classified["counts"]["provenance_unverified"] == 1
+    assert classified["counts"]["newly_added_scored"] == 0
+    assert classified["provenance_unverified"][0]["counts_as_new_document"] is False
+
+
+def test_joe_local_pdfs_match_existing_manifest_and_are_not_recounted():
+    intake = load_joe_local_pdf_intake()
+    assert intake["counts"] == {
+        "duplicate": 12,
+        "newly_added_scored": 0,
+        "newly_added_not_scored": 0,
+        "provenance_unverified": 0,
+    }
+    seen = set()
+    for row in intake["duplicate"]:
+        assert row["counts_as_new_document"] is False
+        assert row["matched_by"]
+        assert row["matched_document_id"]
+        assert str(row["source_url"]).startswith("http")
+        assert row["fetched_at"]
+        assert row["license_or_usage_note"]
+        seen.add(row["filename"])
+    assert seen == {
+        "pub-gx-daxin-ultrasound-anesthesia.pdf",
+        "pub-gx-guiping-hospital-it.pdf",
+        "pub-gx-luocheng-smart-hospital.pdf",
+        "pub-gx-nanning-vascular-doppler.pdf",
+        "pub-gx-niv-sleep-monitor.pdf",
+        "pub-gx-qintang-flow-cytometer.pdf",
+        "pub-gx-ventilator-monitors.pdf",
+        "pub-gx-youjiang-ultrasound.pdf",
+        "pub-gx-yulin-dermatology-his.pdf",
+        "source2-nanjing.pdf",
+        "source2-shaanxi.pdf",
+        "source4-zbtb.pdf",
+    }
+
+
 def test_report_keeps_product_pass_false_and_separates_synthetic():
     report_path = ROOT / "outputs" / "ocr-benchmark" / "public-expand-report.json"
     if not report_path.is_file():
@@ -157,6 +203,8 @@ def test_report_keeps_product_pass_false_and_separates_synthetic():
     assert report["old_set"]["teds_gate"] == "GATE_FAIL"
     assert report["synthetic_appendix"]["line_cer_pages"] == 3
     rebuilt = build_report_from_fixtures()
+    assert rebuilt["joe_local_pdf_intake"]["counts"]["duplicate"] == 12
+    assert rebuilt["joe_local_pdf_intake"]["counts"]["newly_added_scored"] == 0
     assert rebuilt["expanded"]["line_cer"] == pytest.approx(report["expanded"]["line_cer"])
     assert rebuilt["expanded"]["key_field_f1"] == pytest.approx(report["expanded"]["key_field_f1"])
     assert rebuilt["expanded"]["teds"] == pytest.approx(report["expanded"]["teds"])

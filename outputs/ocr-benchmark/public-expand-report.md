@@ -37,6 +37,27 @@ Expanded F1 counts: TP 103 / FP 3 / FN 3.
 | pub-ccgp-zycg-ac-award-202609 | http://www.ccgp.gov.cn/cggg/zygg/zbgg/202609/t20260914_27319969.htm | 2026-09-29T07:16:40Z | 公开政府采购/公共资源交易平台公开发布的招标采购文件，仅作为内部工程能力回归的公开 DATA 备份；不用于对外产品承诺，不替代官方分发授权。 | no: Published HTML is authoritative, but the notice has no official PDF page image. A synthetic render was not created and is excluded from CER/F1/TEDS. |
 | pub-gxggzy-femtosecond-2026 | http://gxggzy.gxzf.gov.cn/yxcgptrk/yxcgpt_tzgg_234096/tzgg_hc/t28134257.shtml | 2026-09-29T07:16:40Z | 公开政府采购/公共资源交易平台公开发布的招标采购文件，仅作为内部工程能力回归的公开 DATA 备份；不用于对外产品承诺，不替代官方分发授权。 | no: Published HTML is authoritative, but the notice has no official PDF page image. A synthetic render was not created and is excluded from CER/F1/TEDS. |
 
+## Joe local PDF intake (2026-09-29)
+
+Twelve PDFs from Joe's local `work/public-eval/pdfs`, approved by Edith for eval use. Same filename or same SHA-256 as a completed manifest row is a duplicate and is not counted again. Provenance below is copied from that existing row.
+
+- Duplicate: **12** · newly added (scored): **0** · newly added (not-scored): **0** · provenance-unverified: **0**
+
+| submitted file | class | existing document | fetched | existing CER pages | source URL |
+|---|---|---|---|---:|---|
+| pub-gx-daxin-ultrasound-anesthesia.pdf | duplicate | pub-gx-daxin-ultrasound-anesthesia | 2026-09-16T11:47:36Z | 1, 3, 4, 51, 73 | https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-gov-open-doc/1023FP/450103/10007339275/20261/be962ee4-51f0-46f2-a542-3bf7fe68bd71.pdf |
+| pub-gx-guiping-hospital-it.pdf | duplicate | pub-gx-guiping-hospital-it | 2026-09-16T11:47:36Z | 0 | https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1014AN/450103/10007300794/20268/ba5ac90a-96fe-4f8f-bd50-361317e042e4.pdf |
+| pub-gx-luocheng-smart-hospital.pdf | duplicate | pub-gx-luocheng-smart-hospital | 2026-09-16T11:47:36Z | 0 | https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1024FPA/450502/10009782286/20267/cfbe15f8-d793-487c-9c11-f255d321062d.pdf |
+| pub-gx-nanning-vascular-doppler.pdf | duplicate | pub-gx-nanning-vascular-doppler | 2026-09-16T11:43:11Z | 3, 16, 17 | https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-gov-open-doc/1024FPA/450103/10007339269/20262/e485f8f3-9a31-4bc8-9a18-404b826dcb1a.pdf |
+| pub-gx-niv-sleep-monitor.pdf | duplicate | pub-gx-niv-sleep-monitor | 2026-09-16T11:47:36Z | 0 | https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1024FPA/450103/10007339432/20268/d1063021-8810-48f4-9b0b-58a7e3f1a227.pdf |
+| pub-gx-qintang-flow-cytometer.pdf | duplicate | pub-gx-qintang-flow-cytometer | 2026-09-16T11:47:36Z | 1, 3, 4 | https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1024FPA/undefined/450899/10009653243/20266/b75de483-40d0-4916-93de-a1dbbc97d84a.pdf |
+| pub-gx-ventilator-monitors.pdf | duplicate | pub-gx-ventilator-monitors | 2026-09-16T11:47:36Z | 3, 4, 5, 15 | https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1024FPA/undefined/450103/10007341141/20266/264475cd-19b9-493f-b4e3-142276a4f506.pdf |
+| pub-gx-youjiang-ultrasound.pdf | duplicate | pub-gx-youjiang-ultrasound | 2026-09-16T11:43:11Z | 2, 4, 5, 6 | https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1024FPA/undefined/450103/10007339425/20266/572479dc-2493-43cc-8e66-5186ff6dab02.pdf |
+| pub-gx-yulin-dermatology-his.pdf | duplicate | pub-gx-yulin-dermatology-his | 2026-09-16T11:47:36Z | 0 | https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-gov-open-doc/1023FP/450999/10008210707/20263/434f78b2-57f6-44a1-8840-28a423677952.pdf |
+| source2-nanjing.pdf | duplicate | fixture-001 | 2026-08-24 | 2, 3, 14, 32 | https://njggzy.nanjing.gov.cn/njweb/tz/20240730/676b45b5-113e-4aff-b074-1e6fd738090e.html |
+| source2-shaanxi.pdf | duplicate | fixture-002 | 2026-08-24 | 1, 3, 6, 33, 37 | https://www.ccgp-shaanxi.gov.cn/gpx-bid-file/ZF_JGBM_000003/610001/2024/10/21/8a69c58e90e72f300192ac9d3d5b467b/gpx-template/8a69c2509211dc7a0192adb56a814416.pdf?accessCode=9b3feae299491ee3179981e5e497afd4 |
+| source4-zbtb.pdf | duplicate | fixture-003 | 2026-08-24 | 1, 4, 5, 9, 29, 35 | https://weekly.zbtb.org.cn/2024/1b3441f1ffc3d22.pdf |
+
 ## Failure causes
 
 - **line_cer**: Most pages are near the 2% line-CER band, but table-of-contents pages blow up the micro-average. The text layer splits 目录 and keeps dot leaders; RapidOCR drops the dots and merges the title with the page number, so greedy line alignment charges almost the whole leader string as an edit.
@@ -59,4 +80,4 @@ uv run --extra ocr python -m work.eval.public_expand --build
 uv run python -m work.eval.public_expand --report
 ```
 
-Generated at `2026-09-29T07:17:02.965131+00:00`.
+Generated at `2026-09-29T07:29:53.997545+00:00`.

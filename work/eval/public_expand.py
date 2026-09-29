@@ -57,6 +57,7 @@ TEDS_GT_PATH = FIXTURE_DIR / "public_expand_teds_gt.jsonl"
 TEDS_HYP_PATH = FIXTURE_DIR / "public_expand_teds_hypotheses.jsonl"
 KF_GT_PATH = FIXTURE_DIR / "public_expand_key_field_gt.jsonl"
 KF_HYP_PATH = FIXTURE_DIR / "public_expand_key_field_hypotheses.jsonl"
+JOE_LOCAL_PDFS = FIXTURE_DIR / "joe_local_pdfs_2026-09-29.json"
 
 OLD_CER_GT = FIXTURE_DIR / "sandbox_pages.jsonl"
 OLD_CER_HYP = FIXTURE_DIR / "sandbox_hypotheses.jsonl"
@@ -460,6 +461,124 @@ def _fn_histogram(scored: dict[str, Any]) -> dict[str, int]:
     return dict(sorted(counts.items(), key=lambda item: (-item[1], item[0])))
 
 
+def _scored_doc_ids(path: Path) -> dict[str, list[int]]:
+    pages: dict[str, list[int]] = {}
+    if not path.is_file():
+        return pages
+    for row in _read_jsonl(path):
+        doc_id = str(row.get("doc_id") or "")
+        if not doc_id or row.get("scored") is False:
+            continue
+        pages.setdefault(doc_id, []).append(int(row["page"]))
+    return {doc_id: sorted(set(values)) for doc_id, values in pages.items()}
+
+
+def classify_local_pdf_intake(
+    records: list[dict[str, Any]],
+    manifest: dict[str, Any],
+    *,
+    scored_pages: dict[str, list[int]] | None = None,
+) -> dict[str, Any]:
+    """Classify a local PDF drop against the completed public-eval manifest.
+
+    Same filename or same SHA-256 is a duplicate and is not counted again.
+    A file with no manifest hit and no verifiable http(s) source stays
+    provenance-unverified and is not added to the scored set.
+    """
+    by_sha: dict[str, dict[str, Any]] = {}
+    by_name: dict[str, dict[str, Any]] = {}
+    for row in completed_documents(manifest):
+        digest = str(row.get("sha256") or "").strip().lower()
+        if len(digest) == 64:
+            by_sha[digest] = row
+        for key in (row.get("filename"), Path(str(row.get("path") or "")).name):
+            if key:
+                by_name[str(key).lower()] = row
+    pages = scored_pages if scored_pages is not None else _scored_doc_ids(CER_GT_PATH)
+    buckets: dict[str, list[dict[str, Any]]] = {
+        "duplicate": [],
+        "newly_added_scored": [],
+        "newly_added_not_scored": [],
+        "provenance_unverified": [],
+    }
+    for record in records:
+        filename = Path(str(record.get("filename") or "")).name
+        digest = str(record.get("sha256") or "").strip().lower()
+        source_url = str(record.get("source_url") or "").strip()
+        hit = by_sha.get(digest) or by_name.get(filename.lower())
+        if hit is not None:
+            doc_id = str(hit.get("document_id") or "")
+            matched_by = []
+            if digest and digest == str(hit.get("sha256") or "").lower():
+                matched_by.append("sha256")
+            if filename.lower() in {str(hit.get("filename") or "").lower(), Path(str(hit.get("path") or "")).name.lower()}:
+                matched_by.append("filename")
+            buckets["duplicate"].append(
+                {
+                    "filename": filename,
+                    "sha256": digest,
+                    "bytes": record.get("bytes"),
+                    "classification": "duplicate",
+                    "matched_by": matched_by,
+                    "matched_document_id": doc_id,
+                    "source_url": hit.get("source_url"),
+                    "fetched_at": hit.get("fetched_at"),
+                    "license_or_usage_note": hit.get("license_or_usage_note") or LICENSE_NOTE,
+                    "existing_cer_pages": pages.get(doc_id, []),
+                    "counts_as_new_document": False,
+                }
+            )
+            continue
+        entry = {
+            "filename": filename,
+            "sha256": digest,
+            "bytes": record.get("bytes"),
+            "source_url": source_url or None,
+            "counts_as_new_document": False,
+        }
+        if source_url.startswith("http://") or source_url.startswith("https://"):
+            entry["classification"] = "newly_added_not_scored"
+            entry["reason"] = "Public URL is present, but this intake did not build text-layer GT, so the file is not in the scored set."
+            buckets["newly_added_not_scored"].append(entry)
+        else:
+            entry["classification"] = "provenance_unverified"
+            entry["reason"] = "No completed manifest row and no verifiable public source URL. Excluded from the scored set."
+            buckets["provenance_unverified"].append(entry)
+    return {
+        "intake_id": "joe-local-pdfs-2026-09-29",
+        "note": "Same filename or SHA-256 as a completed public-eval document is a duplicate and is not counted again.",
+        "counts": {name: len(rows) for name, rows in buckets.items()},
+        **buckets,
+    }
+
+
+def load_joe_local_pdf_intake(manifest: dict[str, Any] | None = None) -> dict[str, Any]:
+    if not JOE_LOCAL_PDFS.is_file():
+        return {
+            "intake_id": "joe-local-pdfs-2026-09-29",
+            "counts": {
+                "duplicate": 0,
+                "newly_added_scored": 0,
+                "newly_added_not_scored": 0,
+                "provenance_unverified": 0,
+            },
+            "duplicate": [],
+            "newly_added_scored": [],
+            "newly_added_not_scored": [],
+            "provenance_unverified": [],
+        }
+    payload = json.loads(JOE_LOCAL_PDFS.read_text(encoding="utf-8"))
+    files = payload.get("files") if isinstance(payload, dict) else payload
+    if not isinstance(files, list):
+        files = []
+    classified = classify_local_pdf_intake(files, manifest if manifest is not None else load_manifest(MANIFEST))
+    if isinstance(payload, dict):
+        classified["collected_by"] = payload.get("collected_by")
+        classified["approved_for_eval_by"] = payload.get("approved_for_eval_by")
+        classified["local_source"] = payload.get("local_source")
+    return classified
+
+
 def build_report_from_fixtures() -> dict[str, Any]:
     old = load_old_bundle()
     new_cer_gt = _read_jsonl(CER_GT_PATH)
@@ -602,6 +721,7 @@ def build_report_from_fixtures() -> dict[str, Any]:
         and report["expanded"]["teds_gate"] == "GATE_PASS"
         else "GATE_FAIL"
     )
+    report["joe_local_pdf_intake"] = load_joe_local_pdf_intake(manifest)
     return report
 
 
@@ -759,6 +879,39 @@ def render_markdown(report: dict[str, Any]) -> str:
                 scored="yes" if row.get("scored") else f"no: {row.get('not_scored_reason')}",
             )
         )
+    intake = report.get("joe_local_pdf_intake") or {}
+    counts = intake.get("counts") or {}
+    lines += [
+        "",
+        "## Joe local PDF intake (2026-09-29)",
+        "",
+        "Twelve PDFs from Joe's local `work/public-eval/pdfs`, approved by Edith for eval use. "
+        "Same filename or same SHA-256 as a completed manifest row is a duplicate and is not counted again. "
+        "Provenance below is copied from that existing row.",
+        "",
+        (
+            f"- Duplicate: **{counts.get('duplicate', 0)}**"
+            f" · newly added (scored): **{counts.get('newly_added_scored', 0)}**"
+            f" · newly added (not-scored): **{counts.get('newly_added_not_scored', 0)}**"
+            f" · provenance-unverified: **{counts.get('provenance_unverified', 0)}**"
+        ),
+        "",
+        "| submitted file | class | existing document | fetched | existing CER pages | source URL |",
+        "|---|---|---|---|---:|---|",
+    ]
+    for bucket in ("duplicate", "newly_added_scored", "newly_added_not_scored", "provenance_unverified"):
+        for row in intake.get(bucket) or []:
+            pages = row.get("existing_cer_pages") or []
+            lines.append(
+                "| {filename} | {classification} | {doc} | {fetched} | {pages} | {url} |".format(
+                    filename=row.get("filename"),
+                    classification=row.get("classification"),
+                    doc=row.get("matched_document_id") or "",
+                    fetched=row.get("fetched_at") or "",
+                    pages=", ".join(str(page) for page in pages) if pages else "0",
+                    url=row.get("source_url") or row.get("reason") or "",
+                )
+            )
     lines += ["", "## Failure causes", ""]
     for cause in report["failure_causes"]:
         lines.append(f"- **{cause['metric']}**: {cause['cause']}")

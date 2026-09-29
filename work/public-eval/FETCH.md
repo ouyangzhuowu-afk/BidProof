@@ -78,3 +78,5 @@ uv run python -m work.eval.public_expand --report
 ```
 
 The report is `outputs/ocr-benchmark/public-expand-report.md`. It repeats the published old-set numbers and the expanded live-OCR numbers. `product_pass` stays false. This leaf does not write pilot or ICP ledgers and does not change T-005.
+
+Joe's 2026-09-29 local drop (`work/eval/fixtures/joe_local_pdfs_2026-09-29.json`, 12 PDFs) matches completed rows already in this manifest by filename and SHA-256. Those 12 stay duplicates: 0 newly added, 0 provenance-unverified. Provenance in the report is the existing `source_url` / `fetched_at` / `license_or_usage_note`.

@@ -1,0 +1,68 @@
+{
+  "intake_id": "joe-local-pdfs-2026-09-29",
+  "collected_by": "Joe",
+  "approved_for_eval_by": "Edith",
+  "local_source": "work/public-eval/pdfs",
+  "files": [
+    {
+      "filename": "pub-gx-daxin-ultrasound-anesthesia.pdf",
+      "sha256": "ee2a69cba1ae8ef7cb27a71d89f8aaafbc9ec832647adc453029c0bebec3277d",
+      "bytes": 1043634
+    },
+    {
+      "filename": "pub-gx-guiping-hospital-it.pdf",
+      "sha256": "f6bb275e1ce3022f91898b4e361034e066d7ac15df0f21c3c8d19e6a1d1de537",
+      "bytes": 766259
+    },
+    {
+      "filename": "pub-gx-luocheng-smart-hospital.pdf",
+      "sha256": "446b710182365ba03189ccebf43cc32c7183742f3df67a8ee0d3f7426434c4b9",
+      "bytes": 3972652
+    },
+    {
+      "filename": "pub-gx-nanning-vascular-doppler.pdf",
+      "sha256": "59e5b5814d4b8c340f3237871a9f3f35870b7468aa5dbe0a081c774554a22486",
+      "bytes": 997786
+    },
+    {
+      "filename": "pub-gx-niv-sleep-monitor.pdf",
+      "sha256": "beefafc9d5906dda55cbc25164f102959045872754a6664f199b85351f0f7779",
+      "bytes": 811186
+    },
+    {
+      "filename": "pub-gx-qintang-flow-cytometer.pdf",
+      "sha256": "ff8495e75653d60f936cb22491581c4933d41a377bb328fd70dbadd503f026f5",
+      "bytes": 568442
+    },
+    {
+      "filename": "pub-gx-ventilator-monitors.pdf",
+      "sha256": "c52e7d6e84dd1dc82f6800fa4d361a48d9c2c77278590af6d53a89012a12659e",
+      "bytes": 737939
+    },
+    {
+      "filename": "pub-gx-youjiang-ultrasound.pdf",
+      "sha256": "c385256a47c8c00c048a03fd96de3297484f158345a06b34bc3ebb4923fbac54",
+      "bytes": 850657
+    },
+    {
+      "filename": "pub-gx-yulin-dermatology-his.pdf",
+      "sha256": "670ad070261956f8a2c662e3265f09e352786c02920ef4fb9a24d09a7014295d",
+      "bytes": 827569
+    },
+    {
+      "filename": "source2-nanjing.pdf",
+      "sha256": "b90b22d14736992e3a5ad8fa2c29c4d23a603654faa3fffbead330c6615defd2",
+      "bytes": 1211751
+    },
+    {
+      "filename": "source2-shaanxi.pdf",
+      "sha256": "a6c1f042b077ecbacf5877ac682415ede3dcd64980490eb9d9379867e4fd2b7d",
+      "bytes": 583492
+    },
+    {
+      "filename": "source4-zbtb.pdf",
+      "sha256": "e233f7b45ec3eb26ea8e41c542fcf37b3601cfdf7243bfe1c7956e641eecebf3",
+      "bytes": 994191
+    }
+  ]
+}
