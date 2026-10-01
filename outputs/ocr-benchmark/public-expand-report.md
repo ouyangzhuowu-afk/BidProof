@@ -146,6 +146,77 @@ Bucket 3 is dominated by `fixture-003` page 5 (156), `fixture-002` page 6 (105),
 
 Six pages have 0 edits: `fixture-002` pages 1 and 33, `pub-gx-qintang-flow-cytometer` page 4, `pub-gx-nanxishan-dr-mammo-2026` page 1, `pub-gx-info-center-compute-2026` page 1, `pub-gx-nonggang-patrol-2026` page 3.
 
+## Bucket 3 split (933)
+
+Evidence note only. The scorer is unchanged. This splits the 933 real misses only. The 32 still-unaligned fragments and the 337 text-layer-absent edits stay where they are.
+
+Alignment is the current greedy line match, then a substitution-preferring optimal Levenshtein path. A deletion run is consecutive delete operations; a substitution or an insertion ends the run. An unmatched text-layer line is one run of its full length. `product_pass` stays false. Overall gate stays GATE_FAIL.
+
+| Sub-bucket | Edits |
+|---|---:|
+| Consecutive deletions of 6 or more characters | 342 |
+| Short deletions of 1 to 5 characters | 172 |
+| Substitutions | 369 |
+| In-text-layer insertions still inside these 933 | 50 |
+| Sum | 933 |
+
+342 + 172 + 369 + 50 = 933. The three named classes sum to 883. The other 50 are OCR characters that already occur in the page text layer, so they were not part of the 337. Twenty-nine of them are a whole unused OCR line, including the extra `广西恒桥项目管理有限公司` header on `pub-gx-tianlin-yuegui-devices-2026` page 1 (12). Twenty-one are extra characters inside a paired line. They are not substitutions.
+
+The non-binding split 435 + 154 + 70 does not match. That description was for the older 659, on the 1481-edit score.
+
+Long deletions are dominated by `pub-gx-minzu-ultrasound-2026` page 1 (49) and page 2 (40), `fixture-002` page 6 (46), `pub-gx-info-center-compute-2026` page 5 (39), `pub-gx-youjiang-ultrasound` page 6 (35) and page 5 (34), and `fixture-003` page 5 (33). Substitutions are dominated by `fixture-003` page 5 (88), `pub-gx-minzu-ultrasound-2026` page 2 (47), `pub-gx-info-center-compute-2026` page 5 (43), and `fixture-002` page 6 (42).
+
+| doc | page | miss | long | short | sub | ins |
+|---|---:|---:|---:|---:|---:|---:|
+| fixture-003 | 5 | 156 | 33 | 30 | 88 | 5 |
+| fixture-002 | 6 | 105 | 46 | 13 | 42 | 4 |
+| pub-gx-minzu-ultrasound-2026 | 2 | 92 | 40 | 5 | 47 | 0 |
+| pub-gx-info-center-compute-2026 | 5 | 87 | 39 | 3 | 43 | 2 |
+| pub-gx-youjiang-ultrasound | 6 | 82 | 35 | 9 | 34 | 4 |
+| pub-gx-minzu-ultrasound-2026 | 1 | 77 | 49 | 12 | 16 | 0 |
+| pub-gx-youjiang-ultrasound | 5 | 69 | 34 | 12 | 21 | 2 |
+| fixture-003 | 4 | 55 | 21 | 1 | 33 | 0 |
+| pub-gx-ventilator-monitors | 5 | 42 | 25 | 5 | 12 | 0 |
+| pub-gx-tianlin-yuegui-devices-2026 | 8 | 15 | 0 | 9 | 3 | 3 |
+| pub-gx-nanning-vascular-doppler | 17 | 14 | 0 | 8 | 0 | 6 |
+| fixture-001 | 32 | 13 | 8 | 5 | 0 | 0 |
+| pub-gx-daxin-ultrasound-anesthesia | 73 | 13 | 12 | 1 | 0 | 0 |
+| pub-gx-tianlin-yuegui-devices-2026 | 1 | 12 | 0 | 0 | 0 | 12 |
+| pub-gx-tianlin-yuegui-devices-2026 | 2 | 8 | 0 | 8 | 0 | 0 |
+| fixture-003 | 9 | 7 | 0 | 5 | 2 | 0 |
+| fixture-002 | 37 | 6 | 0 | 6 | 0 | 0 |
+| pub-gx-hechi-mine-safety-2026 | 1 | 6 | 0 | 1 | 0 | 5 |
+| pub-gx-nanxishan-dr-mammo-2026 | 2 | 6 | 0 | 4 | 2 | 0 |
+| pub-gx-qintang-flow-cytometer | 3 | 6 | 0 | 2 | 4 | 0 |
+| fixture-002 | 3 | 4 | 0 | 2 | 2 | 0 |
+| pub-gx-hechi-mine-safety-2026 | 2 | 4 | 0 | 4 | 0 | 0 |
+| pub-gx-minzu-ultrasound-2026 | 6 | 4 | 0 | 1 | 3 | 0 |
+| pub-gx-nanning-vascular-doppler | 3 | 4 | 0 | 2 | 0 | 2 |
+| pub-gx-nanxishan-dr-mammo-2026 | 9 | 4 | 0 | 4 | 0 | 0 |
+| pub-gx-nonggang-patrol-2026 | 9 | 4 | 0 | 1 | 3 | 0 |
+| pub-gx-qintang-flow-cytometer | 1 | 4 | 0 | 0 | 0 | 4 |
+| pub-gx-yibiatong-phase2-2026 | 2 | 4 | 0 | 4 | 0 | 0 |
+| pub-gx-daxin-ultrasound-anesthesia | 3 | 3 | 0 | 2 | 1 | 0 |
+| pub-gx-daxin-ultrasound-anesthesia | 4 | 3 | 0 | 0 | 3 | 0 |
+| pub-gx-nanning-vascular-doppler | 16 | 3 | 0 | 2 | 1 | 0 |
+| pub-gx-ventilator-monitors | 3 | 3 | 0 | 1 | 2 | 0 |
+| pub-gx-nonggang-patrol-2026 | 2 | 2 | 0 | 2 | 0 | 0 |
+| pub-gx-ventilator-monitors | 4 | 2 | 0 | 0 | 2 | 0 |
+| pub-gx-ventilator-monitors | 15 | 2 | 0 | 2 | 0 | 0 |
+| pub-gx-yibiatong-phase2-2026 | 3 | 2 | 0 | 1 | 1 | 0 |
+| fixture-001 | 2 | 1 | 0 | 0 | 0 | 1 |
+| fixture-001 | 3 | 1 | 0 | 0 | 1 | 0 |
+| fixture-003 | 1 | 1 | 0 | 0 | 1 | 0 |
+| fixture-003 | 29 | 1 | 0 | 1 | 0 | 0 |
+| pub-gx-daxin-ultrasound-anesthesia | 1 | 1 | 0 | 1 | 0 | 0 |
+| pub-gx-daxin-ultrasound-anesthesia | 51 | 1 | 0 | 0 | 1 | 0 |
+| pub-gx-hechi-mine-safety-2026 | 3 | 1 | 0 | 1 | 0 | 0 |
+| pub-gx-info-center-compute-2026 | 2 | 1 | 0 | 0 | 1 | 0 |
+| pub-gx-youjiang-ultrasound | 2 | 1 | 0 | 1 | 0 | 0 |
+| pub-gx-youjiang-ultrasound | 4 | 1 | 0 | 1 | 0 | 0 |
+
+These 46 rows sum to 933, with 342 long deletions, 172 short deletions, 369 substitutions, and 50 insertions. Eight pages have a bucket-3 total of 0.
+
 ## Reproduce
 
 ```bash

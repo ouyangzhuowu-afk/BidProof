@@ -1396,6 +1396,17 @@
     "sum_check": 1302,
     "hypothesis_304_339_659": "does not match"
   },
+  "bucket3_split": {
+    "note": "Evidence only. Scorer unchanged. Splits the 933 real misses. The 32 fragments and 337 text-layer-absent edits are not included. Substitution-preferring optimal alignment. product_pass stays false. Overall gate stays GATE_FAIL. pending_audit.",
+    "real_miss_or_wrong_char": 933,
+    "long_deletion_6_or_more": 342,
+    "short_deletion_1_to_5": 172,
+    "substitution": 369,
+    "in_text_layer_insertion": 50,
+    "named_three_sum": 883,
+    "sum_check": 933,
+    "hypothesis_435_154_70": "does not match"
+  },
   "joe_local_pdf_intake": {
     "intake_id": "joe-local-pdfs-2026-09-29",
     "note": "Same filename or SHA-256 as a completed public-eval document is a duplicate and is not counted again.",
