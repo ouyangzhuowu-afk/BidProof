@@ -65,6 +65,37 @@ OLD_TEDS_GT = FIXTURE_DIR / "teds_gt.jsonl"
 OLD_TEDS_HYP = FIXTURE_DIR / "teds_hypotheses.jsonl"
 OLD_KF_GT = FIXTURE_DIR / "key_field_gt.jsonl"
 OLD_KF_HYP = FIXTURE_DIR / "key_field_hypotheses.jsonl"
+SCALE_1_5_RECOUNT = OUT_DIR / "public-expand-scale-1.5-recount.md"
+
+# PDF user space is 72 points per inch. 3.0 renders at 216 DPI.
+# The previous measurement of this same page set used 1.5 (108 DPI).
+RENDER_SCALE = 3.0
+
+# Recomputed by build_report_from_fixtures() on the stored scale-1.5
+# hypotheses before RENDER_SCALE changed. Same scorer, same 54 pages.
+SCALE_1_5_EXPANDED = {
+    "render_scale": 1.5,
+    "dpi": 108,
+    "line_edits": 1302,
+    "line_denom": 29835,
+    "line_cer": 0.043640020110608344,
+    "line_cer_gate": "GATE_FAIL",
+    "line_cer_pages": 54,
+    "key_field_f1": 0.9716981132075472,
+    "key_field_f1_gate": "GATE_PASS",
+    "tp": 103,
+    "fp": 3,
+    "fn": 3,
+    "teds": 0.9580030818780702,
+    "teds_gate": "GATE_PASS",
+    "teds_pages_scored": 19,
+    "gate": "GATE_FAIL",
+    "product_pass": False,
+    "det_model": "ch_PP-OCRv4_det_infer.onnx",
+    "rec_model": "ch_PP-OCRv4_rec_infer.onnx",
+}
+V4_DET_MODEL = "ch_PP-OCRv4_det_infer.onnx"
+V4_REC_MODEL = "ch_PP-OCRv4_rec_infer.onnx"
 
 HTML_NOTICES: list[dict[str, str]] = [
     {
@@ -1044,7 +1075,19 @@ def build_report_from_fixtures() -> dict[str, Any]:
         "failure_causes": failures,
         "improvement_directions": improvement_directions(failures),
         "gt_policy": "embedded PDF text layer or PyMuPDF table extract confirmed against that text layer; published HTML for not-scored notices. OCR is never GT.",
-        "hypothesis_policy": "rapidocr_onnxruntime on a 1.5x render of the official PDF page. TOC dot leaders are segmented before line CER. Text-layer fragments that equal one OCR line are joined at scoring time; stored GT is not rewritten. Table hypotheses place OCR text into the PDF ruling-line grid. Ground truth stays the text layer.",
+        "hypothesis_policy": (
+            "rapidocr_onnxruntime defaults "
+            f"{V4_DET_MODEL} and {V4_REC_MODEL} on a {RENDER_SCALE:g}x "
+            f"({int(RENDER_SCALE * 72)} DPI) render of the official PDF page. "
+            "The previous measurement used a 1.5x (108 DPI) render and the same two models. "
+            "TOC dot leaders are segmented before line CER. Text-layer fragments that equal one OCR line "
+            "are joined at scoring time; stored GT is not rewritten. Table hypotheses place OCR text into "
+            "the PDF ruling-line grid. Ground truth stays the text layer."
+        ),
+        "render_scale": RENDER_SCALE,
+        "dpi": int(RENDER_SCALE * 72),
+        "models": _rapidocr_models_for_report(),
+        "before_render_scale_1_5": dict(SCALE_1_5_EXPANDED),
     }
     report["gate"] = (
         "GATE_PASS"
@@ -1165,6 +1208,44 @@ def improvement_directions(causes: list[dict[str, Any]]) -> list[str]:
     return directions
 
 
+def _scale_comparison_lines(report: dict[str, Any]) -> list[str]:
+    before = report["before_render_scale_1_5"]
+    after = report["expanded"]
+    models = report["models"]
+    return [
+        "## Render scale",
+        "",
+        (
+            f"Line finding stays `{models['det']}` and printed-text recognition stays `{models['rec']}` "
+            "(rapidocr_onnxruntime package defaults, `RapidOCR()` with no model override). "
+            f"Render scale is the only change: {before['render_scale']:g} ({before['dpi']} DPI) to "
+            f"{report['render_scale']:g} ({report['dpi']} DPI)."
+        ),
+        "",
+        "Same 54 CER pages, denominator 29835, 19 TEDS pages. "
+        "Thresholds unchanged: CER ≤2%, key-field F1 ≥97%, TEDS ≥90%.",
+        "",
+        "| Measurement | Render | Line CER | CER gate | Key-field F1 | F1 gate | TEDS | TEDS gate | Overall | product_pass |",
+        "|---|---|---:|---|---:|---|---:|---|---|---|",
+        (
+            f"| Before | {before['render_scale']:g}× ({before['dpi']} DPI) | "
+            f"{before['line_edits']}/{before['line_denom']} ({_pct(before['line_cer'])}) | {before['line_cer_gate']} | "
+            f"{_pct(before['key_field_f1'])} (TP {before['tp']} / FP {before['fp']} / FN {before['fn']}) | "
+            f"{before['key_field_f1_gate']} | {_pct(before['teds'])} | {before['teds_gate']} | {before['gate']} | false |"
+        ),
+        (
+            f"| After | {report['render_scale']:g}× ({report['dpi']} DPI) | "
+            f"{after.get('line_edits')}/{after.get('line_denom')} ({_pct(after['line_cer'])}) | {after['line_cer_gate']} | "
+            f"{_pct(after['key_field_f1'])} (TP {after['tp']} / FP {after['fp']} / FN {after['fn']}) | "
+            f"{after['key_field_f1_gate']} | {_pct(after['teds'])} | {after['teds_gate']} | {report['gate']} | false |"
+        ),
+        "",
+        "Before figures were recomputed by the same scorer on the scale-1.5 hypotheses before this render change. "
+        "A missed gate stays GATE_FAIL. `product_pass` stays false when any gate fails.",
+        "",
+    ]
+
+
 def render_markdown(report: dict[str, Any]) -> str:
     old = report["old_set"]
     new = report["expanded"]
@@ -1175,6 +1256,7 @@ def render_markdown(report: dict[str, Any]) -> str:
         "Engineering measurement only. This is not a product PASS, not T-005, and not business acceptance.",
         "Synthetic rows are in the appendix and are not in the expanded gate. Thresholds were not changed.",
         "",
+        *_scale_comparison_lines(report),
         "## Counts",
         "",
         f"- Prior completed public-eval documents: **{report['prior_completed_documents']}**",
@@ -1192,7 +1274,7 @@ def render_markdown(report: dict[str, Any]) -> str:
             f"{_pct(old['teds'])} | {old['teds_gate']} |"
         ),
         (
-            f"| Expanded public set (live OCR) | {_pct(new['line_cer'])} | {new['line_cer_gate']} | "
+            f"| Expanded public set (render scale {report['render_scale']:g}) | {_pct(new['line_cer'])} | {new['line_cer_gate']} | "
             f"{_pct(new['key_field_f1'])} | {new['key_field_f1_gate']} | "
             f"{_pct(new['teds'])} | {new['teds_gate']} |"
         ),
@@ -1277,6 +1359,10 @@ def render_markdown(report: dict[str, Any]) -> str:
         "uv run --extra ocr python -m work.eval.public_expand --build",
         "uv run python -m work.eval.public_expand --report",
         "```",
+    ]
+    if SCALE_1_5_RECOUNT.is_file():
+        lines += ["", SCALE_1_5_RECOUNT.read_text(encoding="utf-8").rstrip(), ""]
+    lines += [
         "",
         f"Generated at `{report['generated_at']}`.",
         "",
@@ -1375,11 +1461,59 @@ def _provenance(row: dict[str, Any], fetched_at: str) -> dict[str, Any]:
     }
 
 
+def _package_rapidocr_models() -> dict[str, str] | None:
+    """Read the installed RapidOCR default config. No model search and no override."""
+    try:
+        import rapidocr_onnxruntime
+    except ImportError:
+        return None
+    text = (Path(rapidocr_onnxruntime.__file__).resolve().parent / "config.yaml").read_text(encoding="utf-8")
+    section: str | None = None
+    found: dict[str, str] = {}
+    for line in text.splitlines():
+        if line.startswith("Det:"):
+            section = "det"
+        elif line.startswith("Rec:"):
+            section = "rec"
+        elif line.startswith("Cls:"):
+            section = "cls"
+        elif line[:1].isalpha() and line.endswith(":") and not line.startswith(" "):
+            section = None
+        elif section and "model_path:" in line:
+            found[section] = Path(line.split(":", 1)[1].strip()).name
+    return found
+
+
+def _rapidocr_models_for_report() -> dict[str, Any]:
+    installed = _package_rapidocr_models()
+    models: dict[str, Any] = {
+        "det": V4_DET_MODEL,
+        "rec": V4_REC_MODEL,
+        "source": "rapidocr_onnxruntime default config; RapidOCR() with no model override",
+        "confirmed_from_installed_package": False,
+    }
+    if installed is None:
+        return models
+    if installed.get("det") != V4_DET_MODEL or installed.get("rec") != V4_REC_MODEL:
+        raise RuntimeError(
+            "public expand OCR must keep the original v4 pair "
+            f"{V4_DET_MODEL} and {V4_REC_MODEL}, installed config has {installed}"
+        )
+    models["cls"] = installed.get("cls")
+    models["confirmed_from_installed_package"] = True
+    return models
+
+
+def _ocr_progress(document_id: object, page_number: int) -> None:
+    print(f"ocr_page {document_id} page {page_number}", flush=True)
+
+
 def _run_rapidocr(png: bytes) -> list[dict[str, Any]]:
     import fitz
     import numpy as np
     from rapidocr_onnxruntime import RapidOCR
 
+    _rapidocr_models_for_report()
     engine = _run_rapidocr.engine  # type: ignore[attr-defined]
     if engine is None:
         engine = RapidOCR()
@@ -1395,7 +1529,7 @@ def _run_rapidocr(png: bytes) -> list[dict[str, Any]]:
 _run_rapidocr.engine = None  # type: ignore[attr-defined]
 
 
-def _render(page: Any, scale: float = 1.5) -> bytes:
+def _render(page: Any, scale: float = RENDER_SCALE) -> bytes:
     import fitz
 
     return page.get_pixmap(matrix=fitz.Matrix(scale, scale), alpha=False).tobytes("png")
@@ -1495,6 +1629,7 @@ def build_samples(manifest: dict[str, Any]) -> dict[str, Any]:
                 }
             )
             return
+        _ocr_progress(row.get("document_id"), page_number)
         lines = ocr_page(page)
         hyp_text = redact_text("\n".join(item["text"] for item in lines))
         prov = _provenance(row, fetched_at)
@@ -1590,7 +1725,7 @@ def build_samples(manifest: dict[str, Any]) -> dict[str, Any]:
                     {
                         "doc_id": row["document_id"],
                         "page": page_number,
-                        "table_html_hyp": ocr_lines_into_cell_grid(lines, grid, 1.5),
+                        "table_html_hyp": ocr_lines_into_cell_grid(lines, grid, RENDER_SCALE),
                         "hypothesis_source": "rapidocr_onnxruntime_ruling_grid",
                         "cohort": cohort,
                     }
@@ -1664,6 +1799,7 @@ def build_samples(manifest: dict[str, Any]) -> dict[str, Any]:
                     }
                 )
                 continue
+            _ocr_progress(doc_id, page_number)
             lines = ocr_page(page)
             hyp_text = redact_text("\n".join(item["text"] for item in lines))
             prov = _provenance(stamped, fetched_at)
@@ -1753,7 +1889,7 @@ def build_samples(manifest: dict[str, Any]) -> dict[str, Any]:
                         "doc_id": doc_id,
                         "page": page_number,
                         "table_html_hyp": "".join(
-                            ocr_lines_into_cell_grid(lines, grid, 1.5) for grid in grids
+                            ocr_lines_into_cell_grid(lines, grid, RENDER_SCALE) for grid in grids
                         ),
                         "hypothesis_source": "rapidocr_onnxruntime_ruling_grid",
                         "cohort": "prior_public_ocr",

@@ -246,6 +246,18 @@ def test_joe_local_pdfs_match_existing_manifest_and_are_not_recounted():
     }
 
 
+def test_render_scale_is_3_and_default_models_stay_v4():
+    from work.eval.public_expand import RENDER_SCALE, V4_DET_MODEL, V4_REC_MODEL, _package_rapidocr_models
+
+    assert RENDER_SCALE == 3.0
+    rapidocr = pytest.importorskip("rapidocr_onnxruntime")
+    assert rapidocr is not None
+    models = _package_rapidocr_models()
+    assert models is not None
+    assert models["det"] == V4_DET_MODEL == "ch_PP-OCRv4_det_infer.onnx"
+    assert models["rec"] == V4_REC_MODEL == "ch_PP-OCRv4_rec_infer.onnx"
+
+
 def test_report_keeps_product_pass_false_and_separates_synthetic():
     report_path = ROOT / "outputs" / "ocr-benchmark" / "public-expand-report.json"
     if not report_path.is_file():
