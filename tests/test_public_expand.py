@@ -295,12 +295,27 @@ def test_report_keeps_product_pass_false_and_separates_synthetic():
     assert report["old_set"]["teds_gate"] == "GATE_FAIL"
     assert report["synthetic_appendix"]["line_cer_pages"] == 3
     assert report["expanded"]["line_cer_pages"] == 54
-    assert report["expanded"]["line_edits"] == 1302
+    assert report["expanded"]["line_edits"] == 2563
     assert report["expanded"]["line_denom"] == 29835
-    assert report["expanded"]["tp"] == 103
+    assert report["expanded"]["line_cer_gate"] == "GATE_FAIL"
+    assert report["expanded"]["tp"] == 102
     assert report["expanded"]["fp"] == 3
-    assert report["expanded"]["fn"] == 3
+    assert report["expanded"]["fn"] == 4
+    assert report["expanded"]["key_field_f1_gate"] == "GATE_FAIL"
     assert report["expanded"]["teds_pages_scored"] == 19
+    assert report["expanded"]["teds_gate"] == "GATE_PASS"
+    assert report["render_scale"] == 3.0
+    assert report["max_side_len"] == 2527
+    assert report["models"]["det"] == "ch_PP-OCRv4_det_infer.onnx"
+    assert report["models"]["rec"] == "ch_PP-OCRv4_rec_infer.onnx"
+    assert report["page_long_sides"]["largest_long_side"] == 2526
+    assert report["page_long_sides"]["pages"] == 54
+    assert report["page_long_sides"]["pages_shrunk"] == 0
+    assert report["page_long_sides"]["any_page_shrunk"] is False
+    assert report["scale_1_5_baseline"]["line_edits"] == 1302
+    assert report["scale_1_5_baseline"]["line_denom"] == 29835
+    assert report["product_pass"] is False
+    assert report["gate"] == "GATE_FAIL"
     assert report["old_set"]["line_cer"] == pytest.approx(0.031746031746031744)
     assert report["old_set"]["key_field_f1"] == pytest.approx(0.76)
     assert report["old_set"]["teds"] == pytest.approx(0.8784546114752891, rel=1e-6)

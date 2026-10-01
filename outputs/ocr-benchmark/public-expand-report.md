@@ -1,7 +1,25 @@
 # S-A-OCR-PUBLIC-EXPAND OCR gate report
 
-Engineering measurement only. This is not a product PASS, not T-005, and not business acceptance.
+Engineering measurement only. This is not a product PASS, not T-005, and not business acceptance. `pending_audit` only.
 Synthetic rows are in the appendix and are not in the expanded gate. Thresholds were not changed.
+
+## Render scale and max_side_len
+
+Line finding stays `ch_PP-OCRv4_det_infer.onnx` and printed-text recognition stays `ch_PP-OCRv4_rec_infer.onnx` (rapidocr_onnxruntime package defaults; `RapidOCR(max_side_len=...)` does not replace either model). Render scale stays 3 (216 DPI).
+
+`Global.max_side_len` used for this run: **2527**. Largest page long side measured at that render scale: **2526** pixels across **54** pages. No page was shrunk. A page is shrunk when its long side is greater than `max_side_len`.
+
+Same 54 CER pages, denominator 29835, 19 TEDS pages. Thresholds unchanged: CER ≤2%, key-field F1 ≥97%, TEDS ≥90%. Fragment-line alignment and the scoring formula are unchanged.
+
+| Measurement | Render | max_side_len | Line CER | CER gate | Key-field F1 | F1 gate | TEDS | TEDS gate | Overall | product_pass |
+|---|---|---:|---:|---|---:|---|---:|---|---|---|
+| Scale-1.5 baseline (8b869d54) | 1.5× (108 DPI) | 2000 | 1302/29835 (4.36%) | GATE_FAIL | 97.17% (TP 103 / FP 3 / FN 3) | GATE_PASS | 95.80% | GATE_PASS | GATE_FAIL | false |
+| Scale 3, default cap (draft PR #21) | 3× (216 DPI) | 2000 | 2399/29835 (8.04%) | GATE_FAIL | 95.19% (TP 99 / FP 3 / FN 7) | GATE_FAIL | 95.12% | GATE_PASS | GATE_FAIL | false |
+| This run | 3× (216 DPI) | 2527 | 2563/29835 (8.59%) | GATE_FAIL | 96.68% (TP 102 / FP 3 / FN 4) | GATE_FAIL | 94.88% | GATE_PASS | GATE_FAIL | false |
+
+The scale-1.5 row is the recorded baseline on commit 8b869d54: line CER 1302/29835 (4.36%) GATE_FAIL. The middle row is the scale-3 run that left `max_side_len` at 2000. This run only raises `max_side_len`. A missed gate stays GATE_FAIL. `product_pass` stays false when any gate fails.
+
+Line CER on this run is 2563/29835 (8.59%), above the scale-1.5 baseline of 1302/29835 (4.36%). No further render scale or parameter was tried.
 
 ## Counts
 
@@ -15,14 +33,14 @@ Synthetic rows are in the appendix and are not in the expanded gate. Thresholds 
 | Set | CER | CER gate | F1 | F1 gate | TEDS | TEDS gate |
 |---|---:|---|---:|---|---:|---|
 | Old published set | 3.17% | GATE_FAIL | 76.00% | GATE_FAIL | 87.85% | GATE_FAIL |
-| Expanded public set (live OCR) | 4.36% | GATE_FAIL | 97.17% | GATE_PASS | 95.80% | GATE_PASS |
+| Expanded public set (scale 3, max_side_len 2527) | 8.59% | GATE_FAIL | 96.68% | GATE_FAIL | 94.88% | GATE_PASS |
 | Synthetic appendix (not in gate) | 3.17% | GATE_FAIL | 10.26% | GATE_FAIL | 86.63% | GATE_FAIL |
 
 Overall expanded gate: **GATE_FAIL**. `product_pass=false`.
 
-Expanded F1 counts: TP 103 / FP 3 / FN 3.
+Expanded F1 counts: TP 102 / FP 3 / FN 4.
 
-Expanded line edits: **1302** / **29835** on **54** pages. Baseline before fragment alignment, same pages: **1481/29835** (CER 4.96%). Unconstrained adjacent joins (remeasured 485 edits; prior hypothesis 483) are not applied. Rejected false candidates: fixture-003 page 5, two paragraphs; pub-gx-youjiang-ultrasound page 5, 开标时间 with 开标地点 and the acquisition-time wrap.
+Expanded line edits: **2563** / **29835** on **54** pages. Baseline before fragment alignment, same pages: **1481/29835** (CER 4.96%). Unconstrained adjacent joins (remeasured 485 edits; prior hypothesis 483) are not applied. Rejected false candidates: fixture-003 page 5, two paragraphs; pub-gx-youjiang-ultrasound page 5, 开标时间 with 开标地点 and the acquisition-time wrap.
 
 ## Sources
 
@@ -73,6 +91,8 @@ Twelve PDFs from Joe's local `work/public-eval/pdfs`, approved by Edith for eval
 - Table hypotheses already use the PDF ruling-line grid. Remaining TEDS misses are OCR characters inside those cells, still scored against the text-layer HTML.
 - Leave image-only pages not-scored until a human transcript exists. Do not promote OCR text to ground truth.
 - Keep training-corpus PDFs and synthetic scans out of this gate so later fine-tunes cannot leak into the reported numbers.
+
+The recount below is the scale-1.5 baseline of 1302/29835. It is not this run.
 
 ## Remaining line-edit recount (1302)
 
@@ -248,6 +268,7 @@ Whole unmatched lines are dominated by `fixture-003` page 5 (21), `pub-gx-youjia
 
 These 11 rows sum to 342, with 100 whole unmatched lines and 242 paired-line gaps. The other 43 pages have no long deletion.
 
+
 ## Reproduce
 
 ```bash
@@ -255,4 +276,4 @@ uv run --extra ocr python -m work.eval.public_expand --build
 uv run python -m work.eval.public_expand --report
 ```
 
-Generated at `2026-10-01T12:21:36.109905+00:00`.
+Generated at `2026-10-01T14:54:33.084927+00:00`.

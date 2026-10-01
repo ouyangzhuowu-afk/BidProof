@@ -37,8 +37,8 @@
         "outputs/ocr-benchmark/public-expand-report.md",
         "outputs/ocr-benchmark/public-expand-report.json"
       ],
-      "validation": "Live RapidOCR vs text-layer GT. Prior public-eval docs 12. New completed PDFs 7, new not-scored HTML notices 2, one CCGP HTTPS fetch HTTP 403 not counted. Old set unchanged: CER 3.17% / F1 76.00% / TEDS 87.85%, all GATE_FAIL. Expanded public set, same 54 pages, after scoring-time fragment alignment: line CER 4.36% GATE_FAIL (1302/29835; baseline 1481/29835 = 4.96%). Real fragment alignment removed 179 edits. Unconstrained adjacent join (remeasured 485; hypothesis 483) was not applied. Rejected false candidates: fixture-003 page 5 two paragraphs; pub-gx-youjiang-ultrasound page 5 开标时间/开标地点 and the acquisition-time wrap. F1 97.17% GATE_PASS (TP 103 / FP 3 / FN 3), TEDS 95.80% GATE_PASS (19 pages). Overall GATE_FAIL. product_pass=false. Synthetic rows excluded. Joe local PDF intake 2026-09-29: 12/12 duplicate, 0 newly added. No pilot/ICP ledger writes. T-005 not modified.",
-      "note": "pending_audit only. Fragment-line scoring is not a product PASS and not a business unblock. Recount of the remaining 1302 line edits: fragment 32, text-layer-absent 337, real miss 933. Sum 1302. Bucket 3 split: long deletion 342, short deletion 172, substitution 369, in-text-layer insertion 50. Sum 933. Long deletions: whole unmatched line 100, paired-line gap 242, remainder 0. Sum 342. Not verified."
+      "validation": "Live RapidOCR vs text-layer GT. Prior public-eval docs 12. New completed PDFs 7, new not-scored HTML notices 2. Old set unchanged: CER 3.17% / F1 76.00% / TEDS 87.85%, all GATE_FAIL. Scale-1.5 baseline on 8b869d54: line CER 4.36% GATE_FAIL (1302/29835), F1 97.17% GATE_PASS (TP 103 / FP 3 / FN 3), TEDS 95.80% GATE_PASS (19 pages). This run keeps ch_PP-OCRv4_det_infer.onnx and ch_PP-OCRv4_rec_infer.onnx, render scale 3, Global.max_side_len 2527. Largest page long side 2526. Pages shrunk: 0. Line CER 8.59% GATE_FAIL (2563/29835), F1 96.68% GATE_FAIL (TP 102 / FP 3 / FN 4), TEDS 94.88% GATE_PASS. Above the 4.36% baseline, so no further scale or parameter was tried. Overall GATE_FAIL. product_pass=false. pending_audit. Synthetic rows excluded. Joe local PDF intake 2026-09-29: 12/12 duplicate, 0 newly added. No pilot/ICP ledger writes. T-005 not modified.",
+      "note": "pending_audit only. Not a product PASS and not a business unblock. max_side_len 2527 is above the measured long side 2526; no page was shrunk. CER stayed above 4.36% (2563>1302). Stopped. Not verified."
     }
   ],
   "completed": [
@@ -1343,19 +1343,19 @@
       "path": "work/eval/public_expand.py",
       "kind": "ocr-public-expand",
       "status": "pending_audit",
-      "note": "S-A-OCR-PUBLIC-EXPAND live OCR eval. Scoring-time fragment join only. Not verified."
+      "note": "S-A-OCR-PUBLIC-EXPAND. Render scale 3, max_side_len 2527, original v4 det and rec. pending_audit. Not verified."
     },
     {
       "path": "outputs/ocr-benchmark/public-expand-report.md",
       "kind": "ocr-public-expand-report",
       "status": "pending_audit",
-      "note": "Expanded line CER 4.36% (1302/29835) GATE_FAIL. Recount: fragment 32, absent 337, miss 933. Bucket 3: long 342, short 172, sub 369, ins 50. Long deletions: whole 100, gap 242. Overall GATE_FAIL. Not verified."
+      "note": "Scale 3, max_side_len 2527, largest long side 2526, pages shrunk 0. Line CER 8.59% (2563/29835) GATE_FAIL, above the 4.36% baseline. F1 96.68% GATE_FAIL. TEDS 94.88% GATE_PASS. product_pass false. pending_audit. Not verified."
     },
     {
       "path": "outputs/ocr-benchmark/public-expand-report.json",
       "kind": "ocr-public-expand-report",
       "status": "pending_audit",
-      "note": "Machine-readable expanded gate. Line edits 1302/29835. Recount 32+337+933. Bucket 3 split 342+172+369+50. Long deletions 100+242. product_pass false. Not verified."
+      "note": "Machine-readable expanded gate. Line edits 2563/29835. max_side_len 2527. pages_shrunk 0. product_pass false. pending_audit. Not verified."
     },
     {
       "path": "work/public-eval/FETCH.md",
@@ -1379,7 +1379,7 @@
     ],
     "note": "Do not write demo/test rows into pilot/ICP ledgers. Do not claim business TARGET_MET. Pilot scan results are always NEEDS_REVIEW and cannot count as accuracy acceptance. On real input: copy template → fill → pilot_ledger/icp_ledger --row-json. Readiness: uv run python -m work.pilot_readiness --json."
   },
-  "updated_at": "2026-10-01T12:54:32+00:00",
+  "updated_at": "2026-10-01T14:55:00+00:00",
   "sandbox_roadmap": {
     "locked_at": "2026-09-16",
     "gates": {

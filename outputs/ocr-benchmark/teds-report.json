@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-09-29T09:06:12.123118+00:00",
+  "generated_at": "2026-10-01T14:54:33.084927+00:00",
   "claim_scope": "engineering_gate_only",
-  "teds": 0.9580030818780702,
+  "teds": 0.9488104528525958,
   "gate": "GATE_PASS",
   "product_pass": false,
   "business_pass": false,
@@ -34,7 +34,7 @@
     {
       "doc_id": "fixture-002",
       "page": 33,
-      "teds": 1.0
+      "teds": 0.9841269841269842
     },
     {
       "doc_id": "fixture-002",
@@ -64,22 +64,22 @@
     {
       "doc_id": "pub-gx-nanning-vascular-doppler",
       "page": 3,
-      "teds": 0.9855072463768116
-    },
-    {
-      "doc_id": "pub-gx-nanning-vascular-doppler",
-      "page": 16,
       "teds": 1.0
     },
     {
       "doc_id": "pub-gx-nanning-vascular-doppler",
+      "page": 16,
+      "teds": 0.9705882352941176
+    },
+    {
+      "doc_id": "pub-gx-nanning-vascular-doppler",
       "page": 17,
-      "teds": 0.9772727272727273
+      "teds": 0.9431818181818182
     },
     {
       "doc_id": "pub-gx-ventilator-monitors",
       "page": 15,
-      "teds": 0.9811320754716981
+      "teds": 0.9622641509433962
     },
     {
       "doc_id": "pub-gx-tianlin-yuegui-devices-2026",
@@ -104,7 +104,7 @@
     {
       "doc_id": "pub-gx-info-center-compute-2026",
       "page": 5,
-      "teds": 0.9090909090909091
+      "teds": 0.8181818181818181
     },
     {
       "doc_id": "pub-gx-yibiatong-phase2-2026",

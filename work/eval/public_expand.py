@@ -130,6 +130,38 @@ SCALE_3_MAX_SIDE_2000 = {
     "rec_model": V4_REC_MODEL,
 }
 
+# Recorded on 8b869d54 for the 1302-edit scale-1.5 baseline. Not this run.
+SCALE_1_5_LINE_EDIT_RECOUNT = {
+    "note": "Evidence only. Scorer unchanged. Each of the 1302 current line edits is assigned once. product_pass stays false. Overall gate stays GATE_FAIL. pending_audit.",
+    "line_edits": 1302,
+    "line_denom": 29835,
+    "fragment_unaligned": 32,
+    "text_layer_absent": 337,
+    "real_miss_or_wrong_char": 933,
+    "sum_check": 1302,
+    "hypothesis_304_339_659": "does not match",
+}
+SCALE_1_5_BUCKET3_SPLIT = {
+    "note": "Evidence only. Scorer unchanged. Splits the 933 real misses. The 32 fragments and 337 text-layer-absent edits are not included. Substitution-preferring optimal alignment. product_pass stays false. Overall gate stays GATE_FAIL. pending_audit.",
+    "real_miss_or_wrong_char": 933,
+    "long_deletion_6_or_more": 342,
+    "short_deletion_1_to_5": 172,
+    "substitution": 369,
+    "in_text_layer_insertion": 50,
+    "named_three_sum": 883,
+    "sum_check": 933,
+    "hypothesis_435_154_70": "does not match",
+}
+SCALE_1_5_LONG_DELETION_SPLIT = {
+    "note": "Evidence only. Scorer unchanged. Splits only the 342 long deletions. The 337 absent edits, 50 in-text-layer insertions, 172 short deletions, and 369 substitutions are not included. Same alignment. product_pass stays false. Overall gate stays GATE_FAIL. pending_audit.",
+    "long_deletion_6_or_more": 342,
+    "whole_unmatched_line": 100,
+    "paired_line_gap": 242,
+    "remainder": 0,
+    "sum_check": 342,
+}
+SCALE_1_5_RECOUNT_MD = OUT_DIR / "public-expand-scale-1.5-line-edit-recount.md"
+
 HTML_NOTICES: list[dict[str, str]] = [
     {
         "document_id": "pub-ccgp-zycg-ac-award-202609",
@@ -1141,6 +1173,12 @@ def build_report_from_fixtures() -> dict[str, Any]:
         "page_long_sides": measure_scored_page_long_sides(),
         "scale_1_5_baseline": dict(SCALE_1_5_BASELINE),
         "scale_3_max_side_len_2000": dict(SCALE_3_MAX_SIDE_2000),
+        "scale_1_5_baseline_recount": {
+            "applies_to": "scale-1.5 baseline 1302/29835 on 8b869d54, not this run",
+            "line_edit_recount": dict(SCALE_1_5_LINE_EDIT_RECOUNT),
+            "bucket3_split": dict(SCALE_1_5_BUCKET3_SPLIT),
+            "long_deletion_split": dict(SCALE_1_5_LONG_DELETION_SPLIT),
+        },
     }
     report["gate"] = (
         "GATE_PASS"
@@ -1280,7 +1318,7 @@ def _max_side_comparison_lines(report: dict[str, Any]) -> list[str]:
         if not measured["any_page_shrunk"]
         else f"{measured['pages_shrunk']} of {measured['pages']} pages were still shrunk."
     )
-    return [
+    lines = [
         "## Render scale and max_side_len",
         "",
         (
@@ -1340,6 +1378,22 @@ def _max_side_comparison_lines(report: dict[str, Any]) -> list[str]:
         ),
         "",
     ]
+    baseline_edits = report["scale_1_5_baseline"]["line_edits"]
+    this_edits = after.get("line_edits")
+    if this_edits is not None and this_edits > baseline_edits:
+        lines.extend(
+            [
+                (
+                    f"Line CER on this run is {this_edits}/{after.get('line_denom')} "
+                    f"({_pct(after.get('line_cer'))}), above the scale-1.5 baseline of "
+                    f"{baseline_edits}/{report['scale_1_5_baseline']['line_denom']} "
+                    f"({_pct(report['scale_1_5_baseline']['line_cer'])}). "
+                    "No further render scale or parameter was tried."
+                ),
+                "",
+            ]
+        )
+    return lines
 
 
 def render_markdown(report: dict[str, Any]) -> str:
@@ -1447,6 +1501,14 @@ def render_markdown(report: dict[str, Any]) -> str:
     lines += ["", "## Improvement directions", ""]
     for item in report["improvement_directions"]:
         lines.append(f"- {item}")
+    if SCALE_1_5_RECOUNT_MD.is_file():
+        lines += [
+            "",
+            "The recount below is the scale-1.5 baseline of 1302/29835. It is not this run.",
+            "",
+            SCALE_1_5_RECOUNT_MD.read_text(encoding="utf-8").rstrip(),
+            "",
+        ]
     lines += [
         "",
         "## Reproduce",
@@ -2125,9 +2187,24 @@ def build_samples(manifest: dict[str, Any]) -> dict[str, Any]:
     _write_sample_rows(TEDS_HYP_PATH, teds_hyp)
     _write_sample_rows(KF_GT_PATH, kf_gt)
     _write_sample_rows(KF_HYP_PATH, kf_hyp)
-    assert_safe_output(OUT_DIR / "public-expand-not-scored.json")
-    (OUT_DIR / "public-expand-not-scored.json").write_text(
-        json.dumps(not_scored, ensure_ascii=False, indent=2) + "\n",
+    sidecar_path = OUT_DIR / "public-expand-not-scored.json"
+    assert_safe_output(sidecar_path)
+    prior_html: list[dict[str, Any]] = []
+    if sidecar_path.is_file():
+        loaded = json.loads(sidecar_path.read_text(encoding="utf-8"))
+        if isinstance(loaded, list):
+            prior_html = [
+                row
+                for row in loaded
+                if isinstance(row, dict) and row.get("gt_source") == "published_html"
+            ]
+    present = {str(row.get("document_id") or "") for row in not_scored}
+    merged_not_scored = list(not_scored)
+    for row in prior_html:
+        if str(row.get("document_id") or "") not in present:
+            merged_not_scored.append(row)
+    sidecar_path.write_text(
+        json.dumps(merged_not_scored, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )
     return {"not_scored": len(not_scored), "cer_pages": len(cer_gt), "teds_pages": len(teds_gt), "key_rows": len(kf_gt)}
