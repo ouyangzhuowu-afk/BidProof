@@ -38,10 +38,13 @@
         "outputs/ocr-benchmark/public-expand-report.json",
         "work/eval/line_edit_buckets.py",
         "outputs/ocr-benchmark/line-edit-seven-buckets.md",
-        "outputs/ocr-benchmark/line-edit-seven-buckets.json"
+        "outputs/ocr-benchmark/line-edit-seven-buckets.json",
+        "work/eval/substitution_split.py",
+        "outputs/ocr-benchmark/substitution-split-395.md",
+        "outputs/ocr-benchmark/substitution-split-395.json"
       ],
       "validation": "Live RapidOCR vs text-layer GT. Prior public-eval docs 12. New completed PDFs 7, new not-scored HTML notices 2, one CCGP HTTPS fetch HTTP 403 not counted. Old set unchanged: CER 3.17% / F1 76.00% / TEDS 87.85%, all GATE_FAIL. Expanded public set, same 54 pages, after scoring-time fragment alignment: line CER 4.36% GATE_FAIL (1302/29835; baseline 1481/29835 = 4.96%). Real fragment alignment removed 179 edits. Unconstrained adjacent join (remeasured 485; hypothesis 483) was not applied. Rejected false candidates: fixture-003 page 5 two paragraphs; pub-gx-youjiang-ultrasound page 5 开标时间/开标地点 and the acquisition-time wrap. F1 97.17% GATE_PASS (TP 103 / FP 3 / FN 3), TEDS 95.80% GATE_PASS (19 pages). Overall GATE_FAIL. product_pass=false. Synthetic rows excluded. Joe local PDF intake 2026-09-29: 12/12 duplicate, 0 newly added. No pilot/ICP ledger writes. T-005 not modified.",
-      "note": "pending_audit only. Fragment-line scoring is not a product PASS and not a business unblock. Recount of the remaining 1302 line edits: fragment 32, text-layer-absent 337, real miss 933. Sum 1302. Bucket 3 split: long deletion 342, short deletion 172, substitution 369, in-text-layer insertion 50. Sum 933. Long deletions: whole unmatched line 100, paired-line gap 242, remainder 0. Sum 342. Not verified. 2026-10-01 seven-bucket label of the same 1302 edits, exclusive rule in outputs/ocr-benchmark/line-edit-seven-buckets.md: not in text layer 47, header/letterhead 286, whole-line miss 151, paired-line gap 363, substitution 395, extra insertion 28, fragment 32. Sum 1302, remainder 0. Labels only. Gate unchanged."
+      "note": "pending_audit only. Fragment-line scoring is not a product PASS and not a business unblock. Recount of the remaining 1302 line edits: fragment 32, text-layer-absent 337, real miss 933. Sum 1302. Bucket 3 split: long deletion 342, short deletion 172, substitution 369, in-text-layer insertion 50. Sum 933. Long deletions: whole unmatched line 100, paired-line gap 242, remainder 0. Sum 342. Not verified. 2026-10-01 seven-bucket label of the same 1302 edits, exclusive rule in outputs/ocr-benchmark/line-edit-seven-buckets.md: not in text layer 47, header/letterhead 286, whole-line miss 151, paired-line gap 363, substitution 395, extra insertion 28, fragment 32. Sum 1302, remainder 0. Labels only. Gate unchanged. 2026-10-01 substitution split of the same 395, exclusive rule in outputs/ocr-benchmark/substitution-split-395.md: wrong-line pairing 324, same-line misread 71. Sum 395, remainder 0. Other six buckets unchanged. Not a product pass."
     }
   ],
   "completed": [
@@ -1379,6 +1382,24 @@
       "note": "Machine-readable seven-bucket label. line_edits 1302, line_denom 29835, remainder 0. Not verified."
     },
     {
+      "path": "work/eval/substitution_split.py",
+      "kind": "ocr-substitution-split",
+      "status": "pending_audit",
+      "note": "Labels the current 395 substitutions into two exclusive pieces. Does not change the matcher. Not verified."
+    },
+    {
+      "path": "outputs/ocr-benchmark/substitution-split-395.md",
+      "kind": "ocr-substitution-split-report",
+      "status": "pending_audit",
+      "note": "Wrong-line pairing 324 and same-line misread 71. Sum 395, remainder 0. Other six buckets and 1302 unchanged. GATE_FAIL. product_pass false. Not verified."
+    },
+    {
+      "path": "outputs/ocr-benchmark/substitution-split-395.json",
+      "kind": "ocr-substitution-split-report",
+      "status": "pending_audit",
+      "note": "Machine-readable substitution split. piece_sum 395, remainder 0. Not verified."
+    },
+    {
       "path": "work/public-eval/FETCH.md",
       "kind": "public-eval-runbook",
       "status": "pending_audit",
@@ -1400,7 +1421,7 @@
     ],
     "note": "Do not write demo/test rows into pilot/ICP ledgers. Do not claim business TARGET_MET. Pilot scan results are always NEEDS_REVIEW and cannot count as accuracy acceptance. On real input: copy template → fill → pilot_ledger/icp_ledger --row-json. Readiness: uv run python -m work.pilot_readiness --json."
   },
-  "updated_at": "2026-10-01T16:30:00+00:00",
+  "updated_at": "2026-10-01T17:10:00+00:00",
   "sandbox_roadmap": {
     "locked_at": "2026-09-16",
     "gates": {
