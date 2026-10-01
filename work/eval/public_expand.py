@@ -65,6 +65,70 @@ OLD_TEDS_GT = FIXTURE_DIR / "teds_gt.jsonl"
 OLD_TEDS_HYP = FIXTURE_DIR / "teds_hypotheses.jsonl"
 OLD_KF_GT = FIXTURE_DIR / "key_field_gt.jsonl"
 OLD_KF_HYP = FIXTURE_DIR / "key_field_hypotheses.jsonl"
+STORED_GT_PATHS = frozenset({CER_GT_PATH, TEDS_GT_PATH, KF_GT_PATH})
+
+# PDF user space is 72 points per inch. 3.0 renders at 216 DPI.
+# The scale-1.5 baseline on 8b869d54 used 108 DPI. Render scale stays 3.
+RENDER_SCALE = 3.0
+
+# RapidOCR shrinks a page in preprocess when its long side is greater than
+# Global.max_side_len. The package default is 2000. On these 54 pages at
+# RENDER_SCALE the largest long side is 2526, so 2000 shrinks every page.
+# 2527 is the integer above that measured side. Do not use 2000.
+MAX_SIDE_LEN = 2527
+
+V4_DET_MODEL = "ch_PP-OCRv4_det_infer.onnx"
+V4_REC_MODEL = "ch_PP-OCRv4_rec_infer.onnx"
+
+# Same scorer, same 54 pages, recorded on 8b869d54. Not recomputed here.
+SCALE_1_5_BASELINE = {
+    "label": "scale-1.5 baseline on 8b869d54",
+    "render_scale": 1.5,
+    "dpi": 108,
+    "max_side_len": 2000,
+    "line_edits": 1302,
+    "line_denom": 29835,
+    "line_cer": 0.043640020110608344,
+    "line_cer_gate": "GATE_FAIL",
+    "line_cer_pages": 54,
+    "key_field_f1": 0.9716981132075472,
+    "key_field_f1_gate": "GATE_PASS",
+    "tp": 103,
+    "fp": 3,
+    "fn": 3,
+    "teds": 0.9580030818780702,
+    "teds_gate": "GATE_PASS",
+    "teds_pages_scored": 19,
+    "gate": "GATE_FAIL",
+    "product_pass": False,
+    "det_model": V4_DET_MODEL,
+    "rec_model": V4_REC_MODEL,
+}
+
+# Draft PR #21 left Global.max_side_len at the package default. Not this run.
+SCALE_3_MAX_SIDE_2000 = {
+    "label": "scale-3 with max_side_len 2000 (draft PR #21)",
+    "render_scale": 3.0,
+    "dpi": 216,
+    "max_side_len": 2000,
+    "line_edits": 2399,
+    "line_denom": 29835,
+    "line_cer": 0.08040891570303335,
+    "line_cer_gate": "GATE_FAIL",
+    "line_cer_pages": 54,
+    "key_field_f1": 0.951923076923077,
+    "key_field_f1_gate": "GATE_FAIL",
+    "tp": 99,
+    "fp": 3,
+    "fn": 7,
+    "teds": 0.951161696265886,
+    "teds_gate": "GATE_PASS",
+    "teds_pages_scored": 19,
+    "gate": "GATE_FAIL",
+    "product_pass": False,
+    "det_model": V4_DET_MODEL,
+    "rec_model": V4_REC_MODEL,
+}
 
 HTML_NOTICES: list[dict[str, str]] = [
     {
@@ -443,6 +507,22 @@ def _write_jsonl(path: Path, rows: list[dict[str, Any]]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     payload = "".join(json.dumps(row, ensure_ascii=False) + "\n" for row in rows)
     path.write_text(payload, encoding="utf-8")
+
+
+def _write_sample_rows(path: Path, rows: list[dict[str, Any]]) -> None:
+    """Write hypotheses. Leave stored ground truth bytes in place."""
+    if path in STORED_GT_PATHS and path.is_file():
+        stored_keys = sorted(
+            (str(row.get("doc_id")), int(row.get("page") or 0)) for row in _read_jsonl(path)
+        )
+        new_keys = sorted((str(row.get("doc_id")), int(row.get("page") or 0)) for row in rows)
+        if stored_keys != new_keys:
+            raise RuntimeError(
+                f"refusing to change the scored page set in {path.name}: "
+                f"stored {len(stored_keys)} vs rebuilt {len(new_keys)}"
+            )
+        return
+    _write_jsonl(path, rows)
 
 
 def _gate_cer(value: float | None) -> str:
@@ -1044,7 +1124,23 @@ def build_report_from_fixtures() -> dict[str, Any]:
         "failure_causes": failures,
         "improvement_directions": improvement_directions(failures),
         "gt_policy": "embedded PDF text layer or PyMuPDF table extract confirmed against that text layer; published HTML for not-scored notices. OCR is never GT.",
-        "hypothesis_policy": "rapidocr_onnxruntime on a 1.5x render of the official PDF page. TOC dot leaders are segmented before line CER. Text-layer fragments that equal one OCR line are joined at scoring time; stored GT is not rewritten. Table hypotheses place OCR text into the PDF ruling-line grid. Ground truth stays the text layer.",
+        "hypothesis_policy": (
+            "rapidocr_onnxruntime defaults "
+            f"{V4_DET_MODEL} and {V4_REC_MODEL} on a {RENDER_SCALE:g}x "
+            f"({int(RENDER_SCALE * 72)} DPI) render of the official PDF page. "
+            f"Global.max_side_len is {MAX_SIDE_LEN}, above the largest measured page long side. "
+            "The package default 2000 is not used. "
+            "TOC dot leaders are segmented before line CER. Text-layer fragments that equal one OCR line "
+            "are joined at scoring time; stored GT is not rewritten. Table hypotheses place OCR text into "
+            "the PDF ruling-line grid. Ground truth stays the text layer."
+        ),
+        "render_scale": RENDER_SCALE,
+        "dpi": int(RENDER_SCALE * 72),
+        "max_side_len": MAX_SIDE_LEN,
+        "models": _rapidocr_models_for_report(),
+        "page_long_sides": measure_scored_page_long_sides(),
+        "scale_1_5_baseline": dict(SCALE_1_5_BASELINE),
+        "scale_3_max_side_len_2000": dict(SCALE_3_MAX_SIDE_2000),
     }
     report["gate"] = (
         "GATE_PASS"
@@ -1165,6 +1261,87 @@ def improvement_directions(causes: list[dict[str, Any]]) -> list[str]:
     return directions
 
 
+def _measurement_row(label: str, row: dict[str, Any], *, render: str) -> str:
+    return (
+        f"| {label} | {render} | {row.get('max_side_len')} | "
+        f"{row.get('line_edits')}/{row.get('line_denom')} ({_pct(row.get('line_cer'))}) | {row.get('line_cer_gate')} | "
+        f"{_pct(row.get('key_field_f1'))} (TP {row.get('tp')} / FP {row.get('fp')} / FN {row.get('fn')}) | "
+        f"{row.get('key_field_f1_gate')} | {_pct(row.get('teds'))} | {row.get('teds_gate')} | "
+        f"{row.get('gate')} | false |"
+    )
+
+
+def _max_side_comparison_lines(report: dict[str, Any]) -> list[str]:
+    measured = report["page_long_sides"]
+    models = report["models"]
+    after = report["expanded"]
+    shrunk = (
+        "No page was shrunk."
+        if not measured["any_page_shrunk"]
+        else f"{measured['pages_shrunk']} of {measured['pages']} pages were still shrunk."
+    )
+    return [
+        "## Render scale and max_side_len",
+        "",
+        (
+            f"Line finding stays `{models['det']}` and printed-text recognition stays `{models['rec']}` "
+            "(rapidocr_onnxruntime package defaults; `RapidOCR(max_side_len=...)` does not replace either model). "
+            f"Render scale stays {report['render_scale']:g} ({report['dpi']} DPI)."
+        ),
+        "",
+        (
+            f"`Global.max_side_len` used for this run: **{measured['max_side_len']}**. "
+            f"Largest page long side measured at that render scale: **{measured['largest_long_side']}** pixels "
+            f"across **{measured['pages']}** pages. {shrunk} "
+            "A page is shrunk when its long side is greater than `max_side_len`."
+        ),
+        "",
+        "Same 54 CER pages, denominator 29835, 19 TEDS pages. "
+        "Thresholds unchanged: CER ≤2%, key-field F1 ≥97%, TEDS ≥90%. "
+        "Fragment-line alignment and the scoring formula are unchanged.",
+        "",
+        "| Measurement | Render | max_side_len | Line CER | CER gate | Key-field F1 | F1 gate | TEDS | TEDS gate | Overall | product_pass |",
+        "|---|---|---:|---:|---|---:|---|---:|---|---|---|",
+        _measurement_row(
+            "Scale-1.5 baseline (8b869d54)",
+            report["scale_1_5_baseline"],
+            render=f"{report['scale_1_5_baseline']['render_scale']:g}× ({report['scale_1_5_baseline']['dpi']} DPI)",
+        ),
+        _measurement_row(
+            "Scale 3, default cap (draft PR #21)",
+            report["scale_3_max_side_len_2000"],
+            render=f"{report['scale_3_max_side_len_2000']['render_scale']:g}× ({report['scale_3_max_side_len_2000']['dpi']} DPI)",
+        ),
+        _measurement_row(
+            "This run",
+            {
+                "max_side_len": measured["max_side_len"],
+                "line_edits": after.get("line_edits"),
+                "line_denom": after.get("line_denom"),
+                "line_cer": after.get("line_cer"),
+                "line_cer_gate": after.get("line_cer_gate"),
+                "key_field_f1": after.get("key_field_f1"),
+                "tp": after.get("tp"),
+                "fp": after.get("fp"),
+                "fn": after.get("fn"),
+                "key_field_f1_gate": after.get("key_field_f1_gate"),
+                "teds": after.get("teds"),
+                "teds_gate": after.get("teds_gate"),
+                "gate": report.get("gate"),
+            },
+            render=f"{report['render_scale']:g}× ({report['dpi']} DPI)",
+        ),
+        "",
+        (
+            "The scale-1.5 row is the recorded baseline on commit 8b869d54: line CER 1302/29835 (4.36%) GATE_FAIL. "
+            "The middle row is the scale-3 run that left `max_side_len` at 2000. "
+            "This run only raises `max_side_len`. A missed gate stays GATE_FAIL. "
+            "`product_pass` stays false when any gate fails."
+        ),
+        "",
+    ]
+
+
 def render_markdown(report: dict[str, Any]) -> str:
     old = report["old_set"]
     new = report["expanded"]
@@ -1172,9 +1349,10 @@ def render_markdown(report: dict[str, Any]) -> str:
     lines = [
         "# S-A-OCR-PUBLIC-EXPAND OCR gate report",
         "",
-        "Engineering measurement only. This is not a product PASS, not T-005, and not business acceptance.",
+        "Engineering measurement only. This is not a product PASS, not T-005, and not business acceptance. `pending_audit` only.",
         "Synthetic rows are in the appendix and are not in the expanded gate. Thresholds were not changed.",
         "",
+        *_max_side_comparison_lines(report),
         "## Counts",
         "",
         f"- Prior completed public-eval documents: **{report['prior_completed_documents']}**",
@@ -1192,7 +1370,7 @@ def render_markdown(report: dict[str, Any]) -> str:
             f"{_pct(old['teds'])} | {old['teds_gate']} |"
         ),
         (
-            f"| Expanded public set (live OCR) | {_pct(new['line_cer'])} | {new['line_cer_gate']} | "
+            f"| Expanded public set (scale {report['render_scale']:g}, max_side_len {report['max_side_len']}) | {_pct(new['line_cer'])} | {new['line_cer_gate']} | "
             f"{_pct(new['key_field_f1'])} | {new['key_field_f1_gate']} | "
             f"{_pct(new['teds'])} | {new['teds_gate']} |"
         ),
@@ -1375,27 +1553,156 @@ def _provenance(row: dict[str, Any], fetched_at: str) -> dict[str, Any]:
     }
 
 
+def _package_rapidocr_models() -> dict[str, str] | None:
+    """Read the installed RapidOCR default config. No model search and no override."""
+    try:
+        import rapidocr_onnxruntime
+    except ImportError:
+        return None
+    text = (Path(rapidocr_onnxruntime.__file__).resolve().parent / "config.yaml").read_text(encoding="utf-8")
+    section: str | None = None
+    found: dict[str, str] = {}
+    for line in text.splitlines():
+        if line.startswith("Det:"):
+            section = "det"
+        elif line.startswith("Rec:"):
+            section = "rec"
+        elif line.startswith("Cls:"):
+            section = "cls"
+        elif line[:1].isalpha() and line.endswith(":") and not line.startswith(" "):
+            section = None
+        elif section and "model_path:" in line:
+            found[section] = Path(line.split(":", 1)[1].strip()).name
+    return found
+
+
+def _rapidocr_models_for_report() -> dict[str, Any]:
+    installed = _package_rapidocr_models()
+    models: dict[str, Any] = {
+        "det": V4_DET_MODEL,
+        "rec": V4_REC_MODEL,
+        "source": "rapidocr_onnxruntime default config; only Global.max_side_len is overridden",
+        "confirmed_from_installed_package": False,
+        "max_side_len": MAX_SIDE_LEN,
+    }
+    if installed is None:
+        return models
+    if installed.get("det") != V4_DET_MODEL or installed.get("rec") != V4_REC_MODEL:
+        raise RuntimeError(
+            "public expand OCR must keep the original v4 pair "
+            f"{V4_DET_MODEL} and {V4_REC_MODEL}, installed config has {installed}"
+        )
+    models["cls"] = installed.get("cls")
+    models["confirmed_from_installed_package"] = True
+    return models
+
+
+def _rapidocr_engine() -> Any:
+    from rapidocr_onnxruntime import RapidOCR
+
+    _rapidocr_models_for_report()
+    engine = _rapidocr_engine.engine  # type: ignore[attr-defined]
+    if engine is None:
+        engine = RapidOCR(max_side_len=MAX_SIDE_LEN)
+        if engine.max_side_len != MAX_SIDE_LEN:
+            raise RuntimeError(f"RapidOCR max_side_len is {engine.max_side_len}, expected {MAX_SIDE_LEN}")
+        if engine.text_det.limit_side_len != 736 or engine.text_det.limit_type != "min":
+            raise RuntimeError("Det.limit_side_len and Det.limit_type must stay at the package defaults")
+        if engine.min_side_len != 30 or engine.min_height != 30 or engine.width_height_ratio != 8:
+            raise RuntimeError("RapidOCR Global size thresholds other than max_side_len must stay at the package defaults")
+        if engine.text_score != 0.5:
+            raise RuntimeError("RapidOCR text_score must stay at the package default")
+        _rapidocr_engine.engine = engine  # type: ignore[attr-defined]
+    return engine
+
+
+_rapidocr_engine.engine = None  # type: ignore[attr-defined]
+
+
+def measure_scored_page_long_sides() -> dict[str, Any]:
+    """Long side of each stored CER page at RENDER_SCALE. Does not run OCR."""
+    import fitz
+
+    rows: list[dict[str, Any]] = []
+    missing: list[str] = []
+    open_docs: dict[str, Any] = {}
+    try:
+        for row in _read_jsonl(CER_GT_PATH):
+            rel = str(row.get("document_path") or "")
+            path = ROOT / rel
+            page_number = int(row["page"])
+            if not path.is_file():
+                missing.append(rel)
+                continue
+            key = path.as_posix()
+            if key not in open_docs:
+                open_docs[key] = fitz.open(path)
+            page = open_docs[key][page_number - 1]
+            pixmap = fitz.Pixmap(_render(page, RENDER_SCALE))
+            long_side = max(pixmap.width, pixmap.height)
+            rows.append(
+                {
+                    "doc_id": row.get("doc_id"),
+                    "page": page_number,
+                    "width": pixmap.width,
+                    "height": pixmap.height,
+                    "long_side": long_side,
+                    "shrunk": long_side > MAX_SIDE_LEN,
+                }
+            )
+    finally:
+        for document in open_docs.values():
+            document.close()
+    if missing:
+        raise FileNotFoundError("scored public PDF missing: " + ", ".join(sorted(set(missing))))
+    if len(rows) != 54:
+        raise RuntimeError(f"expected 54 scored CER pages, measured {len(rows)}")
+    largest = max(int(item["long_side"]) for item in rows)
+    shrunk = [item for item in rows if item["shrunk"]]
+    if largest >= MAX_SIDE_LEN:
+        raise RuntimeError(
+            f"MAX_SIDE_LEN {MAX_SIDE_LEN} is not above the largest long side {largest}"
+        )
+    return {
+        "render_scale": RENDER_SCALE,
+        "dpi": int(RENDER_SCALE * 72),
+        "pages": len(rows),
+        "max_side_len": MAX_SIDE_LEN,
+        "largest_long_side": largest,
+        "pages_shrunk": len(shrunk),
+        "any_page_shrunk": bool(shrunk),
+        "shrink_rule": "RapidOCR preprocess shrinks a page when its long side is greater than Global.max_side_len",
+        "pages_detail": rows,
+    }
+
+
 def _run_rapidocr(png: bytes) -> list[dict[str, Any]]:
     import fitz
     import numpy as np
-    from rapidocr_onnxruntime import RapidOCR
 
-    engine = _run_rapidocr.engine  # type: ignore[attr-defined]
-    if engine is None:
-        engine = RapidOCR()
-        _run_rapidocr.engine = engine  # type: ignore[attr-defined]
+    engine = _rapidocr_engine()
     pixmap = fitz.Pixmap(png)
     if pixmap.alpha:
         pixmap = fitz.Pixmap(fitz.csRGB, pixmap)
+    long_side = max(pixmap.width, pixmap.height)
+    if long_side > MAX_SIDE_LEN:
+        raise RuntimeError(
+            f"rendered page long side {long_side} exceeds max_side_len {MAX_SIDE_LEN}; refusing to shrink"
+        )
+    _run_rapidocr.pages += 1  # type: ignore[attr-defined]
+    print(
+        f"ocr_page {_run_rapidocr.pages} long_side={long_side} max_side_len={MAX_SIDE_LEN} shrunk=false",
+        flush=True,
+    )
     array = np.frombuffer(pixmap.samples, dtype=np.uint8).reshape(pixmap.height, pixmap.width, pixmap.n)
     raw = engine(array)
     return _ocr_lines(raw)
 
 
-_run_rapidocr.engine = None  # type: ignore[attr-defined]
+_run_rapidocr.pages = 0  # type: ignore[attr-defined]
 
 
-def _render(page: Any, scale: float = 1.5) -> bytes:
+def _render(page: Any, scale: float = RENDER_SCALE) -> bytes:
     import fitz
 
     return page.get_pixmap(matrix=fitz.Matrix(scale, scale), alpha=False).tobytes("png")
@@ -1590,7 +1897,7 @@ def build_samples(manifest: dict[str, Any]) -> dict[str, Any]:
                     {
                         "doc_id": row["document_id"],
                         "page": page_number,
-                        "table_html_hyp": ocr_lines_into_cell_grid(lines, grid, 1.5),
+                        "table_html_hyp": ocr_lines_into_cell_grid(lines, grid, RENDER_SCALE),
                         "hypothesis_source": "rapidocr_onnxruntime_ruling_grid",
                         "cohort": cohort,
                     }
@@ -1753,7 +2060,7 @@ def build_samples(manifest: dict[str, Any]) -> dict[str, Any]:
                         "doc_id": doc_id,
                         "page": page_number,
                         "table_html_hyp": "".join(
-                            ocr_lines_into_cell_grid(lines, grid, 1.5) for grid in grids
+                            ocr_lines_into_cell_grid(lines, grid, RENDER_SCALE) for grid in grids
                         ),
                         "hypothesis_source": "rapidocr_onnxruntime_ruling_grid",
                         "cohort": "prior_public_ocr",
@@ -1812,12 +2119,12 @@ def build_samples(manifest: dict[str, Any]) -> dict[str, Any]:
         for document in open_docs.values():
             document.close()
 
-    _write_jsonl(CER_GT_PATH, cer_gt)
-    _write_jsonl(CER_HYP_PATH, cer_hyp)
-    _write_jsonl(TEDS_GT_PATH, teds_gt)
-    _write_jsonl(TEDS_HYP_PATH, teds_hyp)
-    _write_jsonl(KF_GT_PATH, kf_gt)
-    _write_jsonl(KF_HYP_PATH, kf_hyp)
+    _write_sample_rows(CER_GT_PATH, cer_gt)
+    _write_sample_rows(CER_HYP_PATH, cer_hyp)
+    _write_sample_rows(TEDS_GT_PATH, teds_gt)
+    _write_sample_rows(TEDS_HYP_PATH, teds_hyp)
+    _write_sample_rows(KF_GT_PATH, kf_gt)
+    _write_sample_rows(KF_HYP_PATH, kf_hyp)
     assert_safe_output(OUT_DIR / "public-expand-not-scored.json")
     (OUT_DIR / "public-expand-not-scored.json").write_text(
         json.dumps(not_scored, ensure_ascii=False, indent=2) + "\n",

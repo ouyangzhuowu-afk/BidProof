@@ -246,6 +246,42 @@ def test_joe_local_pdfs_match_existing_manifest_and_are_not_recounted():
     }
 
 
+def test_render_scale_3_and_max_side_len_above_every_page():
+    from work.eval.public_expand import (
+        MAX_SIDE_LEN,
+        RENDER_SCALE,
+        V4_DET_MODEL,
+        V4_REC_MODEL,
+        _package_rapidocr_models,
+        measure_scored_page_long_sides,
+    )
+
+    assert RENDER_SCALE == 3.0
+    assert MAX_SIDE_LEN == 2527
+    assert MAX_SIDE_LEN != 2000
+    measured = measure_scored_page_long_sides()
+    assert measured["pages"] == 54
+    assert measured["largest_long_side"] == 2526
+    assert measured["max_side_len"] == MAX_SIDE_LEN
+    assert measured["largest_long_side"] < MAX_SIDE_LEN
+    assert measured["pages_shrunk"] == 0
+    assert measured["any_page_shrunk"] is False
+    assert all(not row["shrunk"] for row in measured["pages_detail"])
+    assert all(row["long_side"] > 2000 for row in measured["pages_detail"])
+    rapidocr = pytest.importorskip("rapidocr_onnxruntime")
+    assert rapidocr is not None
+    models = _package_rapidocr_models()
+    assert models is not None
+    assert models["det"] == V4_DET_MODEL == "ch_PP-OCRv4_det_infer.onnx"
+    assert models["rec"] == V4_REC_MODEL == "ch_PP-OCRv4_rec_infer.onnx"
+    engine = rapidocr.RapidOCR(max_side_len=MAX_SIDE_LEN)
+    assert engine.max_side_len == MAX_SIDE_LEN
+    assert engine.text_det.limit_side_len == 736
+    assert engine.text_det.limit_type == "min"
+    assert engine.min_side_len == 30
+    assert engine.text_score == 0.5
+
+
 def test_report_keeps_product_pass_false_and_separates_synthetic():
     report_path = ROOT / "outputs" / "ocr-benchmark" / "public-expand-report.json"
     if not report_path.is_file():
