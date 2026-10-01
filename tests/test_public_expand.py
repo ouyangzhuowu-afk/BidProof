@@ -259,12 +259,26 @@ def test_report_keeps_product_pass_false_and_separates_synthetic():
     assert report["old_set"]["teds_gate"] == "GATE_FAIL"
     assert report["synthetic_appendix"]["line_cer_pages"] == 3
     assert report["expanded"]["line_cer_pages"] == 54
-    assert report["expanded"]["line_edits"] == 1302
+    assert report["expanded"]["line_edits"] == report["detection_swap"]["after"]["line_edits"]
     assert report["expanded"]["line_denom"] == 29835
-    assert report["expanded"]["tp"] == 103
-    assert report["expanded"]["fp"] == 3
-    assert report["expanded"]["fn"] == 3
+    assert report["detection_swap"]["before"]["line_edits"] == 1302
+    assert report["detection_swap"]["before"]["line_denom"] == 29835
+    assert report["detection_swap"]["before"]["line_cer_gate"] == "GATE_FAIL"
+    assert report["detection_swap"]["before"]["key_field_f1_gate"] == "GATE_PASS"
+    assert report["detection_swap"]["before"]["teds_gate"] == "GATE_PASS"
+    assert report["detection_swap"]["before"]["teds_pages_scored"] == 19
+    assert report["detection_swap"]["before"]["tp"] == 103
+    assert report["detection_swap"]["before"]["product_pass"] is False
+    assert report["detection_swap"]["detection_model"] == "ch_PP-OCRv5_det_mobile.onnx"
+    assert report["detection_swap"]["recognition_model"] == "ch_PP-OCRv4_rec_infer.onnx"
+    assert report["detection_swap"]["after"]["product_pass"] is False
+    assert report["product_pass"] is False
+    assert report["expanded"]["tp"] == report["detection_swap"]["after"]["tp"]
+    assert report["expanded"]["fp"] == report["detection_swap"]["after"]["fp"]
+    assert report["expanded"]["fn"] == report["detection_swap"]["after"]["fn"]
     assert report["expanded"]["teds_pages_scored"] == 19
+    assert report["detection_swap"]["after"]["line_cer_pages"] == 54
+    assert report["detection_swap"]["after"]["teds_pages_scored"] == 19
     assert report["old_set"]["line_cer"] == pytest.approx(0.031746031746031744)
     assert report["old_set"]["key_field_f1"] == pytest.approx(0.76)
     assert report["old_set"]["teds"] == pytest.approx(0.8784546114752891, rel=1e-6)
@@ -363,3 +377,36 @@ def test_fragment_prepare_keeps_every_page_and_does_not_rewrite_gt():
     assert denom == len("采购人：医院") + len("项目编号：ABC")
     assert edits == len("北京数字支点国际项目管理有限公司")
     assert pages.read_bytes() == before
+
+
+def test_rapidocr_loads_ppocrv5_det_and_keeps_package_recognition(monkeypatch):
+    rapidocr_onnxruntime = pytest.importorskip("rapidocr_onnxruntime")
+    import fitz
+
+    from work.eval import public_expand as expand
+
+    calls: dict[str, dict] = {}
+
+    class _FakeEngine:
+        def __call__(self, _array):
+            return ([], None)
+
+    def _factory(**kwargs):
+        calls["kwargs"] = kwargs
+        return _FakeEngine()
+
+    monkeypatch.setattr(expand, "ppocrv5_det_path", lambda: expand.ROOT / "ch_PP-OCRv5_det_mobile.onnx")
+    monkeypatch.setattr(expand, "_package_recognition_model", lambda: expand.ROOT / "ch_PP-OCRv4_rec_infer.onnx")
+    monkeypatch.setattr(rapidocr_onnxruntime, "RapidOCR", _factory)
+    expand._run_rapidocr.engine = None
+    document = fitz.open()
+    try:
+        page = document.new_page(width=50, height=50)
+        png = page.get_pixmap(alpha=False).tobytes("png")
+        expand._run_rapidocr(png)
+    finally:
+        document.close()
+        expand._run_rapidocr.engine = None
+    assert calls["kwargs"] == {"det_model_path": str(expand.ROOT / "ch_PP-OCRv5_det_mobile.onnx")}
+    assert "rec_model_path" not in calls["kwargs"]
+    assert calls["kwargs"]["det_model_path"].endswith("ch_PP-OCRv5_det_mobile.onnx")

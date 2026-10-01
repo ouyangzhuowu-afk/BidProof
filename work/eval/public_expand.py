@@ -59,6 +59,38 @@ KF_GT_PATH = FIXTURE_DIR / "public_expand_key_field_gt.jsonl"
 KF_HYP_PATH = FIXTURE_DIR / "public_expand_key_field_hypotheses.jsonl"
 JOE_LOCAL_PDFS = FIXTURE_DIR / "joe_local_pdfs_2026-09-29.json"
 
+# Line finding only. Printed-text recognition stays the rapidocr_onnxruntime package default.
+PPOCRV5_DET_FILENAME = "ch_PP-OCRv5_det_mobile.onnx"
+PPOCRV5_DET_SHA256 = "4d97c44a20d30a81aad087d6a396b08f786c4635742afc391f6621f5c6ae78ae"
+PPOCRV5_DET_URL = (
+    "https://www.modelscope.cn/models/RapidAI/RapidOCR/resolve/v3.9.2/onnx/PP-OCRv5/det/"
+    + PPOCRV5_DET_FILENAME
+)
+PPOCRV5_DET_PATH = ROOT / "work" / "models" / "ocr" / PPOCRV5_DET_FILENAME
+PACKAGE_REC_FILENAME = "ch_PP-OCRv4_rec_infer.onnx"
+PACKAGE_REC_SHA256 = "48fc40f24f6d2a207a2b1091d3437eb3cc3eb6b676dc3ef9c37384005483683b"
+DET_HYPOTHESIS_SOURCE = "rapidocr_onnxruntime_ppocrv5_det"
+DET_TABLE_HYPOTHESIS_SOURCE = "rapidocr_onnxruntime_ppocrv5_det_ruling_grid"
+DETECTION_SWAP_BASE = "8b869d541e3df3c3ac11d271c05d0ee1f9e65156"
+# Recomputed by build_report_from_fixtures() on the hypotheses at DETECTION_SWAP_BASE.
+DETECTION_SWAP_BEFORE = {
+    "line_edits": 1302,
+    "line_denom": 29835,
+    "line_cer": 0.043640020110608344,
+    "line_cer_gate": "GATE_FAIL",
+    "line_cer_pages": 54,
+    "key_field_f1": 0.9716981132075472,
+    "key_field_f1_gate": "GATE_PASS",
+    "tp": 103,
+    "fp": 3,
+    "fn": 3,
+    "teds": 0.9580030818780702,
+    "teds_gate": "GATE_PASS",
+    "teds_pages_scored": 19,
+    "gate": "GATE_FAIL",
+    "product_pass": False,
+}
+
 OLD_CER_GT = FIXTURE_DIR / "sandbox_pages.jsonl"
 OLD_CER_HYP = FIXTURE_DIR / "sandbox_hypotheses.jsonl"
 OLD_TEDS_GT = FIXTURE_DIR / "teds_gt.jsonl"
@@ -1045,6 +1077,8 @@ def build_report_from_fixtures() -> dict[str, Any]:
         "improvement_directions": improvement_directions(failures),
         "gt_policy": "embedded PDF text layer or PyMuPDF table extract confirmed against that text layer; published HTML for not-scored notices. OCR is never GT.",
         "hypothesis_policy": "rapidocr_onnxruntime on a 1.5x render of the official PDF page. TOC dot leaders are segmented before line CER. Text-layer fragments that equal one OCR line are joined at scoring time; stored GT is not rewritten. Table hypotheses place OCR text into the PDF ruling-line grid. Ground truth stays the text layer.",
+        "detection_model": PPOCRV5_DET_FILENAME,
+        "recognition_model": PACKAGE_REC_FILENAME,
     }
     report["gate"] = (
         "GATE_PASS"
@@ -1053,8 +1087,83 @@ def build_report_from_fixtures() -> dict[str, Any]:
         and report["expanded"]["teds_gate"] == "GATE_PASS"
         else "GATE_FAIL"
     )
+    report["product_pass"] = False
     report["joe_local_pdf_intake"] = load_joe_local_pdf_intake(manifest)
+    report["detection_swap"] = _detection_swap(report["expanded"], report["gate"])
     return report
+
+
+def _detection_swap(expanded: dict[str, Any], gate: str) -> dict[str, Any]:
+    after = {
+        "line_edits": expanded.get("line_edits"),
+        "line_denom": expanded.get("line_denom"),
+        "line_cer": expanded.get("line_cer"),
+        "line_cer_gate": expanded.get("line_cer_gate"),
+        "line_cer_pages": expanded.get("line_cer_pages"),
+        "key_field_f1": expanded.get("key_field_f1"),
+        "key_field_f1_gate": expanded.get("key_field_f1_gate"),
+        "tp": expanded.get("tp"),
+        "fp": expanded.get("fp"),
+        "fn": expanded.get("fn"),
+        "teds": expanded.get("teds"),
+        "teds_gate": expanded.get("teds_gate"),
+        "teds_pages_scored": expanded.get("teds_pages_scored"),
+        "gate": gate,
+        "product_pass": False,
+    }
+    return {
+        "status": "pending_audit",
+        "detection_model": PPOCRV5_DET_FILENAME,
+        "recognition_model": PACKAGE_REC_FILENAME,
+        "recognition_sha256": PACKAGE_REC_SHA256,
+        "base_commit": DETECTION_SWAP_BASE,
+        "before": DETECTION_SWAP_BEFORE,
+        "after": after,
+    }
+
+
+def _detection_swap_lines(swap: Any) -> list[str]:
+    if not isinstance(swap, dict):
+        return []
+    before = swap.get("before") or {}
+    after = swap.get("after") or {}
+
+    def cell(metrics: dict[str, Any], key: str) -> str:
+        value = metrics.get(key)
+        if key in {"line_cer", "key_field_f1", "teds"}:
+            return _pct(None if value is None else float(value))
+        if key == "product_pass":
+            return "false" if value is False else str(value)
+        return "" if value is None else str(value)
+
+    lines = [
+        "",
+        "## PP-OCRv5 detection swap",
+        "",
+        "Evidence only. Pending audit. Line finding uses `ch_PP-OCRv5_det_mobile`, which RapidOCR loads directly. "
+        "Printed-text recognition stays the package default `ch_PP-OCRv4_rec_infer.onnx`. "
+        "Scoring and thresholds are unchanged. Same 54 CER pages, denominator 29835, and 19 TEDS pages. "
+        "A missed gate stays GATE_FAIL. `product_pass` stays false when any gate fails. Not T-005.",
+        "",
+        f"Before was recomputed by this scorer on the hypotheses at `{swap.get('base_commit', '')}`.",
+        "",
+        "| | line edits | denominator | CER | CER gate | F1 | F1 gate | TP | FP | FN | TEDS | TEDS gate | TEDS pages | overall |",
+        "|---|---:|---:|---:|---|---:|---|---:|---:|---:|---:|---|---:|---|",
+        (
+            f"| Before | {cell(before, 'line_edits')} | {cell(before, 'line_denom')} | {cell(before, 'line_cer')} | "
+            f"{cell(before, 'line_cer_gate')} | {cell(before, 'key_field_f1')} | {cell(before, 'key_field_f1_gate')} | "
+            f"{cell(before, 'tp')} | {cell(before, 'fp')} | {cell(before, 'fn')} | {cell(before, 'teds')} | "
+            f"{cell(before, 'teds_gate')} | {cell(before, 'teds_pages_scored')} | {cell(before, 'gate')} |"
+        ),
+        (
+            f"| After | {cell(after, 'line_edits')} | {cell(after, 'line_denom')} | {cell(after, 'line_cer')} | "
+            f"{cell(after, 'line_cer_gate')} | {cell(after, 'key_field_f1')} | {cell(after, 'key_field_f1_gate')} | "
+            f"{cell(after, 'tp')} | {cell(after, 'fp')} | {cell(after, 'fn')} | {cell(after, 'teds')} | "
+            f"{cell(after, 'teds_gate')} | {cell(after, 'teds_pages_scored')} | {cell(after, 'gate')} |"
+        ),
+        "",
+    ]
+    return lines
 
 
 def _compact(metrics: dict[str, Any]) -> dict[str, Any]:
@@ -1269,6 +1378,7 @@ def render_markdown(report: dict[str, Any]) -> str:
     lines += ["", "## Improvement directions", ""]
     for item in report["improvement_directions"]:
         lines.append(f"- {item}")
+    lines.extend(_detection_swap_lines(report.get("detection_swap")))
     lines += [
         "",
         "## Reproduce",
@@ -1375,6 +1485,56 @@ def _provenance(row: dict[str, Any], fetched_at: str) -> dict[str, Any]:
     }
 
 
+def _sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def ppocrv5_det_path() -> Path:
+    """Return the PP-OCRv5 detection model RapidOCR can load directly.
+
+    Recognition is not downloaded and is not replaced.
+    """
+    if PPOCRV5_DET_PATH.is_file() and _sha256_file(PPOCRV5_DET_PATH) == PPOCRV5_DET_SHA256:
+        return PPOCRV5_DET_PATH
+    PPOCRV5_DET_PATH.parent.mkdir(parents=True, exist_ok=True)
+    partial = PPOCRV5_DET_PATH.with_suffix(".partial")
+    import urllib.request
+
+    try:
+        urllib.request.urlretrieve(PPOCRV5_DET_URL, partial)  # noqa: S310
+    except Exception as exc:
+        if partial.exists():
+            partial.unlink()
+        raise RuntimeError(
+            "PP-OCRv5 detection model could not be downloaded for RapidOCR. "
+            "The recognition model was not changed."
+        ) from exc
+    digest = _sha256_file(partial)
+    if digest != PPOCRV5_DET_SHA256:
+        partial.unlink()
+        raise RuntimeError(
+            f"PP-OCRv5 detection model hash {digest} does not match {PPOCRV5_DET_SHA256}. Refusing to load it."
+        )
+    partial.replace(PPOCRV5_DET_PATH)
+    return PPOCRV5_DET_PATH
+
+
+def _package_recognition_model() -> Path:
+    import rapidocr_onnxruntime
+
+    path = Path(rapidocr_onnxruntime.__file__).resolve().parent / "models" / PACKAGE_REC_FILENAME
+    if not path.is_file() or _sha256_file(path) != PACKAGE_REC_SHA256:
+        raise RuntimeError(
+            "Printed-text recognition is not the rapidocr_onnxruntime package default "
+            f"{PACKAGE_REC_FILENAME}. Refusing to pair it with the PP-OCRv5 detection model."
+        )
+    return path
+
+
 def _run_rapidocr(png: bytes) -> list[dict[str, Any]]:
     import fitz
     import numpy as np
@@ -1382,7 +1542,9 @@ def _run_rapidocr(png: bytes) -> list[dict[str, Any]]:
 
     engine = _run_rapidocr.engine  # type: ignore[attr-defined]
     if engine is None:
-        engine = RapidOCR()
+        _package_recognition_model()
+        # Detection only. Omitting rec_model_path keeps the package recognition model.
+        engine = RapidOCR(det_model_path=str(ppocrv5_det_path()))
         _run_rapidocr.engine = engine  # type: ignore[attr-defined]
     pixmap = fitz.Pixmap(png)
     if pixmap.alpha:
@@ -1425,6 +1587,157 @@ def best_table_bbox(page: Any, text_gt: str) -> tuple[float, float, float, float
     if best < 0.5:
         return None
     return best_bbox
+
+
+def _prior_field_labels() -> dict[tuple[str, int], list[dict[str, str]]]:
+    hand_fields: dict[tuple[str, int], list[dict[str, str]]] = {}
+    for row in load_annotations(OLD_KF_GT):
+        if is_synthetic_row(row):
+            continue
+        bucket = hand_fields.setdefault((str(row["doc_id"]), int(row["page"])), [])
+        for item in row.get("fields") or []:
+            name = str(item.get("name") or "")
+            value = str(item.get("value") or "")
+            if name in KEY_FIELD_NAMES and value and not looks_like_pii(value):
+                bucket.append({"name": name, "value": value})
+    return hand_fields
+
+
+def _fields_hyp(labeled: list[dict[str, str]], hyp_text: str) -> list[dict[str, str]]:
+    ocr_norm = _norm(hyp_text)
+    regex_hyp = fields_from_text(hyp_text)
+    fields_hyp: list[dict[str, str]] = []
+    for item in labeled:
+        if _norm(item["value"]) in ocr_norm:
+            fields_hyp.append({"name": item["name"], "value": item["value"]})
+        elif item["name"] in regex_hyp:
+            fields_hyp.append({"name": item["name"], "value": regex_hyp[item["name"]]})
+    return fields_hyp
+
+
+def refresh_live_hypotheses() -> dict[str, int]:
+    """Re-OCR the stored public pages and rewrite hypotheses only.
+
+    Ground-truth files are not opened for writing. Page sets stay the stored sets.
+    """
+    import fitz
+
+    gt_paths = (CER_GT_PATH, TEDS_GT_PATH, KF_GT_PATH)
+    gt_bytes = {path: path.read_bytes() for path in gt_paths}
+    cer_gt = _read_jsonl(CER_GT_PATH)
+    kf_gt = _read_jsonl(KF_GT_PATH)
+    teds_gt = _read_jsonl(TEDS_GT_PATH)
+    if len(cer_gt) != 54 or len(teds_gt) != 19 or len(kf_gt) != 34:
+        raise RuntimeError(
+            f"Stored page set changed (CER {len(cer_gt)}, TEDS {len(teds_gt)}, key fields {len(kf_gt)}). "
+            "Refusing to drop pages."
+        )
+    hand_fields = _prior_field_labels()
+    old_teds = {
+        (str(row["doc_id"]), int(row["page"])): row
+        for row in load_annotations(OLD_TEDS_GT)
+        if not is_synthetic_row(row)
+    }
+    documents: dict[str, Any] = {}
+    ocr_cache: dict[tuple[str, int], list[dict[str, Any]]] = {}
+    pages: dict[tuple[str, int], Any] = {}
+
+    def recognize(row: dict[str, Any]) -> tuple[Any, list[dict[str, Any]]]:
+        path = ROOT / str(row.get("document_path") or "")
+        if not path.is_file():
+            raise RuntimeError(f"Missing public PDF for {row.get('doc_id')} page {row.get('page')}: {path}")
+        page_number = int(row["page"])
+        key = (str(row["doc_id"]), page_number)
+        if key not in ocr_cache:
+            if path.as_posix() not in documents:
+                documents[path.as_posix()] = fitz.open(path)
+            document = documents[path.as_posix()]
+            if page_number < 1 or page_number > document.page_count:
+                raise RuntimeError(f"Stored page {key} is outside {path}")
+            page = document[page_number - 1]
+            pages[key] = page
+            ocr_cache[key] = _run_rapidocr(_render(page))
+        return pages[key], ocr_cache[key]
+
+    try:
+        cer_hyp: list[dict[str, Any]] = []
+        for row in cer_gt:
+            _page, lines = recognize(row)
+            hyp_text = redact_text("\n".join(item["text"] for item in lines))
+            cer_hyp.append(
+                {
+                    "doc_id": row["doc_id"],
+                    "page": row["page"],
+                    "text_hyp": hyp_text,
+                    "lines_hyp": [redact_text(str(item["text"])) for item in lines],
+                    "hypothesis_source": DET_HYPOTHESIS_SOURCE,
+                    "cohort": row.get("cohort"),
+                }
+            )
+        kf_hyp: list[dict[str, Any]] = []
+        for row in kf_gt:
+            _page, lines = recognize(row)
+            hyp_text = redact_text("\n".join(item["text"] for item in lines))
+            cohort = row.get("cohort")
+            if cohort == "new_public":
+                fields_hyp = [
+                    {"name": name, "value": value} for name, value in fields_from_text(hyp_text).items()
+                ]
+            else:
+                labeled = hand_fields.get((str(row["doc_id"]), int(row["page"])))
+                if labeled is None:
+                    raise RuntimeError(f"Missing prior key-field labels for {row.get('doc_id')} page {row.get('page')}")
+                fields_hyp = _fields_hyp(labeled, hyp_text)
+            kf_hyp.append(
+                {
+                    "doc_id": row["doc_id"],
+                    "page": row["page"],
+                    "fields_hyp": fields_hyp,
+                    "hypothesis_source": DET_HYPOTHESIS_SOURCE,
+                    "cohort": cohort,
+                }
+            )
+        teds_hyp: list[dict[str, Any]] = []
+        for row in teds_gt:
+            page, lines = recognize(row)
+            key = (str(row["doc_id"]), int(row["page"]))
+            if row.get("cohort") == "prior_public_ocr":
+                frozen = old_teds.get(key)
+                if frozen is None or not frozen.get("table_html"):
+                    raise RuntimeError(f"Missing prior table GT for {key}")
+                grids = ruling_grids_for_gt(
+                    page, str(frozen.get("text_gt") or ""), str(frozen.get("table_html") or "")
+                )
+                table_html_hyp = "".join(ocr_lines_into_cell_grid(lines, grid, 1.5) for grid in grids)
+            else:
+                text = _page_text(page)
+                rows, grid = first_supported_table(page, text)
+                if not rows or grid is None:
+                    raise RuntimeError(f"Refusing to drop TEDS page {key}")
+                table_html_hyp = ocr_lines_into_cell_grid(lines, grid, 1.5)
+            teds_hyp.append(
+                {
+                    "doc_id": row["doc_id"],
+                    "page": row["page"],
+                    "table_html_hyp": table_html_hyp,
+                    "hypothesis_source": DET_TABLE_HYPOTHESIS_SOURCE,
+                    "cohort": row.get("cohort"),
+                }
+            )
+    finally:
+        for document in documents.values():
+            document.close()
+
+    if len(cer_hyp) != 54 or len(teds_hyp) != 19 or len(kf_hyp) != 34:
+        raise RuntimeError("Hypothesis refresh changed the page count. Nothing was written.")
+    for path, blob in gt_bytes.items():
+        if path.read_bytes() != blob:
+            path.write_bytes(blob)
+            raise RuntimeError(f"Ground truth changed while refreshing hypotheses: {path}")
+    _write_jsonl(CER_HYP_PATH, cer_hyp)
+    _write_jsonl(TEDS_HYP_PATH, teds_hyp)
+    _write_jsonl(KF_HYP_PATH, kf_hyp)
+    return {"cer_pages": len(cer_hyp), "teds_pages": len(teds_hyp), "key_rows": len(kf_hyp)}
 
 
 def build_samples(manifest: dict[str, Any]) -> dict[str, Any]:
@@ -1519,7 +1832,7 @@ def build_samples(manifest: dict[str, Any]) -> dict[str, Any]:
                 "page": page_number,
                 "text_hyp": hyp_text,
                 "lines_hyp": [redact_text(str(item["text"])) for item in lines],
-                "hypothesis_source": "rapidocr_onnxruntime",
+                "hypothesis_source": DET_HYPOTHESIS_SOURCE,
                 "cohort": cohort,
             }
         )
@@ -1546,7 +1859,7 @@ def build_samples(manifest: dict[str, Any]) -> dict[str, Any]:
                     "doc_id": row["document_id"],
                     "page": page_number,
                     "fields_hyp": [{"name": name, "value": value} for name, value in ocr_fields.items()],
-                    "hypothesis_source": "rapidocr_onnxruntime",
+                    "hypothesis_source": DET_HYPOTHESIS_SOURCE,
                     "cohort": cohort,
                 }
             )
@@ -1591,7 +1904,7 @@ def build_samples(manifest: dict[str, Any]) -> dict[str, Any]:
                         "doc_id": row["document_id"],
                         "page": page_number,
                         "table_html_hyp": ocr_lines_into_cell_grid(lines, grid, 1.5),
-                        "hypothesis_source": "rapidocr_onnxruntime_ruling_grid",
+                        "hypothesis_source": DET_TABLE_HYPOTHESIS_SOURCE,
                         "cohort": cohort,
                     }
                 )
@@ -1688,7 +2001,7 @@ def build_samples(manifest: dict[str, Any]) -> dict[str, Any]:
                     "page": page_number,
                     "text_hyp": hyp_text,
                     "lines_hyp": [redact_text(str(item["text"])) for item in lines],
-                    "hypothesis_source": "rapidocr_onnxruntime",
+                    "hypothesis_source": DET_HYPOTHESIS_SOURCE,
                     "cohort": "prior_public_ocr",
                 }
             )
@@ -1723,7 +2036,7 @@ def build_samples(manifest: dict[str, Any]) -> dict[str, Any]:
                         "doc_id": doc_id,
                         "page": page_number,
                         "fields_hyp": fields_hyp,
-                        "hypothesis_source": "rapidocr_onnxruntime",
+                        "hypothesis_source": DET_HYPOTHESIS_SOURCE,
                         "cohort": "prior_public_ocr",
                     }
                 )
@@ -1755,7 +2068,7 @@ def build_samples(manifest: dict[str, Any]) -> dict[str, Any]:
                         "table_html_hyp": "".join(
                             ocr_lines_into_cell_grid(lines, grid, 1.5) for grid in grids
                         ),
-                        "hypothesis_source": "rapidocr_onnxruntime_ruling_grid",
+                        "hypothesis_source": DET_TABLE_HYPOTHESIS_SOURCE,
                         "cohort": "prior_public_ocr",
                     }
                 )
@@ -1883,9 +2196,16 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Expand and score the public OCR eval set.")
     parser.add_argument("--build", action="store_true", help="Fetch new PDFs, OCR them, write fixtures and the report.")
     parser.add_argument("--report", action="store_true", help="Rebuild the report from fixtures already on disk.")
+    parser.add_argument(
+        "--refresh-hypotheses",
+        action="store_true",
+        help="Re-OCR the stored public pages and rewrite hypotheses only.",
+    )
     parser.add_argument("--delay", type=float, default=2.0)
     args = parser.parse_args(argv)
     try:
+        if args.refresh_hypotheses:
+            print(json.dumps(refresh_live_hypotheses(), ensure_ascii=False))
         if args.build:
             candidates = [
                 row
@@ -1908,7 +2228,7 @@ def main(argv: list[str] | None = None) -> int:
             if not isinstance(current, list):
                 current = []
             sidecar.write_text(json.dumps(current + notices, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-        if args.build or args.report:
+        if args.build or args.report or args.refresh_hypotheses:
             report = build_report_from_fixtures()
             write_reports(report)
             print(
