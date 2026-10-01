@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-01T12:21:36.109905+00:00",
+  "generated_at": "2026-10-01T13:48:16.311524+00:00",
   "claim_scope": "engineering_gate_only",
-  "line_cer": 0.043640020110608344,
+  "line_cer": 0.04229931288754818,
   "gate": "GATE_FAIL",
   "product_pass": false,
   "business_pass": false,
@@ -40,8 +40,8 @@
     {
       "doc_id": "fixture-001",
       "page": 32,
-      "page_cer": 0.494949494949495,
-      "line_cer": 0.1717171717171717
+      "page_cer": 0.47474747474747475,
+      "line_cer": 0.1919191919191919
     },
     {
       "doc_id": "fixture-002",
@@ -58,8 +58,8 @@
     {
       "doc_id": "fixture-002",
       "page": 6,
-      "page_cer": 0.07845433255269321,
-      "line_cer": 0.15807962529274006
+      "page_cer": 0.07962529274004684,
+      "line_cer": 0.10187353629976581
     },
     {
       "doc_id": "fixture-002",
@@ -70,8 +70,8 @@
     {
       "doc_id": "fixture-002",
       "page": 37,
-      "page_cer": 0.0344311377245509,
-      "line_cer": 0.008982035928143712
+      "page_cer": 0.03143712574850299,
+      "line_cer": 0.004491017964071856
     },
     {
       "doc_id": "fixture-003",
@@ -82,20 +82,20 @@
     {
       "doc_id": "fixture-003",
       "page": 4,
-      "page_cer": 0.1819620253164557,
-      "line_cer": 0.2199367088607595
+      "page_cer": 0.18037974683544303,
+      "line_cer": 0.21835443037974683
     },
     {
       "doc_id": "fixture-003",
       "page": 5,
-      "page_cer": 0.21357850070721357,
-      "line_cer": 0.3521923620933522
+      "page_cer": 0.2164073550212164,
+      "line_cer": 0.3988684582743989
     },
     {
       "doc_id": "fixture-003",
       "page": 9,
-      "page_cer": 0.08190224570673713,
-      "line_cer": 0.03038309114927345
+      "page_cer": 0.083223249669749,
+      "line_cer": 0.03302509907529723
     },
     {
       "doc_id": "fixture-003",
@@ -118,14 +118,14 @@
     {
       "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
       "page": 3,
-      "page_cer": 0.12012012012012012,
-      "line_cer": 0.0045045045045045045
+      "page_cer": 0.11861861861861862,
+      "line_cer": 0.003003003003003003
     },
     {
       "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
       "page": 4,
-      "page_cer": 0.0048638132295719845,
-      "line_cer": 0.0029182879377431907
+      "page_cer": 0.0029182879377431907,
+      "line_cer": 0.0009727626459143969
     },
     {
       "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
@@ -142,20 +142,20 @@
     {
       "doc_id": "pub-gx-nanning-vascular-doppler",
       "page": 3,
-      "page_cer": 0.2421185372005044,
+      "page_cer": 0.24337957124842372,
       "line_cer": 0.005044136191677175
     },
     {
       "doc_id": "pub-gx-nanning-vascular-doppler",
       "page": 16,
-      "page_cer": 0.013539651837524178,
-      "line_cer": 0.005802707930367505
+      "page_cer": 0.007736943907156673,
+      "line_cer": 0.0
     },
     {
       "doc_id": "pub-gx-nanning-vascular-doppler",
       "page": 17,
       "page_cer": 0.07719298245614035,
-      "line_cer": 0.056140350877192984
+      "line_cer": 0.042105263157894736
     },
     {
       "doc_id": "pub-gx-qintang-flow-cytometer",
@@ -172,14 +172,14 @@
     {
       "doc_id": "pub-gx-qintang-flow-cytometer",
       "page": 4,
-      "page_cer": 0.0023612750885478157,
-      "line_cer": 0.0
+      "page_cer": 0.0035419126328217238,
+      "line_cer": 0.0011806375442739079
     },
     {
       "doc_id": "pub-gx-ventilator-monitors",
       "page": 3,
-      "page_cer": 0.0034924330616996507,
-      "line_cer": 0.0034924330616996507
+      "page_cer": 0.002328288707799767,
+      "line_cer": 0.0
     },
     {
       "doc_id": "pub-gx-ventilator-monitors",
@@ -190,14 +190,14 @@
     {
       "doc_id": "pub-gx-ventilator-monitors",
       "page": 5,
-      "page_cer": 0.03339041095890411,
-      "line_cer": 0.03595890410958904
+      "page_cer": 0.031678082191780824,
+      "line_cer": 0.03424657534246575
     },
     {
       "doc_id": "pub-gx-ventilator-monitors",
       "page": 15,
-      "page_cer": 0.16252390057361377,
-      "line_cer": 0.0038240917782026767
+      "page_cer": 0.16443594646271512,
+      "line_cer": 0.0076481835564053535
     },
     {
       "doc_id": "pub-gx-youjiang-ultrasound",
@@ -214,14 +214,14 @@
     {
       "doc_id": "pub-gx-youjiang-ultrasound",
       "page": 5,
-      "page_cer": 0.04954954954954955,
-      "line_cer": 0.0777027027027027
+      "page_cer": 0.05067567567567568,
+      "line_cer": 0.07657657657657657
     },
     {
       "doc_id": "pub-gx-youjiang-ultrasound",
       "page": 6,
-      "page_cer": 0.05071770334928229,
-      "line_cer": 0.08995215311004785
+      "page_cer": 0.05167464114832536,
+      "line_cer": 0.09090909090909091
     },
     {
       "doc_id": "pub-gx-tianlin-yuegui-devices-2026",
@@ -232,8 +232,8 @@
     {
       "doc_id": "pub-gx-tianlin-yuegui-devices-2026",
       "page": 2,
-      "page_cer": 0.03787878787878788,
-      "line_cer": 0.045454545454545456
+      "page_cer": 0.022727272727272728,
+      "line_cer": 0.022727272727272728
     },
     {
       "doc_id": "pub-gx-tianlin-yuegui-devices-2026",
@@ -250,32 +250,32 @@
     {
       "doc_id": "pub-gx-nanxishan-dr-mammo-2026",
       "page": 2,
-      "page_cer": 0.041666666666666664,
-      "line_cer": 0.041666666666666664
+      "page_cer": 0.034722222222222224,
+      "line_cer": 0.034722222222222224
     },
     {
       "doc_id": "pub-gx-nanxishan-dr-mammo-2026",
       "page": 9,
-      "page_cer": 0.09482758620689655,
-      "line_cer": 0.006896551724137931
+      "page_cer": 0.09137931034482759,
+      "line_cer": 0.0034482758620689655
     },
     {
       "doc_id": "pub-gx-minzu-ultrasound-2026",
       "page": 1,
-      "page_cer": 0.1189083820662768,
-      "line_cer": 0.15009746588693956
+      "page_cer": 0.12085769980506822,
+      "line_cer": 0.15204678362573099
     },
     {
       "doc_id": "pub-gx-minzu-ultrasound-2026",
       "page": 2,
-      "page_cer": 0.046906187624750496,
-      "line_cer": 0.09181636726546906
+      "page_cer": 0.04790419161676647,
+      "line_cer": 0.09281437125748503
     },
     {
       "doc_id": "pub-gx-minzu-ultrasound-2026",
       "page": 6,
-      "page_cer": 0.03535911602209945,
-      "line_cer": 0.026519337016574586
+      "page_cer": 0.03425414364640884,
+      "line_cer": 0.02541436464088398
     },
     {
       "doc_id": "pub-gx-hechi-mine-safety-2026",
@@ -316,8 +316,8 @@
     {
       "doc_id": "pub-gx-yibiatong-phase2-2026",
       "page": 2,
-      "page_cer": 0.06172839506172839,
-      "line_cer": 0.09876543209876543
+      "page_cer": 0.04938271604938271,
+      "line_cer": 0.04938271604938271
     },
     {
       "doc_id": "pub-gx-yibiatong-phase2-2026",
@@ -340,8 +340,8 @@
     {
       "doc_id": "pub-gx-nonggang-patrol-2026",
       "page": 9,
-      "page_cer": 0.1095679012345679,
-      "line_cer": 0.006172839506172839
+      "page_cer": 0.10802469135802469,
+      "line_cer": 0.004629629629629629
     }
   ]
 }

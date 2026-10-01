@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-09-29T09:06:12.123118+00:00",
+  "generated_at": "2026-10-01T13:48:16.311524+00:00",
   "claim_scope": "engineering_gate_only",
-  "teds": 0.9580030818780702,
+  "teds": 0.9574582415162961,
   "gate": "GATE_PASS",
   "product_pass": false,
   "business_pass": false,
@@ -39,7 +39,7 @@
     {
       "doc_id": "fixture-002",
       "page": 37,
-      "teds": 1.0
+      "teds": 0.9565217391304348
     },
     {
       "doc_id": "fixture-003",
@@ -64,7 +64,7 @@
     {
       "doc_id": "pub-gx-nanning-vascular-doppler",
       "page": 3,
-      "teds": 0.9855072463768116
+      "teds": 0.9710144927536232
     },
     {
       "doc_id": "pub-gx-nanning-vascular-doppler",
@@ -89,7 +89,7 @@
     {
       "doc_id": "pub-gx-nanxishan-dr-mammo-2026",
       "page": 9,
-      "teds": 0.9047619047619048
+      "teds": 0.9523809523809523
     },
     {
       "doc_id": "pub-gx-minzu-ultrasound-2026",

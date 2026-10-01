@@ -260,8 +260,23 @@ def test_report_keeps_product_pass_false_and_separates_synthetic():
     assert report["old_set"]["teds_gate"] == "GATE_FAIL"
     assert report["synthetic_appendix"]["line_cer_pages"] == 3
     assert report["expanded"]["line_cer_pages"] == 54
-    assert report["expanded"]["line_edits"] == 1302
+    assert report["expanded"]["line_edits"] == 1262
     assert report["expanded"]["line_denom"] == 29835
+    swap = report["recognition_swap"]
+    assert swap["status"] == "pending_audit"
+    assert swap["recognition_model"] == "ch_PP-OCRv5_rec_server"
+    assert swap["before"]["line_edits"] == 1302
+    assert swap["before"]["line_denom"] == 29835
+    assert swap["before"]["line_cer_gate"] == "GATE_FAIL"
+    assert swap["after"]["line_edits"] == 1262
+    assert swap["after"]["line_cer_gate"] == "GATE_FAIL"
+    assert swap["after"]["key_field_f1_gate"] == "GATE_PASS"
+    assert swap["after"]["teds_gate"] == "GATE_PASS"
+    assert swap["after"]["gate"] == "GATE_FAIL"
+    assert swap["after"]["product_pass"] is False
+    assert swap["missing_edits"] == {"before": 529, "after": 538, "dropped": -9}
+    assert swap["misread_edits"] == {"before": 410, "after": 389, "dropped": 21}
+    assert len(swap["pages"]) == 54
     assert report["expanded"]["tp"] == 103
     assert report["expanded"]["fp"] == 3
     assert report["expanded"]["fn"] == 3
