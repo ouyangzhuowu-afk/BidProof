@@ -19,6 +19,7 @@ from work.eval.public_expand import (
     load_joe_local_pdf_intake,
     looks_like_pii,
     ocr_lines_into_cell_grid,
+    page_char_edit_counts,
     prepare_expanded_cer,
     redact_text,
     score_bundle,
@@ -363,3 +364,47 @@ def test_fragment_prepare_keeps_every_page_and_does_not_rewrite_gt():
     assert denom == len("采购人：医院") + len("项目编号：ABC")
     assert edits == len("北京数字支点国际项目管理有限公司")
     assert pages.read_bytes() == before
+
+
+def test_char_edit_counts_match_line_distance():
+    from work.eval.rapidocr_line_cer import _line_edits
+
+    ref = "采购人:医院\n项目编号:ABC"
+    hyp = ["采购人:医阮", "项目"]
+    counts = page_char_edit_counts(ref, "\n".join(hyp), hyp)
+    edits, _denom = _line_edits(ref, "\n".join(hyp), hyp)
+    assert counts["edits"] == edits
+    assert counts["misread"] == 1
+    assert counts["missing"] == len("编号:ABC")
+
+
+def test_rapidocr_loads_ppocrv5_server_rec_only(monkeypatch):
+    rapidocr_onnxruntime = pytest.importorskip("rapidocr_onnxruntime")
+    import fitz
+
+    from work.eval import public_expand as expand
+
+    calls: dict[str, dict] = {}
+
+    class _FakeEngine:
+        def __call__(self, _array):
+            return ([], None)
+
+    def _factory(**kwargs):
+        calls["kwargs"] = kwargs
+        return _FakeEngine()
+
+    monkeypatch.setattr(expand, "ppocrv5_server_rec_path", lambda: expand.ROOT / "ch_PP-OCRv5_rec_server.onnx")
+    monkeypatch.setattr(rapidocr_onnxruntime, "RapidOCR", _factory)
+    expand._run_rapidocr.engine = None
+    document = fitz.open()
+    try:
+        page = document.new_page(width=50, height=50)
+        png = page.get_pixmap(alpha=False).tobytes("png")
+        expand._run_rapidocr(png)
+    finally:
+        document.close()
+        expand._run_rapidocr.engine = None
+    assert calls["kwargs"] == {"rec_model_path": str(expand.ROOT / "ch_PP-OCRv5_rec_server.onnx")}
+    assert "mobile" not in calls["kwargs"]["rec_model_path"]
+    assert "det_model_path" not in calls["kwargs"]

@@ -30,9 +30,9 @@ from work.eval.collect_public_tenders import (
 )
 from work.eval.key_field_f1 import score_key_field_f1
 from work.eval.key_field_gt import KEY_FIELD_NAMES, NATIONAL_ID_RE, PHONE_RE
-from work.eval.ocr_benchmark import _norm
+from work.eval.ocr_benchmark import _norm, levenshtein
 from work.eval.page_annotation import load_annotations
-from work.eval.rapidocr_line_cer import evaluate_line_cer, load_hypotheses
+from work.eval.rapidocr_line_cer import evaluate_line_cer, load_hypotheses, split_normalized_lines
 from work.eval.sandbox_gates import KEY_FIELD_F1_MIN, LINE_CER_MAX, TEDS_MIN
 from work.eval.teds_gt import rows_to_table_html
 from work.eval.teds_harness import evaluate_teds
@@ -58,6 +58,17 @@ TEDS_HYP_PATH = FIXTURE_DIR / "public_expand_teds_hypotheses.jsonl"
 KF_GT_PATH = FIXTURE_DIR / "public_expand_key_field_gt.jsonl"
 KF_HYP_PATH = FIXTURE_DIR / "public_expand_key_field_hypotheses.jsonl"
 JOE_LOCAL_PDFS = FIXTURE_DIR / "joe_local_pdfs_2026-09-29.json"
+
+# Printed-text recognition only. Detection stays the rapidocr_onnxruntime package default.
+PPOCRV5_SERVER_REC_FILENAME = "ch_PP-OCRv5_rec_server.onnx"
+PPOCRV5_SERVER_REC_SHA256 = "e09385400eaaaef34ceff54aeb7c4f0f1fe014c27fa8b9905d4709b65746562a"
+PPOCRV5_SERVER_REC_URL = (
+    "https://www.modelscope.cn/models/RapidAI/RapidOCR/resolve/v3.9.2/onnx/PP-OCRv5/rec/"
+    + PPOCRV5_SERVER_REC_FILENAME
+)
+PPOCRV5_SERVER_REC_PATH = ROOT / "work" / "models" / "ocr" / PPOCRV5_SERVER_REC_FILENAME
+REC_HYPOTHESIS_SOURCE = "rapidocr_onnxruntime_ppocrv5_server_rec"
+REC_TABLE_HYPOTHESIS_SOURCE = "rapidocr_onnxruntime_ppocrv5_server_rec_ruling_grid"
 
 OLD_CER_GT = FIXTURE_DIR / "sandbox_pages.jsonl"
 OLD_CER_HYP = FIXTURE_DIR / "sandbox_hypotheses.jsonl"
@@ -720,6 +731,91 @@ def prepare_expanded_cer(
     return prepared_gt, prepared_hyp
 
 
+def _levenshtein_ops(ref: str, hyp: str) -> tuple[int, int, int]:
+    """Substitution-preferring Levenshtein operation counts.
+
+    Returns deletions (缺字), substitutions (认错), and insertions.
+    This is a recount of an already scored distance. It does not change the gate.
+    """
+    if ref == hyp:
+        return 0, 0, 0
+    if not ref:
+        return 0, 0, len(hyp)
+    if not hyp:
+        return len(ref), 0, 0
+    rows = len(ref) + 1
+    cols = len(hyp) + 1
+    dp = [[0] * cols for _ in range(rows)]
+    for i in range(rows):
+        dp[i][0] = i
+    for j in range(cols):
+        dp[0][j] = j
+    for i, ca in enumerate(ref, 1):
+        for j, cb in enumerate(hyp, 1):
+            substitute = dp[i - 1][j - 1] + (ca != cb)
+            delete = dp[i - 1][j] + 1
+            insert = dp[i][j - 1] + 1
+            dp[i][j] = min(substitute, delete, insert)
+    i, j = len(ref), len(hyp)
+    deletions = substitutions = insertions = 0
+    while i > 0 or j > 0:
+        if i > 0 and j > 0:
+            cost = ref[i - 1] != hyp[j - 1]
+            if dp[i][j] == dp[i - 1][j - 1] + int(cost):
+                substitutions += int(cost)
+                i -= 1
+                j -= 1
+                continue
+        if i > 0 and dp[i][j] == dp[i - 1][j] + 1:
+            deletions += 1
+            i -= 1
+            continue
+        insertions += 1
+        j -= 1
+    return deletions, substitutions, insertions
+
+
+def page_char_edit_counts(ref_text: str, hyp_text: str, hyp_lines: list[str] | None) -> dict[str, int]:
+    """Count 缺字 and 认错 with the same greedy line match as line CER."""
+    refs = split_normalized_lines(ref_text)
+    if hyp_lines is not None:
+        hyps = [_norm(line) for line in hyp_lines if _norm(str(line))]
+    else:
+        hyps = split_normalized_lines(hyp_text)
+    deletions = substitutions = insertions = 0
+    if not refs:
+        insertions = 0 if not hyps else 1
+        return {"missing": deletions, "misread": substitutions, "insertion": insertions, "edits": insertions}
+    used: set[int] = set()
+    for ref in refs:
+        best_j: int | None = None
+        best_d = len(ref)
+        for index, hyp in enumerate(hyps):
+            if index in used:
+                continue
+            distance = levenshtein(ref, hyp)
+            if distance < best_d:
+                best_d = distance
+                best_j = index
+        if best_j is None:
+            deletions += len(ref)
+            continue
+        used.add(best_j)
+        deleted, substituted, inserted = _levenshtein_ops(ref, hyps[best_j])
+        deletions += deleted
+        substitutions += substituted
+        insertions += inserted
+    for index, hyp in enumerate(hyps):
+        if index not in used:
+            insertions += len(hyp)
+    return {
+        "missing": deletions,
+        "misread": substitutions,
+        "insertion": insertions,
+        "edits": deletions + substitutions + insertions,
+    }
+
+
 def score_bundle(
     cer_gt: list[dict[str, Any]],
     cer_hyp: list[dict[str, Any]],
@@ -1028,6 +1124,7 @@ def build_report_from_fixtures() -> dict[str, Any]:
         | {
             "note": (
                 "Live RapidOCR hypotheses versus text-layer or published-table GT. "
+                "Printed-text recognition is the PP-OCRv5 server model. Detection is unchanged. "
                 "Synthetic rows excluded. Thresholds unchanged. "
                 "Scoring concatenates a text-layer fragment span only when the span "
                 "contains a calendar particle, a chapter marker plus its title, or a "
@@ -1044,7 +1141,13 @@ def build_report_from_fixtures() -> dict[str, Any]:
         "failure_causes": failures,
         "improvement_directions": improvement_directions(failures),
         "gt_policy": "embedded PDF text layer or PyMuPDF table extract confirmed against that text layer; published HTML for not-scored notices. OCR is never GT.",
-        "hypothesis_policy": "rapidocr_onnxruntime on a 1.5x render of the official PDF page. TOC dot leaders are segmented before line CER. Text-layer fragments that equal one OCR line are joined at scoring time; stored GT is not rewritten. Table hypotheses place OCR text into the PDF ruling-line grid. Ground truth stays the text layer.",
+        "hypothesis_policy": (
+            "rapidocr_onnxruntime printed-text recognition is the PP-OCRv5 server model "
+            "ch_PP-OCRv5_rec_server. The line-finding detection model is the package default and is unchanged. "
+            "TOC dot leaders are segmented before line CER. Text-layer fragments that equal one OCR line are joined "
+            "at scoring time; stored GT is not rewritten. Table hypotheses place OCR text into the PDF ruling-line grid. "
+            "Ground truth stays the text layer."
+        ),
     }
     report["gate"] = (
         "GATE_PASS"
@@ -1054,7 +1157,113 @@ def build_report_from_fixtures() -> dict[str, Any]:
         else "GATE_FAIL"
     )
     report["joe_local_pdf_intake"] = load_joe_local_pdf_intake(manifest)
+    return _attach_saved_recognition_swap(report)
+
+
+def _close(left: Any, right: Any) -> bool:
+    if left is None or right is None:
+        return left is None and right is None
+    return abs(float(left) - float(right)) <= 1e-12
+
+
+def _attach_saved_recognition_swap(report: dict[str, Any]) -> dict[str, Any]:
+    """Keep a prior swap note only when it still describes this scored run."""
+    if not REPORT_JSON.is_file():
+        return report
+    try:
+        previous = json.loads(REPORT_JSON.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return report
+    swap = previous.get("recognition_swap")
+    if not isinstance(swap, dict):
+        return report
+    after = swap.get("after") or {}
+    expanded = report["expanded"]
+    same = (
+        after.get("line_edits") == expanded.get("line_edits")
+        and after.get("line_denom") == expanded.get("line_denom")
+        and after.get("line_cer_pages") == expanded.get("line_cer_pages")
+        and after.get("tp") == expanded.get("tp")
+        and after.get("fp") == expanded.get("fp")
+        and after.get("fn") == expanded.get("fn")
+        and after.get("teds_pages_scored") == expanded.get("teds_pages_scored")
+        and after.get("line_cer_gate") == expanded.get("line_cer_gate")
+        and after.get("key_field_f1_gate") == expanded.get("key_field_f1_gate")
+        and after.get("teds_gate") == expanded.get("teds_gate")
+        and _close(after.get("line_cer"), expanded.get("line_cer"))
+        and _close(after.get("key_field_f1"), expanded.get("key_field_f1"))
+        and _close(after.get("teds"), expanded.get("teds"))
+    )
+    if same:
+        report["recognition_swap"] = swap
     return report
+
+
+def _recognition_swap_lines(swap: Any) -> list[str]:
+    if not isinstance(swap, dict):
+        return []
+    before = swap.get("before") or {}
+    after = swap.get("after") or {}
+    missing = swap.get("missing_edits") or {}
+    misread = swap.get("misread_edits") or {}
+
+    def cell(metrics: dict[str, Any], key: str) -> str:
+        value = metrics.get(key)
+        if key in {"line_cer", "key_field_f1", "teds"}:
+            return _pct(None if value is None else float(value))
+        return "" if value is None else str(value)
+
+    lines = [
+        "",
+        "## PP-OCRv5 server recognition swap",
+        "",
+        "Evidence only. Pending audit. Printed-text recognition is `ch_PP-OCRv5_rec_server`. "
+        "The line-finding detection model is unchanged. Scoring and thresholds are unchanged. "
+        "A missed gate stays GATE_FAIL. `product_pass` stays false when any gate fails. Not T-005.",
+        "",
+        f"Before is the same 54-page run on `{swap.get('base_commit', '')}`.",
+        "",
+        "| | line edits | denominator | CER | CER gate | F1 | F1 gate | TP | FP | FN | TEDS | TEDS gate | TEDS pages | overall |",
+        "|---|---:|---:|---:|---|---:|---|---:|---:|---:|---:|---|---:|---|",
+        (
+            f"| Before | {cell(before, 'line_edits')} | {cell(before, 'line_denom')} | {cell(before, 'line_cer')} | "
+            f"{cell(before, 'line_cer_gate')} | {cell(before, 'key_field_f1')} | {cell(before, 'key_field_f1_gate')} | "
+            f"{cell(before, 'tp')} | {cell(before, 'fp')} | {cell(before, 'fn')} | {cell(before, 'teds')} | "
+            f"{cell(before, 'teds_gate')} | {cell(before, 'teds_pages_scored')} | {cell(before, 'gate')} |"
+        ),
+        (
+            f"| After | {cell(after, 'line_edits')} | {cell(after, 'line_denom')} | {cell(after, 'line_cer')} | "
+            f"{cell(after, 'line_cer_gate')} | {cell(after, 'key_field_f1')} | {cell(after, 'key_field_f1_gate')} | "
+            f"{cell(after, 'tp')} | {cell(after, 'fp')} | {cell(after, 'fn')} | {cell(after, 'teds')} | "
+            f"{cell(after, 'teds_gate')} | {cell(after, 'teds_pages_scored')} | {cell(after, 'gate')} |"
+        ),
+        "",
+        (
+            f"缺字 dropped **{missing.get('dropped')}** "
+            f"({missing.get('before')} → {missing.get('after')}). "
+            f"认错 dropped **{misread.get('dropped')}** "
+            f"({misread.get('before')} → {misread.get('after')}). "
+            "Dropped is before minus after on the same page. A negative drop means more edits after the swap."
+        ),
+        "",
+        "| doc | page | 缺字 before | 缺字 after | 缺字 dropped | 认错 before | 认错 after | 认错 dropped |",
+        "|---|---:|---:|---:|---:|---:|---:|---:|",
+    ]
+    for row in swap.get("pages") or []:
+        lines.append(
+            "| {doc} | {page} | {mb} | {ma} | {md} | {rb} | {ra} | {rd} |".format(
+                doc=row.get("doc_id"),
+                page=row.get("page"),
+                mb=row.get("missing_before"),
+                ma=row.get("missing_after"),
+                md=row.get("missing_dropped"),
+                rb=row.get("misread_before"),
+                ra=row.get("misread_after"),
+                rd=row.get("misread_dropped"),
+            )
+        )
+    lines.append("")
+    return lines
 
 
 def _compact(metrics: dict[str, Any]) -> dict[str, Any]:
@@ -1269,6 +1478,7 @@ def render_markdown(report: dict[str, Any]) -> str:
     lines += ["", "## Improvement directions", ""]
     for item in report["improvement_directions"]:
         lines.append(f"- {item}")
+    lines.extend(_recognition_swap_lines(report.get("recognition_swap")))
     lines += [
         "",
         "## Reproduce",
@@ -1375,6 +1585,46 @@ def _provenance(row: dict[str, Any], fetched_at: str) -> dict[str, Any]:
     }
 
 
+def _sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def ppocrv5_server_rec_path() -> Path:
+    """Return the PP-OCRv5 server recognition model RapidOCR can load directly.
+
+    The mobile recognition model is not a substitute. A missing or mismatched
+    file is an error.
+    """
+    if PPOCRV5_SERVER_REC_PATH.is_file() and _sha256_file(PPOCRV5_SERVER_REC_PATH) == PPOCRV5_SERVER_REC_SHA256:
+        return PPOCRV5_SERVER_REC_PATH
+    PPOCRV5_SERVER_REC_PATH.parent.mkdir(parents=True, exist_ok=True)
+    partial = PPOCRV5_SERVER_REC_PATH.with_suffix(".partial")
+    import urllib.request
+
+    try:
+        urllib.request.urlretrieve(PPOCRV5_SERVER_REC_URL, partial)  # noqa: S310
+    except Exception as exc:
+        if partial.exists():
+            partial.unlink()
+        raise RuntimeError(
+            "PP-OCRv5 server recognition model could not be downloaded for RapidOCR. "
+            "The mobile recognition model was not substituted."
+        ) from exc
+    digest = _sha256_file(partial)
+    if digest != PPOCRV5_SERVER_REC_SHA256:
+        partial.unlink()
+        raise RuntimeError(
+            f"PP-OCRv5 server recognition model hash {digest} does not match "
+            f"{PPOCRV5_SERVER_REC_SHA256}. Refusing to load it."
+        )
+    partial.replace(PPOCRV5_SERVER_REC_PATH)
+    return PPOCRV5_SERVER_REC_PATH
+
+
 def _run_rapidocr(png: bytes) -> list[dict[str, Any]]:
     import fitz
     import numpy as np
@@ -1382,7 +1632,8 @@ def _run_rapidocr(png: bytes) -> list[dict[str, Any]]:
 
     engine = _run_rapidocr.engine  # type: ignore[attr-defined]
     if engine is None:
-        engine = RapidOCR()
+        # Recognition only. Omitting det/cls paths keeps the package detection model.
+        engine = RapidOCR(rec_model_path=str(ppocrv5_server_rec_path()))
         _run_rapidocr.engine = engine  # type: ignore[attr-defined]
     pixmap = fitz.Pixmap(png)
     if pixmap.alpha:
@@ -1519,7 +1770,7 @@ def build_samples(manifest: dict[str, Any]) -> dict[str, Any]:
                 "page": page_number,
                 "text_hyp": hyp_text,
                 "lines_hyp": [redact_text(str(item["text"])) for item in lines],
-                "hypothesis_source": "rapidocr_onnxruntime",
+                "hypothesis_source": REC_HYPOTHESIS_SOURCE,
                 "cohort": cohort,
             }
         )
@@ -1546,7 +1797,7 @@ def build_samples(manifest: dict[str, Any]) -> dict[str, Any]:
                     "doc_id": row["document_id"],
                     "page": page_number,
                     "fields_hyp": [{"name": name, "value": value} for name, value in ocr_fields.items()],
-                    "hypothesis_source": "rapidocr_onnxruntime",
+                    "hypothesis_source": REC_HYPOTHESIS_SOURCE,
                     "cohort": cohort,
                 }
             )
@@ -1591,7 +1842,7 @@ def build_samples(manifest: dict[str, Any]) -> dict[str, Any]:
                         "doc_id": row["document_id"],
                         "page": page_number,
                         "table_html_hyp": ocr_lines_into_cell_grid(lines, grid, 1.5),
-                        "hypothesis_source": "rapidocr_onnxruntime_ruling_grid",
+                        "hypothesis_source": REC_TABLE_HYPOTHESIS_SOURCE,
                         "cohort": cohort,
                     }
                 )
@@ -1688,7 +1939,7 @@ def build_samples(manifest: dict[str, Any]) -> dict[str, Any]:
                     "page": page_number,
                     "text_hyp": hyp_text,
                     "lines_hyp": [redact_text(str(item["text"])) for item in lines],
-                    "hypothesis_source": "rapidocr_onnxruntime",
+                    "hypothesis_source": REC_HYPOTHESIS_SOURCE,
                     "cohort": "prior_public_ocr",
                 }
             )
@@ -1723,7 +1974,7 @@ def build_samples(manifest: dict[str, Any]) -> dict[str, Any]:
                         "doc_id": doc_id,
                         "page": page_number,
                         "fields_hyp": fields_hyp,
-                        "hypothesis_source": "rapidocr_onnxruntime",
+                        "hypothesis_source": REC_HYPOTHESIS_SOURCE,
                         "cohort": "prior_public_ocr",
                     }
                 )
@@ -1755,7 +2006,7 @@ def build_samples(manifest: dict[str, Any]) -> dict[str, Any]:
                         "table_html_hyp": "".join(
                             ocr_lines_into_cell_grid(lines, grid, 1.5) for grid in grids
                         ),
-                        "hypothesis_source": "rapidocr_onnxruntime_ruling_grid",
+                        "hypothesis_source": REC_TABLE_HYPOTHESIS_SOURCE,
                         "cohort": "prior_public_ocr",
                     }
                 )

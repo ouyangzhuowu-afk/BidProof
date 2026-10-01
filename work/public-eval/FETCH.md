@@ -72,6 +72,7 @@ Additional public PDFs are appended to this same manifest with `leaf_id=S-A-OCR-
 - Ground truth is the PDF text layer, or a PyMuPDF table whose cells are confirmed in that text layer. Published HTML notices without an official PDF are stored redacted and marked not-scored. OCR output is never ground truth.
 - Thresholds stay CER ≤ 2%, key-field F1 ≥ 97%, TEDS ≥ 90%.
 - Line CER segments table-of-contents leaders before alignment. TEDS places RapidOCR text into the PDF ruling-line grid. Stored ground truth stays the text layer. Pages are not dropped.
+- Printed-text recognition for this leaf is the PP-OCRv5 server model `ch_PP-OCRv5_rec_server`, loaded by RapidOCR. The line-finding detection model stays the package default.
 
 ```bash
 uv run --extra ocr python -m work.eval.public_expand --build
