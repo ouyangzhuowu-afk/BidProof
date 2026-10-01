@@ -1386,6 +1386,16 @@
   "gt_policy": "embedded PDF text layer or PyMuPDF table extract confirmed against that text layer; published HTML for not-scored notices. OCR is never GT.",
   "hypothesis_policy": "rapidocr_onnxruntime on a 1.5x render of the official PDF page. TOC dot leaders are segmented before line CER. Text-layer fragments that equal one OCR line are joined at scoring time; stored GT is not rewritten. Table hypotheses place OCR text into the PDF ruling-line grid. Ground truth stays the text layer.",
   "gate": "GATE_FAIL",
+  "line_edit_recount": {
+    "note": "Evidence only. Scorer unchanged. Each of the 1302 current line edits is assigned once. product_pass stays false. Overall gate stays GATE_FAIL. pending_audit.",
+    "line_edits": 1302,
+    "line_denom": 29835,
+    "fragment_unaligned": 32,
+    "text_layer_absent": 337,
+    "real_miss_or_wrong_char": 933,
+    "sum_check": 1302,
+    "hypothesis_304_339_659": "does not match"
+  },
   "joe_local_pdf_intake": {
     "intake_id": "joe-local-pdfs-2026-09-29",
     "note": "Same filename or SHA-256 as a completed public-eval document is a duplicate and is not counted again.",

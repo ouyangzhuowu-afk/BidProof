@@ -74,6 +74,78 @@ Twelve PDFs from Joe's local `work/public-eval/pdfs`, approved by Edith for eval
 - Leave image-only pages not-scored until a human transcript exists. Do not promote OCR text to ground truth.
 - Keep training-corpus PDFs and synthetic scans out of this gate so later fine-tunes cannot leak into the reported numbers.
 
+## Remaining line-edit recount (1302)
+
+Evidence note only. The scorer is unchanged. These counts are the current line edits on the same 54 pages (1302/29835, CER 4.36%), each edit assigned once. `product_pass` stays false. Overall gate stays GATE_FAIL.
+
+| Bucket | Edits | What it is |
+|---|---:|---|
+| 1. Fragment lines still unaligned | 32 | Short CJK text-layer lines still separate, while one OCR line already contains them, and the current rule did not join them |
+| 2. OCR characters absent from the text layer | 337 | Letterheads, English company names, and other OCR text that is not in the page text layer |
+| 3. Real misses or wrong characters | 933 | Wrong line pairing, substitutions, and text-layer lines OCR did not produce |
+| Sum | 1302 | |
+
+32 + 337 + 933 = 1302. The non-binding split 304 + 339 + 659 does not match this recount. 337 is near the 339 insertion estimate. The other 304 are not residual fragment lines; they are in bucket 3.
+
+Bucket 1 is three pages: `pub-gx-minzu-ultrasound-2026` page 6 (20, table cells 项/号/货物/名称/数/量/单/位 against `项货物数单` and `号名称量位`), `pub-gx-tianlin-yuegui-devices-2026` page 8 (8, `数量` + `单位` against `数量单位`), `fixture-001` page 32 (4, `日` against `日期:`). `fixture-003` page 5 and `pub-gx-youjiang-ultrasound` page 5 stay at 0 in this bucket.
+
+Bucket 2 is dominated by `fixture-003` pages 5 and 4 (93 and 84: `cpil`, `北京数字支点`, the English letterhead, and one garbled line), then `pub-gx-tianlin-yuegui-devices-2026` page 1 (39, the English 广西恒桥 line). The Chinese 广西恒桥 header is also in the body, so that extra 12-character copy is bucket 3.
+
+Bucket 3 is dominated by `fixture-003` page 5 (156), `fixture-002` page 6 (105), `pub-gx-minzu-ultrasound-2026` page 2 (92), `pub-gx-info-center-compute-2026` page 5 (87), `pub-gx-youjiang-ultrasound` page 6 (82), `pub-gx-minzu-ultrasound-2026` page 1 (77), and `pub-gx-youjiang-ultrasound` page 5 (69).
+
+| doc | page | edits | fragment | absent | miss |
+|---|---:|---:|---:|---:|---:|
+| fixture-003 | 5 | 249 | 0 | 93 | 156 |
+| fixture-003 | 4 | 139 | 0 | 84 | 55 |
+| fixture-002 | 6 | 135 | 0 | 30 | 105 |
+| pub-gx-youjiang-ultrasound | 6 | 94 | 0 | 12 | 82 |
+| pub-gx-minzu-ultrasound-2026 | 2 | 92 | 0 | 0 | 92 |
+| pub-gx-info-center-compute-2026 | 5 | 87 | 0 | 0 | 87 |
+| pub-gx-minzu-ultrasound-2026 | 1 | 77 | 0 | 0 | 77 |
+| pub-gx-youjiang-ultrasound | 5 | 69 | 0 | 0 | 69 |
+| pub-gx-tianlin-yuegui-devices-2026 | 1 | 51 | 0 | 39 | 12 |
+| pub-gx-ventilator-monitors | 5 | 42 | 0 | 0 | 42 |
+| pub-gx-minzu-ultrasound-2026 | 6 | 24 | 20 | 0 | 4 |
+| fixture-003 | 9 | 23 | 0 | 16 | 7 |
+| pub-gx-tianlin-yuegui-devices-2026 | 8 | 23 | 8 | 0 | 15 |
+| fixture-003 | 29 | 22 | 0 | 21 | 1 |
+| fixture-001 | 32 | 17 | 4 | 0 | 13 |
+| fixture-003 | 35 | 16 | 0 | 16 | 0 |
+| pub-gx-nanning-vascular-doppler | 17 | 16 | 0 | 2 | 14 |
+| pub-gx-daxin-ultrasound-anesthesia | 73 | 13 | 0 | 0 | 13 |
+| pub-gx-tianlin-yuegui-devices-2026 | 2 | 12 | 0 | 4 | 8 |
+| fixture-001 | 2 | 8 | 0 | 7 | 1 |
+| pub-gx-yibiatong-phase2-2026 | 2 | 8 | 0 | 4 | 4 |
+| fixture-001 | 14 | 7 | 0 | 7 | 0 |
+| fixture-002 | 3 | 6 | 0 | 2 | 4 |
+| fixture-002 | 37 | 6 | 0 | 0 | 6 |
+| pub-gx-hechi-mine-safety-2026 | 1 | 6 | 0 | 0 | 6 |
+| pub-gx-nanxishan-dr-mammo-2026 | 2 | 6 | 0 | 0 | 6 |
+| pub-gx-qintang-flow-cytometer | 3 | 6 | 0 | 0 | 6 |
+| pub-gx-hechi-mine-safety-2026 | 2 | 4 | 0 | 0 | 4 |
+| pub-gx-nanning-vascular-doppler | 3 | 4 | 0 | 0 | 4 |
+| pub-gx-nanxishan-dr-mammo-2026 | 9 | 4 | 0 | 0 | 4 |
+| pub-gx-nonggang-patrol-2026 | 9 | 4 | 0 | 0 | 4 |
+| pub-gx-qintang-flow-cytometer | 1 | 4 | 0 | 0 | 4 |
+| pub-gx-daxin-ultrasound-anesthesia | 3 | 3 | 0 | 0 | 3 |
+| pub-gx-daxin-ultrasound-anesthesia | 4 | 3 | 0 | 0 | 3 |
+| pub-gx-nanning-vascular-doppler | 16 | 3 | 0 | 0 | 3 |
+| pub-gx-ventilator-monitors | 3 | 3 | 0 | 0 | 3 |
+| pub-gx-nonggang-patrol-2026 | 2 | 2 | 0 | 0 | 2 |
+| pub-gx-ventilator-monitors | 4 | 2 | 0 | 0 | 2 |
+| pub-gx-ventilator-monitors | 15 | 2 | 0 | 0 | 2 |
+| pub-gx-yibiatong-phase2-2026 | 3 | 2 | 0 | 0 | 2 |
+| fixture-001 | 3 | 1 | 0 | 0 | 1 |
+| fixture-003 | 1 | 1 | 0 | 0 | 1 |
+| pub-gx-daxin-ultrasound-anesthesia | 1 | 1 | 0 | 0 | 1 |
+| pub-gx-daxin-ultrasound-anesthesia | 51 | 1 | 0 | 0 | 1 |
+| pub-gx-hechi-mine-safety-2026 | 3 | 1 | 0 | 0 | 1 |
+| pub-gx-info-center-compute-2026 | 2 | 1 | 0 | 0 | 1 |
+| pub-gx-youjiang-ultrasound | 2 | 1 | 0 | 0 | 1 |
+| pub-gx-youjiang-ultrasound | 4 | 1 | 0 | 0 | 1 |
+
+Six pages have 0 edits: `fixture-002` pages 1 and 33, `pub-gx-qintang-flow-cytometer` page 4, `pub-gx-nanxishan-dr-mammo-2026` page 1, `pub-gx-info-center-compute-2026` page 1, `pub-gx-nonggang-patrol-2026` page 3.
+
 ## Reproduce
 
 ```bash
