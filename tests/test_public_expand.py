@@ -259,12 +259,39 @@ def test_report_keeps_product_pass_false_and_separates_synthetic():
     assert report["old_set"]["teds_gate"] == "GATE_FAIL"
     assert report["synthetic_appendix"]["line_cer_pages"] == 3
     assert report["expanded"]["line_cer_pages"] == 54
-    assert report["expanded"]["line_edits"] == 1302
+    assert report["expanded"]["line_edits"] == 1064
     assert report["expanded"]["line_denom"] == 29835
+    assert report["expanded"]["line_cer_gate"] == "GATE_FAIL"
+    assert report["expanded"]["key_field_f1_gate"] == "GATE_PASS"
+    assert report["expanded"]["teds_gate"] == "GATE_PASS"
     assert report["expanded"]["tp"] == 103
-    assert report["expanded"]["fp"] == 3
+    assert report["expanded"]["fp"] == 2
     assert report["expanded"]["fn"] == 3
     assert report["expanded"]["teds_pages_scored"] == 19
+    pair = report["model_pair"]
+    assert pair["status"] == "pending_audit"
+    assert pair["detection_model"] == "ch_PP-OCRv5_det_mobile"
+    assert pair["recognition_model"] == "ch_PP-OCRv5_rec_server"
+    assert pair["render_scale"] == 1.5
+    assert pair["max_side_len"] == 2000
+    assert pair["base_commit"] == "8b869d541e3df3c3ac11d271c05d0ee1f9e65156"
+    assert pair["before"]["line_edits"] == 1302
+    assert pair["before"]["line_denom"] == 29835
+    assert pair["before"]["line_cer_gate"] == "GATE_FAIL"
+    assert pair["before"]["key_field_f1_gate"] == "GATE_PASS"
+    assert pair["before"]["teds_gate"] == "GATE_PASS"
+    assert pair["before"]["gate"] == "GATE_FAIL"
+    assert pair["after"]["line_edits"] == 1064
+    assert pair["after"]["line_denom"] == 29835
+    assert pair["after"]["line_cer_gate"] == "GATE_FAIL"
+    assert pair["after"]["key_field_f1_gate"] == "GATE_PASS"
+    assert pair["after"]["teds_gate"] == "GATE_PASS"
+    assert pair["after"]["tp"] == 103
+    assert pair["after"]["fp"] == 2
+    assert pair["after"]["fn"] == 3
+    assert pair["after"]["teds_pages_scored"] == 19
+    assert pair["after"]["gate"] == "GATE_FAIL"
+    assert pair["after"]["product_pass"] is False
     assert report["old_set"]["line_cer"] == pytest.approx(0.031746031746031744)
     assert report["old_set"]["key_field_f1"] == pytest.approx(0.76)
     assert report["old_set"]["teds"] == pytest.approx(0.8784546114752891, rel=1e-6)

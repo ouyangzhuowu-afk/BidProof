@@ -15,14 +15,14 @@ Synthetic rows are in the appendix and are not in the expanded gate. Thresholds 
 | Set | CER | CER gate | F1 | F1 gate | TEDS | TEDS gate |
 |---|---:|---|---:|---|---:|---|
 | Old published set | 3.17% | GATE_FAIL | 76.00% | GATE_FAIL | 87.85% | GATE_FAIL |
-| Expanded public set (live OCR) | 4.36% | GATE_FAIL | 97.17% | GATE_PASS | 95.80% | GATE_PASS |
+| Expanded public set (live OCR) | 3.57% | GATE_FAIL | 97.63% | GATE_PASS | 97.40% | GATE_PASS |
 | Synthetic appendix (not in gate) | 3.17% | GATE_FAIL | 10.26% | GATE_FAIL | 86.63% | GATE_FAIL |
 
 Overall expanded gate: **GATE_FAIL**. `product_pass=false`.
 
-Expanded F1 counts: TP 103 / FP 3 / FN 3.
+Expanded F1 counts: TP 103 / FP 2 / FN 3.
 
-Expanded line edits: **1302** / **29835** on **54** pages. Baseline before fragment alignment, same pages: **1481/29835** (CER 4.96%). Unconstrained adjacent joins (remeasured 485 edits; prior hypothesis 483) are not applied. Rejected false candidates: fixture-003 page 5, two paragraphs; pub-gx-youjiang-ultrasound page 5, 开标时间 with 开标地点 and the acquisition-time wrap.
+Expanded line edits: **1064** / **29835** on **54** pages. Baseline before fragment alignment, same pages: **1481/29835** (CER 4.96%). Unconstrained adjacent joins (remeasured 485 edits; prior hypothesis 483) are not applied. Rejected false candidates: fixture-003 page 5, two paragraphs; pub-gx-youjiang-ultrasound page 5, 开标时间 with 开标地点 and the acquisition-time wrap.
 
 ## Sources
 
@@ -74,7 +74,21 @@ Twelve PDFs from Joe's local `work/public-eval/pdfs`, approved by Edith for eval
 - Leave image-only pages not-scored until a human transcript exists. Do not promote OCR text to ground truth.
 - Keep training-corpus PDFs and synthetic scans out of this gate so later fine-tunes cannot leak into the reported numbers.
 
+## PP-OCRv5 mobile detector and server recognizer
+
+Evidence only. Pending audit. Line finding is `ch_PP-OCRv5_det_mobile`. Printed-text recognition is `ch_PP-OCRv5_rec_server`. Render scale is 1.5 (about 108 DPI). RapidOCR max_side_len stays 2000. Scoring, fragment-line alignment, and thresholds are unchanged. Same 54 CER pages, denominator 29835, and 19 TEDS pages. A missed gate stays GATE_FAIL. `product_pass` stays false when any gate fails. Not T-005.
+
+Before is the v4 pair on `8b869d541e3df3c3ac11d271c05d0ee1f9e65156`, recomputed by this scorer.
+
+| | line edits | denominator | CER | CER gate | F1 | F1 gate | TP | FP | FN | TEDS | TEDS gate | TEDS pages | overall | product_pass |
+|---|---:|---:|---:|---|---:|---|---:|---:|---:|---:|---|---:|---|---|
+| Baseline v4 pair | 1302 | 29835 | 4.36% | GATE_FAIL | 97.17% | GATE_PASS | 103 | 3 | 3 | 95.80% | GATE_PASS | 19 | GATE_FAIL | false |
+| det mobile + rec server | 1064 | 29835 | 3.57% | GATE_FAIL | 97.63% | GATE_PASS | 103 | 2 | 3 | 97.40% | GATE_PASS | 19 | GATE_FAIL | false |
+
+
 ## Remaining line-edit recount (1302)
+
+These tables recount the v4 pair at `8b869d541e3df3c3ac11d271c05d0ee1f9e65156` (1302/29835, CER 4.36%). They were not recomputed on the PP-OCRv5 mobile detector and server recognizer.
 
 Evidence note only. The scorer is unchanged. These counts are the current line edits on the same 54 pages (1302/29835, CER 4.36%), each edit assigned once. `product_pass` stays false. Overall gate stays GATE_FAIL.
 
@@ -248,6 +262,7 @@ Whole unmatched lines are dominated by `fixture-003` page 5 (21), `pub-gx-youjia
 
 These 11 rows sum to 342, with 100 whole unmatched lines and 242 paired-line gaps. The other 43 pages have no long deletion.
 
+
 ## Reproduce
 
 ```bash
@@ -255,4 +270,4 @@ uv run --extra ocr python -m work.eval.public_expand --build
 uv run python -m work.eval.public_expand --report
 ```
 
-Generated at `2026-10-01T12:21:36.109905+00:00`.
+Generated at `2026-10-01T15:55:07.526073+00:00`.

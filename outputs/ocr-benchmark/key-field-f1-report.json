@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-09-29T09:06:12.123118+00:00",
+  "generated_at": "2026-10-01T15:55:07.526073+00:00",
   "claim_scope": "engineering_gate_only",
-  "key_field_f1": 0.9716981132075472,
+  "key_field_f1": 0.976303317535545,
   "gate": "GATE_PASS",
   "product_pass": false,
   "business_pass": false,
@@ -19,6 +19,6 @@
   "note": "Top-level metric is the expanded public live-OCR set. Old published numbers are under old_set.",
   "key_field_f1_min": 0.97,
   "tp": 103,
-  "fp": 3,
+  "fp": 2,
   "fn": 3
 }

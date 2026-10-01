@@ -2192,6 +2192,7 @@ def refresh_live_hypotheses() -> dict[str, int]:
                 raise RuntimeError(f"Stored page {key} is outside {path}")
             page = document[page_number - 1]
             pages[key] = page
+            print(f"ocr {key[0]} p{key[1]}", flush=True)
             ocr_cache[key] = _run_rapidocr(_render(page))
         return pages[key], ocr_cache[key]
 
