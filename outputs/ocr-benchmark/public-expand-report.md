@@ -15,12 +15,14 @@ Synthetic rows are in the appendix and are not in the expanded gate. Thresholds 
 | Set | CER | CER gate | F1 | F1 gate | TEDS | TEDS gate |
 |---|---:|---|---:|---|---:|---|
 | Old published set | 3.17% | GATE_FAIL | 76.00% | GATE_FAIL | 87.85% | GATE_FAIL |
-| Expanded public set (live OCR) | 4.96% | GATE_FAIL | 97.17% | GATE_PASS | 95.80% | GATE_PASS |
+| Expanded public set (live OCR) | 4.36% | GATE_FAIL | 97.17% | GATE_PASS | 95.80% | GATE_PASS |
 | Synthetic appendix (not in gate) | 3.17% | GATE_FAIL | 10.26% | GATE_FAIL | 86.63% | GATE_FAIL |
 
 Overall expanded gate: **GATE_FAIL**. `product_pass=false`.
 
 Expanded F1 counts: TP 103 / FP 3 / FN 3.
+
+Expanded line edits: **1302** / **29835** on **54** pages. Baseline before fragment alignment, same pages: **1481/29835** (CER 4.96%). Unconstrained adjacent joins (remeasured 485 edits; prior hypothesis 483) are not applied. Rejected false candidates: fixture-003 page 5, two paragraphs; pub-gx-youjiang-ultrasound page 5, 开标时间 with 开标地点 and the acquisition-time wrap.
 
 ## Sources
 
@@ -60,13 +62,13 @@ Twelve PDFs from Joe's local `work/public-eval/pdfs`, approved by Edith for eval
 
 ## Failure causes
 
-- **line_cer**: TOC pages still count. Before alignment, split 目录 headings are joined, dot leaders are removed, and a bare OCR page number is put back on the preceding title. Line CER remains above 2% on the same pages because non-leader characters still disagree.
+- **line_cer**: TOC pages still count. Before alignment, split 目录 headings are joined, dot leaders are removed, and a bare OCR page number is put back on the preceding title. Short text-layer fragments (月/日/点/分, a 第N章 marker plus its title, or a vertical one-glyph run) are concatenated only when that concatenation equals one OCR line. Two long lines are not joined. Stored ground truth is not rewritten. Line CER remains above 2% on the same pages because non-fragment characters still disagree.
 - **key_field_f1**: Exact NFKC field match fails when RapidOCR drops or alters the authoritative span (dates, amounts, agency names).
 
 ## Improvement directions
 
 - Keep thresholds at CER≤2%, F1≥97%, TEDS≥90%. Do not drop low-scoring public pages.
-- TOC dot leaders are already segmented before line CER. Further CER gains have to come from the characters RapidOCR still misses on the same pages.
+- TOC dot leaders are already segmented, and text-layer fragments that equal one OCR line are already joined. Further CER gains have to come from characters RapidOCR still misses or inserts on the same pages. Do not join two long lines to move the number.
 - Normalize key-field hypotheses with a constrained parser (amount, date, project code) instead of exact full-span equality, and keep the text-layer string as GT.
 - Table hypotheses already use the PDF ruling-line grid. Remaining TEDS misses are OCR characters inside those cells, still scored against the text-layer HTML.
 - Leave image-only pages not-scored until a human transcript exists. Do not promote OCR text to ground truth.
@@ -79,4 +81,4 @@ uv run --extra ocr python -m work.eval.public_expand --build
 uv run python -m work.eval.public_expand --report
 ```
 
-Generated at `2026-09-29T09:06:12.123118+00:00`.
+Generated at `2026-10-01T12:21:36.109905+00:00`.

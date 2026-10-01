@@ -556,10 +556,139 @@ def segment_toc_lines(lines: list[str]) -> list[str]:
     return merged
 
 
+_PARTICLE_CHARS = frozenset("年月日时分点")
+_PAGE_LINE_RE = re.compile(r"^\d{1,4}$|^第\d{1,4}页$")
+_DASH_FOLD = str.maketrans({"—": "一", "–": "一", "－": "一"})
+
+
+def _fold_dash(text: str) -> str:
+    """Compare em dashes with the OCR glyph 一. The stored line is not rewritten."""
+    return text.translate(_DASH_FOLD)
+
+
+def _is_page_line(line: str) -> bool:
+    return bool(_PAGE_LINE_RE.match(line))
+
+
+def _is_date_fragment(line: str) -> bool:
+    if _is_page_line(line):
+        return False
+    if line in _PARTICLE_CHARS:
+        return True
+    if 1 < len(line) <= 4 and any(ch in "月日点分" for ch in line):
+        if "时间" in line or "地点" in line:
+            return False
+        return True
+    return False
+
+
+def _date_span_ok(span: list[str]) -> bool:
+    """Calendar particles may pull in the host line they were split from.
+
+    Two substantial lines join only when a one-character particle sits between
+    them. That rejects a pair of paragraphs and a 开标时间 / 开标地点 pair.
+    """
+    if len(span) < 2 or not any(_is_date_fragment(line) for line in span):
+        return False
+    if any(_is_page_line(line) for line in span):
+        return False
+    for line in span:
+        if line.startswith("开标时间") or line.startswith("开标地点"):
+            return False
+    substantial = [index for index, line in enumerate(span) if len(line) > 8]
+    for left, right in zip(substantial, substantial[1:]):
+        if not any(line in _PARTICLE_CHARS for line in span[left + 1 : right]):
+            return False
+    return True
+
+
+def _is_title_line(line: str) -> bool:
+    if _TOC_CHAPTER_RE.match(line) or _is_page_line(line):
+        return False
+    if len(line) > 16:
+        return False
+    if any(ch in line for ch in "。；;"):
+        return False
+    return True
+
+
+def _chapter_span_ok(span: list[str]) -> bool:
+    return len(span) == 2 and bool(_TOC_CHAPTER_RE.match(span[0])) and _is_title_line(span[1])
+
+
+def _vertical_span_ok(span: list[str]) -> bool:
+    return len(span) >= 6 and all(len(line) == 1 and not _is_page_line(line) for line in span)
+
+
+def join_fragment_lines(gt_lines: list[str], ocr_lines: list[str]) -> list[str]:
+    """Concatenate text-layer fragments that are already one OCR line.
+
+    Scoring-time only. Characters are concatenated, never deleted, and OCR
+    text is never copied into the ground truth. A span qualifies only when it
+    contains a calendar fragment, a chapter marker plus its title, or a
+    vertical one-glyph run, and that concatenation equals one OCR line.
+    Unconstrained adjacent joins are intentionally not applied.
+    """
+    lines = [_norm(line) for line in gt_lines if _norm(line)]
+    hyps = [_norm(line) for line in ocr_lines if _norm(line)]
+    candidates: list[tuple[int, int]] = []
+    for hyp in hyps:
+        folded_hyp = _fold_dash(hyp)
+        for start, first in enumerate(lines):
+            if _is_page_line(first):
+                continue
+            concat = ""
+            folded = ""
+            for end in range(start, len(lines)):
+                piece = lines[end]
+                if _is_page_line(piece):
+                    break
+                concat += piece
+                folded += _fold_dash(piece)
+                if len(folded) > len(folded_hyp):
+                    break
+                if end == start:
+                    if not folded_hyp.startswith(folded):
+                        break
+                    continue
+                span = lines[start : end + 1]
+                if concat == hyp and (_date_span_ok(span) or _chapter_span_ok(span)):
+                    candidates.append((start, end))
+                    break
+                if folded == folded_hyp and _vertical_span_ok(span):
+                    candidates.append((start, end))
+                    break
+                if not hyp.startswith(concat) and not folded_hyp.startswith(folded):
+                    break
+    chosen: list[tuple[int, int]] = []
+    used: set[int] = set()
+    for start, end in sorted(candidates, key=lambda item: (-(item[1] - item[0]), item[0])):
+        if any(index in used for index in range(start, end + 1)):
+            continue
+        chosen.append((start, end))
+        used.update(range(start, end + 1))
+    if not chosen:
+        return lines
+    output: list[str] = []
+    cursor = 0
+    for start, end in sorted(chosen):
+        output.extend(lines[cursor:start])
+        output.append("".join(lines[start : end + 1]))
+        cursor = end + 1
+    output.extend(lines[cursor:])
+    if "".join(output) != "".join(lines):
+        return lines
+    return output
+
+
 def prepare_expanded_cer(
     gt_rows: list[dict[str, Any]], hyp_rows: list[dict[str, Any]]
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
-    """Segment TOC lines on the expanded set only. Every page is still scored."""
+    """Segment TOC lines and join text-layer fragments. Every page is still scored.
+
+    The stored ground-truth files are not rewritten. Fragment joins concatenate
+    short text-layer lines onto the scoring copy only.
+    """
     hyp_by = {(str(row.get("doc_id")), int(row.get("page") or 0)): row for row in hyp_rows}
     prepared_gt: list[dict[str, Any]] = []
     prepared_hyp: list[dict[str, Any]] = []
@@ -569,18 +698,23 @@ def prepare_expanded_cer(
         raw_lines = hyp.get("lines_hyp")
         source_lines = [str(item) for item in raw_lines] if isinstance(raw_lines, list) else None
         text_gt = str(gt.get("text_gt") or "")
+        gt = dict(gt)
         if is_toc_page(text_gt):
             gt_lines = segment_toc_lines([line for line in text_gt.splitlines() if _norm(line)])
             hyp_source = source_lines if source_lines is not None else str(hyp.get("text_hyp") or "").splitlines()
             hyp_lines = segment_toc_lines([redact_text(line) for line in hyp_source])
-            gt = dict(gt)
-            gt["text_gt"] = "\n".join(gt_lines)
             hyp["text_hyp"] = "\n".join(hyp_lines)
             hyp["lines_hyp"] = hyp_lines
         elif source_lines is not None:
-            redacted = [redact_text(line) for line in source_lines if _norm(redact_text(line))]
-            hyp["lines_hyp"] = redacted
-            hyp["text_hyp"] = "\n".join(redacted)
+            hyp_lines = [redact_text(line) for line in source_lines if _norm(redact_text(line))]
+            hyp["lines_hyp"] = hyp_lines
+            hyp["text_hyp"] = "\n".join(hyp_lines)
+            gt_lines = [line for line in text_gt.splitlines() if _norm(line)]
+        else:
+            hyp_lines = [line for line in str(hyp.get("text_hyp") or "").splitlines() if _norm(line)]
+            gt_lines = [line for line in text_gt.splitlines() if _norm(line)]
+        joined = join_fragment_lines(gt_lines, hyp_lines)
+        gt["text_gt"] = "\n".join(joined)
         prepared_gt.append(gt)
         prepared_hyp.append(hyp)
     return prepared_gt, prepared_hyp
@@ -612,6 +746,8 @@ def score_bundle(
     return {
         "line_cer": None if cer is None else cer["line_cer"],
         "line_cer_gate": _gate_cer(None if cer is None else cer["line_cer"]),
+        "line_edits": 0 if cer is None else cer["line_edits"],
+        "line_denom": 0 if cer is None else cer["line_denom"],
         "line_cer_pages": 0 if cer is None else len(cer["pages"]),
         "page_cer": None if cer is None else cer["page_cer"],
         "cer_pages": [] if cer is None else cer["pages"],
@@ -890,13 +1026,25 @@ def build_report_from_fixtures() -> dict[str, Any]:
         },
         "expanded": _compact(real)
         | {
-            "note": "Live RapidOCR hypotheses versus text-layer or published-table GT. Synthetic rows excluded. Thresholds unchanged."
+            "note": (
+                "Live RapidOCR hypotheses versus text-layer or published-table GT. "
+                "Synthetic rows excluded. Thresholds unchanged. "
+                "Scoring concatenates a text-layer fragment span only when the span "
+                "contains a calendar particle, a chapter marker plus its title, or a "
+                "vertical one-glyph run, and the concatenation equals one OCR line. "
+                "Stored GT is not rewritten and no character is deleted. "
+                f"Line edits {real['line_edits']}/{real['line_denom']}. "
+                "Baseline before this alignment on the same 54 pages: 1481/29835 (CER 4.96%). "
+                "An unconstrained adjacent join was remeasured at 485 surplus edits and is not applied. "
+                "Rejected false candidates: fixture-003 page 5 (two paragraphs) and "
+                "pub-gx-youjiang-ultrasound page 5 (开标时间 with 开标地点, and the acquisition-time wrap)."
+            )
         },
         "sources": sources,
         "failure_causes": failures,
         "improvement_directions": improvement_directions(failures),
         "gt_policy": "embedded PDF text layer or PyMuPDF table extract confirmed against that text layer; published HTML for not-scored notices. OCR is never GT.",
-        "hypothesis_policy": "rapidocr_onnxruntime on a 1.5x render of the official PDF page. TOC dot leaders are segmented before line CER. Table hypotheses place OCR text into the PDF ruling-line grid. Ground truth stays the text layer.",
+        "hypothesis_policy": "rapidocr_onnxruntime on a 1.5x render of the official PDF page. TOC dot leaders are segmented before line CER. Text-layer fragments that equal one OCR line are joined at scoring time; stored GT is not rewritten. Table hypotheses place OCR text into the PDF ruling-line grid. Ground truth stays the text layer.",
     }
     report["gate"] = (
         "GATE_PASS"
@@ -913,6 +1061,8 @@ def _compact(metrics: dict[str, Any]) -> dict[str, Any]:
     return {
         "line_cer": metrics["line_cer"],
         "line_cer_gate": metrics["line_cer_gate"],
+        "line_edits": metrics.get("line_edits"),
+        "line_denom": metrics.get("line_denom"),
         "line_cer_pages": metrics["line_cer_pages"],
         "page_cer": metrics["page_cer"],
         "key_field_f1": metrics["key_field_f1"],
@@ -952,10 +1102,13 @@ def failure_causes(metrics: dict[str, Any]) -> list[dict[str, Any]]:
                 "cause": (
                     "TOC pages still count. Before alignment, split 目录 headings are joined, dot leaders are removed, "
                     "and a bare OCR page number is put back on the preceding title. "
+                    "Short text-layer fragments (月/日/点/分, a 第N章 marker plus its title, or a vertical one-glyph run) "
+                    "are concatenated only when that concatenation equals one OCR line. "
+                    "Two long lines are not joined. Stored ground truth is not rewritten. "
                     + (
-                        "Line CER remains above 2% on the same pages because non-leader characters still disagree."
+                        "Line CER remains above 2% on the same pages because non-fragment characters still disagree."
                         if cer_gate != "GATE_PASS"
-                        else "Line CER on the expanded set meets the 2% gate after that segmentation."
+                        else "Line CER on the expanded set meets the 2% gate after that alignment."
                     )
                 ),
                 "evidence": [
@@ -1001,7 +1154,7 @@ def failure_causes(metrics: dict[str, Any]) -> list[dict[str, Any]]:
 def improvement_directions(causes: list[dict[str, Any]]) -> list[str]:
     directions = [
         "Keep thresholds at CER≤2%, F1≥97%, TEDS≥90%. Do not drop low-scoring public pages.",
-        "TOC dot leaders are already segmented before line CER. Further CER gains have to come from the characters RapidOCR still misses on the same pages.",
+        "TOC dot leaders are already segmented, and text-layer fragments that equal one OCR line are already joined. Further CER gains have to come from characters RapidOCR still misses or inserts on the same pages. Do not join two long lines to move the number.",
         "Normalize key-field hypotheses with a constrained parser (amount, date, project code) instead of exact full-span equality, and keep the text-layer string as GT.",
         "Table hypotheses already use the PDF ruling-line grid. Remaining TEDS misses are OCR characters inside those cells, still scored against the text-layer HTML.",
         "Leave image-only pages not-scored until a human transcript exists. Do not promote OCR text to ground truth.",
@@ -1052,6 +1205,15 @@ def render_markdown(report: dict[str, Any]) -> str:
         f"Overall expanded gate: **{report['gate']}**. `product_pass=false`.",
         "",
         f"Expanded F1 counts: TP {new['tp']} / FP {new['fp']} / FN {new['fn']}.",
+        "",
+        (
+            f"Expanded line edits: **{new.get('line_edits')}** / **{new.get('line_denom')}** "
+            f"on **{new['line_cer_pages']}** pages. "
+            "Baseline before fragment alignment, same pages: **1481/29835** (CER 4.96%). "
+            "Unconstrained adjacent joins (remeasured 485 edits; prior hypothesis 483) are not applied. "
+            "Rejected false candidates: fixture-003 page 5, two paragraphs; "
+            "pub-gx-youjiang-ultrasound page 5, 开标时间 with 开标地点 and the acquisition-time wrap."
+        ),
         "",
         "## Sources",
         "",

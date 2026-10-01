@@ -1,6 +1,6 @@
 {
   "leaf_id": "S-A-OCR-PUBLIC-EXPAND",
-  "generated_at": "2026-09-29T09:06:12.123118+00:00",
+  "generated_at": "2026-10-01T12:21:36.109905+00:00",
   "claim_scope": "engineering_gate_only",
   "product_pass": false,
   "business_pass": false,
@@ -64,6 +64,8 @@
   "old_set": {
     "line_cer": 0.031746031746031744,
     "line_cer_gate": "GATE_FAIL",
+    "line_edits": 2,
+    "line_denom": 63,
     "line_cer_pages": 3,
     "page_cer": 0.4603174603174603,
     "key_field_f1": 0.76,
@@ -194,6 +196,8 @@
   "synthetic_appendix": {
     "line_cer": 0.031746031746031744,
     "line_cer_gate": "GATE_FAIL",
+    "line_edits": 2,
+    "line_denom": 63,
     "line_cer_pages": 3,
     "page_cer": 0.4603174603174603,
     "key_field_f1": 0.10256410256410256,
@@ -255,6 +259,8 @@
   "expanded_with_frozen_hypotheses": {
     "line_cer": 0.14696873199284263,
     "line_cer_gate": "GATE_FAIL",
+    "line_edits": 4846,
+    "line_denom": 32973,
     "line_cer_pages": 54,
     "page_cer": 0.15148758074788463,
     "key_field_f1": 0.9454545454545454,
@@ -756,8 +762,10 @@
     "note": "Diagnostic mix of frozen sandbox hypotheses and new rows. Not the live OCR gate."
   },
   "expanded": {
-    "line_cer": 0.04963968493380258,
+    "line_cer": 0.043640020110608344,
     "line_cer_gate": "GATE_FAIL",
+    "line_edits": 1302,
+    "line_denom": 29835,
     "line_cer_pages": 54,
     "page_cer": 0.06371711077593431,
     "key_field_f1": 0.9716981132075472,
@@ -808,7 +816,7 @@
         "doc_id": "fixture-002",
         "page": 3,
         "page_cer": 0.019230769230769232,
-        "line_cer": 0.023076923076923078
+        "line_cer": 0.011538461538461539
       },
       {
         "doc_id": "fixture-002",
@@ -826,7 +834,7 @@
         "doc_id": "fixture-002",
         "page": 37,
         "page_cer": 0.0344311377245509,
-        "line_cer": 0.017964071856287425
+        "line_cer": 0.008982035928143712
       },
       {
         "doc_id": "fixture-003",
@@ -892,7 +900,7 @@
         "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
         "page": 73,
         "page_cer": 0.08428246013667426,
-        "line_cer": 0.04328018223234624
+        "line_cer": 0.029612756264236904
       },
       {
         "doc_id": "pub-gx-nanning-vascular-doppler",
@@ -934,7 +942,7 @@
         "doc_id": "pub-gx-ventilator-monitors",
         "page": 3,
         "page_cer": 0.0034924330616996507,
-        "line_cer": 0.012805587892898719
+        "line_cer": 0.0034924330616996507
       },
       {
         "doc_id": "pub-gx-ventilator-monitors",
@@ -946,7 +954,7 @@
         "doc_id": "pub-gx-ventilator-monitors",
         "page": 5,
         "page_cer": 0.03339041095890411,
-        "line_cer": 0.04280821917808219
+        "line_cer": 0.03595890410958904
       },
       {
         "doc_id": "pub-gx-ventilator-monitors",
@@ -1024,7 +1032,7 @@
         "doc_id": "pub-gx-minzu-ultrasound-2026",
         "page": 2,
         "page_cer": 0.046906187624750496,
-        "line_cer": 0.18463073852295409
+        "line_cer": 0.09181636726546906
       },
       {
         "doc_id": "pub-gx-minzu-ultrasound-2026",
@@ -1054,13 +1062,13 @@
         "doc_id": "pub-gx-info-center-compute-2026",
         "page": 1,
         "page_cer": 0.0,
-        "line_cer": 0.022770398481973434
+        "line_cer": 0.0
       },
       {
         "doc_id": "pub-gx-info-center-compute-2026",
         "page": 2,
         "page_cer": 0.0011061946902654867,
-        "line_cer": 0.03871681415929203
+        "line_cer": 0.0011061946902654867
       },
       {
         "doc_id": "pub-gx-info-center-compute-2026",
@@ -1078,7 +1086,7 @@
         "doc_id": "pub-gx-yibiatong-phase2-2026",
         "page": 3,
         "page_cer": 0.05875706214689266,
-        "line_cer": 0.00903954802259887
+        "line_cer": 0.0022598870056497176
       },
       {
         "doc_id": "pub-gx-nonggang-patrol-2026",
@@ -1196,7 +1204,7 @@
         "teds": 0.9065743944636678
       }
     ],
-    "note": "Live RapidOCR hypotheses versus text-layer or published-table GT. Synthetic rows excluded. Thresholds unchanged."
+    "note": "Live RapidOCR hypotheses versus text-layer or published-table GT. Synthetic rows excluded. Thresholds unchanged. Scoring concatenates a text-layer fragment span only when the span contains a calendar particle, a chapter marker plus its title, or a vertical one-glyph run, and the concatenation equals one OCR line. Stored GT is not rewritten and no character is deleted. Line edits 1302/29835. Baseline before this alignment on the same 54 pages: 1481/29835 (CER 4.96%). An unconstrained adjacent join was remeasured at 485 surplus edits and is not applied. Rejected false candidates: fixture-003 page 5 (two paragraphs) and pub-gx-youjiang-ultrasound page 5 (开标时间 with 开标地点, and the acquisition-time wrap)."
   },
   "sources": [
     {
@@ -1310,7 +1318,7 @@
   "failure_causes": [
     {
       "metric": "line_cer",
-      "cause": "TOC pages still count. Before alignment, split 目录 headings are joined, dot leaders are removed, and a bare OCR page number is put back on the preceding title. Line CER remains above 2% on the same pages because non-leader characters still disagree.",
+      "cause": "TOC pages still count. Before alignment, split 目录 headings are joined, dot leaders are removed, and a bare OCR page number is put back on the preceding title. Short text-layer fragments (月/日/点/分, a 第N章 marker plus its title, or a vertical one-glyph run) are concatenated only when that concatenation equals one OCR line. Two long lines are not joined. Stored ground truth is not rewritten. Line CER remains above 2% on the same pages because non-fragment characters still disagree.",
       "evidence": [
         {
           "doc_id": "pub-gx-tianlin-yuegui-devices-2026",
@@ -1331,19 +1339,19 @@
           "page_cer": 0.1819620253164557
         },
         {
-          "doc_id": "pub-gx-minzu-ultrasound-2026",
-          "page": 2,
-          "line_cer": 0.18463073852295409,
-          "page_cer": 0.046906187624750496
-        },
-        {
           "doc_id": "fixture-001",
           "page": 32,
           "line_cer": 0.1717171717171717,
           "page_cer": 0.494949494949495
+        },
+        {
+          "doc_id": "fixture-002",
+          "page": 6,
+          "line_cer": 0.15807962529274006,
+          "page_cer": 0.07845433255269321
         }
       ],
-      "pages_above_10_percent": 8,
+      "pages_above_10_percent": 7,
       "pages": 54,
       "toc_like_pages": [
         "pub-gx-daxin-ultrasound-anesthesia#p51",
@@ -1369,14 +1377,14 @@
   ],
   "improvement_directions": [
     "Keep thresholds at CER≤2%, F1≥97%, TEDS≥90%. Do not drop low-scoring public pages.",
-    "TOC dot leaders are already segmented before line CER. Further CER gains have to come from the characters RapidOCR still misses on the same pages.",
+    "TOC dot leaders are already segmented, and text-layer fragments that equal one OCR line are already joined. Further CER gains have to come from characters RapidOCR still misses or inserts on the same pages. Do not join two long lines to move the number.",
     "Normalize key-field hypotheses with a constrained parser (amount, date, project code) instead of exact full-span equality, and keep the text-layer string as GT.",
     "Table hypotheses already use the PDF ruling-line grid. Remaining TEDS misses are OCR characters inside those cells, still scored against the text-layer HTML.",
     "Leave image-only pages not-scored until a human transcript exists. Do not promote OCR text to ground truth.",
     "Keep training-corpus PDFs and synthetic scans out of this gate so later fine-tunes cannot leak into the reported numbers."
   ],
   "gt_policy": "embedded PDF text layer or PyMuPDF table extract confirmed against that text layer; published HTML for not-scored notices. OCR is never GT.",
-  "hypothesis_policy": "rapidocr_onnxruntime on a 1.5x render of the official PDF page. TOC dot leaders are segmented before line CER. Table hypotheses place OCR text into the PDF ruling-line grid. Ground truth stays the text layer.",
+  "hypothesis_policy": "rapidocr_onnxruntime on a 1.5x render of the official PDF page. TOC dot leaders are segmented before line CER. Text-layer fragments that equal one OCR line are joined at scoring time; stored GT is not rewritten. Table hypotheses place OCR text into the PDF ruling-line grid. Ground truth stays the text layer.",
   "gate": "GATE_FAIL",
   "joe_local_pdf_intake": {
     "intake_id": "joe-local-pdfs-2026-09-29",

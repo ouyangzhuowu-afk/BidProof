@@ -15,6 +15,7 @@ from work.eval.public_expand import (
     is_forbidden_source,
     is_synthetic_row,
     is_toc_page,
+    join_fragment_lines,
     load_joe_local_pdf_intake,
     looks_like_pii,
     ocr_lines_into_cell_grid,
@@ -258,6 +259,11 @@ def test_report_keeps_product_pass_false_and_separates_synthetic():
     assert report["old_set"]["teds_gate"] == "GATE_FAIL"
     assert report["synthetic_appendix"]["line_cer_pages"] == 3
     assert report["expanded"]["line_cer_pages"] == 54
+    assert report["expanded"]["line_edits"] == 1302
+    assert report["expanded"]["line_denom"] == 29835
+    assert report["expanded"]["tp"] == 103
+    assert report["expanded"]["fp"] == 3
+    assert report["expanded"]["fn"] == 3
     assert report["expanded"]["teds_pages_scored"] == 19
     assert report["old_set"]["line_cer"] == pytest.approx(0.031746031746031744)
     assert report["old_set"]["key_field_f1"] == pytest.approx(0.76)
@@ -268,8 +274,92 @@ def test_report_keeps_product_pass_false_and_separates_synthetic():
     assert rebuilt["expanded"]["line_cer"] == pytest.approx(report["expanded"]["line_cer"])
     assert rebuilt["expanded"]["key_field_f1"] == pytest.approx(report["expanded"]["key_field_f1"])
     assert rebuilt["expanded"]["teds"] == pytest.approx(report["expanded"]["teds"])
+    assert rebuilt["expanded"]["line_cer_pages"] == 54
+    assert rebuilt["expanded"]["line_edits"] == report["expanded"]["line_edits"]
+    assert rebuilt["expanded"]["line_denom"] == report["expanded"]["line_denom"]
+    assert rebuilt["product_pass"] is False
+    assert rebuilt["gate"] == "GATE_FAIL"
+    assert rebuilt["old_set"]["line_cer"] == pytest.approx(0.031746031746031744)
     for row in report["sources"]:
         if row.get("scored"):
             assert row.get("source_url")
             assert row.get("fetched_at")
             assert row.get("license_or_usage_note")
+
+
+def test_fragment_join_concatenates_calendar_particles_and_chapter_titles():
+    date_lines = ["时间:2026年", "月", "日至2026年", "月", "日,每天上午08:30-11:59"]
+    date_ocr = "".join(date_lines)
+    assert join_fragment_lines(date_lines, [date_ocr]) == [date_ocr]
+    shard_lines = ["并于2026年", "月", "日", "点", "分(北"]
+    shard_ocr = "".join(shard_lines)
+    assert join_fragment_lines(shard_lines, [shard_ocr]) == [shard_ocr]
+    chapter = join_fragment_lines(["第一章", "招标公告", "正文"], ["第一章招标公告", "正文"])
+    assert chapter == ["第一章招标公告", "正文"]
+    vertical = list("角—服务中心")
+    assert len(vertical) >= 6
+    joined = join_fragment_lines(vertical, ["角一服务中心"])
+    assert joined == ["角—服务中心"]
+    assert "一" not in joined[0]
+
+
+def test_fragment_join_rejects_paragraphs_bid_fields_and_letterhead():
+    paragraphs = [
+        "(2)登录后,在“工作台”或“我的应用”处选择【",
+        "处选择“公采云代理机构公共服务平台-公采云交易运",
+    ]
+    assert join_fragment_lines(paragraphs, ["".join(paragraphs)]) == paragraphs
+    opening = [
+        "开标时间:2026年7月27日09时00分",
+        "开标地点:广西政府采购云平台电子开标大厅",
+    ]
+    assert join_fragment_lines(opening, ["".join(opening)]) == opening
+    acquire = [
+        "时间:2026年6月29日至2026年7月13日",
+        "12:00至23:59(北京时间,法定节假日除外",
+    ]
+    assert join_fragment_lines(acquire, ["".join(acquire)]) == acquire
+    letterhead = "北京数字支点国际项目管理有限公司"
+    other = "广西恒桥项目管理有限公司"
+    kept = join_fragment_lines(["采购人：医院"], [letterhead, other, "采购人：医院"])
+    assert kept == ["采购人:医院"]
+    assert letterhead not in "".join(kept)
+    assert other not in "".join(kept)
+    original = ["时间:2026年", "月", "日"]
+    joined = join_fragment_lines(original, ["".join(original)])
+    assert "".join(joined) == "".join(original)
+
+
+def test_fragment_prepare_keeps_every_page_and_does_not_rewrite_gt():
+    pages = ROOT / "work" / "eval" / "fixtures" / "public_expand_pages.jsonl"
+    if not pages.is_file():
+        pytest.skip("expand fixtures are written by --build")
+    before = pages.read_bytes()
+    gt = [
+        {"doc_id": "a", "page": 1, "text_gt": "时间:2026年\n月\n日"},
+        {"doc_id": "b", "page": 5, "text_gt": "采购人：医院\n项目编号：ABC"},
+    ]
+    hyp = [
+        {"doc_id": "a", "page": 1, "lines_hyp": ["时间:2026年月日"], "text_hyp": "时间:2026年月日"},
+        {
+            "doc_id": "b",
+            "page": 5,
+            "lines_hyp": ["北京数字支点国际项目管理有限公司", "采购人：医院", "项目编号：ABC"],
+            "text_hyp": "北京数字支点国际项目管理有限公司\n采购人：医院\n项目编号：ABC",
+        },
+    ]
+    prepared_gt, prepared_hyp = prepare_expanded_cer(gt, hyp)
+    assert [(row["doc_id"], row["page"]) for row in prepared_gt] == [("a", 1), ("b", 5)]
+    assert prepared_gt[0]["text_gt"] == "时间:2026年月日"
+    assert "北京数字支点" not in prepared_gt[1]["text_gt"]
+    assert prepared_hyp[1]["lines_hyp"][0] == "北京数字支点国际项目管理有限公司"
+    from work.eval.rapidocr_line_cer import _line_edits
+
+    edits, denom = _line_edits(
+        prepared_gt[1]["text_gt"],
+        prepared_hyp[1]["text_hyp"],
+        prepared_hyp[1]["lines_hyp"],
+    )
+    assert denom == len("采购人：医院") + len("项目编号：ABC")
+    assert edits == len("北京数字支点国际项目管理有限公司")
+    assert pages.read_bytes() == before

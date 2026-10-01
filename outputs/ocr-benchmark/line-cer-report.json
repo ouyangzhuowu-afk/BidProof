@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-09-29T09:06:12.123118+00:00",
+  "generated_at": "2026-10-01T12:21:36.109905+00:00",
   "claim_scope": "engineering_gate_only",
-  "line_cer": 0.04963968493380258,
+  "line_cer": 0.043640020110608344,
   "gate": "GATE_FAIL",
   "product_pass": false,
   "business_pass": false,
@@ -53,7 +53,7 @@
       "doc_id": "fixture-002",
       "page": 3,
       "page_cer": 0.019230769230769232,
-      "line_cer": 0.023076923076923078
+      "line_cer": 0.011538461538461539
     },
     {
       "doc_id": "fixture-002",
@@ -71,7 +71,7 @@
       "doc_id": "fixture-002",
       "page": 37,
       "page_cer": 0.0344311377245509,
-      "line_cer": 0.017964071856287425
+      "line_cer": 0.008982035928143712
     },
     {
       "doc_id": "fixture-003",
@@ -137,7 +137,7 @@
       "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
       "page": 73,
       "page_cer": 0.08428246013667426,
-      "line_cer": 0.04328018223234624
+      "line_cer": 0.029612756264236904
     },
     {
       "doc_id": "pub-gx-nanning-vascular-doppler",
@@ -179,7 +179,7 @@
       "doc_id": "pub-gx-ventilator-monitors",
       "page": 3,
       "page_cer": 0.0034924330616996507,
-      "line_cer": 0.012805587892898719
+      "line_cer": 0.0034924330616996507
     },
     {
       "doc_id": "pub-gx-ventilator-monitors",
@@ -191,7 +191,7 @@
       "doc_id": "pub-gx-ventilator-monitors",
       "page": 5,
       "page_cer": 0.03339041095890411,
-      "line_cer": 0.04280821917808219
+      "line_cer": 0.03595890410958904
     },
     {
       "doc_id": "pub-gx-ventilator-monitors",
@@ -269,7 +269,7 @@
       "doc_id": "pub-gx-minzu-ultrasound-2026",
       "page": 2,
       "page_cer": 0.046906187624750496,
-      "line_cer": 0.18463073852295409
+      "line_cer": 0.09181636726546906
     },
     {
       "doc_id": "pub-gx-minzu-ultrasound-2026",
@@ -299,13 +299,13 @@
       "doc_id": "pub-gx-info-center-compute-2026",
       "page": 1,
       "page_cer": 0.0,
-      "line_cer": 0.022770398481973434
+      "line_cer": 0.0
     },
     {
       "doc_id": "pub-gx-info-center-compute-2026",
       "page": 2,
       "page_cer": 0.0011061946902654867,
-      "line_cer": 0.03871681415929203
+      "line_cer": 0.0011061946902654867
     },
     {
       "doc_id": "pub-gx-info-center-compute-2026",
@@ -323,7 +323,7 @@
       "doc_id": "pub-gx-yibiatong-phase2-2026",
       "page": 3,
       "page_cer": 0.05875706214689266,
-      "line_cer": 0.00903954802259887
+      "line_cer": 0.0022598870056497176
     },
     {
       "doc_id": "pub-gx-nonggang-patrol-2026",
