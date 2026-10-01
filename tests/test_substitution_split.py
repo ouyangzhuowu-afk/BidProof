@@ -27,8 +27,15 @@ def test_pieces_partition_the_395_substitutions(report):
     assert report["pages"] == 54
     assert report["line_denom"] == 29835
     assert report["line_edits"] == 1302
-    assert report["pieces"][PIECE_WRONG_LINE] == 324
-    assert report["pieces"][PIECE_SAME_LINE] == 71
+    assert report["pieces"][PIECE_WRONG_LINE] == 208
+    assert report["pieces"][PIECE_SAME_LINE] == 187
+    assert report["matches_audit_check"] is True
+    assert report["audit_check"] == {PIECE_WRONG_LINE: 208, PIECE_SAME_LINE: 187}
+    assert report["comparison"] == "raw_text_before_norm"
+    assert report["whitespace_or_case_pairs"] == 7
+    assert report["whitespace_or_case_chars"] == 116
+    assert sum(item["chars"] for item in report["whitespace_or_case_flips"]) == 116
+    assert all(item["gt_raw"] != item["ocr_raw"] for item in report["whitespace_or_case_flips"])
     assert report["piece_sum"] == 395
     assert report["remainder"] == 0
     assert report["substitution_characters"] == 395
@@ -61,51 +68,59 @@ def test_pieces_partition_the_395_substitutions(report):
     assert sum(row["wrong_line_pairing"] + row["same_line_misread"] for row in report["page_rows"]) == 395
 
 
-def test_procurement_notice_is_a_wrong_line_and_the_menu_line_stays_a_misread(report):
+def test_space_and_case_pairs_stay_out_of_piece_1(report):
     notice = next(
         pair
         for pair in report["pairs"]
         if pair["filename"] == "source4-zbtb.pdf"
         and pair["page"] == 5
-        and "采购公告" in pair["gt"]
-        and "评分法" in pair["ocr"]
+        and "采购公告" in pair["gt_raw"]
+        and "评分法" in pair["ocr_raw"]
     )
-    assert notice["piece"] == PIECE_WRONG_LINE
+    assert notice["piece"] == PIECE_SAME_LINE
     assert notice["chars"] == 17
-    assert notice["reason"] == "both"
-    assert notice["ocr"] == notice["other_gt"]
-    assert "采购公告" in notice["other_ocr"]
-    garbled = next(
-        pair
-        for pair in report["pairs"]
-        if pair["filename"] == "source4-zbtb.pdf" and pair["page"] == 5 and "点击左侧菜单" in pair["gt"]
-    )
-    assert garbled["piece"] == PIECE_SAME_LINE
-    assert garbled["chars"] == 17
-    assert garbled["reason"] == "same_line"
-    assert garbled["other_gt"] is None
-    assert garbled["other_ocr"] is None
-    page = next(row for row in report["page_rows"] if row["filename"] == "source4-zbtb.pdf" and row["page"] == 5)
-    assert page["wrong_line_pairing"] == 88
-    assert page["same_line_misread"] == 17
-    assert page["substitution"] == 105
-    follow = next(
+    assert notice["norm_would_be_piece_1"] is True
+    assert "100分" in notice["ocr_raw"]
+    assert "100 分" not in notice["ocr_raw"]
+    scoring = next(
         pair
         for pair in report["pairs"]
         if pair["filename"] == "source4-zbtb.pdf"
         and pair["page"] == 5
-        and "综合评分法" in pair["gt"]
-        and "询问" in pair["ocr"]
+        and "综合评分法" in pair["gt_raw"]
+        and "询问" in pair["ocr_raw"]
     )
-    assert follow["piece"] == PIECE_WRONG_LINE
-    assert follow["chars"] == 18
+    assert scoring["piece"] == PIECE_SAME_LINE
+    assert scoring["chars"] == 18
+    assert "100 分" in scoring["gt_raw"]
+    assert scoring["gt_raw"].endswith(" ")
+    assert scoring["gt_raw"] != notice["ocr_raw"]
+    flip_keys = {(item["filename"], item["page"], item["chars"], item["gt_raw"]) for item in report["whitespace_or_case_flips"]}
+    assert ("source4-zbtb.pdf", 5, 17, notice["gt_raw"]) in flip_keys
+    assert ("source4-zbtb.pdf", 5, 18, scoring["gt_raw"]) in flip_keys
+    assert all(
+        pair["piece"] == PIECE_SAME_LINE
+        for pair in report["pairs"]
+        if (pair["filename"], pair["page"], pair["chars"], pair["gt_raw"]) in flip_keys
+    )
+    garbled = next(
+        pair
+        for pair in report["pairs"]
+        if pair["filename"] == "source4-zbtb.pdf" and pair["page"] == 5 and "点击左侧菜单" in pair["gt_raw"]
+    )
+    assert garbled["piece"] == PIECE_SAME_LINE
+    assert garbled["chars"] == 17
+    assert garbled["norm_would_be_piece_1"] is False
+    page = next(row for row in report["page_rows"] if row["filename"] == "source4-zbtb.pdf" and row["page"] == 5)
+    assert page["substitution"] == 105
+    assert page["wrong_line_pairing"] + page["same_line_misread"] == 105
     bid_open = next(
         pair
         for pair in report["pairs"]
         if pair["filename"] == "pub-gx-youjiang-ultrasound.pdf"
         and pair["page"] == 5
-        and "开标时间" in pair["gt"]
-        and "开标地点" in pair["ocr"]
+        and pair["gt_raw"].startswith("开标时间")
+        and pair["ocr_raw"].startswith("开标地点")
     )
     assert bid_open["piece"] == PIECE_WRONG_LINE
     assert bid_open["chars"] == 17
