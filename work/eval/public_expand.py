@@ -59,6 +59,46 @@ KF_GT_PATH = FIXTURE_DIR / "public_expand_key_field_gt.jsonl"
 KF_HYP_PATH = FIXTURE_DIR / "public_expand_key_field_hypotheses.jsonl"
 JOE_LOCAL_PDFS = FIXTURE_DIR / "joe_local_pdfs_2026-09-29.json"
 
+# This pair only. Detection is the PP-OCRv5 mobile model. Recognition is the PP-OCRv5 server model.
+# Render scale stays 1.5. RapidOCR max_side_len stays the package default of 2000.
+PPOCRV5_DET_FILENAME = "ch_PP-OCRv5_det_mobile.onnx"
+PPOCRV5_DET_SHA256 = "4d97c44a20d30a81aad087d6a396b08f786c4635742afc391f6621f5c6ae78ae"
+PPOCRV5_DET_URL = (
+    "https://www.modelscope.cn/models/RapidAI/RapidOCR/resolve/v3.9.2/onnx/PP-OCRv5/det/"
+    + PPOCRV5_DET_FILENAME
+)
+PPOCRV5_SERVER_REC_FILENAME = "ch_PP-OCRv5_rec_server.onnx"
+PPOCRV5_SERVER_REC_SHA256 = "e09385400eaaaef34ceff54aeb7c4f0f1fe014c27fa8b9905d4709b65746562a"
+PPOCRV5_SERVER_REC_URL = (
+    "https://www.modelscope.cn/models/RapidAI/RapidOCR/resolve/v3.9.2/onnx/PP-OCRv5/rec/"
+    + PPOCRV5_SERVER_REC_FILENAME
+)
+PPOCRV5_DET_PATH = ROOT / "work" / "models" / "ocr" / PPOCRV5_DET_FILENAME
+PPOCRV5_SERVER_REC_PATH = ROOT / "work" / "models" / "ocr" / PPOCRV5_SERVER_REC_FILENAME
+PAIR_HYPOTHESIS_SOURCE = "rapidocr_onnxruntime_ppocrv5_det_mobile_rec_server"
+PAIR_TABLE_HYPOTHESIS_SOURCE = "rapidocr_onnxruntime_ppocrv5_det_mobile_rec_server_ruling_grid"
+PAIR_BASE = "8b869d541e3df3c3ac11d271c05d0ee1f9e65156"
+RENDER_SCALE = 1.5
+MAX_SIDE_LEN = 2000
+# Recomputed by the current scorer on the v4-pair hypotheses at PAIR_BASE.
+PAIR_BEFORE = {
+    "line_edits": 1302,
+    "line_denom": 29835,
+    "line_cer": 0.043640020110608344,
+    "line_cer_gate": "GATE_FAIL",
+    "line_cer_pages": 54,
+    "key_field_f1": 0.9716981132075472,
+    "key_field_f1_gate": "GATE_PASS",
+    "tp": 103,
+    "fp": 3,
+    "fn": 3,
+    "teds": 0.9580030818780702,
+    "teds_gate": "GATE_PASS",
+    "teds_pages_scored": 19,
+    "gate": "GATE_FAIL",
+    "product_pass": False,
+}
+
 OLD_CER_GT = FIXTURE_DIR / "sandbox_pages.jsonl"
 OLD_CER_HYP = FIXTURE_DIR / "sandbox_hypotheses.jsonl"
 OLD_TEDS_GT = FIXTURE_DIR / "teds_gt.jsonl"
@@ -1044,7 +1084,14 @@ def build_report_from_fixtures() -> dict[str, Any]:
         "failure_causes": failures,
         "improvement_directions": improvement_directions(failures),
         "gt_policy": "embedded PDF text layer or PyMuPDF table extract confirmed against that text layer; published HTML for not-scored notices. OCR is never GT.",
-        "hypothesis_policy": "rapidocr_onnxruntime on a 1.5x render of the official PDF page. TOC dot leaders are segmented before line CER. Text-layer fragments that equal one OCR line are joined at scoring time; stored GT is not rewritten. Table hypotheses place OCR text into the PDF ruling-line grid. Ground truth stays the text layer.",
+        "hypothesis_policy": (
+            "rapidocr_onnxruntime on a 1.5x render of the official PDF page. "
+            "Line finding is ch_PP-OCRv5_det_mobile. Printed-text recognition is ch_PP-OCRv5_rec_server. "
+            "RapidOCR max_side_len stays 2000. "
+            "TOC dot leaders are segmented before line CER. Text-layer fragments that equal one OCR line are joined "
+            "at scoring time; stored GT is not rewritten. Table hypotheses place OCR text into the PDF ruling-line grid. "
+            "Ground truth stays the text layer."
+        ),
     }
     report["gate"] = (
         "GATE_PASS"
@@ -1054,7 +1101,108 @@ def build_report_from_fixtures() -> dict[str, Any]:
         else "GATE_FAIL"
     )
     report["joe_local_pdf_intake"] = load_joe_local_pdf_intake(manifest)
+    report["model_pair"] = _model_pair(report["expanded"], report["gate"])
     return report
+
+
+def _model_pair(expanded: dict[str, Any], gate: str) -> dict[str, Any]:
+    after = {
+        "line_edits": expanded.get("line_edits"),
+        "line_denom": expanded.get("line_denom"),
+        "line_cer": expanded.get("line_cer"),
+        "line_cer_gate": expanded.get("line_cer_gate"),
+        "line_cer_pages": expanded.get("line_cer_pages"),
+        "key_field_f1": expanded.get("key_field_f1"),
+        "key_field_f1_gate": expanded.get("key_field_f1_gate"),
+        "tp": expanded.get("tp"),
+        "fp": expanded.get("fp"),
+        "fn": expanded.get("fn"),
+        "teds": expanded.get("teds"),
+        "teds_gate": expanded.get("teds_gate"),
+        "teds_pages_scored": expanded.get("teds_pages_scored"),
+        "gate": gate,
+        "product_pass": False,
+    }
+    return {
+        "status": "pending_audit",
+        "detection_model": "ch_PP-OCRv5_det_mobile",
+        "recognition_model": "ch_PP-OCRv5_rec_server",
+        "render_scale": RENDER_SCALE,
+        "max_side_len": MAX_SIDE_LEN,
+        "base_commit": PAIR_BASE,
+        "before": PAIR_BEFORE,
+        "after": after,
+    }
+
+
+def _model_pair_lines(pair: Any) -> list[str]:
+    if not isinstance(pair, dict):
+        return []
+    before = pair.get("before") or {}
+    after = pair.get("after") or {}
+
+    def cell(metrics: dict[str, Any], key: str) -> str:
+        value = metrics.get(key)
+        if key in {"line_cer", "key_field_f1", "teds"}:
+            return _pct(None if value is None else float(value))
+        if key == "product_pass":
+            return "false" if value is False else str(value)
+        return "" if value is None else str(value)
+
+    return [
+        "",
+        "## PP-OCRv5 mobile detector and server recognizer",
+        "",
+        "Evidence only. Pending audit. Line finding is `ch_PP-OCRv5_det_mobile`. "
+        "Printed-text recognition is `ch_PP-OCRv5_rec_server`. "
+        f"Render scale is {pair.get('render_scale')} (about 108 DPI). "
+        f"RapidOCR max_side_len stays {pair.get('max_side_len')}. "
+        "Scoring, fragment-line alignment, and thresholds are unchanged. "
+        "Same 54 CER pages, denominator 29835, and 19 TEDS pages. "
+        "A missed gate stays GATE_FAIL. `product_pass` stays false when any gate fails. Not T-005.",
+        "",
+        f"Before is the v4 pair on `{pair.get('base_commit', '')}`, recomputed by this scorer.",
+        "",
+        "| | line edits | denominator | CER | CER gate | F1 | F1 gate | TP | FP | FN | TEDS | TEDS gate | TEDS pages | overall | product_pass |",
+        "|---|---:|---:|---:|---|---:|---|---:|---:|---:|---:|---|---:|---|---|",
+        (
+            f"| Baseline v4 pair | {cell(before, 'line_edits')} | {cell(before, 'line_denom')} | {cell(before, 'line_cer')} | "
+            f"{cell(before, 'line_cer_gate')} | {cell(before, 'key_field_f1')} | {cell(before, 'key_field_f1_gate')} | "
+            f"{cell(before, 'tp')} | {cell(before, 'fp')} | {cell(before, 'fn')} | {cell(before, 'teds')} | "
+            f"{cell(before, 'teds_gate')} | {cell(before, 'teds_pages_scored')} | {cell(before, 'gate')} | "
+            f"{cell(before, 'product_pass')} |"
+        ),
+        (
+            f"| det mobile + rec server | {cell(after, 'line_edits')} | {cell(after, 'line_denom')} | {cell(after, 'line_cer')} | "
+            f"{cell(after, 'line_cer_gate')} | {cell(after, 'key_field_f1')} | {cell(after, 'key_field_f1_gate')} | "
+            f"{cell(after, 'tp')} | {cell(after, 'fp')} | {cell(after, 'fn')} | {cell(after, 'teds')} | "
+            f"{cell(after, 'teds_gate')} | {cell(after, 'teds_pages_scored')} | {cell(after, 'gate')} | "
+            f"{cell(after, 'product_pass')} |"
+        ),
+        "",
+    ]
+
+
+def _baseline_recount_lines() -> list[str]:
+    """Keep the v4-pair recount already stored in the report. Do not recompute it."""
+    if not REPORT_MD.is_file():
+        return []
+    text = REPORT_MD.read_text(encoding="utf-8")
+    start = text.find("## Remaining line-edit recount")
+    if start < 0:
+        return []
+    end = text.find("\n## Reproduce", start)
+    block = text[start:] if end < 0 else text[start:end]
+    block = block.strip("\n")
+    note = (
+        "These tables recount the v4 pair at `8b869d541e3df3c3ac11d271c05d0ee1f9e65156` "
+        "(1302/29835, CER 4.36%). They were not recomputed on the PP-OCRv5 mobile detector "
+        "and server recognizer."
+    )
+    heading, _sep, rest = block.partition("\n")
+    if note not in rest:
+        block = f"{heading}\n\n{note}\n\n{rest.lstrip(chr(10))}"
+    return ["", block, ""]
 
 
 def _compact(metrics: dict[str, Any]) -> dict[str, Any]:
@@ -1269,6 +1417,8 @@ def render_markdown(report: dict[str, Any]) -> str:
     lines += ["", "## Improvement directions", ""]
     for item in report["improvement_directions"]:
         lines.append(f"- {item}")
+    lines += _model_pair_lines(report.get("model_pair"))
+    lines += _baseline_recount_lines()
     lines += [
         "",
         "## Reproduce",
@@ -1375,6 +1525,87 @@ def _provenance(row: dict[str, Any], fetched_at: str) -> dict[str, Any]:
     }
 
 
+def _sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def _download_verified(path: Path, url: str, expected_sha256: str, label: str) -> Path:
+    if path.is_file() and _sha256_file(path) == expected_sha256:
+        return path
+    path.parent.mkdir(parents=True, exist_ok=True)
+    partial = path.with_suffix(".partial")
+    import urllib.request
+
+    try:
+        urllib.request.urlretrieve(url, partial)  # noqa: S310
+    except Exception as exc:
+        if partial.exists():
+            partial.unlink()
+        raise RuntimeError(
+            f"{label} could not be downloaded for RapidOCR. "
+            "No other detection or recognition model was substituted."
+        ) from exc
+    digest = _sha256_file(partial)
+    if digest != expected_sha256:
+        partial.unlink()
+        raise RuntimeError(
+            f"{label} hash {digest} does not match {expected_sha256}. Refusing to load it."
+        )
+    partial.replace(path)
+    return path
+
+
+def ppocrv5_det_path() -> Path:
+    """Return the PP-OCRv5 mobile detection model RapidOCR can load directly."""
+    return _download_verified(
+        PPOCRV5_DET_PATH,
+        PPOCRV5_DET_URL,
+        PPOCRV5_DET_SHA256,
+        "PP-OCRv5 mobile detection model ch_PP-OCRv5_det_mobile",
+    )
+
+
+def ppocrv5_server_rec_path() -> Path:
+    """Return the PP-OCRv5 server recognition model RapidOCR can load directly."""
+    return _download_verified(
+        PPOCRV5_SERVER_REC_PATH,
+        PPOCRV5_SERVER_REC_URL,
+        PPOCRV5_SERVER_REC_SHA256,
+        "PP-OCRv5 server recognition model ch_PP-OCRv5_rec_server",
+    )
+
+
+def _loaded_onnx_name(session: Any) -> str:
+    model_path = getattr(session, "_model_path", None)
+    if not model_path:
+        raise RuntimeError("RapidOCR did not expose the loaded ONNX path.")
+    return Path(str(model_path)).name
+
+
+def _assert_pair_loaded(engine: Any, det_path: Path, rec_path: Path) -> None:
+    det_name = _loaded_onnx_name(engine.text_det.infer.session)
+    rec_name = _loaded_onnx_name(engine.text_rec.session.session)
+    if det_name != PPOCRV5_DET_FILENAME or rec_name != PPOCRV5_SERVER_REC_FILENAME:
+        raise RuntimeError(
+            "RapidOCR did not keep ch_PP-OCRv5_det_mobile and ch_PP-OCRv5_rec_server together "
+            f"(loaded detection {det_name}, recognition {rec_name}). "
+            "No other model was substituted."
+        )
+    if Path(str(engine.text_det.infer.session._model_path)).resolve() != det_path.resolve():
+        raise RuntimeError("RapidOCR loaded a different detection file than ch_PP-OCRv5_det_mobile.")
+    if Path(str(engine.text_rec.session.session._model_path)).resolve() != rec_path.resolve():
+        raise RuntimeError("RapidOCR loaded a different recognition file than ch_PP-OCRv5_rec_server.")
+    if int(engine.max_side_len) != MAX_SIDE_LEN:
+        raise RuntimeError(
+            f"RapidOCR max_side_len is {engine.max_side_len}, not {MAX_SIDE_LEN}. "
+            "Refusing to change it."
+        )
+
+
 def _run_rapidocr(png: bytes) -> list[dict[str, Any]]:
     import fitz
     import numpy as np
@@ -1382,7 +1613,21 @@ def _run_rapidocr(png: bytes) -> list[dict[str, Any]]:
 
     engine = _run_rapidocr.engine  # type: ignore[attr-defined]
     if engine is None:
-        engine = RapidOCR()
+        det_path = ppocrv5_det_path()
+        rec_path = ppocrv5_server_rec_path()
+        try:
+            # Both models together. Do not pass max_side_len; the package default stays 2000.
+            engine = RapidOCR(
+                det_model_path=str(det_path),
+                rec_model_path=str(rec_path),
+            )
+        except Exception as exc:
+            raise RuntimeError(
+                "ch_PP-OCRv5_det_mobile and ch_PP-OCRv5_rec_server cannot run together in RapidOCR. "
+                "No other detector, recognizer, or engine was substituted. "
+                f"{type(exc).__name__}: {exc}"
+            ) from exc
+        _assert_pair_loaded(engine, det_path, rec_path)
         _run_rapidocr.engine = engine  # type: ignore[attr-defined]
     pixmap = fitz.Pixmap(png)
     if pixmap.alpha:
@@ -1519,7 +1764,7 @@ def build_samples(manifest: dict[str, Any]) -> dict[str, Any]:
                 "page": page_number,
                 "text_hyp": hyp_text,
                 "lines_hyp": [redact_text(str(item["text"])) for item in lines],
-                "hypothesis_source": "rapidocr_onnxruntime",
+                "hypothesis_source": PAIR_HYPOTHESIS_SOURCE,
                 "cohort": cohort,
             }
         )
@@ -1546,7 +1791,7 @@ def build_samples(manifest: dict[str, Any]) -> dict[str, Any]:
                     "doc_id": row["document_id"],
                     "page": page_number,
                     "fields_hyp": [{"name": name, "value": value} for name, value in ocr_fields.items()],
-                    "hypothesis_source": "rapidocr_onnxruntime",
+                    "hypothesis_source": PAIR_HYPOTHESIS_SOURCE,
                     "cohort": cohort,
                 }
             )
@@ -1590,8 +1835,8 @@ def build_samples(manifest: dict[str, Any]) -> dict[str, Any]:
                     {
                         "doc_id": row["document_id"],
                         "page": page_number,
-                        "table_html_hyp": ocr_lines_into_cell_grid(lines, grid, 1.5),
-                        "hypothesis_source": "rapidocr_onnxruntime_ruling_grid",
+                        "table_html_hyp": ocr_lines_into_cell_grid(lines, grid, RENDER_SCALE),
+                        "hypothesis_source": PAIR_TABLE_HYPOTHESIS_SOURCE,
                         "cohort": cohort,
                     }
                 )
@@ -1688,7 +1933,7 @@ def build_samples(manifest: dict[str, Any]) -> dict[str, Any]:
                     "page": page_number,
                     "text_hyp": hyp_text,
                     "lines_hyp": [redact_text(str(item["text"])) for item in lines],
-                    "hypothesis_source": "rapidocr_onnxruntime",
+                    "hypothesis_source": PAIR_HYPOTHESIS_SOURCE,
                     "cohort": "prior_public_ocr",
                 }
             )
@@ -1723,7 +1968,7 @@ def build_samples(manifest: dict[str, Any]) -> dict[str, Any]:
                         "doc_id": doc_id,
                         "page": page_number,
                         "fields_hyp": fields_hyp,
-                        "hypothesis_source": "rapidocr_onnxruntime",
+                        "hypothesis_source": PAIR_HYPOTHESIS_SOURCE,
                         "cohort": "prior_public_ocr",
                     }
                 )
@@ -1753,9 +1998,9 @@ def build_samples(manifest: dict[str, Any]) -> dict[str, Any]:
                         "doc_id": doc_id,
                         "page": page_number,
                         "table_html_hyp": "".join(
-                            ocr_lines_into_cell_grid(lines, grid, 1.5) for grid in grids
+                            ocr_lines_into_cell_grid(lines, grid, RENDER_SCALE) for grid in grids
                         ),
-                        "hypothesis_source": "rapidocr_onnxruntime_ruling_grid",
+                        "hypothesis_source": PAIR_TABLE_HYPOTHESIS_SOURCE,
                         "cohort": "prior_public_ocr",
                     }
                 )
@@ -1879,13 +2124,172 @@ def refresh_manifest_not_scored(rows: list[dict[str, Any]]) -> None:
     MANIFEST.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
+def _prior_field_labels() -> dict[tuple[str, int], list[dict[str, str]]]:
+    hand_fields: dict[tuple[str, int], list[dict[str, str]]] = {}
+    for row in load_annotations(OLD_KF_GT):
+        if is_synthetic_row(row):
+            continue
+        bucket = hand_fields.setdefault((str(row["doc_id"]), int(row["page"])), [])
+        for item in row.get("fields") or []:
+            name = str(item.get("name") or "")
+            value = str(item.get("value") or "")
+            if name in KEY_FIELD_NAMES and value and not looks_like_pii(value):
+                bucket.append({"name": name, "value": value})
+    return hand_fields
+
+
+def _fields_hyp(labeled: list[dict[str, str]], hyp_text: str) -> list[dict[str, str]]:
+    ocr_norm = _norm(hyp_text)
+    regex_hyp = fields_from_text(hyp_text)
+    fields_hyp: list[dict[str, str]] = []
+    for item in labeled:
+        if _norm(item["value"]) in ocr_norm:
+            fields_hyp.append({"name": item["name"], "value": item["value"]})
+        elif item["name"] in regex_hyp:
+            fields_hyp.append({"name": item["name"], "value": regex_hyp[item["name"]]})
+    return fields_hyp
+
+
+def refresh_live_hypotheses() -> dict[str, int]:
+    """Re-OCR the stored public pages and rewrite hypotheses only.
+
+    Ground-truth files are not opened for writing. Page sets stay the stored sets.
+    Render scale stays 1.5. RapidOCR max_side_len stays 2000.
+    """
+    import fitz
+
+    gt_paths = (CER_GT_PATH, TEDS_GT_PATH, KF_GT_PATH)
+    gt_bytes = {path: path.read_bytes() for path in gt_paths}
+    cer_gt = _read_jsonl(CER_GT_PATH)
+    kf_gt = _read_jsonl(KF_GT_PATH)
+    teds_gt = _read_jsonl(TEDS_GT_PATH)
+    if len(cer_gt) != 54 or len(teds_gt) != 19 or len(kf_gt) != 34:
+        raise RuntimeError(
+            f"Stored page set changed (CER {len(cer_gt)}, TEDS {len(teds_gt)}, key fields {len(kf_gt)}). "
+            "Refusing to drop pages."
+        )
+    hand_fields = _prior_field_labels()
+    old_teds = {
+        (str(row["doc_id"]), int(row["page"])): row
+        for row in load_annotations(OLD_TEDS_GT)
+        if not is_synthetic_row(row)
+    }
+    documents: dict[str, Any] = {}
+    ocr_cache: dict[tuple[str, int], list[dict[str, Any]]] = {}
+    pages: dict[tuple[str, int], Any] = {}
+
+    def recognize(row: dict[str, Any]) -> tuple[Any, list[dict[str, Any]]]:
+        path = ROOT / str(row.get("document_path") or "")
+        if not path.is_file():
+            raise RuntimeError(f"Missing public PDF for {row.get('doc_id')} page {row.get('page')}: {path}")
+        page_number = int(row["page"])
+        key = (str(row["doc_id"]), page_number)
+        if key not in ocr_cache:
+            if path.as_posix() not in documents:
+                documents[path.as_posix()] = fitz.open(path)
+            document = documents[path.as_posix()]
+            if page_number < 1 or page_number > document.page_count:
+                raise RuntimeError(f"Stored page {key} is outside {path}")
+            page = document[page_number - 1]
+            pages[key] = page
+            ocr_cache[key] = _run_rapidocr(_render(page))
+        return pages[key], ocr_cache[key]
+
+    try:
+        cer_hyp: list[dict[str, Any]] = []
+        for row in cer_gt:
+            _page, lines = recognize(row)
+            hyp_text = redact_text("\n".join(item["text"] for item in lines))
+            cer_hyp.append(
+                {
+                    "doc_id": row["doc_id"],
+                    "page": row["page"],
+                    "text_hyp": hyp_text,
+                    "lines_hyp": [redact_text(str(item["text"])) for item in lines],
+                    "hypothesis_source": PAIR_HYPOTHESIS_SOURCE,
+                    "cohort": row.get("cohort"),
+                }
+            )
+        kf_hyp: list[dict[str, Any]] = []
+        for row in kf_gt:
+            _page, lines = recognize(row)
+            hyp_text = redact_text("\n".join(item["text"] for item in lines))
+            cohort = row.get("cohort")
+            if cohort == "new_public":
+                fields_hyp = [
+                    {"name": name, "value": value} for name, value in fields_from_text(hyp_text).items()
+                ]
+            else:
+                labeled = hand_fields.get((str(row["doc_id"]), int(row["page"])))
+                if labeled is None:
+                    raise RuntimeError(f"Missing prior key-field labels for {row.get('doc_id')} page {row.get('page')}")
+                fields_hyp = _fields_hyp(labeled, hyp_text)
+            kf_hyp.append(
+                {
+                    "doc_id": row["doc_id"],
+                    "page": row["page"],
+                    "fields_hyp": fields_hyp,
+                    "hypothesis_source": PAIR_HYPOTHESIS_SOURCE,
+                    "cohort": cohort,
+                }
+            )
+        teds_hyp: list[dict[str, Any]] = []
+        for row in teds_gt:
+            page, lines = recognize(row)
+            key = (str(row["doc_id"]), int(row["page"]))
+            if row.get("cohort") == "prior_public_ocr":
+                frozen = old_teds.get(key)
+                if frozen is None or not frozen.get("table_html"):
+                    raise RuntimeError(f"Missing prior table GT for {key}")
+                grids = ruling_grids_for_gt(
+                    page, str(frozen.get("text_gt") or ""), str(frozen.get("table_html") or "")
+                )
+                table_html_hyp = "".join(ocr_lines_into_cell_grid(lines, grid, RENDER_SCALE) for grid in grids)
+            else:
+                text = _page_text(page)
+                rows, grid = first_supported_table(page, text)
+                if not rows or grid is None:
+                    raise RuntimeError(f"Refusing to drop TEDS page {key}")
+                table_html_hyp = ocr_lines_into_cell_grid(lines, grid, RENDER_SCALE)
+            teds_hyp.append(
+                {
+                    "doc_id": row["doc_id"],
+                    "page": row["page"],
+                    "table_html_hyp": table_html_hyp,
+                    "hypothesis_source": PAIR_TABLE_HYPOTHESIS_SOURCE,
+                    "cohort": row.get("cohort"),
+                }
+            )
+    finally:
+        for document in documents.values():
+            document.close()
+
+    if len(cer_hyp) != 54 or len(teds_hyp) != 19 or len(kf_hyp) != 34:
+        raise RuntimeError("Hypothesis refresh changed the page count. Nothing was written.")
+    for path, blob in gt_bytes.items():
+        if path.read_bytes() != blob:
+            path.write_bytes(blob)
+            raise RuntimeError(f"Ground truth changed while refreshing hypotheses: {path}")
+    _write_jsonl(CER_HYP_PATH, cer_hyp)
+    _write_jsonl(TEDS_HYP_PATH, teds_hyp)
+    _write_jsonl(KF_HYP_PATH, kf_hyp)
+    return {"cer_pages": len(cer_hyp), "teds_pages": len(teds_hyp), "key_rows": len(kf_hyp)}
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Expand and score the public OCR eval set.")
     parser.add_argument("--build", action="store_true", help="Fetch new PDFs, OCR them, write fixtures and the report.")
     parser.add_argument("--report", action="store_true", help="Rebuild the report from fixtures already on disk.")
+    parser.add_argument(
+        "--refresh-hypotheses",
+        action="store_true",
+        help="Re-OCR the stored public pages with the PP-OCRv5 mobile detector and server recognizer.",
+    )
     parser.add_argument("--delay", type=float, default=2.0)
     args = parser.parse_args(argv)
     try:
+        if args.refresh_hypotheses:
+            print(json.dumps(refresh_live_hypotheses(), ensure_ascii=False))
         if args.build:
             candidates = [
                 row
@@ -1908,7 +2312,7 @@ def main(argv: list[str] | None = None) -> int:
             if not isinstance(current, list):
                 current = []
             sidecar.write_text(json.dumps(current + notices, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-        if args.build or args.report:
+        if args.build or args.report or args.refresh_hypotheses:
             report = build_report_from_fixtures()
             write_reports(report)
             print(

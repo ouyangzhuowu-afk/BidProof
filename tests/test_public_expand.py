@@ -363,3 +363,52 @@ def test_fragment_prepare_keeps_every_page_and_does_not_rewrite_gt():
     assert denom == len("采购人：医院") + len("项目编号：ABC")
     assert edits == len("北京数字支点国际项目管理有限公司")
     assert pages.read_bytes() == before
+
+
+def test_rapidocr_loads_det_mobile_and_server_rec_together(monkeypatch):
+    rapidocr_onnxruntime = pytest.importorskip("rapidocr_onnxruntime")
+    import fitz
+
+    from work.eval import public_expand as expand
+
+    calls: dict[str, dict] = {}
+
+    class _FakeSession:
+        def __init__(self, model_path: str):
+            self._model_path = model_path
+
+    class _FakeEngine:
+        def __init__(self, det_path: str, rec_path: str):
+            self.max_side_len = 2000
+            self.text_det = type("Det", (), {"infer": type("Infer", (), {"session": _FakeSession(det_path)})()})()
+            self.text_rec = type("Rec", (), {"session": type("Ort", (), {"session": _FakeSession(rec_path)})()})()
+
+        def __call__(self, _array):
+            return ([], None)
+
+    def _factory(**kwargs):
+        calls["kwargs"] = kwargs
+        return _FakeEngine(kwargs["det_model_path"], kwargs["rec_model_path"])
+
+    det_path = expand.ROOT / "ch_PP-OCRv5_det_mobile.onnx"
+    rec_path = expand.ROOT / "ch_PP-OCRv5_rec_server.onnx"
+    monkeypatch.setattr(expand, "ppocrv5_det_path", lambda: det_path)
+    monkeypatch.setattr(expand, "ppocrv5_server_rec_path", lambda: rec_path)
+    monkeypatch.setattr(rapidocr_onnxruntime, "RapidOCR", _factory)
+    expand._run_rapidocr.engine = None
+    document = fitz.open()
+    try:
+        page = document.new_page(width=50, height=50)
+        png = page.get_pixmap(alpha=False).tobytes("png")
+        expand._run_rapidocr(png)
+    finally:
+        document.close()
+        expand._run_rapidocr.engine = None
+    assert calls["kwargs"] == {
+        "det_model_path": str(det_path),
+        "rec_model_path": str(rec_path),
+    }
+    assert "max_side_len" not in calls["kwargs"]
+    assert expand.RENDER_SCALE == 1.5
+    assert expand.MAX_SIDE_LEN == 2000
+    assert expand._render.__defaults__ == (1.5,)
