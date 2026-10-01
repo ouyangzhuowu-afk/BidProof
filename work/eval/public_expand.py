@@ -1086,6 +1086,7 @@ def build_report_from_fixtures() -> dict[str, Any]:
         ),
         "render_scale": RENDER_SCALE,
         "dpi": int(RENDER_SCALE * 72),
+        "engine_max_side_len_unchanged": 2000,
         "models": _rapidocr_models_for_report(),
         "before_render_scale_1_5": dict(SCALE_1_5_EXPANDED),
     }
@@ -1241,7 +1242,8 @@ def _scale_comparison_lines(report: dict[str, Any]) -> list[str]:
         ),
         "",
         "Before figures were recomputed by the same scorer on the scale-1.5 hypotheses before this render change. "
-        "A missed gate stays GATE_FAIL. `product_pass` stays false when any gate fails.",
+        "A missed gate stays GATE_FAIL. `product_pass` stays false when any gate fails. "
+        "The pixmap uses this render scale. The installed RapidOCR default `Global.max_side_len` of 2000 was not changed.",
         "",
     ]
 

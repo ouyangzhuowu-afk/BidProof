@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-09-29T09:06:12.123118+00:00",
+  "generated_at": "2026-10-01T14:30:49.761977+00:00",
   "claim_scope": "engineering_gate_only",
-  "teds": 0.9580030818780702,
+  "teds": 0.951161696265886,
   "gate": "GATE_PASS",
   "product_pass": false,
   "business_pass": false,
@@ -64,22 +64,22 @@
     {
       "doc_id": "pub-gx-nanning-vascular-doppler",
       "page": 3,
-      "teds": 0.9855072463768116
-    },
-    {
-      "doc_id": "pub-gx-nanning-vascular-doppler",
-      "page": 16,
       "teds": 1.0
     },
     {
       "doc_id": "pub-gx-nanning-vascular-doppler",
+      "page": 16,
+      "teds": 0.9411764705882353
+    },
+    {
+      "doc_id": "pub-gx-nanning-vascular-doppler",
       "page": 17,
-      "teds": 0.9772727272727273
+      "teds": 0.9886363636363636
     },
     {
       "doc_id": "pub-gx-ventilator-monitors",
       "page": 15,
-      "teds": 0.9811320754716981
+      "teds": 1.0
     },
     {
       "doc_id": "pub-gx-tianlin-yuegui-devices-2026",
@@ -94,7 +94,7 @@
     {
       "doc_id": "pub-gx-minzu-ultrasound-2026",
       "page": 6,
-      "teds": 0.9333333333333333
+      "teds": 0.8
     },
     {
       "doc_id": "pub-gx-hechi-mine-safety-2026",
@@ -104,17 +104,17 @@
     {
       "doc_id": "pub-gx-info-center-compute-2026",
       "page": 5,
-      "teds": 0.9090909090909091
+      "teds": 1.0
     },
     {
       "doc_id": "pub-gx-yibiatong-phase2-2026",
       "page": 3,
-      "teds": 1.0
+      "teds": 0.9230769230769231
     },
     {
       "doc_id": "pub-gx-nonggang-patrol-2026",
       "page": 9,
-      "teds": 0.9065743944636678
+      "teds": 0.9100346020761245
     }
   ]
 }

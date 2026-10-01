@@ -270,13 +270,32 @@ def test_report_keeps_product_pass_false_and_separates_synthetic():
     assert report["old_set"]["key_field_f1_gate"] == "GATE_FAIL"
     assert report["old_set"]["teds_gate"] == "GATE_FAIL"
     assert report["synthetic_appendix"]["line_cer_pages"] == 3
+    assert report["render_scale"] == 3.0
+    assert report["models"]["det"] == "ch_PP-OCRv4_det_infer.onnx"
+    assert report["models"]["rec"] == "ch_PP-OCRv4_rec_infer.onnx"
     assert report["expanded"]["line_cer_pages"] == 54
-    assert report["expanded"]["line_edits"] == 1302
+    assert report["expanded"]["line_edits"] == 2399
     assert report["expanded"]["line_denom"] == 29835
-    assert report["expanded"]["tp"] == 103
+    assert report["expanded"]["line_cer_gate"] == "GATE_FAIL"
+    assert report["expanded"]["tp"] == 99
     assert report["expanded"]["fp"] == 3
-    assert report["expanded"]["fn"] == 3
+    assert report["expanded"]["fn"] == 7
+    assert report["expanded"]["key_field_f1_gate"] == "GATE_FAIL"
     assert report["expanded"]["teds_pages_scored"] == 19
+    assert report["expanded"]["teds_gate"] == "GATE_PASS"
+    before = report["before_render_scale_1_5"]
+    assert before["line_edits"] == 1302
+    assert before["line_denom"] == 29835
+    assert before["line_cer_pages"] == 54
+    assert before["line_cer_gate"] == "GATE_FAIL"
+    assert before["tp"] == 103
+    assert before["fp"] == 3
+    assert before["fn"] == 3
+    assert before["key_field_f1_gate"] == "GATE_PASS"
+    assert before["teds_pages_scored"] == 19
+    assert before["teds_gate"] == "GATE_PASS"
+    assert before["gate"] == "GATE_FAIL"
+    assert before["product_pass"] is False
     assert report["old_set"]["line_cer"] == pytest.approx(0.031746031746031744)
     assert report["old_set"]["key_field_f1"] == pytest.approx(0.76)
     assert report["old_set"]["teds"] == pytest.approx(0.8784546114752891, rel=1e-6)

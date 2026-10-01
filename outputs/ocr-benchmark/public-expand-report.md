@@ -3,6 +3,19 @@
 Engineering measurement only. This is not a product PASS, not T-005, and not business acceptance.
 Synthetic rows are in the appendix and are not in the expanded gate. Thresholds were not changed.
 
+## Render scale
+
+Line finding stays `ch_PP-OCRv4_det_infer.onnx` and printed-text recognition stays `ch_PP-OCRv4_rec_infer.onnx` (rapidocr_onnxruntime package defaults, `RapidOCR()` with no model override). Render scale is the only change: 1.5 (108 DPI) to 3 (216 DPI).
+
+Same 54 CER pages, denominator 29835, 19 TEDS pages. Thresholds unchanged: CER ≤2%, key-field F1 ≥97%, TEDS ≥90%.
+
+| Measurement | Render | Line CER | CER gate | Key-field F1 | F1 gate | TEDS | TEDS gate | Overall | product_pass |
+|---|---|---:|---|---:|---|---:|---|---|---|
+| Before | 1.5× (108 DPI) | 1302/29835 (4.36%) | GATE_FAIL | 97.17% (TP 103 / FP 3 / FN 3) | GATE_PASS | 95.80% | GATE_PASS | GATE_FAIL | false |
+| After | 3× (216 DPI) | 2399/29835 (8.04%) | GATE_FAIL | 95.19% (TP 99 / FP 3 / FN 7) | GATE_FAIL | 95.12% | GATE_PASS | GATE_FAIL | false |
+
+Before figures were recomputed by the same scorer on the scale-1.5 hypotheses before this render change. A missed gate stays GATE_FAIL. `product_pass` stays false when any gate fails. The pixmap uses this render scale. The installed RapidOCR default `Global.max_side_len` of 2000 was not changed.
+
 ## Counts
 
 - Prior completed public-eval documents: **12**
@@ -15,14 +28,14 @@ Synthetic rows are in the appendix and are not in the expanded gate. Thresholds 
 | Set | CER | CER gate | F1 | F1 gate | TEDS | TEDS gate |
 |---|---:|---|---:|---|---:|---|
 | Old published set | 3.17% | GATE_FAIL | 76.00% | GATE_FAIL | 87.85% | GATE_FAIL |
-| Expanded public set (live OCR) | 4.36% | GATE_FAIL | 97.17% | GATE_PASS | 95.80% | GATE_PASS |
+| Expanded public set (render scale 3) | 8.04% | GATE_FAIL | 95.19% | GATE_FAIL | 95.12% | GATE_PASS |
 | Synthetic appendix (not in gate) | 3.17% | GATE_FAIL | 10.26% | GATE_FAIL | 86.63% | GATE_FAIL |
 
 Overall expanded gate: **GATE_FAIL**. `product_pass=false`.
 
-Expanded F1 counts: TP 103 / FP 3 / FN 3.
+Expanded F1 counts: TP 99 / FP 3 / FN 7.
 
-Expanded line edits: **1302** / **29835** on **54** pages. Baseline before fragment alignment, same pages: **1481/29835** (CER 4.96%). Unconstrained adjacent joins (remeasured 485 edits; prior hypothesis 483) are not applied. Rejected false candidates: fixture-003 page 5, two paragraphs; pub-gx-youjiang-ultrasound page 5, 开标时间 with 开标地点 and the acquisition-time wrap.
+Expanded line edits: **2399** / **29835** on **54** pages. Baseline before fragment alignment, same pages: **1481/29835** (CER 4.96%). Unconstrained adjacent joins (remeasured 485 edits; prior hypothesis 483) are not applied. Rejected false candidates: fixture-003 page 5, two paragraphs; pub-gx-youjiang-ultrasound page 5, 开标时间 with 开标地点 and the acquisition-time wrap.
 
 ## Sources
 
@@ -74,9 +87,16 @@ Twelve PDFs from Joe's local `work/public-eval/pdfs`, approved by Edith for eval
 - Leave image-only pages not-scored until a human transcript exists. Do not promote OCR text to ground truth.
 - Keep training-corpus PDFs and synthetic scans out of this gate so later fine-tunes cannot leak into the reported numbers.
 
-## Remaining line-edit recount (1302)
+## Reproduce
 
-Evidence note only. The scorer is unchanged. These counts are the current line edits on the same 54 pages (1302/29835, CER 4.36%), each edit assigned once. `product_pass` stays false. Overall gate stays GATE_FAIL.
+```bash
+uv run --extra ocr python -m work.eval.public_expand --build
+uv run python -m work.eval.public_expand --report
+```
+
+## Scale 1.5 line-edit recount (1302)
+
+Copied from commit 8b869d54. These counts are the scale-1.5 hypotheses (1302/29835, CER 4.36%), each edit assigned once. They were not recomputed on the scale-3 hypotheses. The scorer was unchanged when this recount was written. `product_pass` stays false. Overall gate stays GATE_FAIL.
 
 | Bucket | Edits | What it is |
 |---|---:|---|
@@ -248,11 +268,5 @@ Whole unmatched lines are dominated by `fixture-003` page 5 (21), `pub-gx-youjia
 
 These 11 rows sum to 342, with 100 whole unmatched lines and 242 paired-line gaps. The other 43 pages have no long deletion.
 
-## Reproduce
 
-```bash
-uv run --extra ocr python -m work.eval.public_expand --build
-uv run python -m work.eval.public_expand --report
-```
-
-Generated at `2026-10-01T12:21:36.109905+00:00`.
+Generated at `2026-10-01T14:30:49.761977+00:00`.
