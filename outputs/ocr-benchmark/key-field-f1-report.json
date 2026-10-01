@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-09-29T09:06:12.123118+00:00",
+  "generated_at": "2026-10-01T14:13:45.209211+00:00",
   "claim_scope": "engineering_gate_only",
-  "key_field_f1": 0.9716981132075472,
-  "gate": "GATE_PASS",
+  "key_field_f1": 0.9668246445497629,
+  "gate": "GATE_FAIL",
   "product_pass": false,
   "business_pass": false,
   "forced_requirement_status": "NEEDS_REVIEW",
@@ -18,7 +18,7 @@
   "synthetic_appendix_excluded_from_gate": true,
   "note": "Top-level metric is the expanded public live-OCR set. Old published numbers are under old_set.",
   "key_field_f1_min": 0.97,
-  "tp": 103,
+  "tp": 102,
   "fp": 3,
-  "fn": 3
+  "fn": 4
 }

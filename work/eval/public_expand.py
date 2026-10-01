@@ -1384,7 +1384,7 @@ def render_markdown(report: dict[str, Any]) -> str:
         "## Reproduce",
         "",
         "```bash",
-        "uv run --extra ocr python -m work.eval.public_expand --build",
+        "uv run --extra ocr python -m work.eval.public_expand --refresh-hypotheses",
         "uv run python -m work.eval.public_expand --report",
         "```",
         "",
