@@ -217,6 +217,37 @@ Long deletions are dominated by `pub-gx-minzu-ultrasound-2026` page 1 (49) and p
 
 These 46 rows sum to 933, with 342 long deletions, 172 short deletions, 369 substitutions, and 50 insertions. Eight pages have a bucket-3 total of 0.
 
+## Long-deletion split (342)
+
+Evidence note only. The scorer is unchanged. This splits only the 342 consecutive deletions of 6 or more characters, on the same alignment. The 337 text-layer-absent edits, the 50 in-text-layer insertions, the 172 short deletions, and the 369 substitutions stay where they are. `product_pass` stays false. Overall gate stays GATE_FAIL.
+
+| Kind | Edits |
+|---|---:|
+| Whole text-layer line that matches no OCR line | 100 |
+| Gap inside a line already paired with an OCR line | 242 |
+| Remainder | 0 |
+| Sum | 342 |
+
+100 + 242 = 342. There is no remainder. Every long deletion is one of those two kinds.
+
+Whole unmatched lines are dominated by `fixture-003` page 5 (21), `pub-gx-youjiang-ultrasound` page 5 (20), `fixture-002` page 6 (18), and `pub-gx-minzu-ultrasound-2026` page 2 (15). Gaps inside paired lines are dominated by `pub-gx-minzu-ultrasound-2026` page 1 (49), `pub-gx-youjiang-ultrasound` page 6 (35), `pub-gx-info-center-compute-2026` page 5 (32), and `fixture-002` page 6 (28). `pub-gx-minzu-ultrasound-2026` page 1 and `pub-gx-youjiang-ultrasound` page 6 are entirely gaps.
+
+| doc | page | long | whole | gap |
+|---|---:|---:|---:|---:|
+| pub-gx-minzu-ultrasound-2026 | 1 | 49 | 0 | 49 |
+| fixture-002 | 6 | 46 | 18 | 28 |
+| pub-gx-minzu-ultrasound-2026 | 2 | 40 | 15 | 25 |
+| pub-gx-info-center-compute-2026 | 5 | 39 | 7 | 32 |
+| pub-gx-youjiang-ultrasound | 6 | 35 | 0 | 35 |
+| pub-gx-youjiang-ultrasound | 5 | 34 | 20 | 14 |
+| fixture-003 | 5 | 33 | 21 | 12 |
+| pub-gx-ventilator-monitors | 5 | 25 | 7 | 18 |
+| fixture-003 | 4 | 21 | 0 | 21 |
+| pub-gx-daxin-ultrasound-anesthesia | 73 | 12 | 12 | 0 |
+| fixture-001 | 32 | 8 | 0 | 8 |
+
+These 11 rows sum to 342, with 100 whole unmatched lines and 242 paired-line gaps. The other 43 pages have no long deletion.
+
 ## Reproduce
 
 ```bash

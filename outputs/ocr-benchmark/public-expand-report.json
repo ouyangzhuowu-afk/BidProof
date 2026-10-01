@@ -1407,6 +1407,14 @@
     "sum_check": 933,
     "hypothesis_435_154_70": "does not match"
   },
+  "long_deletion_split": {
+    "note": "Evidence only. Scorer unchanged. Splits only the 342 long deletions. The 337 absent edits, 50 in-text-layer insertions, 172 short deletions, and 369 substitutions are not included. Same alignment. product_pass stays false. Overall gate stays GATE_FAIL. pending_audit.",
+    "long_deletion_6_or_more": 342,
+    "whole_unmatched_line": 100,
+    "paired_line_gap": 242,
+    "remainder": 0,
+    "sum_check": 342
+  },
   "joe_local_pdf_intake": {
     "intake_id": "joe-local-pdfs-2026-09-29",
     "note": "Same filename or SHA-256 as a completed public-eval document is a duplicate and is not counted again.",
