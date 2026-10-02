@@ -1,0 +1,12 @@
+{
+  "provider": "rapidocr_onnxruntime",
+  "egress_sends": 0,
+  "line_cer": 0.04963968493380258,
+  "line_cer_gate": "GATE_FAIL",
+  "key_field_f1": 0.9716981132075472,
+  "key_field_f1_gate": "GATE_PASS",
+  "teds": 0.9580030818780702,
+  "teds_gate": "GATE_PASS",
+  "line_cer_pages": 54,
+  "teds_pages_scored": 19
+}

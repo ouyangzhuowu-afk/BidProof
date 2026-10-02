@@ -1,0 +1,829 @@
+{
+  "schema_version": "1.0",
+  "cohort_id": "public-expand-54",
+  "mainline_baseline": "a99014f3f265",
+  "scorer_version": "line-cer-v1+toc-segment",
+  "page_count": 54,
+  "cer_denominator_chars": 29835,
+  "teds_note": "TEDS hypotheses place OCR text into the PDF ruling-line / table-grid (pdf table lines assist). That is not a pure E2E OCR-only table tree score; document separately if an E2E-only path is tested.",
+  "product_pass": false,
+  "business_pass": false,
+  "t005": "unchanged",
+  "claim_scope": "engineering_compare_only",
+  "generated_at": "2026-10-02T13:15:40.406902+00:00",
+  "fixture_sha256": {
+    "public_expand_pages.jsonl": "50a6e7e229049f72100bacd43d3946e5a1e186b6d131c3b643caba68a40a47d9",
+    "public_expand_hypotheses.jsonl": "6082c494505d4c3cbb86ad93370ad14b4c0a5addf715d12ad4134ad95ec383fa",
+    "public_expand_teds_gt.jsonl": "e154422548e6b34e4e6e526bd8ccb5b038fae73aaf83f55b3a3874dc657a0a4b",
+    "public_expand_teds_hypotheses.jsonl": "a4c8572c03da1e1f8c8f5f91b0d4f08804fb306cf35776f33220ceb71ba3498e",
+    "public_expand_key_field_gt.jsonl": "fa42e91f78ba33ffa8460bd55213051ba4f1221b2cfa42eeeb38bd5da67488ed",
+    "public_expand_key_field_hypotheses.jsonl": "6c7ce4c7691be7b6dd1d4f61607aabeb77b39bb6ed7bbaf4180e1eec39d5a29f"
+  },
+  "documents": [
+    {
+      "doc_id": "fixture-001",
+      "pdf_sha256": "",
+      "document_path": null,
+      "source_url": null,
+      "fetched_at": null,
+      "license_or_usage_note": null,
+      "pages": [
+        2,
+        3,
+        14,
+        32
+      ]
+    },
+    {
+      "doc_id": "fixture-002",
+      "pdf_sha256": "",
+      "document_path": null,
+      "source_url": null,
+      "fetched_at": null,
+      "license_or_usage_note": null,
+      "pages": [
+        1,
+        3,
+        6,
+        33,
+        37
+      ]
+    },
+    {
+      "doc_id": "fixture-003",
+      "pdf_sha256": "",
+      "document_path": null,
+      "source_url": null,
+      "fetched_at": null,
+      "license_or_usage_note": null,
+      "pages": [
+        1,
+        4,
+        5,
+        9,
+        29,
+        35
+      ]
+    },
+    {
+      "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
+      "pdf_sha256": "",
+      "document_path": null,
+      "source_url": null,
+      "fetched_at": null,
+      "license_or_usage_note": null,
+      "pages": [
+        1,
+        3,
+        4,
+        51,
+        73
+      ]
+    },
+    {
+      "doc_id": "pub-gx-hechi-mine-safety-2026",
+      "pdf_sha256": "",
+      "document_path": null,
+      "source_url": null,
+      "fetched_at": null,
+      "license_or_usage_note": null,
+      "pages": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "doc_id": "pub-gx-info-center-compute-2026",
+      "pdf_sha256": "",
+      "document_path": null,
+      "source_url": null,
+      "fetched_at": null,
+      "license_or_usage_note": null,
+      "pages": [
+        1,
+        2,
+        5
+      ]
+    },
+    {
+      "doc_id": "pub-gx-minzu-ultrasound-2026",
+      "pdf_sha256": "",
+      "document_path": null,
+      "source_url": null,
+      "fetched_at": null,
+      "license_or_usage_note": null,
+      "pages": [
+        1,
+        2,
+        6
+      ]
+    },
+    {
+      "doc_id": "pub-gx-nanning-vascular-doppler",
+      "pdf_sha256": "",
+      "document_path": null,
+      "source_url": null,
+      "fetched_at": null,
+      "license_or_usage_note": null,
+      "pages": [
+        3,
+        16,
+        17
+      ]
+    },
+    {
+      "doc_id": "pub-gx-nanxishan-dr-mammo-2026",
+      "pdf_sha256": "",
+      "document_path": null,
+      "source_url": null,
+      "fetched_at": null,
+      "license_or_usage_note": null,
+      "pages": [
+        1,
+        2,
+        9
+      ]
+    },
+    {
+      "doc_id": "pub-gx-nonggang-patrol-2026",
+      "pdf_sha256": "",
+      "document_path": null,
+      "source_url": null,
+      "fetched_at": null,
+      "license_or_usage_note": null,
+      "pages": [
+        2,
+        3,
+        9
+      ]
+    },
+    {
+      "doc_id": "pub-gx-qintang-flow-cytometer",
+      "pdf_sha256": "",
+      "document_path": null,
+      "source_url": null,
+      "fetched_at": null,
+      "license_or_usage_note": null,
+      "pages": [
+        1,
+        3,
+        4
+      ]
+    },
+    {
+      "doc_id": "pub-gx-tianlin-yuegui-devices-2026",
+      "pdf_sha256": "",
+      "document_path": null,
+      "source_url": null,
+      "fetched_at": null,
+      "license_or_usage_note": null,
+      "pages": [
+        1,
+        2,
+        8
+      ]
+    },
+    {
+      "doc_id": "pub-gx-ventilator-monitors",
+      "pdf_sha256": "",
+      "document_path": null,
+      "source_url": null,
+      "fetched_at": null,
+      "license_or_usage_note": null,
+      "pages": [
+        3,
+        4,
+        5,
+        15
+      ]
+    },
+    {
+      "doc_id": "pub-gx-yibiatong-phase2-2026",
+      "pdf_sha256": "",
+      "document_path": null,
+      "source_url": null,
+      "fetched_at": null,
+      "license_or_usage_note": null,
+      "pages": [
+        2,
+        3
+      ]
+    },
+    {
+      "doc_id": "pub-gx-youjiang-ultrasound",
+      "pdf_sha256": "",
+      "document_path": null,
+      "source_url": null,
+      "fetched_at": null,
+      "license_or_usage_note": null,
+      "pages": [
+        2,
+        4,
+        5,
+        6
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "doc_id": "fixture-001",
+      "page": 2,
+      "page_type": "body",
+      "pdf_sha256": "",
+      "gt_text_sha256": "ec180424e8681b28f7618cd72a09f94d524ab2fed0034d04ca43e5413282d0ef",
+      "gt_char_count_raw": 484,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    },
+    {
+      "doc_id": "fixture-001",
+      "page": 3,
+      "page_type": "body",
+      "pdf_sha256": "",
+      "gt_text_sha256": "00037473d2ce2218176e7a6ec19f11a857604c69bc19d7172bc8e13d6af81ce3",
+      "gt_char_count_raw": 483,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    },
+    {
+      "doc_id": "fixture-001",
+      "page": 14,
+      "page_type": "body",
+      "pdf_sha256": "",
+      "gt_text_sha256": "cda6adfb7ba6bb91c97e05781da0565a7e8f317c124385b7e3b837cec656c512",
+      "gt_char_count_raw": 798,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    },
+    {
+      "doc_id": "fixture-001",
+      "page": 32,
+      "page_type": "body",
+      "pdf_sha256": "",
+      "gt_text_sha256": "fc666f2588ed70e7ebfd0af89c41c8ad7612bffbd577c901ffeeeb6d40a1ef5b",
+      "gt_char_count_raw": 113,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    },
+    {
+      "doc_id": "fixture-002",
+      "page": 1,
+      "page_type": "body",
+      "pdf_sha256": "",
+      "gt_text_sha256": "272de40b9b087aa8107856caa7cacfb97950722b5e92ab31a1a1fe53133aedd5",
+      "gt_char_count_raw": 136,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    },
+    {
+      "doc_id": "fixture-002",
+      "page": 3,
+      "page_type": "body",
+      "pdf_sha256": "",
+      "gt_text_sha256": "016dfc4bcfdd5cc27b0c5de5fca43b138f32742ca241102ef1b203025b3d9789",
+      "gt_char_count_raw": 556,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    },
+    {
+      "doc_id": "fixture-002",
+      "page": 6,
+      "page_type": "body",
+      "pdf_sha256": "",
+      "gt_text_sha256": "b5463f1880cb678ef570a155389bf1748967b22856f10e8c6f4841fabd78e3f3",
+      "gt_char_count_raw": 902,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    },
+    {
+      "doc_id": "fixture-002",
+      "page": 33,
+      "page_type": "body",
+      "pdf_sha256": "",
+      "gt_text_sha256": "c5ee6657dc650061de940706e6544ec215770ecb84a0eb764050e663cb8afef9",
+      "gt_char_count_raw": 557,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    },
+    {
+      "doc_id": "fixture-002",
+      "page": 37,
+      "page_type": "body",
+      "pdf_sha256": "",
+      "gt_text_sha256": "4f6960e918da64d6799ba9c9ce2ba1b57b2032df40a6a8b209d43438772936fc",
+      "gt_char_count_raw": 746,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    },
+    {
+      "doc_id": "fixture-003",
+      "page": 1,
+      "page_type": "body",
+      "pdf_sha256": "",
+      "gt_text_sha256": "f12490388b8800ebf00706175ebf04a380196cc2ed1a34ed55a2824b5dce4861",
+      "gt_char_count_raw": 139,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    },
+    {
+      "doc_id": "fixture-003",
+      "page": 4,
+      "page_type": "body",
+      "pdf_sha256": "",
+      "gt_text_sha256": "34d1d613900420099db8498b2646d7df49bb95ff8538ed41e11819fca469843a",
+      "gt_char_count_raw": 753,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    },
+    {
+      "doc_id": "fixture-003",
+      "page": 5,
+      "page_type": "body",
+      "pdf_sha256": "",
+      "gt_text_sha256": "0391afd139a21feaf3721dd746b840a54544d456ba1d80a993972ccdaf6a60d2",
+      "gt_char_count_raw": 807,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    },
+    {
+      "doc_id": "fixture-003",
+      "page": 9,
+      "page_type": "body",
+      "pdf_sha256": "",
+      "gt_text_sha256": "5cfd998de63cb6ffb3dfd17197b4fa1d36274de70518ef10da3ff01ca8f4d322",
+      "gt_char_count_raw": 883,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    },
+    {
+      "doc_id": "fixture-003",
+      "page": 29,
+      "page_type": "body",
+      "pdf_sha256": "",
+      "gt_text_sha256": "3c127c52560adf10d46e5fae3862572f0202d64a611c8fadbdb7ead6eca0af93",
+      "gt_char_count_raw": 728,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    },
+    {
+      "doc_id": "fixture-003",
+      "page": 35,
+      "page_type": "body",
+      "pdf_sha256": "",
+      "gt_text_sha256": "c4a1dfa5d54ef7b2bb0e0fc8bd492a6847b1a6718800be33e733e5c8ed96bcfb",
+      "gt_char_count_raw": 287,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    },
+    {
+      "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
+      "page": 1,
+      "page_type": "body",
+      "pdf_sha256": "",
+      "gt_text_sha256": "1055a5dc3ac349f4214e1573791309b8b0740e942fe27834834cd8f55367ad6a",
+      "gt_char_count_raw": 173,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    },
+    {
+      "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
+      "page": 3,
+      "page_type": "body",
+      "pdf_sha256": "",
+      "gt_text_sha256": "61e004cebe260d71e006776d5b5ac87e616f82af37f17a2722efe0de69c1431f",
+      "gt_char_count_raw": 749,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    },
+    {
+      "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
+      "page": 4,
+      "page_type": "body",
+      "pdf_sha256": "",
+      "gt_text_sha256": "074a1d5cee2d917a5a2867434bf3e006b30ca9cd4e5b784fa8c86dfcbdbfb135",
+      "gt_char_count_raw": 1086,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    },
+    {
+      "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
+      "page": 51,
+      "page_type": "body",
+      "pdf_sha256": "",
+      "gt_text_sha256": "3cb83c536210c79419411ea90ab7d1f301a793056405d17fdb921f2dfbd5d7bf",
+      "gt_char_count_raw": 917,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    },
+    {
+      "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
+      "page": 73,
+      "page_type": "body",
+      "pdf_sha256": "",
+      "gt_text_sha256": "79b594eaf9a2166f8516d089f3273b7dd5b7773ae4e94c110db378f4bfa9e624",
+      "gt_char_count_raw": 484,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    },
+    {
+      "doc_id": "pub-gx-nanning-vascular-doppler",
+      "page": 3,
+      "page_type": "body",
+      "pdf_sha256": "",
+      "gt_text_sha256": "171ec42c1a64455a6f209cdb597889c3d63a445b92d552614bcf7569358ca529",
+      "gt_char_count_raw": 905,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    },
+    {
+      "doc_id": "pub-gx-nanning-vascular-doppler",
+      "page": 16,
+      "page_type": "body",
+      "pdf_sha256": "",
+      "gt_text_sha256": "515d33953eee0d4d827b2d3edb4e4e9090aff533c7f25a6aef591f697ff88e24",
+      "gt_char_count_raw": 605,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    },
+    {
+      "doc_id": "pub-gx-nanning-vascular-doppler",
+      "page": 17,
+      "page_type": "body",
+      "pdf_sha256": "",
+      "gt_text_sha256": "b2e26b2fdd77632d0ee802ea70e7d1cf0f84c90892ab639e2b8eef5df1914484",
+      "gt_char_count_raw": 403,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    },
+    {
+      "doc_id": "pub-gx-qintang-flow-cytometer",
+      "page": 1,
+      "page_type": "body",
+      "pdf_sha256": "",
+      "gt_text_sha256": "9e599343e0614fec9b74f461897d327e328065664fbb3a2a9517f853b736d15f",
+      "gt_char_count_raw": 157,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    },
+    {
+      "doc_id": "pub-gx-qintang-flow-cytometer",
+      "page": 3,
+      "page_type": "body",
+      "pdf_sha256": "",
+      "gt_text_sha256": "91dc41c48f5387d769943463638156cedf9caea7366ce51895e6a443b0be4e32",
+      "gt_char_count_raw": 777,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    },
+    {
+      "doc_id": "pub-gx-qintang-flow-cytometer",
+      "page": 4,
+      "page_type": "body",
+      "pdf_sha256": "",
+      "gt_text_sha256": "b959e501150195cc0a01ad6fa5ca5a676b601f6a03636333609523603af8744d",
+      "gt_char_count_raw": 891,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    },
+    {
+      "doc_id": "pub-gx-ventilator-monitors",
+      "page": 3,
+      "page_type": "body",
+      "pdf_sha256": "",
+      "gt_text_sha256": "953029d697b40774c422587e34211f2b126e867c57c04bb2c4cd813d208dc828",
+      "gt_char_count_raw": 931,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    },
+    {
+      "doc_id": "pub-gx-ventilator-monitors",
+      "page": 4,
+      "page_type": "body",
+      "pdf_sha256": "",
+      "gt_text_sha256": "0f57ee45eee120c991b7edcbfa02cbab420e917b37ec33356f81f8ded79f881e",
+      "gt_char_count_raw": 932,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    },
+    {
+      "doc_id": "pub-gx-ventilator-monitors",
+      "page": 5,
+      "page_type": "body",
+      "pdf_sha256": "",
+      "gt_text_sha256": "91e75dfd41bf3e6e632473b86cbd746e062068ba5d7eb9af61457bf4a83699a7",
+      "gt_char_count_raw": 1234,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    },
+    {
+      "doc_id": "pub-gx-ventilator-monitors",
+      "page": 15,
+      "page_type": "body",
+      "pdf_sha256": "",
+      "gt_text_sha256": "5eca4f53642ca6cbdd2702bff8c3d74d585dc7e1c303296d00e76b8d994ba88f",
+      "gt_char_count_raw": 629,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    },
+    {
+      "doc_id": "pub-gx-youjiang-ultrasound",
+      "page": 2,
+      "page_type": "body",
+      "pdf_sha256": "",
+      "gt_text_sha256": "566b17c54de0fcbacedcc0112d543daff4ad58dfbf3d319ee388b33d4775a03d",
+      "gt_char_count_raw": 181,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    },
+    {
+      "doc_id": "pub-gx-youjiang-ultrasound",
+      "page": 4,
+      "page_type": "body",
+      "pdf_sha256": "",
+      "gt_text_sha256": "0e6862a01b983bb3b54f7f1936dd618b54188217849e04a77685028f28906698",
+      "gt_char_count_raw": 645,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    },
+    {
+      "doc_id": "pub-gx-youjiang-ultrasound",
+      "page": 5,
+      "page_type": "body",
+      "pdf_sha256": "",
+      "gt_text_sha256": "fd8a2e73ad856a359eb418e07225c480f91cfba6eb1436897ca50ab8642964d4",
+      "gt_char_count_raw": 942,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    },
+    {
+      "doc_id": "pub-gx-youjiang-ultrasound",
+      "page": 6,
+      "page_type": "body",
+      "pdf_sha256": "",
+      "gt_text_sha256": "934f1c99d657bf47f6d1dff6e3b17f97132341d7bf94909934965c51a03a26eb",
+      "gt_char_count_raw": 1086,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    },
+    {
+      "doc_id": "pub-gx-tianlin-yuegui-devices-2026",
+      "page": 1,
+      "page_type": "body",
+      "pdf_sha256": "",
+      "gt_text_sha256": "e51e0641aeca80f53162034538cd3164ddbc8f7b8b460f42313ad26e506705b6",
+      "gt_char_count_raw": 130,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    },
+    {
+      "doc_id": "pub-gx-tianlin-yuegui-devices-2026",
+      "page": 2,
+      "page_type": "body",
+      "pdf_sha256": "",
+      "gt_text_sha256": "5c6f11656677f5d86f1300336ea83947131042e317f0ec9641c963202459c7a6",
+      "gt_char_count_raw": 1665,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    },
+    {
+      "doc_id": "pub-gx-tianlin-yuegui-devices-2026",
+      "page": 8,
+      "page_type": "table",
+      "pdf_sha256": "",
+      "gt_text_sha256": "ba84a5a5c150c8f75090ea0b2a1e3bc4ec9e68f4d9dc03ae42849463819c8a1e",
+      "gt_char_count_raw": 772,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    },
+    {
+      "doc_id": "pub-gx-nanxishan-dr-mammo-2026",
+      "page": 1,
+      "page_type": "body",
+      "pdf_sha256": "",
+      "gt_text_sha256": "2b6f8e03cd3978d98320ab69a5c9167684bbaa10e1f2264ac9ae4c1ec4a1b39e",
+      "gt_char_count_raw": 162,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    },
+    {
+      "doc_id": "pub-gx-nanxishan-dr-mammo-2026",
+      "page": 2,
+      "page_type": "body",
+      "pdf_sha256": "",
+      "gt_text_sha256": "e4d99a77b83c2357902412dc9af19628322f40167727cdd4f4b3bfa3907a7ceb",
+      "gt_char_count_raw": 551,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    },
+    {
+      "doc_id": "pub-gx-nanxishan-dr-mammo-2026",
+      "page": 9,
+      "page_type": "table",
+      "pdf_sha256": "",
+      "gt_text_sha256": "68a7f4067f373f734a259ff0f8166cde48157e95ca0c9e710c17b221dfdf02af",
+      "gt_char_count_raw": 641,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    },
+    {
+      "doc_id": "pub-gx-minzu-ultrasound-2026",
+      "page": 1,
+      "page_type": "body",
+      "pdf_sha256": "",
+      "gt_text_sha256": "c03a78b79a92c4216f3ec68681432c817ecd01962577f46ce3c68d46a30df0f6",
+      "gt_char_count_raw": 554,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    },
+    {
+      "doc_id": "pub-gx-minzu-ultrasound-2026",
+      "page": 2,
+      "page_type": "body",
+      "pdf_sha256": "",
+      "gt_text_sha256": "31507abd49fa82443b1a1868643d9c9d22163210c30d428c5ec562da73999de6",
+      "gt_char_count_raw": 1059,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    },
+    {
+      "doc_id": "pub-gx-minzu-ultrasound-2026",
+      "page": 6,
+      "page_type": "table",
+      "pdf_sha256": "",
+      "gt_text_sha256": "70444efdb59fb49de205f9d46e81b89c8119f3a2449903dab42e60055656ff51",
+      "gt_char_count_raw": 974,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    },
+    {
+      "doc_id": "pub-gx-hechi-mine-safety-2026",
+      "page": 1,
+      "page_type": "body",
+      "pdf_sha256": "",
+      "gt_text_sha256": "1ceb9f5ff6af7160b81f6b9698d6606f307cbb8e14a0c363bec514aee3322c7e",
+      "gt_char_count_raw": 127,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    },
+    {
+      "doc_id": "pub-gx-hechi-mine-safety-2026",
+      "page": 2,
+      "page_type": "body",
+      "pdf_sha256": "",
+      "gt_text_sha256": "ca494361b2107e5b990b31ba4a8d262f49ed059bacf8b253371d4cfbe9b516cf",
+      "gt_char_count_raw": 345,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    },
+    {
+      "doc_id": "pub-gx-hechi-mine-safety-2026",
+      "page": 3,
+      "page_type": "table",
+      "pdf_sha256": "",
+      "gt_text_sha256": "1839432b14c630369bf7687ad55465566d8e4c18c04724b29c9a138fe9778ea7",
+      "gt_char_count_raw": 649,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    },
+    {
+      "doc_id": "pub-gx-info-center-compute-2026",
+      "page": 1,
+      "page_type": "body",
+      "pdf_sha256": "",
+      "gt_text_sha256": "4dfc4457e116c7ff1a1fdf1e4166e63581164b687d94f559e76388c6b2a27fac",
+      "gt_char_count_raw": 561,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    },
+    {
+      "doc_id": "pub-gx-info-center-compute-2026",
+      "page": 2,
+      "page_type": "body",
+      "pdf_sha256": "",
+      "gt_text_sha256": "26bc64d62eaf46ce198c2d472ddc715a8f886cfd8ebd5c1f31acfb5e11cc1703",
+      "gt_char_count_raw": 955,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    },
+    {
+      "doc_id": "pub-gx-info-center-compute-2026",
+      "page": 5,
+      "page_type": "table",
+      "pdf_sha256": "",
+      "gt_text_sha256": "51e7f1ecc6ef2cd506c08aef50313cbb5b1fcc53d6b65f337d31c34fcdbda3e0",
+      "gt_char_count_raw": 911,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    },
+    {
+      "doc_id": "pub-gx-yibiatong-phase2-2026",
+      "page": 2,
+      "page_type": "body",
+      "pdf_sha256": "",
+      "gt_text_sha256": "2f6fffa9e8422550265c999a5e369bc30fc752d459681bb3b7e8c9895cfdc6da",
+      "gt_char_count_raw": 500,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    },
+    {
+      "doc_id": "pub-gx-yibiatong-phase2-2026",
+      "page": 3,
+      "page_type": "table",
+      "pdf_sha256": "",
+      "gt_text_sha256": "5996d81165d9f37f68ee9345cdbe2c3b1a655528023f706d92653001a714ccf4",
+      "gt_char_count_raw": 956,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    },
+    {
+      "doc_id": "pub-gx-nonggang-patrol-2026",
+      "page": 2,
+      "page_type": "body",
+      "pdf_sha256": "",
+      "gt_text_sha256": "f853e3bdf22bd3775281b53620aebbe4d82481b1c2c803992a292ccd6e157947",
+      "gt_char_count_raw": 919,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    },
+    {
+      "doc_id": "pub-gx-nonggang-patrol-2026",
+      "page": 3,
+      "page_type": "body",
+      "pdf_sha256": "",
+      "gt_text_sha256": "e273e101bc4d9f27291fea08306379f219ad0c21e968615e2cc726fe2fcf612a",
+      "gt_char_count_raw": 772,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    },
+    {
+      "doc_id": "pub-gx-nonggang-patrol-2026",
+      "page": 9,
+      "page_type": "table",
+      "pdf_sha256": "",
+      "gt_text_sha256": "4a9db5230d9d0d36ee18272691a0ff143460761625ea08f824523c177ac304e8",
+      "gt_char_count_raw": 746,
+      "document_path": null,
+      "source_url": null,
+      "origin": null
+    }
+  ],
+  "integrity": {
+    "expected_page_count": 54,
+    "expected_cer_denominator_chars": 29835,
+    "pages_never_dropped_from_denominator": true
+  }
+}

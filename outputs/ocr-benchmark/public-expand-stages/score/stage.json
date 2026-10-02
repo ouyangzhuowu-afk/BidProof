@@ -1,0 +1,6 @@
+{
+  "stage": "score",
+  "generated_at": "2026-10-02T13:17:25.390872+00:00",
+  "product_pass": false,
+  "note": "Split stage output dir. Canonical fixtures remain under work/eval/fixtures/."
+}

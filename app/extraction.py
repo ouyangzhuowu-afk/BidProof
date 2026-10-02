@@ -325,13 +325,16 @@ def extract_pdf(path: Path, ocr_adapter: OCRAdapter | None = None) -> list[dict[
                         )
                     except Exception:  # noqa: BLE001 — metrics must never break extraction
                         logger.debug("ocr_metric_record_failed")
-                except OCRUnavailable:
+                except OCRUnavailable as exc:
                     page_data["ocr_status"] = "FAILED"
                     page_data["ocr_error"] = "OCR_UNAVAILABLE"
+                    page_data["failure_reason"] = f"ocr_unavailable:{type(exc).__name__}"
                     page_data["low_text_confidence"] = True
                     page_data["ocr_egress"] = "none"
+                    # Page remains in any evaluation denominator; do not drop it.
             elif page_data["ocr_required"]:
                 page_data["ocr_status"] = "DISABLED"
+                page_data["failure_reason"] = "ocr_disabled"
             pages.append(page_data)
     return pages
 

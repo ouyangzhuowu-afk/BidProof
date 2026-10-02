@@ -1,0 +1,410 @@
+{
+  "provider": "qwen-vl-ocr",
+  "status": "APPROVED_NOT_RUN",
+  "egress_sends": 0,
+  "egress_decision": {
+    "allowed": false,
+    "reason": "egress_disabled",
+    "mode": "never",
+    "approval_id": "",
+    "endpoint_host": ""
+  },
+  "policy": {
+    "egress_allowed_flag": false,
+    "egress_mode": "never",
+    "approval_present": false,
+    "approval_id": "",
+    "approval_expires_at": "",
+    "doc_pin_set": false,
+    "api_key_present": false,
+    "allowed_hosts": [
+      "dashscope-intl.aliyuncs.com",
+      "dashscope.aliyuncs.com",
+      "ocr-vpc.cn-beijing.aliyuncs.com",
+      "ocr-vpc.cn-hangzhou.aliyuncs.com",
+      "ocr-vpc.cn-shanghai.aliyuncs.com"
+    ]
+  },
+  "page_failures": [
+    {
+      "doc_id": "fixture-001",
+      "page": 2,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    },
+    {
+      "doc_id": "fixture-001",
+      "page": 3,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    },
+    {
+      "doc_id": "fixture-001",
+      "page": 14,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    },
+    {
+      "doc_id": "fixture-001",
+      "page": 32,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    },
+    {
+      "doc_id": "fixture-002",
+      "page": 1,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    },
+    {
+      "doc_id": "fixture-002",
+      "page": 3,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    },
+    {
+      "doc_id": "fixture-002",
+      "page": 6,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    },
+    {
+      "doc_id": "fixture-002",
+      "page": 33,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    },
+    {
+      "doc_id": "fixture-002",
+      "page": 37,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    },
+    {
+      "doc_id": "fixture-003",
+      "page": 1,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    },
+    {
+      "doc_id": "fixture-003",
+      "page": 4,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    },
+    {
+      "doc_id": "fixture-003",
+      "page": 5,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    },
+    {
+      "doc_id": "fixture-003",
+      "page": 9,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    },
+    {
+      "doc_id": "fixture-003",
+      "page": 29,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    },
+    {
+      "doc_id": "fixture-003",
+      "page": 35,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    },
+    {
+      "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
+      "page": 1,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    },
+    {
+      "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
+      "page": 3,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    },
+    {
+      "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
+      "page": 4,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    },
+    {
+      "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
+      "page": 51,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    },
+    {
+      "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
+      "page": 73,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    },
+    {
+      "doc_id": "pub-gx-nanning-vascular-doppler",
+      "page": 3,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    },
+    {
+      "doc_id": "pub-gx-nanning-vascular-doppler",
+      "page": 16,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    },
+    {
+      "doc_id": "pub-gx-nanning-vascular-doppler",
+      "page": 17,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    },
+    {
+      "doc_id": "pub-gx-qintang-flow-cytometer",
+      "page": 1,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    },
+    {
+      "doc_id": "pub-gx-qintang-flow-cytometer",
+      "page": 3,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    },
+    {
+      "doc_id": "pub-gx-qintang-flow-cytometer",
+      "page": 4,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    },
+    {
+      "doc_id": "pub-gx-ventilator-monitors",
+      "page": 3,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    },
+    {
+      "doc_id": "pub-gx-ventilator-monitors",
+      "page": 4,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    },
+    {
+      "doc_id": "pub-gx-ventilator-monitors",
+      "page": 5,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    },
+    {
+      "doc_id": "pub-gx-ventilator-monitors",
+      "page": 15,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    },
+    {
+      "doc_id": "pub-gx-youjiang-ultrasound",
+      "page": 2,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    },
+    {
+      "doc_id": "pub-gx-youjiang-ultrasound",
+      "page": 4,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    },
+    {
+      "doc_id": "pub-gx-youjiang-ultrasound",
+      "page": 5,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    },
+    {
+      "doc_id": "pub-gx-youjiang-ultrasound",
+      "page": 6,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    },
+    {
+      "doc_id": "pub-gx-tianlin-yuegui-devices-2026",
+      "page": 1,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    },
+    {
+      "doc_id": "pub-gx-tianlin-yuegui-devices-2026",
+      "page": 2,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    },
+    {
+      "doc_id": "pub-gx-tianlin-yuegui-devices-2026",
+      "page": 8,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    },
+    {
+      "doc_id": "pub-gx-nanxishan-dr-mammo-2026",
+      "page": 1,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    },
+    {
+      "doc_id": "pub-gx-nanxishan-dr-mammo-2026",
+      "page": 2,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    },
+    {
+      "doc_id": "pub-gx-nanxishan-dr-mammo-2026",
+      "page": 9,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    },
+    {
+      "doc_id": "pub-gx-minzu-ultrasound-2026",
+      "page": 1,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    },
+    {
+      "doc_id": "pub-gx-minzu-ultrasound-2026",
+      "page": 2,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    },
+    {
+      "doc_id": "pub-gx-minzu-ultrasound-2026",
+      "page": 6,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    },
+    {
+      "doc_id": "pub-gx-hechi-mine-safety-2026",
+      "page": 1,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    },
+    {
+      "doc_id": "pub-gx-hechi-mine-safety-2026",
+      "page": 2,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    },
+    {
+      "doc_id": "pub-gx-hechi-mine-safety-2026",
+      "page": 3,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    },
+    {
+      "doc_id": "pub-gx-info-center-compute-2026",
+      "page": 1,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    },
+    {
+      "doc_id": "pub-gx-info-center-compute-2026",
+      "page": 2,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    },
+    {
+      "doc_id": "pub-gx-info-center-compute-2026",
+      "page": 5,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    },
+    {
+      "doc_id": "pub-gx-yibiatong-phase2-2026",
+      "page": 2,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    },
+    {
+      "doc_id": "pub-gx-yibiatong-phase2-2026",
+      "page": 3,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    },
+    {
+      "doc_id": "pub-gx-nonggang-patrol-2026",
+      "page": 2,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    },
+    {
+      "doc_id": "pub-gx-nonggang-patrol-2026",
+      "page": 3,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    },
+    {
+      "doc_id": "pub-gx-nonggang-patrol-2026",
+      "page": 9,
+      "provider": "qwen-vl-ocr",
+      "failure_reason": "not_sent:egress_disabled",
+      "kept_in_denominator": true
+    }
+  ],
+  "note": "APPROVED_NOT_RUN: zero cloud HTTP sends. Set BIDPROOF_OCR_EGRESS_ALLOWED=1, BIDPROOF_OCR_EGRESS_MODE=redacted_only|vpc_private, BIDPROOF_OCR_EGRESS_APPROVAL=T1-JOE-CLOUD-COMPARE-2026-10-02 (or another T1-/T2- token), and QWEN_OCR_API_KEY before a live compare.",
+  "scored": null
+}

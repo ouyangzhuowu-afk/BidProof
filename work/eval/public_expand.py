@@ -48,6 +48,13 @@ FIXTURE_DIR = ROOT / "work" / "eval" / "fixtures"
 OUT_DIR = ROOT / "outputs" / "ocr-benchmark"
 REPORT_JSON = OUT_DIR / "public-expand-report.json"
 REPORT_MD = OUT_DIR / "public-expand-report.md"
+# Separated stage outputs (build-gt / predict / score / report). Fixtures stay
+# under work/eval/fixtures/; these dirs hold stage snapshots only.
+STAGE_ROOT = OUT_DIR / "public-expand-stages"
+STAGE_GT_DIR = STAGE_ROOT / "gt"
+STAGE_PREDICT_DIR = STAGE_ROOT / "predict"
+STAGE_SCORE_DIR = STAGE_ROOT / "score"
+STAGE_REPORT_DIR = STAGE_ROOT / "report"
 FORBIDDEN_OUTPUT_TOKENS = ("pilot-ledger", "icp-outreach")
 FORBIDDEN_PATH_TOKENS = ("training-corpus", "case-studies", "source2-fujian")
 
@@ -1233,6 +1240,52 @@ def _run_rapidocr(png: bytes) -> list[dict[str, Any]]:
 _run_rapidocr.engine = None  # type: ignore[attr-defined]
 
 
+def _ocr_page_with_reason(page: Any) -> tuple[list[dict[str, Any]], str | None]:
+    """OCR a page; on failure return empty lines + reason (page stays in denom)."""
+    try:
+        lines = _run_rapidocr(_render(page))
+        if not lines:
+            return [], "ocr_empty_text"
+        return lines, None
+    except Exception as exc:  # noqa: BLE001 — keep page; record reason
+        return [], f"ocr_error:{type(exc).__name__}"
+
+
+def _write_stage_snapshot(stage_dir: Path, *, label: str, payload: dict[str, Any]) -> None:
+    assert_safe_output(stage_dir)
+    stage_dir.mkdir(parents=True, exist_ok=True)
+    stamp = {
+        "stage": label,
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "product_pass": False,
+        **payload,
+    }
+    (stage_dir / "stage.json").write_text(
+        json.dumps(stamp, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+
+
+def copy_fixtures_to_stage(stage_dir: Path) -> None:
+    """Copy current GT/hyp fixtures into a stage directory (separate from fixtures/)."""
+    assert_safe_output(stage_dir)
+    stage_dir.mkdir(parents=True, exist_ok=True)
+    mapping = {
+        "pages.jsonl": CER_GT_PATH,
+        "hypotheses.jsonl": CER_HYP_PATH,
+        "teds_gt.jsonl": TEDS_GT_PATH,
+        "teds_hypotheses.jsonl": TEDS_HYP_PATH,
+        "key_field_gt.jsonl": KF_GT_PATH,
+        "key_field_hypotheses.jsonl": KF_HYP_PATH,
+    }
+    copied: dict[str, str] = {}
+    for name, source in mapping.items():
+        if source.is_file():
+            dest = stage_dir / name
+            dest.write_bytes(source.read_bytes())
+            copied[name] = dest.as_posix()
+    _write_stage_snapshot(stage_dir, label=stage_dir.name, payload={"copied_fixtures": copied})
+
+
 def _render(page: Any, scale: float = 1.5) -> bytes:
     import fitz
 
@@ -1279,8 +1332,8 @@ def build_samples(manifest: dict[str, Any]) -> dict[str, Any]:
     kf_hyp: list[dict[str, Any]] = []
     not_scored: list[dict[str, Any]] = []
 
-    def ocr_page(page: Any) -> list[dict[str, Any]]:
-        return _run_rapidocr(_render(page))
+    def ocr_page(page: Any) -> tuple[list[dict[str, Any]], str | None]:
+        return _ocr_page_with_reason(page)
 
     def add_page(
         row: dict[str, Any],
@@ -1333,7 +1386,7 @@ def build_samples(manifest: dict[str, Any]) -> dict[str, Any]:
                 }
             )
             return
-        lines = ocr_page(page)
+        lines, ocr_failure = ocr_page(page)
         hyp_text = redact_text("\n".join(item["text"] for item in lines))
         prov = _provenance(row, fetched_at)
         cer_gt.append(
@@ -1351,16 +1404,18 @@ def build_samples(manifest: dict[str, Any]) -> dict[str, Any]:
                 **prov,
             }
         )
-        cer_hyp.append(
-            {
-                "doc_id": row["document_id"],
-                "page": page_number,
-                "text_hyp": hyp_text,
-                "lines_hyp": [redact_text(str(item["text"])) for item in lines],
-                "hypothesis_source": "rapidocr_onnxruntime",
-                "cohort": cohort,
-            }
-        )
+        hyp_row: dict[str, Any] = {
+            "doc_id": row["document_id"],
+            "page": page_number,
+            "text_hyp": hyp_text,
+            "lines_hyp": [redact_text(str(item["text"])) for item in lines],
+            "hypothesis_source": "rapidocr_onnxruntime",
+            "cohort": cohort,
+            "kept_in_denominator": True,
+        }
+        if ocr_failure:
+            hyp_row["failure_reason"] = ocr_failure
+        cer_hyp.append(hyp_row)
         labeled = fields_from_text(text)
         ocr_fields = fields_from_text(hyp_text)
         if labeled and cohort == "new_public":
@@ -1502,7 +1557,7 @@ def build_samples(manifest: dict[str, Any]) -> dict[str, Any]:
                     }
                 )
                 continue
-            lines = ocr_page(page)
+            lines, ocr_failure = ocr_page(page)
             hyp_text = redact_text("\n".join(item["text"] for item in lines))
             prov = _provenance(stamped, fetched_at)
             prov["cohort"] = "prior_public_ocr"
@@ -1520,16 +1575,18 @@ def build_samples(manifest: dict[str, Any]) -> dict[str, Any]:
                     **prov,
                 }
             )
-            cer_hyp.append(
-                {
-                    "doc_id": doc_id,
-                    "page": page_number,
-                    "text_hyp": hyp_text,
-                    "lines_hyp": [redact_text(str(item["text"])) for item in lines],
-                    "hypothesis_source": "rapidocr_onnxruntime",
-                    "cohort": "prior_public_ocr",
-                }
-            )
+            prior_hyp: dict[str, Any] = {
+                "doc_id": doc_id,
+                "page": page_number,
+                "text_hyp": hyp_text,
+                "lines_hyp": [redact_text(str(item["text"])) for item in lines],
+                "hypothesis_source": "rapidocr_onnxruntime",
+                "cohort": "prior_public_ocr",
+                "kept_in_denominator": True,
+            }
+            if ocr_failure:
+                prior_hyp["failure_reason"] = ocr_failure
+            cer_hyp.append(prior_hyp)
             labeled = hand_fields.get((doc_id, page_number)) or []
             if labeled:
                 ocr_norm = _norm(hyp_text)
@@ -1717,38 +1774,93 @@ def refresh_manifest_not_scored(rows: list[dict[str, Any]]) -> None:
     MANIFEST.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
+def _run_fetch_and_build_samples(*, delay: float) -> dict[str, Any]:
+    candidates = [
+        row
+        for row in load_candidates(CANDIDATES)
+        if str(row.get("leaf_id") or "") == LEAF_ID and not is_forbidden_source(str(row.get("source_url") or ""))
+    ]
+    run_collection(
+        candidates=candidates,
+        manifest_path=MANIFEST,
+        pdfs_dir=PDFS,
+        delay_seconds=delay,
+        leaf_id=LEAF_ID,
+        extra_blocked_sha256={item for item in training_corpus_sha256() if not item.startswith("path:")},
+    )
+    notices = fetch_html_notices()
+    refresh_manifest_not_scored(notices)
+    summary = build_samples(load_manifest(MANIFEST))
+    sidecar = OUT_DIR / "public-expand-not-scored.json"
+    current = json.loads(sidecar.read_text(encoding="utf-8")) if sidecar.is_file() else []
+    if not isinstance(current, list):
+        current = []
+    sidecar.write_text(json.dumps(current + notices, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    return summary
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Expand and score the public OCR eval set.")
-    parser.add_argument("--build", action="store_true", help="Fetch new PDFs, OCR them, write fixtures and the report.")
-    parser.add_argument("--report", action="store_true", help="Rebuild the report from fixtures already on disk.")
+    parser.add_argument("--build", action="store_true", help="Fetch + OCR + fixtures + report (all stages).")
+    parser.add_argument("--build-gt", action="store_true", help="Stage: fetch PDFs and write GT fixtures (+ local OCR hyp).")
+    parser.add_argument("--predict", action="store_true", help="Stage: snapshot hypotheses into predict/ (separate dir).")
+    parser.add_argument("--score", action="store_true", help="Stage: score fixtures into score/.")
+    parser.add_argument("--report", action="store_true", help="Stage: rebuild top-level + report/ markdown+json.")
     parser.add_argument("--delay", type=float, default=2.0)
     args = parser.parse_args(argv)
     try:
-        if args.build:
-            candidates = [
-                row
-                for row in load_candidates(CANDIDATES)
-                if str(row.get("leaf_id") or "") == LEAF_ID and not is_forbidden_source(str(row.get("source_url") or ""))
-            ]
-            run_collection(
-                candidates=candidates,
-                manifest_path=MANIFEST,
-                pdfs_dir=PDFS,
-                delay_seconds=args.delay,
-                leaf_id=LEAF_ID,
-                extra_blocked_sha256={item for item in training_corpus_sha256() if not item.startswith("path:")},
-            )
-            notices = fetch_html_notices()
-            refresh_manifest_not_scored(notices)
-            build_samples(load_manifest(MANIFEST))
-            sidecar = OUT_DIR / "public-expand-not-scored.json"
-            current = json.loads(sidecar.read_text(encoding="utf-8")) if sidecar.is_file() else []
-            if not isinstance(current, list):
-                current = []
-            sidecar.write_text(json.dumps(current + notices, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-        if args.build or args.report:
+        ran = False
+        if args.build or args.build_gt:
+            summary = _run_fetch_and_build_samples(delay=args.delay)
+            copy_fixtures_to_stage(STAGE_GT_DIR)
+            _write_stage_snapshot(STAGE_GT_DIR, label="gt", payload={"build_summary": summary})
+            ran = True
+        if args.build or args.predict:
+            # Predict stage is the OCR hypothesis snapshot. Live rebuild already
+            # wrote fixtures; this copies them into a separate predict/ dir so
+            # score/report never overwrite the predict artifact in-place.
+            if not CER_HYP_PATH.is_file() and not (args.build or args.build_gt):
+                raise FileNotFoundError("hypotheses missing; run --build-gt or --build first")
+            copy_fixtures_to_stage(STAGE_PREDICT_DIR)
+            ran = True
+        if args.build or args.score or args.report:
             report = build_report_from_fixtures()
-            write_reports(report)
+            if args.build or args.score:
+                STAGE_SCORE_DIR.mkdir(parents=True, exist_ok=True)
+                (STAGE_SCORE_DIR / "score.json").write_text(
+                    json.dumps(
+                        {
+                            "gate": report["gate"],
+                            "expanded": _compact(report["expanded"]),
+                            "old_set": _compact(report["old_set"]),
+                            "product_pass": False,
+                            "generated_at": report["generated_at"],
+                        },
+                        ensure_ascii=False,
+                        indent=2,
+                    )
+                    + "\n",
+                    encoding="utf-8",
+                )
+                _write_stage_snapshot(
+                    STAGE_SCORE_DIR,
+                    label="score",
+                    payload={"gate": report["gate"], "product_pass": False},
+                )
+            if args.build or args.report:
+                write_reports(report)
+                STAGE_REPORT_DIR.mkdir(parents=True, exist_ok=True)
+                (STAGE_REPORT_DIR / "public-expand-report.json").write_text(
+                    REPORT_JSON.read_text(encoding="utf-8"), encoding="utf-8"
+                )
+                (STAGE_REPORT_DIR / "public-expand-report.md").write_text(
+                    REPORT_MD.read_text(encoding="utf-8"), encoding="utf-8"
+                )
+                _write_stage_snapshot(
+                    STAGE_REPORT_DIR,
+                    label="report",
+                    payload={"gate": report["gate"], "product_pass": False},
+                )
             print(
                 json.dumps(
                     {
@@ -1768,6 +1880,12 @@ def main(argv: list[str] | None = None) -> int:
                         },
                         "new_completed_documents": report["new_completed_documents"],
                         "new_not_scored": report["new_not_scored"],
+                        "stages": {
+                            "gt": STAGE_GT_DIR.as_posix(),
+                            "predict": STAGE_PREDICT_DIR.as_posix(),
+                            "score": STAGE_SCORE_DIR.as_posix(),
+                            "report": STAGE_REPORT_DIR.as_posix(),
+                        },
                         "product_pass": False,
                     },
                     ensure_ascii=False,
@@ -1775,6 +1893,9 @@ def main(argv: list[str] | None = None) -> int:
                 )
             )
             return 0 if report["gate"] == "GATE_PASS" else 2
+        if ran:
+            print(json.dumps({"ok": True, "product_pass": False}, ensure_ascii=False))
+            return 0
         parser.print_help()
         return 1
     except Exception as exc:  # noqa: BLE001
