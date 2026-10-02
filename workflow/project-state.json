@@ -829,6 +829,23 @@
       "scope_detail": "pilot readiness scaffolding only",
       "pilot_scan_results": "Pilot scan results are always NEEDS_REVIEW and cannot count as accuracy acceptance.",
       "does_not_supersede": "D-SANDBOX-2026-09-16"
+    },
+    {
+      "id": "D-OCR-EGRESS-APPROVED-2026-10-02",
+      "decision": "Joe approved controlled 54-page cloud OCR compare under written T1/T2 egress policy. Purpose approval only — not blanket egress enablement.",
+      "reason": "Need fair local vs cloud side-by-side on the frozen public-expand cohort (54 pages, CER denom 29835) to decide next OCR investment. Runtime still requires switch + mode + T1-/T2- approval token + API key + host allow-list before any HTTP send.",
+      "date": "2026-10-02",
+      "decided_by": "Joe",
+      "scope": "controlled-cloud-compare",
+      "scope_detail": "54-page public-expand cohort compare; APPROVED_NOT_RUN with zero sends until keys are set",
+      "evidence": "docs/ocr/d-ocr-egress-approved-2026-10-02.md",
+      "does_not_claim": [
+        "OCR GATE_PASS",
+        "product PASS",
+        "T-005 unblock"
+      ],
+      "mainline_baseline": "a99014f3f265",
+      "does_not_supersede": "D-SANDBOX-2026-09-16"
     }
   ],
   "open_questions": [
@@ -850,7 +867,8 @@
       "id": "Q-SANDBOX-1",
       "question": "沙箱 OCR egress 密钥与 BIDPROOF_OCR_EGRESS_ALLOWED 由谁持有/如何轮换？",
       "status": "open",
-      "owner": "Joe"
+      "owner": "Joe",
+      "note": "D-OCR-EGRESS-APPROVED-2026-10-02 records purpose approval; runtime keys still required for live send."
     },
     {
       "id": "Q-HANDOVER-1",
@@ -1379,7 +1397,7 @@
     ],
     "note": "Do not write demo/test rows into pilot/ICP ledgers. Do not claim business TARGET_MET. Pilot scan results are always NEEDS_REVIEW and cannot count as accuracy acceptance. On real input: copy template → fill → pilot_ledger/icp_ledger --row-json. Readiness: uv run python -m work.pilot_readiness --json."
   },
-  "updated_at": "2026-09-29T07:20:00+00:00",
+  "updated_at": "2026-10-02T13:00:00+00:00",
   "sandbox_roadmap": {
     "locked_at": "2026-09-16",
     "gates": {
