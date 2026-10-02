@@ -1,20 +1,21 @@
 """Resumable local OCR batch runner for scanned upload PDFs.
 
-The runner is intentionally opt-in. Without BID_OCR_PROVIDER=qwen-vl-ocr and
-QWEN_OCR_API_KEY it emits a plan and performs no network request.
+Local-only by default. Cloud Qwen is sealed behind the dual-check egress policy
+(app.egress_policy + get_cloud_ocr_adapter). This script never selects cloud as
+the primary adapter; without a local provider it emits a plan and performs no
+network request.
 """
 
 from __future__ import annotations
 
 import argparse
 import json
-import os
 import tempfile
 from pathlib import Path
 
 import fitz
 
-from app.ocr import OCRUnavailable, get_ocr_adapter
+from app.ocr import OCRUnavailable, get_local_ocr_adapter, get_ocr_adapter
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -29,7 +30,9 @@ def _atomic_write(path: Path, payload: dict) -> None:
 
 
 def run(source: Path, output_dir: Path, limit: int | None = None, retry_failed: bool = False) -> dict:
-    adapter = get_ocr_adapter()
+    adapter = get_local_ocr_adapter()
+    if not adapter.enabled:
+        adapter = get_ocr_adapter()
     output_dir.mkdir(parents=True, exist_ok=True)
     document = fitz.open(source)
     pages = [index + 1 for index, page in enumerate(document) if not (page.get_text("text") or "").strip()]
@@ -43,14 +46,17 @@ def run(source: Path, output_dir: Path, limit: int | None = None, retry_failed: 
         "source": source_label,
         "pages_requiring_ocr": pages,
         "adapter_enabled": bool(adapter.enabled),
-        "provider": "qwen-vl-ocr" if adapter.enabled else "disabled",
+        "provider": adapter.__class__.__name__ if adapter.enabled else "disabled",
         "completed": [],
         "failed": [],
         "skipped_existing": [],
         "retried_failed": [],
+        "egress": "local_only",
     }
     if not adapter.enabled:
-        summary["blocked_reason"] = "OCR provider is disabled or QWEN_OCR_API_KEY is absent"
+        summary["blocked_reason"] = (
+            "Local OCR provider is disabled; cloud egress is not used by this script"
+        )
         _atomic_write(output_dir / "batch-summary.json", summary)
         document.close()
         return summary
@@ -83,7 +89,7 @@ def run(source: Path, output_dir: Path, limit: int | None = None, retry_failed: 
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Run resumable OCR for a scanned upload PDF")
+    parser = argparse.ArgumentParser(description="Local-only OCR batch runner (no unapproved cloud egress)")
     parser.add_argument("source", type=Path)
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--limit", type=int, default=None, help="Limit pages for a smoke run")

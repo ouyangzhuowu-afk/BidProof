@@ -34,6 +34,8 @@ def test_should_escalate_requires_egress_flags(monkeypatch):
 def test_should_escalate_when_t1_enabled_and_low_confidence(monkeypatch):
     monkeypatch.setenv("BIDPROOF_OCR_EGRESS_ALLOWED", "1")
     monkeypatch.setenv("BIDPROOF_OCR_EGRESS_MODE", "redacted_only")
+    monkeypatch.setenv("BIDPROOF_OCR_EGRESS_APPROVAL", "T1-JOE-WRITTEN-APPROVAL")
+    monkeypatch.setenv("QWEN_OCR_API_KEY", "secret")
     risk = classify_page_text("目录 第一章 磋商须知")
     ok, reason = should_escalate_to_cloud(local_text="x" * 20, local_confidence=0.3, risk=risk)
     assert ok is True
@@ -57,6 +59,7 @@ def test_redact_masks_phone_line_bbox():
 def test_cloud_adapter_disabled_without_t1_mode(monkeypatch):
     monkeypatch.setenv("BIDPROOF_OCR_EGRESS_ALLOWED", "1")
     monkeypatch.setenv("BIDPROOF_OCR_EGRESS_MODE", "never")
+    monkeypatch.setenv("BIDPROOF_OCR_EGRESS_APPROVAL", "T1-JOE-WRITTEN-APPROVAL")
     monkeypatch.setenv("BID_OCR_PROVIDER", "disabled")
     monkeypatch.setenv("QWEN_OCR_API_KEY", "secret")
     assert get_cloud_ocr_adapter().enabled is False
@@ -65,6 +68,7 @@ def test_cloud_adapter_disabled_without_t1_mode(monkeypatch):
 def test_t1_escalation_sends_only_redacted_image(monkeypatch, tmp_path):
     monkeypatch.setenv("BIDPROOF_OCR_EGRESS_ALLOWED", "1")
     monkeypatch.setenv("BIDPROOF_OCR_EGRESS_MODE", "redacted_only")
+    monkeypatch.setenv("BIDPROOF_OCR_EGRESS_APPROVAL", "T1-JOE-WRITTEN-APPROVAL")
     monkeypatch.setenv("BID_OCR_PROVIDER", "rapid")
     monkeypatch.setenv("BID_OCR_CLOUD_PROVIDER", "qwen")
     monkeypatch.setenv("QWEN_OCR_API_KEY", "secret")
@@ -112,6 +116,8 @@ def test_t1_escalation_sends_only_redacted_image(monkeypatch, tmp_path):
 def test_t1_blocks_license_page_from_cloud(monkeypatch, tmp_path):
     monkeypatch.setenv("BIDPROOF_OCR_EGRESS_ALLOWED", "1")
     monkeypatch.setenv("BIDPROOF_OCR_EGRESS_MODE", "redacted_only")
+    monkeypatch.setenv("BIDPROOF_OCR_EGRESS_APPROVAL", "T1-JOE-WRITTEN-APPROVAL")
+    monkeypatch.setenv("QWEN_OCR_API_KEY", "secret")
     monkeypatch.setenv("BID_OCR_TILE_ENABLED", "0")
 
     class LocalAdapter:
@@ -122,6 +128,7 @@ def test_t1_blocks_license_page_from_cloud(monkeypatch, tmp_path):
                 text="请提供医疗器械经营许可证复印件并加盖公章",
                 confidence=0.2,
                 provider="rapidocr",
+                lines=(OCRLine(text="请提供医疗器械经营许可证复印件并加盖公章", confidence=0.2, bbox=(10, 40, 200, 60)),),
             )
 
     calls = {"n": 0}

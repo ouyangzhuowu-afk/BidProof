@@ -12,5 +12,11 @@
   "elapsed_minutes": "",
   "payment_signal": "",
   "payment_note": "",
-  "evidence_boundary": "真实企业输入；待人工确认；不得用 demo 或历史测试任务填充"
+  "evidence_boundary": "真实企业输入；待人工确认；不得用 demo 或历史测试任务填充",
+  "enterprise_source": "enterprise_response",
+  "enterprise_material_sha256": "",
+  "enterprise_task_ref": "",
+  "human_feedback_text": "",
+  "human_feedback_author": "",
+  "human_feedback_at": ""
 }

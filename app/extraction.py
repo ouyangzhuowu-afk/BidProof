@@ -17,7 +17,7 @@ from .ocr import (
 )
 from .ocr_privacy import (
     REDACTION_VERSION,
-    classify_page_text,
+    classify_page_for_egress,
     egress_allowed_for_cloud,
     egress_mode,
     merge_ocr_texts,
@@ -159,7 +159,11 @@ def _maybe_escalate_cloud(
         "ocr_escalation_reason": "",
         "ocr_page_types": [],
     }
-    risk = classify_page_text(local.text)
+    risk = classify_page_for_egress(
+        local_text=local.text,
+        lines=local.lines,
+        ocr_available=True,
+    )
     meta["ocr_page_types"] = list(risk.page_types)
     escalate, reason = should_escalate_to_cloud(
         local_text=local.text,
@@ -221,14 +225,15 @@ def extract_pdf(path: Path, ocr_adapter: OCRAdapter | None = None) -> list[dict[
         raise ExtractionError("PyMuPDF is required to extract PDF text") from exc
 
     pages: list[dict[str, Any]] = []
+    # Local-only default. Cloud escalation is a separate gated path after redaction.
     if ocr_adapter is not None:
         adapter = ocr_adapter
-    elif egress_allowed_for_cloud():
+    else:
         adapter = get_local_ocr_adapter()
         if not adapter.enabled:
             adapter = get_ocr_adapter()
-    else:
-        adapter = get_ocr_adapter()
+        # Never fall back to an unapproved cloud primary from get_ocr_adapter —
+        # that factory is local-only by policy.
     try:
         document = fitz.open(path)
     except Exception as exc:

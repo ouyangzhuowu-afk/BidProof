@@ -77,9 +77,14 @@ def egress_mode() -> str:
 
 
 def egress_allowed_for_cloud() -> bool:
-    """Master switch still required; mode selects how strictly we scrub."""
-    flag = os.getenv("BIDPROOF_OCR_EGRESS_ALLOWED", "0").strip().lower() in {"1", "true", "yes"}
-    return flag and egress_mode() in {"redacted_only", "vpc_private"}
+    """Master switch still required; mode selects how strictly we scrub.
+
+    Defers to the dual-check egress policy (approval + auth + mode). Doc pin is
+    evaluated at send time when a fingerprint is available.
+    """
+    from .egress_policy import cloud_egress_permitted
+
+    return cloud_egress_permitted()
 
 
 def escalate_min_confidence() -> float:
@@ -104,6 +109,37 @@ def classify_page_text(text: str) -> PageRisk:
     if not risk.page_types:
         risk.page_types.append("body")
     return risk
+
+
+def classify_page_for_egress(
+    *,
+    local_text: str,
+    lines: list[OCRLine] | tuple[OCRLine, ...] | None = None,
+    ocr_available: bool = True,
+) -> PageRisk:
+    """Classify for cloud escalation. Missing OCR or required bbox → UNKNOWN (block)."""
+    if not ocr_available:
+        return PageRisk(
+            page_types=["UNKNOWN"],
+            block_escalation=True,
+            block_reasons=["ocr_missing"],
+        )
+    line_list = list(lines or ())
+    # When OCR produced text but no line geometry, escalate risk is UNKNOWN.
+    if (local_text or "").strip() and not line_list:
+        return PageRisk(
+            page_types=["UNKNOWN"],
+            block_escalation=True,
+            block_reasons=["ocr_bbox_missing"],
+        )
+    if line_list and any(line_needs_mask(line.text) and line.bbox is None for line in line_list):
+        return PageRisk(
+            page_types=["UNKNOWN"],
+            block_escalation=True,
+            block_reasons=["ocr_bbox_missing"],
+            escalate_hints=[],
+        )
+    return classify_page_text(local_text)
 
 
 def should_escalate_to_cloud(

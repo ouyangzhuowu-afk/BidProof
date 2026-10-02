@@ -14,6 +14,21 @@ from app.ocr import (
     sanitize_ocr_text,
 )
 
+def _enable_qwen_egress(monkeypatch):
+    monkeypatch.setenv("BIDPROOF_OCR_EGRESS_ALLOWED", "1")
+    monkeypatch.setenv("BIDPROOF_OCR_EGRESS_MODE", "redacted_only")
+    monkeypatch.setenv("BIDPROOF_OCR_EGRESS_APPROVAL", "T1-JOE-WRITTEN-APPROVAL")
+    monkeypatch.setenv("QWEN_OCR_API_KEY", "secret")
+
+
+def _patch_opener(monkeypatch, fake_open):
+    monkeypatch.setattr(
+        "urllib.request.build_opener",
+        lambda *a, **k: type("O", (), {"open": staticmethod(fake_open)})(),
+    )
+
+
+
 
 def test_ocr_is_disabled_without_provider_or_key(monkeypatch):
     monkeypatch.delenv("BID_OCR_PROVIDER", raising=False)
@@ -58,6 +73,8 @@ def test_enabled_adapter_failure_is_fail_closed(tmp_path):
 
 
 def test_qwen_adapter_parses_openai_compatible_response(monkeypatch):
+    _enable_qwen_egress(monkeypatch)
+    monkeypatch.setenv("BIDPROOF_OCR_EGRESS_ALLOWED_HOSTS", "example.invalid")
     seen = {}
 
     class Response:
@@ -70,13 +87,13 @@ def test_qwen_adapter_parses_openai_compatible_response(monkeypatch):
         def read(self):
             return json.dumps({"choices": [{"message": {"content": "识别结果"}}]}).encode()
 
-    def fake_urlopen(request, timeout):
+    def fake_urlopen(request, timeout=None):
         seen["authorization"] = request.headers["Authorization"]
         seen["timeout"] = timeout
         seen["payload"] = json.loads(request.data.decode())
         return Response()
 
-    monkeypatch.setattr("urllib.request.urlopen", fake_urlopen)
+    _patch_opener(monkeypatch, fake_urlopen)
     adapter = QwenVLOCRAdapter("secret", endpoint="https://example.invalid/ocr", timeout_seconds=5)
 
     result = adapter.extract(b"png", 2)
@@ -93,6 +110,8 @@ def test_sanitize_ocr_text_strips_html_fences():
 
 
 def test_qwen_adapter_marks_html_dump_low_confidence(monkeypatch):
+    _enable_qwen_egress(monkeypatch)
+    monkeypatch.setenv("BIDPROOF_OCR_EGRESS_ALLOWED_HOSTS", "example.invalid")
     class Response:
         def __enter__(self):
             return self
@@ -114,7 +133,7 @@ def test_qwen_adapter_marks_html_dump_low_confidence(monkeypatch):
             }
             return json.dumps(body).encode()
 
-    monkeypatch.setattr("urllib.request.urlopen", lambda *a, **k: Response())
+    _patch_opener(monkeypatch, lambda *a, **k: Response())
     adapter = QwenVLOCRAdapter("secret", endpoint="https://example.invalid/ocr")
     result = adapter.extract(b"png", 1)
     assert "条目0" in result.text
@@ -123,6 +142,8 @@ def test_qwen_adapter_marks_html_dump_low_confidence(monkeypatch):
 
 
 def test_qwen_adapter_retries_transient_errors(monkeypatch):
+    _enable_qwen_egress(monkeypatch)
+    monkeypatch.setenv("BIDPROOF_OCR_EGRESS_ALLOWED_HOSTS", "example.invalid")
     calls = {"n": 0}
 
     class Response:
@@ -135,13 +156,13 @@ def test_qwen_adapter_retries_transient_errors(monkeypatch):
         def read(self):
             return json.dumps({"choices": [{"message": {"content": "重试成功"}}]}).encode()
 
-    def fake_urlopen(request, timeout):
+    def fake_urlopen(request, timeout=None):
         calls["n"] += 1
         if calls["n"] < 2:
             raise TimeoutError("temporary")
         return Response()
 
-    monkeypatch.setattr("urllib.request.urlopen", fake_urlopen)
+    _patch_opener(monkeypatch, fake_urlopen)
     monkeypatch.setattr("app.ocr.time.sleep", lambda *_: None)
     adapter = QwenVLOCRAdapter("secret", endpoint="https://example.invalid/ocr", max_attempts=3)
     assert adapter.extract(b"png", 1).text == "重试成功"

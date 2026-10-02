@@ -27,9 +27,43 @@ import urllib.request
 from dataclasses import dataclass
 from typing import Any, Protocol
 
+from .egress_policy import (
+    EgressDenied,
+    assert_factory_cloud_allowed,
+    assert_http_send_allowed,
+    cloud_egress_permitted,
+    host_allowed,
+)
 from .ocr_privacy import OCRLine, parse_lines_from_rapid_rows
 
 logger = logging.getLogger("bidproof.ocr")
+
+# Optional pin passed through cloud extract for doc-mismatch dual-check.
+_CLOUD_DOC_SHA256: str | None = None
+
+
+def set_cloud_doc_sha256(doc_sha256: str | None) -> None:
+    """Bind the active document fingerprint for send-time egress dual-check."""
+    global _CLOUD_DOC_SHA256
+    _CLOUD_DOC_SHA256 = (doc_sha256 or "").strip().lower() or None
+
+
+def clear_cloud_doc_sha256() -> None:
+    set_cloud_doc_sha256(None)
+
+
+class _AllowlistRedirectHandler(urllib.request.HTTPRedirectHandler):
+    """Block redirects that leave the OCR egress host allow-list."""
+
+    def redirect_request(self, req, fp, code, msg, headers, newurl):  # type: ignore[override]
+        if not host_allowed(newurl):
+            raise EgressDenied("bad_redirect")
+        assert_http_send_allowed(
+            endpoint=req.full_url,
+            doc_sha256=_CLOUD_DOC_SHA256,
+            redirect_url=newurl,
+        )
+        return super().redirect_request(req, fp, code, msg, headers, newurl)
 
 
 class OCRUnavailable(RuntimeError):
@@ -77,6 +111,12 @@ class QwenVLOCRAdapter:
         self._max_attempts = max(1, min(max_attempts, 5))
 
     def extract(self, image_bytes: bytes, page_number: int) -> OCRResult:
+        # Final HTTP dual-check — factory permission alone is not enough to send.
+        try:
+            assert_http_send_allowed(endpoint=self._endpoint, doc_sha256=_CLOUD_DOC_SHA256)
+        except EgressDenied as exc:
+            raise OCRUnavailable(f"Qwen OCR egress denied on page {page_number}: {exc}") from exc
+
         image_data = base64.b64encode(image_bytes).decode("ascii")
         payload = {
             "model": self._model,
@@ -109,13 +149,16 @@ class QwenVLOCRAdapter:
             },
             method="POST",
         )
+        opener = urllib.request.build_opener(_AllowlistRedirectHandler)
         body: bytes | None = None
         last_error: Exception | None = None
         for attempt in range(1, self._max_attempts + 1):
             try:
-                with urllib.request.urlopen(request, timeout=self._timeout_seconds) as response:
+                with opener.open(request, timeout=self._timeout_seconds) as response:
                     body = response.read()
                 break
+            except EgressDenied as exc:
+                raise OCRUnavailable(f"Qwen OCR egress denied on page {page_number}: {exc}") from exc
             except (urllib.error.HTTPError, urllib.error.URLError, TimeoutError, OSError) as exc:
                 last_error = exc
                 retryable = True
@@ -404,36 +447,53 @@ def _should_try_fallback(result: OCRResult) -> bool:
     return len(result.text.strip()) < 40
 
 
-def _env_flag(name: str, default: str = "0") -> bool:
-    return os.getenv(name, default).strip().lower() in {"1", "true", "yes"}
+def _qwen_endpoint() -> str:
+    return os.getenv(
+        "QWEN_OCR_ENDPOINT",
+        "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions",
+    )
 
 
-def _build_named_adapter(name: str) -> OCRAdapter:
+def _build_qwen_adapter(*, require_egress_policy: bool) -> OCRAdapter:
+    """Build Qwen only when dual-check policy permits (or return disabled)."""
+    endpoint = _qwen_endpoint()
+    if require_egress_policy:
+        decision = assert_factory_cloud_allowed(endpoint=endpoint, doc_sha256=_CLOUD_DOC_SHA256)
+        if not decision.allowed:
+            return DisabledOCRAdapter()
+    else:
+        # Even "raw" construction paths must not become a silent cloud bypass.
+        if not cloud_egress_permitted(endpoint=endpoint, doc_sha256=_CLOUD_DOC_SHA256):
+            return DisabledOCRAdapter()
+    api_key = os.getenv("QWEN_OCR_API_KEY", "")
+    if not api_key:
+        return DisabledOCRAdapter()
+    try:
+        timeout = float(os.getenv("QWEN_OCR_TIMEOUT_SECONDS", "30"))
+    except ValueError:
+        timeout = 30.0
+    try:
+        attempts = int(os.getenv("QWEN_OCR_MAX_ATTEMPTS", "3"))
+    except ValueError:
+        attempts = 3
+    return QwenVLOCRAdapter(
+        api_key=api_key,
+        endpoint=endpoint,
+        model=os.getenv("QWEN_OCR_MODEL", "qwen-vl-ocr"),
+        timeout_seconds=timeout,
+        max_attempts=attempts,
+    )
+
+
+def _build_named_adapter(name: str, *, allow_cloud: bool = False) -> OCRAdapter:
     key = name.strip().lower()
     if key in {"", "disabled", "off", "none"}:
         return DisabledOCRAdapter()
     if key in {"qwen", "qwen-vl-ocr", "qwen_vl_ocr"}:
-        api_key = os.getenv("QWEN_OCR_API_KEY", "")
-        if not api_key:
+        if not allow_cloud:
+            # Direct / hybrid cloud selection is sealed; only get_cloud_ocr_adapter may enable it.
             return DisabledOCRAdapter()
-        try:
-            timeout = float(os.getenv("QWEN_OCR_TIMEOUT_SECONDS", "30"))
-        except ValueError:
-            timeout = 30.0
-        try:
-            attempts = int(os.getenv("QWEN_OCR_MAX_ATTEMPTS", "3"))
-        except ValueError:
-            attempts = 3
-        return QwenVLOCRAdapter(
-            api_key=api_key,
-            endpoint=os.getenv(
-                "QWEN_OCR_ENDPOINT",
-                "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions",
-            ),
-            model=os.getenv("QWEN_OCR_MODEL", "qwen-vl-ocr"),
-            timeout_seconds=timeout,
-            max_attempts=attempts,
-        )
+        return _build_qwen_adapter(require_egress_policy=True)
     if key in {"paddle", "paddleocr"}:
         return PaddleOCRAdapter(lang=os.getenv("PADDLE_OCR_LANG", "ch"))
     if key in {"rapid", "rapidocr", "onnx"}:
@@ -443,12 +503,8 @@ def _build_named_adapter(name: str) -> OCRAdapter:
 
 def get_cloud_ocr_adapter() -> OCRAdapter:
     """Cloud adapter used only after the T1 redaction gate in extraction."""
-    if not _env_flag("BIDPROOF_OCR_EGRESS_ALLOWED", "0"):
-        return DisabledOCRAdapter()
-    mode = os.getenv("BIDPROOF_OCR_EGRESS_MODE", "never").strip().lower()
-    if mode not in {"redacted_only", "redacted", "t1", "vpc_private", "vpc", "t2"}:
-        return DisabledOCRAdapter()
-    return _build_named_adapter(os.getenv("BID_OCR_CLOUD_PROVIDER", "qwen").strip() or "qwen")
+    provider = os.getenv("BID_OCR_CLOUD_PROVIDER", "qwen").strip() or "qwen"
+    return _build_named_adapter(provider, allow_cloud=True)
 
 
 def get_local_ocr_adapter() -> OCRAdapter:
@@ -458,38 +514,44 @@ def get_local_ocr_adapter() -> OCRAdapter:
         primary = os.getenv("BID_OCR_PRIMARY", "rapid" if os.name == "nt" else "paddle").strip()
         if primary in {"qwen", "qwen-vl-ocr", "qwen_vl_ocr"}:
             primary = "rapid" if os.name == "nt" else "paddle"
-        adapter = _build_named_adapter(primary)
+        adapter = _build_named_adapter(primary, allow_cloud=False)
         return adapter if adapter.enabled else DisabledOCRAdapter()
     if provider in {"qwen", "qwen-vl-ocr", "qwen_vl_ocr"}:
         # Do not use cloud as the "local" pass under T1 orchestration.
         return DisabledOCRAdapter()
     try:
-        adapter = _build_named_adapter(provider)
+        adapter = _build_named_adapter(provider, allow_cloud=False)
     except ValueError:
         return DisabledOCRAdapter()
     return adapter
 
 
 def get_ocr_adapter() -> OCRAdapter:
+    """Default extraction adapter — local only. Cloud never selected here."""
     provider = os.getenv("BID_OCR_PROVIDER", "disabled").strip().lower()
+    if provider in {"qwen", "qwen-vl-ocr", "qwen_vl_ocr"}:
+        # Seal direct cloud as primary: callers must use get_cloud_ocr_adapter after T1.
+        return DisabledOCRAdapter()
     if provider in {"hybrid", "auto"}:
         # Windows + Blackwell: default primary to RapidOCR (ONNX). Paddle stays for WSL/Linux.
         # Cloud fallback is NOT used here for T1 — escalation goes through redaction in extraction.
         default_primary = "rapid" if os.name == "nt" else "paddle"
         primary_name = os.getenv("BID_OCR_PRIMARY", default_primary).strip() or default_primary
         fallback_name = os.getenv("BID_OCR_FALLBACK", "disabled").strip() or "disabled"
+        if primary_name in {"qwen", "qwen-vl-ocr", "qwen_vl_ocr"}:
+            primary_name = default_primary
         if fallback_name in {"qwen", "qwen-vl-ocr", "qwen_vl_ocr"}:
             # Force cloud out of naive hybrid; T1 path owns cloud calls.
             fallback_name = "disabled"
-        primary = _build_named_adapter(primary_name)
-        fallback = _build_named_adapter(fallback_name)
+        primary = _build_named_adapter(primary_name, allow_cloud=False)
+        fallback = _build_named_adapter(fallback_name, allow_cloud=False)
         if not primary.enabled and fallback.enabled:
             return fallback
         if primary.enabled:
             return HybridOCRAdapter(primary, fallback if fallback.enabled else None)
         return DisabledOCRAdapter()
     try:
-        adapter = _build_named_adapter(provider)
+        adapter = _build_named_adapter(provider, allow_cloud=False)
     except ValueError:
         return DisabledOCRAdapter()
     return adapter
