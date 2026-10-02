@@ -1,0 +1,20 @@
+{
+  "generated_at": "2026-10-02T13:00:41.238532+00:00",
+  "claim_scope": "engineering_gate_only",
+  "cohort": "expanded",
+  "source": "expanded",
+  "report_version": "20261002T130041.238532p0000",
+  "report_hash": "025d9189a5a7b3f793b2d12cd517ee357a426129a52c1e09de1599bcdda92352",
+  "key_field_f1": 0.9716981132075472,
+  "gate": "GATE_PASS",
+  "product_pass": false,
+  "business_pass": false,
+  "forced_requirement_status": "NEEDS_REVIEW",
+  "leaf_id": "S-A-OCR-PUBLIC-EXPAND",
+  "synthetic_appendix_excluded_from_gate": true,
+  "note": "Cohort `expanded` metrics only. Other cohorts live in sibling dirs under cohorts/.",
+  "key_field_f1_min": 0.97,
+  "tp": 103,
+  "fp": 3,
+  "fn": 3
+}

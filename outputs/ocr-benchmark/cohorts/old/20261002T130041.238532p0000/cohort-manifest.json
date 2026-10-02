@@ -1,0 +1,18 @@
+{
+  "cohort": "old",
+  "report_version": "20261002T130041.238532p0000",
+  "report_hash": "3cd49c88aa1f46546547f31f2df78e7fd5b300b8affe0e117b6a33edf1a43793",
+  "generated_at": "2026-10-02T13:00:41.238532+00:00",
+  "product_pass": false,
+  "business_pass": false,
+  "forced_requirement_status": "NEEDS_REVIEW",
+  "metrics": {
+    "line_cer": 0.031746031746031744,
+    "line_cer_gate": "GATE_FAIL",
+    "key_field_f1": 0.76,
+    "key_field_f1_gate": "GATE_FAIL",
+    "teds": 0.8784546114752891,
+    "teds_gate": "GATE_FAIL"
+  },
+  "note": "Versioned cohort snapshot. Sibling versions under this cohort dir are retained."
+}
