@@ -5,7 +5,7 @@ import { html, mount, mountNodes, emptyState } from '../../ui/render.js';
 import { toast, toastFromError } from '../../core/toast.js';
 import { statusLabel, categoryLabel, locatorLabel, riskRank } from '../../core/format.js';
 import { runsApi } from '../../api/index.js';
-import { hasCompleteCitation, latestReview, isHumanConfirmed, getReviewQueueCounts } from './review-model.js';
+import { hasCompleteCitation, latestReview, isHumanConfirmed, getReviewQueueCounts, effectiveStatus, isReviewRequired } from './review-model.js';
 import { highlightQuote, quoteTerms, renderEvidenceReader } from './evidence-reader.js';
 
 const PAGE_SIZE = 25;
@@ -239,13 +239,15 @@ function renderCard(item, priority) {
   const run = store.get().currentRun; const record = latestReview(run, item.requirement_id);
   const node = document.createElement('details');
   node.className = priority ? 'review-card review-card--priority' : 'req review-card review-card--compact';
-  node.dataset.status = item.status; node.dataset.requirementId = item.requirement_id; node.dataset.category = item.category;
+  const displayStatus = effectiveStatus(item);
+  node.dataset.status = displayStatus; node.dataset.requirementId = item.requirement_id; node.dataset.category = item.category;
+  node.dataset.reviewRequired = String(isReviewRequired(item));
   if (priority && !collapsed.has(item.requirement_id)) node.open = true;
   mount(node, html`
     <summary class="review-card__summary">
       <span class="review-card__identity"><span class="review-card__category">${categoryLabel(item.category)}</span><strong>${item.label}</strong><small class="review-card__draft" data-draft-for="${item.requirement_id}" ${hasDraft(item.requirement_id) ? '' : 'hidden'}>草稿未保存</small></span>
       <span class="review-card__summary-locator">${locatorLabel(item.source)}</span>
-      <span class="review-status review-status--${item.status}" data-human-confirmed="${String(isHumanConfirmed(run, item))}"><span aria-hidden="true"></span>${isHumanConfirmed(run, item) ? '已核销通过' : item.status === 'PASS' ? '系统已满足 · 待核销' : statusLabel(item.status)}</span>
+      <span class="review-status review-status--${displayStatus}" data-human-confirmed="${String(isHumanConfirmed(run, item))}"><span aria-hidden="true"></span>${isHumanConfirmed(run, item) ? '已核销通过' : displayStatus === 'PASS' ? '系统已满足 · 待核销' : statusLabel(displayStatus)}</span>
       <i class="review-card__caret" data-lucide="chevron-down" aria-hidden="true"></i>
     </summary>
     <div class="review-card__body">
@@ -282,16 +284,18 @@ function citation(item) {
 function actions(item) {
   const run = store.get().currentRun;
   const permitted = store.get().currentUser?.role !== 'VIEWER';
-  const complete = hasCompleteCitation(item); const revision = Number(run.revision);
+  // Server pass_block_reason means CONFIRM cannot mint PASS even if citations look complete locally.
+  const passBlocked = Boolean(item.pass_block_reason) || !hasCompleteCitation(item);
+  const revision = Number(run.revision);
   const unavailable = !permitted || busyRunId === run.run_id || !Number.isInteger(revision) || revision < 1;
   const confirmed = isHumanConfirmed(run, item);
   const notePending = pendingNotes.has(`${run.run_id}:${item.requirement_id}`);
   return html`<div class="review-actions" role="group" aria-label="${item.label}的人工复核">
-    <button class="btn btn--primary btn--sm" type="button" data-review="CONFIRM" data-id="${item.requirement_id}" ${unavailable || !complete || confirmed ? 'disabled' : ''}
-      title="${!complete ? '需同时具备招标与企业证据的定位及原文摘录' : '确认引用、有效期与适用条件无误后通过'}"><i data-lucide="check" aria-hidden="true"></i>${confirmed ? '已核销通过' : '确认无误通过'}</button>
+    <button class="btn btn--primary btn--sm" type="button" data-review="CONFIRM" data-id="${item.requirement_id}" ${unavailable || passBlocked || confirmed ? 'disabled' : ''}
+      title="${passBlocked ? (item.pass_block_reason === 'QUALITY_GATE_FAIL' ? 'OCR 工程门禁未通过，暂不能核销通过' : '需同时具备招标与企业证据的定位及原文摘录') : '确认引用、有效期与适用条件无误后通过'}"><i data-lucide="check" aria-hidden="true"></i>${confirmed ? '已核销通过' : '确认无误通过'}</button>
     <button class="btn btn--secondary btn--sm" type="button" data-review="REJECT" data-id="${item.requirement_id}" ${unavailable || notePending ? 'disabled' : ''}>存疑驳回</button>
     <button class="btn btn--ghost btn--sm" type="button" data-note data-id="${item.requirement_id}" ${!permitted || busyRunId === run.run_id || notePending ? 'disabled' : ''}><i data-lucide="message-square-plus" aria-hidden="true"></i>添加备注</button>
-  </div>${!complete ? html`<p class="review-gate"><i data-lucide="lock-keyhole" aria-hidden="true"></i>双向引用不完整，补齐后方可核销通过。</p>` : ''}`;
+  </div>${passBlocked ? html`<p class="review-gate"><i data-lucide="lock-keyhole" aria-hidden="true"></i>${item.pass_block_reason === 'QUALITY_GATE_FAIL' ? 'OCR 工程门禁未通过，补齐门禁后方可核销通过。' : '双向引用不完整或未通过原文核验，补齐后方可核销通过。'}</p>` : ''}`;
 }
 
 function editor(id) {
@@ -420,7 +424,7 @@ async function review(button, note = '', id = button.dataset.id, decision = butt
   const item = run.requirements.find((entry) => entry.requirement_id === id);
   const revision = Number(run.revision);
   if (!item || !Number.isInteger(revision) || revision < 1) { toast('任务版本信息不完整，请重新打开任务后复核。', 'error'); return; }
-  if (decision === 'CONFIRM' && !hasCompleteCitation(item)) { toast('缺少双向原文引用，暂不能核销通过。', 'error'); return; }
+  if (decision === 'CONFIRM' && (item.pass_block_reason || !hasCompleteCitation(item))) { toast('缺少双向原文引用或复核门禁未通过，暂不能核销通过。', 'error'); return; }
   if (decision === 'REJECT' && !note.trim()) return;
   busyRunId = run.run_id; setReviewBusy(true); button.setAttribute('aria-busy', 'true');
   try {
@@ -428,7 +432,8 @@ async function review(button, note = '', id = button.dataset.id, decision = butt
       ...(decision === 'CONFIRM' ? { new_status: 'PASS' } : {}) });
     if (store.get().currentRun?.run_id !== run.run_id || epoch !== viewEpoch) return;
     const card = button.closest('.review-card');
-    const status = newestRun(updated).requirements.find((entry) => entry.requirement_id === id)?.status;
+    const status = newestRun(updated).requirements.find((entry) => entry.requirement_id === id)?.effective_status
+      || newestRun(updated).requirements.find((entry) => entry.requirement_id === id)?.status;
     if (card && status) { card.dataset.status = status; card.classList.add('review-card--saved'); }
     if (motion()) {
       const body = card?.querySelector('.review-card__body');

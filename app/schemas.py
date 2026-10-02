@@ -43,6 +43,14 @@ ReviewDecision = Literal[
 
 
 class ReviewRequest(BaseModel):
+    """Human review event.
+
+    Setting ``new_status`` / ``decision`` to PASS is enforced by
+    ``app.review_policy``: both tender and evidence sides need a real
+    ``source_id``, in-bounds page, and a quote that matches the page corpus.
+    Missing evidence, OCR gate failure, or incomplete coverage cannot PASS.
+    """
+
     requirement_id: str = Field(min_length=1, max_length=100)
     decision: ReviewDecision
     note: str = Field(default="", max_length=2000)

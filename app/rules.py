@@ -126,6 +126,7 @@ def match_evidence(
         requirement["evidence"].append(
             {
                 "filename": filename,
+                "source_id": page_hit.get("source_id"),
                 "page": page_hit["page"],
                 "locator": (block_hit or {}).get("locator") or page_hit.get("locator", {"kind": "page", "label": f"第 {page_hit['page']} 页", "index": page_hit["page"]}),
                 "quote": " ".join(((block_hit or {}).get("text") or page_hit["text"]).split())[:240],

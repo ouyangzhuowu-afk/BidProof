@@ -198,6 +198,7 @@ function renderMetrics(runs) {
 
   const blockers = sum(runs, (r) => r.blocker_count);
   const unresolved = sum(runs, (r) => r.unresolved_count);
+  // unresolved_count already reflects server effective_status / review_required.
   const decided = runs.filter((r) => r.decision?.decision).length;
   const coverage = runs.length ? Math.round((decided / runs.length) * 100) : 0;
 

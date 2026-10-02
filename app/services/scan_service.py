@@ -16,6 +16,7 @@ from pathlib import Path
 from fastapi import HTTPException, UploadFile
 
 from .. import config, job_leases, presenters, uow
+from ..citations import annotate_evidence_source_ids, build_page_corpus, merge_page_corpus
 from ..extraction import ExtractionError, extract_file
 from ..identity import InternalJobContext
 from ..repositories import audit, jobs, projects, runs
@@ -181,6 +182,7 @@ async def create_run(
     requirements = extract_requirements(tender_pages)
     if evidence_pages and evidence_files:
         requirements = match_evidence(requirements, evidence_pages, evidence_files)
+        annotate_evidence_source_ids(requirements, evidence_pages)
 
     source_documents = [
         {
@@ -222,6 +224,10 @@ async def create_run(
     state["source_documents"] = source_documents
     state["evidence_assets"] = evidence_assets
     state["evidence_matrix"] = requirements
+    state["citation_corpus"] = merge_page_corpus(
+        build_page_corpus(tender_pages),
+        build_page_corpus(evidence_pages),
+    )
     state["scan_quality"] = presenters.scan_quality(tender_pages, evidence_pages)
     advance_state(state, "AUDIT")
 

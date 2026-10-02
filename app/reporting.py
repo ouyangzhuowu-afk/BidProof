@@ -1,6 +1,8 @@
 from datetime import UTC, datetime
 from typing import Any
 
+from . import review_policy
+
 PAGE_WIDTH = 595
 PAGE_HEIGHT = 842
 MARGIN = 44
@@ -17,9 +19,15 @@ def build_pdf_report(run: dict[str, Any]) -> bytes:
     document = fitz.open()
     page = _new_page(document, "BidProof 投标证据链报告")
     y = 82
-    requirements = run.get("requirements", [])
-    unresolved = sum(item.get("status") in {"UNKNOWN", "NEEDS_REVIEW"} for item in requirements)
-    blockers = sum(item.get("category") in {"FATAL", "QUALIFICATION"} and item.get("status") != "PASS" for item in requirements)
+    requirements = [review_policy.project_requirement(item, run) for item in run.get("requirements", [])]
+    unresolved = sum(
+        item.get("effective_status") in {"UNKNOWN", "NEEDS_REVIEW"} or item.get("review_required")
+        for item in requirements
+    )
+    blockers = sum(
+        item.get("category") in {"FATAL", "QUALIFICATION"} and item.get("effective_status") != "PASS"
+        for item in requirements
+    )
     decision = run.get("decision", {}).get("decision") or "未记录"
     summary_lines = [
         f"招标文件：{run.get('tender_filename', '')}",
@@ -39,8 +47,9 @@ def build_pdf_report(run: dict[str, Any]) -> bytes:
             f"{entry.get('filename', '')} {_locator_label(entry)}：{_clean(entry.get('quote', ''))}"
             for entry in evidence
         ) or "未定位到企业证据"
+        status = item.get("effective_status") or item.get("status", "")
         lines = [
-            f"{item.get('requirement_id', f'REQ-{index:04d}')}  [{item.get('category', '')}]  {item.get('status', '')} / {item.get('severity', '')}",
+            f"{item.get('requirement_id', f'REQ-{index:04d}')}  [{item.get('category', '')}]  {status} / {item.get('severity', '')}",
             f"要求：{_clean(item.get('title', ''))}",
             f"招标定位：{_locator_label(source)}；原文：{_clean(source.get('quote', ''))}",
             f"企业证据：{evidence_text}",
@@ -92,7 +101,8 @@ def _locator_label(item: dict[str, Any]) -> str:
 
 
 def _evidence_gap(item: dict[str, Any]) -> str:
-    if item.get("status") == "PASS" and item.get("evidence"):
+    status = item.get("effective_status") or item.get("status")
+    if status == "PASS" and item.get("evidence"):
         return "已定位证据，仍需核验原件与有效期"
     if item.get("category") in {"QUALIFICATION", "CREDENTIAL", "BOND", "SIGNATURE"}:
         return "未定位到可核验的企业证据"
@@ -108,8 +118,9 @@ def _risk_impact(item: dict[str, Any]) -> str:
 
 
 def _next_action(item: dict[str, Any]) -> str:
-    if item.get("status") in {"UNKNOWN", "NEEDS_REVIEW"}:
+    status = item.get("effective_status") or item.get("status")
+    if status in {"UNKNOWN", "NEEDS_REVIEW"} or item.get("review_required"):
         return "补充证据并由人工复核"
-    if item.get("status") == "FAIL":
+    if status == "FAIL":
         return "核对原文并制定风险处置方案"
     return "保留定位引用并确认原件有效"
