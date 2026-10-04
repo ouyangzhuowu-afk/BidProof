@@ -39,6 +39,21 @@
       ],
       "validation": "Live RapidOCR vs text-layer GT. Prior public-eval docs 12. New completed PDFs 7, new not-scored HTML notices 2, one CCGP HTTPS fetch HTTP 403 not counted. Old set unchanged: CER 3.17% / F1 76.00% / TEDS 87.85%, all GATE_FAIL. Expanded public set on the same pages: CER 4.96% GATE_FAIL (54 pages), F1 97.17% GATE_PASS, TEDS 95.80% GATE_PASS (19 pages). Overall GATE_FAIL. product_pass=false. Synthetic rows excluded from the gate. Joe local PDF intake 2026-09-29: 12/12 duplicate by filename and sha256, 0 newly added, 0 provenance-unverified. No pilot/ICP ledger writes. T-005 not modified.",
       "note": "pending_audit only. Not a product PASS and not a business unblock."
+    },
+    {
+      "id": "S-TENDER-BLOCKS-2026-10-04",
+      "title": "招标文件按资格、评分、要交材料、废标四块抽取并强制原文页码",
+      "status": "pending_audit",
+      "priority": "P1",
+      "dependencies": [],
+      "artifacts": [
+        "app/tender_blocks.py",
+        "tests/test_tender_blocks.py",
+        "outputs/tender-blocks/public-text-pending-audit.md",
+        "outputs/tender-blocks/public-text-pending-audit.json"
+      ],
+      "validation": "Extends the existing page extraction. Clauses without an original page stay UNKNOWN or NEEDS_REVIEW. product_pass=false. CER/F1/TEDS thresholds unchanged. No pilot/ICP ledger writes. T-005 not modified.",
+      "note": "pending_audit only. Not a product PASS. Public texts in the repo have no PDF page numbers, so those clauses are uncited."
     }
   ],
   "completed": [
@@ -1362,6 +1377,24 @@
       "kind": "public-eval-runbook",
       "status": "pending_audit",
       "note": "Adds the S-A-OCR-PUBLIC-EXPAND reproduce section. Not verified."
+    },
+    {
+      "path": "app/tender_blocks.py",
+      "kind": "tender-four-blocks",
+      "status": "pending_audit",
+      "note": "Four-block tender extraction with page citations. Not a product PASS."
+    },
+    {
+      "path": "outputs/tender-blocks/public-text-pending-audit.md",
+      "kind": "tender-four-blocks-report",
+      "status": "pending_audit",
+      "note": "Uncited clauses from public texts already in the repo. product_pass=false."
+    },
+    {
+      "path": "outputs/tender-blocks/public-text-pending-audit.json",
+      "kind": "tender-four-blocks-report",
+      "status": "pending_audit",
+      "note": "Machine-readable uncited clause list. product_pass=false."
     }
   ],
   "next_best_action": {
@@ -1379,7 +1412,7 @@
     ],
     "note": "Do not write demo/test rows into pilot/ICP ledgers. Do not claim business TARGET_MET. Pilot scan results are always NEEDS_REVIEW and cannot count as accuracy acceptance. On real input: copy template → fill → pilot_ledger/icp_ledger --row-json. Readiness: uv run python -m work.pilot_readiness --json."
   },
-  "updated_at": "2026-09-29T07:20:00+00:00",
+  "updated_at": "2026-10-04T14:10:00+00:00",
   "sandbox_roadmap": {
     "locked_at": "2026-09-16",
     "gates": {

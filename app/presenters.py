@@ -11,6 +11,7 @@ from typing import Any
 
 from . import quality_gates
 from .schemas import ReviewRequest
+from .tender_blocks import empty_tender_blocks, sanitize_tender_blocks
 
 
 def locator_label(item: dict) -> str:
@@ -141,12 +142,20 @@ def public_run(run: dict) -> dict:
         "source_documents": run.get("source_documents", []),
         "evidence_assets": run.get("evidence_assets", []),
         "requirements": run["requirements"],
+        "tender_blocks": tender_blocks_for_run(run),
         "review": run["review"],
         "decision": run.get("decision", {}),
         "archived_at": run.get("archived_at"),
         "scan_quality": quality_for_run(run),
         "research_state": run["state"],
     }
+
+
+def tender_blocks_for_run(run: dict) -> dict:
+    stored = (run.get("state") or {}).get("tender_blocks")
+    if not isinstance(stored, dict):
+        return empty_tender_blocks()
+    return sanitize_tender_blocks(stored)
 
 
 def requirement_signature(item: dict) -> tuple[str, str]:

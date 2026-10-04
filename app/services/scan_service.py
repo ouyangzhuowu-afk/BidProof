@@ -20,6 +20,7 @@ from ..extraction import ExtractionError, extract_file
 from ..identity import InternalJobContext
 from ..repositories import audit, jobs, projects, runs
 from ..rules import extract_requirements, match_evidence
+from ..tender_blocks import extract_tender_blocks
 from ..schemas import EvidenceMetadata
 from ..state import advance_state, initial_research_state, utc_now
 from ..uploads import (
@@ -181,6 +182,7 @@ async def create_run(
     requirements = extract_requirements(tender_pages)
     if evidence_pages and evidence_files:
         requirements = match_evidence(requirements, evidence_pages, evidence_files)
+    tender_blocks = extract_tender_blocks(tender_pages, filename=tender.filename)
 
     source_documents = [
         {
@@ -222,6 +224,7 @@ async def create_run(
     state["source_documents"] = source_documents
     state["evidence_assets"] = evidence_assets
     state["evidence_matrix"] = requirements
+    state["tender_blocks"] = tender_blocks
     state["scan_quality"] = presenters.scan_quality(tender_pages, evidence_pages)
     advance_state(state, "AUDIT")
 
