@@ -210,18 +210,7 @@ def test_office_table_cells_do_not_invent_a_page_number():
 
 
 def test_flat_qualification_table_becomes_materials_with_a_page():
-    text = "\n".join([
-        "附表1资格审查表",
-        "序号",
-        "审查项目",
-        "审查标准",
-        "1",
-        "法人营业执照等主体资格证明文件",
-        "提供并加盖公章",
-        "2",
-        "法定代表人身份证明或授权委托书",
-        "提供原件并加盖公章",
-    ])
+    text = "附表1资格审查表\n序号\n审查项目\n审查标准\n1\n法人营业执照等主体资格证明文件\n提供并加盖公章\n2\n法定代表人身份证明或授权委托书\n提供原件并加盖公章"
     materials = _blocks(extract_tender_blocks([_page(12, text)], filename="review.pdf"))["materials"]
 
     assert {item["page"] for item in materials} == {12}

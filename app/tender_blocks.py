@@ -271,9 +271,7 @@ def _can_continue(pending: dict[str, Any], event: dict[str, Any]) -> bool:
         return False
     left = pending["pages"]
     right = event["pages"]
-    if left and right and right[0] != left[-1] + 1 and right[0] != left[-1]:
-        return False
-    return True
+    return not (left and right and right[0] != left[-1] + 1 and right[0] != left[-1])
 
 
 def _closed_text(text: str) -> bool:
@@ -288,16 +286,12 @@ def _classify(clause: dict[str, Any], section: str | None, list_mode: str | None
     blocks: set[str] = set()
     if list_mode == "suppress":
         pass
-    elif list_mode == "rejection" and not _negated(text):
-        blocks.add("rejection")
-    elif _is_rejection(text):
+    elif (list_mode == "rejection" and not _negated(text)) or _is_rejection(text):
         blocks.add("rejection")
     inherited = None if list_mode in {"rejection", "suppress"} else section
     if _is_scoring(text, inherited):
         blocks.add("scoring")
-    if list_mode == "materials" and _CHILD_ITEM.match(text):
-        blocks.add("materials")
-    elif _is_materials(text, inherited):
+    if (list_mode == "materials" and _CHILD_ITEM.match(text)) or _is_materials(text, inherited):
         blocks.add("materials")
     if _is_qualification(text, inherited):
         blocks.add("qualification")
@@ -327,12 +321,14 @@ def _classify_row(headers: list[str], cells: list[str], text: str) -> set[str]:
                 continue
             if _is_rejection(cell) or any(token in name for token in ("废标", "无效", "否决")):
                 blocks.add("rejection")
-        if any(token in name for token in ("分值", "评分", "评审标准", "评审因素", "评审项目")):
-            if _is_scoring(cell, "scoring") or "分值" in name:
-                blocks.add("scoring")
-        if any(token in name for token in ("证明材料", "证明文件", "提交材料", "审查标准")):
-            if re.search(r"提供|提交|复印件|原件|盖章", cell):
-                blocks.add("materials")
+        if any(token in name for token in ("分值", "评分", "评审标准", "评审因素", "评审项目")) and (
+            _is_scoring(cell, "scoring") or "分值" in name
+        ):
+            blocks.add("scoring")
+        if any(token in name for token in ("证明材料", "证明文件", "提交材料", "审查标准")) and re.search(
+            r"提供|提交|复印件|原件|盖章", cell
+        ):
+            blocks.add("materials")
         if any(token in name for token in ("资格", "审查项目")) and _is_qualification(cell, "qualification"):
             blocks.add("qualification")
     if not blocks and not explicit_keep:
@@ -388,9 +384,12 @@ def _is_materials(text: str, section: str | None) -> bool:
         return False
     if re.search(r"须提供|应提供|应提交|须提交|证明材料|复印件|加盖公章|资格证明文件", text):
         return True
-    if section == "materials" and _ITEM_START.match(text) and len(text) <= 32 and re.search(r"函|委托书|偏离表|报价表|证明|执照|证书|材料|身份证明", text):
-        return True
-    return False
+    return bool(
+        section == "materials"
+        and _ITEM_START.match(text)
+        and len(text) <= 32
+        and re.search(r"函|委托书|偏离表|报价表|证明|执照|证书|材料|身份证明", text)
+    )
 
 
 def _materials_lead(text: str) -> bool:
@@ -400,9 +399,10 @@ def _materials_lead(text: str) -> bool:
 def _is_qualification(text: str, section: str | None) -> bool:
     if re.search(r"(?:供应商|投标人|申请人).{0,12}资格(?:条件|要求)|资格(?:条件|要求)\s*[:：]|特定资格|基本资格|政府采购法》第二十二条|须具备|应具备|应当符合", text):
         return True
-    if section == "qualification" and re.search(r"应当符合|必须具备|必须是|须具备|须具有|须满足|具备|具有|不得参加", text):
-        return True
-    return False
+    return bool(
+        section == "qualification"
+        and re.search(r"应当符合|必须具备|必须是|须具备|须具有|须满足|具备|具有|不得参加", text)
+    )
 
 
 def _section_of(text: str) -> str | None:
@@ -417,9 +417,7 @@ def _section_of(text: str) -> str | None:
 
 def _keep(text: str) -> bool:
     compact = _compact(text)
-    if len(compact) < 4 or _NOISE.search(text):
-        return False
-    return True
+    return not (len(compact) < 4 or _NOISE.search(text))
 
 
 def _item(block: str, clause: dict[str, Any], filename: str | None) -> dict[str, Any]:
@@ -645,7 +643,7 @@ def _consume_flat_tables(
     skip = set()
     index = 0
     while index < len(lines):
-        headers, row_end = _flat_table_at(lines, index)
+        headers, _row_end = _flat_table_at(lines, index)
         if not headers:
             index += 1
             continue

@@ -20,9 +20,9 @@ from ..extraction import ExtractionError, extract_file
 from ..identity import InternalJobContext
 from ..repositories import audit, jobs, projects, runs
 from ..rules import extract_requirements, match_evidence
-from ..tender_blocks import extract_tender_blocks
 from ..schemas import EvidenceMetadata
 from ..state import advance_state, initial_research_state, utc_now
+from ..tender_blocks import extract_tender_blocks
 from ..uploads import (
     is_supported,
     remove_tree,
