@@ -1,0 +1,4532 @@
+{
+  "audit_status": "pending_audit",
+  "product_pass": false,
+  "test_material_only": true,
+  "source_url": "https://www.gl.gov.cn/xjwz/zwgkml/zdlyxxgk/zfcg/zhbgg/zbgg_swj/202609/P020260920414795183978.pdf",
+  "title": "竞争性磋商文件（服务类）— 2026年八闽美食嘉年华暨鼓楼区海鲜美食消费季活动",
+  "project_number": "2026-FZSC339",
+  "buyer": "福州市鼓楼区商务局",
+  "local_path": "work/public-eval/tender-blocks/pub-gl-fzsc339-cuoshang-202609.pdf",
+  "sha256": "4a2e96b99a539855f9736300937aa02657ae85aa0a07deb4b1a4bdef1af8f148",
+  "pdf_page_count": 66,
+  "ocr": "not_used",
+  "footer_check": {
+    "checked_pages": 66,
+    "mismatches": []
+  },
+  "counts": {
+    "total": 184,
+    "with_real_page": 184,
+    "without_page": 0,
+    "by_block": {
+      "qualification": {
+        "label": "资格要求",
+        "cited": 15,
+        "items": 15
+      },
+      "scoring": {
+        "label": "评分要求",
+        "cited": 40,
+        "items": 40
+      },
+      "materials": {
+        "label": "要交的材料",
+        "cited": 119,
+        "items": 119
+      },
+      "rejection": {
+        "label": "废标项",
+        "cited": 10,
+        "items": 10
+      }
+    }
+  },
+  "known_hits": [
+    {
+      "label": "资格要求",
+      "needle": "第二十二条第一款",
+      "expected_pdf_page": 2,
+      "matches": [
+        {
+          "block": "资格要求",
+          "pages": [
+            2
+          ],
+          "status": "NEEDS_REVIEW",
+          "summary": "5.1、法定条件:符合《中华人民共和国政府采购法》第二十二条第一款规 定的条件。"
+        }
+      ]
+    },
+    {
+      "label": "废标项",
+      "needle": "资格审查和实质性响应审查不合格",
+      "expected_pdf_page": 24,
+      "matches": []
+    }
+  ],
+  "extraction": {
+    "audit_status": "pending_audit",
+    "product_pass": false,
+    "blocks": {
+      "qualification": {
+        "label": "资格要求",
+        "items": [
+          {
+            "clause_id": "TB-0001",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "5.1、法定条件:符合《中华人民共和国政府采购法》第二十二条第一款规 定的条件。",
+            "quote": "5.1、法定条件:符合《中华人民共和国政府采购法》第二十二条第一款规 定的条件。",
+            "pages": [
+              2
+            ],
+            "page": 2,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 2 页",
+              "index": 2,
+              "pages": [
+                2
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0002",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "项<br>号：1 条款号：3.2.1 编列内容：供应商的资格要求:见磋商文件第一章“采购公告/采购邀请书”<br>(1)资格证明文件资料要求:<br>采购包1:",
+            "quote": "项<br>号：1 条款号：3.2.1 编列内容：供应商的资格要求:见磋商文件第一章“采购公告/采购邀请书”<br>(1)资格证明文件资料要求:<br>采购包1:<br>序<br>号<br>资格审查要<br>求概况<br>评审点具体描述<br>1<br>磋商响应声<br>明<br>详见声明函<br>2<br>单位负责人<br>授权书<br>供应商(自然人除外):若供应商代表为<br>单位授权的委托代理人,应提供本授权书;<br>若供应商代表为单位负责人,应在此项下<br>提交其身份证正反面复印件,可不提供本<br>授权书。<br>3<br>营业执照等<br>证明文件<br>1供应商为企业的,提供有效的营业执照<br>复印件;供应商为事业单位的,提供有效<br>的事业单位法人证书复印件;供应商为社<br>会团体的,提供有效的社会团体法人登记<br>证书复印件;供应商为合伙企业、个体工<br>商",
+            "pages": [
+              5
+            ],
+            "page": 5,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 5 页",
+              "index": 5,
+              "pages": [
+                5
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0003",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "第6 页共66 页 年的供应商),应选择提供资信证明复印 件。 5 依法缴纳税 收证明材料 1供应商提供的税收缴纳凭据复印件应符 合下列规定:a.提交响应文件截",
+            "quote": "第6 页共66 页 年的供应商),应选择提供资信证明复印 件。 5 依法缴纳税 收证明材料 1供应商提供的税收缴纳凭据复印件应符 合下列规定:a.提交响应文件截止时间前 (不含提交响应文件截止时间的当月)已 依法缴纳税收的供应商,提供提交响应文 件截止时间前六个月(不含提交响应文件 截止时间的当月)中任一月份的税收缴纳 凭据复印件。b.提交响应文件截止时间的 当月成立的供应商,视同满足本项资格条 件要求。c.若为依法免税范围的供应商, 提供依法免税证明材料的,视同满足本项 资格条件要求。 6 依法缴纳社 会保障资金 证明材料 1供应商提供的社会保障资金缴纳凭据复 印件应符合下列规定:a.提交响应文件截 止时间前(不含提交响应文件截止时间的 当月)已依法缴纳社会保障资金的供应商, 提供提交响应文件截止时间前六个月(不 含提交响应文件截止时间的当月)中任一 月份的社会保障资金缴纳凭据复印件。b",
+            "pages": [
+              6
+            ],
+            "page": 6,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 6 页",
+              "index": 6,
+              "pages": [
+                6
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0004",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "第7 页共66 页 用) 《关于印发<统计上大中小微型企业划分 办法(2017)>的通知》规定准确划分企业类 型。本项目采购标的对应的中小企业划分 标准所属行业",
+            "quote": "第7 页共66 页 用) 《关于印发<统计上大中小微型企业划分 办法(2017)>的通知》规定准确划分企业类 型。本项目采购标的对应的中小企业划分 标准所属行业详见特定资格条件。2供应 商为监狱企业的,可不填写本声明函,根 据其提供的由省级以上监狱管理局、戒毒 管理局(含新疆生产建设兵团)出具的属 于监狱企业的证明文件进行认定,监狱企 业视同小型、微型企业。3供应商为残疾 人福利性单位的,可不填写本声明函,根 据其提供的《残疾人福利性单位声明函》 进行认定,残疾人福利性单位视同小型、 微型企业。4以联合体形式落实中小企业 预留份额时,还需提供《联合体协议》。 5以合同分包形式落实中小企业预留份额 时,还需提供《分包意向协议》。 10 信用记录查 询结果 1信用记录查询的截止时点:信用记录查 询的截止时点为本项目提交响应文件截止 当日。2信用记录查询渠道:信用中国 (www.creditch",
+            "pages": [
+              7
+            ],
+            "page": 7,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 7 页",
+              "index": 7,
+              "pages": [
+                7
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0005",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "3.1.3 列入失信被执行人、重大税收违法案件当事人名单、政府采购严重违 法失信行为记录名单及其他不符合《中华人民共和国政府采购法》第二十二条规 定条件的供应商",
+            "quote": "3.1.3 列入失信被执行人、重大税收违法案件当事人名单、政府采购严重违 法失信行为记录名单及其他不符合《中华人民共和国政府采购法》第二十二条规 定条件的供应商,不得参加政府采购活动。 供应商有责任检查自身情况,在响应文件中对是否违反以上一般规定做出 如实声明,否则其响应文件将被否决。",
+            "pages": [
+              19
+            ],
+            "page": 19,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 19 页",
+              "index": 19,
+              "pages": [
+                19
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0006",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "3.2.1 供应商的资格要求:详见竞争性磋商须知前附表第1 项。",
+            "quote": "3.2.1 供应商的资格要求:详见竞争性磋商须知前附表第1 项。",
+            "pages": [
+              19
+            ],
+            "page": 19,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 19 页",
+              "index": 19,
+              "pages": [
+                19
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0007",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "3.2.3 若接受联合体形式,单位负责人为同一人或者存在直接控股、管理关 系的不同供应商可以组成一个联合体,以一个供应商的身份参加政府采购活动。 若不接受联合体",
+            "quote": "3.2.3 若接受联合体形式,单位负责人为同一人或者存在直接控股、管理关 系的不同供应商可以组成一个联合体,以一个供应商的身份参加政府采购活动。 若不接受联合体形式,则单位负责人为同一人或者存在直接控股、管理关系的不 同供应商,不得参加同一合同项下的政府采购活动。",
+            "pages": [
+              20
+            ],
+            "page": 20,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 20 页",
+              "index": 20,
+              "pages": [
+                20
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0008",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "(1)本国产品标准本国产品应当符合以下条件:1在中国境内生产。产 品应当在中国境内生产,即在中华人民共和国关境内实现从原材料、组件到产品 的属性改变。属性改变是",
+            "quote": "(1)本国产品标准本国产品应当符合以下条件:1在中国境内生产。产 品应当在中国境内生产,即在中华人民共和国关境内实现从原材料、组件到产品 的属性改变。属性改变是指经过制造、加工或者组装等工序,产生完全不同于 原材料、组件的新产品,并具有新的名称和特征(用途)。属性改变不包括以下 细微操作:a.为确保产品在运输或者储存期间保持某种状态而进行的操作;b. 为产品运输或者销售进行的包装或者展示;c.在产品或者其包装上粘贴或者印 刷品牌、标志、标识以及其他用于区别的标记;d.简单的上漆、磨光和分装;e. 其他不属于属性改变的情形。2在中国境内生产的组件成本占比达到规定比例。 具体判定标准以《国务院办公厅关于在政府采购中实施本国产品标准及相关政策 的通知》以及财政部相关文件为准。3特定产品的关键组件、关键工序符合相 关要求。具体判定标准以《国务院办公厅关于在政府采购中实施本国产品标准 及相关政策的通",
+            "pages": [
+              29
+            ],
+            "page": 29,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 29 页",
+              "index": 29,
+              "pages": [
+                29
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0009",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "4、对接市级及以上媒体资源开展活动报道,扩大活动影响力;做到阶段有 话题、节点有爆点、全季有热度。(评审项5) ★5、在采购人所在地市级及以上主流媒体,于活动期",
+            "quote": "4、对接市级及以上媒体资源开展活动报道,扩大活动影响力;做到阶段有 话题、节点有爆点、全季有热度。(评审项5) ★5、在采购人所在地市级及以上主流媒体,于活动期间开展专题宣传,不 少于三期。 ★(五)团队要求 为满足本项目实施需要,并确保项目按质、按量、按时及有序进行,供应商 应成立一个完善和稳定的项目团队,团队成员人数至少应≥5 人。项目团队人员 须具备较高专业素质和相关工作能力及经验,确保在项目周期内实施人员的稳定 性,项目核心人员不发生变动。",
+            "pages": [
+              34
+            ],
+            "page": 34,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 34 页",
+              "index": 34,
+              "pages": [
+                34
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0010",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "商在响应文件中按上述格式提供其具备履行合同所必需的设备和专业技术能力 的声明即可,声明函应加盖供应商单位公章。。",
+            "quote": "商在响应文件中按上述格式提供其具备履行合同所必需的设备和专业技术能力 的声明即可,声明函应加盖供应商单位公章。。",
+            "pages": [
+              55
+            ],
+            "page": 55,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 55 页",
+              "index": 55,
+              "pages": [
+                55
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0011",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "一、我单位(本人)具备招标文件要求以及《中华人民共和国政府采购法》第 二十二条规定的条件:",
+            "quote": "一、我单位(本人)具备招标文件要求以及《中华人民共和国政府采购法》第 二十二条规定的条件:",
+            "pages": [
+              58
+            ],
+            "page": 58,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 58 页",
+              "index": 58,
+              "pages": [
+                58
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0012",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "1.具有独立承担民事责任的能力;",
+            "quote": "1.具有独立承担民事责任的能力;",
+            "pages": [
+              58
+            ],
+            "page": 58,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 58 页",
+              "index": 58,
+              "pages": [
+                58
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0013",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "2.具有良好的商业信誉和健全的财务会计制度;",
+            "quote": "2.具有良好的商业信誉和健全的财务会计制度;",
+            "pages": [
+              58
+            ],
+            "page": 58,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 58 页",
+              "index": 58,
+              "pages": [
+                58
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0014",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "3.具有履行合同所必需的设备和专业技术能力;",
+            "quote": "3.具有履行合同所必需的设备和专业技术能力;",
+            "pages": [
+              58
+            ],
+            "page": 58,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 58 页",
+              "index": 58,
+              "pages": [
+                58
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0015",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "二、不存在违反《中华人民共和国政府采购法实施条例》第十八条规定的“单 位负责人为同一人或者存在直接控股、管理关系的不同供应商,不得参加同一合 同项下的政府采购活",
+            "quote": "二、不存在违反《中华人民共和国政府采购法实施条例》第十八条规定的“单 位负责人为同一人或者存在直接控股、管理关系的不同供应商,不得参加同一合 同项下的政府采购活动。除单一来源采购项目外,为采购项目提供整体设计、规 范编制或者项目管理、监理、检测等服务的供应商,不得再参加该采购项目的其 他采购活动”情形。 我单位(本人)对本承诺函及所承诺事项的真实性、合法性及有效性负责,并 已知晓如提供资格承诺函不实,可能涉嫌《中华人民共和国政府采购法》第七十 七条第一款第(一)项规定的“提供虚假材料谋取中标成交”违法情形。经调查属 实的,愿意接受行政监管部门按照《中华人民共和国政府采购法》第七十七条: “处以采购金额千分之五以上千分之十以下的罚款,列入不良行为记录名单,在 一至三年内禁止参加政府采购活动,有违法所得的,并处没收违法所得,情节严 重的,由市场监管部门吊销营业执照,构成犯罪的,依法追究刑事责任",
+            "pages": [
+              58,
+              59
+            ],
+            "page": 58,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 58-59 页",
+              "index": 58,
+              "pages": [
+                58,
+                59
+              ]
+            },
+            "detection": "cross_page",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          }
+        ]
+      },
+      "scoring": {
+        "label": "评分要求",
+        "items": [
+          {
+            "clause_id": "TB-0016",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "项目：技术部分评分PT 满分为65.00 分 适用<br>对象：技术部分评分PT 满分为65.00 分 比例：技术部分评分PT 满分为65.00 分 描述：技术",
+            "quote": "项目：技术部分评分PT 满分为65.00 分 适用<br>对象：技术部分评分PT 满分为65.00 分 比例：技术部分评分PT 满分为65.00 分 描述：技术部分评分PT 满分为65.00 分",
+            "pages": [
+              11
+            ],
+            "page": 11,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 11 页",
+              "index": 11,
+              "pages": [
+                11
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0017",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "综合评审总得分从高到低顺序推荐3 名成交候选供应商,其中评审总得分最高的 供应商为第一成交候选供应商。",
+            "quote": "综合评审总得分从高到低顺序推荐3 名成交候选供应商,其中评审总得分最高的 供应商为第一成交候选供应商。",
+            "pages": [
+              11
+            ],
+            "page": 11,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 11 页",
+              "index": 11,
+              "pages": [
+                11
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0018",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "(2)每个供应商的评审总得分FA=F1×A1+F2×A2+F3×A3,其中:F1",
+            "quote": "(2)每个供应商的评审总得分FA=F1×A1+F2×A2+F3×A3,其中:F1",
+            "pages": [
+              11
+            ],
+            "page": 11,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 11 页",
+              "index": 11,
+              "pages": [
+                11
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0019",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "项评审因素所占的权重,A1+A2+A3=1、F1×A1+F2×A2+F3×A3=100 分(满 分时)。",
+            "quote": "项评审因素所占的权重,A1+A2+A3=1、F1×A1+F2×A2+F3×A3=100 分(满 分时)。",
+            "pages": [
+              11
+            ],
+            "page": 11,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 11 页",
+              "index": 11,
+              "pages": [
+                11
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0020",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "报价部分评分PF 满分为10.00 分 满足竞争性磋商文件要求且报价最低的为评审基准价,价格得分=(评审基 准价/报价)×标准分值。因落实政府采购政策进行价格调",
+            "quote": "报价部分评分PF 满分为10.00 分 满足竞争性磋商文件要求且报价最低的为评审基准价,价格得分=(评审基 准价/报价)×标准分值。因落实政府采购政策进行价格调整的,以调整后的价 格计算评标基准价和投标报价。价格扣除的规则如下: 项目 适用 对象 比例 描述 技术部分评分PT 满分为65.00 分 项目 分值 是否客 观项 描述 T1.技术",
+            "pages": [
+              11
+            ],
+            "page": 11,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 11 页",
+              "index": 11,
+              "pages": [
+                11
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0021",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "32.00 否 根据供应商对磋商文件第三章《采购内容及要求》第12 页共66 页 响应情 况 “二、技术要求”中的各项条款内容的逐项响应情 况并结合相关佐证材料",
+            "quote": "32.00 否 根据供应商对磋商文件第三章《采购内容及要求》第12 页共66 页 响应情 况 “二、技术要求”中的各项条款内容的逐项响应情 况并结合相关佐证材料(如有),由磋商小组进行 评议并打分:完全满足磋商文件要求的得32 分; 标注“★”的技术参数为不允许负偏离的实质性要 求,若出现任一项负偏离(或未响应)的按无效响 应处理;其他指标(共计5 项),每负偏离一项扣",
+            "pages": [
+              11,
+              12
+            ],
+            "page": 11,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 11-12 页",
+              "index": 11,
+              "pages": [
+                11,
+                12
+              ]
+            },
+            "detection": "cross_page",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0022",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "6.4 分,扣完为止,正偏离不加分。",
+            "quote": "6.4 分,扣完为止,正偏离不加分。",
+            "pages": [
+              12
+            ],
+            "page": 12,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 12 页",
+              "index": 12,
+              "pages": [
+                12
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0023",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "3.00 否 根据供应商针对本项目提供的策划方案(包含但不 限于:1主题及立意深化;2整体活动策划理念阐 述说明;3系列分项活动策划理念阐述说明)进行 评分:方",
+            "quote": "3.00 否 根据供应商针对本项目提供的策划方案(包含但不 限于:1主题及立意深化;2整体活动策划理念阐 述说明;3系列分项活动策划理念阐述说明)进行 评分:方案所包含的要点齐全无缺漏项、内容与要 点相符、每个要点均有展开详细的阐述且能够适用 于本项目的得3 分;方案所包含的要点齐全、内容 与要点相符、每个要点均有展开阐述(没有特别具 体)但基本能够适用于本项目的得2.7 分;方案所 包含的要点齐全、内容与要点相符但仅有纲要、内 容简略,未展开详细阐述但基本能够适用于本项目 的得2.4 分;方案所包含的要点有缺漏、未提供或 内容存在明显错误、内容明显不适用于本项目需求 的均不得分。 T3.活动 主视觉 设计效 果方案",
+            "pages": [
+              12
+            ],
+            "page": 12,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 12 页",
+              "index": 12,
+              "pages": [
+                12
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0024",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "3.00 否 根据供应商针对本项目提供的活动主视觉设计效 果方案(包含但不限于:1体现活动口号;2活动 地点;3主题文化特色;4视觉效果说明)进行评 分:方案所",
+            "quote": "3.00 否 根据供应商针对本项目提供的活动主视觉设计效 果方案(包含但不限于:1体现活动口号;2活动 地点;3主题文化特色;4视觉效果说明)进行评 分:方案所包含的要点齐全无缺漏项、内容与要点 相符、每个要点均有展开详细的阐述且能够适用于 本项目的得3 分;方案所包含的要点齐全、内容与 要点相符、每个要点均有展开阐述(没有特别具体) 但基本能够适用于本项目的得2.7 分;方案所包含 的要点齐全、内容与要点相符但仅有纲要、内容简 略,未展开详细阐述但基本能够适用于本项目的得",
+            "pages": [
+              12
+            ],
+            "page": 12,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 12 页",
+              "index": 12,
+              "pages": [
+                12
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0025",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "2.4 分;方案所包含的要点有缺漏、未提供或内容 存在明显错误、内容明显不适用于本项目需求的均 不得分。 T4.启动 仪式场 地规划 方案情 况",
+            "quote": "2.4 分;方案所包含的要点有缺漏、未提供或内容 存在明显错误、内容明显不适用于本项目需求的均 不得分。 T4.启动 仪式场 地规划 方案情 况",
+            "pages": [
+              12
+            ],
+            "page": 12,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 12 页",
+              "index": 12,
+              "pages": [
+                12
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0026",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "3.00 否 根据供应商针对本项目提供的启动仪式现场规划 方案情况(包括但不限于:实际场地的整体平面规 划图、活动区域规划、氛围布置规划等)进行评分: 方案涉及",
+            "quote": "3.00 否 根据供应商针对本项目提供的启动仪式现场规划 方案情况(包括但不限于:实际场地的整体平面规 划图、活动区域规划、氛围布置规划等)进行评分: 方案涉及以上要点且内容齐全无缺漏项、内容与要 点相符、内容完善且能够完全满足本项目需求的得 3 分;方案所包含的要点齐全、内容与要点相符, 但仅有纲要内容简略,能够大部分满足本项目需求 的得2.7 分;要点有缺漏或内容存在错误,针对性 不强的,少部分满足本项目需求的得2.4 分;不满 足或未提供的不得分。 T5.鼓楼",
+            "pages": [
+              12
+            ],
+            "page": 12,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 12 页",
+              "index": 12,
+              "pages": [
+                12
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0027",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "限定宴<br>席设计<br>情况：T6.海鲜<br>伴手礼/<br>预制菜<br>推广方<br>案 Col2：3.00 Col3：否 方案情况(包括但不限于:菜",
+            "quote": "限定宴<br>席设计<br>情况：T6.海鲜<br>伴手礼/<br>预制菜<br>推广方<br>案 Col2：3.00 Col3：否 方案情况(包括但不限于:菜品设计、制定理念、<br>现场活动组织等)进行评分:方案涉及以上要点且<br>内容齐全无缺漏项、内容与要点相符、内容完善且<br>能够完全满足本项目需求的得3 分;方案所包含的<br>要点齐全、内容与要点相符,但仅有纲要内容简略,<br>能够大部分满足本项目需求的得2.7 分;要点有缺<br>漏或内容存在错误,针对性不强的,少部分满足本<br>项目需求的得2.4 分;不满足或未提供的不得分。：根据供应商针对本项目所提供海鲜伴手礼/预制菜<br>推广方案进行综合评审:设计理念清晰完整,高度<br>契合鼓楼文化内涵与项目推广主题,创意鲜明、立<br>意深刻的得3 分;设计理念清晰,能切合主题,内<br>容具体详实的得2.7 分;设计理念",
+            "pages": [
+              13
+            ],
+            "page": 13,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 13 页",
+              "index": 13,
+              "pages": [
+                13
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0028",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "限定宴<br>席设计<br>情况：T7.宴席<br>售卖方<br>案情况 Col2：3.00 Col3：否 方案情况(包括但不限于:菜品设计、制定理念、<br>",
+            "quote": "限定宴<br>席设计<br>情况：T7.宴席<br>售卖方<br>案情况 Col2：3.00 Col3：否 方案情况(包括但不限于:菜品设计、制定理念、<br>现场活动组织等)进行评分:方案涉及以上要点且<br>内容齐全无缺漏项、内容与要点相符、内容完善且<br>能够完全满足本项目需求的得3 分;方案所包含的<br>要点齐全、内容与要点相符,但仅有纲要内容简略,<br>能够大部分满足本项目需求的得2.7 分;要点有缺<br>漏或内容存在错误,针对性不强的,少部分满足本<br>项目需求的得2.4 分;不满足或未提供的不得分。：根据供应商针对本项目提供的宴席售卖方案情况<br>(内容包含但不限于:定价、销售渠道)进行评分:<br>方案涉及以上要点且内容齐全无缺漏项、内容与要<br>点相符、内容完善且能够完全满足本项目需求的得<br>3 分;方案所包含的要点齐全、内容与要点相符,<br>但仅有纲",
+            "pages": [
+              13
+            ],
+            "page": 13,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 13 页",
+              "index": 13,
+              "pages": [
+                13
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0029",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "限定宴<br>席设计<br>情况：T8.媒体<br>平台资<br>源情况 Col2：3.00 Col3：是 方案情况(包括但不限于:菜品设计、制定理念、<br>",
+            "quote": "限定宴<br>席设计<br>情况：T8.媒体<br>平台资<br>源情况 Col2：3.00 Col3：是 方案情况(包括但不限于:菜品设计、制定理念、<br>现场活动组织等)进行评分:方案涉及以上要点且<br>内容齐全无缺漏项、内容与要点相符、内容完善且<br>能够完全满足本项目需求的得3 分;方案所包含的<br>要点齐全、内容与要点相符,但仅有纲要内容简略,<br>能够大部分满足本项目需求的得2.7 分;要点有缺<br>漏或内容存在错误,针对性不强的,少部分满足本<br>项目需求的得2.4 分;不满足或未提供的不得分。：根据供应商提供的媒体平台资源(可用于本项目宣<br>传)情况进行打分,市级及以上媒体资源,平台种<br>类丰富,提供平台≥10 个,证明材料完整的得3<br>分;市级及以上媒体资源,平台种类丰富,提供5<br>个≤平台<10 个,证明材料完整的得2 分;市级及<br>以",
+            "pages": [
+              13
+            ],
+            "page": 13,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 13 页",
+              "index": 13,
+              "pages": [
+                13
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0030",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "限定宴<br>席设计<br>情况：T9.宣传<br>方案 Col2：3.00 Col3：否 方案情况(包括但不限于:菜品设计、制定理念、<br>现场活动组织等)",
+            "quote": "限定宴<br>席设计<br>情况：T9.宣传<br>方案 Col2：3.00 Col3：否 方案情况(包括但不限于:菜品设计、制定理念、<br>现场活动组织等)进行评分:方案涉及以上要点且<br>内容齐全无缺漏项、内容与要点相符、内容完善且<br>能够完全满足本项目需求的得3 分;方案所包含的<br>要点齐全、内容与要点相符,但仅有纲要内容简略,<br>能够大部分满足本项目需求的得2.7 分;要点有缺<br>漏或内容存在错误,针对性不强的,少部分满足本<br>项目需求的得2.4 分;不满足或未提供的不得分。：根据供应商针对本项目提供的宣传方案(包含但不<br>限于:1宣传内容;2宣传方式;3传播效果)进<br>行评分:方案所包含的要点齐全无缺漏项、内容与<br>要点相符、每个要点均有展开详细的阐述且能够适<br>用于本项目的得3 分;方案所包含的要点齐全、内<br>容与要点相符、每个要点均",
+            "pages": [
+              13
+            ],
+            "page": 13,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 13 页",
+              "index": 13,
+              "pages": [
+                13
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0031",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "第13 页共66 页 限定宴 席设计 情况 方案情况(包括但不限于:菜品设计、制定理念、 现场活动组织等)进行评分:方案涉及以上要点且 内容齐全无缺漏项、内容与",
+            "quote": "第13 页共66 页 限定宴 席设计 情况 方案情况(包括但不限于:菜品设计、制定理念、 现场活动组织等)进行评分:方案涉及以上要点且 内容齐全无缺漏项、内容与要点相符、内容完善且 能够完全满足本项目需求的得3 分;方案所包含的 要点齐全、内容与要点相符,但仅有纲要内容简略, 能够大部分满足本项目需求的得2.7 分;要点有缺 漏或内容存在错误,针对性不强的,少部分满足本 项目需求的得2.4 分;不满足或未提供的不得分。 T6.海鲜 伴手礼/ 预制菜 推广方 案",
+            "pages": [
+              13
+            ],
+            "page": 13,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 13 页",
+              "index": 13,
+              "pages": [
+                13
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0032",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "3.00 否 根据供应商针对本项目所提供海鲜伴手礼/预制菜 推广方案进行综合评审:设计理念清晰完整,高度 契合鼓楼文化内涵与项目推广主题,创意鲜明、立 意深刻的",
+            "quote": "3.00 否 根据供应商针对本项目所提供海鲜伴手礼/预制菜 推广方案进行综合评审:设计理念清晰完整,高度 契合鼓楼文化内涵与项目推广主题,创意鲜明、立 意深刻的得3 分;设计理念清晰,能切合主题,内 容具体详实的得2.7 分;设计理念基本完整,与主 题契合,内容较为单薄的得2.4 分;设计理念明显 偏离主题或未提供相关设计理念说明的不得分。 T7.宴席 售卖方 案情况",
+            "pages": [
+              13
+            ],
+            "page": 13,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 13 页",
+              "index": 13,
+              "pages": [
+                13
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0033",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "3.00 否 根据供应商针对本项目提供的宴席售卖方案情况 (内容包含但不限于:定价、销售渠道)进行评分: 方案涉及以上要点且内容齐全无缺漏项、内容与要 点相符、",
+            "quote": "3.00 否 根据供应商针对本项目提供的宴席售卖方案情况 (内容包含但不限于:定价、销售渠道)进行评分: 方案涉及以上要点且内容齐全无缺漏项、内容与要 点相符、内容完善且能够完全满足本项目需求的得 3 分;方案所包含的要点齐全、内容与要点相符, 但仅有纲要内容简略,能够大部分满足本项目需求 的得2.7 分;要点有缺漏或内容存在错误,针对性 不强的,少部分满足本项目需求的得2.4 分;不满 足或未提供的不得分。 T8.媒体 平台资 源情况",
+            "pages": [
+              13
+            ],
+            "page": 13,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 13 页",
+              "index": 13,
+              "pages": [
+                13
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0034",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "3.00 是 根据供应商提供的媒体平台资源(可用于本项目宣 传)情况进行打分,市级及以上媒体资源,平台种 类丰富,提供平台≥10 个,证明材料完整的得3 分;市",
+            "quote": "3.00 是 根据供应商提供的媒体平台资源(可用于本项目宣 传)情况进行打分,市级及以上媒体资源,平台种 类丰富,提供平台≥10 个,证明材料完整的得3 分;市级及以上媒体资源,平台种类丰富,提供5 个≤平台<10 个,证明材料完整的得2 分;市级及 以上媒体资源,平台种类丰富,提供3 个≤平台< 5 个,证明材料完整的得1 分;未提供或提供不齐 全的不得分。 注:须提供平台资源一览表和相应的证明材料(合 同或授权证明等)。 T9.宣传 方案",
+            "pages": [
+              13
+            ],
+            "page": 13,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 13 页",
+              "index": 13,
+              "pages": [
+                13
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0035",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "3.00 否 根据供应商针对本项目提供的宣传方案(包含但不 限于:1宣传内容;2宣传方式;3传播效果)进 行评分:方案所包含的要点齐全无缺漏项、内容与 要点相符",
+            "quote": "3.00 否 根据供应商针对本项目提供的宣传方案(包含但不 限于:1宣传内容;2宣传方式;3传播效果)进 行评分:方案所包含的要点齐全无缺漏项、内容与 要点相符、每个要点均有展开详细的阐述且能够适 用于本项目的得3 分;方案所包含的要点齐全、内 容与要点相符、每个要点均有展开阐述(没有特别 具体)但基本能够适用于本项目的得2.7 分;方案 所包含的要点齐全、内容与要点相符但仅有纲要、 内容简略,未展开详细阐述但基本能够适用于本项 目的得2.4 分;方案所包含的要点有缺漏、未提供",
+            "pages": [
+              13
+            ],
+            "page": 13,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 13 页",
+              "index": 13,
+              "pages": [
+                13
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0036",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "项目：B1.业绩<br>情况 分值：3.00 是否客<br>观项：是 描述：根据供应商提供的自2022 年1 月1 日以来(日期<br>以合同签订时间为准)由供",
+            "quote": "项目：B1.业绩<br>情况 分值：3.00 是否客<br>观项：是 描述：根据供应商提供的自2022 年1 月1 日以来(日期<br>以合同签订时间为准)由供应商完成的活动、宣传<br>类业绩情况进行评分:每提供一份完整业绩证明得<br>1 分,满分3 分。<br>注:供应商需同时提供项目汇总表及业绩项目的中<br>标<成交>公告(提供相关网站中标<成交>公告的下<br>载网页并注明网址)、中标<成交>通知书复印件、<br>采购合同文本复印件以及能够证明该业绩项目已经<br>采购人验收合格的相关证明文件复印件,未提供或<br>提供内容不符或提供内容不完整的本项不得分。<br>【本项与“B2.活动组织相关经验情况”、“B4.",
+            "pages": [
+              14
+            ],
+            "page": 14,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 14 页",
+              "index": 14,
+              "pages": [
+                14
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0037",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "第14 页共66 页 或内容存在明显错误、内容明显不适用于本项目需 求的均不得分。 T10.宣 传服务 实力",
+            "quote": "第14 页共66 页 或内容存在明显错误、内容明显不适用于本项目需 求的均不得分。 T10.宣 传服务 实力",
+            "pages": [
+              14
+            ],
+            "page": 14,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 14 页",
+              "index": 14,
+              "pages": [
+                14
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0038",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "3.00 是 根据供应商提供的爆款内容制作能力进行评分,制 作10 万+爆款推文≥20 条的得3 分;15 条≤制作 10 万+爆款推文<20 条的得2 分;1",
+            "quote": "3.00 是 根据供应商提供的爆款内容制作能力进行评分,制 作10 万+爆款推文≥20 条的得3 分;15 条≤制作 10 万+爆款推文<20 条的得2 分;10 条≤制作10 万+爆款推文<15 条的得1 分;制作10 万+爆款推 文<10 条的或未提供的不得分。 注:须提供爆款推文制作能力相关证明材料(需有 合同或授权证明该平台为供应商所有或运营),同 时提供承诺函承诺提供的爆款内容是供应商团队 原创(非转载、格式自拟),未提供或提供不齐全 的不得分。 T11.视 频服务 实力",
+            "pages": [
+              14
+            ],
+            "page": 14,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 14 页",
+              "index": 14,
+              "pages": [
+                14
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0039",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "3.00 是 根据供应商提供的视频拍摄、制作能力进行评分, 全年独立制作视频≥20 条的得3 分;15 条≤全年 独立制作视频<20 条的得2 分;10 条≤全",
+            "quote": "3.00 是 根据供应商提供的视频拍摄、制作能力进行评分, 全年独立制作视频≥20 条的得3 分;15 条≤全年 独立制作视频<20 条的得2 分;10 条≤全年独立 制作视频<15 条的得1 分;全年独立制作视频<10 条的或未提供的不得分。 注:须提供视频制作能力相关证明材料(需有合同 或授权证明发布平台为供应商所有或运营),同时 提供承诺函承诺提供视频内容是供应商团队原创 (非转载、格式自拟),未提供或提供不齐全的不 得分。 T12.主 视觉设 计服务 实力",
+            "pages": [
+              14
+            ],
+            "page": 14,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 14 页",
+              "index": 14,
+              "pages": [
+                14
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0040",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "3.00 是 根据供应商提供的视觉设计能力(主题图解或海报 等类型)进行评分,全年独立设计作品≥20 个的得 3 分;20 个>全年独立设计作品≥15 个的得2",
+            "quote": "3.00 是 根据供应商提供的视觉设计能力(主题图解或海报 等类型)进行评分,全年独立设计作品≥20 个的得 3 分;20 个>全年独立设计作品≥15 个的得2 分; 15>全年独立设计作品≥10 个的得1 分;全年独立 设计作品<10 条的或未提供的不得分。 注:须提供相关作品截图,同时提供承诺函,承诺 提供设计作品是供应商团队原创(非转载、格式自 拟),未提供或提供不齐全的不得分。 商务部分评分PB 满分为25.00 分 项目 分值 是否客 观项 描述 B1.业绩 情况",
+            "pages": [
+              14
+            ],
+            "page": 14,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 14 页",
+              "index": 14,
+              "pages": [
+                14
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0041",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "3.00 是 根据供应商提供的自2022 年1 月1 日以来(日期 以合同签订时间为准)由供应商完成的活动、宣传 类业绩情况进行评分:每提供一份完整业绩证明得 ",
+            "quote": "3.00 是 根据供应商提供的自2022 年1 月1 日以来(日期 以合同签订时间为准)由供应商完成的活动、宣传 类业绩情况进行评分:每提供一份完整业绩证明得 1 分,满分3 分。 注:供应商需同时提供项目汇总表及业绩项目的中 标<成交>公告(提供相关网站中标<成交>公告的下 载网页并注明网址)、中标<成交>通知书复印件、 采购合同文本复印件以及能够证明该业绩项目已经 采购人验收合格的相关证明文件复印件,未提供或 提供内容不符或提供内容不完整的本项不得分。 【本项与“B2.活动组织相关经验情况”、“B4.",
+            "pages": [
+              14
+            ],
+            "page": 14,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 14 页",
+              "index": 14,
+              "pages": [
+                14
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0042",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "Col1：B2.活动<br>组织相<br>关经验<br>情况 Col2：3.00 Col3：是 满意度”评分项为同一项目的不重复计分】：根据供应商提供的自202",
+            "quote": "Col1：B2.活动<br>组织相<br>关经验<br>情况 Col2：3.00 Col3：是 满意度”评分项为同一项目的不重复计分】：根据供应商提供的自2022 年1 月1 日以来(日期<br>以合同签订时间为准)由供应商组织的促消费主题<br>活动情况进行评分:每提供一份得1 分,满分3 分。<br>注:供应商需提供项目汇总表及业绩项目的中标<<br>成交>公告(提供相关网站中标<成交>公告的下载<br>网页并注明网址)、中标<成交>通知书复印件、采<br>购合同文本复印件以及能够证明该业绩项目已经采<br>购人验收合格的相关证明文件复印件,未提供或提<br>供内容不符或提供内容不完整的本项不得分。<br>【本项与“B1.业绩情况”、“B4.满意度”评分项<br>为同一项目的不重复计分】",
+            "pages": [
+              15
+            ],
+            "page": 15,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 15 页",
+              "index": 15,
+              "pages": [
+                15
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0043",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "Col1：B3.宣传<br>相关经<br>验情<br>况 Col2：3.00 Col3：是 满意度”评分项为同一项目的不重复计分】：根据供应商提供的自2022 ",
+            "quote": "Col1：B3.宣传<br>相关经<br>验情<br>况 Col2：3.00 Col3：是 满意度”评分项为同一项目的不重复计分】：根据供应商提供的自2022 年1 月1 日以来(日期<br>以合同签订时间为准)由供应商作为主办单位或承<br>办单位组织的促消费活动的新闻稿情况进行评分:<br>新闻稿篇数≥5 篇的得3 分;4 篇>新闻稿篇数≥3<br>篇的得2 分;新闻稿篇数<3 篇的得1 分。<br>注:须提供官方网站或者公众号发布的新闻截图,<br>未提供或提供内容不符的本项不得分。",
+            "pages": [
+              15
+            ],
+            "page": 15,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 15 页",
+              "index": 15,
+              "pages": [
+                15
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0044",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "Col1：B4.满意<br>度 Col2：3.00 Col3：是 满意度”评分项为同一项目的不重复计分】：根据供应商提供的2022 年1 月1 日以来(以评价日",
+            "quote": "Col1：B4.满意<br>度 Col2：3.00 Col3：是 满意度”评分项为同一项目的不重复计分】：根据供应商提供的2022 年1 月1 日以来(以评价日<br>期为准)由用户单位对供应商自身完成的同类项目<br>评价结果进行评分:每提供一份评为优秀(评价在<br>90 分以上或评价为满意或好等同等描述)的得1<br>分,满分3 分。<br>注:每份评价须同时提供由用户单位出具的满意意<br>见证明材料复印件、合同复印件及中标通知书,所<br>有材料缺一不可,否则不得分。【本项与“B1.业<br>绩情况”、“B2.活动组织相关经验情况”评分项<br>为同一项目的不重复计分】",
+            "pages": [
+              15
+            ],
+            "page": 15,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 15 页",
+              "index": 15,
+              "pages": [
+                15
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0045",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "Col1：B5.人员<br>配备 Col2：3.00 Col3：是 满意度”评分项为同一项目的不重复计分】：5.1 根据供应商针对本项目拟投入的项目负责人(1<",
+            "quote": "Col1：B5.人员<br>配备 Col2：3.00 Col3：是 满意度”评分项为同一项目的不重复计分】：5.1 根据供应商针对本项目拟投入的项目负责人(1<br>名,本科及以上学历)情况进行评分:具有同类项目<br>经验的得3 分。<br>注:须提供能体现项目负责人信息的合同复印件或<br>其他证明材料。未提供或提供内容不符的本项不得<br>分。",
+            "pages": [
+              15
+            ],
+            "page": 15,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 15 页",
+              "index": 15,
+              "pages": [
+                15
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0046",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "Col1：B5.人员<br>配备 Col2：3.00 Col3：是 满意度”评分项为同一项目的不重复计分】：5.2 根据供应商针对本项目拟投入的设计人员(1<b",
+            "quote": "Col1：B5.人员<br>配备 Col2：3.00 Col3：是 满意度”评分项为同一项目的不重复计分】：5.2 根据供应商针对本项目拟投入的设计人员(1<br>名)情况进行评分:具有本科及以上艺术或设计或<br>动画类专业毕业证书的得3 分。<br>注:须提供上述人员毕业证书复印件或学信网截图<br>证明、联系方式、递交响应文件截止时间前六个月<br>内任意一个月(不含递交响应文件截止时间当月)<br>供应商为其缴纳社保证明材料【若供应商为提交响<br>应文件截止时间当月成立的,可提供依法缴纳社会<br>保障资金承诺书(格式自拟)】及承诺函(格式自",
+            "pages": [
+              15
+            ],
+            "page": 15,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 15 页",
+              "index": 15,
+              "pages": [
+                15
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0047",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "第15 页共66 页 满意度”评分项为同一项目的不重复计分】 B2.活动 组织相 关经验 情况",
+            "quote": "第15 页共66 页 满意度”评分项为同一项目的不重复计分】 B2.活动 组织相 关经验 情况",
+            "pages": [
+              15
+            ],
+            "page": 15,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 15 页",
+              "index": 15,
+              "pages": [
+                15
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0048",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "3.00 是 B3.宣传 相关经 验情 根据供应商提供的自2022 年1 月1 日以来(日期 以合同签订时间为准)由供应商组织的促消费主题 活动情况进行评分:每",
+            "quote": "3.00 是 B3.宣传 相关经 验情 根据供应商提供的自2022 年1 月1 日以来(日期 以合同签订时间为准)由供应商组织的促消费主题 活动情况进行评分:每提供一份得1 分,满分3 分。 注:供应商需提供项目汇总表及业绩项目的中标< 成交>公告(提供相关网站中标<成交>公告的下载 网页并注明网址)、中标<成交>通知书复印件、采 购合同文本复印件以及能够证明该业绩项目已经采 购人验收合格的相关证明文件复印件,未提供或提 供内容不符或提供内容不完整的本项不得分。 【本项与“B1.业绩情况”、“B4.满意度”评分项 为同一项目的不重复计分】 况",
+            "pages": [
+              15
+            ],
+            "page": 15,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 15 页",
+              "index": 15,
+              "pages": [
+                15
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0049",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "3.00 是 根据供应商提供的自2022 年1 月1 日以来(日期 以合同签订时间为准)由供应商作为主办单位或承 办单位组织的促消费活动的新闻稿情况进行评分: ",
+            "quote": "3.00 是 根据供应商提供的自2022 年1 月1 日以来(日期 以合同签订时间为准)由供应商作为主办单位或承 办单位组织的促消费活动的新闻稿情况进行评分: 新闻稿篇数≥5 篇的得3 分;4 篇>新闻稿篇数≥3 篇的得2 分;新闻稿篇数<3 篇的得1 分。 注:须提供官方网站或者公众号发布的新闻截图, 未提供或提供内容不符的本项不得分。 B4.满意 度",
+            "pages": [
+              15
+            ],
+            "page": 15,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 15 页",
+              "index": 15,
+              "pages": [
+                15
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0050",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "3.00 是 根据供应商提供的2022 年1 月1 日以来(以评价日 期为准)由用户单位对供应商自身完成的同类项目 评价结果进行评分:每提供一份评为优秀(评价在",
+            "quote": "3.00 是 根据供应商提供的2022 年1 月1 日以来(以评价日 期为准)由用户单位对供应商自身完成的同类项目 评价结果进行评分:每提供一份评为优秀(评价在 90 分以上或评价为满意或好等同等描述)的得1 分,满分3 分。 注:每份评价须同时提供由用户单位出具的满意意 见证明材料复印件、合同复印件及中标通知书,所 有材料缺一不可,否则不得分。【本项与“B1.业 绩情况”、“B2.活动组织相关经验情况”评分项 为同一项目的不重复计分】 B5.人员 配备",
+            "pages": [
+              15
+            ],
+            "page": 15,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 15 页",
+              "index": 15,
+              "pages": [
+                15
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0051",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "5.1 根据供应商针对本项目拟投入的项目负责人(1 名,本科及以上学历)情况进行评分:具有同类项目 经验的得3 分。 注:须提供能体现项目负责人信息的合同复印件",
+            "quote": "5.1 根据供应商针对本项目拟投入的项目负责人(1 名,本科及以上学历)情况进行评分:具有同类项目 经验的得3 分。 注:须提供能体现项目负责人信息的合同复印件或 其他证明材料。未提供或提供内容不符的本项不得 分。",
+            "pages": [
+              15
+            ],
+            "page": 15,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 15 页",
+              "index": 15,
+              "pages": [
+                15
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0052",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "5.2 根据供应商针对本项目拟投入的设计人员(1 名)情况进行评分:具有本科及以上艺术或设计或 动画类专业毕业证书的得3 分。 注:须提供上述人员毕业证书复印件",
+            "quote": "5.2 根据供应商针对本项目拟投入的设计人员(1 名)情况进行评分:具有本科及以上艺术或设计或 动画类专业毕业证书的得3 分。 注:须提供上述人员毕业证书复印件或学信网截图 证明、联系方式、递交响应文件截止时间前六个月 内任意一个月(不含递交响应文件截止时间当月) 供应商为其缴纳社保证明材料【若供应商为提交响 应文件截止时间当月成立的,可提供依法缴纳社会 保障资金承诺书(格式自拟)】及承诺函(格式自第16 页共66 页 拟,承诺内容如下:承诺投入本项目的设计人员不 兼任本项目的其他职务)。未提供或提供内容不符 的本项不得分。",
+            "pages": [
+              15,
+              16
+            ],
+            "page": 15,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 15-16 页",
+              "index": 15,
+              "pages": [
+                15,
+                16
+              ]
+            },
+            "detection": "cross_page",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0053",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "5.3 根据供应商针对本项目拟投入的技术保障人员 (1 名)情况进行评分:具有本科及以上计算机类专 业毕业证书的得1 分。 注:须提供上述人员毕业证书复印件或学",
+            "quote": "5.3 根据供应商针对本项目拟投入的技术保障人员 (1 名)情况进行评分:具有本科及以上计算机类专 业毕业证书的得1 分。 注:须提供上述人员毕业证书复印件或学信网截图 证明、联系方式、递交响应文件截止时间前六个月 内任意一个月(不含递交响应文件截止时间当月) 供应商为其缴纳社保证明材料【若供应商为提交响 应文件截止时间当月成立的,可提供依法缴纳社会 保障资金承诺书(格式自拟)】及承诺函(格式自 拟,承诺内容如下:承诺投入本项目的技术保障人 员不兼任本项目的其他职务)。未提供或提供内容 不符的本项不得分。",
+            "pages": [
+              16
+            ],
+            "page": 16,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 16 页",
+              "index": 16,
+              "pages": [
+                16
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0054",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "5.4 根据供应商针对本项目拟投入的新媒体宣传专 员(1 名)情况进行评分:具有本科及以上新媒体或 网络传播类毕业证书的得3 分。 注:须提供上述人员毕业证书复",
+            "quote": "5.4 根据供应商针对本项目拟投入的新媒体宣传专 员(1 名)情况进行评分:具有本科及以上新媒体或 网络传播类毕业证书的得3 分。 注:须提供上述人员毕业证书复印件或学信网截图 证明、联系方式、递交响应文件截止时间前六个月 内任意一个月(不含递交响应文件截止时间当月) 供应商为其缴纳社保证明材料【若供应商为提交响 应文件截止时间当月成立的,可提供依法缴纳社会 保障资金承诺书(格式自拟)】及承诺函(格式自 拟,承诺内容如下:承诺投入本项目的新媒体或网 络传播人员不兼任本项目的其他职务)。未提供或 提供内容不符的本项不得分。",
+            "pages": [
+              16
+            ],
+            "page": 16,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 16 页",
+              "index": 16,
+              "pages": [
+                16
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0055",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "5.5 根据供应商针对本项目拟投入的文案策划人员 (1 名)情况进行评分:具有本科及以上新闻或广告 类专业毕业证书的得3 分。 注:须提供人员毕业证书或学信网截",
+            "quote": "5.5 根据供应商针对本项目拟投入的文案策划人员 (1 名)情况进行评分:具有本科及以上新闻或广告 类专业毕业证书的得3 分。 注:须提供人员毕业证书或学信网截图证明或相关 证书复印件、联系方式、提交响应文件截止时间前 六个月(不含提交响应文件截止时间当月)中任意 一个月供应商为其缴纳的社保证明材料【若供应商 为提交响应文件截止时间当月成立的,可提供依法 缴纳社会保障资金承诺书(格式自拟)】以及承诺 函(格式自拟,承诺内容如下:供应商投入本项目 的项目文案策划人员不得兼任本项目的其他职务)。 未提供或提供不全的本项不得分。注:文案策划人 员不得兼任本项目的其他职务,不重复得分。 异常低价审查 项目 描述 异常低 价审查 根据《财政部关于推动解决政府采购异常低价问题的通知》(财库 〔2026〕2 号),结合本项目(采购包)实际情况,政府采购评审中",
+            "pages": [
+              16
+            ],
+            "page": 16,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 16 页",
+              "index": 16,
+              "pages": [
+                16
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          }
+        ]
+      },
+      "materials": {
+        "label": "要交的材料",
+        "items": [
+          {
+            "clause_id": "TB-0056",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "Col1：专门面向中小企<br>业采购 供应商,应当根据投标(响应)格式文件要求提供资格承诺<br>函,无需提供《政府采购法实施条例》第十七条第一款规定<br>",
+            "quote": "Col1：专门面向中小企<br>业采购 供应商,应当根据投标(响应)格式文件要求提供资格承诺<br>函,无需提供《政府采购法实施条例》第十七条第一款规定<br>的一般资格条件证明材料;资格承诺函不符合采购文件要求<br>的,视为未按照采购文件规定提交供应商的资格及资信文<br>件,按资格审查不合格处理。2采购项目有特殊资格要求的,<br>供应商还应按要求提供相应的证明材料。：本采购包为专门面向中小企业采购,供应商须提供中小企业<br>声明函。监狱企业、残疾人福利性单位视同小型、微型企业。<br>本项目为服务类采购项目,采购标的对应的中小企业划分标<br>准所属行业为:“租赁和商务服务业”。",
+            "pages": [
+              3
+            ],
+            "page": 3,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 3 页",
+              "index": 3,
+              "pages": [
+                3
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0057",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "的,视为未按照采购文件规定提交供应商的资格及资信文 件,按资格审查不合格处理。2采购项目有特殊资格要求的, 供应商还应按要求提供相应的证明材料。 专门面向中小企",
+            "quote": "的,视为未按照采购文件规定提交供应商的资格及资信文 件,按资格审查不合格处理。2采购项目有特殊资格要求的, 供应商还应按要求提供相应的证明材料。 专门面向中小企 业采购 本采购包为专门面向中小企业采购,供应商须提供中小企业 声明函。监狱企业、残疾人福利性单位视同小型、微型企业。 本项目为服务类采购项目,采购标的对应的中小企业划分标 准所属行业为:“租赁和商务服务业”。",
+            "pages": [
+              3
+            ],
+            "page": 3,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 3 页",
+              "index": 3,
+              "pages": [
+                3
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0058",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "6.2、方式:(1)直接至招标公司办理:填写报名表。(2)通过邮件办理:按 要求提交标书费后,将电汇或转账底单(公对公转账)及报名供应商相关信息(公 司名称、联",
+            "quote": "6.2、方式:(1)直接至招标公司办理:填写报名表。(2)通过邮件办理:按 要求提交标书费后,将电汇或转账底单(公对公转账)及报名供应商相关信息(公 司名称、联系人、公司电话、手机、电子邮箱、公司地址、参与投标的项目名称 及招标文件项目编号)填写清楚加盖公章发邮件至523520021@qq.com。 注:未办理报名登记备案的潜在供应商无资格参加本次投标。",
+            "pages": [
+              3
+            ],
+            "page": 3,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 3 页",
+              "index": 3,
+              "pages": [
+                3
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0059",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "项<br>号：1 条款号：3.2.1 编列内容：供应商的资格要求:见磋商文件第一章“采购公告/采购邀请书”<br>(1)资格证明文件资料要求:<br>采购包1:",
+            "quote": "项<br>号：1 条款号：3.2.1 编列内容：供应商的资格要求:见磋商文件第一章“采购公告/采购邀请书”<br>(1)资格证明文件资料要求:<br>采购包1:<br>序<br>号<br>资格审查要<br>求概况<br>评审点具体描述<br>1<br>磋商响应声<br>明<br>详见声明函<br>2<br>单位负责人<br>授权书<br>供应商(自然人除外):若供应商代表为<br>单位授权的委托代理人,应提供本授权书;<br>若供应商代表为单位负责人,应在此项下<br>提交其身份证正反面复印件,可不提供本<br>授权书。<br>3<br>营业执照等<br>证明文件<br>1供应商为企业的,提供有效的营业执照<br>复印件;供应商为事业单位的,提供有效<br>的事业单位法人证书复印件;供应商为社<br>会团体的,提供有效的社会团体法人登记<br>证书复印件;供应商为合伙企业、个体工<br>商",
+            "pages": [
+              5
+            ],
+            "page": 5,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 5 页",
+              "index": 5,
+              "pages": [
+                5
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0060",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "序<br>号：2 资格审查要<br>求概况：单位负责人<br>授权书 评审点具体描述：供应商(自然人除外):若供应商代表为<br>单位授权的委托代理人,应提供本",
+            "quote": "序<br>号：2 资格审查要<br>求概况：单位负责人<br>授权书 评审点具体描述：供应商(自然人除外):若供应商代表为<br>单位授权的委托代理人,应提供本授权书;<br>若供应商代表为单位负责人,应在此项下<br>提交其身份证正反面复印件,可不提供本<br>授权书。",
+            "pages": [
+              5
+            ],
+            "page": 5,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 5 页",
+              "index": 5,
+              "pages": [
+                5
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0061",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "序<br>号：3 资格审查要<br>求概况：营业执照等<br>证明文件 评审点具体描述：1供应商为企业的,提供有效的营业执照<br>复印件;供应商为事业单位的,",
+            "quote": "序<br>号：3 资格审查要<br>求概况：营业执照等<br>证明文件 评审点具体描述：1供应商为企业的,提供有效的营业执照<br>复印件;供应商为事业单位的,提供有效<br>的事业单位法人证书复印件;供应商为社<br>会团体的,提供有效的社会团体法人登记<br>证书复印件;供应商为合伙企业、个体工<br>商户的,提供有效的营业执照复印件;供<br>应商为非企业专业服务机构的,提供有效<br>的执业许可证等证明材料复印件;供应商<br>为自然人的,提供有效的自然人身份证件<br>复印件;其他供应商应按照有关法律、法<br>规和规章规定,提供有效的相应具体证照<br>复印件。",
+            "pages": [
+              5
+            ],
+            "page": 5,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 5 页",
+              "index": 5,
+              "pages": [
+                5
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0062",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "序<br>号：4 资格审查要<br>求概况：提供财务状<br>况报告(财<br>务报告、或<br>资信证明) 评审点具体描述：1供应商提供的财务报告复印件(成立",
+            "quote": "序<br>号：4 资格审查要<br>求概况：提供财务状<br>况报告(财<br>务报告、或<br>资信证明) 评审点具体描述：1供应商提供的财务报告复印件(成立年<br>限按照提交响应文件截止时间推算)应符<br>合下列规定:a.成立年限满1 年及以上的<br>供应商,提供经审计的上一年度的年度财<br>务报告。b.成立年限满半年但不足1 年的<br>供应商,提供该半年度中任一季度的季度<br>财务报告或该半年度的半年度财务报告。<br>c.无法按照以上a、b 项规定提供财务报告<br>复印件的供应商(包括但不限于:成立年<br>限满1 年及以上的供应商、成立年限满半<br>年但不足1 年的供应商、成立年限不足半",
+            "pages": [
+              5
+            ],
+            "page": 5,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 5 页",
+              "index": 5,
+              "pages": [
+                5
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0063",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(1)资格证明文件资料要求:",
+            "quote": "(1)资格证明文件资料要求:",
+            "pages": [
+              5
+            ],
+            "page": 5,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 5 页",
+              "index": 5,
+              "pages": [
+                5
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0064",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "求概况 评审点具体描述 1 磋商响应声 明 详见声明函 2 单位负责人 授权书 供应商(自然人除外):若供应商代表为 单位授权的委托代理人,应提供本授权书; 若",
+            "quote": "求概况 评审点具体描述 1 磋商响应声 明 详见声明函 2 单位负责人 授权书 供应商(自然人除外):若供应商代表为 单位授权的委托代理人,应提供本授权书; 若供应商代表为单位负责人,应在此项下 提交其身份证正反面复印件,可不提供本 授权书。 3 营业执照等 证明文件 1供应商为企业的,提供有效的营业执照 复印件;供应商为事业单位的,提供有效 的事业单位法人证书复印件;供应商为社 会团体的,提供有效的社会团体法人登记 证书复印件;供应商为合伙企业、个体工 商户的,提供有效的营业执照复印件;供 应商为非企业专业服务机构的,提供有效 的执业许可证等证明材料复印件;供应商 为自然人的,提供有效的自然人身份证件 复印件;其他供应商应按照有关法律、法 规和规章规定,提供有效的相应具体证照 复印件。 4 提供财务状 况报告(财 务报告、或 资信证明) 1供应商提供的财务报告复印件(成立年 限按照提交响",
+            "pages": [
+              5
+            ],
+            "page": 5,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 5 页",
+              "index": 5,
+              "pages": [
+                5
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0065",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "Col1：5 Col2：依法缴纳税<br>收证明材料 Col3：1供应商提供的税收缴纳凭据复印件应符<br>合下列规定:a.提交响应文件截止时间前<br>(不含",
+            "quote": "Col1：5 Col2：依法缴纳税<br>收证明材料 Col3：1供应商提供的税收缴纳凭据复印件应符<br>合下列规定:a.提交响应文件截止时间前<br>(不含提交响应文件截止时间的当月)已<br>依法缴纳税收的供应商,提供提交响应文<br>件截止时间前六个月(不含提交响应文件<br>截止时间的当月)中任一月份的税收缴纳<br>凭据复印件。b.提交响应文件截止时间的<br>当月成立的供应商,视同满足本项资格条<br>件要求。c.若为依法免税范围的供应商,<br>提供依法免税证明材料的,视同满足本项<br>资格条件要求。 Col4：1供应商提供的税收缴纳凭据复印件应符<br>合下列规定:a.提交响应文件截止时间前<br>(不含提交响应文件截止时间的当月)已<br>依法缴纳税收的供应商,提供提交响应文<br>件截止时间前六个月(不含提交响应文件<br>截止时间的当月)中任一月份的税收缴纳<br",
+            "pages": [
+              6
+            ],
+            "page": 6,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 6 页",
+              "index": 6,
+              "pages": [
+                6
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0066",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "Col1：6 Col2：依法缴纳社<br>会保障资金<br>证明材料 Col3：1供应商提供的社会保障资金缴纳凭据复<br>印件应符合下列规定:a.提交响应文件",
+            "quote": "Col1：6 Col2：依法缴纳社<br>会保障资金<br>证明材料 Col3：1供应商提供的社会保障资金缴纳凭据复<br>印件应符合下列规定:a.提交响应文件截<br>止时间前(不含提交响应文件截止时间的<br>当月)已依法缴纳社会保障资金的供应商,<br>提供提交响应文件截止时间前六个月(不<br>含提交响应文件截止时间的当月)中任一<br>月份的社会保障资金缴纳凭据复印件。b.<br>提交响应文件截止时间的当月成立的供应<br>商,视同满足本项资格条件要求。c.若为<br>依法不需要缴纳或暂缓缴纳社会保障资金<br>的供应商,提供依法不需要缴纳或暂缓缴<br>纳社会保障资金证明材料的,视同满足本<br>项资格条件要求。 Col4：1供应商提供的社会保障资金缴纳凭据复<br>印件应符合下列规定:a.提交响应文件截<br>止时间前(不含提交响应文件截止时间的<br>当月)已依法缴纳社会保",
+            "pages": [
+              6
+            ],
+            "page": 6,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 6 页",
+              "index": 6,
+              "pages": [
+                6
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0067",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "Col1：7 Col2：具备履行合<br>同所必需设<br>备和专业技<br>术能力的声<br>明函 Col3：供应商提供“具备履行合同所必需的设备<br>和专",
+            "quote": "Col1：7 Col2：具备履行合<br>同所必需设<br>备和专业技<br>术能力的声<br>明函 Col3：供应商提供“具备履行合同所必需的设备<br>和专业技术能力专项证明材料”的声明函。 Col4：供应商提供“具备履行合同所必需的设备<br>和专业技术能力专项证明材料”的声明函。",
+            "pages": [
+              6
+            ],
+            "page": 6,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 6 页",
+              "index": 6,
+              "pages": [
+                6
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0068",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "第6 页共66 页 年的供应商),应选择提供资信证明复印 件。 5 依法缴纳税 收证明材料 1供应商提供的税收缴纳凭据复印件应符 合下列规定:a.提交响应文件截",
+            "quote": "第6 页共66 页 年的供应商),应选择提供资信证明复印 件。 5 依法缴纳税 收证明材料 1供应商提供的税收缴纳凭据复印件应符 合下列规定:a.提交响应文件截止时间前 (不含提交响应文件截止时间的当月)已 依法缴纳税收的供应商,提供提交响应文 件截止时间前六个月(不含提交响应文件 截止时间的当月)中任一月份的税收缴纳 凭据复印件。b.提交响应文件截止时间的 当月成立的供应商,视同满足本项资格条 件要求。c.若为依法免税范围的供应商, 提供依法免税证明材料的,视同满足本项 资格条件要求。 6 依法缴纳社 会保障资金 证明材料 1供应商提供的社会保障资金缴纳凭据复 印件应符合下列规定:a.提交响应文件截 止时间前(不含提交响应文件截止时间的 当月)已依法缴纳社会保障资金的供应商, 提供提交响应文件截止时间前六个月(不 含提交响应文件截止时间的当月)中任一 月份的社会保障资金缴纳凭据复印件。b",
+            "pages": [
+              6
+            ],
+            "page": 6,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 6 页",
+              "index": 6,
+              "pages": [
+                6
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0069",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "Col1：10 用 )：信用记录查<br>询结果 《关于印发<统计上大中小微型企业划分<br>办法(2017)>的通知》规定准确划分企业类<br>型。本项目采购",
+            "quote": "Col1：10 用 )：信用记录查<br>询结果 《关于印发<统计上大中小微型企业划分<br>办法(2017)>的通知》规定准确划分企业类<br>型。本项目采购标的对应的中小企业划分<br>标准所属行业详见特定资格条件。2供应<br>商为监狱企业的,可不填写本声明函,根<br>据其提供的由省级以上监狱管理局、戒毒<br>管理局(含新疆生产建设兵团)出具的属<br>于监狱企业的证明文件进行认定,监狱企<br>业视同小型、微型企业。3供应商为残疾<br>人福利性单位的,可不填写本声明函,根<br>据其提供的《残疾人福利性单位声明函》<br>进行认定,残疾人福利性单位视同小型、<br>微型企业。4以联合体形式落实中小企业<br>预留份额时,还需提供《联合体协议》。<br>5以合同分包形式落实中小企业预留份额<br>时,还需提供《分包意向协议》。：1信用记录查询的截止时点:信用记录查<br>询的截",
+            "pages": [
+              7
+            ],
+            "page": 7,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 7 页",
+              "index": 7,
+              "pages": [
+                7
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0070",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "Col1：11 用 )：联合体协议<br>(若有) 《关于印发<统计上大中小微型企业划分<br>办法(2017)>的通知》规定准确划分企业类<br>型。本项目采",
+            "quote": "Col1：11 用 )：联合体协议<br>(若有) 《关于印发<统计上大中小微型企业划分<br>办法(2017)>的通知》规定准确划分企业类<br>型。本项目采购标的对应的中小企业划分<br>标准所属行业详见特定资格条件。2供应<br>商为监狱企业的,可不填写本声明函,根<br>据其提供的由省级以上监狱管理局、戒毒<br>管理局(含新疆生产建设兵团)出具的属<br>于监狱企业的证明文件进行认定,监狱企<br>业视同小型、微型企业。3供应商为残疾<br>人福利性单位的,可不填写本声明函,根<br>据其提供的《残疾人福利性单位声明函》<br>进行认定,残疾人福利性单位视同小型、<br>微型企业。4以联合体形式落实中小企业<br>预留份额时,还需提供《联合体协议》。<br>5以合同分包形式落实中小企业预留份额<br>时,还需提供《分包意向协议》。：1采购文件接受联合体报价且供应商为联<br>合体",
+            "pages": [
+              7
+            ],
+            "page": 7,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 7 页",
+              "index": 7,
+              "pages": [
+                7
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0071",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "不合格。 11 联合体协议 (若有) 1采购文件接受联合体报价且供应商为联 合体的,供应商应提供本协议;否则无须 提供。2本协议由委托代理人签字或盖章 的,应按",
+            "quote": "不合格。 11 联合体协议 (若有) 1采购文件接受联合体报价且供应商为联 合体的,供应商应提供本协议;否则无须 提供。2本协议由委托代理人签字或盖章 的,应按照采购文件第五章载明的格式提 供“单位负责人授权书”。",
+            "pages": [
+              7
+            ],
+            "page": 7,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 7 页",
+              "index": 7,
+              "pages": [
+                7
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0072",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "Col1：2 Col2：3.2.2 规定提交供应商的资格及资信文件,按资格<br>审查不合格处理。2采购项目有特殊资格要<br>求的,供应商还应按要求提供相应的",
+            "quote": "Col1：2 Col2：3.2.2 规定提交供应商的资格及资信文件,按资格<br>审查不合格处理。2采购项目有特殊资格要<br>求的,供应商还应按要求提供相应的证明材<br>料。<br>本采购包为专门面向中小企业采购,供应商<br>须提供中小企业声明函。监狱企业、残疾人<br>专门面向中小<br>福利性单位视同小型、微型企业。本项目为<br>企业采购<br>服务类采购项目,采购标的对应的中小企业<br>划分标准所属行业为:“租赁和商务服务业”。<br>(3)磋商保证金<br>※备注说明<br>1供应商应根据自身实际情况提供上述资格要求的证明材料,格<br>式可参考磋商文件第五章提供。<br>2供应商提供的相应证明材料复印件均应符合:内容完整、清晰、<br>整洁,并由供应商加盖其单位公章。：是否接受联合体形式的响应磋商:采购包1:不接受;",
+            "pages": [
+              8
+            ],
+            "page": 8,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 8 页",
+              "index": 8,
+              "pages": [
+                8
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0073",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "Col1：3 Col2：6.3 规定提交供应商的资格及资信文件,按资格<br>审查不合格处理。2采购项目有特殊资格要<br>求的,供应商还应按要求提供相应的证明",
+            "quote": "Col1：3 Col2：6.3 规定提交供应商的资格及资信文件,按资格<br>审查不合格处理。2采购项目有特殊资格要<br>求的,供应商还应按要求提供相应的证明材<br>料。<br>本采购包为专门面向中小企业采购,供应商<br>须提供中小企业声明函。监狱企业、残疾人<br>专门面向中小<br>福利性单位视同小型、微型企业。本项目为<br>企业采购<br>服务类采购项目,采购标的对应的中小企业<br>划分标准所属行业为:“租赁和商务服务业”。<br>(3)磋商保证金<br>※备注说明<br>1供应商应根据自身实际情况提供上述资格要求的证明材料,格<br>式可参考磋商文件第五章提供。<br>2供应商提供的相应证明材料复印件均应符合:内容完整、清晰、<br>整洁,并由供应商加盖其单位公章。：是否组织现场考察或召开磋商前答疑会:无;",
+            "pages": [
+              8
+            ],
+            "page": 8,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 8 页",
+              "index": 8,
+              "pages": [
+                8
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0074",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "Col1：4 Col2：9.1 规定提交供应商的资格及资信文件,按资格<br>审查不合格处理。2采购项目有特殊资格要<br>求的,供应商还应按要求提供相应的证明",
+            "quote": "Col1：4 Col2：9.1 规定提交供应商的资格及资信文件,按资格<br>审查不合格处理。2采购项目有特殊资格要<br>求的,供应商还应按要求提供相应的证明材<br>料。<br>本采购包为专门面向中小企业采购,供应商<br>须提供中小企业声明函。监狱企业、残疾人<br>专门面向中小<br>福利性单位视同小型、微型企业。本项目为<br>企业采购<br>服务类采购项目,采购标的对应的中小企业<br>划分标准所属行业为:“租赁和商务服务业”。<br>(3)磋商保证金<br>※备注说明<br>1供应商应根据自身实际情况提供上述资格要求的证明材料,格<br>式可参考磋商文件第五章提供。<br>2供应商提供的相应证明材料复印件均应符合:内容完整、清晰、<br>整洁,并由供应商加盖其单位公章。：响应文件有效期:首次响应文件提交截止时间起90 个日历日。",
+            "pages": [
+              8
+            ],
+            "page": 8,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 8 页",
+              "index": 8,
+              "pages": [
+                8
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0075",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "Col1：5 Col2：10.3.1 规定提交供应商的资格及资信文件,按资格<br>审查不合格处理。2采购项目有特殊资格要<br>求的,供应商还应按要求提供相应",
+            "quote": "Col1：5 Col2：10.3.1 规定提交供应商的资格及资信文件,按资格<br>审查不合格处理。2采购项目有特殊资格要<br>求的,供应商还应按要求提供相应的证明材<br>料。<br>本采购包为专门面向中小企业采购,供应商<br>须提供中小企业声明函。监狱企业、残疾人<br>专门面向中小<br>福利性单位视同小型、微型企业。本项目为<br>企业采购<br>服务类采购项目,采购标的对应的中小企业<br>划分标准所属行业为:“租赁和商务服务业”。<br>(3)磋商保证金<br>※备注说明<br>1供应商应根据自身实际情况提供上述资格要求的证明材料,格<br>式可参考磋商文件第五章提供。<br>2供应商提供的相应证明材料复印件均应符合:内容完整、清晰、<br>整洁,并由供应商加盖其单位公章。：磋商保证金退还的其它要求:无",
+            "pages": [
+              8
+            ],
+            "page": 8,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 8 页",
+              "index": 8,
+              "pages": [
+                8
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0076",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "Col1：6 Col2：11.1 规定提交供应商的资格及资信文件,按资格<br>审查不合格处理。2采购项目有特殊资格要<br>求的,供应商还应按要求提供相应的证",
+            "quote": "Col1：6 Col2：11.1 规定提交供应商的资格及资信文件,按资格<br>审查不合格处理。2采购项目有特殊资格要<br>求的,供应商还应按要求提供相应的证明材<br>料。<br>本采购包为专门面向中小企业采购,供应商<br>须提供中小企业声明函。监狱企业、残疾人<br>专门面向中小<br>福利性单位视同小型、微型企业。本项目为<br>企业采购<br>服务类采购项目,采购标的对应的中小企业<br>划分标准所属行业为:“租赁和商务服务业”。<br>(3)磋商保证金<br>※备注说明<br>1供应商应根据自身实际情况提供上述资格要求的证明材料,格<br>式可参考磋商文件第五章提供。<br>2供应商提供的相应证明材料复印件均应符合:内容完整、清晰、<br>整洁,并由供应商加盖其单位公章。：响应文件的份数<br>纸质响应文件<br>1响应文件正本1 份、副本2 份。<br>2可读介质(光盘或U",
+            "pages": [
+              8
+            ],
+            "page": 8,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 8 页",
+              "index": 8,
+              "pages": [
+                8
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0077",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "Col1：7 Col2：14.4 规定提交供应商的资格及资信文件,按资格<br>审查不合格处理。2采购项目有特殊资格要<br>求的,供应商还应按要求提供相应的证",
+            "quote": "Col1：7 Col2：14.4 规定提交供应商的资格及资信文件,按资格<br>审查不合格处理。2采购项目有特殊资格要<br>求的,供应商还应按要求提供相应的证明材<br>料。<br>本采购包为专门面向中小企业采购,供应商<br>须提供中小企业声明函。监狱企业、残疾人<br>专门面向中小<br>福利性单位视同小型、微型企业。本项目为<br>企业采购<br>服务类采购项目,采购标的对应的中小企业<br>划分标准所属行业为:“租赁和商务服务业”。<br>(3)磋商保证金<br>※备注说明<br>1供应商应根据自身实际情况提供上述资格要求的证明材料,格<br>式可参考磋商文件第五章提供。<br>2供应商提供的相应证明材料复印件均应符合:内容完整、清晰、<br>整洁,并由供应商加盖其单位公章。：磋商过程中可能发生实质性变动的内容:无。",
+            "pages": [
+              8
+            ],
+            "page": 8,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 8 页",
+              "index": 8,
+              "pages": [
+                8
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0078",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "Col1：8 Col2：14.9 规定提交供应商的资格及资信文件,按资格<br>审查不合格处理。2采购项目有特殊资格要<br>求的,供应商还应按要求提供相应的证",
+            "quote": "Col1：8 Col2：14.9 规定提交供应商的资格及资信文件,按资格<br>审查不合格处理。2采购项目有特殊资格要<br>求的,供应商还应按要求提供相应的证明材<br>料。<br>本采购包为专门面向中小企业采购,供应商<br>须提供中小企业声明函。监狱企业、残疾人<br>专门面向中小<br>福利性单位视同小型、微型企业。本项目为<br>企业采购<br>服务类采购项目,采购标的对应的中小企业<br>划分标准所属行业为:“租赁和商务服务业”。<br>(3)磋商保证金<br>※备注说明<br>1供应商应根据自身实际情况提供上述资格要求的证明材料,格<br>式可参考磋商文件第五章提供。<br>2供应商提供的相应证明材料复印件均应符合:内容完整、清晰、<br>整洁,并由供应商加盖其单位公章。：评审的标准和方法:具体内容详见竞争性磋商须知前附表专项附<br>件“评审的标准和方法”。",
+            "pages": [
+              8
+            ],
+            "page": 8,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 8 页",
+              "index": 8,
+              "pages": [
+                8
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0079",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "Col1：9 规定提交供应商的资格及资信文件,按资格<br>审查不合格处理。2采购项目有特殊资格要<br>求的,供应商还应按要求提供相应的证明材<br>料。<b",
+            "quote": "Col1：9 规定提交供应商的资格及资信文件,按资格<br>审查不合格处理。2采购项目有特殊资格要<br>求的,供应商还应按要求提供相应的证明材<br>料。<br>本采购包为专门面向中小企业采购,供应商<br>须提供中小企业声明函。监狱企业、残疾人<br>专门面向中小<br>福利性单位视同小型、微型企业。本项目为<br>企业采购<br>服务类采购项目,采购标的对应的中小企业<br>划分标准所属行业为:“租赁和商务服务业”。<br>(3)磋商保证金<br>※备注说明<br>1供应商应根据自身实际情况提供上述资格要求的证明材料,格<br>式可参考磋商文件第五章提供。<br>2供应商提供的相应证明材料复印件均应符合:内容完整、清晰、<br>整洁,并由供应商加盖其单位公章。：根据采购项目的特点和需要,需要加以详细说明的其他磋商程序<br>规定、要求等内容:无。",
+            "pages": [
+              8
+            ],
+            "page": 8,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 8 页",
+              "index": 8,
+              "pages": [
+                8
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0080",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "Col1：10 Col2：22.2 规定提交供应商的资格及资信文件,按资格<br>审查不合格处理。2采购项目有特殊资格要<br>求的,供应商还应按要求提供相应的",
+            "quote": "Col1：10 Col2：22.2 规定提交供应商的资格及资信文件,按资格<br>审查不合格处理。2采购项目有特殊资格要<br>求的,供应商还应按要求提供相应的证明材<br>料。<br>本采购包为专门面向中小企业采购,供应商<br>须提供中小企业声明函。监狱企业、残疾人<br>专门面向中小<br>福利性单位视同小型、微型企业。本项目为<br>企业采购<br>服务类采购项目,采购标的对应的中小企业<br>划分标准所属行业为:“租赁和商务服务业”。<br>(3)磋商保证金<br>※备注说明<br>1供应商应根据自身实际情况提供上述资格要求的证明材料,格<br>式可参考磋商文件第五章提供。<br>2供应商提供的相应证明材料复印件均应符合:内容完整、清晰、<br>整洁,并由供应商加盖其单位公章。：信息公告指定媒体(以下简称:“指定媒体”):<br>鼓楼区人民政府官网(https://www.gl.",
+            "pages": [
+              8
+            ],
+            "page": 8,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 8 页",
+              "index": 8,
+              "pages": [
+                8
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0081",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "Col1：11 Col2：23.1 规定提交供应商的资格及资信文件,按资格<br>审查不合格处理。2采购项目有特殊资格要<br>求的,供应商还应按要求提供相应的",
+            "quote": "Col1：11 Col2：23.1 规定提交供应商的资格及资信文件,按资格<br>审查不合格处理。2采购项目有特殊资格要<br>求的,供应商还应按要求提供相应的证明材<br>料。<br>本采购包为专门面向中小企业采购,供应商<br>须提供中小企业声明函。监狱企业、残疾人<br>专门面向中小<br>福利性单位视同小型、微型企业。本项目为<br>企业采购<br>服务类采购项目,采购标的对应的中小企业<br>划分标准所属行业为:“租赁和商务服务业”。<br>(3)磋商保证金<br>※备注说明<br>1供应商应根据自身实际情况提供上述资格要求的证明材料,格<br>式可参考磋商文件第五章提供。<br>2供应商提供的相应证明材料复印件均应符合:内容完整、清晰、<br>整洁,并由供应商加盖其单位公章。：本项目监督管理部门:福州市鼓楼区商务局。",
+            "pages": [
+              8
+            ],
+            "page": 8,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 8 页",
+              "index": 8,
+              "pages": [
+                8
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0082",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "Col1：12 Col2：26 规定提交供应商的资格及资信文件,按资格<br>审查不合格处理。2采购项目有特殊资格要<br>求的,供应商还应按要求提供相应的证明",
+            "quote": "Col1：12 Col2：26 规定提交供应商的资格及资信文件,按资格<br>审查不合格处理。2采购项目有特殊资格要<br>求的,供应商还应按要求提供相应的证明材<br>料。<br>本采购包为专门面向中小企业采购,供应商<br>须提供中小企业声明函。监狱企业、残疾人<br>专门面向中小<br>福利性单位视同小型、微型企业。本项目为<br>企业采购<br>服务类采购项目,采购标的对应的中小企业<br>划分标准所属行业为:“租赁和商务服务业”。<br>(3)磋商保证金<br>※备注说明<br>1供应商应根据自身实际情况提供上述资格要求的证明材料,格<br>式可参考磋商文件第五章提供。<br>2供应商提供的相应证明材料复印件均应符合:内容完整、清晰、<br>整洁,并由供应商加盖其单位公章。：根据采购项目特点或政策需要补充的其他新增内容:",
+            "pages": [
+              8
+            ],
+            "page": 8,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 8 页",
+              "index": 8,
+              "pages": [
+                8
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0083",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "第8 页共66 页 规定提交供应商的资格及资信文件,按资格 审查不合格处理。2采购项目有特殊资格要 求的,供应商还应按要求提供相应的证明材 料。 专门面向中小 ",
+            "quote": "第8 页共66 页 规定提交供应商的资格及资信文件,按资格 审查不合格处理。2采购项目有特殊资格要 求的,供应商还应按要求提供相应的证明材 料。 专门面向中小 企业采购 本采购包为专门面向中小企业采购,供应商 须提供中小企业声明函。监狱企业、残疾人 福利性单位视同小型、微型企业。本项目为 服务类采购项目,采购标的对应的中小企业 划分标准所属行业为: “租赁和商务服务业”。",
+            "pages": [
+              8
+            ],
+            "page": 8,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 8 页",
+              "index": 8,
+              "pages": [
+                8
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0084",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "式可参考磋商文件第五章提供。 2供应商提供的相应证明材料复印件均应符合:内容完整、清晰、 整洁,并由供应商加盖其单位公章。 2",
+            "quote": "式可参考磋商文件第五章提供。 2供应商提供的相应证明材料复印件均应符合:内容完整、清晰、 整洁,并由供应商加盖其单位公章。 2",
+            "pages": [
+              8
+            ],
+            "page": 8,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 8 页",
+              "index": 8,
+              "pages": [
+                8
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0085",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "11.1 响应文件的份数 纸质响应文件 1响应文件正本1 份、副本2 份。 2可读介质(光盘或U 盘)1 份。 响应文件正本和全部副本均应用A4 幅面纸张打印装",
+            "quote": "11.1 响应文件的份数 纸质响应文件 1响应文件正本1 份、副本2 份。 2可读介质(光盘或U 盘)1 份。 响应文件正本和全部副本均应用A4 幅面纸张打印装订,应编制 封面、目录、页码,均应使用不能擦去的墨料或墨水打印、书写 或复印,必须用胶装(为永久性、无破坏不可拆分)装订成册, 副本可以用正本的完整复印件。响应文件封面上应标明“正本”、 “副本”字样。正本与副本内容如有不一致,则以正本为准。供 应商需提供响应文件的电子版(PDF 格式)一份,并封装在正本 中。 供应商应当将响应文件密封包装提交,并在外封套上标识项目名 称、项目编号、供应商单位名称以及“于 之 前(指首次响应文件递交截止日期及时间)不准启封响应文件” 的字样。 7",
+            "pages": [
+              8
+            ],
+            "page": 8,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 8 页",
+              "index": 8,
+              "pages": [
+                8
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0086",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "3.00 是 根据供应商提供的媒体平台资源(可用于本项目宣 传)情况进行打分,市级及以上媒体资源,平台种 类丰富,提供平台≥10 个,证明材料完整的得3 分;市",
+            "quote": "3.00 是 根据供应商提供的媒体平台资源(可用于本项目宣 传)情况进行打分,市级及以上媒体资源,平台种 类丰富,提供平台≥10 个,证明材料完整的得3 分;市级及以上媒体资源,平台种类丰富,提供5 个≤平台<10 个,证明材料完整的得2 分;市级及 以上媒体资源,平台种类丰富,提供3 个≤平台< 5 个,证明材料完整的得1 分;未提供或提供不齐 全的不得分。 注:须提供平台资源一览表和相应的证明材料(合 同或授权证明等)。 T9.宣传 方案",
+            "pages": [
+              13
+            ],
+            "page": 13,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 13 页",
+              "index": 13,
+              "pages": [
+                13
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0087",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "3.00 是 根据供应商提供的爆款内容制作能力进行评分,制 作10 万+爆款推文≥20 条的得3 分;15 条≤制作 10 万+爆款推文<20 条的得2 分;1",
+            "quote": "3.00 是 根据供应商提供的爆款内容制作能力进行评分,制 作10 万+爆款推文≥20 条的得3 分;15 条≤制作 10 万+爆款推文<20 条的得2 分;10 条≤制作10 万+爆款推文<15 条的得1 分;制作10 万+爆款推 文<10 条的或未提供的不得分。 注:须提供爆款推文制作能力相关证明材料(需有 合同或授权证明该平台为供应商所有或运营),同 时提供承诺函承诺提供的爆款内容是供应商团队 原创(非转载、格式自拟),未提供或提供不齐全 的不得分。 T11.视 频服务 实力",
+            "pages": [
+              14
+            ],
+            "page": 14,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 14 页",
+              "index": 14,
+              "pages": [
+                14
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0088",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "3.00 是 根据供应商提供的视频拍摄、制作能力进行评分, 全年独立制作视频≥20 条的得3 分;15 条≤全年 独立制作视频<20 条的得2 分;10 条≤全",
+            "quote": "3.00 是 根据供应商提供的视频拍摄、制作能力进行评分, 全年独立制作视频≥20 条的得3 分;15 条≤全年 独立制作视频<20 条的得2 分;10 条≤全年独立 制作视频<15 条的得1 分;全年独立制作视频<10 条的或未提供的不得分。 注:须提供视频制作能力相关证明材料(需有合同 或授权证明发布平台为供应商所有或运营),同时 提供承诺函承诺提供视频内容是供应商团队原创 (非转载、格式自拟),未提供或提供不齐全的不 得分。 T12.主 视觉设 计服务 实力",
+            "pages": [
+              14
+            ],
+            "page": 14,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 14 页",
+              "index": 14,
+              "pages": [
+                14
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0089",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "3.00 是 根据供应商提供的视觉设计能力(主题图解或海报 等类型)进行评分,全年独立设计作品≥20 个的得 3 分;20 个>全年独立设计作品≥15 个的得2",
+            "quote": "3.00 是 根据供应商提供的视觉设计能力(主题图解或海报 等类型)进行评分,全年独立设计作品≥20 个的得 3 分;20 个>全年独立设计作品≥15 个的得2 分; 15>全年独立设计作品≥10 个的得1 分;全年独立 设计作品<10 条的或未提供的不得分。 注:须提供相关作品截图,同时提供承诺函,承诺 提供设计作品是供应商团队原创(非转载、格式自 拟),未提供或提供不齐全的不得分。 商务部分评分PB 满分为25.00 分 项目 分值 是否客 观项 描述 B1.业绩 情况",
+            "pages": [
+              14
+            ],
+            "page": 14,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 14 页",
+              "index": 14,
+              "pages": [
+                14
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0090",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "3.00 是 根据供应商提供的自2022 年1 月1 日以来(日期 以合同签订时间为准)由供应商完成的活动、宣传 类业绩情况进行评分:每提供一份完整业绩证明得 ",
+            "quote": "3.00 是 根据供应商提供的自2022 年1 月1 日以来(日期 以合同签订时间为准)由供应商完成的活动、宣传 类业绩情况进行评分:每提供一份完整业绩证明得 1 分,满分3 分。 注:供应商需同时提供项目汇总表及业绩项目的中 标<成交>公告(提供相关网站中标<成交>公告的下 载网页并注明网址)、中标<成交>通知书复印件、 采购合同文本复印件以及能够证明该业绩项目已经 采购人验收合格的相关证明文件复印件,未提供或 提供内容不符或提供内容不完整的本项不得分。 【本项与“B2.活动组织相关经验情况”、“B4.",
+            "pages": [
+              14
+            ],
+            "page": 14,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 14 页",
+              "index": 14,
+              "pages": [
+                14
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0091",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "3.00 是 B3.宣传 相关经 验情 根据供应商提供的自2022 年1 月1 日以来(日期 以合同签订时间为准)由供应商组织的促消费主题 活动情况进行评分:每",
+            "quote": "3.00 是 B3.宣传 相关经 验情 根据供应商提供的自2022 年1 月1 日以来(日期 以合同签订时间为准)由供应商组织的促消费主题 活动情况进行评分:每提供一份得1 分,满分3 分。 注:供应商需提供项目汇总表及业绩项目的中标< 成交>公告(提供相关网站中标<成交>公告的下载 网页并注明网址)、中标<成交>通知书复印件、采 购合同文本复印件以及能够证明该业绩项目已经采 购人验收合格的相关证明文件复印件,未提供或提 供内容不符或提供内容不完整的本项不得分。 【本项与“B1.业绩情况”、“B4.满意度”评分项 为同一项目的不重复计分】 况",
+            "pages": [
+              15
+            ],
+            "page": 15,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 15 页",
+              "index": 15,
+              "pages": [
+                15
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0092",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "3.00 是 根据供应商提供的自2022 年1 月1 日以来(日期 以合同签订时间为准)由供应商作为主办单位或承 办单位组织的促消费活动的新闻稿情况进行评分: ",
+            "quote": "3.00 是 根据供应商提供的自2022 年1 月1 日以来(日期 以合同签订时间为准)由供应商作为主办单位或承 办单位组织的促消费活动的新闻稿情况进行评分: 新闻稿篇数≥5 篇的得3 分;4 篇>新闻稿篇数≥3 篇的得2 分;新闻稿篇数<3 篇的得1 分。 注:须提供官方网站或者公众号发布的新闻截图, 未提供或提供内容不符的本项不得分。 B4.满意 度",
+            "pages": [
+              15
+            ],
+            "page": 15,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 15 页",
+              "index": 15,
+              "pages": [
+                15
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0093",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "3.00 是 根据供应商提供的2022 年1 月1 日以来(以评价日 期为准)由用户单位对供应商自身完成的同类项目 评价结果进行评分:每提供一份评为优秀(评价在",
+            "quote": "3.00 是 根据供应商提供的2022 年1 月1 日以来(以评价日 期为准)由用户单位对供应商自身完成的同类项目 评价结果进行评分:每提供一份评为优秀(评价在 90 分以上或评价为满意或好等同等描述)的得1 分,满分3 分。 注:每份评价须同时提供由用户单位出具的满意意 见证明材料复印件、合同复印件及中标通知书,所 有材料缺一不可,否则不得分。【本项与“B1.业 绩情况”、“B2.活动组织相关经验情况”评分项 为同一项目的不重复计分】 B5.人员 配备",
+            "pages": [
+              15
+            ],
+            "page": 15,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 15 页",
+              "index": 15,
+              "pages": [
+                15
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0094",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "5.1 根据供应商针对本项目拟投入的项目负责人(1 名,本科及以上学历)情况进行评分:具有同类项目 经验的得3 分。 注:须提供能体现项目负责人信息的合同复印件",
+            "quote": "5.1 根据供应商针对本项目拟投入的项目负责人(1 名,本科及以上学历)情况进行评分:具有同类项目 经验的得3 分。 注:须提供能体现项目负责人信息的合同复印件或 其他证明材料。未提供或提供内容不符的本项不得 分。",
+            "pages": [
+              15
+            ],
+            "page": 15,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 15 页",
+              "index": 15,
+              "pages": [
+                15
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0095",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "5.2 根据供应商针对本项目拟投入的设计人员(1 名)情况进行评分:具有本科及以上艺术或设计或 动画类专业毕业证书的得3 分。 注:须提供上述人员毕业证书复印件",
+            "quote": "5.2 根据供应商针对本项目拟投入的设计人员(1 名)情况进行评分:具有本科及以上艺术或设计或 动画类专业毕业证书的得3 分。 注:须提供上述人员毕业证书复印件或学信网截图 证明、联系方式、递交响应文件截止时间前六个月 内任意一个月(不含递交响应文件截止时间当月) 供应商为其缴纳社保证明材料【若供应商为提交响 应文件截止时间当月成立的,可提供依法缴纳社会 保障资金承诺书(格式自拟)】及承诺函(格式自第16 页共66 页 拟,承诺内容如下:承诺投入本项目的设计人员不 兼任本项目的其他职务)。未提供或提供内容不符 的本项不得分。",
+            "pages": [
+              15,
+              16
+            ],
+            "page": 15,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 15-16 页",
+              "index": 15,
+              "pages": [
+                15,
+                16
+              ]
+            },
+            "detection": "cross_page",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0096",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "5.3 根据供应商针对本项目拟投入的技术保障人员 (1 名)情况进行评分:具有本科及以上计算机类专 业毕业证书的得1 分。 注:须提供上述人员毕业证书复印件或学",
+            "quote": "5.3 根据供应商针对本项目拟投入的技术保障人员 (1 名)情况进行评分:具有本科及以上计算机类专 业毕业证书的得1 分。 注:须提供上述人员毕业证书复印件或学信网截图 证明、联系方式、递交响应文件截止时间前六个月 内任意一个月(不含递交响应文件截止时间当月) 供应商为其缴纳社保证明材料【若供应商为提交响 应文件截止时间当月成立的,可提供依法缴纳社会 保障资金承诺书(格式自拟)】及承诺函(格式自 拟,承诺内容如下:承诺投入本项目的技术保障人 员不兼任本项目的其他职务)。未提供或提供内容 不符的本项不得分。",
+            "pages": [
+              16
+            ],
+            "page": 16,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 16 页",
+              "index": 16,
+              "pages": [
+                16
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0097",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "5.4 根据供应商针对本项目拟投入的新媒体宣传专 员(1 名)情况进行评分:具有本科及以上新媒体或 网络传播类毕业证书的得3 分。 注:须提供上述人员毕业证书复",
+            "quote": "5.4 根据供应商针对本项目拟投入的新媒体宣传专 员(1 名)情况进行评分:具有本科及以上新媒体或 网络传播类毕业证书的得3 分。 注:须提供上述人员毕业证书复印件或学信网截图 证明、联系方式、递交响应文件截止时间前六个月 内任意一个月(不含递交响应文件截止时间当月) 供应商为其缴纳社保证明材料【若供应商为提交响 应文件截止时间当月成立的,可提供依法缴纳社会 保障资金承诺书(格式自拟)】及承诺函(格式自 拟,承诺内容如下:承诺投入本项目的新媒体或网 络传播人员不兼任本项目的其他职务)。未提供或 提供内容不符的本项不得分。",
+            "pages": [
+              16
+            ],
+            "page": 16,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 16 页",
+              "index": 16,
+              "pages": [
+                16
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0098",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "5.5 根据供应商针对本项目拟投入的文案策划人员 (1 名)情况进行评分:具有本科及以上新闻或广告 类专业毕业证书的得3 分。 注:须提供人员毕业证书或学信网截",
+            "quote": "5.5 根据供应商针对本项目拟投入的文案策划人员 (1 名)情况进行评分:具有本科及以上新闻或广告 类专业毕业证书的得3 分。 注:须提供人员毕业证书或学信网截图证明或相关 证书复印件、联系方式、提交响应文件截止时间前 六个月(不含提交响应文件截止时间当月)中任意 一个月供应商为其缴纳的社保证明材料【若供应商 为提交响应文件截止时间当月成立的,可提供依法 缴纳社会保障资金承诺书(格式自拟)】以及承诺 函(格式自拟,承诺内容如下:供应商投入本项目 的项目文案策划人员不得兼任本项目的其他职务)。 未提供或提供不全的本项不得分。注:文案策划人 员不得兼任本项目的其他职务,不重复得分。 异常低价审查 项目 描述 异常低 价审查 根据《财政部关于推动解决政府采购异常低价问题的通知》(财库 〔2026〕2 号),结合本项目(采购包)实际情况,政府采购评审中",
+            "pages": [
+              16
+            ],
+            "page": 16,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 16 页",
+              "index": 16,
+              "pages": [
+                16
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0099",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(3)响应报价低于最高限价45%的,即响应报价<最高限价×45%。(4) 磋商小组基于专业判断,认为供应商报价过低,有可能影响产品质量 或者不能诚信履约的其他情",
+            "quote": "(3)响应报价低于最高限价45%的,即响应报价<最高限价×45%。(4) 磋商小组基于专业判断,认为供应商报价过低,有可能影响产品质量 或者不能诚信履约的其他情形。磋商小组启动异常低价投标(响应) 审查后,应当要求相关供应商在评审现场合理的时间内提供书面说明 及必要的证明材料,对投标(响应)价格作出解释。 磋商小组启动异常低价投标(响应)审查后,属于前述第1 项至第4 项情形 的,应当要求相关供应商在评审现场合理的时间内对投标(响应)价格作出解释, 提供项目具体成本测算等与报价合理性相关的书面说明及必要的证明材料,包括 但不限于原材料成本、人工成本、制造费用等,给予相关供应商的合理时间一般 不少于30 分钟。其中,属于第3 项情形,供应商已随投标(响应)文件一并提 交相关书面说明及必要的证明材料的,在评审现场可不再重复提交。 磋商小组依据专业经验,参考同类项目中标(成交)价格、类似产品市场",
+            "pages": [
+              17
+            ],
+            "page": 17,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 17 页",
+              "index": 17,
+              "pages": [
+                17
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0100",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(1)联合体各方应提交联合体协议,联合体协议应符合磋商文件规定。",
+            "quote": "(1)联合体各方应提交联合体协议,联合体协议应符合磋商文件规定。",
+            "pages": [
+              20
+            ],
+            "page": 20,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 20 页",
+              "index": 20,
+              "pages": [
+                20
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0101",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "7.5 响应文件提供的全部资料中,若原件属于非中文描述,应提供具有翻译 资质的机构翻译的中文译本。前述翻译机构应为中国翻译协会成员单位,翻译的 中文译本应由翻译",
+            "quote": "7.5 响应文件提供的全部资料中,若原件属于非中文描述,应提供具有翻译 资质的机构翻译的中文译本。前述翻译机构应为中国翻译协会成员单位,翻译的 中文译本应由翻译人员签名并加盖翻译机构公章,同时提供翻译人员翻译资格证 书。中文译本、翻译机构的成员单位证书及翻译人员的资格证书可为复印件。",
+            "pages": [
+              21
+            ],
+            "page": 21,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 21 页",
+              "index": 21,
+              "pages": [
+                21
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0102",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(1)响应函",
+            "quote": "(1)响应函",
+            "pages": [
+              21
+            ],
+            "page": 21,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 21 页",
+              "index": 21,
+              "pages": [
+                21
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0103",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(2)开标(报价)一览表",
+            "quote": "(2)开标(报价)一览表",
+            "pages": [
+              21
+            ],
+            "page": 21,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 21 页",
+              "index": 21,
+              "pages": [
+                21
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0104",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(3)资格证明文件",
+            "quote": "(3)资格证明文件",
+            "pages": [
+              21
+            ],
+            "page": 21,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 21 页",
+              "index": 21,
+              "pages": [
+                21
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0105",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(4)磋商保证金凭证(若有)",
+            "quote": "(4)磋商保证金凭证(若有)",
+            "pages": [
+              21
+            ],
+            "page": 21,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 21 页",
+              "index": 21,
+              "pages": [
+                21
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0106",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(5)技术和商务偏离表第22 页共66 页",
+            "quote": "(5)技术和商务偏离表第22 页共66 页",
+            "pages": [
+              21,
+              22
+            ],
+            "page": 21,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 21-22 页",
+              "index": 21,
+              "pages": [
+                21,
+                22
+              ]
+            },
+            "detection": "cross_page",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0107",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(6)相关技术、商务、服务响应承诺及资料",
+            "quote": "(6)相关技术、商务、服务响应承诺及资料",
+            "pages": [
+              22
+            ],
+            "page": 22,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 22 页",
+              "index": 22,
+              "pages": [
+                22
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0108",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(7)供应商提交的其他资料",
+            "quote": "(7)供应商提交的其他资料",
+            "pages": [
+              22
+            ],
+            "page": 22,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 22 页",
+              "index": 22,
+              "pages": [
+                22
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0109",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "10.3.1 采购人或者采购代理机构将在采购活动结束后及时退还供应商的保 证金,但因供应商自身原因导致无法及时退还的除外(比如:采购人委托代理机 构组织磋商采购",
+            "quote": "10.3.1 采购人或者采购代理机构将在采购活动结束后及时退还供应商的保 证金,但因供应商自身原因导致无法及时退还的除外(比如:采购人委托代理机 构组织磋商采购,成交的供应商未向采购代理机构出具已签订合同证明材料,造 成磋商保证金退还时间延误的结果,由成交的供应商自行承担和谅解等)。未成 交供应商的保证金将在成交通知书发出后5 个工作日内退还,成交供应商的保证 金将在采购合同签订后5 个工作日内退还。关于磋商保证金退还的其它要求见竞 争性磋商须知前附表第5 项。",
+            "pages": [
+              22
+            ],
+            "page": 22,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 22 页",
+              "index": 22,
+              "pages": [
+                22
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0110",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(2)供应商在响应文件中提供虚假材料的;",
+            "quote": "(2)供应商在响应文件中提供虚假材料的;",
+            "pages": [
+              22
+            ],
+            "page": 22,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 22 页",
+              "index": 22,
+              "pages": [
+                22
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0111",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "11.1 供应商须编制由本须知规定组成的响应文件正副本份数详见竞争性磋 商须知前附表第6 项。响应文件正本和全部副本均应使用不能擦去的墨料或墨水 打印、书写或复",
+            "quote": "11.1 供应商须编制由本须知规定组成的响应文件正副本份数详见竞争性磋 商须知前附表第6 项。响应文件正本和全部副本均应使用不能擦去的墨料或墨水 打印、书写或复印,副本可以用正本的完整复印件。响应文件封面上应标明“正 本”、“副本”字样。正本与副本内容如有不一致,则以正本为准。",
+            "pages": [
+              23
+            ],
+            "page": 23,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 23 页",
+              "index": 23,
+              "pages": [
+                23
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0112",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "11.2 响应文件应由供应商代表签字并加盖公章。供应商代表如果不是竞争 性磋商须知中定义的“单位负责人”,则其响应文件中还必须提供“单位负责人 授权书”。",
+            "quote": "11.2 响应文件应由供应商代表签字并加盖公章。供应商代表如果不是竞争 性磋商须知中定义的“单位负责人”,则其响应文件中还必须提供“单位负责人 授权书”。",
+            "pages": [
+              23
+            ],
+            "page": 23,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 23 页",
+              "index": 23,
+              "pages": [
+                23
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0113",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "11.4 供应商应提交证明其拟提供货物、服务或工程符合磋商文件要求的技 术和商务响应文件,该文件可以是文字资料、图纸和数据,并对拟提供的货物、 服务或工程的主要",
+            "quote": "11.4 供应商应提交证明其拟提供货物、服务或工程符合磋商文件要求的技 术和商务响应文件,该文件可以是文字资料、图纸和数据,并对拟提供的货物、 服务或工程的主要内容进行详细描述。",
+            "pages": [
+              23
+            ],
+            "page": 23,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 23 页",
+              "index": 23,
+              "pages": [
+                23
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0114",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "12.3 供应商在首次响应文件递交截止时间前,可以对其所提交的响应文件 进行补充、修改或者撤回,并书面通知采购人、采购代理机构或磋商小组。补充、 修改的内容作为",
+            "quote": "12.3 供应商在首次响应文件递交截止时间前,可以对其所提交的响应文件 进行补充、修改或者撤回,并书面通知采购人、采购代理机构或磋商小组。补充、 修改的内容作为响应文件的组成部分。补充、修改的内容与响应文件不一致的, 以补充、修改的内容为准。供应商在提交响应文件截止时间前提交的补充、修改 或者撤回申请要求,应当以原件书面形式并由供应商代表签署(供应商代表如果 不是竞争性磋商须知中定义的“单位负责人”,则还必须提供“单位负责人授权",
+            "pages": [
+              23
+            ],
+            "page": 23,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 23 页",
+              "index": 23,
+              "pages": [
+                23
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0115",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "序号：1 符合审查要求概况：情形1 评审点具体描述：响应文件中提供的资格证明文件不全的;",
+            "quote": "序号：1 符合审查要求概况：情形1 评审点具体描述：响应文件中提供的资格证明文件不全的;",
+            "pages": [
+              24
+            ],
+            "page": 24,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 24 页",
+              "index": 24,
+              "pages": [
+                24
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0116",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "12.4 供应商在磋商过程中根据磋商小组要求,提交的有关澄清、说明、补 充、更正响应文件以及最后报价响应文件等资料,均应由供应商代表签署(供应 商代表如果不是竞",
+            "quote": "12.4 供应商在磋商过程中根据磋商小组要求,提交的有关澄清、说明、补 充、更正响应文件以及最后报价响应文件等资料,均应由供应商代表签署(供应 商代表如果不是竞争性磋商须知中定义的“单位负责人”,则还必须提供“单位 负责人授权书”),或者加盖供应商单位公章。",
+            "pages": [
+              24
+            ],
+            "page": 24,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 24 页",
+              "index": 24,
+              "pages": [
+                24
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0117",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "14.2.1 供应商有下列情况之一者,其提交的响应文件将被视为未实质性响 应磋商文件要求,磋商小组将否决其响应文件,按无效处理: 采购包1: 序号 符合审查要求",
+            "quote": "14.2.1 供应商有下列情况之一者,其提交的响应文件将被视为未实质性响 应磋商文件要求,磋商小组将否决其响应文件,按无效处理: 采购包1: 序号 符合审查要求概况 评审点具体描述 1 情形1 响应文件中提供的资格证明文件不全的; 2 情形2 响应文件未按磋商文件规定由供应商代表签 字,或未按磋商文件规定加盖供应商单位公章 的;或供应商代表未获得有效授权的; 3 情形3 供应商未按磋商文件规定提交磋商保证金的; 4 情形4 响应文件有效期不满足磋商文件要求的; 5 情形5 响应内容与磋商采购内容及要求有重大偏离或 保留的,限制了采购人的权利或者减少成交供 应商合同项下的义务;(由于磋商项目本身特",
+            "pages": [
+              24
+            ],
+            "page": 24,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 24 页",
+              "index": 24,
+              "pages": [
+                24
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0118",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "14.5 合格供应商应当按照磋商文件的变动情况和磋商小组的要求提交补充 响应文件(首次响应文件中已经提交过的如资格证明文件等资料,不用重新提 供),并由供应商代",
+            "quote": "14.5 合格供应商应当按照磋商文件的变动情况和磋商小组的要求提交补充 响应文件(首次响应文件中已经提交过的如资格证明文件等资料,不用重新提 供),并由供应商代表签字或加盖供应商单位公章。供应商代表如果不是竞争性 磋商须知中定义的“单位负责人”,则还必须提供“单位负责人授权书”。供应 商为自然人的,应当由本人签字并附身份证明。",
+            "pages": [
+              25
+            ],
+            "page": 25,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 25 页",
+              "index": 25,
+              "pages": [
+                25
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0119",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "14.8 最后报价是供应商响应文件的有效组成部分。如果供应商的最后报价 明显低于其他最后报价,使得其最后报价有可能影响商品或服务质量或者不能诚 信履约的,供应商",
+            "quote": "14.8 最后报价是供应商响应文件的有效组成部分。如果供应商的最后报价 明显低于其他最后报价,使得其最后报价有可能影响商品或服务质量或者不能诚 信履约的,供应商应当按照磋商小组要求,在规定时间内作出书面说明,必要时 提交相关证明材料;供应商不能合理说明其报价合理性的,磋商小组可以做无效 响应文件和无效报价处理。",
+            "pages": [
+              26
+            ],
+            "page": 26,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 26 页",
+              "index": 26,
+              "pages": [
+                26
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0120",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "20.1.2 质疑人应提交质疑函原件。",
+            "quote": "20.1.2 质疑人应提交质疑函原件。",
+            "pages": [
+              28
+            ],
+            "page": 28,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 28 页",
+              "index": 28,
+              "pages": [
+                28
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0121",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "1质疑人的基本信息,至少包括:全称、地址、邮政编码、联系人及联系电 话等;适合自然人参加磋商的政府采购项目且质疑人为自然人的,质疑人提供本 人的身份证复印件。质",
+            "quote": "1质疑人的基本信息,至少包括:全称、地址、邮政编码、联系人及联系电 话等;适合自然人参加磋商的政府采购项目且质疑人为自然人的,质疑人提供本 人的身份证复印件。质疑人为法人或其他组织的,提供统一社会信用代码营业执 照或者组织机构登记证件复印件、单位负责人的身份证复印件;质疑人代表为委 托代理人的,还应同时提供单位负责人授权书和委托代理人的身份证复印件。 2所质疑项目的基本信息,至少包括:项目编号、项目名称等; 3所质疑的具体事项(以下简称:“质疑事项”); 4质疑人自身权益受到损害的事实依据和证明材料,至少包括: a1 所质疑的具体事项事实存在的证明材料; a2 所质疑的具体事项事实导致质疑人自身权益受到损害的证明材料,如: 采购文件、采购过程或成交结果违法违规,损害自已合法权益等证明材料; 备注:若质疑的具体事项按照有关法律、法规和规章规定处于应当保密阶段, 则应提供信息或证明材料为合法或",
+            "pages": [
+              28
+            ],
+            "page": 28,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 28 页",
+              "index": 28,
+              "pages": [
+                28
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0122",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "21.2 投诉应有明确的请求和必要的证明材料,投诉的事项不得超出已质疑 事项的范围。",
+            "quote": "21.2 投诉应有明确的请求和必要的证明材料,投诉的事项不得超出已质疑 事项的范围。",
+            "pages": [
+              29
+            ],
+            "page": 29,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 29 页",
+              "index": 29,
+              "pages": [
+                29
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0123",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(4)监狱企业指由司法部认定的为罪犯、戒毒人员提供生产项目和劳动对 象,且全部产权属于司法部监狱管理局、戒毒管理局、直属煤矿管理局,各省、 自治区、直辖市监狱管",
+            "quote": "(4)监狱企业指由司法部认定的为罪犯、戒毒人员提供生产项目和劳动对 象,且全部产权属于司法部监狱管理局、戒毒管理局、直属煤矿管理局,各省、 自治区、直辖市监狱管理局、戒毒管理局,各地(设区的市)监狱、强制隔离戒 毒所、戒毒康复所,以及新疆生产建设兵团监狱管理局、戒毒管理局的企业,其 中: 1监狱企业参加采购活动时,应提供由省级以上监狱管理局、戒毒管理局(含 新疆生产建设兵团)出具的属于监狱企业的证明文件。 2监狱企业视同小型、微型企业。",
+            "pages": [
+              31
+            ],
+            "page": 31,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 31 页",
+              "index": 31,
+              "pages": [
+                31
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0124",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "第32 页共66 页 3为安置的每位残疾人按月足额缴纳了基本养老保险、基本医疗保险、失业 保险、工伤保险和生育保险等社会保险费; 4通过银行等金融机构向安置的每",
+            "quote": "第32 页共66 页 3为安置的每位残疾人按月足额缴纳了基本养老保险、基本医疗保险、失业 保险、工伤保险和生育保险等社会保险费; 4通过银行等金融机构向安置的每位残疾人,按月支付了不低于单位所在区 县适用的经省级人民政府批准的月最低工资标准的工资; 5提供本单位制造的货物、承担的工程或服务,或提供其他残疾人福利性单 位制造的货物(不包括使用非残疾人福利性单位注册商标的货物)。 前款所称残疾人指法定劳动年龄内,持有《中华人民共和国残疾人证》或《中 华人民共和国残疾军人证(1 至8 级)》的自然人,包括具有劳动条件和劳动意 愿的精神残疾人。在职职工人数是指与残疾人福利性单位建立劳动关系并依法签 订劳动合同或服务协议的雇员人数。 ※符合上述条件的残疾人福利性单位参加采购活动时,应提供《残疾人福利 性单位声明函》,并对声明的真实性负责。残疾人福利性单位视同小型、微型企 业。残疾人福利性单位属于小型",
+            "pages": [
+              32
+            ],
+            "page": 32,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 32 页",
+              "index": 32,
+              "pages": [
+                32
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0125",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "十四、不可抗力事件处理 本条款中的不可抗力指不能预见、不能避免、不能克服的客观情况,包括但不限于:自然灾害如 地震、台风、洪水、火灾及政府行为、法律规定或其适用",
+            "quote": "十四、不可抗力事件处理 本条款中的不可抗力指不能预见、不能避免、不能克服的客观情况,包括但不限于:自然灾害如 地震、台风、洪水、火灾及政府行为、法律规定或其适用的变化或其他任何无法预见、避免或控 制的事件。因不可抗力造成违约的,遭受不可抗力一方应及时向对方通报不能履行或不能完全履 行的理由,并提供相关证明材料。基于上述情况,遭受不可抗力一方延期履行、部分履行或不履 行合同的,根据实际情况可部分或全部免于承担违约责任。",
+            "pages": [
+              39
+            ],
+            "page": 39,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 39 页",
+              "index": 39,
+              "pages": [
+                39
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0126",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "第43 页共66 页 目录 附件1:响应函 附件2:开标(报价)一览表 附件3:资格证明文件 附件4:磋商保证金凭证(若有) 附件5:技术和商务偏离表 附件6:",
+            "quote": "第43 页共66 页 目录 附件1:响应函 附件2:开标(报价)一览表 附件3:资格证明文件 附件4:磋商保证金凭证(若有) 附件5:技术和商务偏离表 附件6:相关技术、商务、服务响应承诺及资料 附件7:供应商提交的其他资料",
+            "pages": [
+              43
+            ],
+            "page": 43,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 43 页",
+              "index": 43,
+              "pages": [
+                43
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0127",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(1)响应函",
+            "quote": "(1)响应函",
+            "pages": [
+              44
+            ],
+            "page": 44,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 44 页",
+              "index": 44,
+              "pages": [
+                44
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0128",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(3)资格证明文件",
+            "quote": "(3)资格证明文件",
+            "pages": [
+              44
+            ],
+            "page": 44,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 44 页",
+              "index": 44,
+              "pages": [
+                44
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0129",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(5)技术和商务偏离表",
+            "quote": "(5)技术和商务偏离表",
+            "pages": [
+              44
+            ],
+            "page": 44,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 44 页",
+              "index": 44,
+              "pages": [
+                44
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0130",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2.据此函,我方宣布响应承诺如下:",
+            "quote": "2.据此函,我方宣布响应承诺如下:",
+            "pages": [
+              44
+            ],
+            "page": 44,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 44 页",
+              "index": 44,
+              "pages": [
+                44
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0131",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2.3、我方承诺:递交的所有响应文件(包括首次响应文件、补充澄清、最 后报价等响应文件)在竞争性磋商须知前附表第4 项规定的响应文件有效期内始 终保持有效,我方",
+            "quote": "2.3、我方承诺:递交的所有响应文件(包括首次响应文件、补充澄清、最 后报价等响应文件)在竞争性磋商须知前附表第4 项规定的响应文件有效期内始 终保持有效,我方将受此约束。我方对响应文件中的所有承诺、声明、数据和资 料的真实性、准确性、合法性、有效性负责;我方响应文件中有关复印件或扫描 件资料均与原件一致。如有违反,我方将承担法律责任和后果。",
+            "pages": [
+              44
+            ],
+            "page": 44,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 44 页",
+              "index": 44,
+              "pages": [
+                44
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0132",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2.5、我方愿意向贵方提供任何与本项目磋商采购有关的数据或资料。若贵 方需要,我方愿意提供我方作出的一切承诺的证明材料。",
+            "quote": "2.5、我方愿意向贵方提供任何与本项目磋商采购有关的数据或资料。若贵 方需要,我方愿意提供我方作出的一切承诺的证明材料。",
+            "pages": [
+              44
+            ],
+            "page": 44,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 44 页",
+              "index": 44,
+              "pages": [
+                44
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0133",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2.8、我方承诺响应文件所提供的全部资料真实可靠,并接受磋商小组、采 购人、采购代理机构、监管部门进一步审查其中任何资料真实性的要求。 通信地址: 邮编: 传真",
+            "quote": "2.8、我方承诺响应文件所提供的全部资料真实可靠,并接受磋商小组、采 购人、采购代理机构、监管部门进一步审查其中任何资料真实性的要求。 通信地址: 邮编: 传真号: 联系电话(固定电话和移动电话): 供应商代表: (签字) 供应商代表电子信箱: 供应商: (全称并加盖公章) 日期: 年 月 日",
+            "pages": [
+              45
+            ],
+            "page": 45,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 45 页",
+              "index": 45,
+              "pages": [
+                45
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0134",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "第46 页共66 页 开标(报价)一览表 项目编号:2026-FZSC339 项目名称:2026 年八闽美食嘉年华暨鼓楼区海鲜美食消费季活动 采购包 报价内容 ",
+            "quote": "第46 页共66 页 开标(报价)一览表 项目编号:2026-FZSC339 项目名称:2026 年八闽美食嘉年华暨鼓楼区海鲜美食消费季活动 采购包 报价内容 数量 响应报价 备注 1 2026 年八闽美食嘉 年华暨鼓楼区海鲜美 食消费季活动 1 项 元 供应商名称: (全称并加盖公章) 日期: 年 月 日 分项报价表 项目编号:2026-FZSC339 项目名称:2026 年八闽美食嘉年华暨鼓楼区海鲜美食消费季活动 序号 服务 名称 服务 范围 服务 要求 服务 时间 服务 标准 最高 限价 单价 数量 计量 单位 总价 供应商名称: (全称并加盖公章) 日期: 年 月 日",
+            "pages": [
+              46
+            ],
+            "page": 46,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 46 页",
+              "index": 46,
+              "pages": [
+                46
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0135",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "第47 页共66 页 最终(报价)一览表 项目编号:2026-FZSC339 项目名称:2026 年八闽美食嘉年华暨鼓楼区海鲜美食消费季活动 采购包 报价内容 ",
+            "quote": "第47 页共66 页 最终(报价)一览表 项目编号:2026-FZSC339 项目名称:2026 年八闽美食嘉年华暨鼓楼区海鲜美食消费季活动 采购包 报价内容 数量 响应报价 备注 1 2026 年八闽美食嘉 年华暨鼓楼区海鲜美 食消费季活动 1 项 元 注:本表无需装入首次响应文件,在磋商后单独密封提交。 供应商名称: (全称并加盖公章) 日期: 年 月 日第48 页共66 页 附件3 资格证明文件 附件3-1 参加竞争性磋商的声明函(若有) 致:(采购人或采购代理机构)",
+            "pages": [
+              47,
+              48
+            ],
+            "page": 47,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 47-48 页",
+              "index": 47,
+              "pages": [
+                47,
+                48
+              ]
+            },
+            "detection": "cross_page",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0136",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "1、关于贵方 年 月 日项目(项目编号: ) 的采购公告(或采购邀请),本签字人代表供应商参加竞争性磋商,我方提供竞 争性磋商文件中规定的相应资料和说明。本签字",
+            "quote": "1、关于贵方 年 月 日项目(项目编号: ) 的采购公告(或采购邀请),本签字人代表供应商参加竞争性磋商,我方提供竞 争性磋商文件中规定的相应资料和说明。本签字人确认响应文件中所有提交的文 件、声明或资料(包括但不限于资格证明文件)是真实的、合法的、准确的、有 效的。",
+            "pages": [
+              48
+            ],
+            "page": 48,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 48 页",
+              "index": 48,
+              "pages": [
+                48
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0137",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "性别: 年龄: 职 务: 。 备注:“单位负责人”指单位法定代表人(供应商为法人的)或法律、法规 规定代表单位行使职权的主要负责人(供应商为其他组织的)。 对于",
+            "quote": "性别: 年龄: 职 务: 。 备注:“单位负责人”指单位法定代表人(供应商为法人的)或法律、法规 规定代表单位行使职权的主要负责人(供应商为其他组织的)。 对于接受联合体形式的磋商且供应商是联合体的,则联合体各成员都应当提 交本资格证明文件。 供应商代表: (签字) 供应商名称: (全称并加盖公章) 日期: 年 月 日第49 页共66 页 附件3-2 供应商的资格声明 致:(采购人或采购代理机构)",
+            "pages": [
+              48,
+              49
+            ],
+            "page": 48,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 48-49 页",
+              "index": 48,
+              "pages": [
+                48,
+                49
+              ]
+            },
+            "detection": "cross_page",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0138",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "第50 页共66 页 备注:对于接受联合体形式的磋商且供应商是联合体的,则联合体各成员都 应当提交本资格证明文件。 供应商代表: (签字) 供应商名称: (全称",
+            "quote": "第50 页共66 页 备注:对于接受联合体形式的磋商且供应商是联合体的,则联合体各成员都 应当提交本资格证明文件。 供应商代表: (签字) 供应商名称: (全称并加盖公章) 日期: 年 月 日 附件3-3 单位负责人授权书 致:(采购人或采购代理机构) 我方的单位负责人(填写“单位负责人全名”)授权(填写“供应商代表 全名”)为我方的供应商代表,代表我方参加(填写“项目名称”)项目(项目 编号: )的响应磋商,全权代表我方处理响应磋商过程的一切事宜, 包括但不限于:递交响应文件、参与磋商、澄清、签约等工作。供应商代表在响 应磋商过程中所签署的一切文件和处理与之有关的一切事务,我方均予以认可并 对此承担责任。 供应商代表无转委权。特此授权。 (以下无正文) 单位负责人: 身份证号: 手机: 供应商代表: 身份证号: 手机: 授权方 供应商:(全称并加盖单位公章) 单位负责人签字或盖章: 接受",
+            "pages": [
+              50
+            ],
+            "page": 50,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 50 页",
+              "index": 50,
+              "pages": [
+                50
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0139",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "3、负责响应文件签字的供应商代表如果不是上述规定的单位负责人,则供 应商应当在响应文件中提供本授权书,纸质响应文件正本中的本授权书应为原 件。供应商为自然人的,",
+            "quote": "3、负责响应文件签字的供应商代表如果不是上述规定的单位负责人,则供 应商应当在响应文件中提供本授权书,纸质响应文件正本中的本授权书应为原 件。供应商为自然人的,可不填写本授权书,但应当提供其身份证正反面复印件。。",
+            "pages": [
+              51
+            ],
+            "page": 51,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 51 页",
+              "index": 51,
+              "pages": [
+                51
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0140",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "4、对于接受联合体形式的磋商且供应商是联合体的,则只需要联合体的牵 头方提交本授权书,在纸质响应文件正本中的本授权书应为原件。 附件3-4 营业执照等证明文件 ",
+            "quote": "4、对于接受联合体形式的磋商且供应商是联合体的,则只需要联合体的牵 头方提交本授权书,在纸质响应文件正本中的本授权书应为原件。 附件3-4 营业执照等证明文件 致:(采购人或采购代理机构) ()供应商为法人(包括企业、事业单位和社会团体)的 现附上由(填写“签发机关全称”)签发的我方统一社会信用代码(请填写 法人的具体证照名称)复印件,该证明材料真实有效,否则我方负全部责任。 ()供应商为非法人(包括其他组织、自然人)的 □现附上由(填写“签发机关全称”)签发的我方统一社会信用代码(请填 写非自然人的非法人的具体证照名称)复印件,该证明材料真实有效,否则我方 负全部责任。 □现附上由(填写“签发机关全称”)签发的我方统一社会信用代码(请填 写自然人的身份证件名称)复印件,该证明材料真实有效,否则我方负全部责任。 ※注意:",
+            "pages": [
+              51
+            ],
+            "page": 51,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 51 页",
+              "index": 51,
+              "pages": [
+                51
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0141",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "1、请供应商根据实际情况填写,在相应的()中打“√”并选择相应的“□” (若有)后,再按照本格式的要求提供相应证明材料的复印件。",
+            "quote": "1、请供应商根据实际情况填写,在相应的()中打“√”并选择相应的“□” (若有)后,再按照本格式的要求提供相应证明材料的复印件。",
+            "pages": [
+              51
+            ],
+            "page": 51,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 51 页",
+              "index": 51,
+              "pages": [
+                51
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0142",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2、供应商为企业的,提供有效的营业执照复印件;供应商为事业单位的, 提供有效的事业单位法人证书复印件;供应商为社会团体的,提供有效的社会团 体法人登记证书复印件",
+            "quote": "2、供应商为企业的,提供有效的营业执照复印件;供应商为事业单位的, 提供有效的事业单位法人证书复印件;供应商为社会团体的,提供有效的社会团 体法人登记证书复印件;供应商为合伙企业、个体工商户的,提供有效的营业执 照复印件;供应商为非企业专业服务机构的,提供有效的执业许可证等证明材料 复印件;供应商为自然人的,提供有效的自然人身份证件复印件;其他供应商应 按照有关法律、法规和规章规定,提供有效的相应具体证照复印件。",
+            "pages": [
+              51
+            ],
+            "page": 51,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 51 页",
+              "index": 51,
+              "pages": [
+                51
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0143",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "3、对于接受联合体形式的磋商且供应商是联合体的,则联合体各成员都应 当提交本资格证明文件。",
+            "quote": "3、对于接受联合体形式的磋商且供应商是联合体的,则联合体各成员都应 当提交本资格证明文件。",
+            "pages": [
+              51
+            ],
+            "page": 51,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 51 页",
+              "index": 51,
+              "pages": [
+                51
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0144",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "第52 页共66 页 供应商代表 (签字) 供应商名称 (全称并加盖公章) 日期: 年 月 日 附件3-5 财务状况报告 致:(采购人或采购代理机构) ()供应",
+            "quote": "第52 页共66 页 供应商代表 (签字) 供应商名称 (全称并加盖公章) 日期: 年 月 日 附件3-5 财务状况报告 致:(采购人或采购代理机构) ()供应商提供财务报告的 □企业适用:现附上我方(填写“具体的年度、或半年度、或季度”)财务 报告复印件,包括资产负债表、利润表、现金流量表、所有者权益变动表及其附 注(若有)、会计师事务所营业执照和注册会计师资格证书,上述证明材料真实 有效,否则我方负全部责任。 □事业单位适用:现附上我方(填写“具体的年度、或半年度、或季度”) 财务报告复印件,包括资产负债表、收入支出表或收入费用表、财政补助收入支 出表(若有)、会计师事务所营业执照和注册会计师资格证书,上述证明材料真 实有效,否则我方负全部责任。 □社会团体、民办非企单位适用:现附上我方(填写“具体的年度、或半年 度、或季度”)财务报告复印件,包括资产负债表、业务活动表、现金流量表、 ",
+            "pages": [
+              52
+            ],
+            "page": 52,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 52 页",
+              "index": 52,
+              "pages": [
+                52
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0145",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "1、请供应商按照自身实际情况编制填写,在其中相应的()中打“√”并 选择相应的“□”(若有)后,再按照本格式的要求提供相应证明材料的复印件 即可。",
+            "quote": "1、请供应商按照自身实际情况编制填写,在其中相应的()中打“√”并 选择相应的“□”(若有)后,再按照本格式的要求提供相应证明材料的复印件 即可。",
+            "pages": [
+              52
+            ],
+            "page": 52,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 52 页",
+              "index": 52,
+              "pages": [
+                52
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0146",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2、供应商提供的财务报告复印件(成立年限按照首次响应文件递交截止时 间推算)应符合下列规定:",
+            "quote": "2、供应商提供的财务报告复印件(成立年限按照首次响应文件递交截止时 间推算)应符合下列规定:",
+            "pages": [
+              52
+            ],
+            "page": 52,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 52 页",
+              "index": 52,
+              "pages": [
+                52
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0147",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "第53 页共66 页 ※无法按照本格式注意事项第2.1、2.2 条规定提供财务报告复印件的供应商, 应按照本格式注意事项的要求选择提供资信证明复印件。",
+            "quote": "第53 页共66 页 ※无法按照本格式注意事项第2.1、2.2 条规定提供财务报告复印件的供应商, 应按照本格式注意事项的要求选择提供资信证明复印件。",
+            "pages": [
+              53
+            ],
+            "page": 53,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 53 页",
+              "index": 53,
+              "pages": [
+                53
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0148",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "3、对于接受联合体形式的磋商且供应商是联合体的,则联合体各成员都应 当提交本资格证明文件。 供应商代表 (签字) 供应商名称 (全称并加盖公章) 日期: 年 月",
+            "quote": "3、对于接受联合体形式的磋商且供应商是联合体的,则联合体各成员都应 当提交本资格证明文件。 供应商代表 (签字) 供应商名称 (全称并加盖公章) 日期: 年 月 日 附件3-6 依法缴纳税收证明材料 致:(采购人或采购代理机构)",
+            "pages": [
+              53
+            ],
+            "page": 53,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 53 页",
+              "index": 53,
+              "pages": [
+                53
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0149",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "1、依法缴纳税收的供应商 ()法人(包括企业、事业单位和社会团体)的 现附上自 年 月 日至 年 月 日期间我方缴纳(包括但 不限于税务机关出具的专用收据、税收",
+            "quote": "1、依法缴纳税收的供应商 ()法人(包括企业、事业单位和社会团体)的 现附上自 年 月 日至 年 月 日期间我方缴纳(包括但 不限于税务机关出具的专用收据、税收缴纳证明或税收代缴银行的缴款收讫凭 证)等税收凭据复印件,上述证明材料真实有效,否则我方负全部责任。 ()非法人(包括其他组织、自然人)的 现附上自 年 月 日至 年 月 日期间我方缴纳(包括但 不限于税务机关出具的专用收据、税收缴纳证明或税收代缴银行的缴款收讫凭 证)等税收凭据复印件,上述证明材料真实有效,否则我方负全部责任。",
+            "pages": [
+              53
+            ],
+            "page": 53,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 53 页",
+              "index": 53,
+              "pages": [
+                53
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0150",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2、依法减免税收的供应商 ()现附上我方依法免税证明材料复印件,上述证明材料真实有效,否则 我方负全部责任。 ※注意",
+            "quote": "2、依法减免税收的供应商 ()现附上我方依法免税证明材料复印件,上述证明材料真实有效,否则 我方负全部责任。 ※注意",
+            "pages": [
+              53
+            ],
+            "page": 53,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 53 页",
+              "index": 53,
+              "pages": [
+                53
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0151",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "1、请供应商根据实际情况填写,在相应的()中打“√”,并按照本格式 的要求提供相应证明材料的复印件。",
+            "quote": "1、请供应商根据实际情况填写,在相应的()中打“√”,并按照本格式 的要求提供相应证明材料的复印件。",
+            "pages": [
+              53
+            ],
+            "page": 53,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 53 页",
+              "index": 53,
+              "pages": [
+                53
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0152",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2、供应商提供的税收凭据复印件应符合下列规定:",
+            "quote": "2、供应商提供的税收凭据复印件应符合下列规定:",
+            "pages": [
+              53
+            ],
+            "page": 53,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 53 页",
+              "index": 53,
+              "pages": [
+                53
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0153",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2.1 首次响应文件递交截止时间前(不含截止时间的当月)已依法缴纳税收 的供应商,提供首次响应文件递交截止时间前六个月(不含截止时间的当月)中 任一月份的税收凭",
+            "quote": "2.1 首次响应文件递交截止时间前(不含截止时间的当月)已依法缴纳税收 的供应商,提供首次响应文件递交截止时间前六个月(不含截止时间的当月)中 任一月份的税收凭据复印件。",
+            "pages": [
+              53
+            ],
+            "page": 53,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 53 页",
+              "index": 53,
+              "pages": [
+                53
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0154",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2.3 若为依法免税范围的供应商,提供依法免税证明材料的,视同满足本项 资格条件要求。 供应商代表 (签字) 供应商名称 (全称并加盖公章) 日期: 年 月 日",
+            "quote": "2.3 若为依法免税范围的供应商,提供依法免税证明材料的,视同满足本项 资格条件要求。 供应商代表 (签字) 供应商名称 (全称并加盖公章) 日期: 年 月 日 附件3-7 依法缴纳社会保障资金证明材料 致:(采购人或采购代理机构)",
+            "pages": [
+              54
+            ],
+            "page": 54,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 54 页",
+              "index": 54,
+              "pages": [
+                54
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0155",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "1、依法缴纳社会保障资金的供应商 ()法人(包括企业、事业单位和社会团体)的 现附上自 年 月 日至 年 月 日我方缴纳的社会保险 凭据(限:税务机关/社会保障",
+            "quote": "1、依法缴纳社会保障资金的供应商 ()法人(包括企业、事业单位和社会团体)的 现附上自 年 月 日至 年 月 日我方缴纳的社会保险 凭据(限:税务机关/社会保障资金管理机关的专用收据或社会保险缴纳清单, 或社会保险的银行缴款收讫凭证)复印件,上述证明材料真实有效,否则我方负 全部责任。 ()非法人(包括其他组织、自然人)的 自 年 月 日至 年 月 日我方缴纳的社会保险凭据 (限:税务机关/社会保障资金管理机关的专用收据或社会保险缴纳清单,或社 会保险的银行缴款收讫凭证)复印件,上述证明材料真实有效,否则我方负全部 责任。",
+            "pages": [
+              54
+            ],
+            "page": 54,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 54 页",
+              "index": 54,
+              "pages": [
+                54
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0156",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2、依法不需要缴纳或暂缓缴纳社会保障资金的供应商 ()现附上我方依法不需要缴纳社会保障资金证明材料复印件,上述证明材 料真实有效,否则我方负全部责任。 ※注意",
+            "quote": "2、依法不需要缴纳或暂缓缴纳社会保障资金的供应商 ()现附上我方依法不需要缴纳社会保障资金证明材料复印件,上述证明材 料真实有效,否则我方负全部责任。 ※注意",
+            "pages": [
+              54
+            ],
+            "page": 54,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 54 页",
+              "index": 54,
+              "pages": [
+                54
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0157",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "1、请供应商根据实际情况填写,在相应的()中打“√”,并按照本格式 的要求提供相应证明材料的复印件。",
+            "quote": "1、请供应商根据实际情况填写,在相应的()中打“√”,并按照本格式 的要求提供相应证明材料的复印件。",
+            "pages": [
+              54
+            ],
+            "page": 54,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 54 页",
+              "index": 54,
+              "pages": [
+                54
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0158",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2、供应商提供的社会保险凭据复印件应符合下列规定:",
+            "quote": "2、供应商提供的社会保险凭据复印件应符合下列规定:",
+            "pages": [
+              54
+            ],
+            "page": 54,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 54 页",
+              "index": 54,
+              "pages": [
+                54
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0159",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2.1 首次响应文件递交截止时间前(不含截止时间的当月)已依法缴纳社会 保障资金的投供应商,提供首次响应文件递交截止时间前六个月(不含截止时间 的当月)中任一月",
+            "quote": "2.1 首次响应文件递交截止时间前(不含截止时间的当月)已依法缴纳社会 保障资金的投供应商,提供首次响应文件递交截止时间前六个月(不含截止时间 的当月)中任一月份的社会保险凭据复印件。",
+            "pages": [
+              54
+            ],
+            "page": 54,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 54 页",
+              "index": 54,
+              "pages": [
+                54
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0160",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2.3 若为依法不需要缴纳或暂缓缴纳社会保障资金的供应商,提供依法不需 要缴纳或暂缓缴纳社会保障资金证明材料的,视同满足本项资格条件要求。",
+            "quote": "2.3 若为依法不需要缴纳或暂缓缴纳社会保障资金的供应商,提供依法不需 要缴纳或暂缓缴纳社会保障资金证明材料的,视同满足本项资格条件要求。",
+            "pages": [
+              54
+            ],
+            "page": 54,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 54 页",
+              "index": 54,
+              "pages": [
+                54
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0161",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "第55 页共66 页 供应商代表 (签字) 供应商名称 (全称并加盖公章) 日期: 年 月 日 附件3-8 具备履行合同所必需设备和专业技术能力证明材料 声明函",
+            "quote": "第55 页共66 页 供应商代表 (签字) 供应商名称 (全称并加盖公章) 日期: 年 月 日 附件3-8 具备履行合同所必需设备和专业技术能力证明材料 声明函 致:(采购人或采购代理机构) 我方具备履行合同所必需的设备和专业技术能力,并对本声明承诺的真实性 负责,否则产生不利后果由我方承担责任。 特此声明。 ※注意:",
+            "pages": [
+              55
+            ],
+            "page": 55,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 55 页",
+              "index": 55,
+              "pages": [
+                55
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0162",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2.如果根据项目的特点和需要,对履行合同所必需的设备和专业技术能力的 证明材料有特别专项要求的,则采购人或采购代理机构应当在磋商文件“供应商",
+            "quote": "2.如果根据项目的特点和需要,对履行合同所必需的设备和专业技术能力的 证明材料有特别专项要求的,则采购人或采购代理机构应当在磋商文件“供应商",
+            "pages": [
+              55
+            ],
+            "page": 55,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 55 页",
+              "index": 55,
+              "pages": [
+                55
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0163",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "3.对于接受联合体形式的磋商且供应商是联合体的,则联合体各成员都应当 提交本资格证明文件。 供应商代表 (签字) 供应商名称 (全称并加盖公章) 日期: 年 月",
+            "quote": "3.对于接受联合体形式的磋商且供应商是联合体的,则联合体各成员都应当 提交本资格证明文件。 供应商代表 (签字) 供应商名称 (全称并加盖公章) 日期: 年 月 日第56 页共66 页 附件3-9 信用记录查询结果",
+            "pages": [
+              55,
+              56
+            ],
+            "page": 55,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 55-56 页",
+              "index": 55,
+              "pages": [
+                55,
+                56
+              ]
+            },
+            "detection": "cross_page",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0164",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "3、供应商应了解自身的信用记录情况。当供应商受到200 万以上罚款的行 政处罚且该罚款不属较大数额罚款时,供应商应在响应文件中提供此项罚款不属 于较大数额罚款的",
+            "quote": "3、供应商应了解自身的信用记录情况。当供应商受到200 万以上罚款的行 政处罚且该罚款不属较大数额罚款时,供应商应在响应文件中提供此项罚款不属 于较大数额罚款的依据(如提供:相关法律制度的规定、行政执法机构对该罚款 不属于较大数额罚款的认定或者其他有效依据)。 附件3-10 非联合体投标声明 致:(采购人或采购代理机构) 我方非联合体进行投标。 特此声明。 供应商代表 (签字) 供应商名称 (全称并加盖公章) 日期: 年 月 日第57 页共66 页 附件3-11 参加采购活动前三年内在经营活动中没有重大违法记录书面声明 致:(采购人或采购代理机构) 参加采购活动前三年内,我方在经营活动中没有重大违法记录,即没有因违 法经营受到刑事处罚或责令停产停业、吊销许可证或执照、较大数额罚款等行政 处罚。否则产生不利后果由我方承担责任。 特此申明。 供应商名称 (全称并加盖公章) 日期: 年 月 日 ",
+            "pages": [
+              56,
+              57
+            ],
+            "page": 56,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 56-57 页",
+              "index": 56,
+              "pages": [
+                56,
+                57
+              ]
+            },
+            "detection": "cross_page",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0165",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2.资格承诺的供应商应在投标(响应)文件中按此模板提供承诺函,否则,视 为未按照招标文件规定提交投标人的资格及资信文件,按资格审查不通过处理。 采购项目有特殊资",
+            "quote": "2.资格承诺的供应商应在投标(响应)文件中按此模板提供承诺函,否则,视 为未按照招标文件规定提交投标人的资格及资信文件,按资格审查不通过处理。 采购项目有特殊资格要求的,供应商还应按要求提供相应的证明材料。 附件3-13 其它资格证明文件 说明:1、采购人或采购代理机构可以根据项目的特点和需要,在磋商文件",
+            "pages": [
+              59
+            ],
+            "page": 59,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 59 页",
+              "index": 59,
+              "pages": [
+                59
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0166",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "应按照磋商文件要求,在此项下提供相关证明材料,并加盖供应商单位公章。",
+            "quote": "应按照磋商文件要求,在此项下提供相关证明材料,并加盖供应商单位公章。",
+            "pages": [
+              59
+            ],
+            "page": 59,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 59 页",
+              "index": 59,
+              "pages": [
+                59
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0167",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2、若磋商文件规定接受联合体形式且供应商为联合体的,涉及联合体成员 的其它资格证明文件在此处提供相关证明材料,并加盖供应商单位公章。 供应商代表 (签字) 供应",
+            "quote": "2、若磋商文件规定接受联合体形式且供应商为联合体的,涉及联合体成员 的其它资格证明文件在此处提供相关证明材料,并加盖供应商单位公章。 供应商代表 (签字) 供应商名称 (全称并加盖公章) 日期: 年 月 日 附件4 磋商保证金凭证(若有) 编制说明",
+            "pages": [
+              59
+            ],
+            "page": 59,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 59 页",
+              "index": 59,
+              "pages": [
+                59
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0168",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "1、在此项下提交的“磋商保证金”材料可使用转账凭证复印件或从福建省 政府采购网上公开信息系统中下载的有关原始页面的打印件。通过福建省政府采 购网政府采购平台“保",
+            "quote": "1、在此项下提交的“磋商保证金”材料可使用转账凭证复印件或从福建省 政府采购网上公开信息系统中下载的有关原始页面的打印件。通过福建省政府采 购网政府采购平台“保函服务”栏目办理电子保函的,提供电子保函电子格式。",
+            "pages": [
+              59
+            ],
+            "page": 59,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 59 页",
+              "index": 59,
+              "pages": [
+                59
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0169",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2.如果没有特别要求的,供应商根据磋商文件的要求以及特点,提供相关技 术、商务、服务响应承诺及资料,格式自拟。 供应商代表 (签字) 供应商名称 (全称并加盖公",
+            "quote": "2.如果没有特别要求的,供应商根据磋商文件的要求以及特点,提供相关技 术、商务、服务响应承诺及资料,格式自拟。 供应商代表 (签字) 供应商名称 (全称并加盖公章) 日期: 年 月 日第63 页共66 页 附件7 供应商提交符合政府采购政策的证明材料 附件7-1-1 中小企业声明函(工程、服务) 本公司(联合体)郑重声明,根据《政府采购促进中小企业发展管理办法》 (财库〔2020〕46 号)的规定,本公司(联合体)参加(单位名称)的(项目 名称)采购活动,工程的施工单位全部为符合政策要求的中小企业(或者:服务 全部由符合政策要求的中小企业承接)。相关企业(含联合体中的中小企业、签 订分包意向协议的中小企业)的具体情况如下:",
+            "pages": [
+              62,
+              63
+            ],
+            "page": 62,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 62-63 页",
+              "index": 62,
+              "pages": [
+                62,
+                63
+              ]
+            },
+            "detection": "cross_page",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0170",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "第64 页共66 页 附件7-1-2 残疾人福利性单位声明函(若有) 本供应商郑重声明,根据《财政部、民政部、中国残疾人联合会关于促进残 疾人就业政府采购政策的",
+            "quote": "第64 页共66 页 附件7-1-2 残疾人福利性单位声明函(若有) 本供应商郑重声明,根据《财政部、民政部、中国残疾人联合会关于促进残 疾人就业政府采购政策的通知》(财库[2017]141 号)、《政府采购促进中小企 业发展管理办法》(财库〔2020〕46 号)的规定,本供应商为符合条件的残疾 人福利性单位,且本供应商参加贵单位的(填写“项目名称”)项目采购活动: ()提供本供应商制造的(填写“所投采购包、品目号”)货物,或提供 其他残疾人福利性单位制造的(填写“所投采购包、品目号”)货物(不包括使 用非残疾人福利性单位注册商标的货物)。(说明:只有部分货物由残疾人福利 企业制造的,在该货物后标★) ()由本供应商承建的(填写“所投采购包、品目号”)工程 ()由本供应商承接的(填写“所投采购包、品目号”)服务; 本供应商对上述声明的真实性负责。如有虚假,将依法承担相应责任。 供应商代表 ",
+            "pages": [
+              64
+            ],
+            "page": 64,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 64 页",
+              "index": 64,
+              "pages": [
+                64
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0171",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "附件7-1-3 监狱企业证明材料 供应商为监狱企业,提供本单位制造的货物(承接的服务),并在电子响应 文件中提供省级以上监狱管理局、戒毒管理局(含新疆生产建设兵",
+            "quote": "附件7-1-3 监狱企业证明材料 供应商为监狱企业,提供本单位制造的货物(承接的服务),并在电子响应 文件中提供省级以上监狱管理局、戒毒管理局(含新疆生产建设兵团)出具的属 于监狱企业的证明文件。",
+            "pages": [
+              64
+            ],
+            "page": 64,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 64 页",
+              "index": 64,
+              "pages": [
+                64
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0172",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "第65 页共66 页 附件7-2 优先类节能产品、环境标志产品价格扣除证明材料(若有) 项目编号: 本采购包内属于节能、环境标志产品情况 采购包 品目号 产品名",
+            "quote": "第65 页共66 页 附件7-2 优先类节能产品、环境标志产品价格扣除证明材料(若有) 项目编号: 本采购包内属于节能、环境标志产品情况 采购包 品目号 产品名称 认证种类 * *-1 供应商自行填写种类,并上传证明附件以便 评审查看 ... 备注 ※注意:",
+            "pages": [
+              65
+            ],
+            "page": 65,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 65 页",
+              "index": 65,
+              "pages": [
+                65
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0173",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "1、对节能、环境标志产品计算价格扣除时,只依据电子投标(响应)文件 “投标(响应)报价明细表”以及“优先类节能产品、环境标志产品证明材料(价 格扣除适用,若有)",
+            "quote": "1、对节能、环境标志产品计算价格扣除时,只依据电子投标(响应)文件 “投标(响应)报价明细表”以及“优先类节能产品、环境标志产品证明材料(价 格扣除适用,若有)。",
+            "pages": [
+              65
+            ],
+            "page": 65,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 65 页",
+              "index": 65,
+              "pages": [
+                65
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0174",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2、供应商根据自身实际情况编写有关资料包括如供应商单位简介、竞争性 磋商文件要求提供或供应商自已认为体现自身优势,需要补充说明的其它资料, 格式自拟。 供应商代",
+            "quote": "2、供应商根据自身实际情况编写有关资料包括如供应商单位简介、竞争性 磋商文件要求提供或供应商自已认为体现自身优势,需要补充说明的其它资料, 格式自拟。 供应商代表 (签字) 供应商名称 (全称并加盖公章) 日期: 年 月 日",
+            "pages": [
+              66
+            ],
+            "page": 66,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 66 页",
+              "index": 66,
+              "pages": [
+                66
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          }
+        ]
+      },
+      "rejection": {
+        "label": "废标项",
+        "items": [
+          {
+            "clause_id": "TB-0175",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "的,视为未按照采购文件规定提交供应商的资格及资信文 件,按资格审查不合格处理。2采购项目有特殊资格要求的, 供应商还应按要求提供相应的证明材料。 专门面向中小企",
+            "quote": "的,视为未按照采购文件规定提交供应商的资格及资信文 件,按资格审查不合格处理。2采购项目有特殊资格要求的, 供应商还应按要求提供相应的证明材料。 专门面向中小企 业采购 本采购包为专门面向中小企业采购,供应商须提供中小企业 声明函。监狱企业、残疾人福利性单位视同小型、微型企业。 本项目为服务类采购项目,采购标的对应的中小企业划分标 准所属行业为:“租赁和商务服务业”。",
+            "pages": [
+              3
+            ],
+            "page": 3,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 3 页",
+              "index": 3,
+              "pages": [
+                3
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0176",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "32.00 否 根据供应商对磋商文件第三章《采购内容及要求》第12 页共66 页 响应情 况 “二、技术要求”中的各项条款内容的逐项响应情 况并结合相关佐证材料",
+            "quote": "32.00 否 根据供应商对磋商文件第三章《采购内容及要求》第12 页共66 页 响应情 况 “二、技术要求”中的各项条款内容的逐项响应情 况并结合相关佐证材料(如有),由磋商小组进行 评议并打分:完全满足磋商文件要求的得32 分; 标注“★”的技术参数为不允许负偏离的实质性要 求,若出现任一项负偏离(或未响应)的按无效响 应处理;其他指标(共计5 项),每负偏离一项扣",
+            "pages": [
+              11,
+              12
+            ],
+            "page": 11,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 11-12 页",
+              "index": 11,
+              "pages": [
+                11,
+                12
+              ]
+            },
+            "detection": "cross_page",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0177",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(3)响应报价低于最高限价45%的,即响应报价<最高限价×45%。(4) 磋商小组基于专业判断,认为供应商报价过低,有可能影响产品质量 或者不能诚信履约的其他情",
+            "quote": "(3)响应报价低于最高限价45%的,即响应报价<最高限价×45%。(4) 磋商小组基于专业判断,认为供应商报价过低,有可能影响产品质量 或者不能诚信履约的其他情形。磋商小组启动异常低价投标(响应) 审查后,应当要求相关供应商在评审现场合理的时间内提供书面说明 及必要的证明材料,对投标(响应)价格作出解释。 磋商小组启动异常低价投标(响应)审查后,属于前述第1 项至第4 项情形 的,应当要求相关供应商在评审现场合理的时间内对投标(响应)价格作出解释, 提供项目具体成本测算等与报价合理性相关的书面说明及必要的证明材料,包括 但不限于原材料成本、人工成本、制造费用等,给予相关供应商的合理时间一般 不少于30 分钟。其中,属于第3 项情形,供应商已随投标(响应)文件一并提 交相关书面说明及必要的证明材料的,在评审现场可不再重复提交。 磋商小组依据专业经验,参考同类项目中标(成交)价格、类似产品市场",
+            "pages": [
+              17
+            ],
+            "page": 17,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 17 页",
+              "index": 17,
+              "pages": [
+                17
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0178",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "5.1.3 若供应商有任何试图干扰具体评审事务,影响磋商小组独立履行职责 的行为,其响应无效且不予退还磋商保证金或通过保函进行索赔。情节严重的, 由财政部门列入",
+            "quote": "5.1.3 若供应商有任何试图干扰具体评审事务,影响磋商小组独立履行职责 的行为,其响应无效且不予退还磋商保证金或通过保函进行索赔。情节严重的, 由财政部门列入不良行为记录。",
+            "pages": [
+              18
+            ],
+            "page": 18,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 18 页",
+              "index": 18,
+              "pages": [
+                18
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0179",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "第24 页共66 页 书”),或者加盖供应商单位公章方可生效,否则采购人、采购代理机构或磋商 小组将视为无效补充、修改或者撤回。采购人、采购代理机构或磋商小组不",
+            "quote": "第24 页共66 页 书”),或者加盖供应商单位公章方可生效,否则采购人、采购代理机构或磋商 小组将视为无效补充、修改或者撤回。采购人、采购代理机构或磋商小组不接受 供应商口头、电话、传真或电子邮件形式提交的补充、修改或者撤回。",
+            "pages": [
+              24
+            ],
+            "page": 24,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 24 页",
+              "index": 24,
+              "pages": [
+                24
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0180",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "决,按无效处理,不进入磋商阶段,磋商小组将告知有关供应商。",
+            "quote": "决,按无效处理,不进入磋商阶段,磋商小组将告知有关供应商。",
+            "pages": [
+              24
+            ],
+            "page": 24,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 24 页",
+              "index": 24,
+              "pages": [
+                24
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0181",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "14.2.1 供应商有下列情况之一者,其提交的响应文件将被视为未实质性响 应磋商文件要求,磋商小组将否决其响应文件,按无效处理: 采购包1: 序号 符合审查要求",
+            "quote": "14.2.1 供应商有下列情况之一者,其提交的响应文件将被视为未实质性响 应磋商文件要求,磋商小组将否决其响应文件,按无效处理: 采购包1: 序号 符合审查要求概况 评审点具体描述 1 情形1 响应文件中提供的资格证明文件不全的; 2 情形2 响应文件未按磋商文件规定由供应商代表签 字,或未按磋商文件规定加盖供应商单位公章 的;或供应商代表未获得有效授权的; 3 情形3 供应商未按磋商文件规定提交磋商保证金的; 4 情形4 响应文件有效期不满足磋商文件要求的; 5 情形5 响应内容与磋商采购内容及要求有重大偏离或 保留的,限制了采购人的权利或者减少成交供 应商合同项下的义务;(由于磋商项目本身特",
+            "pages": [
+              24
+            ],
+            "page": 24,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 24 页",
+              "index": 24,
+              "pages": [
+                24
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0182",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "第25 页共66 页 点,不能详细列明采购标的的技术、服务要求 的除外); 6 情形6 响应文件中附有采购人无法接受的条件的; 7 情形7 不符合磋商文件中规定",
+            "quote": "第25 页共66 页 点,不能详细列明采购标的的技术、服务要求 的除外); 6 情形6 响应文件中附有采购人无法接受的条件的; 7 情形7 不符合磋商文件中规定的其它实质性条款(比 如:报价超过了磋商文件规定的最高限价)。",
+            "pages": [
+              25
+            ],
+            "page": 25,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 25 页",
+              "index": 25,
+              "pages": [
+                25
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0183",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "1质疑人的基本信息,至少包括:全称、地址、邮政编码、联系人及联系电 话等;适合自然人参加磋商的政府采购项目且质疑人为自然人的,质疑人提供本 人的身份证复印件。质",
+            "quote": "1质疑人的基本信息,至少包括:全称、地址、邮政编码、联系人及联系电 话等;适合自然人参加磋商的政府采购项目且质疑人为自然人的,质疑人提供本 人的身份证复印件。质疑人为法人或其他组织的,提供统一社会信用代码营业执 照或者组织机构登记证件复印件、单位负责人的身份证复印件;质疑人代表为委 托代理人的,还应同时提供单位负责人授权书和委托代理人的身份证复印件。 2所质疑项目的基本信息,至少包括:项目编号、项目名称等; 3所质疑的具体事项(以下简称:“质疑事项”); 4质疑人自身权益受到损害的事实依据和证明材料,至少包括: a1 所质疑的具体事项事实存在的证明材料; a2 所质疑的具体事项事实导致质疑人自身权益受到损害的证明材料,如: 采购文件、采购过程或成交结果违法违规,损害自已合法权益等证明材料; 备注:若质疑的具体事项按照有关法律、法规和规章规定处于应当保密阶段, 则应提供信息或证明材料为合法或",
+            "pages": [
+              28
+            ],
+            "page": 28,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 28 页",
+              "index": 28,
+              "pages": [
+                28
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0184",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "2、供应商须按磋商文件中明确的所属行业填列,多品目项目中须按上表要 求逐条填列,否则,其提供的中小企业声明将被判定为无效声明函,由此造成的 后果由供应商自行承担",
+            "quote": "2、供应商须按磋商文件中明确的所属行业填列,多品目项目中须按上表要 求逐条填列,否则,其提供的中小企业声明将被判定为无效声明函,由此造成的 后果由供应商自行承担(涉及资格的按无效报价处理;涉及价格评审优惠的,不 予认定)。",
+            "pages": [
+              63
+            ],
+            "page": 63,
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "第 63 页",
+              "index": 63,
+              "pages": [
+                63
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          }
+        ]
+      }
+    },
+    "uncited": []
+  }
+}
