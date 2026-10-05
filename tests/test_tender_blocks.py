@@ -121,6 +121,32 @@ def test_negated_rejection_list_is_not_a_rejection_item():
     assert all(item["status"] != "PASS" for item in result["uncited"])
 
 
+def test_line_break_inside_a_page_rejoins_the_sentence():
+    pages = [
+        _page(
+            24,
+            "14.2 在进入磋商阶段之前,磋商小组将对首次响应文件进行审查。\n"
+            "如果供应商资格审查和实质性响应审查不合格,则其响应文件将被磋商小组否\n"
+            "决,按无效处理,不进入磋商阶段,磋商小组将告知有关供应商。\n"
+            "14.2.1 供应商有下列情况之一者,其响应文件按无效处理。",
+        )
+    ]
+    rejection = _blocks(extract_tender_blocks(pages, filename="wrap.pdf"))["rejection"]
+    joined = [
+        item for item in rejection
+        if "资格审查和实质性响应审查不合格" in item["quote"] and "否决" in item["quote"]
+    ]
+
+    assert len(joined) == 1
+    assert joined[0]["page"] == 24
+    assert joined[0]["pages"] == [24]
+    assert joined[0]["status"] == "NEEDS_REVIEW"
+    assert "按无效处理" in joined[0]["quote"]
+    assert "14.2 在进入磋商阶段之前" not in joined[0]["quote"]
+    assert all(not item["quote"].startswith("决,") for item in rejection)
+    assert all(item["status"] == "NEEDS_REVIEW" for item in rejection)
+
+
 def test_cross_page_sentence_keeps_both_pages():
     pages = [
         _page(3, "未按招标文件要求签署、盖章的，其投标"),

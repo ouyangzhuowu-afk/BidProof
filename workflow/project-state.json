@@ -55,7 +55,7 @@
         "outputs/tender-blocks/pub-gl-fzsc339-pending-audit.md",
         "outputs/tender-blocks/pub-gl-fzsc339-pending-audit.json"
       ],
-      "validation": "Extends the existing page extraction. Clauses without an original page stay UNKNOWN or NEEDS_REVIEW. product_pass=false. CER/F1/TEDS thresholds unchanged. No pilot/ICP ledger writes. T-005 not modified. Public 66-page consultation PDF pub-gl-fzsc339 uses the PDF page index; 184 extracted clauses all carry that page number.",
+      "validation": "Extends the existing page extraction. Clauses without an original page stay UNKNOWN or NEEDS_REVIEW. product_pass=false. CER/F1/TEDS thresholds unchanged. No pilot/ICP ledger writes. T-005 not modified. Public 66-page consultation PDF pub-gl-fzsc339 uses the PDF page index; 246 extracted clauses all carry that page number.",
       "note": "pending_audit only. Not a product PASS. Repo text notices stay uncited. The Gulou consultation PDF is test material, not a pilot."
     }
   ],
@@ -1409,7 +1409,7 @@
       "path": "outputs/tender-blocks/pub-gl-fzsc339-pending-audit.md",
       "kind": "tender-four-blocks-report",
       "status": "pending_audit",
-      "note": "184 clauses, all with PDF page numbers. product_pass=false."
+      "note": "246 clauses, all with PDF page numbers. product_pass=false."
     },
     {
       "path": "outputs/tender-blocks/pub-gl-fzsc339-pending-audit.json",
@@ -1433,7 +1433,7 @@
     ],
     "note": "Do not write demo/test rows into pilot/ICP ledgers. Do not claim business TARGET_MET. Pilot scan results are always NEEDS_REVIEW and cannot count as accuracy acceptance. On real input: copy template → fill → pilot_ledger/icp_ledger --row-json. Readiness: uv run python -m work.pilot_readiness --json."
   },
-  "updated_at": "2026-10-05T02:00:00+00:00",
+  "updated_at": "2026-10-05T02:10:00+00:00",
   "sandbox_roadmap": {
     "locked_at": "2026-09-16",
     "gates": {

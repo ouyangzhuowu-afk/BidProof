@@ -141,11 +141,6 @@ def _markdown(payload: dict) -> str:
             lines.append(
                 f"- 第 {hit['expected_pdf_page']} 页「{hit['needle']}」抽到 {len(hit['matches'])} 条，页码 {pages}。"
             )
-        elif hit["expected_pdf_page"] == 24:
-            lines.append(
-                "- 第 24 页「资格审查和实质性响应审查不合格，则其响应文件将被磋商小组否决」没有整句抽成一条。"
-                "页内换行把「否决」拆开，前半句没有单独成条；后半句「决，按无效处理…」在第 24 页的废标项里，带有页码。"
-            )
         else:
             lines.append(f"- 第 {hit['expected_pdf_page']} 页「{hit['needle']}」没有抽到。")
     lines.extend(

@@ -686,6 +686,33 @@ def _flat_table_at(lines: list[str], start: int) -> tuple[list[str], int]:
     return headers, index
 
 
+def _cjk(char: str) -> bool:
+    return "\u3400" <= char <= "\u9fff"
+
+
+def _sentence_end(line: str) -> bool:
+    return line.endswith(("。", "！", "？"))
+
+
+def _join_wrapped(parts: list[str]) -> str:
+    """Join lines of one sentence. A CJK line break is not a word space."""
+    text = parts[0]
+    for part in parts[1:]:
+        if text and part and _cjk(text[-1]) and _cjk(part[0]):
+            text += part
+        else:
+            text += f" {part}"
+    return text
+
+
+def _is_section_heading(line: str) -> bool:
+    if _CHAPTER_LINE.match(line):
+        return True
+    if len(line) > 40 or "，" in line or "," in line or "。" in line:
+        return False
+    return _section_of(line) is not None
+
+
 def _split_prose(text: str) -> list[tuple[str, str]]:
     pieces: list[tuple[str, str]] = []
     buffer_kind = ""
@@ -694,7 +721,7 @@ def _split_prose(text: str) -> list[tuple[str, str]]:
     def flush() -> None:
         nonlocal buffer_kind, buffer
         if buffer:
-            pieces.append((buffer_kind, " ".join(buffer)))
+            pieces.append((buffer_kind, _join_wrapped(buffer)))
         buffer_kind = ""
         buffer = []
 
@@ -703,17 +730,17 @@ def _split_prose(text: str) -> list[tuple[str, str]]:
         if not line or _NOISE.search(line):
             flush()
             continue
-        if _CHAPTER_LINE.match(line) or (len(line) <= 40 and "，" not in line and "。" not in line and _section_of(line)):
+        if _is_section_heading(line):
             flush()
             pieces.append(("heading", line))
             continue
         kind = "item" if _ITEM_START.match(line) else "paragraph"
-        if buffer and kind == "item":
+        if buffer and (kind == "item" or _sentence_end(buffer[-1])):
             flush()
         if not buffer:
             buffer_kind = kind
         buffer.append(line)
-        if line.endswith(_CLOSED) and kind == "item":
+        if (line.endswith(_CLOSED) and kind == "item") or _sentence_end(line):
             flush()
     flush()
     return pieces
