@@ -19,7 +19,7 @@
 /* legacy 排在最前 = 优先级最低。未迁移视图靠它兜底，新层永远胜出。 */
 @layer legacy, reset, base, layout, components, views, utilities;
 
-/* ─── src\styles\legacy.css → @layer legacy ─── */
+/* ─── src/styles/legacy.css → @layer legacy ─── */
 @layer legacy {
 /* =============================================================================
    旧版 static/style.css 的原样归档（过渡层）。
@@ -832,7 +832,7 @@ html[data-theme="dark"] .remediation-row.is-overdue { background: #2a1818; }
 html[data-theme="dark"] .requirement-row[open] { background: #141c28; }
 
 }
-/* ─── src\styles\tokens.css ─── */
+/* ─── src/styles/tokens.css ─── */
 /* =============================================================================
    BidProof 设计令牌 · v3「对照卷宗」
    -----------------------------------------------------------------------------
@@ -1100,7 +1100,7 @@ html[data-theme="dark"] {
 
 html[data-theme="dark"] { --quote-highlight: #655529; }
 
-/* ─── src\styles\base.css ─── */
+/* ─── src/styles/base.css ─── */
 /* =============================================================================
    BidProof 基础层 · reset + 排版 + 状态原语
    只依赖 tokens.css 中的变量。不出现裸色值。
@@ -1568,7 +1568,7 @@ html[data-theme="dark"] { --quote-highlight: #655529; }
   }
 }
 
-/* ─── src\styles\layout.css ─── */
+/* ─── src/styles/layout.css ─── */
 /* =============================================================================
    BidProof 布局层 · 应用外壳
    -----------------------------------------------------------------------------
@@ -1946,7 +1946,7 @@ html[data-theme="dark"] { --quote-highlight: #655529; }
   }
 }
 
-/* ─── src\styles\components.css ─── */
+/* ─── src/styles/components.css ─── */
 /* =============================================================================
    BidProof 组件层
    -----------------------------------------------------------------------------
@@ -2774,7 +2774,7 @@ html[data-theme="dark"] { --quote-highlight: #655529; }
   .runtime-notice[hidden] { display: none; }
 }
 
-/* ─── src\styles\views\runs.css ─── */
+/* ─── src/styles/views/runs.css ─── */
 /* =============================================================================
    视图层 · 任务列表
    -----------------------------------------------------------------------------
@@ -2942,7 +2942,7 @@ html[data-theme="dark"] { --quote-highlight: #655529; }
   }
 }
 
-/* ─── src\styles\views\detail.css ─── */
+/* ─── src/styles/views/detail.css ─── */
 /* =============================================================================
    视图层 · 任务详情（要求项对照矩阵）
    -----------------------------------------------------------------------------
@@ -3149,7 +3149,7 @@ html[data-theme="dark"] { --quote-highlight: #655529; }
   }
 }
 
-/* ─── src\styles\views\jobs.css ─── */
+/* ─── src/styles/views/jobs.css ─── */
 /* =============================================================================
    视图层 · 扫描作业与后台扫描停靠区
    ========================================================================== */
@@ -3336,7 +3336,7 @@ html[data-theme="dark"] { --quote-highlight: #655529; }
   .context-metric[data-tone="warning"][data-nonzero="true"] strong { color: var(--verdict-review); }
 }
 
-/* ─── src\styles\views\collab.css ─── */
+/* ─── src/styles/views/collab.css ─── */
 /* =============================================================================
    视图层 · 协作区与决策确认清单
    ========================================================================== */
@@ -3516,7 +3516,7 @@ html[data-theme="dark"] { --quote-highlight: #655529; }
   }
 }
 
-/* ─── src\styles\views\admin.css ─── */
+/* ─── src/styles/views/admin.css ─── */
 /* =============================================================================
    视图层 · 管理页（成员 / 项目 / 运维 / 账号安全）
    -----------------------------------------------------------------------------
@@ -3680,7 +3680,7 @@ html[data-theme="dark"] { --quote-highlight: #655529; }
   }
 }
 
-/* ─── src\styles\views\auth.css ─── */
+/* ─── src/styles/views/auth.css ─── */
 /* =============================================================================
    视图层 · 鉴权与账号动作对话框
    -----------------------------------------------------------------------------
@@ -3799,7 +3799,7 @@ html[data-theme="dark"] { --quote-highlight: #655529; }
 }
 
 
-/* ─── src\styles\views\workbench.css ─── */
+/* ─── src/styles/views/workbench.css ─── */
 /* The production app-shell and detail-view share the same calm surface system. */
 @layer components {
   /* Dialogs sit outside app-shell. Keep their existing button vocabulary usable
@@ -3927,7 +3927,7 @@ html[data-theme="dark"] { --quote-highlight: #655529; }
   @media (prefers-reduced-motion: reduce) { .review-workbench *, .detail-loading * { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
 }
 
-/* ─── src\styles\views\review-cards.css ─── */
+/* ─── src/styles/views/review-cards.css ─── */
 /* Review cards and two-sided evidence reader; intentionally scoped to the detail view. */
 @layer views {
   #detail-view .review-card {
@@ -4086,7 +4086,7 @@ html[data-theme="dark"] { --quote-highlight: #655529; }
   }
 }
 
-/* ─── src\styles\views\reader-navigation.css ─── */
+/* ─── src/styles/views/reader-navigation.css ─── */
 /* Reader controls extend review-cards.css; no global layout or verdict styling. */
 @layer views {
   #detail-view .reader-evidence-picker {
@@ -4170,7 +4170,7 @@ html[data-theme="dark"] { --quote-highlight: #655529; }
   }
 }
 
-/* ─── src\styles\views\intake.css ─── */
+/* ─── src/styles/views/intake.css ─── */
 /* Upload intake: quiet surfaces, native keyboard access, truthful waiting states. */
 @layer views {
   #intake-panel {

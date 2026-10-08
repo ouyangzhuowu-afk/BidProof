@@ -1,16 +1,12 @@
 /* ============================================================================
    BidProof 法务页样式（/privacy）
-   原为旧营销页 static/landing.css 的全部样式；旧营销页已于 2026-09-24 下线，
-   /privacy 仍依赖本文件，故重命名保留。
-   设计方向：一份被批注过的招标文件。浅纸面 + 墨色正文 + 公章红只用于风险。
-   与工作台 style.v2.css 共用品牌色与判定四态语义，登录前后视觉不断裂。
-   保留的契约：产品截图只能由 HTML 的 <img> 引入，不得写进本文件的任何背景声明
+   2026-09-28：去掉旧营销页残留（hero / evidence / verdict / workflow / proof / cta）。
+   只保留 /privacy 实际用到的 masthead + legal-card 契约。
    ========================================================================== */
 
 :root {
   color-scheme: light;
 
-  /* 纸与墨。不用暖奶油色，用略偏冷的纸白，跟工作台的 #eef1f5 同族 */
   --paper: #f5f7f6;
   --paper-raised: #ffffff;
   --paper-sunk: #eceff0;
@@ -24,32 +20,9 @@
 
   --brand: #087f72;
   --brand-dark: #05665d;
-  --brand-soft: #e4f3f1;
 
-  /* 公章红。中文正式文件就是墨色 + 印章红两色，这里只给「废标风险」用 */
-  --seal: #ad211b;
-  --seal-soft: #fdf1ef;
-  --seal-line: #f0c4bf;
-
-  --review: #9a5b06;
-  --review-soft: #fdf5e8;
-  --review-line: #eed8ae;
-
-  --pass: #15803d;
-  --pass-soft: #eaf6ee;
-  --pass-line: #b3ddc2;
-
-  --unknown: #4d5b64;
-  --unknown-soft: #eef1f2;
-  --unknown-line: #d3dadd;
-
-  /* 中文界面字体。原来是 Inter → Segoe UI → 微软雅黑，Inter 没有汉字，
-     macOS / iOS 全部掉到 Helvetica，中文只能靠系统兜底。 */
   --font-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
     "Microsoft YaHei UI", "Microsoft YaHei", "Noto Sans SC", sans-serif;
-  /* 引用招标原文用宋体：招标文件本身就是这个字面，
-     引文与产品自述之间的字体差异本身就在传达「这句话不是我们说的」 */
-  --font-source: "Songti SC", "SimSun", "Noto Serif SC", "Source Han Serif SC", serif;
 
   --shell: min(1200px, 100% - 40px);
 }
@@ -66,8 +39,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 a { color: inherit; text-decoration: none; }
-img { max-width: 100%; }
-h1, h2, h3 { margin: 0; color: var(--ink); line-height: 1.28; }
+h1 { margin: 0; color: var(--ink); line-height: 1.28; }
 p { margin: 0; }
 :focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; }
 
@@ -80,9 +52,6 @@ p { margin: 0; }
 }
 .skip-link:focus { transform: translateY(0); }
 
-.shell { width: var(--shell); margin: 0 auto; }
-
-/* ------------------------------------------------------------------ 页眉 */
 .masthead {
   position: sticky; z-index: 20; top: 0;
   display: flex; height: 68px; align-items: center; justify-content: space-between; gap: 20px;
@@ -111,301 +80,6 @@ p { margin: 0; }
 }
 .masthead .login-link:hover { background: var(--brand-dark); border-color: var(--brand-dark); color: #fff; }
 
-/* ------------------------------------------------------------------ 按钮 */
-.button {
-  display: inline-flex; min-height: 46px; align-items: center; justify-content: center;
-  border: 1px solid transparent; border-radius: 7px;
-  padding: 0 22px; font-size: 15px; font-weight: 600; line-height: 1;
-  transition: background 170ms ease, border-color 170ms ease, color 170ms ease;
-}
-.button.primary { background: var(--brand); color: #fff; }
-.button.primary:hover { background: var(--brand-dark); }
-.button.primary:active { transform: translateY(1px); }
-.button.secondary { border-color: var(--rule-strong); background: var(--paper-raised); color: var(--ink); }
-.button.secondary:hover { border-color: var(--ink-3); background: var(--paper-sunk); }
-.actions { display: flex; flex-wrap: wrap; gap: 12px; }
-
-/* ------------------------------------------------------------------ 首屏 */
-.hero {
-  position: relative; isolation: isolate; overflow: hidden;
-  border-bottom: 1px solid var(--rule);
-}
-/* canvas 只是纸面底纹与一次扫描动作，不抢主体 */
-.hero-ground {
-  position: absolute; z-index: -1; inset: 0;
-  display: block; width: 100%; height: 100%; pointer-events: none;
-}
-.hero-inner {
-  display: grid; grid-template-columns: minmax(0, 1.02fr) minmax(0, .98fr);
-  align-items: center; gap: clamp(40px, 6vw, 84px);
-  width: var(--shell); margin: 0 auto;
-  padding: clamp(56px, 8vh, 96px) 0 clamp(64px, 9vh, 104px);
-}
-.hero h1 {
-  max-width: 15em;
-  font-size: clamp(30px, 4.1vw, 48px);
-  font-weight: 700; letter-spacing: -.015em; line-height: 1.24;
-  text-wrap: balance;
-}
-.hero-kicker {
-  display: inline-flex; align-items: center; gap: 8px;
-  margin: 0 0 16px;
-  color: var(--brand); font-size: 13px; font-weight: 650;
-  letter-spacing: .06em;
-}
-.hero-kicker::before {
-  width: 7px; height: 7px; border-radius: 1px;
-  background: currentColor; content: "";
-}
-.hero-lede {
-  max-width: 30em; margin-top: 22px;
-  color: var(--ink-2); font-size: 17px; line-height: 1.9;
-}
-.hero .actions { margin-top: 30px; }
-.hero-trust {
-  display: flex; flex-wrap: wrap; gap: 8px 18px;
-  margin: 22px 0 0; padding: 0; list-style: none;
-  color: var(--ink-3); font-size: 13px;
-}
-.hero-trust li { display: inline-flex; align-items: center; gap: 8px; }
-.hero-trust li::before {
-  width: 6px; height: 6px; flex: 0 0 auto; border-radius: 50%;
-  background: var(--brand); content: "";
-}
-.hero-note {
-  max-width: 34em; margin-top: 20px;
-  color: var(--ink-3); font-size: 13px; line-height: 1.75;
-}
-
-/* ------------------------------------------- 首屏主角：一条要求项的证据链 */
-.evidence-stack { position: relative; }
-/* 背后压着的第二张卡，说明「这样的条目还有 45 条」 */
-.evidence-stack::before {
-  position: absolute; z-index: 0; inset: 16px -14px -16px 14px;
-  border: 1px solid var(--rule); border-radius: 12px;
-  background: var(--paper-raised); opacity: .55; content: "";
-}
-.evidence-card {
-  position: relative; z-index: 1;
-  margin: 0; overflow: hidden;
-  border: 1px solid var(--rule-strong); border-radius: 12px;
-  background: var(--paper-raised);
-  box-shadow: 0 18px 44px rgba(19, 32, 39, .1);
-}
-.evidence-stamp {
-  position: absolute; z-index: 2; right: 18px; bottom: 54px;
-  display: grid; width: 76px; height: 76px; place-items: center;
-  border: 2px solid var(--seal); border-radius: 50%;
-  color: var(--seal); font-size: 12px; font-weight: 700;
-  letter-spacing: .12em;
-  transform: rotate(-18deg);
-  opacity: .42; pointer-events: none;
-}
-.evidence-head {
-  display: flex; align-items: center; justify-content: space-between; gap: 14px;
-  border-bottom: 1px solid var(--rule);
-  background: var(--paper-sunk);
-  padding: 12px 18px;
-  color: var(--ink-3); font-size: 13px;
-}
-.evidence-head strong { color: var(--ink-2); font-weight: 600; }
-.evidence-index { font-variant-numeric: tabular-nums; }
-
-.evidence-row { border-bottom: 1px solid var(--rule); padding: 16px 18px; }
-.evidence-label {
-  display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
-  color: var(--ink-3); font-size: 13px;
-}
-.evidence-locator { color: var(--ink-2); font-weight: 600; font-variant-numeric: tabular-nums; }
-.evidence-locator.missing { color: var(--seal); }
-/* 招标原文用宋体排，和产品自己的话区分开 */
-.evidence-quote {
-  margin-top: 9px;
-  color: var(--ink); font-family: var(--font-source);
-  font-size: 15.5px; line-height: 1.95;
-}
-.evidence-plain { margin-top: 9px; color: var(--ink-2); font-size: 14.5px; line-height: 1.8; }
-
-.evidence-verdict {
-  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;
-  background: var(--seal-soft);
-  padding: 14px 18px;
-}
-.verdict-mark {
-  display: inline-flex; align-items: center; gap: 8px;
-  color: var(--seal); font-size: 15px; font-weight: 700;
-}
-.verdict-mark::before {
-  width: 9px; height: 9px; border-radius: 1px;
-  background: currentColor; transform: rotate(45deg); content: "";
-}
-.evidence-verdict span { color: #8d2a24; font-size: 13px; }
-.evidence-foot {
-  border-top: 1px solid var(--rule);
-  padding: 11px 18px;
-  color: var(--ink-3); font-size: 12.5px; line-height: 1.7;
-}
-
-/* --------------------------------------------------------- 判定四态说明 */
-.verdicts { border-bottom: 1px solid var(--rule); background: var(--paper-raised); }
-.verdicts .shell { padding: clamp(48px, 7vw, 76px) 0; }
-.verdicts h2 { max-width: 20em; font-size: clamp(22px, 2.4vw, 30px); font-weight: 700; letter-spacing: -.01em; }
-.verdicts > .shell > p { max-width: 34em; margin-top: 14px; color: var(--ink-2); font-size: 16px; }
-.verdict-grid {
-  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
-  margin-top: 40px; border: 1px solid var(--rule); border-radius: 12px;
-  overflow: hidden;
-}
-.verdict-grid > div { padding: 22px 24px 24px; background: var(--paper-raised); }
-.verdict-grid > div + div { border-left: 1px solid var(--rule); }
-.verdict-grid .pass { box-shadow: inset 0 3px 0 var(--pass); }
-.verdict-grid .fail { box-shadow: inset 0 3px 0 var(--seal); }
-.verdict-grid .review { box-shadow: inset 0 3px 0 var(--review); }
-.verdict-grid .unknown { box-shadow: inset 0 3px 0 var(--unknown); }
-.verdict-name {
-  display: inline-flex; align-items: center; gap: 8px;
-  font-size: 15px; font-weight: 700; letter-spacing: .01em;
-}
-/* 四种形状，不只靠颜色区分。与工作台 .status::before 的形状一致 */
-.verdict-name::before { width: 9px; height: 9px; flex: 0 0 auto; border-radius: 50%; background: currentColor; content: ""; }
-.verdict-grid .pass .verdict-name { color: var(--pass); }
-.verdict-grid .fail .verdict-name { color: var(--seal); }
-.verdict-grid .fail .verdict-name::before { border-radius: 1px; transform: rotate(45deg); }
-.verdict-grid .review .verdict-name { color: var(--review); }
-.verdict-grid .review .verdict-name::before { border-radius: 1px; }
-.verdict-grid .unknown .verdict-name { color: var(--unknown); }
-.verdict-grid .unknown .verdict-name::before { background: transparent; box-shadow: inset 0 0 0 1.5px currentColor; }
-.verdict-grid p { margin-top: 10px; color: var(--ink-2); font-size: 14px; line-height: 1.8; }
-.verdict-grid small { display: block; margin-top: 9px; color: var(--ink-3); font-size: 12.5px; line-height: 1.7; }
-
-/* ------------------------------------------------------------- 工作方式 */
-.workflow .shell {
-  display: grid; grid-template-columns: minmax(260px, .82fr) minmax(0, 1.18fr);
-  gap: clamp(40px, 6vw, 96px);
-  padding: clamp(64px, 8vw, 104px) 0;
-}
-.workflow h2, .boundary h2, .cta h2 {
-  font-size: clamp(24px, 2.7vw, 34px); font-weight: 700; letter-spacing: -.012em;
-}
-.section-lede { max-width: 26em; margin-top: 16px; color: var(--ink-2); font-size: 16px; }
-.steps { margin: 0; padding: 0; list-style: none; counter-reset: step; }
-.steps li {
-  display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 20px;
-  border-top: 1px solid var(--rule); padding: 24px 0;
-  counter-increment: step;
-}
-.steps li:last-child { border-bottom: 1px solid var(--rule); }
-.steps li::before {
-  content: counter(step);
-  display: grid; width: 28px; height: 28px; place-items: center;
-  border-radius: 50%;
-  background: var(--brand-soft); color: var(--brand);
-  font-size: 13px; font-variant-numeric: tabular-nums;
-  font-weight: 700; line-height: 1;
-}
-.steps strong { display: block; font-size: 17px; font-weight: 650; line-height: 1.5; }
-.steps p { max-width: 32em; margin-top: 7px; color: var(--ink-2); font-size: 15px; line-height: 1.8; }
-
-/* ------------------------------------------------------------ 产品截图 */
-.proof { border-top: 1px solid var(--rule); background: var(--paper-raised); }
-.proof .shell { padding: clamp(56px, 7vw, 88px) 0; }
-.proof-copy { display: grid; gap: 14px; max-width: 44em; }
-.proof-copy h2 { font-size: clamp(22px, 2.4vw, 30px); font-weight: 700; letter-spacing: -.01em; }
-.proof-copy p { color: var(--ink-2); font-size: 16px; }
-.proof-link { justify-self: start; color: var(--brand); font-weight: 600; }
-.proof-link:hover { text-decoration: underline; text-underline-offset: 4px; }
-.proof figure { margin: 32px 0 0; }
-.proof-frame {
-  overflow: hidden;
-  border: 1px solid var(--rule-strong); border-radius: 12px;
-  background: var(--paper-raised);
-  box-shadow: 0 22px 52px rgba(19, 32, 39, .13);
-}
-.proof-chrome {
-  display: flex; height: 36px; align-items: center; gap: 6px;
-  border-bottom: 1px solid var(--rule); background: var(--paper-sunk);
-  padding: 0 14px;
-}
-.proof-chrome span {
-  width: 8px; height: 8px; border-radius: 50%; background: #c3cdcb;
-}
-.proof img {
-  display: block; width: 100%; height: auto;
-  border: 0; border-radius: 0; box-shadow: none;
-}
-.proof figcaption { margin-top: 12px; color: var(--ink-3); font-size: 13px; }
-
-/* ------------------------------------------------------------ 数据边界 */
-.boundary { border-top: 1px solid var(--rule); }
-.boundary .shell { padding: clamp(64px, 8vw, 104px) 0; }
-.boundary-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(28px, 4vw, 56px); margin-top: 44px; }
-.boundary-grid > div { border-top: 3px solid var(--brand); padding-top: 18px; }
-.boundary-grid strong { display: block; font-size: 17px; font-weight: 650; }
-.boundary-grid p { margin-top: 9px; max-width: 30em; color: var(--ink-2); font-size: 15px; line-height: 1.8; }
-
-/* ------------------------------------------------------------ 结尾 CTA */
-.cta { border-top: 0; background: #101c28; color: #c3cedb; }
-.cta .shell {
-  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 36px;
-  padding: clamp(56px, 7vw, 88px) 0;
-}
-.cta-copy { max-width: 34em; }
-.cta h2 { color: #fff; }
-.cta-copy p { margin-top: 14px; color: #9aa8b8; font-size: 16px; }
-.cta .button.secondary {
-  border-color: rgba(255,255,255,.28); background: transparent; color: #fff;
-}
-.cta .button.secondary:hover { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.45); }
-
-/* ---------------------------------------------------------------- 页脚 */
-.site-footer { border-top: 1px solid rgba(255,255,255,.08); background: #0c151c; }
-.site-footer .shell {
-  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;
-  padding: 26px 0; color: #7f8ea0; font-size: 13px;
-}
-.footer-nav { display: flex; flex-wrap: wrap; gap: 20px; }
-.footer-nav a:hover { color: #e8eef5; }
-
-/* ================================================================ 响应式 */
-@media (max-width: 1040px) {
-  .hero-inner { grid-template-columns: 1fr; gap: 44px; }
-  .hero h1 { max-width: 18em; }
-  .evidence-stack { max-width: 560px; }
-  .workflow .shell { grid-template-columns: 1fr; gap: 36px; }
-  .verdict-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .verdict-grid > div:nth-child(odd) { border-left: 0; }
-  .verdict-grid > div:nth-child(3) { border-left: 0; border-top: 1px solid var(--rule); }
-  .boundary-grid { grid-template-columns: 1fr; gap: 0; }
-  .boundary-grid > div { border-top: 1px solid var(--rule); padding: 22px 0; }
-  .boundary-grid > div:first-child { border-top: 3px solid var(--brand); }
-}
-
-@media (max-width: 700px) {
-  body { font-size: 15.5px; }
-  :root { --shell: calc(100% - 32px); }
-  .masthead { height: 62px; padding: 0 16px; gap: 12px; }
-  .masthead nav { gap: 16px; font-size: 13px; }
-  .brand small { display: none; }
-  .hero-inner { padding: 40px 0 56px; }
-  .hero h1 { font-size: clamp(27px, 7.2vw, 36px); }
-  .hero-lede { font-size: 16px; }
-  .hero .actions .button { width: 100%; }
-  .evidence-stack { max-width: none; }
-  .evidence-stack::before { inset: 12px -8px -12px 8px; }
-  .verdict-grid { grid-template-columns: 1fr; margin-top: 30px; }
-  .verdict-grid > div { border-left: 0 !important; border-top: 1px solid var(--rule); padding: 20px 18px; }
-  .verdict-grid > div:first-child { border-top: 0; }
-  .cta .shell { align-items: flex-start; flex-direction: column; gap: 26px; }
-  .cta .actions { width: 100%; }
-  .cta .actions .button { flex: 1 1 auto; }
-}
-
-@media (max-width: 520px) {
-  /* 小屏页眉只留品牌和入口，两个锚点收进页脚，不做「直接消失」处理 */
-  .masthead nav a:not(.login-link) { display: none; }
-}
-
-/* ------------------------------------------------------------ 隐私说明页 */
 .legal-page { width: var(--shell); margin: 0 auto; padding: 48px 0 72px; }
 .legal-card {
   max-width: 720px; margin: 0 auto;
@@ -421,8 +95,17 @@ p { margin: 0; }
 .legal-actions { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 28px; }
 
 @media (max-width: 700px) {
+  body { font-size: 15.5px; }
+  :root { --shell: calc(100% - 32px); }
+  .masthead { height: 62px; padding: 0 16px; gap: 12px; }
+  .masthead nav { gap: 16px; font-size: 13px; }
+  .brand small { display: none; }
   .legal-page { padding: 28px 0 48px; }
   .legal-card { padding: 24px 20px 28px; }
+}
+
+@media (max-width: 520px) {
+  .masthead nav a:not(.login-link) { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
