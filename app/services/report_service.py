@@ -25,7 +25,7 @@ def csv_report(run: dict) -> str:
     writer = csv.DictWriter(output, fieldnames=presenters.REPORT_COLUMNS)
     writer.writeheader()
     for item in run.get("requirements", []):
-        writer.writerow(presenters.report_row(item))
+        writer.writerow(presenters.report_row(item, run))
     return output.getvalue().lstrip("\ufeff")
 
 

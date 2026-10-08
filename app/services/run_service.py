@@ -6,7 +6,7 @@ from pathlib import Path
 
 from fastapi import HTTPException
 
-from .. import config, presenters
+from .. import config, presenters, review_policy
 from ..repositories import audit, collaboration, runs
 from ..schemas import (
     AccuracyFeedbackRequest,
@@ -162,8 +162,8 @@ def review(principal: dict[str, str], run: dict, payload: ReviewRequest) -> dict
 
     old_status = requirement["status"]
     new_status = presenters.resolve_review_status(payload, old_status)
-    if new_status == "PASS" and not presenters.has_complete_citation(requirement):
-        raise HTTPException(status_code=422, detail="PASS 必须同时具备招标和企业证据页码引用")
+    if new_status == "PASS":
+        review_policy.enforce_pass_or_raise(requirement, run)
     requirement["status"] = new_status
     reviewed_at = utc_now()
     review_item = {

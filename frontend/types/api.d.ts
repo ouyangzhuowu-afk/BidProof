@@ -133,6 +133,14 @@ export interface Requirement {
   title: string;
   category: RequirementCategory;
   status: RequirementStatus;
+  /** Server fail-closed projection; collapses forged PASS to NEEDS_REVIEW. */
+  effective_status?: RequirementStatus;
+  /** True when human review is still required before treating the clause as settled. */
+  review_required?: boolean;
+  /** True when dual citation integrity holds against the run corpus. */
+  citation_ok?: boolean;
+  /** Stable machine reason when PASS is blocked (quality / citation / coverage). */
+  pass_block_reason?: string;
   /** [假设] 仅在 riskRank() 中使用，取值 'HIGH' 或其它。 */
   severity?: string;
   criticality?: string;

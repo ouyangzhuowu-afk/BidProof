@@ -9,7 +9,7 @@ from __future__ import annotations
 import html
 from typing import Any
 
-from . import quality_gates
+from . import citations, quality_gates, review_policy
 from .schemas import ReviewRequest
 
 
@@ -77,11 +77,12 @@ def quality_for_run(run: dict) -> dict:
 def public_summary(run: dict) -> dict:
     requirements = run.get("requirements") or []
     if requirements:
-        unresolved = [item for item in requirements if item.get("status") in {"UNKNOWN", "NEEDS_REVIEW"}]
+        effective = [review_policy.effective_status(item, run) for item in requirements]
+        unresolved = [item for item, status in zip(requirements, effective) if status in {"UNKNOWN", "NEEDS_REVIEW"}]
         blockers = [
-            item for item in requirements
+            item for item, status in zip(requirements, effective)
             if item.get("category") in {"FATAL", "QUALIFICATION"}
-            and item.get("status") in {"FAIL", "UNKNOWN", "NEEDS_REVIEW"}
+            and status in {"FAIL", "UNKNOWN", "NEEDS_REVIEW"}
         ]
         requirement_count = len(requirements)
         unresolved_count = len(unresolved)
@@ -140,7 +141,9 @@ def public_run(run: dict) -> dict:
         ],
         "source_documents": run.get("source_documents", []),
         "evidence_assets": run.get("evidence_assets", []),
-        "requirements": run["requirements"],
+        "requirements": [
+            review_policy.project_requirement(item, run) for item in run.get("requirements", [])
+        ],
         "review": run["review"],
         "decision": run.get("decision", {}),
         "archived_at": run.get("archived_at"),
@@ -163,15 +166,14 @@ def resolve_review_status(payload: ReviewRequest, old_status: str) -> str:
     return "UNKNOWN"
 
 
-def has_complete_citation(requirement: dict) -> bool:
+def has_complete_citation(requirement: dict, run: dict | None = None) -> bool:
     """A PASS needs a citation on both sides: the requirement text and the enterprise evidence."""
-    source = requirement.get("source", {})
-    source_complete = bool(source.get("locator", {}).get("label") and source.get("quote"))
-    return source_complete and any(item.get("locator", {}).get("label") and item.get("quote") for item in requirement.get("evidence", []))
+    return citations.has_complete_citation(requirement, run)
 
 
 def evidence_gap(item: dict) -> str:
-    if item.get("status") == "PASS" and item.get("evidence"):
+    status = item.get("effective_status") or item.get("status")
+    if status == "PASS" and item.get("evidence"):
         return "已定位企业证据，仍需人工确认原件有效性"
     if item.get("category") in {"QUALIFICATION", "CREDENTIAL", "BOND", "SIGNATURE"}:
         return "未定位到可核验的企业证据"
@@ -189,9 +191,10 @@ def risk_impact(item: dict) -> str:
 
 
 def next_action(item: dict) -> str:
-    if item.get("status") in {"UNKNOWN", "NEEDS_REVIEW"}:
+    status = item.get("effective_status") or item.get("status")
+    if status in {"UNKNOWN", "NEEDS_REVIEW"} or item.get("review_required"):
         return "补充证据并由人工复核"
-    if item.get("status") == "FAIL":
+    if status == "FAIL":
         return "核对原文并制定风险处置方案"
     return "保留原文定位并确认原件有效"
 
@@ -208,36 +211,49 @@ REPORT_COLUMNS = [
     "evidence_gap",
     "risk_impact",
     "next_action",
+    "review_required",
 ]
 
 
-def report_row(item: dict) -> dict[str, Any]:
+def report_row(item: dict, run: dict | None = None) -> dict[str, Any]:
+    projected = review_policy.project_requirement(item, run) if run is not None else item
     return {
-        "requirement_id": item.get("requirement_id", ""),
-        "category": item.get("category", ""),
-        "label": item.get("label", ""),
-        "status": item.get("status", ""),
-        "severity": item.get("severity", ""),
-        "title": item.get("title", ""),
-        "tender_locator": locator_label(item.get("source", {})),
-        "evidence_locators": "; ".join(f'{entry.get("filename", "")} {locator_label(entry)}' for entry in item.get("evidence", [])),
-        "evidence_gap": evidence_gap(item),
-        "risk_impact": risk_impact(item),
-        "next_action": next_action(item),
+        "requirement_id": projected.get("requirement_id", ""),
+        "category": projected.get("category", ""),
+        "label": projected.get("label", ""),
+        "status": projected.get("effective_status") or projected.get("status", ""),
+        "severity": projected.get("severity", ""),
+        "title": projected.get("title", ""),
+        "tender_locator": locator_label(projected.get("source", {})),
+        "evidence_locators": "; ".join(
+            f'{entry.get("filename", "")} {locator_label(entry)}' for entry in projected.get("evidence", [])
+        ),
+        "evidence_gap": evidence_gap(projected),
+        "risk_impact": risk_impact(projected),
+        "next_action": next_action(projected),
+        "review_required": bool(projected.get("review_required")),
     }
 
 
 def report_html(run: dict) -> str:
     rows = []
     for item in run.get("requirements", []):
-        source = item.get("source", {})
-        evidence = item.get("evidence", [])
+        projected = review_policy.project_requirement(item, run)
+        source = projected.get("source", {})
+        evidence = projected.get("evidence", [])
         evidence_locators = "; ".join(f'{entry.get("filename", "")} · {locator_label(entry)}' for entry in evidence) or "未定位"
         rows.append(
             "<tr>"
             + "".join(f"<td>{html.escape(str(value))}</td>" for value in (
-                item.get("requirement_id", ""), item.get("category", ""), item.get("status", ""), item.get("title", ""),
-                locator_label(source), evidence_locators, evidence_gap(item), risk_impact(item), next_action(item),
+                projected.get("requirement_id", ""),
+                projected.get("category", ""),
+                projected.get("effective_status") or projected.get("status", ""),
+                projected.get("title", ""),
+                locator_label(source),
+                evidence_locators,
+                evidence_gap(projected),
+                risk_impact(projected),
+                next_action(projected),
             ))
             + "</tr>"
         )

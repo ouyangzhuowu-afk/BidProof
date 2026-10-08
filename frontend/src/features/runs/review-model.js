@@ -1,11 +1,25 @@
-/** Pure review rules. Keep citation and progress semantics aligned with presenters.py. */
+/** Pure review rules. Keep citation and progress semantics aligned with presenters.py / review_policy. */
 
 /** @typedef {import('../../../types/api.js').Requirement} Requirement */
 /** @typedef {import('../../../types/api.js').Run} Run */
 
+/** Prefer server `effective_status`; fall back to stored status. */
+export function effectiveStatus(/** @type {Requirement} */ item) {
+  return item?.effective_status || item?.status || 'NEEDS_REVIEW';
+}
+
+/** Prefer server `review_required`; fall back to local citation + status rules. */
+export function isReviewRequired(/** @type {Requirement} */ item) {
+  if (typeof item?.review_required === 'boolean') return item.review_required;
+  const status = effectiveStatus(item);
+  return status === 'UNKNOWN' || status === 'NEEDS_REVIEW' || status === 'FAIL'
+    || (status === 'PASS' && !hasCompleteCitation(item));
+}
+
 /** A conclusion needs a locatable quotation on both sides, exactly as the API requires. */
 export function hasCompleteCitation(/** @type {Requirement} */ item) {
-  const complete = (entry) => Boolean(entry?.locator?.label && entry?.quote);
+  if (typeof item?.citation_ok === 'boolean') return item.citation_ok;
+  const complete = (entry) => Boolean(entry?.locator?.label && entry?.quote && entry?.source_id);
   return complete(item.source) && (item.evidence || []).some(complete);
 }
 
@@ -26,7 +40,7 @@ export function latestReview(/** @type {Run} */ run, /** @type {string} */ id) {
 /** A machine PASS remains a human to-do until its latest review explicitly retains PASS. */
 export function isHumanConfirmed(run, item) {
   const review = latestReview(run, item.requirement_id);
-  return item.status === 'PASS' && review?.new_status === 'PASS';
+  return effectiveStatus(item) === 'PASS' && review?.new_status === 'PASS' && !isReviewRequired(item);
 }
 
 export function getReviewQueueCounts(run) {
