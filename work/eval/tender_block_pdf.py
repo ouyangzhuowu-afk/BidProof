@@ -16,20 +16,8 @@ from app.extraction import extract_pdf
 from app.ocr import DisabledOCRAdapter
 from app.tender_blocks import BLOCK_ORDER, extract_tender_blocks, printed_page_facts
 
-SOURCE_URL = "https://www.gl.gov.cn/xjwz/zwgkml/zdlyxxgk/zfcg/zhbgg/zbgg_swj/202609/P020260920414795183978.pdf"
-TITLE = "竞争性磋商文件（服务类）— 2026年八闽美食嘉年华暨鼓楼区海鲜美食消费季活动"
-PROJECT_NUMBER = "2026-FZSC339"
-BUYER = "福州市鼓楼区商务局"
-DEFAULT_PDF = Path("work/public-eval/tender-blocks/pub-gl-fzsc339-cuoshang-202609.pdf")
-DEFAULT_MARKDOWN = Path("outputs/tender-blocks/pub-gl-fzsc339-pending-audit.md")
-DEFAULT_JSON = Path("outputs/tender-blocks/pub-gl-fzsc339-pending-audit.json")
 _FOOTER = re.compile(r"第\s*\d+\s*页\s*[/／]?\s*共\s*\d+\s*页")
-_KNOWN_BY_FILE = {
-    "pub-gl-fzsc339-cuoshang-202609.pdf": (
-        ("资格要求", "第二十二条第一款", 2),
-        ("废标项", "资格审查和实质性响应审查不合格", 24),
-    ),
-}
+_MEASURE = re.compile(r"个|年|月|日|条|项|分|元|万|页|号|名|家|次|包|人|套|台")
 
 
 def _sha256(path: Path) -> str:
@@ -86,33 +74,31 @@ def _counts(result: dict) -> dict:
     }
 
 
-def _known_for(pdf: Path) -> tuple:
-    return _KNOWN_BY_FILE.get(pdf.name, ())
-
-
-def _known_hits(result: dict, known: tuple) -> list[dict]:
-    hits = []
+def _structural_checks(pages: list[dict], result: dict) -> dict[str, bool]:
+    """Checks that apply to every file. They do not look up a project, a buyer, or a page."""
     rows = _rows(result)
-    for label, needle, expected_page in known:
-        matched = [
-            {
-                "block": item["label"],
-                "pages": item["pages"],
-                "status": item["status"],
-                "summary": item["summary"],
-            }
-            for item in rows
-            if needle in item["quote"]
-        ]
-        hits.append(
-            {
-                "label": label,
-                "needle": needle,
-                "expected_pdf_page": expected_page,
-                "matches": matched,
-            }
-        )
-    return hits
+    cited = [item for item in rows if item.get("pages")]
+    labels_ok = all(
+        str((item.get("locator") or {}).get("label") or "").startswith("PDF 第")
+        and all(isinstance(number, int) and not isinstance(number, bool) and number >= 1 for number in item["pages"])
+        for item in cited
+    )
+    pages_ok = all(
+        isinstance(page, dict)
+        and page.get("page") == index
+        and (page.get("locator") or {}).get("kind") == "page"
+        and not page.get("ocr_status")
+        for index, page in enumerate(pages, 1)
+    )
+    status_ok = all(item.get("status") in {"NEEDS_REVIEW", "UNKNOWN"} for item in rows)
+    return {
+        "product_pass_false": result.get("product_pass") is False,
+        "audit_status_pending": result.get("audit_status") == "pending_audit",
+        "no_pass_status": status_ok and all(item.get("status") != "PASS" for item in rows),
+        "cited_labels_use_pdf_page": labels_ok,
+        "page_index_matches_order": pages_ok,
+        "ocr_not_used": all(not (page.get("ocr_status") if isinstance(page, dict) else True) for page in pages),
+    }
 
 
 def _markdown(payload: dict) -> str:
@@ -149,17 +135,20 @@ def _markdown(payload: dict) -> str:
     for key, _label in BLOCK_ORDER:
         block = counts["by_block"][key]
         lines.append(f"| {block['label']} | {block['cited']} | {block['cited']} |")
-    lines.extend(["", "## 已知条款", ""])
-    if not payload["known_hits"]:
-        lines.append("本文件没有已知条款清单。")
-    for hit in payload["known_hits"]:
-        if hit["matches"]:
-            pages = ", ".join(_pdf_pages(item["pages"]) for item in hit["matches"])
-            lines.append(
-                f"- PDF 第{hit['expected_pdf_page']}页「{hit['needle']}」抽到 {len(hit['matches'])} 条，页码 {pages}。"
-            )
-        else:
-            lines.append(f"- PDF 第{hit['expected_pdf_page']}页「{hit['needle']}」没有抽到。")
+    checks = payload["structural_checks"]
+    lines.extend(
+        [
+            "",
+            "## 结构核对",
+            "",
+            "- 每条条款的状态是 `NEEDS_REVIEW`（有页码）或 `UNKNOWN`（没有页码）。",
+            "- `product_pass` 为 false，`audit_status` 为 pending_audit。没有 PASS。",
+            "- 有页码的条款，定位都以「PDF 第」开头，页码是正整数。",
+            "- 页索引与 PDF 顺序一致，没有调用 OCR。",
+            f"- 核对结果：{'通过' if all(checks.values()) else '未通过'}。",
+            "",
+        ]
+    )
     lines.extend(
         [
             "",
@@ -247,9 +236,13 @@ def _bare_page_in_quotes(result: dict) -> int:
     for item in _rows(result):
         quote = item.get("quote") or ""
         for number in item.get("pages") or []:
-            if re.search(rf"(?<=[\u3400-\u9fff])\s*{int(number)}\s*(?=[\u3400-\u9fff])", quote):
-                count += 1
-                break
+            glued = re.search(rf"(?<=[\u3400-\u9fff])\s*{int(number)}\s*(?=[\u3400-\u9fff])", quote)
+            if glued is None:
+                continue
+            if _MEASURE.match(quote[glued.end():]):
+                continue
+            count += 1
+            break
     return count
 
 
@@ -258,26 +251,18 @@ def run(
     markdown_path: Path,
     json_path: Path,
     *,
-    source_url: str = SOURCE_URL,
-    title: str = TITLE,
-    project_number: str = PROJECT_NUMBER,
-    buyer: str = BUYER,
-    known: tuple | None = None,
+    source_url: str,
+    title: str,
+    project_number: str,
+    buyer: str,
 ) -> dict:
     pages = extract_pdf(pdf, ocr_adapter=DisabledOCRAdapter())
-    for index, page in enumerate(pages, 1):
-        if page.get("page") != index or page.get("locator", {}).get("kind") != "page":
-            raise RuntimeError(f"page {index} is not the PDF page index")
-        if page.get("ocr_status"):
-            raise RuntimeError(f"page {index} used OCR")
     result = extract_tender_blocks(pages, filename=pdf.name)
-    if result.get("product_pass") is not False or result.get("audit_status") != "pending_audit":
-        raise RuntimeError("extraction did not stay pending_audit with product_pass false")
-    if any(item.get("status") == "PASS" for item in _rows(result)):
-        raise RuntimeError("a clause was marked PASS")
+    checks = _structural_checks(pages, result)
+    if not all(checks.values()):
+        failed = [name for name, ok in checks.items() if not ok]
+        raise RuntimeError(f"structural checks failed: {', '.join(failed)}")
     footer = _footer_check(pages)
-    if known is None:
-        known = _known_for(pdf)
     payload = {
         "audit_status": "pending_audit",
         "product_pass": False,
@@ -296,7 +281,7 @@ def run(
         "footer_in_quotes": _footer_in_quotes(result),
         "bare_page_in_quotes": _bare_page_in_quotes(result),
         "counts": _counts(result),
-        "known_hits": _known_hits(result, known),
+        "structural_checks": checks,
         "extraction": result,
     }
     json_path.parent.mkdir(parents=True, exist_ok=True)
@@ -308,13 +293,13 @@ def run(
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--pdf", type=Path, default=DEFAULT_PDF)
-    parser.add_argument("--markdown", type=Path, default=DEFAULT_MARKDOWN)
-    parser.add_argument("--json", type=Path, default=DEFAULT_JSON)
-    parser.add_argument("--source-url", default=SOURCE_URL)
-    parser.add_argument("--title", default=TITLE)
-    parser.add_argument("--project-number", default=PROJECT_NUMBER)
-    parser.add_argument("--buyer", default=BUYER)
+    parser.add_argument("--pdf", type=Path, required=True)
+    parser.add_argument("--markdown", type=Path, required=True)
+    parser.add_argument("--json", type=Path, required=True)
+    parser.add_argument("--source-url", required=True)
+    parser.add_argument("--title", required=True)
+    parser.add_argument("--project-number", required=True)
+    parser.add_argument("--buyer", required=True)
     args = parser.parse_args()
     payload = run(
         args.pdf,

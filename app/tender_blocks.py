@@ -46,9 +46,11 @@ _HEADER_CELLS = {
 }
 _REJECTION_OUTCOME = re.compile(
     r"否决其?投标|否决其报价|被否决|不予受理|废标|"
-    r"无效投标|投标无效|投标文件无效|其投标无效|"
+    r"无效投标|投标无效|投标文件无效|其投标无效|投标被拒绝|"
+    r"被认定为投标无效|认定为投标无效|"
     r"无效响应|响应无效|响应文件无效|其响应无效|"
     r"作无效报价处理|无效报价|作无效处理|按无效|视为无效|报价无效|"
+    r"未(?:作出|做出|做)?实质性响应|没有(?:作出|做出|做)?实质性响应|"
     r"非实质性响应|资格审查不合格|取消投标资格|应予(以)?废标"
 )
 _NEGATED_REJECTION = re.compile(
@@ -118,7 +120,36 @@ _POST_AWARD = re.compile(
     r"拒绝[^。]{0,24}签(?:订)?(?:政府采购)?合同|重新开展"
 )
 _THIS_PROCUREMENT = re.compile(r"本次|本项目|该项目|该采购|政府采购|响应磋商|投标|磋商|同一合同项下")
-_FORFEIT_LEAD = re.compile(r"保证金将被不予退还")
+# 拒绝签订之后不得再参加重新采购。合同履行中的普通限制不是这一类。
+_REPROCUREMENT_BAR = re.compile(
+    r"不得(?!不)[^。]{0,40}参加[^。]{0,48}重新(?:开展|组织|进行)"
+    r"|拒绝[^。]{0,40}签(?:订)?[^。]{0,24}合同[^。]{0,80}不得(?!不)[^。]{0,32}参加"
+)
+# 不同投标人由同一单位或同一人编制、办理、转出，以及同类串通列举。
+_COLLUSION = re.compile(
+    r"不同(?:投标人|供应商|响应人)[^。；;]{0,100}"
+    r"(?:同一(?:单位|人|个人|个单位|电子设备|账户)|异常一致|规律性差异|相互混装|"
+    r"硬件信息相同|联系电话一致|细节错误一致)"
+    r"|同一(?:单位|个人)[^。；;]{0,16}(?:编制|办理|转出|签字)"
+)
+_NON_REFUND = re.compile(r"(?:不予|不再|不得)退还")
+_NON_REFUND_LIST = re.compile(r"有下列|下列情形|以下情形|情形之一|情况之一|以下任何一种|任何一种情况")
+_REFUND_TIMETABLE = re.compile(r"个工作日内|及时退还|予以退还")
+# 售价、报名和领取文件的时间地点不是资格条件。
+_PROCUREMENT_ACCESS = re.compile(
+    r"售价|工本费|报名时间|报名截止|登记时间|文件发售|"
+    r"获取(?:招标|采购|磋商|响应)?文件(?:的)?(?:时间|地点|方式)|"
+    r"购买(?:招标|采购|磋商)?文件"
+)
+_PROCUREMENT_HEADING = re.compile(
+    r"^(?:[一二三四五六七八九十\d]+[、.．])?获取(?:招标|采购|磋商|响应)?文件$"
+)
+_BARE_NUMBERING = re.compile(
+    r"(?:第)?\d+(?:\.\d+)*[、.．)）]?"
+    r"|[（(]\d+[）)]"
+    r"|[（(][一二三四五六七八九十]+[）)]"
+    r"|[一二三四五六七八九十]+[、.．]"
+)
 _COMPLAINT = re.compile(r"质疑函|质疑事项|质疑人|提出质疑")
 # 谁不能参加，是资格限制，不是已经递交的文件被否决。
 _PARTICIPATION_LIMIT = re.compile(r"不得(?!不)(?:(?![。！？]).){0,48}(?:参加|组成联合体)")
@@ -136,7 +167,9 @@ _NEGATED_DOCUMENT = re.compile(r"不视为无效文件|不属于无效文件|不
 _BID_RULE_BESIDE_COMPLAINT = re.compile(
     r"被否决|报价无效|无效报价|按无效|应予(以)?废标|无效响应|响应无效|响应文件无效|"
     r"投标文件无效|作无效报价处理|非实质性响应|无效文件|不予接收|"
-    r"无效投标|投标无效|否决其?投标|否决其报价|资格审查不合格|取消投标资格|"
+    r"无效投标|投标无效|投标被拒绝|认定为投标无效|否决其?投标|否决其报价|"
+    r"资格审查不合格|取消投标资格|"
+    r"未(?:作出|做出|做)?实质性响应|没有(?:作出|做出|做)?实质性响应|"
     r"不得(?!不)(?:(?![。！？]).){0,48}(?:参加|组成联合体)"
 )
 _INLINE_MARK = re.compile(
@@ -191,55 +224,64 @@ def empty_tender_blocks() -> dict[str, Any]:
 def extract_tender_blocks(pages: list[dict[str, Any]], filename: str | None = None) -> dict[str, Any]:
     """Group tender clauses into four blocks. Never emits PASS."""
     printed = printed_page_facts(pages)
-    events = _events(pages, _running_headers(pages))
+    events = _drop_loose_fragments(_events(pages, _running_headers(pages)))
     clauses = _close_cross_page(events)
     grouped: dict[str, list[dict[str, Any]]] = {key: [] for key, _label in BLOCK_ORDER}
     uncited: list[dict[str, Any]] = []
     section: str | None = None
     list_mode: str | None = None
     carried: set[str] = set()
+    stem: int | None = None
     for clause in clauses:
         if clause["kind"] == "heading":
             found = _section_of(clause["text"])
             section = found
             list_mode = None
-            carried = set()
+            if found in {"qualification", "rejection", "materials"}:
+                carried = {found}
+            else:
+                carried = set()
+                stem = None
             continue
         text = clause["text"]
-        if not _keep(text):
+        if not _keep(text) or _bare_numbering(text):
             continue
-        if clause["kind"] == "item" and _ends_open_list(text):
+        if clause["kind"] == "item" and _ends_open_list(text, stem):
             list_mode = None
             carried = set()
+            stem = None
         lead = _lead_kind(text)
-        if lead == "rejection":
+        if lead == "rejection" or _non_refund_list(text):
             list_mode = "rejection"
         elif lead == "suppress":
             list_mode = "suppress"
-        elif _forfeit_lead(text):
-            list_mode = "forfeit"
         elif _materials_lead(text):
             list_mode = "materials"
-        active_mode = list_mode
-        blocks = _classify(clause, section, active_mode)
-        if clause["kind"] == "item" and carried and not _ends_open_list(text):
+        scoped_mode = list_mode if clause["kind"] == "item" else None
+        blocks = _classify(clause, section, scoped_mode)
+        inherits = clause["kind"] == "item" and bool(carried) and not _ends_open_list(text, stem)
+        if inherits:
             blocks |= _inherited_blocks(text, carried)
+        if _no_action_fragment(text) and not inherits and not _opens_item_list(text):
+            blocks = set()
         if (
             clause["kind"] == "paragraph"
             and lead is None
             and not _opens_item_list(text)
             and not _materials_lead(text)
-            and not _forfeit_lead(text)
+            and not _non_refund_list(text)
         ):
             list_mode = None
-        elif lead is None and clause["kind"] == "item":
-            list_mode = active_mode
-        else:
-            list_mode = active_mode
-        if _opens_item_list(text) and blocks:
+        if _carries(text, blocks):
             carried = set(blocks)
+            found_stem = _lead_stem(text)
+            if found_stem is not None:
+                stem = found_stem
+        elif _list_aside(text):
+            pass
         elif clause["kind"] != "item" and not _bundle_label(text):
             carried = set()
+            stem = None
         if not blocks:
             continue
         for block in BLOCK_LABELS:
@@ -255,6 +297,10 @@ def extract_tender_blocks(pages: list[dict[str, Any]], filename: str | None = No
     result["printed_page_total"] = printed["printed_page_total"]
     for key, _label in BLOCK_ORDER:
         result["blocks"][key]["items"] = _dedupe(grouped[key])
+    result["blocks"]["materials"]["items"] = _drop_material_echoes(
+        result["blocks"]["materials"]["items"],
+        result["blocks"]["rejection"]["items"],
+    )
     result["uncited"] = _dedupe(uncited)
     _assign_ids(result)
     return sanitize_tender_blocks(result)
@@ -409,17 +455,18 @@ def _classify(clause: dict[str, Any], section: str | None, list_mode: str | None
         return _classify_row(clause.get("headers") or [], clause.get("cells") or [], clause["text"])
     text = clause["text"]
     blocks: set[str] = set()
-    # 质疑/投诉写法，以及保证金不予退还的情形，不是废标，也不是要交的投标材料。
-    leave_out = list_mode == "forfeit" or _complaint_procedure(text)
+    # 质疑函怎么写不是废标。保证金不予退还的情形本身是废标。
+    leave_out = _complaint_procedure(text)
+    collusion = _collusion(text)
     not_a_rejection = _definition_note(text) or _invalidates_unofficial_material(text)
     if list_mode == "suppress" or leave_out or not_a_rejection:
         pass
-    elif (list_mode == "rejection" and not _negated(text)) or _is_rejection(text):
+    elif collusion or (list_mode == "rejection" and not _negated(text)) or _is_rejection(text):
         blocks.add("rejection")
-    inherited = None if list_mode in {"rejection", "suppress", "forfeit"} else section
+    inherited = None if list_mode in {"rejection", "suppress"} else section
     if _is_scoring(text, inherited):
         blocks.add("scoring")
-    if not leave_out and _keeps_materials(text, inherited, list_mode):
+    if not leave_out and not collusion and _keeps_materials(text, inherited, list_mode):
         blocks.add("materials")
     if _is_qualification(text, inherited):
         blocks.add("qualification")
@@ -463,6 +510,9 @@ def _classify_row(headers: list[str], cells: list[str], text: str) -> set[str]:
         blocks = _classify({"kind": "paragraph", "text": text}, None, None)
         # A table cell is 废标项 only when its header says so. Cell text alone is not.
         blocks.discard("rejection")
+    if _collusion(text):
+        blocks.add("rejection")
+        blocks.discard("materials")
     if explicit_keep:
         blocks.discard("rejection")
     if "scoring" in blocks and (
@@ -475,7 +525,7 @@ def _classify_row(headers: list[str], cells: list[str], text: str) -> set[str]:
 def _is_rejection(text: str) -> bool:
     if _definition_note(text) or _invalidates_unofficial_material(text):
         return False
-    if _document_rejected(text):
+    if _document_rejected(text) or _collusion(text) or _non_refund_situation(text) or _reprocurement_bar(text):
         return True
     if _cross_reference_only(text):
         return False
@@ -490,8 +540,26 @@ def _negated(text: str) -> bool:
     return _NEGATED_REJECTION.search(text) is not None
 
 
-def _forfeit_lead(text: str) -> bool:
-    return _FORFEIT_LEAD.search(text) is not None
+def _collusion(text: str) -> bool:
+    return _COLLUSION.search(text) is not None
+
+
+def _reprocurement_bar(text: str) -> bool:
+    """Refusing to sign, then being barred from the restarted procurement, is a rejection."""
+    return _REPROCUREMENT_BAR.search(text) is not None
+
+
+def _non_refund_situation(text: str) -> bool:
+    """A bond that is kept is a rejection. A timetable that only mentions the exception is not."""
+    if _NON_REFUND.search(text) is None or not re.search(r"保证金|保函", text):
+        return False
+    if _REFUND_TIMETABLE.search(text) and re.search(r"除外|但因", text):
+        return False
+    return not (_refund_procedure(text) and _NON_REFUND_LIST.search(text) is None)
+
+
+def _non_refund_list(text: str) -> bool:
+    return _non_refund_situation(text) and _NON_REFUND_LIST.search(text) is not None
 
 
 def _complaint_procedure(text: str) -> bool:
@@ -564,7 +632,7 @@ def _is_scoring(text: str, section: str | None) -> bool:
     clockless = _CLOCK.sub("", text)
     if _SCORE_ASSIGNMENT.search(clockless) or _SCORE_CONTEXT.search(clockless) or _SCORE_AMOUNT.search(clockless):
         return True
-    return section == "scoring" and re.search(r"评审因素|评分标准|评分办法", text) is not None and len(text) <= 80
+    return section == "scoring" and re.search(r"评审因素|评分标准|评分办法", text) is not None
 
 
 def _scoring_process(text: str) -> bool:
@@ -658,7 +726,6 @@ def _is_materials(text: str, section: str | None) -> bool:
     return bool(
         section == "materials"
         and _ITEM_START.match(text)
-        and len(text) <= 32
         and re.search(r"函|委托书|偏离表|报价表|证明|执照|证书|材料|身份证明", text)
     )
 
@@ -667,7 +734,16 @@ def _materials_lead(text: str) -> bool:
     return _MATERIALS_LEAD.search(text) is not None
 
 
+def _procurement_access(text: str) -> bool:
+    """Sale price, registration time, and where to collect the tender are not eligibility."""
+    if _PROCUREMENT_ACCESS.search(text):
+        return True
+    return _PROCUREMENT_HEADING.fullmatch(_compact(text)) is not None
+
+
 def _is_qualification(text: str, section: str | None) -> bool:
+    if _procurement_access(text) or _reprocurement_bar(text):
+        return False
     if _participation_limit(text):
         return True
     if re.search(
@@ -694,7 +770,9 @@ def _section_of(text: str) -> str | None:
 
 def _keep(text: str) -> bool:
     compact = _compact(text)
-    if len(compact) < 4 or _NOISE.search(text):
+    if not compact or _NOISE.search(text):
+        return False
+    if len(compact) < 4 and not re.search(r"无效|否决|拒绝|废标", text):
         return False
     if _TOC_LINE.search(text) and _REJECTION_OUTCOME.search(text) is None:
         return False
@@ -722,8 +800,25 @@ def _is_child_item(text: str) -> bool:
     return _CHILD_ITEM.match(text) is not None
 
 
-def _ends_open_list(text: str) -> bool:
-    """A new numbered section ends the list. A short bundle title such as 「8.1 商务文件」 does not."""
+def _lead_stem(text: str) -> int | None:
+    """The major number of a list lead such as 「3.」。 A decimal child 「3.1」 has no stem of its own."""
+    if re.match(r"^\s*\d+[.．]\d", text):
+        return None
+    match = re.match(r"^\s*(\d+)[.．、]", text)
+    if match is None:
+        return None
+    return int(match.group(1))
+
+
+def _continues_stem(text: str, stem: int | None) -> bool:
+    match = re.match(r"^\s*(\d+)[.．]\d", text)
+    return bool(match and stem is not None and int(match.group(1)) == stem)
+
+
+def _ends_open_list(text: str, stem: int | None = None) -> bool:
+    """A new numbered section ends the list. A decimal child of the open stem does not."""
+    if _continues_stem(text, stem):
+        return False
     if _is_child_item(text) or not _ITEM_START.match(text):
         return False
     return not (
@@ -731,6 +826,56 @@ def _ends_open_list(text: str) -> bool:
         and not re.search(r"[，。！？；;]", text)
         and len(_compact(text)) <= 24
     )
+
+
+def _bare_numbering(text: str) -> bool:
+    return _BARE_NUMBERING.fullmatch(_compact(text)) is not None
+
+
+def _no_action_fragment(text: str) -> bool:
+    """A label with no predicate is not its own item. Invalidity words keep the sentence."""
+    if re.search(r"无效|否决|拒绝|废标", text):
+        return False
+    if re.search(r"[。！？]", text):
+        return False
+    if re.search(r"须|应当|必须|不得|提供|提交|递交|具备|具有|参加|缴纳|退还", text):
+        return False
+    if re.search(r"函|委托书|偏离表|报价表|执照|证书|证明", text):
+        return False
+    return re.search(r"[，,；;]", text) is None
+
+
+def _drop_loose_fragments(events: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """A bare number or a prose label is not glued onto the next sentence."""
+    kept: list[dict[str, Any]] = []
+    for event in events:
+        text = event["text"]
+        loose = (
+            event["kind"] != "item"
+            and _no_action_fragment(text)
+            and not _opens_item_list(text)
+            and not _materials_lead(text)
+            and not _non_refund_list(text)
+        )
+        if event["kind"] != "heading" and (_bare_numbering(text) or loose):
+            continue
+        kept.append(event)
+    return kept
+
+
+def _list_aside(text: str) -> bool:
+    """A note or a quoted definition between numbered children does not close the list."""
+    return bool(re.match(r"^\s*注\s*[:：]?", text) or _definition_note(text))
+
+
+def _carries(text: str, blocks: set[str]) -> bool:
+    if not blocks:
+        return False
+    if _opens_item_list(text):
+        return True
+    if not (blocks & {"qualification", "rejection"}):
+        return False
+    return re.search(r"[，,。！？；;]", text) is None
 
 
 def _bundle_label(text: str) -> bool:
@@ -742,12 +887,17 @@ def _bundle_label(text: str) -> bool:
 
 def _inherited_blocks(text: str, carried: set[str]) -> set[str]:
     extra = set(carried)
-    if _bond_template(text):
+    if _bond_template(text) or _collusion(text):
         extra.discard("materials")
     if _negated(text) or _definition_note(text):
         extra.discard("rejection")
-    if _POST_AWARD.search(text):
+    if _procurement_access(text):
         extra.discard("qualification")
+    if _collusion(text) or (_REJECTION_OUTCOME.search(text) and not _negated(text)):
+        extra.add("rejection")
+    if _refund_procedure(text):
+        extra.discard("materials")
+        extra.discard("rejection")
     return extra
 
 
@@ -959,6 +1109,26 @@ def _passage(text: str) -> str:
     cleaned = re.sub(r"<br\s*/?>", "", text, flags=re.IGNORECASE)
     cleaned = re.sub(r"Col\d+：", "", cleaned)
     return _compact(cleaned)
+
+
+def _drop_material_echoes(
+    materials: list[dict[str, Any]],
+    rejection: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """On one page, a sentence that states invalidity is kept as 废标项 only."""
+    rejection_pages: dict[str, set[int]] = {}
+    for item in rejection:
+        if not _is_rejection(item["quote"]):
+            continue
+        rejection_pages.setdefault(_compact(item["quote"]), set()).update(item["pages"])
+    kept: list[dict[str, Any]] = []
+    for item in materials:
+        pages = set(item["pages"])
+        overlap = rejection_pages.get(_compact(item["quote"]), set())
+        if pages and pages <= overlap:
+            continue
+        kept.append(item)
+    return kept
 
 
 def _dedupe(items: list[dict[str, Any]]) -> list[dict[str, Any]]:

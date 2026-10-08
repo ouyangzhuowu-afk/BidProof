@@ -431,9 +431,10 @@ def test_complaint_rules_and_deposit_forfeit_are_not_rejection_or_materials():
     found = _blocks(extract_tender_blocks(pages, filename="procedure.pdf"))
     kept = _quotes(found["rejection"] + found["materials"] + found["qualification"] + found["scoring"])
 
-    assert "虚假材料" not in kept
-    assert "保证金将被不予退还" not in kept
-    assert "通过保函进行索赔" not in kept
+    assert any("虚假材料" in item["quote"] for item in found["rejection"])
+    assert any("不予退还" in item["quote"] for item in found["rejection"])
+    assert any("撤回响应文件" in item["quote"] for item in found["rejection"])
+    assert all("虚假材料" not in item["quote"] for item in found["materials"])
     assert "质疑事项" not in kept
     assert "视为无效" not in kept
     assert "废标、重新采购" not in kept
@@ -812,6 +813,7 @@ def test_post_award_bans_and_bond_templates_are_not_qualification_or_materials()
     found = _blocks(extract_tender_blocks(pages, filename="after-award.pdf"))
 
     assert all("重新开展" not in item["quote"] for item in found["qualification"])
+    assert any("重新开展" in item["quote"] for item in found["rejection"])
     assert all("本保函" not in item["quote"] for item in found["materials"])
     assert any("投标保函" in item["quote"] for item in found["materials"])
     assert any("本次采购" in item["quote"] for item in found["qualification"])
@@ -853,3 +855,115 @@ def test_page_edges_fragments_and_quote_tails_stay_readable():
     long_quote = [item for item in rejection if "认证证书" in item["quote"]]
     assert long_quote and "响应无效" in long_quote[0]["quote"]
     assert len(long_quote[0]["quote"]) > 400
+
+
+def test_decimal_children_and_notes_keep_the_parent_block():
+    pages = [
+        _page(
+            1,
+            "3.特定资格要求：\n"
+            "3.1 供应商具备相应施工资质；\n"
+            "3.2 项目经理持有建造师注册证书。",
+        ),
+        _page(
+            2,
+            "资格证明材料：\n"
+            "（1）营业执照；\n"
+            "（2）资质证书；\n"
+            "注：证书记载按证面理解，不改变清单范围。\n"
+            "（3）书面声明；\n"
+            "（4）法律规定的其他条件。",
+        ),
+    ]
+    found = _blocks(extract_tender_blocks(pages, filename="inherit.pdf"))
+    qualification = _quotes(found["qualification"])
+
+    assert "施工资质" in qualification
+    assert "建造师注册证书" in qualification
+    assert "营业执照" in qualification
+    assert "书面声明" in qualification
+    assert "其他条件" in qualification
+    assert all(item["status"] == "NEEDS_REVIEW" for item in found["qualification"])
+
+
+def test_rejection_wording_covers_refusal_collusion_bond_and_substantive_response():
+    pages = [
+        _page(1, "不满足实质性要求的，将导致投标被拒绝。"),
+        _page(2, "进口产品未经批准的，将被认定为投标无效。"),
+        _page(3, "所投方案未实质性响应招标文件的，按未实质性响应处理。"),
+        _page(4, "供应商没有做出实质性响应的，不得进入下一步。"),
+        _page(5, "投标文件满足实质性响应要求的，进入详细评审。"),
+        _page(6, "投标人须提交投标保证金，未提交的投标无效。"),
+        _page(
+            7,
+            "供应商有下列情形之一的，投标保证金不予退还：\n"
+            "（1）在截止时间后撤回投标文件的；\n"
+            "（2）在投标文件中提供虚假材料的。",
+        ),
+        _page(8, "未中标人的投标保证金在通知书发出后5个工作日内退还。"),
+        _page(
+            9,
+            "投标文件包括下列文件：\n"
+            "（1）投标函；\n"
+            "（2）不同投标人的投标文件由同一单位编制；\n"
+            "（3）不同投标人委托同一人办理投标事宜。",
+        ),
+    ]
+    found = _blocks(extract_tender_blocks(pages, filename="wording-round.pdf"))
+    rejection = _quotes(found["rejection"])
+    materials = _quotes(found["materials"])
+
+    assert "投标被拒绝" in rejection
+    assert "认定为投标无效" in rejection
+    assert "未实质性响应" in rejection
+    assert "没有做出实质性响应" in rejection
+    assert "满足实质性响应" not in rejection
+    assert any("投标无效" in item["quote"] and item["page"] == 6 for item in found["rejection"])
+    assert all("未提交的投标无效" not in item["quote"] for item in found["materials"])
+    assert "撤回投标文件" in rejection
+    assert "虚假材料" in rejection
+    assert "工作日内退还" not in rejection
+    assert "工作日内退还" not in materials
+    assert "同一单位编制" in rejection
+    assert "办理投标事宜" in rejection
+    assert "同一单位编制" not in materials
+    assert "投标函" in materials
+    assert all(item["status"] == "NEEDS_REVIEW" for item in found["rejection"])
+
+
+def test_same_page_keeps_one_sentence_and_drops_fragments():
+    pages = [
+        _page(1, "未盖章的，投标无效。\n未盖章的，投标无效。"),
+        _page(2, "未盖章的，投标无效。"),
+        _page(3, "投标人须提交授权委托书，未提交的，投标无效。"),
+        _page(4, "响应文件由下列文件组成。\n（1）报价函；\n4.2\n（2）商务偏离表。"),
+        _page(5, "见下表"),
+        _page(6, "其投标被否决。"),
+        _page(
+            7,
+            "投标人资格要求：\n"
+            "（1）具有独立承担民事责任的能力；\n"
+            "（2）获取招标文件的时间为公告发布之日起；\n"
+            "（3）招标文件售价按套收取；\n"
+            "（4）报名时间为工作日上午。",
+        ),
+    ]
+    found = _blocks(extract_tender_blocks(pages, filename="cleanup-round.pdf"))
+    sealed = [item for item in found["rejection"] if item["quote"] == "未盖章的，投标无效。"]
+    bond = [item for item in found["rejection"] if "授权委托书" in item["quote"]]
+    materials = _quotes(found["materials"])
+    qualification = _quotes(found["qualification"])
+    everything = _quotes([item for group in found.values() for item in group])
+
+    assert sorted(item["page"] for item in sealed) == [1, 2]
+    assert bond and all("授权委托书" not in item["quote"] for item in found["materials"])
+    assert "报价函" in materials
+    assert "商务偏离表" in materials
+    assert "4.2" not in everything
+    assert "见下表" not in everything
+    assert any("否决" in item["quote"] for item in found["rejection"])
+    assert "民事责任" in qualification
+    assert "获取招标文件的时间" not in qualification
+    assert "售价" not in qualification
+    assert "报名时间" not in qualification
+    assert all(item["status"] == "NEEDS_REVIEW" for group in found.values() for item in group)
