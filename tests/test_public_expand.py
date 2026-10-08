@@ -9,6 +9,9 @@ import pytest
 
 from work.eval.public_expand import (
     LEAF_ID,
+    _repo_relative,
+    _write_cohort_bundle,
+    _write_cohort_metric_file,
     build_report_from_fixtures,
     classify_local_pdf_intake,
     fields_from_text,
@@ -243,6 +246,101 @@ def test_joe_local_pdfs_match_existing_manifest_and_are_not_recounted():
         "source2-shaanxi.pdf",
         "source4-zbtb.pdf",
     }
+
+
+def test_missing_cer_is_not_written_as_zero(tmp_path: Path):
+    _write_cohort_metric_file(
+        tmp_path,
+        stem="line-cer-report",
+        metric="line_cer",
+        value=None,
+        gate="GATE_PASS",
+        cohort="old",
+        report_version="missing-cer",
+        report_hash="abc123456789",
+        generated_at="2026-10-08T00:00:00+00:00",
+    )
+    text = (tmp_path / "line-cer-report.json").read_text(encoding="utf-8")
+    body = json.loads(text)
+    assert body["line_cer"] is None
+    assert body["gate"] == "GATE_FAIL"
+    assert body["product_pass"] is False
+    assert body["forced_requirement_status"] == "NEEDS_REVIEW"
+    assert '"line_cer": 0' not in text
+    assert '"line_cer": 0.0' not in text
+
+    _write_cohort_metric_file(
+        tmp_path,
+        stem="line-cer-nan",
+        metric="line_cer",
+        value=float("nan"),
+        gate="GATE_PASS",
+        cohort="old",
+        report_version="missing-cer",
+        report_hash="abc123456789",
+        generated_at="2026-10-08T00:00:00+00:00",
+    )
+    nan_text = (tmp_path / "line-cer-nan.json").read_text(encoding="utf-8")
+    nan_body = json.loads(nan_text)
+    assert nan_body["line_cer"] is None
+    assert nan_body["gate"] == "GATE_FAIL"
+    assert '"line_cer": 0.0' not in nan_text
+
+    # A real perfect score is still stored as 0.0 and can pass the CER gate.
+    _write_cohort_metric_file(
+        tmp_path,
+        stem="line-cer-perfect",
+        metric="line_cer",
+        value=0.0,
+        gate="GATE_PASS",
+        cohort="old",
+        report_version="missing-cer",
+        report_hash="abc123456789",
+        generated_at="2026-10-08T00:00:00+00:00",
+    )
+    perfect = json.loads((tmp_path / "line-cer-perfect.json").read_text(encoding="utf-8"))
+    assert perfect["line_cer"] == 0.0
+    assert perfect["gate"] == "GATE_PASS"
+    assert perfect["product_pass"] is False
+
+
+def test_cohort_paths_are_repo_relative(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
+    from work.eval import public_expand
+
+    monkeypatch.setattr(public_expand, "ROOT", tmp_path)
+    monkeypatch.setattr(public_expand, "COHORT_ROOT", tmp_path / "outputs" / "ocr-benchmark" / "cohorts")
+    metrics = {
+        "line_cer": 0.05,
+        "line_cer_gate": "GATE_FAIL",
+        "key_field_f1": 0.5,
+        "key_field_f1_gate": "GATE_FAIL",
+        "teds": 0.5,
+        "teds_gate": "GATE_FAIL",
+    }
+    meta = _write_cohort_bundle(
+        {"generated_at": "2026-10-08T00:00:00+00:00"},
+        cohort="old",
+        metrics=metrics,
+        report_version="vtest",
+    )
+    assert meta["path"] == "outputs/ocr-benchmark/cohorts/old/vtest"
+    assert not Path(meta["path"]).is_absolute()
+    assert "/workspace" not in meta["path"]
+    assert (tmp_path / meta["path"]).is_dir()
+    assert _repo_relative(tmp_path / "outputs" / "ocr-benchmark" / "cohorts" / "old" / "vtest") == meta["path"]
+
+
+def test_committed_public_expand_report_has_no_workspace_absolute_paths():
+    report_path = ROOT / "outputs" / "ocr-benchmark" / "public-expand-report.json"
+    text = report_path.read_text(encoding="utf-8")
+    assert "/workspace" not in text
+    report = json.loads(text)
+    for cohort, path in report["cohort_paths"].items():
+        assert not Path(path).is_absolute()
+        assert ".." not in Path(path).parts
+        assert (ROOT / path).is_dir(), cohort
+    assert report["product_pass"] is False
+    assert report["forced_requirement_status"] == "NEEDS_REVIEW"
 
 
 def test_report_keeps_product_pass_false_and_separates_synthetic():

@@ -11,13 +11,14 @@ from __future__ import annotations
 
 import hashlib
 import json
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from typing import Any
 
 from work.eval.sandbox_gates import (
     REQUIRED_COHORTS,
     aggregate_cohort_gates,
     aggregate_engineering_gates,
+    is_measured_number,
 )
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -30,6 +31,8 @@ METRIC_FILES = {
     "teds": "teds-report.json",
     "key_field_f1": "key-field-f1-report.json",
 }
+PROVENANCE_KEYS = ("cohort", "source", "metric_source", "hypothesis_source")
+_POINTER_REJECTED = object()
 
 
 def _read_json(path: Path) -> dict[str, Any] | None:
@@ -43,44 +46,109 @@ def _read_json(path: Path) -> dict[str, Any] | None:
 
 
 def _metric_from_report(report: dict[str, Any] | None, key: str) -> Any:
-    if report is None:
+    """Return a measured metric, or None. Never coerce null / NaN / missing to 0.0."""
+    if report is None or key not in report:
         return None
-    if key not in report:
+    value = report[key]
+    if not is_measured_number(value):
         return None
-    return report[key]
+    return value
 
 
-def _source_from_report(report: dict[str, Any] | None) -> str | None:
+def _metric_status(report: dict[str, Any] | None, key: str) -> str:
+    """Null, NaN, and a missing key are not evaluated."""
+    if report is None or key not in report or not is_measured_number(report[key]):
+        return "NOT_EVALUATED"
+    return "EVALUATED"
+
+
+def _provenance_labels(report: dict[str, Any] | None) -> list[str]:
     if report is None:
-        return None
-    for key in ("cohort", "source", "metric_source", "hypothesis_source"):
+        return []
+    labels: list[str] = []
+    for key in PROVENANCE_KEYS:
         value = report.get(key)
         if value:
-            return str(value)
-    return None
+            labels.append(str(value))
+    return labels
 
 
-def _cohort_dir(base: Path, cohort: str, version: str | None = None) -> Path:
+def _provenance_matches_cohort(report: dict[str, Any] | None, cohort: str) -> bool:
+    """A present report must name this cohort. A copied foreign bundle does not match."""
+    if report is None:
+        return True
+    labels = _provenance_labels(report)
+    if not labels:
+        return False
+    return all(label == cohort for label in labels)
+
+
+def _contained_child(root: Path, target: str) -> Path | None:
+    """Resolve CURRENT only to a directory strictly inside ``root``.
+
+    Rejects ``..``, and any absolute or relative path that resolves outside
+    the cohort directory (including symlink escapes).
+    """
+    text = target.strip().lstrip("\ufeff")
+    if not text or any(ch in text for ch in "\n\r\x00"):
+        return None
+    normalized = text.replace("\\", "/")
+    pure = PurePosixPath(normalized)
+    if ".." in pure.parts:
+        return None
+    root_resolved = root.resolve()
+    if pure.is_absolute():
+        candidate = Path(normalized).resolve()
+    else:
+        candidate = (root_resolved / pure).resolve()
+    try:
+        candidate.relative_to(root_resolved)
+    except ValueError:
+        return None
+    if candidate == root_resolved or not candidate.is_dir():
+        return None
+    return candidate
+
+
+def _cohort_dir(base: Path, cohort: str, version: str | None = None) -> Path | object:
     root = base / COHORT_DIRNAME / cohort
     if version:
-        return root / version
+        contained = _contained_child(root, version)
+        return contained if contained is not None else _POINTER_REJECTED
     pointer = root / CURRENT_POINTER
     if pointer.is_file():
-        target = pointer.read_text(encoding="utf-8").strip()
-        if target:
-            candidate = root / target
-            if candidate.is_dir():
-                return candidate
-    # Fall back to a literal "current" directory if present.
+        # A CURRENT file is authoritative. Do not fall back to another directory.
+        contained = _contained_child(root, pointer.read_text(encoding="utf-8"))
+        return contained if contained is not None else _POINTER_REJECTED
     current = root / "current"
     if current.is_dir():
-        return current
+        contained = _contained_child(root, "current")
+        if contained is not None:
+            return contained
     return root
 
 
 def _load_cohort_manifest(cohort_path: Path) -> dict[str, Any]:
     manifest = _read_json(cohort_path / MANIFEST_NAME) or {}
     return manifest if isinstance(manifest, dict) else {}
+
+
+def _rejected_pointer_snapshot(cohort: str) -> dict[str, Any]:
+    """CURRENT pointed outside this cohort. Do not read the foreign directory."""
+    aggregate = aggregate_engineering_gates(
+        line_cer=None,
+        key_field_f1=None,
+        teds=None,
+        line_cer_status="NOT_EVALUATED",
+        key_field_f1_status="NOT_EVALUATED",
+        teds_status="NOT_EVALUATED",
+    )
+    aggregate["failures"] = [*aggregate["failures"], "current_pointer_outside_cohort"]
+    aggregate["engineering_gate"] = "GATE_FAIL"
+    aggregate["cohort"] = cohort
+    aggregate["product_pass"] = False
+    aggregate["forced_requirement_status"] = "NEEDS_REVIEW"
+    return aggregate
 
 
 def _cohort_snapshot(
@@ -90,7 +158,9 @@ def _cohort_snapshot(
     version: str | None = None,
 ) -> dict[str, Any] | None:
     cohort_path = _cohort_dir(base, cohort, version=version)
-    if not cohort_path.is_dir():
+    if cohort_path is _POINTER_REJECTED:
+        return _rejected_pointer_snapshot(cohort)
+    if not isinstance(cohort_path, Path) or not cohort_path.is_dir():
         return None
 
     line_report = _read_json(cohort_path / METRIC_FILES["line_cer"])
@@ -99,19 +169,21 @@ def _cohort_snapshot(
     if line_report is None and teds_report is None and key_report is None:
         return None
 
-    line_status = "EVALUATED" if line_report is not None and "line_cer" in line_report else "NOT_EVALUATED"
-    teds_status = "EVALUATED" if teds_report is not None and "teds" in teds_report else "NOT_EVALUATED"
-    key_status = "EVALUATED" if key_report is not None and "key_field_f1" in key_report else "NOT_EVALUATED"
+    line_status = _metric_status(line_report, "line_cer")
+    teds_status = _metric_status(teds_report, "teds")
+    key_status = _metric_status(key_report, "key_field_f1")
 
     sources = {
-        "line_cer": _source_from_report(line_report),
-        "teds": _source_from_report(teds_report),
-        "key_field_f1": _source_from_report(key_report),
+        "line_cer": _provenance_labels(line_report),
+        "teds": _provenance_labels(teds_report),
+        "key_field_f1": _provenance_labels(key_report),
     }
-    # Consistent sources: all present metric reports for a cohort must share one source label.
-    present_sources = {name: value for name, value in sources.items() if value}
-    expected_source = next(iter(present_sources.values()), cohort)
-    inconsistent = any(value != expected_source for value in present_sources.values())
+    # Provenance must name this cohort directory. A copied expanded bundle that
+    # still says "expanded" fails inside "old", even when its own files agree.
+    inconsistent = any(
+        not _provenance_matches_cohort(report, cohort)
+        for report in (line_report, teds_report, key_report)
+    )
 
     aggregate = aggregate_engineering_gates(
         line_cer=_metric_from_report(line_report, "line_cer"),
@@ -120,10 +192,17 @@ def _cohort_snapshot(
         line_cer_status=line_status,
         key_field_f1_status=key_status,
         teds_status=teds_status,
-        source=None if inconsistent else expected_source,
-        expected_source=expected_source,
+        source=None if inconsistent else cohort,
+        expected_source=cohort,
     )
     manifest = _load_cohort_manifest(cohort_path)
+    manifest_cohort = manifest.get("cohort")
+    if manifest_cohort is not None and str(manifest_cohort) != cohort:
+        if "inconsistent_source" not in aggregate["failures"]:
+            aggregate["failures"] = [*aggregate["failures"], "inconsistent_source"]
+        aggregate["engineering_gate"] = "GATE_FAIL"
+        aggregate["source"] = str(manifest_cohort)
+        aggregate["expected_source"] = cohort
     report_version = str(manifest.get("report_version") or cohort_path.name)
     report_hash = str(manifest.get("report_hash") or "")
     if not report_hash:
@@ -165,9 +244,9 @@ def _legacy_flat_snapshot(base: Path) -> dict[str, Any]:
         line_cer=_metric_from_report(line_report, "line_cer"),
         key_field_f1=_metric_from_report(key_report, "key_field_f1"),
         teds=_metric_from_report(teds_report, "teds"),
-        line_cer_status="EVALUATED" if line_report is not None and "line_cer" in line_report else "NOT_EVALUATED",
-        key_field_f1_status="EVALUATED" if key_report is not None and "key_field_f1" in key_report else "NOT_EVALUATED",
-        teds_status="EVALUATED" if teds_report is not None and "teds" in teds_report else "NOT_EVALUATED",
+        line_cer_status=_metric_status(line_report, "line_cer"),
+        key_field_f1_status=_metric_status(key_report, "key_field_f1"),
+        teds_status=_metric_status(teds_report, "teds"),
         source="legacy_flat",
         expected_source="legacy_flat",
     )

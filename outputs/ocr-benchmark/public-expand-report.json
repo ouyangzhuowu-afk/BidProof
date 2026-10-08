@@ -1639,7 +1639,7 @@
     "expanded": "025d9189a5a7b3f793b2d12cd517ee357a426129a52c1e09de1599bcdda92352"
   },
   "cohort_paths": {
-    "old": "/workspace/outputs/ocr-benchmark/cohorts/old/20261002T130041.238532p0000",
-    "expanded": "/workspace/outputs/ocr-benchmark/cohorts/expanded/20261002T130041.238532p0000"
+    "old": "outputs/ocr-benchmark/cohorts/old/20261002T130041.238532p0000",
+    "expanded": "outputs/ocr-benchmark/cohorts/expanded/20261002T130041.238532p0000"
   }
 }

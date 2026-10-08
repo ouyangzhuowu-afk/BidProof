@@ -33,7 +33,12 @@ from work.eval.key_field_gt import KEY_FIELD_NAMES, NATIONAL_ID_RE, PHONE_RE
 from work.eval.ocr_benchmark import _norm
 from work.eval.page_annotation import load_annotations
 from work.eval.rapidocr_line_cer import evaluate_line_cer, load_hypotheses
-from work.eval.sandbox_gates import KEY_FIELD_F1_MIN, LINE_CER_MAX, TEDS_MIN
+from work.eval.sandbox_gates import (
+    KEY_FIELD_F1_MIN,
+    LINE_CER_MAX,
+    TEDS_MIN,
+    is_measured_number,
+)
 from work.eval.teds_gt import rows_to_table_html
 from work.eval.teds_harness import evaluate_teds
 
@@ -447,22 +452,32 @@ def _write_jsonl(path: Path, rows: list[dict[str, Any]]) -> None:
     path.write_text(payload, encoding="utf-8")
 
 
+def _measured(value: float | None) -> float | None:
+    """Finite measured metric, or None. Missing / NaN must not become 0.0."""
+    if not is_measured_number(value):
+        return None
+    return float(value)
+
+
 def _gate_cer(value: float | None) -> str:
-    if value is None:
+    number = _measured(value)
+    if number is None:
         return "GATE_FAIL"
-    return "GATE_PASS" if value <= LINE_CER_MAX else "GATE_FAIL"
+    return "GATE_PASS" if number <= LINE_CER_MAX else "GATE_FAIL"
 
 
 def _gate_f1(value: float | None) -> str:
-    if value is None:
+    number = _measured(value)
+    if number is None:
         return "GATE_FAIL"
-    return "GATE_PASS" if value >= KEY_FIELD_F1_MIN else "GATE_FAIL"
+    return "GATE_PASS" if number >= KEY_FIELD_F1_MIN else "GATE_FAIL"
 
 
 def _gate_teds(value: float | None) -> str:
-    if value is None:
+    number = _measured(value)
+    if number is None:
         return "GATE_FAIL"
-    return "GATE_PASS" if value >= TEDS_MIN else "GATE_FAIL"
+    return "GATE_PASS" if number >= TEDS_MIN else "GATE_FAIL"
 
 
 def _pct(value: float | None) -> str:
@@ -1128,6 +1143,15 @@ def render_markdown(report: dict[str, Any]) -> str:
     return "\n".join(lines)
 
 
+def _repo_relative(path: Path) -> str:
+    """Repo-relative POSIX path. Never an absolute ``/workspace`` path."""
+    resolved = path.resolve()
+    try:
+        return resolved.relative_to(ROOT.resolve()).as_posix()
+    except ValueError:
+        return Path(path).as_posix().lstrip("/")
+
+
 def _report_version_id(generated_at: str) -> str:
     """Stable-ish version folder name from the report timestamp (no overwrite of prior runs)."""
     stamp = (generated_at or "").replace(":", "").replace("+", "p").replace("-", "")
@@ -1163,6 +1187,11 @@ def _write_cohort_metric_file(
     generated_at: str,
     extra: dict[str, Any] | None = None,
 ) -> None:
+    # A missing / NaN metric stays null. It must never be written as 0.0, which
+    # would satisfy line CER ≤ line_cer_max and mint a false GATE_PASS.
+    stored = _measured(value)
+    if stored is None:
+        gate = "GATE_FAIL"
     body: dict[str, Any] = {
         "generated_at": generated_at,
         "claim_scope": "engineering_gate_only",
@@ -1170,7 +1199,7 @@ def _write_cohort_metric_file(
         "source": cohort,
         "report_version": report_version,
         "report_hash": report_hash,
-        metric: value,
+        metric: stored,
         "gate": gate,
         "product_pass": False,
         "business_pass": False,
@@ -1187,6 +1216,12 @@ def _write_cohort_metric_file(
         body["teds_min"] = TEDS_MIN
     if extra:
         body.update(extra)
+    # Re-apply after extra so a nested payload cannot turn a missing CER into 0.0
+    # or flip product_pass.
+    body[metric] = stored
+    body["gate"] = gate
+    body["product_pass"] = False
+    body["forced_requirement_status"] = "NEEDS_REVIEW"
     path = out_dir / f"{stem}.json"
     md_path = out_dir / f"{stem}.md"
     assert_safe_output(path)
@@ -1196,7 +1231,7 @@ def _write_cohort_metric_file(
             [
                 f"# {stem} ({cohort})",
                 "",
-                f"Cohort `{cohort}` `{metric}` = **{_pct(value)}** → **{gate}**.",
+                f"Cohort `{cohort}` `{metric}` = **{_pct(stored)}** → **{gate}**.",
                 f"report_version=`{report_version}` report_hash=`{report_hash[:12]}`.",
                 "Not a product PASS. Not T-005.",
                 "",
@@ -1309,7 +1344,11 @@ def _write_cohort_bundle(
     pointer = COHORT_ROOT / cohort / "CURRENT"
     assert_safe_output(pointer)
     pointer.write_text(report_version + "\n", encoding="utf-8")
-    return {"report_version": report_version, "report_hash": report_hash, "path": str(version_dir)}
+    return {
+        "report_version": report_version,
+        "report_hash": report_hash,
+        "path": _repo_relative(version_dir),
+    }
 
 
 def write_reports(report: dict[str, Any]) -> dict[str, Any]:

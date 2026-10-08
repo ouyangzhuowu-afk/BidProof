@@ -45,6 +45,15 @@ def _as_finite_number(value: Any) -> float | None:
     return number
 
 
+def is_measured_number(value: Any) -> bool:
+    """True only for a finite measured metric.
+
+    Null, missing, NaN, Inf, and non-numeric values are not an evaluation.
+    They must never be coerced to 0.0.
+    """
+    return _as_finite_number(value) is not None
+
+
 def validate_line_cer(value: Any) -> tuple[float | None, str | None]:
     """CER: finite and >= 0. Values above 1.0 remain valid (no false upper-cap)."""
     number = _as_finite_number(value)
@@ -80,7 +89,11 @@ def aggregate_engineering_gates(
     source: str | None = None,
     expected_source: str | None = None,
 ) -> dict[str, Any]:
-    """Combine OCR/structure gates. Unevaluated metrics are ignored, not treated as pass."""
+    """Combine OCR/structure gates. Null, NaN, and missing metrics are not evaluated and fail.
+
+    ``line_cer_status``, ``key_field_f1_status``, and ``teds_status`` cannot turn a
+    missing or non-finite value into a pass.
+    """
     failures: list[str] = []
     unevaluated: list[str] = []
     invalid: list[str] = []
@@ -94,30 +107,38 @@ def aggregate_engineering_gates(
     if cer_error:
         failures.append(cer_error)
         invalid.append("line_cer")
+        # NaN / Inf / non-numeric are not an evaluation, even if a status label says otherwise.
+        if not is_measured_number(line_cer):
+            unevaluated.append("line_cer")
     elif cer_value is not None:
         if cer_value > LINE_CER_MAX:
             failures.append("line_cer")
-    elif line_cer_status in {None, "NOT_EVALUATED", "INSUFFICIENT"}:
+    else:
+        # Null or missing. A status of EVALUATED cannot promote a missing value to a pass.
         unevaluated.append("line_cer")
 
     f1_value, f1_error = validate_unit_interval(key_field_f1, name="key_field_f1")
     if f1_error:
         failures.append(f1_error)
         invalid.append("key_field_f1")
+        if not is_measured_number(key_field_f1):
+            unevaluated.append("key_field_f1")
     elif f1_value is not None:
         if f1_value < KEY_FIELD_F1_MIN:
             failures.append("key_field_f1")
-    elif key_field_f1_status in {None, "NOT_EVALUATED", "INSUFFICIENT"}:
+    else:
         unevaluated.append("key_field_f1")
 
     teds_value, teds_error = validate_unit_interval(teds, name="teds")
     if teds_error:
         failures.append(teds_error)
         invalid.append("teds")
+        if not is_measured_number(teds):
+            unevaluated.append("teds")
     elif teds_value is not None:
         if teds_value < TEDS_MIN:
             failures.append("teds")
-    elif teds_status in {None, "NOT_EVALUATED", "INSUFFICIENT"}:
+    else:
         unevaluated.append("teds")
 
     engineering_gate = "GATE_PASS" if not failures and not unevaluated else "GATE_FAIL"

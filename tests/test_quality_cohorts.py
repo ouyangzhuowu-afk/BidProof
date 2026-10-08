@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import math
+import shutil
 from pathlib import Path
 
 import pytest
@@ -200,3 +201,143 @@ def test_presenters_bind_report_version_and_hash(tmp_path: Path, monkeypatch: py
     run_quality = quality_for_run({"state": {}, "source_documents": [{"pages": 2}]})
     assert run_quality["ocr_report_version"]["old"] == "bind-old"
     assert run_quality["ocr_report_hash"]["expanded"]
+
+
+def _write_metric_file(directory: Path, stem: str, key: str, value: object, cohort: str, version: str) -> None:
+    directory.mkdir(parents=True, exist_ok=True)
+    (directory / f"{stem}.json").write_text(
+        json.dumps(
+            {
+                key: value,
+                "gate": "GATE_PASS",
+                "cohort": cohort,
+                "source": cohort,
+                "report_version": version,
+                "product_pass": False,
+            },
+            allow_nan=True,
+        ),
+        encoding="utf-8",
+    )
+
+
+def test_all_null_metrics_do_not_pass(tmp_path: Path):
+    version = "all-null"
+    for cohort in ("old", "expanded"):
+        cohort_dir = tmp_path / "cohorts" / cohort / version
+        _write_metric_file(cohort_dir, "line-cer-report", "line_cer", None, cohort, version)
+        _write_metric_file(cohort_dir, "key-field-f1-report", "key_field_f1", None, cohort, version)
+        _write_metric_file(cohort_dir, "teds-report", "teds", None, cohort, version)
+        (cohort_dir / "cohort-manifest.json").write_text(
+            json.dumps({"cohort": cohort, "report_version": version, "report_hash": "nulls", "product_pass": False}),
+            encoding="utf-8",
+        )
+        (tmp_path / "cohorts" / cohort / "CURRENT").write_text(version + "\n", encoding="utf-8")
+    snap = quality_gates.engineering_gate_snapshot(tmp_path)
+    assert snap["engineering_gate"] == "GATE_FAIL"
+    assert snap["product_pass"] is False
+    assert snap["forced_requirement_status"] == "NEEDS_REVIEW"
+    assert snap["cohorts"]["old"]["engineering_gate"] == "GATE_FAIL"
+    assert snap["cohorts"]["expanded"]["engineering_gate"] == "GATE_FAIL"
+    assert "line_cer" in snap["cohorts"]["old"]["unevaluated"]
+    assert quality_gates.allow_machine_pass(tmp_path) is False
+
+
+def test_nan_and_missing_metrics_do_not_pass(tmp_path: Path):
+    old_dir = tmp_path / "cohorts" / "old" / "nan-v"
+    _write_metric_file(old_dir, "line-cer-report", "line_cer", float("nan"), "old", "nan-v")
+    _write_metric_file(old_dir, "key-field-f1-report", "key_field_f1", 0.99, "old", "nan-v")
+    _write_metric_file(old_dir, "teds-report", "teds", 0.95, "old", "nan-v")
+    (old_dir / "cohort-manifest.json").write_text(
+        json.dumps({"cohort": "old", "report_version": "nan-v", "report_hash": "nan", "product_pass": False}),
+        encoding="utf-8",
+    )
+    (tmp_path / "cohorts" / "old" / "CURRENT").write_text("nan-v\n", encoding="utf-8")
+
+    exp_dir = tmp_path / "cohorts" / "expanded" / "miss-v"
+    # File exists but the CER key is absent. Other metrics would pass on their own.
+    (exp_dir).mkdir(parents=True)
+    (exp_dir / "line-cer-report.json").write_text(
+        json.dumps({"gate": "GATE_PASS", "cohort": "expanded", "source": "expanded", "product_pass": False}),
+        encoding="utf-8",
+    )
+    _write_metric_file(exp_dir, "key-field-f1-report", "key_field_f1", 0.99, "expanded", "miss-v")
+    _write_metric_file(exp_dir, "teds-report", "teds", 0.95, "expanded", "miss-v")
+    (exp_dir / "cohort-manifest.json").write_text(
+        json.dumps({"cohort": "expanded", "report_version": "miss-v", "report_hash": "miss", "product_pass": False}),
+        encoding="utf-8",
+    )
+    (tmp_path / "cohorts" / "expanded" / "CURRENT").write_text("miss-v\n", encoding="utf-8")
+
+    snap = quality_gates.engineering_gate_snapshot(tmp_path)
+    assert snap["engineering_gate"] == "GATE_FAIL"
+    assert snap["cohorts"]["old"]["engineering_gate"] == "GATE_FAIL"
+    assert snap["cohorts"]["expanded"]["engineering_gate"] == "GATE_FAIL"
+    assert "line_cer" in snap["cohorts"]["old"]["unevaluated"]
+    assert "line_cer" in snap["cohorts"]["expanded"]["unevaluated"]
+    assert snap["cohorts"]["old"]["line_cer"] is None
+    assert snap["cohorts"]["expanded"]["line_cer"] is None
+    assert snap["product_pass"] is False
+    assert quality_gates.allow_machine_pass(tmp_path) is False
+
+
+def test_legacy_missing_cer_is_not_zero_and_does_not_pass(tmp_path: Path):
+    # Legacy flat file: key present, value null. Must not be read as 0.0 (which would pass ≤ 2%).
+    (tmp_path / "line-cer-report.json").write_text(
+        json.dumps({"line_cer": None, "gate": "GATE_PASS", "product_pass": False}),
+        encoding="utf-8",
+    )
+    (tmp_path / "key-field-f1-report.json").write_text(
+        json.dumps({"key_field_f1": 0.99, "product_pass": False}),
+        encoding="utf-8",
+    )
+    (tmp_path / "teds-report.json").write_text(
+        json.dumps({"teds": 0.95, "product_pass": False}),
+        encoding="utf-8",
+    )
+    snap = quality_gates.engineering_gate_snapshot(tmp_path)
+    legacy = snap["legacy_flat"]
+    assert legacy["line_cer"] is None
+    assert legacy["line_cer"] != 0.0
+    assert "line_cer" in legacy["unevaluated"]
+    assert legacy["engineering_gate"] == "GATE_FAIL"
+    assert snap["engineering_gate"] == "GATE_FAIL"
+    assert snap["product_pass"] is False
+    assert legacy["forced_requirement_status"] == "NEEDS_REVIEW"
+
+
+def test_current_pointer_outside_cohort_does_not_pass(tmp_path: Path):
+    _write_cohort(tmp_path, "expanded", line_cer=0.01, key_field_f1=0.99, teds=0.96, version="exp-v1")
+    _write_cohort(tmp_path, "old", line_cer=0.05, key_field_f1=0.5, teds=0.5, version="old-v1")
+    # Point old's CURRENT at the passing expanded cohort. Must not be followed.
+    (tmp_path / "cohorts" / "old" / "CURRENT").write_text("../expanded/exp-v1\n", encoding="utf-8")
+    snap = quality_gates.engineering_gate_snapshot(tmp_path)
+    assert snap["engineering_gate"] == "GATE_FAIL"
+    assert snap["cohorts"]["old"]["engineering_gate"] == "GATE_FAIL"
+    assert "current_pointer_outside_cohort" in snap["cohorts"]["old"]["failures"]
+    assert snap["product_pass"] is False
+    assert quality_gates.allow_machine_pass(tmp_path) is False
+
+    # Absolute path that resolves in the other cohort is the same rejection.
+    escaped = (tmp_path / "cohorts" / "expanded" / "exp-v1").resolve().as_posix()
+    (tmp_path / "cohorts" / "old" / "CURRENT").write_text(escaped + "\n", encoding="utf-8")
+    snap = quality_gates.engineering_gate_snapshot(tmp_path)
+    assert snap["engineering_gate"] == "GATE_FAIL"
+    assert "current_pointer_outside_cohort" in snap["cohorts"]["old"]["failures"]
+    assert snap["product_pass"] is False
+
+
+def test_copied_expanded_report_into_old_does_not_pass(tmp_path: Path):
+    _write_cohort(tmp_path, "expanded", line_cer=0.01, key_field_f1=0.99, teds=0.96, version="exp-v1")
+    source = tmp_path / "cohorts" / "expanded" / "exp-v1"
+    dest = tmp_path / "cohorts" / "old" / "exp-v1"
+    shutil.copytree(source, dest)
+    (tmp_path / "cohorts" / "old" / "CURRENT").write_text("exp-v1\n", encoding="utf-8")
+    snap = quality_gates.engineering_gate_snapshot(tmp_path)
+    assert snap["engineering_gate"] == "GATE_FAIL"
+    assert snap["cohorts"]["old"]["engineering_gate"] == "GATE_FAIL"
+    assert "inconsistent_source" in snap["cohorts"]["old"]["failures"]
+    assert snap["cohorts"]["expanded"]["engineering_gate"] == "GATE_PASS"
+    assert snap["product_pass"] is False
+    assert snap["forced_requirement_status"] == "NEEDS_REVIEW"
+    assert quality_gates.allow_machine_pass(tmp_path) is False
