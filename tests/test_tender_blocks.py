@@ -967,3 +967,95 @@ def test_same_page_keeps_one_sentence_and_drops_fragments():
     assert "售价" not in qualification
     assert "报名时间" not in qualification
     assert all(item["status"] == "NEEDS_REVIEW" for group in found.values() for item in group)
+
+
+def test_a_declared_marker_class_puts_those_clauses_in_rejection():
+    declared = _blocks(
+        extract_tender_blocks(
+            [
+                _page(1, "*2.1 供货周期不超过合同签订后三十日。"),
+                _page(2, "带“*”号的条款为废标项。凡标有星号（*）而不满足的，投标无效。"),
+                _page(3, "*2.4 质保期不少于三年。\n#2.5 备件清单随箱提供。\n见条款*2.1，此处不单列。"),
+                _page(4, "★3.1 交货地点为采购人指定仓库。"),
+            ],
+            filename="marker-star.pdf",
+        )
+    )
+    rejection = _quotes(declared["rejection"])
+
+    assert "*2.1 供货周期" in rejection
+    assert "*2.4 质保期" in rejection
+    assert "#2.5 备件清单" not in rejection
+    assert "此处不单列" not in rejection
+    assert "★3.1 交货地点" not in rejection
+    assert all(item["status"] == "NEEDS_REVIEW" for item in declared["rejection"])
+
+    starred = _blocks(
+        extract_tender_blocks(
+            [
+                _page(1, "以下标注★的内容，不满足的投标被拒绝。"),
+                _page(
+                    2,
+                    "★付款方式为到货验收合格后支付。\n普通包装完好即可。",
+                    tables=[{
+                        "header": ["序号", "标记", "内容"],
+                        "rows": [["1", "★", "培训在现场完成"], ["2", "", "提供说明书一份"]],
+                    }],
+                ),
+            ],
+            filename="marker-solid.pdf",
+        )
+    )
+    star_rejection = _quotes(starred["rejection"])
+
+    assert "付款方式为到货验收合格后支付" in star_rejection
+    assert "培训在现场完成" in star_rejection
+    assert "提供说明书一份" not in star_rejection
+    assert "普通包装完好即可" not in star_rejection
+
+    silent = _blocks(
+        extract_tender_blocks(
+            [_page(1, "*8.1 外壳颜色为蓝色。\n★9.2 附送备用滤芯。")],
+            filename="marker-silent.pdf",
+        )
+    )
+    assert "外壳颜色为蓝色" not in _quotes(silent["rejection"])
+    assert "备用滤芯" not in _quotes(silent["rejection"])
+
+
+def test_a_blank_deviation_form_is_not_rejection():
+    pages = [
+        _page(
+            1,
+            "合同条款偏离表\n"
+            "项目名称：____________\n"
+            "偏离情况（应进行选择，未选择投标无效）：\n"
+            "□无偏离\n"
+            "□有偏离",
+        ),
+        _page(2, "“偏离情况”列应据实填写“正偏离”或“负偏离”或“无偏离”。"),
+        _page(3, "未按招标文件要求填写偏离表的，投标无效。"),
+        _page(
+            4,
+            "有下列情形之一的，投标无效：\n"
+            "（1）未加盖公章的；\n"
+            "（2）“偏离情况”列应据实填写“正偏离”或“负偏离”或“无偏离”。",
+        ),
+        _page(
+            5,
+            "",
+            tables=[{
+                "header": ["栏目", "填写"],
+                "rows": [["偏离情况", "应进行选择，未选择投标无效 □无偏离 项目名称：________"]],
+            }],
+        ),
+    ]
+    found = _blocks(extract_tender_blocks(pages, filename="blank-form.pdf"))
+    rejection = _quotes(found["rejection"])
+
+    assert "应进行选择" not in rejection
+    assert "未选择投标无效" not in rejection
+    assert "据实填写" not in rejection
+    assert "未按招标文件要求填写偏离表的，投标无效。" in rejection
+    assert "未加盖公章" in rejection
+    assert all(item["status"] == "NEEDS_REVIEW" for item in found["rejection"])

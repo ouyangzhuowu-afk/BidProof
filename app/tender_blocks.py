@@ -183,6 +183,25 @@ _FRONT_PREFIX = re.compile(
 )
 _TOC_LINE = re.compile(r"[\.．·…]{4,}\s*\d+\s*$")
 _EMAIL = re.compile(r"@|邮箱|电子邮箱|电子邮件")
+# 文中声明某一类记号表示否决，才把带这个记号的条款收进废标。# 号不在此类。
+_MARKER_REJECTION = re.compile(r"废标项|废标|投标无效|投标被拒绝")
+_DECL_ASTERISK = re.compile(
+    r"标注\s*[“\"'「『（(]?\s*[*＊]\s*[”\"'」』）)]?"
+    r"|[“\"'「『（(]\s*[*＊]\s*[”\"'」』）)]\s*号?"
+    r"|[*＊]\s*(?:不满足|号)"
+    r"|星号"
+)
+_DECL_STAR = re.compile(
+    r"标注\s*[“\"'「『（(]?\s*[★☆]\s*[”\"'」』）)]?"
+    r"|[“\"'「『（(]\s*[★☆]\s*[”\"'」』）)]"
+    r"|[★☆]\s*(?:号|的条款|为|表示)"
+)
+_ASTERISK_CLAUSE = re.compile(r"^[*＊]\s*\d+(?:\.\d+)*(?!\d)")
+_STAR_CLAUSE = re.compile(
+    r"^(?:[★☆]|(?:[（(]\d+[）)]|\d+[)）、.．])\s*[★☆]|\d+(?:\.\d+)*\s*[★☆])"
+)
+_DEVIATION_TOPIC = re.compile(r"偏离")
+_FORM_BLANK = re.compile(r"_{3,}|＿{3,}|□|☐|■")
 _QUOTE_SOFT_CAP = 400
 _QUOTE_HARD_CAP = 1200
 _HEADER_LABELS = (
@@ -224,7 +243,9 @@ def empty_tender_blocks() -> dict[str, Any]:
 def extract_tender_blocks(pages: list[dict[str, Any]], filename: str | None = None) -> dict[str, Any]:
     """Group tender clauses into four blocks. Never emits PASS."""
     printed = printed_page_facts(pages)
-    events = _drop_loose_fragments(_events(pages, _running_headers(pages)))
+    events = _events(pages, _running_headers(pages))
+    markers = _declared_rejection_markers(events)
+    events = _drop_loose_fragments(events, markers)
     clauses = _close_cross_page(events)
     grouped: dict[str, list[dict[str, Any]]] = {key: [] for key, _label in BLOCK_ORDER}
     uncited: list[dict[str, Any]] = []
@@ -251,6 +272,8 @@ def extract_tender_blocks(pages: list[dict[str, Any]], filename: str | None = No
             carried = set()
             stem = None
         lead = _lead_kind(text)
+        if _deviation_template(text):
+            lead = None
         if lead == "rejection" or _non_refund_list(text):
             list_mode = "rejection"
         elif lead == "suppress":
@@ -258,11 +281,12 @@ def extract_tender_blocks(pages: list[dict[str, Any]], filename: str | None = No
         elif _materials_lead(text):
             list_mode = "materials"
         scoped_mode = list_mode if clause["kind"] == "item" else None
-        blocks = _classify(clause, section, scoped_mode)
+        blocks = _classify(clause, section, scoped_mode, markers)
         inherits = clause["kind"] == "item" and bool(carried) and not _ends_open_list(text, stem)
         if inherits:
             blocks |= _inherited_blocks(text, carried)
-        if _no_action_fragment(text) and not inherits and not _opens_item_list(text):
+        marked = _carries_rejection_marker(text, markers, clause.get("cells"))
+        if _no_action_fragment(text) and not inherits and not _opens_item_list(text) and not marked:
             blocks = set()
         if (
             clause["kind"] == "paragraph"
@@ -450,18 +474,35 @@ def _closed_text(text: str) -> bool:
     return stripped.endswith(_CLOSED)
 
 
-def _classify(clause: dict[str, Any], section: str | None, list_mode: str | None) -> set[str]:
+def _classify(
+    clause: dict[str, Any],
+    section: str | None,
+    list_mode: str | None,
+    markers: frozenset[str] | None = None,
+) -> set[str]:
+    markers = markers or frozenset()
     if clause["kind"] == "table_row":
-        return _classify_row(clause.get("headers") or [], clause.get("cells") or [], clause["text"])
+        return _classify_row(
+            clause.get("headers") or [],
+            clause.get("cells") or [],
+            clause["text"],
+            markers,
+        )
     text = clause["text"]
     blocks: set[str] = set()
     # 质疑函怎么写不是废标。保证金不予退还的情形本身是废标。
     leave_out = _complaint_procedure(text)
     collusion = _collusion(text)
+    template = _deviation_template(text)
     not_a_rejection = _definition_note(text) or _invalidates_unofficial_material(text)
-    if list_mode == "suppress" or leave_out or not_a_rejection:
+    if list_mode == "suppress" or leave_out or not_a_rejection or template:
         pass
-    elif collusion or (list_mode == "rejection" and not _negated(text)) or _is_rejection(text):
+    elif (
+        collusion
+        or (list_mode == "rejection" and not _negated(text))
+        or _is_rejection(text)
+        or _carries_rejection_marker(text, markers)
+    ):
         blocks.add("rejection")
     inherited = None if list_mode in {"rejection", "suppress"} else section
     if _is_scoring(text, inherited):
@@ -475,7 +516,13 @@ def _classify(clause: dict[str, Any], section: str | None, list_mode: str | None
     return blocks
 
 
-def _classify_row(headers: list[str], cells: list[str], text: str) -> set[str]:
+def _classify_row(
+    headers: list[str],
+    cells: list[str],
+    text: str,
+    markers: frozenset[str] | None = None,
+) -> set[str]:
+    markers = markers or frozenset()
     blocks: set[str] = set()
     explicit_keep = False
     pairs = list(zip(headers, cells))
@@ -507,12 +554,16 @@ def _classify_row(headers: list[str], cells: list[str], text: str) -> set[str]:
         if any(token in name for token in ("资格", "审查项目")) and _is_qualification(cell, "qualification"):
             blocks.add("qualification")
     if not blocks and not explicit_keep:
-        blocks = _classify({"kind": "paragraph", "text": text}, None, None)
+        blocks = _classify({"kind": "paragraph", "text": text}, None, None, markers)
         # A table cell is 废标项 only when its header says so. Cell text alone is not.
         blocks.discard("rejection")
     if _collusion(text):
         blocks.add("rejection")
         blocks.discard("materials")
+    if not _deviation_template(text) and _carries_rejection_marker(text, markers, cells):
+        blocks.add("rejection")
+    if _deviation_template(text):
+        blocks.discard("rejection")
     if explicit_keep:
         blocks.discard("rejection")
     if "scoring" in blocks and (
@@ -523,7 +574,7 @@ def _classify_row(headers: list[str], cells: list[str], text: str) -> set[str]:
 
 
 def _is_rejection(text: str) -> bool:
-    if _definition_note(text) or _invalidates_unofficial_material(text):
+    if _definition_note(text) or _invalidates_unofficial_material(text) or _deviation_template(text):
         return False
     if _document_rejected(text) or _collusion(text) or _non_refund_situation(text) or _reprocurement_bar(text):
         return True
@@ -610,7 +661,70 @@ def _cross_reference_only(text: str) -> bool:
     return re.search(r"否则|有下列|应当|必须|未按|不具备", text) is None
 
 
+def _declared_rejection_markers(events: list[dict[str, Any]]) -> frozenset[str]:
+    """A marker class counts only when this document says that class rejects a bid."""
+    found: set[str] = set()
+    for event in events:
+        text = str(event.get("text") or "")
+        if "asterisk" not in found and _marker_declared(text, _DECL_ASTERISK):
+            found.add("asterisk")
+        if "star" not in found and _marker_declared(text, _DECL_STAR):
+            found.add("star")
+    return frozenset(found)
+
+
+def _marker_declared(text: str, pattern: re.Pattern[str]) -> bool:
+    for match in pattern.finditer(text):
+        start = max(0, match.start() - 8)
+        end = min(len(text), match.end() + 80)
+        if _MARKER_REJECTION.search(text[start:end]):
+            return True
+    return False
+
+
+def _carries_rejection_marker(
+    text: str,
+    markers: frozenset[str],
+    cells: list[str] | None = None,
+) -> bool:
+    """The clause itself is prefixed by a declared marker. A citation later in the sentence is not."""
+    if not markers:
+        return False
+    if cells:
+        for cell in cells:
+            if _cell_carries_marker(cell, markers):
+                return True
+    stripped = text.lstrip()
+    if "asterisk" in markers and _ASTERISK_CLAUSE.match(stripped):
+        return True
+    return "star" in markers and _STAR_CLAUSE.match(stripped) is not None
+
+
+def _cell_carries_marker(cell: str, markers: frozenset[str]) -> bool:
+    compact = _compact(cell)
+    if not compact:
+        return False
+    if "star" in markers and re.fullmatch(r"[★☆]", compact):
+        return True
+    if "star" in markers and _STAR_CLAUSE.match(cell.strip()):
+        return True
+    return "asterisk" in markers and _ASTERISK_CLAUSE.match(cell.strip()) is not None
+
+
+def _deviation_template(text: str) -> bool:
+    """A blank form or a how-to-fill deviation line. The 无效 in the blank is an instruction."""
+    if _DEVIATION_TOPIC.search(text):
+        if _FORM_BLANK.search(text):
+            return True
+        if re.search(r"据实填写|应进行选择", text):
+            return True
+        return bool(re.search(r"正偏离", text) and re.search(r"负偏离|无偏离", text))
+    return _FORM_BLANK.search(text) is not None and re.search(r"未选择|应进行选择", text) is not None
+
+
 def _lead_kind(text: str) -> str | None:
+    if _deviation_template(text):
+        return None
     if not _REJECTION_LEAD.search(text) and "不作为" not in text and "不因此" not in text:
         return None
     if _negated(text) and not _is_rejection(text):
@@ -845,8 +959,12 @@ def _no_action_fragment(text: str) -> bool:
     return re.search(r"[，,；;]", text) is None
 
 
-def _drop_loose_fragments(events: list[dict[str, Any]]) -> list[dict[str, Any]]:
+def _drop_loose_fragments(
+    events: list[dict[str, Any]],
+    markers: frozenset[str] | None = None,
+) -> list[dict[str, Any]]:
     """A bare number or a prose label is not glued onto the next sentence."""
+    markers = markers or frozenset()
     kept: list[dict[str, Any]] = []
     for event in events:
         text = event["text"]
@@ -856,6 +974,7 @@ def _drop_loose_fragments(events: list[dict[str, Any]]) -> list[dict[str, Any]]:
             and not _opens_item_list(text)
             and not _materials_lead(text)
             and not _non_refund_list(text)
+            and not _carries_rejection_marker(text, markers, event.get("cells"))
         )
         if event["kind"] != "heading" and (_bare_numbering(text) or loose):
             continue
@@ -897,6 +1016,8 @@ def _inherited_blocks(text: str, carried: set[str]) -> set[str]:
         extra.add("rejection")
     if _refund_procedure(text):
         extra.discard("materials")
+        extra.discard("rejection")
+    if _deviation_template(text):
         extra.discard("rejection")
     return extra
 
