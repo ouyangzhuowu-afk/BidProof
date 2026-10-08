@@ -16,7 +16,11 @@ from pathlib import Path
 from fastapi import HTTPException, UploadFile
 
 from .. import config, job_leases, presenters, uow
-from ..citations import annotate_evidence_source_ids, build_page_corpus, merge_page_corpus
+from ..citations import (
+    annotate_evidence_source_ids,
+    build_page_corpus,
+    merge_page_corpus,
+)
 from ..extraction import ExtractionError, extract_file
 from ..identity import InternalJobContext
 from ..repositories import audit, jobs, projects, runs

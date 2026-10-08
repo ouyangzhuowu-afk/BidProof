@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from app import citations, review_policy
+from app import citations
 
 
 def _run_with_corpus() -> dict:
@@ -150,7 +150,7 @@ def test_same_name_files_require_source_id_not_filename_guess():
     assert citations.has_complete_citation(requirement, run) is False
     issues = citations.citation_issues(requirement, run)
     assert any(
-        issue.endswith(citations.MISSING_SOURCE_ID) or issue.endswith(citations.AMBIGUOUS_FILENAME)
+        issue.endswith((citations.MISSING_SOURCE_ID, citations.AMBIGUOUS_FILENAME))
         for issue in issues
     )
 

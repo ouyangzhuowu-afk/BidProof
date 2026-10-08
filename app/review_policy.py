@@ -81,9 +81,7 @@ def review_required(requirement: dict[str, Any], run: dict[str, Any] | None = No
     status = str(requirement.get("status") or "")
     if status in {"UNKNOWN", "NEEDS_REVIEW", "FAIL"}:
         return True
-    if status == "PASS" and pass_block_reason(requirement, run):
-        return True
-    return False
+    return status == "PASS" and bool(pass_block_reason(requirement, run))
 
 
 def effective_status(requirement: dict[str, Any], run: dict[str, Any] | None = None) -> str:
