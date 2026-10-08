@@ -45,7 +45,7 @@ _HEADER_CELLS = {
     "情形",
 }
 _REJECTION_OUTCOME = re.compile(
-    r"否决其?投标|被否决|不予受理|废标|无效投标|投标无效|无效响应|响应无效|作无效处理|"
+    r"否决其?投标|否决其报价|被否决|不予受理|废标|无效投标|投标无效|无效响应|响应无效|作无效处理|"
     r"按无效|视为无效|报价无效|资格审查不合格|取消投标资格|不得参加本次|应予(以)?废标"
 )
 _NEGATED_REJECTION = re.compile(
@@ -64,25 +64,44 @@ _ITEM_START = re.compile(
 )
 _CHILD_ITEM = re.compile(r"^\s*[（(]")
 _CHAPTER_LINE = re.compile(r"^\s*第[0-9一二三四五六七八九十]+[章节篇]")
-_CLOCK = re.compile(r"\d+\s*时\s*\d+\s*分|\d+\s*分钟")
+_CLOCK = re.compile(r"\d+\s*[时点]\s*\d+\s*分|\d+\s*分钟")
 _MATERIALS_LEAD = re.compile(r"响应文件包括|投标文件包括|包括下列(?:内容|文件|材料)|应提交下列|须提交下列")
 _NOISE = re.compile(r"[{}]|function\s|var\s|document\.|@media|font-size|background(?:-color)?:")
-_PAGE_FOOTER = re.compile(r"第\s*\d+\s*页\s*共\s*\d+\s*页")
+# 「第N页共M页」 and 「第N页/共M页」, including spaces and a fullwidth slash.
+_PAGE_FOOTER = re.compile(r"第\s*\d+\s*页\s*[/／]?\s*共\s*\d+\s*页")
+_PAGE_FOOTER_NUM = re.compile(r"第\s*(\d+)\s*页\s*[/／]?\s*共\s*(\d+)\s*页")
+_SCORE_CONTEXT = re.compile(r"分值|得分|评分标准|评分办法|满分|加分|扣分|计分|打分|不得分|不计分")
+_SCORE_AMOUNT = re.compile(r"\d+\s*分(?!体|别|布|析|公司|包|钟|部)|扣\s*\d+")
+_DEFINITION_NOTE = re.compile(
+    r"^\s*注\s*[:：]"
+    r"|^\s*注\s*[「“\"']"
+    r"|[「“\"][^」”\"]{1,12}[」”\"]\s*是指"
+)
+_INFORMAL_MATERIAL = re.compile(
+    r"(?:非正式|非书面|口头|宣传|参考|内部|未经[^。；;]{0,20}(?:发布|通知|公布))"
+    r"[^。；;]{0,16}(?:资料|材料|信息|通知)"
+)
+_RESPONSE_FILE = re.compile(r"响应文件|投标文件|报价文件|申请文件")
+_POST_AWARD = re.compile(r"合同履行|履行合同|签订合同后|合同签订后|成交后|中标后|履约期间|合同期内|合同执行")
+_THIS_PROCUREMENT = re.compile(r"本次|本项目|该项目|该采购|政府采购|响应磋商|投标|磋商|同一合同项下")
 _FORFEIT_LEAD = re.compile(r"保证金将被不予退还")
 _COMPLAINT = re.compile(r"质疑函|质疑事项|质疑人|提出质疑")
 # 谁不能参加，是资格限制，不是已经递交的文件被否决。
 _PARTICIPATION_LIMIT = re.compile(r"不得(?!不)(?:(?![。！？]).){0,48}(?:参加|组成联合体)")
 # 响应文件本身被拒绝接收。单独的「拒收货物/服务」不算。
+# 拒收必须是采购人作出的接收决定。密封风险里列举的「拒收、误放、遗漏」不是否决。
 _DOCUMENT_REJECTION = re.compile(r"无效文件|不予接收")
 _DOCUMENT_REFUSAL = re.compile(
-    r"(?:响应文件|投标文件|报价文件|申请文件)(?:(?![。！？]).){0,80}拒收"
-    r"|拒收(?:(?![。！？]).){0,24}(?:响应文件|投标文件|报价文件|申请文件)"
+    r"(?:将|予以|有权|可以|应当|应予|决定)拒收"
+    r"(?:(?![。！？]).){0,24}(?:响应文件|投标文件|报价文件|申请文件)"
+    r"|(?:响应文件|投标文件|报价文件|申请文件)"
+    r"(?:(?![。！？]).){0,40}(?:将|予以|有权|可以|应当|应予|决定)拒收"
 )
 _NEGATED_DOCUMENT = re.compile(r"不视为无效文件|不属于无效文件|不作为无效文件|不得拒收|不予拒收|应当接收|应予接收")
 # 条款自己已经给出投标结论时，提到质疑也不算质疑程序。
 _BID_RULE_BESIDE_COMPLAINT = re.compile(
     r"被否决|报价无效|按无效|应予(以)?废标|无效响应|响应无效|无效文件|不予接收|"
-    r"无效投标|投标无效|否决其?投标|资格审查不合格|取消投标资格|"
+    r"无效投标|投标无效|否决其?投标|否决其报价|资格审查不合格|取消投标资格|"
     r"不得(?!不)(?:(?![。！？]).){0,48}(?:参加|组成联合体)"
 )
 _SECTION_KEYS: tuple[tuple[str, tuple[str, ...]], ...] = (
@@ -97,6 +116,8 @@ def empty_tender_blocks() -> dict[str, Any]:
     return {
         "audit_status": "pending_audit",
         "product_pass": False,
+        "printed_page_offset": None,
+        "printed_page_total": None,
         "blocks": {
             key: {"label": label, "items": []}
             for key, label in BLOCK_ORDER
@@ -107,7 +128,8 @@ def empty_tender_blocks() -> dict[str, Any]:
 
 def extract_tender_blocks(pages: list[dict[str, Any]], filename: str | None = None) -> dict[str, Any]:
     """Group tender clauses into four blocks. Never emits PASS."""
-    events = _events(pages)
+    printed = printed_page_facts(pages)
+    events = _events(pages, _running_headers(pages))
     clauses = _close_cross_page(events)
     grouped: dict[str, list[dict[str, Any]]] = {key: [] for key, _label in BLOCK_ORDER}
     uncited: list[dict[str, Any]] = []
@@ -152,12 +174,14 @@ def extract_tender_blocks(pages: list[dict[str, Any]], filename: str | None = No
         for block in BLOCK_LABELS:
             if block not in blocks:
                 continue
-            item = _item(block, clause, filename)
+            item = _item(block, clause, filename, printed["by_page"])
             if item["pages"]:
                 grouped[block].append(item)
             else:
                 uncited.append(item)
     result = empty_tender_blocks()
+    result["printed_page_offset"] = printed["printed_page_offset"]
+    result["printed_page_total"] = printed["printed_page_total"]
     for key, _label in BLOCK_ORDER:
         result["blocks"][key]["items"] = _dedupe(grouped[key])
     result["uncited"] = _dedupe(uncited)
@@ -168,6 +192,9 @@ def extract_tender_blocks(pages: list[dict[str, Any]], filename: str | None = No
 def sanitize_tender_blocks(payload: dict[str, Any]) -> dict[str, Any]:
     """Force pending_audit, product_pass false, and no PASS without a real page."""
     result = empty_tender_blocks()
+    if isinstance(payload, dict):
+        result["printed_page_offset"] = _optional_int(payload.get("printed_page_offset"))
+        result["printed_page_total"] = _optional_int(payload.get("printed_page_total"))
     seen_uncited: set[tuple[str, str]] = set()
     source_blocks = payload.get("blocks") if isinstance(payload, dict) else None
     if not isinstance(source_blocks, dict):
@@ -207,7 +234,7 @@ def sanitize_tender_blocks(payload: dict[str, Any]) -> dict[str, Any]:
     return result
 
 
-def _events(pages: list[dict[str, Any]]) -> list[dict[str, Any]]:
+def _events(pages: list[dict[str, Any]], banners: set[str] | None = None) -> list[dict[str, Any]]:
     events: list[dict[str, Any]] = []
     index = 0
     while index < len(pages):
@@ -226,7 +253,7 @@ def _events(pages: list[dict[str, Any]]) -> list[dict[str, Any]]:
         text = str(page.get("text") or "")
         if not structured:
             text = _consume_flat_tables(text, pages_on, locator, events)
-        for kind, piece in _split_prose(text):
+        for kind, piece in _split_prose(text, banners or set()):
             events.append(_event(kind, piece, pages_on, locator, None, None))
         index += 1
     return events
@@ -312,7 +339,8 @@ def _classify(clause: dict[str, Any], section: str | None, list_mode: str | None
     blocks: set[str] = set()
     # 质疑/投诉写法，以及保证金不予退还的情形，不是废标，也不是要交的投标材料。
     leave_out = list_mode == "forfeit" or _complaint_procedure(text)
-    if list_mode == "suppress" or leave_out:
+    not_a_rejection = _definition_note(text) or _invalidates_unofficial_material(text)
+    if list_mode == "suppress" or leave_out or not_a_rejection:
         pass
     elif (list_mode == "rejection" and not _negated(text)) or _is_rejection(text):
         blocks.add("rejection")
@@ -361,12 +389,18 @@ def _classify_row(headers: list[str], cells: list[str], text: str) -> set[str]:
             blocks.add("qualification")
     if not blocks and not explicit_keep:
         blocks = _classify({"kind": "paragraph", "text": text}, None, None)
+        # A table cell is 废标项 only when its header says so. Cell text alone is not.
+        blocks.discard("rejection")
     if explicit_keep:
         blocks.discard("rejection")
+    if "scoring" in blocks and not _has_clause_subject(text):
+        blocks.discard("scoring")
     return blocks
 
 
 def _is_rejection(text: str) -> bool:
+    if _definition_note(text) or _invalidates_unofficial_material(text):
+        return False
     if _document_rejected(text):
         return True
     if _cross_reference_only(text):
@@ -394,7 +428,15 @@ def _complaint_procedure(text: str) -> bool:
 
 
 def _participation_limit(text: str) -> bool:
-    return _PARTICIPATION_LIMIT.search(text) is not None
+    """Eligibility to take part in this procurement. Contract and post-award bans are not."""
+    match = _PARTICIPATION_LIMIT.search(text)
+    if match is None or _POST_AWARD.search(text):
+        return False
+    after = text[match.end():match.end() + 24]
+    if re.match(r"其他", after):
+        return False
+    window = text[max(0, match.start() - 16):match.end() + 24]
+    return _THIS_PROCUREMENT.search(window) is not None
 
 
 def _document_rejected(text: str) -> bool:
@@ -441,10 +483,37 @@ def _lead_kind(text: str) -> str | None:
 def _is_scoring(text: str, section: str | None) -> bool:
     if re.search(r"不作为评分|不计入评分|不予记分", text):
         return False
+    if not _has_clause_subject(text):
+        return False
     clockless = _CLOCK.sub("", text)
-    if re.search(r"\d+\s*分(?!体|别|布|析|公司)|扣\s*\d+|计分|满分|打分|不得分", clockless):
+    if _SCORE_CONTEXT.search(clockless) or _SCORE_AMOUNT.search(clockless):
         return True
-    return section == "scoring" and re.search(r"评审因素|评分标准|得分", text) is not None and len(text) <= 80
+    return section == "scoring" and re.search(r"评审因素|评分标准|评分办法", text) is not None and len(text) <= 80
+
+
+def _has_clause_subject(text: str) -> bool:
+    """A score fragment such as 「得3分」 has no subject and is not its own clause."""
+    stripped = _CLOCK.sub("", text)
+    stripped = _SCORE_CONTEXT.sub("", stripped)
+    stripped = _SCORE_AMOUNT.sub("", stripped)
+    return len(re.findall(r"[\u3400-\u9fff]", stripped)) >= 2
+
+
+def _definition_note(text: str) -> bool:
+    return _DEFINITION_NOTE.search(text) is not None
+
+
+def _invalidates_unofficial_material(text: str) -> bool:
+    """Invalidating an unofficial notice or material does not reject the response file."""
+    if not re.search(r"作无效处理|按无效处理|视为无效", text):
+        return False
+    if _RESPONSE_FILE.search(text):
+        return False
+    if _INFORMAL_MATERIAL.search(text):
+        return True
+    return re.search(r"作无效处理", text) is not None and re.search(
+        r"未经[^。；;]{0,40}(?:发布|通知|公布)", text
+    ) is not None
 
 
 _SUBMISSION_DUTY = re.compile(r"须提供|应提供|应提交|须提交|复印件|加盖公章|资格证明文件")
@@ -481,7 +550,7 @@ def _is_qualification(text: str, section: str | None) -> bool:
         return True
     return bool(
         section == "qualification"
-        and re.search(r"应当符合|必须具备|必须是|须具备|须具有|须满足|具备|具有|不得参加", text)
+        and re.search(r"应当符合|必须具备|必须是|须具备|须具有|须满足|具备|具有", text)
     )
 
 
@@ -500,7 +569,12 @@ def _keep(text: str) -> bool:
     return not (len(compact) < 4 or _NOISE.search(text))
 
 
-def _item(block: str, clause: dict[str, Any], filename: str | None) -> dict[str, Any]:
+def _item(
+    block: str,
+    clause: dict[str, Any],
+    filename: str | None,
+    printed_by_page: dict[int, int],
+) -> dict[str, Any]:
     pages = [number for number in clause["pages"] if isinstance(number, int) and number >= 1]
     locator = _locator(clause, pages)
     status = "NEEDS_REVIEW" if pages or locator else "UNKNOWN"
@@ -509,6 +583,7 @@ def _item(block: str, clause: dict[str, Any], filename: str | None) -> dict[str,
     if len(pages) > 1 or clause.get("cross_page"):
         detection = "cross_page"
     quote = clause["text"][:400]
+    printed_pages = [_printed_on(number, printed_by_page) for number in pages]
     return {
         "clause_id": "",
         "block": block,
@@ -517,6 +592,8 @@ def _item(block: str, clause: dict[str, Any], filename: str | None) -> dict[str,
         "quote": quote,
         "pages": pages,
         "page": pages[0] if pages else None,
+        "printed_page": printed_pages[0] if printed_pages else None,
+        "printed_pages": printed_pages,
         "status": status,
         "locator": locator,
         "detection": detection,
@@ -526,14 +603,26 @@ def _item(block: str, clause: dict[str, Any], filename: str | None) -> dict[str,
     }
 
 
+def _printed_on(number: int, printed_by_page: dict[int, int]) -> int | None:
+    value = printed_by_page.get(number)
+    if isinstance(value, int) and not isinstance(value, bool) and value >= 1:
+        return value
+    return None
+
+
+def _pdf_page_label(pages: list[int]) -> str:
+    if len(pages) == 1:
+        return f"PDF 第{pages[0]}页"
+    return f"PDF 第{pages[0]}-{pages[-1]}页"
+
+
 def _locator(clause: dict[str, Any], pages: list[int]) -> dict[str, Any] | None:
     locator = dict(clause["locator"]) if clause.get("locator") else None
     if not pages:
         return locator
-    label = f"第 {pages[0]} 页" if len(pages) == 1 else f"第 {pages[0]}-{pages[-1]} 页"
     if locator is None:
         locator = {"kind": "page", "index": pages[0]}
-    locator["label"] = label
+    locator["label"] = _pdf_page_label(pages)
     locator["pages"] = pages
     return locator
 
@@ -548,9 +637,84 @@ def _uncited_reason(locator: dict[str, Any] | None) -> str:
     return "这条条款没有可用的原文页码。"
 
 
+def _optional_int(value: Any) -> int | None:
+    if isinstance(value, bool) or not isinstance(value, int):
+        return None
+    return value
+
+
+def _printed_fields(raw: dict[str, Any], pages: list[int]) -> tuple[int | None, list[int | None]]:
+    printed_page = _optional_int(raw.get("printed_page"))
+    if printed_page is not None and printed_page < 1:
+        printed_page = None
+    printed_pages: list[int | None] = []
+    raw_pages = raw.get("printed_pages")
+    if isinstance(raw_pages, list):
+        for value in raw_pages:
+            number = _optional_int(value)
+            printed_pages.append(number if number is not None and number >= 1 else None)
+    if pages and not printed_pages:
+        printed_pages = [None for _number in pages]
+    if printed_page is None and printed_pages:
+        printed_page = printed_pages[0]
+    return printed_page, printed_pages
+
+
+def printed_page_facts(pages: list[dict[str, Any]]) -> dict[str, Any]:
+    """Read 「第N页/共M页」 from each page. Unknown stays null. Never invent a number."""
+    by_page: dict[int, int] = {}
+    observations: list[dict[str, Any]] = []
+    for page in pages:
+        if not isinstance(page, dict):
+            continue
+        number = page.get("page")
+        if isinstance(number, bool) or not isinstance(number, int) or number < 1:
+            continue
+        matches = _PAGE_FOOTER_NUM.findall(str(page.get("text") or ""))
+        if not matches:
+            continue
+        pairs = {(int(printed), int(total)) for printed, total in matches}
+        if len(pairs) != 1:
+            observations.append({"pdf_page": number, "printed_page": None, "printed_total": None, "conflict": True})
+            continue
+        printed, total = next(iter(pairs))
+        by_page[number] = printed
+        observations.append({"pdf_page": number, "printed_page": printed, "printed_total": total, "conflict": False})
+    totals = {item["printed_total"] for item in observations if isinstance(item["printed_total"], int)}
+    offsets = {
+        item["pdf_page"] - item["printed_page"]
+        for item in observations
+        if isinstance(item["printed_page"], int)
+    }
+    printed_total = next(iter(totals)) if len(totals) == 1 else None
+    offset = next(iter(offsets)) if len(offsets) == 1 else None
+    mismatches = []
+    for item in observations:
+        if item["conflict"] or not isinstance(item["printed_page"], int):
+            mismatches.append(item)
+            continue
+        if offset is None or item["pdf_page"] - item["printed_page"] != offset:
+            mismatches.append(item)
+    return {
+        "printed_page_offset": offset,
+        "printed_page_total": printed_total,
+        "printed_total_consistent": printed_total is not None,
+        "pages_with_footer": sum(1 for item in observations if item["printed_page"] is not None),
+        "printed_totals_seen": sorted(totals),
+        "offsets_seen": sorted(offsets),
+        "by_page": by_page,
+        "mismatches": mismatches,
+    }
+
+
 def _force_status(raw: dict[str, Any], label: str, block: str) -> dict[str, Any]:
     pages = [number for number in raw.get("pages") or [] if isinstance(number, int) and not isinstance(number, bool) and number >= 1]
     locator = raw.get("locator") if isinstance(raw.get("locator"), dict) else None
+    if pages:
+        locator = dict(locator) if locator else {"kind": "page", "index": pages[0]}
+        locator["label"] = _pdf_page_label(pages)
+        locator["pages"] = pages
+    printed_page, printed_pages = _printed_fields(raw, pages)
     item = {
         "clause_id": str(raw.get("clause_id") or ""),
         "block": block,
@@ -559,6 +723,8 @@ def _force_status(raw: dict[str, Any], label: str, block: str) -> dict[str, Any]
         "quote": str(raw.get("quote") or raw.get("summary") or "")[:400],
         "pages": pages,
         "page": pages[0] if pages else None,
+        "printed_page": printed_page,
+        "printed_pages": printed_pages,
         "status": "NEEDS_REVIEW" if pages or locator else "UNKNOWN",
         "locator": locator,
         "detection": raw.get("detection") or "clause",
@@ -793,7 +959,35 @@ def _is_section_heading(line: str) -> bool:
     return _section_of(line) is not None
 
 
-def _split_prose(text: str) -> list[tuple[str, str]]:
+def _running_headers(pages: list[dict[str, Any]]) -> set[str]:
+    """The first line of a page, when that same line opens several pages, is a running header."""
+    counts: dict[str, int] = {}
+    for page in pages:
+        if not isinstance(page, dict):
+            continue
+        first = ""
+        for raw in str(page.get("text") or "").splitlines():
+            line = _strip_footer(raw.strip())
+            if not line:
+                continue
+            first = line
+            break
+        if not first or re.search(r"[，。！？；;、：:]", first):
+            continue
+        if len(_compact(first)) < 8 or _is_section_heading(first) or _ITEM_START.match(first):
+            continue
+        counts[first] = counts.get(first, 0) + 1
+    return {line for line, count in counts.items() if count >= 3}
+
+
+def _score_only_line(line: str) -> bool:
+    """「得5分」 or 「0-15分」 has no subject."""
+    compact = _compact(line).strip("；;。")
+    return re.fullmatch(r"(?:得|扣|加)?\d+分|满分\d+分|\d+[-~～至到]\d+分", compact) is not None
+
+
+def _split_prose(text: str, banners: set[str] | None = None) -> list[tuple[str, str]]:
+    banners = banners or set()
     pieces: list[tuple[str, str]] = []
     buffer_kind = ""
     buffer: list[str] = []
@@ -811,7 +1005,13 @@ def _split_prose(text: str) -> list[tuple[str, str]]:
             flush()
             continue
         line = _strip_footer(line)
-        if not line:
+        if not line or line in banners:
+            continue
+        if _score_only_line(line):
+            # Keep it as its own piece so a wrapped sentence can absorb it.
+            # Alone, it has no subject and is not a clause.
+            flush()
+            pieces.append(("paragraph", line))
             continue
         if _is_section_heading(line):
             flush()

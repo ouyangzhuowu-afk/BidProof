@@ -160,7 +160,7 @@ def test_cross_page_sentence_keeps_both_pages():
     assert rejection[0]["page"] == 3
     assert rejection[0]["detection"] == "cross_page"
     assert "无效" in rejection[0]["quote"]
-    assert rejection[0]["locator"]["label"] == "第 3-4 页"
+    assert rejection[0]["locator"]["label"] == "PDF 第3-4页"
 
 
 def test_rejection_list_continues_on_the_next_page_without_those_keywords():
@@ -557,3 +557,150 @@ def test_deposit_refund_timing_from_the_pdf_is_not_a_material():
     assert found["materials"] == []
     assert found["rejection"] == []
     assert all(item["status"] == "NEEDS_REVIEW" for group in found.values() for item in group)
+
+
+def test_pdf_page_label_and_printed_offset_come_from_the_footer():
+    pages = [
+        _page(
+            5,
+            "二、申请人的资格要求：\n1.满足《中华人民共和国政府采购法》第二十二条的规定。\n第 2 页/共 8 页",
+        ),
+        _page(6, "有下列情形之一的，应予以废标：\n（1）符合专业条件的供应商不足3家的。"),
+    ]
+    result = extract_tender_blocks(pages, filename="offset.pdf")
+    found = _blocks(result)
+    qualification = found["qualification"][0]
+    rejection = found["rejection"][0]
+
+    assert qualification["page"] == 5
+    assert qualification["locator"]["label"] == "PDF 第5页"
+    assert qualification["printed_page"] == 2
+    assert rejection["locator"]["label"] == "PDF 第6页"
+    assert rejection["printed_page"] is None
+    assert result["printed_page_offset"] == 3
+    assert result["printed_page_total"] == 8
+    assert result["product_pass"] is False
+    stored = tender_blocks_for_run({"state": {"tender_blocks": result}})
+    assert stored["printed_page_offset"] == 3
+    assert stored["blocks"]["qualification"]["items"][0]["locator"]["label"] == "PDF 第5页"
+    assert stored["blocks"]["rejection"]["items"][0]["printed_page"] is None
+
+    conflicting = extract_tender_blocks(
+        [
+            _page(1, "投标人资格要求：具有市政公用工程施工总承包资质。\n第 1 页/共 4 页"),
+            _page(2, "投标人资格要求：具有建筑工程施工总承包资质。\n第 9 页/共 4 页"),
+        ],
+        filename="conflict.pdf",
+    )
+    assert conflicting["printed_page_offset"] is None
+    quoted = _blocks(conflicting)["qualification"]
+    assert {item["printed_page"] for item in quoted} == {1, 9}
+
+
+def test_slash_footer_is_stripped_from_the_clause():
+    pages = [
+        _page(8, "未按招标文件要求签字盖章的，投\n第 6 页 / 共 30 页\n标无效。"),
+    ]
+    rejection = _blocks(extract_tender_blocks(pages, filename="slash.pdf"))["rejection"]
+
+    assert len(rejection) == 1
+    assert rejection[0]["quote"] == "未按招标文件要求签字盖章的，投标无效。"
+    assert "页" not in rejection[0]["quote"]
+    assert rejection[0]["page"] == 8
+    assert rejection[0]["printed_page"] == 6
+    assert rejection[0]["locator"]["label"] == "PDF 第8页"
+
+
+def test_scoring_needs_a_score_context_and_a_subject():
+    pages = [
+        _page(2, "开标时间为当日14点00分，请投标人准时出席。"),
+        _page(3, "本项目分为两个分包，分部分项工程量清单另行提供。"),
+        _page(4, "得3分。\n满分10分。\n扣5分。"),
+        _page(5, "售后响应方案每缩短1小时得2分，满分10分。"),
+    ]
+    found = _blocks(extract_tender_blocks(pages, filename="scores.pdf"))
+    quotes = _quotes(found["scoring"] + found["qualification"] + found["materials"] + found["rejection"])
+
+    assert len(found["scoring"]) == 1
+    assert found["scoring"][0]["page"] == 5
+    assert "售后响应方案" in found["scoring"][0]["quote"]
+    assert "14点00分" not in quotes
+    assert "分包" not in quotes
+    assert "分部分项" not in quotes
+    assert "得3分" not in quotes
+    fragments = {item["quote"] for group in found.values() for item in group}
+    assert "满分10分。" not in fragments
+    assert "扣5分。" not in fragments
+    assert all(item["status"] == "NEEDS_REVIEW" for item in found["scoring"])
+
+
+def test_definition_notes_and_non_response_invalidity_stay_out_of_rejection():
+    pages = [
+        _page(
+            3,
+            "有下列情形之一的，应予以废标：\n（1）投标人不足3家的。\n注：“有效”是指证书载明的有效期尚未届满。",
+        ),
+        _page(4, "采购人在其他渠道散发的非正式资料作无效处理。"),
+        _page(5, "未经采购人网上发布或书面通知的内容，均作无效处理。"),
+        _page(6, "因包装不当造成的后果，包括拒收、误放或遗漏，由投标人自行承担。"),
+        _page(7, "逾期送达的投标文件，招标人将拒收该投标文件。"),
+        _page(
+            9,
+            "",
+            tables=[{"header": ["评审内容", "品牌要求"], "rows": [["设备", "指定品牌的投标无效这一说法不适用于本表"]]}],
+        ),
+    ]
+    found = _blocks(extract_tender_blocks(pages, filename="keep-out.pdf"))
+    quotes = _quotes(found["rejection"])
+
+    assert "不足3家" in quotes
+    assert any("将拒收该投标文件" in item["quote"] and item["page"] == 7 for item in found["rejection"])
+    assert "有效期尚未届满" not in quotes
+    assert "非正式资料" not in quotes
+    assert "书面通知" not in quotes
+    assert "自行承担" not in quotes
+    assert "指定品牌" not in quotes
+    assert all(item["status"] == "NEEDS_REVIEW" for item in found["rejection"])
+
+
+def test_participation_limit_is_only_for_this_procurement():
+    pages = [
+        _page(2, "为本项目编制招标文件的单位，不得再参加本次采购的施工投标。"),
+        _page(3, "合同履行期间，成交人不得参加与本项目无关的其他竞争性活动。"),
+        _page(4, "中标后，中标人不得参加合同约定以外的分包。"),
+    ]
+    found = _blocks(extract_tender_blocks(pages, filename="who-may-bid.pdf"))
+
+    assert any(item["page"] == 2 and "本次采购" in item["quote"] for item in found["qualification"])
+    assert all("合同履行" not in item["quote"] for item in found["qualification"])
+    assert all("中标后" not in item["quote"] for item in found["qualification"])
+    assert all(item["page"] != 3 for item in found["rejection"])
+    assert all(item["status"] == "NEEDS_REVIEW" for group in found.values() for item in group)
+
+
+def test_a_bare_score_does_not_take_a_running_header_as_its_subject():
+    header = "磋商文件示范文本页眉"
+    pages = [
+        _page(1, f"{header}\n第 1 页/共 3 页\n供应商须提交营业执照复印件。"),
+        _page(2, f"{header}\n第 2 页/共 3 页\n(1)计划详细且针对本工程的,"),
+        _page(3, f"{header}\n第 3 页/共 3 页\n得5 分;"),
+    ]
+    found = _blocks(extract_tender_blocks(pages, filename="banner.pdf"))
+    quotes = _quotes(found["scoring"] + found["materials"] + found["qualification"] + found["rejection"])
+
+    assert any("计划详细且针对本工程" in item["quote"] and "得5" in item["quote"] for item in found["scoring"])
+    assert all(header not in item["quote"] for item in found["scoring"])
+    assert "页眉" not in quotes
+    assert all(item["status"] == "NEEDS_REVIEW" for item in found["scoring"])
+
+
+def test_rejecting_the_quote_is_a_rejection_item():
+    pages = [_page(11, "未响应实质性要求的，评审委员会将否决其报价。")]
+    rejection = _blocks(extract_tender_blocks(pages, filename="quote.pdf"))["rejection"]
+
+    assert len(rejection) == 1
+    assert "否决其报价" in rejection[0]["quote"]
+    assert rejection[0]["page"] == 11
+    assert rejection[0]["locator"]["label"] == "PDF 第11页"
+    assert rejection[0]["status"] == "NEEDS_REVIEW"
+    assert rejection[0]["printed_page"] is None

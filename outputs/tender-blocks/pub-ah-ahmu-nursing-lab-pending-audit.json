@@ -9,477 +9,41 @@
   "local_path": "work/public-eval/tender-blocks/pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
   "sha256": "4babe095f46a288ccba009bfa3a673915d3c3e2d5c89fa5cb224a3e518cd206f",
   "pdf_page_count": 109,
+  "printed_page_offset": 2,
+  "printed_page_total": null,
   "ocr": "not_used",
   "footer_check": {
     "checked_pages": 109,
-    "mismatches": [
-      {
-        "pdf_page": 1,
-        "printed": null
-      },
-      {
-        "pdf_page": 2,
-        "printed": null
-      },
-      {
-        "pdf_page": 3,
-        "printed": null
-      },
-      {
-        "pdf_page": 4,
-        "printed": null
-      },
-      {
-        "pdf_page": 5,
-        "printed": null
-      },
-      {
-        "pdf_page": 6,
-        "printed": null
-      },
-      {
-        "pdf_page": 7,
-        "printed": null
-      },
-      {
-        "pdf_page": 8,
-        "printed": null
-      },
-      {
-        "pdf_page": 9,
-        "printed": null
-      },
-      {
-        "pdf_page": 10,
-        "printed": null
-      },
-      {
-        "pdf_page": 11,
-        "printed": null
-      },
-      {
-        "pdf_page": 12,
-        "printed": null
-      },
-      {
-        "pdf_page": 13,
-        "printed": null
-      },
-      {
-        "pdf_page": 14,
-        "printed": null
-      },
-      {
-        "pdf_page": 15,
-        "printed": null
-      },
-      {
-        "pdf_page": 16,
-        "printed": null
-      },
-      {
-        "pdf_page": 17,
-        "printed": null
-      },
-      {
-        "pdf_page": 18,
-        "printed": null
-      },
-      {
-        "pdf_page": 19,
-        "printed": null
-      },
-      {
-        "pdf_page": 20,
-        "printed": null
-      },
-      {
-        "pdf_page": 21,
-        "printed": null
-      },
-      {
-        "pdf_page": 22,
-        "printed": null
-      },
-      {
-        "pdf_page": 23,
-        "printed": null
-      },
-      {
-        "pdf_page": 24,
-        "printed": null
-      },
-      {
-        "pdf_page": 25,
-        "printed": null
-      },
-      {
-        "pdf_page": 26,
-        "printed": null
-      },
-      {
-        "pdf_page": 27,
-        "printed": null
-      },
-      {
-        "pdf_page": 28,
-        "printed": null
-      },
-      {
-        "pdf_page": 29,
-        "printed": null
-      },
-      {
-        "pdf_page": 30,
-        "printed": null
-      },
-      {
-        "pdf_page": 31,
-        "printed": null
-      },
-      {
-        "pdf_page": 32,
-        "printed": null
-      },
-      {
-        "pdf_page": 33,
-        "printed": null
-      },
-      {
-        "pdf_page": 34,
-        "printed": null
-      },
-      {
-        "pdf_page": 35,
-        "printed": null
-      },
-      {
-        "pdf_page": 36,
-        "printed": null
-      },
-      {
-        "pdf_page": 37,
-        "printed": null
-      },
-      {
-        "pdf_page": 38,
-        "printed": null
-      },
-      {
-        "pdf_page": 39,
-        "printed": null
-      },
-      {
-        "pdf_page": 40,
-        "printed": null
-      },
-      {
-        "pdf_page": 41,
-        "printed": null
-      },
-      {
-        "pdf_page": 42,
-        "printed": null
-      },
-      {
-        "pdf_page": 43,
-        "printed": null
-      },
-      {
-        "pdf_page": 44,
-        "printed": null
-      },
-      {
-        "pdf_page": 45,
-        "printed": null
-      },
-      {
-        "pdf_page": 46,
-        "printed": null
-      },
-      {
-        "pdf_page": 47,
-        "printed": null
-      },
-      {
-        "pdf_page": 48,
-        "printed": null
-      },
-      {
-        "pdf_page": 49,
-        "printed": null
-      },
-      {
-        "pdf_page": 50,
-        "printed": null
-      },
-      {
-        "pdf_page": 51,
-        "printed": null
-      },
-      {
-        "pdf_page": 52,
-        "printed": null
-      },
-      {
-        "pdf_page": 53,
-        "printed": null
-      },
-      {
-        "pdf_page": 54,
-        "printed": null
-      },
-      {
-        "pdf_page": 55,
-        "printed": null
-      },
-      {
-        "pdf_page": 56,
-        "printed": null
-      },
-      {
-        "pdf_page": 57,
-        "printed": null
-      },
-      {
-        "pdf_page": 58,
-        "printed": null
-      },
-      {
-        "pdf_page": 59,
-        "printed": null
-      },
-      {
-        "pdf_page": 60,
-        "printed": null
-      },
-      {
-        "pdf_page": 61,
-        "printed": null
-      },
-      {
-        "pdf_page": 62,
-        "printed": null
-      },
-      {
-        "pdf_page": 63,
-        "printed": null
-      },
-      {
-        "pdf_page": 64,
-        "printed": null
-      },
-      {
-        "pdf_page": 65,
-        "printed": null
-      },
-      {
-        "pdf_page": 66,
-        "printed": null
-      },
-      {
-        "pdf_page": 67,
-        "printed": null
-      },
-      {
-        "pdf_page": 68,
-        "printed": null
-      },
-      {
-        "pdf_page": 69,
-        "printed": null
-      },
-      {
-        "pdf_page": 70,
-        "printed": null
-      },
-      {
-        "pdf_page": 71,
-        "printed": null
-      },
-      {
-        "pdf_page": 72,
-        "printed": null
-      },
-      {
-        "pdf_page": 73,
-        "printed": null
-      },
-      {
-        "pdf_page": 74,
-        "printed": null
-      },
-      {
-        "pdf_page": 75,
-        "printed": null
-      },
-      {
-        "pdf_page": 76,
-        "printed": null
-      },
-      {
-        "pdf_page": 77,
-        "printed": null
-      },
-      {
-        "pdf_page": 78,
-        "printed": null
-      },
-      {
-        "pdf_page": 79,
-        "printed": null
-      },
-      {
-        "pdf_page": 80,
-        "printed": null
-      },
-      {
-        "pdf_page": 81,
-        "printed": null
-      },
-      {
-        "pdf_page": 82,
-        "printed": null
-      },
-      {
-        "pdf_page": 83,
-        "printed": null
-      },
-      {
-        "pdf_page": 84,
-        "printed": null
-      },
-      {
-        "pdf_page": 85,
-        "printed": null
-      },
-      {
-        "pdf_page": 86,
-        "printed": null
-      },
-      {
-        "pdf_page": 87,
-        "printed": null
-      },
-      {
-        "pdf_page": 88,
-        "printed": null
-      },
-      {
-        "pdf_page": 89,
-        "printed": null
-      },
-      {
-        "pdf_page": 90,
-        "printed": null
-      },
-      {
-        "pdf_page": 91,
-        "printed": null
-      },
-      {
-        "pdf_page": 92,
-        "printed": null
-      },
-      {
-        "pdf_page": 93,
-        "printed": null
-      },
-      {
-        "pdf_page": 94,
-        "printed": null
-      },
-      {
-        "pdf_page": 95,
-        "printed": [
-          "93",
-          "109"
-        ]
-      },
-      {
-        "pdf_page": 96,
-        "printed": [
-          "94",
-          "109"
-        ]
-      },
-      {
-        "pdf_page": 97,
-        "printed": [
-          "95",
-          "109"
-        ]
-      },
-      {
-        "pdf_page": 98,
-        "printed": [
-          "96",
-          "109"
-        ]
-      },
-      {
-        "pdf_page": 99,
-        "printed": [
-          "97",
-          "109"
-        ]
-      },
-      {
-        "pdf_page": 100,
-        "printed": null
-      },
-      {
-        "pdf_page": 101,
-        "printed": null
-      },
-      {
-        "pdf_page": 102,
-        "printed": null
-      },
-      {
-        "pdf_page": 103,
-        "printed": null
-      },
-      {
-        "pdf_page": 104,
-        "printed": null
-      },
-      {
-        "pdf_page": 105,
-        "printed": null
-      },
-      {
-        "pdf_page": 106,
-        "printed": null
-      },
-      {
-        "pdf_page": 107,
-        "printed": null
-      },
-      {
-        "pdf_page": 108,
-        "printed": null
-      },
-      {
-        "pdf_page": 109,
-        "printed": null
-      }
-    ]
+    "pages_with_footer": 107,
+    "printed_page_offset": 2,
+    "printed_page_total": null,
+    "printed_total_consistent": false,
+    "printed_totals_seen": [
+      107,
+      109
+    ],
+    "offsets_seen": [
+      2
+    ],
+    "compared_with": "printed_total",
+    "mismatch_count": 0,
+    "mismatches": []
   },
+  "footer_in_quotes": 0,
   "counts": {
-    "total": 167,
-    "with_real_page": 167,
+    "total": 153,
+    "with_real_page": 153,
     "without_page": 0,
     "by_block": {
       "qualification": {
         "label": "资格要求",
-        "cited": 22,
-        "items": 22
+        "cited": 20,
+        "items": 20
       },
       "scoring": {
         "label": "评分要求",
-        "cited": 69,
-        "items": 69
+        "cited": 59,
+        "items": 59
       },
       "materials": {
         "label": "要交的材料",
@@ -488,28 +52,17 @@
       },
       "rejection": {
         "label": "废标项",
-        "cited": 20,
-        "items": 20
+        "cited": 18,
+        "items": 18
       }
     }
   },
-  "known_hits": [
-    {
-      "label": "资格要求",
-      "needle": "第二十二条第一款",
-      "expected_pdf_page": 2,
-      "matches": []
-    },
-    {
-      "label": "废标项",
-      "needle": "资格审查和实质性响应审查不合格",
-      "expected_pdf_page": 24,
-      "matches": []
-    }
-  ],
+  "known_hits": [],
   "extraction": {
     "audit_status": "pending_audit",
     "product_pass": false,
+    "printed_page_offset": 2,
+    "printed_page_total": null,
     "blocks": {
       "qualification": {
         "label": "资格要求",
@@ -524,10 +77,14 @@
               3
             ],
             "page": 3,
+            "printed_page": 1,
+            "printed_pages": [
+              1
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 3 页",
+              "label": "PDF 第3页",
               "index": 3,
               "pages": [
                 3
@@ -548,10 +105,14 @@
               3
             ],
             "page": 3,
+            "printed_page": 1,
+            "printed_pages": [
+              1
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 3 页",
+              "label": "PDF 第3页",
               "index": 3,
               "pages": [
                 3
@@ -567,16 +128,21 @@
             "block": "qualification",
             "label": "资格要求",
             "summary": "3.2 拟任项目经理建筑工程专业二级及以上注册建造师资格,具备住房和城乡建设主管部门颁发的安全生产考核合格证书(B 证),同时提供供应商所属社保机构出具的项目经",
-            "quote": "3.2 拟任项目经理建筑工程专业二级及以上注册建造师资格,具备住房和城乡建设主管部门颁发的安全生产考核合格证书(B 证),同时提供供应商所属社保机构出具的项目经理近三个月内(任意一个月)社保证明材料(至少含养老保安徽省政府采购项目竞争性磋商文件示范文本(工程类) 第2 页/共107 页险、医疗保险、工伤保险、失业保险中任意一项即可)",
+            "quote": "3.2 拟任项目经理建筑工程专业二级及以上注册建造师资格,具备住房和城乡建设主管部门颁发的安全生产考核合格证书(B 证),同时提供供应商所属社保机构出具的项目经理近三个月内(任意一个月)社保证明材料(至少含养老保险、医疗保险、工伤保险、失业保险中任意一项即可)",
             "pages": [
               3,
               4
             ],
             "page": 3,
+            "printed_page": 1,
+            "printed_pages": [
+              1,
+              2
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 3-4 页",
+              "label": "PDF 第3-4页",
               "index": 3,
               "pages": [
                 3,
@@ -598,10 +164,14 @@
               10
             ],
             "page": 10,
+            "printed_page": 8,
+            "printed_pages": [
+              8
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 10 页",
+              "label": "PDF 第10页",
               "index": 10,
               "pages": [
                 10
@@ -622,10 +192,14 @@
               10
             ],
             "page": 10,
+            "printed_page": 8,
+            "printed_pages": [
+              8
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 10 页",
+              "label": "PDF 第10页",
               "index": 10,
               "pages": [
                 10
@@ -646,10 +220,14 @@
               13
             ],
             "page": 13,
+            "printed_page": 11,
+            "printed_pages": [
+              11
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 13 页",
+              "label": "PDF 第13页",
               "index": 13,
               "pages": [
                 13
@@ -670,10 +248,14 @@
               13
             ],
             "page": 13,
+            "printed_page": 11,
+            "printed_pages": [
+              11
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 13 页",
+              "label": "PDF 第13页",
               "index": 13,
               "pages": [
                 13
@@ -694,10 +276,14 @@
               13
             ],
             "page": 13,
+            "printed_page": 11,
+            "printed_pages": [
+              11
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 13 页",
+              "label": "PDF 第13页",
               "index": 13,
               "pages": [
                 13
@@ -718,10 +304,14 @@
               13
             ],
             "page": 13,
+            "printed_page": 11,
+            "printed_pages": [
+              11
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 13 页",
+              "label": "PDF 第13页",
               "index": 13,
               "pages": [
                 13
@@ -742,10 +332,14 @@
               13
             ],
             "page": 13,
+            "printed_page": 11,
+            "printed_pages": [
+              11
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 13 页",
+              "label": "PDF 第13页",
               "index": 13,
               "pages": [
                 13
@@ -766,10 +360,14 @@
               17
             ],
             "page": 17,
+            "printed_page": 15,
+            "printed_pages": [
+              15
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 17 页",
+              "label": "PDF 第17页",
               "index": 17,
               "pages": [
                 17
@@ -784,17 +382,22 @@
             "clause_id": "TB-0012",
             "block": "qualification",
             "label": "资格要求",
-            "summary": "27.3 成交供应商拒绝与采购人签订合同的,采购人可以按照评审报告推荐安徽省政府采购项目竞争性磋商文件示范文本(工程类) 第21 页/共107 页的成交候选供应",
-            "quote": "27.3 成交供应商拒绝与采购人签订合同的,采购人可以按照评审报告推荐安徽省政府采购项目竞争性磋商文件示范文本(工程类) 第21 页/共107 页的成交候选供应商名单排序,确定下一成交候选供应商为成交供应商,也可以重新开展采购活动。成交供应商拒绝签订政府采购合同的不得参加对该项目重新开展的采购活动。",
+            "summary": "27.3 成交供应商拒绝与采购人签订合同的,采购人可以按照评审报告推荐的成交候选供应商名单排序,确定下一成交候选供应商为成交供应商,也可以重新开展采购活动。成交",
+            "quote": "27.3 成交供应商拒绝与采购人签订合同的,采购人可以按照评审报告推荐的成交候选供应商名单排序,确定下一成交候选供应商为成交供应商,也可以重新开展采购活动。成交供应商拒绝签订政府采购合同的不得参加对该项目重新开展的采购活动。",
             "pages": [
               22,
               23
             ],
             "page": 22,
+            "printed_page": 20,
+            "printed_pages": [
+              20,
+              21
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 22-23 页",
+              "label": "PDF 第22-23页",
               "index": 22,
               "pages": [
                 22,
@@ -816,10 +419,14 @@
               26
             ],
             "page": 26,
+            "printed_page": 24,
+            "printed_pages": [
+              24
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 26 页",
+              "label": "PDF 第26页",
               "index": 26,
               "pages": [
                 26
@@ -840,10 +447,14 @@
               28
             ],
             "page": 28,
+            "printed_page": 26,
+            "printed_pages": [
+              26
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 28 页",
+              "label": "PDF 第28页",
               "index": 28,
               "pages": [
                 28
@@ -864,10 +475,14 @@
               29
             ],
             "page": 29,
+            "printed_page": 27,
+            "printed_pages": [
+              27
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 29 页",
+              "label": "PDF 第29页",
               "index": 29,
               "pages": [
                 29
@@ -888,10 +503,14 @@
               32
             ],
             "page": 32,
+            "printed_page": 30,
+            "printed_pages": [
+              30
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 32 页",
+              "label": "PDF 第32页",
               "index": 32,
               "pages": [
                 32
@@ -912,10 +531,14 @@
               32
             ],
             "page": 32,
+            "printed_page": 30,
+            "printed_pages": [
+              30
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 32 页",
+              "label": "PDF 第32页",
               "index": 32,
               "pages": [
                 32
@@ -930,19 +553,23 @@
             "clause_id": "TB-0018",
             "block": "qualification",
             "label": "资格要求",
-            "summary": "(二)甲方工作人员不得参加乙方安排的可能影响相关业务公开、公正、公平性的宴请和娱乐活动;不得参与任何形式的赌博,严禁通过赌博方式取得乙方及其工作人员的财物; 不",
-            "quote": "(二)甲方工作人员不得参加乙方安排的可能影响相关业务公开、公正、公平性的宴请和娱乐活动;不得参与任何形式的赌博,严禁通过赌博方式取得乙方及其工作人员的财物; 不得接受乙方提供的通讯工具和高档办公用品等。",
+            "summary": "(一)具有良好的商业信誉和健全的财务会计制度;",
+            "quote": "(一)具有良好的商业信誉和健全的财务会计制度;",
             "pages": [
-              74
+              94
             ],
-            "page": 74,
+            "page": 94,
+            "printed_page": 92,
+            "printed_pages": [
+              92
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 74 页",
-              "index": 74,
+              "label": "PDF 第94页",
+              "index": 94,
               "pages": [
-                74
+                94
               ]
             },
             "detection": "clause",
@@ -954,19 +581,23 @@
             "clause_id": "TB-0019",
             "block": "qualification",
             "label": "资格要求",
-            "summary": "(三)乙方不得以任何理由安排甲方工作人员参加可能影响相关业务公开、公正、公平性的宴请及娱乐活动。",
-            "quote": "(三)乙方不得以任何理由安排甲方工作人员参加可能影响相关业务公开、公正、公平性的宴请及娱乐活动。",
+            "summary": "(二)具有履行合同所必需的设备和专业技术能力;",
+            "quote": "(二)具有履行合同所必需的设备和专业技术能力;",
             "pages": [
-              75
+              94
             ],
-            "page": 75,
+            "page": 94,
+            "printed_page": 92,
+            "printed_pages": [
+              92
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 75 页",
-              "index": 75,
+              "label": "PDF 第94页",
+              "index": 94,
               "pages": [
-                75
+                94
               ]
             },
             "detection": "clause",
@@ -978,64 +609,20 @@
             "clause_id": "TB-0020",
             "block": "qualification",
             "label": "资格要求",
-            "summary": "(一)具有良好的商业信誉和健全的财务会计制度;",
-            "quote": "(一)具有良好的商业信誉和健全的财务会计制度;",
-            "pages": [
-              94
-            ],
-            "page": 94,
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "第 94 页",
-              "index": 94,
-              "pages": [
-                94
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0021",
-            "block": "qualification",
-            "label": "资格要求",
-            "summary": "(二)具有履行合同所必需的设备和专业技术能力;",
-            "quote": "(二)具有履行合同所必需的设备和专业技术能力;",
-            "pages": [
-              94
-            ],
-            "page": 94,
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "第 94 页",
-              "index": 94,
-              "pages": [
-                94
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0022",
-            "block": "qualification",
-            "label": "资格要求",
             "summary": "3.如磋商文件载明本项目分包承担主体应具备的相应资质条件,则供应商须在本表中列明分包承担主体的资质等级,并后附材料扫描件或电子证照,否则响应无效。",
             "quote": "3.如磋商文件载明本项目分包承担主体应具备的相应资质条件,则供应商须在本表中列明分包承担主体的资质等级,并后附材料扫描件或电子证照,否则响应无效。",
             "pages": [
               99
             ],
             "page": 99,
+            "printed_page": 97,
+            "printed_pages": [
+              97
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 99 页",
+              "label": "PDF 第99页",
               "index": 99,
               "pages": [
                 99
@@ -1052,55 +639,35 @@
         "label": "评分要求",
         "items": [
           {
-            "clause_id": "TB-0023",
+            "clause_id": "TB-0021",
             "block": "scoring",
             "label": "评分要求",
-            "summary": "四、响应文件提交截止时间2026 年6 月15 日14 点00 分(北京时间) 地点:“徽采云”电子交易系统。",
-            "quote": "四、响应文件提交截止时间2026 年6 月15 日14 点00 分(北京时间) 地点:“徽采云”电子交易系统。",
+            "summary": "Col1：22.2 Col2：随成交结果公<br>告同时公告的<br>内容 / 。(允许大中型企业向小微企业分包的项目适用)：(1)中小企业声明函;(如有)<b",
+            "quote": "Col1：22.2 Col2：随成交结果公<br>告同时公告的<br>内容 / 。(允许大中型企业向小微企业分包的项目适用)：(1)中小企业声明函;(如有)<br>(2)残疾人福利性单位声明函;(如有)<br>(3)中标(成交)供应商的评审总得分",
             "pages": [
-              4
+              7
             ],
-            "page": 4,
+            "page": 7,
+            "printed_page": 5,
+            "printed_pages": [
+              5
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 4 页",
-              "index": 4,
+              "label": "PDF 第7页",
+              "index": 7,
               "pages": [
-                4
+                7
               ]
             },
-            "detection": "clause",
+            "detection": "table",
             "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
             "uncited_reason": null,
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0024",
-            "block": "scoring",
-            "label": "评分要求",
-            "summary": "五、开启时间:2026 年6 月15 日14 点00 分(北京时间) 地点:“徽采云”电子交易系统。",
-            "quote": "五、开启时间:2026 年6 月15 日14 点00 分(北京时间) 地点:“徽采云”电子交易系统。",
-            "pages": [
-              4
-            ],
-            "page": 4,
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "第 4 页",
-              "index": 4,
-              "pages": [
-                4
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0025",
+            "clause_id": "TB-0022",
             "block": "scoring",
             "label": "评分要求",
             "summary": "(3)中标(成交)供应商的评审总得分",
@@ -1109,10 +676,14 @@
               7
             ],
             "page": 7,
+            "printed_page": 5,
+            "printed_pages": [
+              5
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 7 页",
+              "label": "PDF 第7页",
               "index": 7,
               "pages": [
                 7
@@ -1124,7 +695,63 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0026",
+            "clause_id": "TB-0023",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "综合评分法,是指响应文件满足磋商文件全部实质性要求且按评审因素的量化指标评审得分最高的供应商为成交候选供应商的评审方法。",
+            "quote": "综合评分法,是指响应文件满足磋商文件全部实质性要求且按评审因素的量化指标评审得分最高的供应商为成交候选供应商的评审方法。",
+            "pages": [
+              17
+            ],
+            "page": 17,
+            "printed_page": 15,
+            "printed_pages": [
+              15
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第17页",
+              "index": 17,
+              "pages": [
+                17
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0024",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "18.1 磋商小组依据本项目磋商文件所约定的评审方法和标准,按照有效供应商综合总得分由高到低依次推荐成交候选供应商。综合总得分出现两家或两家以上相同者,按最后报",
+            "quote": "18.1 磋商小组依据本项目磋商文件所约定的评审方法和标准,按照有效供应商综合总得分由高到低依次推荐成交候选供应商。综合总得分出现两家或两家以上相同者,按最后报价由低到高排序推荐成交候选供应商;综合总得分且最后报价均相同的,由磋商小组按照技术指标优劣顺序推荐成交候选供应商。",
+            "pages": [
+              21
+            ],
+            "page": 21,
+            "printed_page": 19,
+            "printed_pages": [
+              19
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第21页",
+              "index": 21,
+              "pages": [
+                21
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0025",
             "block": "scoring",
             "label": "评分要求",
             "summary": "24.1 在公告成交结果的同时,采购代理机构同时以供应商须知前附表规定的形式告知未成交供应商本人的评审得分和排序。",
@@ -1133,10 +760,14 @@
               22
             ],
             "page": 22,
+            "printed_page": 20,
+            "printed_pages": [
+              20
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 22 页",
+              "label": "PDF 第22页",
               "index": 22,
               "pages": [
                 22
@@ -1148,7 +779,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0027",
+            "clause_id": "TB-0026",
             "block": "scoring",
             "label": "评分要求",
             "summary": "2.3.2 本项目综合评分满分为100 分,具体评分细则如下:",
@@ -1157,10 +788,14 @@
               33
             ],
             "page": 33,
+            "printed_page": 31,
+            "printed_pages": [
+              31
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 33 页",
+              "label": "PDF 第33页",
               "index": 33,
               "pages": [
                 33
@@ -1172,7 +807,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0028",
+            "clause_id": "TB-0027",
             "block": "scoring",
             "label": "评分要求",
             "summary": "类别：技术资信<br>分<br>(85 分) 评分内容：工程实际情<br>况及重难点<br>分析 评分标准：熟悉施工现场情况、熟悉本工程施工重难点、<br>对本",
@@ -1181,10 +816,42 @@
               34
             ],
             "page": 34,
+            "printed_page": 32,
+            "printed_pages": [
+              32
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 34 页",
+              "label": "PDF 第34页",
+              "index": 34,
+              "pages": [
+                34
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0028",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "类别：技术资信<br>分<br>(85 分) 评分内容：施工组织设<br>计 评分标准：供应商针对项目具体施工要求制定施工组织<br>方案,包括但不限于:施工计",
+            "quote": "类别：技术资信<br>分<br>(85 分) 评分内容：施工组织设<br>计 评分标准：供应商针对项目具体施工要求制定施工组织<br>方案,包括但不限于:施工计划、技术措施、<br>安全文明措施等,由磋商小组评审:<br>1.施工计划:<br>(1)内容全面详实,重点突出,方案健全,<br>有具体措施的,得5 分;<br>(2)内容较为详实,有一定的重点,制度、<br>措施符合项目基本需求的,得3 分;<br>(3)基本满足需求的,得1 分;<br>(4)差或未提供的不得分。 分值范围：0-15 分",
+            "pages": [
+              34
+            ],
+            "page": 34,
+            "printed_page": 32,
+            "printed_pages": [
+              32
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第34页",
               "index": 34,
               "pages": [
                 34
@@ -1199,22 +866,26 @@
             "clause_id": "TB-0029",
             "block": "scoring",
             "label": "评分要求",
-            "summary": "类别：技术资信<br>分<br>(85 分) 评分内容：施工组织设<br>计 评分标准：供应商针对项目具体施工要求制定施工组织<br>方案,包括但不限于:施工计",
-            "quote": "类别：技术资信<br>分<br>(85 分) 评分内容：施工组织设<br>计 评分标准：供应商针对项目具体施工要求制定施工组织<br>方案,包括但不限于:施工计划、技术措施、<br>安全文明措施等,由磋商小组评审:<br>1.施工计划:<br>(1)内容全面详实,重点突出,方案健全,<br>有具体措施的,得5 分;<br>(2)内容较为详实,有一定的重点,制度、<br>措施符合项目基本需求的,得3 分;<br>(3)基本满足需求的,得1 分;<br>(4)差或未提供的不得分。 分值范围：0-15 分",
+            "summary": "分值范围技术资信分 (85 分) 工程实际情况及重难点分析熟悉施工现场情况、熟悉本工程施工重难点、 对本项目定位理解准确,了解采购人项目需求。",
+            "quote": "分值范围技术资信分 (85 分) 工程实际情况及重难点分析熟悉施工现场情况、熟悉本工程施工重难点、 对本项目定位理解准确,了解采购人项目需求。",
             "pages": [
               34
             ],
             "page": 34,
+            "printed_page": 32,
+            "printed_pages": [
+              32
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 34 页",
+              "label": "PDF 第34页",
               "index": 34,
               "pages": [
                 34
               ]
             },
-            "detection": "table",
+            "detection": "clause",
             "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
             "uncited_reason": null,
             "audit_status": "pending_audit"
@@ -1223,16 +894,20 @@
             "clause_id": "TB-0030",
             "block": "scoring",
             "label": "评分要求",
-            "summary": "分值范围技术资信分 (85 分) 工程实际情况及重难点分析熟悉施工现场情况、熟悉本工程施工重难点、 对本项目定位理解准确,了解采购人项目需求。",
-            "quote": "分值范围技术资信分 (85 分) 工程实际情况及重难点分析熟悉施工现场情况、熟悉本工程施工重难点、 对本项目定位理解准确,了解采购人项目需求。",
+            "summary": "(1)对项目现场情况熟悉,完全了解采购人项目需求的,得5 分;",
+            "quote": "(1)对项目现场情况熟悉,完全了解采购人项目需求的,得5 分;",
             "pages": [
               34
             ],
             "page": 34,
+            "printed_page": 32,
+            "printed_pages": [
+              32
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 34 页",
+              "label": "PDF 第34页",
               "index": 34,
               "pages": [
                 34
@@ -1247,16 +922,20 @@
             "clause_id": "TB-0031",
             "block": "scoring",
             "label": "评分要求",
-            "summary": "(1)对项目现场情况熟悉,完全了解采购人项目需求的,得5 分;",
-            "quote": "(1)对项目现场情况熟悉,完全了解采购人项目需求的,得5 分;",
+            "summary": "(2)对项目现场情况较熟悉,基本了解采购人项目需求的,得3 分;",
+            "quote": "(2)对项目现场情况较熟悉,基本了解采购人项目需求的,得3 分;",
             "pages": [
               34
             ],
             "page": 34,
+            "printed_page": 32,
+            "printed_pages": [
+              32
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 34 页",
+              "label": "PDF 第34页",
               "index": 34,
               "pages": [
                 34
@@ -1271,16 +950,20 @@
             "clause_id": "TB-0032",
             "block": "scoring",
             "label": "评分要求",
-            "summary": "(2)对项目现场情况较熟悉,基本了解采购人项目需求的,得3 分;",
-            "quote": "(2)对项目现场情况较熟悉,基本了解采购人项目需求的,得3 分;",
+            "summary": "(3)对项目现场情况不太熟悉,采购人项目需求了解较少得,得1 分;",
+            "quote": "(3)对项目现场情况不太熟悉,采购人项目需求了解较少得,得1 分;",
             "pages": [
               34
             ],
             "page": 34,
+            "printed_page": 32,
+            "printed_pages": [
+              32
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 34 页",
+              "label": "PDF 第34页",
               "index": 34,
               "pages": [
                 34
@@ -1295,16 +978,20 @@
             "clause_id": "TB-0033",
             "block": "scoring",
             "label": "评分要求",
-            "summary": "(3)对项目现场情况不太熟悉,采购人项目需求了解较少得,得1 分;",
-            "quote": "(3)对项目现场情况不太熟悉,采购人项目需求了解较少得,得1 分;",
+            "summary": "(4)较差或未提供不得分。",
+            "quote": "(4)较差或未提供不得分。",
             "pages": [
               34
             ],
             "page": 34,
+            "printed_page": 32,
+            "printed_pages": [
+              32
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 34 页",
+              "label": "PDF 第34页",
               "index": 34,
               "pages": [
                 34
@@ -1319,16 +1006,20 @@
             "clause_id": "TB-0034",
             "block": "scoring",
             "label": "评分要求",
-            "summary": "(4)较差或未提供不得分。",
-            "quote": "(4)较差或未提供不得分。",
+            "summary": "(1)重难点分析准确到位的,得5 分;",
+            "quote": "(1)重难点分析准确到位的,得5 分;",
             "pages": [
               34
             ],
             "page": 34,
+            "printed_page": 32,
+            "printed_pages": [
+              32
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 34 页",
+              "label": "PDF 第34页",
               "index": 34,
               "pages": [
                 34
@@ -1343,16 +1034,20 @@
             "clause_id": "TB-0035",
             "block": "scoring",
             "label": "评分要求",
-            "summary": "(1)重难点分析准确到位的,得5 分;",
-            "quote": "(1)重难点分析准确到位的,得5 分;",
+            "summary": "(2)重难点分析有待完善的,得3 分;",
+            "quote": "(2)重难点分析有待完善的,得3 分;",
             "pages": [
               34
             ],
             "page": 34,
+            "printed_page": 32,
+            "printed_pages": [
+              32
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 34 页",
+              "label": "PDF 第34页",
               "index": 34,
               "pages": [
                 34
@@ -1367,16 +1062,20 @@
             "clause_id": "TB-0036",
             "block": "scoring",
             "label": "评分要求",
-            "summary": "(2)重难点分析有待完善的,得3 分;",
-            "quote": "(2)重难点分析有待完善的,得3 分;",
+            "summary": "(3)重难点分析不到位,得1 分;",
+            "quote": "(3)重难点分析不到位,得1 分;",
             "pages": [
               34
             ],
             "page": 34,
+            "printed_page": 32,
+            "printed_pages": [
+              32
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 34 页",
+              "label": "PDF 第34页",
               "index": 34,
               "pages": [
                 34
@@ -1391,16 +1090,20 @@
             "clause_id": "TB-0037",
             "block": "scoring",
             "label": "评分要求",
-            "summary": "(3)重难点分析不到位,得1 分;",
-            "quote": "(3)重难点分析不到位,得1 分;",
+            "summary": "(1)内容全面详实,重点突出,方案健全, 有具体措施的,得5 分;",
+            "quote": "(1)内容全面详实,重点突出,方案健全, 有具体措施的,得5 分;",
             "pages": [
               34
             ],
             "page": 34,
+            "printed_page": 32,
+            "printed_pages": [
+              32
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 34 页",
+              "label": "PDF 第34页",
               "index": 34,
               "pages": [
                 34
@@ -1415,16 +1118,20 @@
             "clause_id": "TB-0038",
             "block": "scoring",
             "label": "评分要求",
-            "summary": "0-10 分施工组织设计供应商针对项目具体施工要求制定施工组织方案,包括但不限于:施工计划、技术措施、 安全文明措施等,由磋商小组评审:",
-            "quote": "0-10 分施工组织设计供应商针对项目具体施工要求制定施工组织方案,包括但不限于:施工计划、技术措施、 安全文明措施等,由磋商小组评审:",
+            "summary": "(2)内容较为详实,有一定的重点,制度、 措施符合项目基本需求的,得3 分;",
+            "quote": "(2)内容较为详实,有一定的重点,制度、 措施符合项目基本需求的,得3 分;",
             "pages": [
               34
             ],
             "page": 34,
+            "printed_page": 32,
+            "printed_pages": [
+              32
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 34 页",
+              "label": "PDF 第34页",
               "index": 34,
               "pages": [
                 34
@@ -1439,16 +1146,20 @@
             "clause_id": "TB-0039",
             "block": "scoring",
             "label": "评分要求",
-            "summary": "(1)内容全面详实,重点突出,方案健全, 有具体措施的,得5 分;",
-            "quote": "(1)内容全面详实,重点突出,方案健全, 有具体措施的,得5 分;",
+            "summary": "(3)基本满足需求的,得1 分;",
+            "quote": "(3)基本满足需求的,得1 分;",
             "pages": [
               34
             ],
             "page": 34,
+            "printed_page": 32,
+            "printed_pages": [
+              32
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 34 页",
+              "label": "PDF 第34页",
               "index": 34,
               "pages": [
                 34
@@ -1463,16 +1174,20 @@
             "clause_id": "TB-0040",
             "block": "scoring",
             "label": "评分要求",
-            "summary": "(2)内容较为详实,有一定的重点,制度、 措施符合项目基本需求的,得3 分;",
-            "quote": "(2)内容较为详实,有一定的重点,制度、 措施符合项目基本需求的,得3 分;",
+            "summary": "(4)差或未提供的不得分。",
+            "quote": "(4)差或未提供的不得分。",
             "pages": [
               34
             ],
             "page": 34,
+            "printed_page": 32,
+            "printed_pages": [
+              32
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 34 页",
+              "label": "PDF 第34页",
               "index": 34,
               "pages": [
                 34
@@ -1487,22 +1202,26 @@
             "clause_id": "TB-0041",
             "block": "scoring",
             "label": "评分要求",
-            "summary": "(3)基本满足需求的,得1 分;",
-            "quote": "(3)基本满足需求的,得1 分;",
+            "summary": "Col1：劳动力安排<br>方案 Col2：供应商针对本项目实际需求制定劳动力安排<br>方案,包括但不限于:人员数量、工种配备<br>方案等,由磋商小组评审。",
+            "quote": "Col1：劳动力安排<br>方案 Col2：供应商针对本项目实际需求制定劳动力安排<br>方案,包括但不限于:人员数量、工种配备<br>方案等,由磋商小组评审。<br>(1)人员数量完全满足本项目实际需要,工<br>种配备方案全面详实、工种丰富的,得5 分;<br>(2)人员数量可以满足本项目实际需要,工<br>种配备较为丰富的,得3 分;<br>(3)人员数量基本满足需求,工种配备有待<br>完善的,得1 分;<br>(4)差或未提供的不得分。 2.技术措施:<br>(1)内容全面详实,重点突出,方案健全,<br>有具体措施的,得5 分;<br>(2)内容较为详实,有一定的重点,制度、<br>措施符合项目基本需求的,得3 分;<br>(3)基本满足需求的,得1 分;<br>(4)差或未提供的不得分。<br>3.安全文明措施:<br>(1)内容全面详实,重点突出,方案健全,<br>有具体措",
             "pages": [
-              34
+              35
             ],
-            "page": 34,
+            "page": 35,
+            "printed_page": 33,
+            "printed_pages": [
+              33
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 34 页",
-              "index": 34,
+              "label": "PDF 第35页",
+              "index": 35,
               "pages": [
-                34
+                35
               ]
             },
-            "detection": "clause",
+            "detection": "table",
             "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
             "uncited_reason": null,
             "audit_status": "pending_audit"
@@ -1511,22 +1230,26 @@
             "clause_id": "TB-0042",
             "block": "scoring",
             "label": "评分要求",
-            "summary": "(4)差或未提供的不得分。",
-            "quote": "(4)差或未提供的不得分。",
+            "summary": "Col1：主要施工机<br>械、设备进场<br>计划 Col2：结合本工程特点,投入的施工机械、设备、<br>机具有详细计划且计划周密,设备数量、选<br>型配",
+            "quote": "Col1：主要施工机<br>械、设备进场<br>计划 Col2：结合本工程特点,投入的施工机械、设备、<br>机具有详细计划且计划周密,设备数量、选<br>型配置、进场数量、时间安排合理,满足施<br>工需要。<br>(1)计划详细完善,具有针对性和可行性的, 2.技术措施:<br>(1)内容全面详实,重点突出,方案健全,<br>有具体措施的,得5 分;<br>(2)内容较为详实,有一定的重点,制度、<br>措施符合项目基本需求的,得3 分;<br>(3)基本满足需求的,得1 分;<br>(4)差或未提供的不得分。<br>3.安全文明措施:<br>(1)内容全面详实,重点突出,方案健全,<br>有具体措施的,得5 分;<br>(2)内容较为详实,有一定的重点,制度、<br>措施符合项目基本需求的,得3 分;<br>(3)基本满足需求的,得1 分;<br>(4)差或未提供的不得分。：0-5 ",
             "pages": [
-              34
+              35
             ],
-            "page": 34,
+            "page": 35,
+            "printed_page": 33,
+            "printed_pages": [
+              33
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 34 页",
-              "index": 34,
+              "label": "PDF 第35页",
+              "index": 35,
               "pages": [
-                34
+                35
               ]
             },
-            "detection": "clause",
+            "detection": "table",
             "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
             "uncited_reason": null,
             "audit_status": "pending_audit"
@@ -1535,19 +1258,23 @@
             "clause_id": "TB-0043",
             "block": "scoring",
             "label": "评分要求",
-            "summary": "0-15 分",
-            "quote": "0-15 分",
+            "summary": "(1)内容全面详实,重点突出,方案健全, 有具体措施的,得5 分;",
+            "quote": "(1)内容全面详实,重点突出,方案健全, 有具体措施的,得5 分;",
             "pages": [
-              34
+              35
             ],
-            "page": 34,
+            "page": 35,
+            "printed_page": 33,
+            "printed_pages": [
+              33
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 34 页",
-              "index": 34,
+              "label": "PDF 第35页",
+              "index": 35,
               "pages": [
-                34
+                35
               ]
             },
             "detection": "clause",
@@ -1559,22 +1286,26 @@
             "clause_id": "TB-0044",
             "block": "scoring",
             "label": "评分要求",
-            "summary": "Col1：劳动力安排<br>方案 Col2：供应商针对本项目实际需求制定劳动力安排<br>方案,包括但不限于:人员数量、工种配备<br>方案等,由磋商小组评审。",
-            "quote": "Col1：劳动力安排<br>方案 Col2：供应商针对本项目实际需求制定劳动力安排<br>方案,包括但不限于:人员数量、工种配备<br>方案等,由磋商小组评审。<br>(1)人员数量完全满足本项目实际需要,工<br>种配备方案全面详实、工种丰富的,得5 分;<br>(2)人员数量可以满足本项目实际需要,工<br>种配备较为丰富的,得3 分;<br>(3)人员数量基本满足需求,工种配备有待<br>完善的,得1 分;<br>(4)差或未提供的不得分。 2.技术措施:<br>(1)内容全面详实,重点突出,方案健全,<br>有具体措施的,得5 分;<br>(2)内容较为详实,有一定的重点,制度、<br>措施符合项目基本需求的,得3 分;<br>(3)基本满足需求的,得1 分;<br>(4)差或未提供的不得分。<br>3.安全文明措施:<br>(1)内容全面详实,重点突出,方案健全,<br>有具体措",
+            "summary": "(2)内容较为详实,有一定的重点,制度、 措施符合项目基本需求的,得3 分;",
+            "quote": "(2)内容较为详实,有一定的重点,制度、 措施符合项目基本需求的,得3 分;",
             "pages": [
               35
             ],
             "page": 35,
+            "printed_page": 33,
+            "printed_pages": [
+              33
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 35 页",
+              "label": "PDF 第35页",
               "index": 35,
               "pages": [
                 35
               ]
             },
-            "detection": "table",
+            "detection": "clause",
             "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
             "uncited_reason": null,
             "audit_status": "pending_audit"
@@ -1583,22 +1314,26 @@
             "clause_id": "TB-0045",
             "block": "scoring",
             "label": "评分要求",
-            "summary": "Col1：主要施工机<br>械、设备进场<br>计划 Col2：结合本工程特点,投入的施工机械、设备、<br>机具有详细计划且计划周密,设备数量、选<br>型配",
-            "quote": "Col1：主要施工机<br>械、设备进场<br>计划 Col2：结合本工程特点,投入的施工机械、设备、<br>机具有详细计划且计划周密,设备数量、选<br>型配置、进场数量、时间安排合理,满足施<br>工需要。<br>(1)计划详细完善,具有针对性和可行性的, 2.技术措施:<br>(1)内容全面详实,重点突出,方案健全,<br>有具体措施的,得5 分;<br>(2)内容较为详实,有一定的重点,制度、<br>措施符合项目基本需求的,得3 分;<br>(3)基本满足需求的,得1 分;<br>(4)差或未提供的不得分。<br>3.安全文明措施:<br>(1)内容全面详实,重点突出,方案健全,<br>有具体措施的,得5 分;<br>(2)内容较为详实,有一定的重点,制度、<br>措施符合项目基本需求的,得3 分;<br>(3)基本满足需求的,得1 分;<br>(4)差或未提供的不得分。：0-5 ",
+            "summary": "(3)基本满足需求的,得1 分;",
+            "quote": "(3)基本满足需求的,得1 分;",
             "pages": [
               35
             ],
             "page": 35,
+            "printed_page": 33,
+            "printed_pages": [
+              33
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 35 页",
+              "label": "PDF 第35页",
               "index": 35,
               "pages": [
                 35
               ]
             },
-            "detection": "table",
+            "detection": "clause",
             "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
             "uncited_reason": null,
             "audit_status": "pending_audit"
@@ -1607,16 +1342,20 @@
             "clause_id": "TB-0046",
             "block": "scoring",
             "label": "评分要求",
-            "summary": "(1)内容全面详实,重点突出,方案健全, 有具体措施的,得5 分;",
-            "quote": "(1)内容全面详实,重点突出,方案健全, 有具体措施的,得5 分;",
+            "summary": "(4)差或未提供的不得分。",
+            "quote": "(4)差或未提供的不得分。",
             "pages": [
               35
             ],
             "page": 35,
+            "printed_page": 33,
+            "printed_pages": [
+              33
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 35 页",
+              "label": "PDF 第35页",
               "index": 35,
               "pages": [
                 35
@@ -1631,16 +1370,20 @@
             "clause_id": "TB-0047",
             "block": "scoring",
             "label": "评分要求",
-            "summary": "(2)内容较为详实,有一定的重点,制度、 措施符合项目基本需求的,得3 分;",
-            "quote": "(2)内容较为详实,有一定的重点,制度、 措施符合项目基本需求的,得3 分;",
+            "summary": "(1)人员数量完全满足本项目实际需要,工种配备方案全面详实、工种丰富的,得5 分;",
+            "quote": "(1)人员数量完全满足本项目实际需要,工种配备方案全面详实、工种丰富的,得5 分;",
             "pages": [
               35
             ],
             "page": 35,
+            "printed_page": 33,
+            "printed_pages": [
+              33
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 35 页",
+              "label": "PDF 第35页",
               "index": 35,
               "pages": [
                 35
@@ -1655,16 +1398,20 @@
             "clause_id": "TB-0048",
             "block": "scoring",
             "label": "评分要求",
-            "summary": "(3)基本满足需求的,得1 分;",
-            "quote": "(3)基本满足需求的,得1 分;",
+            "summary": "(2)人员数量可以满足本项目实际需要,工种配备较为丰富的,得3 分;",
+            "quote": "(2)人员数量可以满足本项目实际需要,工种配备较为丰富的,得3 分;",
             "pages": [
               35
             ],
             "page": 35,
+            "printed_page": 33,
+            "printed_pages": [
+              33
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 35 页",
+              "label": "PDF 第35页",
               "index": 35,
               "pages": [
                 35
@@ -1679,16 +1426,20 @@
             "clause_id": "TB-0049",
             "block": "scoring",
             "label": "评分要求",
-            "summary": "(4)差或未提供的不得分。",
-            "quote": "(4)差或未提供的不得分。",
+            "summary": "(3)人员数量基本满足需求,工种配备有待完善的,得1 分;",
+            "quote": "(3)人员数量基本满足需求,工种配备有待完善的,得1 分;",
             "pages": [
               35
             ],
             "page": 35,
+            "printed_page": 33,
+            "printed_pages": [
+              33
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 35 页",
+              "label": "PDF 第35页",
               "index": 35,
               "pages": [
                 35
@@ -1703,16 +1454,20 @@
             "clause_id": "TB-0050",
             "block": "scoring",
             "label": "评分要求",
-            "summary": "(1)人员数量完全满足本项目实际需要,工种配备方案全面详实、工种丰富的,得5 分;",
-            "quote": "(1)人员数量完全满足本项目实际需要,工种配备方案全面详实、工种丰富的,得5 分;",
+            "summary": "(1)计划详细完善,具有针对性和可行性的,0-5 分",
+            "quote": "(1)计划详细完善,具有针对性和可行性的,0-5 分",
             "pages": [
               35
             ],
             "page": 35,
+            "printed_page": 33,
+            "printed_pages": [
+              33
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 35 页",
+              "label": "PDF 第35页",
               "index": 35,
               "pages": [
                 35
@@ -1727,22 +1482,26 @@
             "clause_id": "TB-0051",
             "block": "scoring",
             "label": "评分要求",
-            "summary": "(2)人员数量可以满足本项目实际需要,工种配备较为丰富的,得3 分;",
-            "quote": "(2)人员数量可以满足本项目实际需要,工种配备较为丰富的,得3 分;",
+            "summary": "Col1：售后服务 Col2：磋商小组根据供应商提供的售后服务方案进<br>行评审,内容包括但不限于:质量保证方案、<br>应急维修时间计划。<br>1.质量保",
+            "quote": "Col1：售后服务 Col2：磋商小组根据供应商提供的售后服务方案进<br>行评审,内容包括但不限于:质量保证方案、<br>应急维修时间计划。<br>1.质量保证方案:响应文件须提供所投产品<br>质量保证方案充实可行、内容科学合理的,<br>得4 分;提供的方案内容较为充实可行、内<br>容较为详细合理的,得2 分;提供了质量保<br>障方案,方案有待进一步完善,但在一定程<br>度上能够满足采购人的基本需求的,得1<br>分;提供的内容完全不能满足采购人需求的,<br>或未提供任何内容的不得分。<br>2.应急维修时间计划:应急维修时间计划详<br>细合理的,得3 分;应急维修时间计划较为<br>详细合理的,在一定程度上能够满足采购人<br>的基本需求的,得2 分;具有应急维修时间<br>安排,但内容简约,有待完善的,得1 分;<br>提供的内容完全不能满足采购人需求的,或<br>未提",
             "pages": [
-              35
+              36
             ],
-            "page": 35,
+            "page": 36,
+            "printed_page": 34,
+            "printed_pages": [
+              34
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 35 页",
-              "index": 35,
+              "label": "PDF 第36页",
+              "index": 36,
               "pages": [
-                35
+                36
               ]
             },
-            "detection": "clause",
+            "detection": "table",
             "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
             "uncited_reason": null,
             "audit_status": "pending_audit"
@@ -1751,22 +1510,26 @@
             "clause_id": "TB-0052",
             "block": "scoring",
             "label": "评分要求",
-            "summary": "(3)人员数量基本满足需求,工种配备有待完善的,得1 分;",
-            "quote": "(3)人员数量基本满足需求,工种配备有待完善的,得1 分;",
+            "summary": "Col1：供应商业绩 Col2：自2023 年1 月1 日以来(以合同签订时间为<br>准),供应商具有装饰装修或改造工程业绩<br>的,每提供1 个业绩得5 ",
+            "quote": "Col1：供应商业绩 Col2：自2023 年1 月1 日以来(以合同签订时间为<br>准),供应商具有装饰装修或改造工程业绩<br>的,每提供1 个业绩得5 分,满分15 分。<br>注:响应文件中提供业绩合同和验收证明材<br>料扫描件,若合同或验收证明材料中无法体<br>现合同签订时间、项目内容等关键评审因素<br>的,须同时提供加盖业主(合同甲方)公章 得5 分;<br>(2)计划比较详细,具有一定的针对性的,<br>得3 分;<br>(3)内容需要进一步完善的,得1 分;<br>(4)差或未提供的不得分。：0-15 分",
             "pages": [
-              35
+              36
             ],
-            "page": 35,
+            "page": 36,
+            "printed_page": 34,
+            "printed_pages": [
+              34
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 35 页",
-              "index": 35,
+              "label": "PDF 第36页",
+              "index": 36,
               "pages": [
-                35
+                36
               ]
             },
-            "detection": "clause",
+            "detection": "table",
             "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
             "uncited_reason": null,
             "audit_status": "pending_audit"
@@ -1775,19 +1538,23 @@
             "clause_id": "TB-0053",
             "block": "scoring",
             "label": "评分要求",
-            "summary": "0-5 分主要施工机械、设备进场计划结合本工程特点,投入的施工机械、设备、 机具有详细计划且计划周密,设备数量、选型配置、进场数量、时间安排合理,满足施工需要。",
-            "quote": "0-5 分主要施工机械、设备进场计划结合本工程特点,投入的施工机械、设备、 机具有详细计划且计划周密,设备数量、选型配置、进场数量、时间安排合理,满足施工需要。",
+            "summary": "(2)计划比较详细,具有一定的针对性的,得3 分;",
+            "quote": "(2)计划比较详细,具有一定的针对性的,得3 分;",
             "pages": [
-              35
+              36
             ],
-            "page": 35,
+            "page": 36,
+            "printed_page": 34,
+            "printed_pages": [
+              34
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 35 页",
-              "index": 35,
+              "label": "PDF 第36页",
+              "index": 36,
               "pages": [
-                35
+                36
               ]
             },
             "detection": "clause",
@@ -1799,19 +1566,23 @@
             "clause_id": "TB-0054",
             "block": "scoring",
             "label": "评分要求",
-            "summary": "(1)计划详细完善,具有针对性和可行性的, 0-5 分",
-            "quote": "(1)计划详细完善,具有针对性和可行性的, 0-5 分",
+            "summary": "(3)内容需要进一步完善的,得1 分;",
+            "quote": "(3)内容需要进一步完善的,得1 分;",
             "pages": [
-              35
+              36
             ],
-            "page": 35,
+            "page": 36,
+            "printed_page": 34,
+            "printed_pages": [
+              34
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 35 页",
-              "index": 35,
+              "label": "PDF 第36页",
+              "index": 36,
               "pages": [
-                35
+                36
               ]
             },
             "detection": "clause",
@@ -1823,22 +1594,26 @@
             "clause_id": "TB-0055",
             "block": "scoring",
             "label": "评分要求",
-            "summary": "Col1：售后服务 Col2：磋商小组根据供应商提供的售后服务方案进<br>行评审,内容包括但不限于:质量保证方案、<br>应急维修时间计划。<br>1.质量保",
-            "quote": "Col1：售后服务 Col2：磋商小组根据供应商提供的售后服务方案进<br>行评审,内容包括但不限于:质量保证方案、<br>应急维修时间计划。<br>1.质量保证方案:响应文件须提供所投产品<br>质量保证方案充实可行、内容科学合理的,<br>得4 分;提供的方案内容较为充实可行、内<br>容较为详细合理的,得2 分;提供了质量保<br>障方案,方案有待进一步完善,但在一定程<br>度上能够满足采购人的基本需求的,得1<br>分;提供的内容完全不能满足采购人需求的,<br>或未提供任何内容的不得分。<br>2.应急维修时间计划:应急维修时间计划详<br>细合理的,得3 分;应急维修时间计划较为<br>详细合理的,在一定程度上能够满足采购人<br>的基本需求的,得2 分;具有应急维修时间<br>安排,但内容简约,有待完善的,得1 分;<br>提供的内容完全不能满足采购人需求的,或<br>未提",
+            "summary": "(4)差或未提供的不得分。",
+            "quote": "(4)差或未提供的不得分。",
             "pages": [
               36
             ],
             "page": 36,
+            "printed_page": 34,
+            "printed_pages": [
+              34
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 36 页",
+              "label": "PDF 第36页",
               "index": 36,
               "pages": [
                 36
               ]
             },
-            "detection": "table",
+            "detection": "clause",
             "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
             "uncited_reason": null,
             "audit_status": "pending_audit"
@@ -1847,22 +1622,26 @@
             "clause_id": "TB-0056",
             "block": "scoring",
             "label": "评分要求",
-            "summary": "Col1：供应商业绩 Col2：自2023 年1 月1 日以来(以合同签订时间为<br>准),供应商具有装饰装修或改造工程业绩<br>的,每提供1 个业绩得5 ",
-            "quote": "Col1：供应商业绩 Col2：自2023 年1 月1 日以来(以合同签订时间为<br>准),供应商具有装饰装修或改造工程业绩<br>的,每提供1 个业绩得5 分,满分15 分。<br>注:响应文件中提供业绩合同和验收证明材<br>料扫描件,若合同或验收证明材料中无法体<br>现合同签订时间、项目内容等关键评审因素<br>的,须同时提供加盖业主(合同甲方)公章 得5 分;<br>(2)计划比较详细,具有一定的针对性的,<br>得3 分;<br>(3)内容需要进一步完善的,得1 分;<br>(4)差或未提供的不得分。：0-15 分",
+            "summary": "1.质量保证方案:响应文件须提供所投产品质量保证方案充实可行、内容科学合理的, 得4 分;提供的方案内容较为充实可行、内容较为详细合理的,得2 分;提供了质量保",
+            "quote": "1.质量保证方案:响应文件须提供所投产品质量保证方案充实可行、内容科学合理的, 得4 分;提供的方案内容较为充实可行、内容较为详细合理的,得2 分;提供了质量保障方案,方案有待进一步完善,但在一定程度上能够满足采购人的基本需求的,得1 分;提供的内容完全不能满足采购人需求的, 或未提供任何内容的不得分。",
             "pages": [
               36
             ],
             "page": 36,
+            "printed_page": 34,
+            "printed_pages": [
+              34
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 36 页",
+              "label": "PDF 第36页",
               "index": 36,
               "pages": [
                 36
               ]
             },
-            "detection": "table",
+            "detection": "clause",
             "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
             "uncited_reason": null,
             "audit_status": "pending_audit"
@@ -1871,16 +1650,20 @@
             "clause_id": "TB-0057",
             "block": "scoring",
             "label": "评分要求",
-            "summary": "安徽省政府采购项目竞争性磋商文件示范文本(工程类) 第34 页/共107 页得5 分;",
-            "quote": "安徽省政府采购项目竞争性磋商文件示范文本(工程类) 第34 页/共107 页得5 分;",
+            "summary": "2.应急维修时间计划:应急维修时间计划详细合理的,得3 分;应急维修时间计划较为详细合理的,在一定程度上能够满足采购人的基本需求的,得2 分;具有应急维修时间安",
+            "quote": "2.应急维修时间计划:应急维修时间计划详细合理的,得3 分;应急维修时间计划较为详细合理的,在一定程度上能够满足采购人的基本需求的,得2 分;具有应急维修时间安排,但内容简约,有待完善的,得1 分; 提供的内容完全不能满足采购人需求的,或未提供任何内容的不得分。",
             "pages": [
               36
             ],
             "page": 36,
+            "printed_page": 34,
+            "printed_pages": [
+              34
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 36 页",
+              "label": "PDF 第36页",
               "index": 36,
               "pages": [
                 36
@@ -1895,16 +1678,20 @@
             "clause_id": "TB-0058",
             "block": "scoring",
             "label": "评分要求",
-            "summary": "(2)计划比较详细,具有一定的针对性的, 得3 分;",
-            "quote": "(2)计划比较详细,具有一定的针对性的, 得3 分;",
+            "summary": "供应商业绩自2023 年1 月1 日以来(以合同签订时间为准),供应商具有装饰装修或改造工程业绩的,每提供1 个业绩得5 分,满分15 分。",
+            "quote": "供应商业绩自2023 年1 月1 日以来(以合同签订时间为准),供应商具有装饰装修或改造工程业绩的,每提供1 个业绩得5 分,满分15 分。",
             "pages": [
               36
             ],
             "page": 36,
+            "printed_page": 34,
+            "printed_pages": [
+              34
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 36 页",
+              "label": "PDF 第36页",
               "index": 36,
               "pages": [
                 36
@@ -1919,16 +1706,20 @@
             "clause_id": "TB-0059",
             "block": "scoring",
             "label": "评分要求",
-            "summary": "(3)内容需要进一步完善的,得1 分;",
-            "quote": "(3)内容需要进一步完善的,得1 分;",
+            "summary": "的,须同时提供加盖业主(合同甲方)公章0-15 分",
+            "quote": "的,须同时提供加盖业主(合同甲方)公章0-15 分",
             "pages": [
               36
             ],
             "page": 36,
+            "printed_page": 34,
+            "printed_pages": [
+              34
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 36 页",
+              "label": "PDF 第36页",
               "index": 36,
               "pages": [
                 36
@@ -1943,22 +1734,26 @@
             "clause_id": "TB-0060",
             "block": "scoring",
             "label": "评分要求",
-            "summary": "(4)差或未提供的不得分。",
-            "quote": "(4)差或未提供的不得分。",
+            "summary": "Col1：业绩履约评<br>价 Col2：供应商提供经评审小组认可业绩的业主履约<br>评价,评价等级为良好(满意)及以上的,<br>每提供一份证明得3 分,满",
+            "quote": "Col1：业绩履约评<br>价 Col2：供应商提供经评审小组认可业绩的业主履约<br>评价,评价等级为良好(满意)及以上的,<br>每提供一份证明得3 分,满分9 分。<br>注:响应文件中提供加盖业主(合同甲方)<br>公章或行政主管部门章的履约评价证明扫描<br>件。 的证明材料扫描件,否则不得分。：0-9 分",
             "pages": [
-              36
+              37
             ],
-            "page": 36,
+            "page": 37,
+            "printed_page": 35,
+            "printed_pages": [
+              35
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 36 页",
-              "index": 36,
+              "label": "PDF 第37页",
+              "index": 37,
               "pages": [
-                36
+                37
               ]
             },
-            "detection": "clause",
+            "detection": "table",
             "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
             "uncited_reason": null,
             "audit_status": "pending_audit"
@@ -1967,22 +1762,26 @@
             "clause_id": "TB-0061",
             "block": "scoring",
             "label": "评分要求",
-            "summary": "1.质量保证方案:响应文件须提供所投产品质量保证方案充实可行、内容科学合理的, 得4 分;提供的方案内容较为充实可行、内容较为详细合理的,得2 分;提供了质量保",
-            "quote": "1.质量保证方案:响应文件须提供所投产品质量保证方案充实可行、内容科学合理的, 得4 分;提供的方案内容较为充实可行、内容较为详细合理的,得2 分;提供了质量保障方案,方案有待进一步完善,但在一定程度上能够满足采购人的基本需求的,得1 分;提供的内容完全不能满足采购人需求的, 或未提供任何内容的不得分。",
+            "summary": "Col1：项目经理实<br>力 Col2：1.供应商为本项目配备的项目经理具有建筑<br>工程相关专业中级职称证书的得3 分,高级<br>工程师职称的得5 分,",
+            "quote": "Col1：项目经理实<br>力 Col2：1.供应商为本项目配备的项目经理具有建筑<br>工程相关专业中级职称证书的得3 分,高级<br>工程师职称的得5 分,本项最高得5 分。<br>注:<br>1、响应文件中提供职称证书证书扫描件。<br>2、响应文件中提供供应商为上述人员缴纳的<br>近三个月内(任意一个月)社保证明材料扫<br>描件,否则不予计分,具体详见供应商须知<br>前附表,社保证明提供任意五险之一即可。<br>2.除拟派项目经理外,根据拟投入本项目管<br>理人员的数量、资格、岗位安排、工作经验<br>等评分。<br>(1)人员数量满足项目需求、主要人员具备<br>相关资格证书、岗位安排满足本项目实际需<br>要的得5 分;<br>(2)人员数量基本能满足项目需求、主要人<br>员相关资格证书有缺失较少、岗位安排基本<br>可行得3 分;<br>(3)人员数量短缺、主要人员",
             "pages": [
-              36
+              37
             ],
-            "page": 36,
+            "page": 37,
+            "printed_page": 35,
+            "printed_pages": [
+              35
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 36 页",
-              "index": 36,
+              "label": "PDF 第37页",
+              "index": 37,
               "pages": [
-                36
+                37
               ]
             },
-            "detection": "clause",
+            "detection": "table",
             "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
             "uncited_reason": null,
             "audit_status": "pending_audit"
@@ -1991,19 +1790,23 @@
             "clause_id": "TB-0062",
             "block": "scoring",
             "label": "评分要求",
-            "summary": "2.应急维修时间计划:应急维修时间计划详细合理的,得3 分;应急维修时间计划较为详细合理的,在一定程度上能够满足采购人的基本需求的,得2 分;具有应急维修时间安",
-            "quote": "2.应急维修时间计划:应急维修时间计划详细合理的,得3 分;应急维修时间计划较为详细合理的,在一定程度上能够满足采购人的基本需求的,得2 分;具有应急维修时间安排,但内容简约,有待完善的,得1 分; 提供的内容完全不能满足采购人需求的,或未提供任何内容的不得分。",
+            "summary": "的证明材料扫描件,否则不得分。",
+            "quote": "的证明材料扫描件,否则不得分。",
             "pages": [
-              36
+              37
             ],
-            "page": 36,
+            "page": 37,
+            "printed_page": 35,
+            "printed_pages": [
+              35
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 36 页",
-              "index": 36,
+              "label": "PDF 第37页",
+              "index": 37,
               "pages": [
-                36
+                37
               ]
             },
             "detection": "clause",
@@ -2015,19 +1818,23 @@
             "clause_id": "TB-0063",
             "block": "scoring",
             "label": "评分要求",
-            "summary": "0-7 分供应商业绩自2023 年1 月1 日以来(以合同签订时间为准),供应商具有装饰装修或改造工程业绩的,每提供1 个业绩得5 分,满分15 分。",
-            "quote": "0-7 分供应商业绩自2023 年1 月1 日以来(以合同签订时间为准),供应商具有装饰装修或改造工程业绩的,每提供1 个业绩得5 分,满分15 分。",
+            "summary": "业绩履约评价供应商提供经评审小组认可业绩的业主履约评价,评价等级为良好(满意)及以上的, 每提供一份证明得3 分,满分9 分。",
+            "quote": "业绩履约评价供应商提供经评审小组认可业绩的业主履约评价,评价等级为良好(满意)及以上的, 每提供一份证明得3 分,满分9 分。",
             "pages": [
-              36
+              37
             ],
-            "page": 36,
+            "page": 37,
+            "printed_page": 35,
+            "printed_pages": [
+              35
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 36 页",
-              "index": 36,
+              "label": "PDF 第37页",
+              "index": 37,
               "pages": [
-                36
+                37
               ]
             },
             "detection": "clause",
@@ -2039,19 +1846,23 @@
             "clause_id": "TB-0064",
             "block": "scoring",
             "label": "评分要求",
-            "summary": "的,须同时提供加盖业主(合同甲方)公章 0-15 分",
-            "quote": "的,须同时提供加盖业主(合同甲方)公章 0-15 分",
+            "summary": "0-9 分项目经理实力",
+            "quote": "0-9 分项目经理实力",
             "pages": [
-              36
+              37
             ],
-            "page": 36,
+            "page": 37,
+            "printed_page": 35,
+            "printed_pages": [
+              35
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 36 页",
-              "index": 36,
+              "label": "PDF 第37页",
+              "index": 37,
               "pages": [
-                36
+                37
               ]
             },
             "detection": "clause",
@@ -2063,22 +1874,26 @@
             "clause_id": "TB-0065",
             "block": "scoring",
             "label": "评分要求",
-            "summary": "Col1：业绩履约评<br>价 Col2：供应商提供经评审小组认可业绩的业主履约<br>评价,评价等级为良好(满意)及以上的,<br>每提供一份证明得3 分,满",
-            "quote": "Col1：业绩履约评<br>价 Col2：供应商提供经评审小组认可业绩的业主履约<br>评价,评价等级为良好(满意)及以上的,<br>每提供一份证明得3 分,满分9 分。<br>注:响应文件中提供加盖业主(合同甲方)<br>公章或行政主管部门章的履约评价证明扫描<br>件。 的证明材料扫描件,否则不得分。：0-9 分",
+            "summary": "1.供应商为本项目配备的项目经理具有建筑工程相关专业中级职称证书的得3 分,高级工程师职称的得5 分,本项最高得5 分。",
+            "quote": "1.供应商为本项目配备的项目经理具有建筑工程相关专业中级职称证书的得3 分,高级工程师职称的得5 分,本项最高得5 分。",
             "pages": [
               37
             ],
             "page": 37,
+            "printed_page": 35,
+            "printed_pages": [
+              35
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 37 页",
+              "label": "PDF 第37页",
               "index": 37,
               "pages": [
                 37
               ]
             },
-            "detection": "table",
+            "detection": "clause",
             "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
             "uncited_reason": null,
             "audit_status": "pending_audit"
@@ -2087,22 +1902,26 @@
             "clause_id": "TB-0066",
             "block": "scoring",
             "label": "评分要求",
-            "summary": "Col1：项目经理实<br>力 Col2：1.供应商为本项目配备的项目经理具有建筑<br>工程相关专业中级职称证书的得3 分,高级<br>工程师职称的得5 分,",
-            "quote": "Col1：项目经理实<br>力 Col2：1.供应商为本项目配备的项目经理具有建筑<br>工程相关专业中级职称证书的得3 分,高级<br>工程师职称的得5 分,本项最高得5 分。<br>注:<br>1、响应文件中提供职称证书证书扫描件。<br>2、响应文件中提供供应商为上述人员缴纳的<br>近三个月内(任意一个月)社保证明材料扫<br>描件,否则不予计分,具体详见供应商须知<br>前附表,社保证明提供任意五险之一即可。<br>2.除拟派项目经理外,根据拟投入本项目管<br>理人员的数量、资格、岗位安排、工作经验<br>等评分。<br>(1)人员数量满足项目需求、主要人员具备<br>相关资格证书、岗位安排满足本项目实际需<br>要的得5 分;<br>(2)人员数量基本能满足项目需求、主要人<br>员相关资格证书有缺失较少、岗位安排基本<br>可行得3 分;<br>(3)人员数量短缺、主要人员",
+            "summary": "2、响应文件中提供供应商为上述人员缴纳的近三个月内(任意一个月)社保证明材料扫描件,否则不予计分,具体详见供应商须知前附表,社保证明提供任意五险之一即可。",
+            "quote": "2、响应文件中提供供应商为上述人员缴纳的近三个月内(任意一个月)社保证明材料扫描件,否则不予计分,具体详见供应商须知前附表,社保证明提供任意五险之一即可。",
             "pages": [
               37
             ],
             "page": 37,
+            "printed_page": 35,
+            "printed_pages": [
+              35
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 37 页",
+              "label": "PDF 第37页",
               "index": 37,
               "pages": [
                 37
               ]
             },
-            "detection": "table",
+            "detection": "clause",
             "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
             "uncited_reason": null,
             "audit_status": "pending_audit"
@@ -2111,16 +1930,20 @@
             "clause_id": "TB-0067",
             "block": "scoring",
             "label": "评分要求",
-            "summary": "安徽省政府采购项目竞争性磋商文件示范文本(工程类) 第35 页/共107 页的证明材料扫描件,否则不得分。",
-            "quote": "安徽省政府采购项目竞争性磋商文件示范文本(工程类) 第35 页/共107 页的证明材料扫描件,否则不得分。",
+            "summary": "(1)人员数量满足项目需求、主要人员具备相关资格证书、岗位安排满足本项目实际需要的得5 分;",
+            "quote": "(1)人员数量满足项目需求、主要人员具备相关资格证书、岗位安排满足本项目实际需要的得5 分;",
             "pages": [
               37
             ],
             "page": 37,
+            "printed_page": 35,
+            "printed_pages": [
+              35
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 37 页",
+              "label": "PDF 第37页",
               "index": 37,
               "pages": [
                 37
@@ -2135,16 +1958,20 @@
             "clause_id": "TB-0068",
             "block": "scoring",
             "label": "评分要求",
-            "summary": "业绩履约评价供应商提供经评审小组认可业绩的业主履约评价,评价等级为良好(满意)及以上的, 每提供一份证明得3 分,满分9 分。",
-            "quote": "业绩履约评价供应商提供经评审小组认可业绩的业主履约评价,评价等级为良好(满意)及以上的, 每提供一份证明得3 分,满分9 分。",
+            "summary": "(2)人员数量基本能满足项目需求、主要人员相关资格证书有缺失较少、岗位安排基本可行得3 分;",
+            "quote": "(2)人员数量基本能满足项目需求、主要人员相关资格证书有缺失较少、岗位安排基本可行得3 分;",
             "pages": [
               37
             ],
             "page": 37,
+            "printed_page": 35,
+            "printed_pages": [
+              35
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 37 页",
+              "label": "PDF 第37页",
               "index": 37,
               "pages": [
                 37
@@ -2159,16 +1986,20 @@
             "clause_id": "TB-0069",
             "block": "scoring",
             "label": "评分要求",
-            "summary": "0-9 分项目经理实力",
-            "quote": "0-9 分项目经理实力",
+            "summary": "(3)人员数量短缺、主要人员相关人员资格证书大量缺失、岗位安排不合理得1 分;",
+            "quote": "(3)人员数量短缺、主要人员相关人员资格证书大量缺失、岗位安排不合理得1 分;",
             "pages": [
               37
             ],
             "page": 37,
+            "printed_page": 35,
+            "printed_pages": [
+              35
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 37 页",
+              "label": "PDF 第37页",
               "index": 37,
               "pages": [
                 37
@@ -2183,16 +2014,20 @@
             "clause_id": "TB-0070",
             "block": "scoring",
             "label": "评分要求",
-            "summary": "1.供应商为本项目配备的项目经理具有建筑工程相关专业中级职称证书的得3 分,高级工程师职称的得5 分,本项最高得5 分。",
-            "quote": "1.供应商为本项目配备的项目经理具有建筑工程相关专业中级职称证书的得3 分,高级工程师职称的得5 分,本项最高得5 分。",
+            "summary": "(4)较差或未提供方案,不得分。",
+            "quote": "(4)较差或未提供方案,不得分。",
             "pages": [
               37
             ],
             "page": 37,
+            "printed_page": 35,
+            "printed_pages": [
+              35
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 37 页",
+              "label": "PDF 第37页",
               "index": 37,
               "pages": [
                 37
@@ -2207,16 +2042,20 @@
             "clause_id": "TB-0071",
             "block": "scoring",
             "label": "评分要求",
-            "summary": "2、响应文件中提供供应商为上述人员缴纳的近三个月内(任意一个月)社保证明材料扫描件,否则不予计分,具体详见供应商须知前附表,社保证明提供任意五险之一即可。",
-            "quote": "2、响应文件中提供供应商为上述人员缴纳的近三个月内(任意一个月)社保证明材料扫描件,否则不予计分,具体详见供应商须知前附表,社保证明提供任意五险之一即可。",
+            "summary": "注:1、响应文件中须提供具体人员花名册及0-10 分",
+            "quote": "注:1、响应文件中须提供具体人员花名册及0-10 分",
             "pages": [
               37
             ],
             "page": 37,
+            "printed_page": 35,
+            "printed_pages": [
+              35
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 37 页",
+              "label": "PDF 第37页",
               "index": 37,
               "pages": [
                 37
@@ -2231,22 +2070,26 @@
             "clause_id": "TB-0072",
             "block": "scoring",
             "label": "评分要求",
-            "summary": "(1)人员数量满足项目需求、主要人员具备相关资格证书、岗位安排满足本项目实际需要的得5 分;",
-            "quote": "(1)人员数量满足项目需求、主要人员具备相关资格证书、岗位安排满足本项目实际需要的得5 分;",
+            "summary": "Col1：供应商管理<br>体系认证 Col2：供应商具有经中国国家认证认可监督管理委<br>员会认证机构颁发的有效期内的<br>1.质量管理体系认证证书;<b",
+            "quote": "Col1：供应商管理<br>体系认证 Col2：供应商具有经中国国家认证认可监督管理委<br>员会认证机构颁发的有效期内的<br>1.质量管理体系认证证书;<br>2.环境管理体系认证证书;<br>3.职业健康安全管理体系认证证书;<br>每提供1 个得3 分,满分9 分。<br>注:响应文件中同时提供证书扫描件及全国<br>认证认可信息公共服务平台官网证书信息查<br>询截图。 对应岗位(具备证书的须提供对应证书扫描<br>件),上述人员不得兼任。<br>2、响应文件中提供供应商为上述人员缴纳的<br>近3 个月内(任意一个月即可)的社保证明<br>材料,否则不予计分,具体详见供应商须知前<br>附表,社保证明提供任意五险之一即可。：0-9 分",
             "pages": [
-              37
+              38
             ],
-            "page": 37,
+            "page": 38,
+            "printed_page": 36,
+            "printed_pages": [
+              36
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 37 页",
-              "index": 37,
+              "label": "PDF 第38页",
+              "index": 38,
               "pages": [
-                37
+                38
               ]
             },
-            "detection": "clause",
+            "detection": "table",
             "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
             "uncited_reason": null,
             "audit_status": "pending_audit"
@@ -2255,22 +2098,26 @@
             "clause_id": "TB-0073",
             "block": "scoring",
             "label": "评分要求",
-            "summary": "(2)人员数量基本能满足项目需求、主要人员相关资格证书有缺失较少、岗位安排基本可行得3 分;",
-            "quote": "(2)人员数量基本能满足项目需求、主要人员相关资格证书有缺失较少、岗位安排基本可行得3 分;",
+            "summary": "Col1：价格分<br>(15 分) Col2：价格分统一采用低价优先法,即满足磋商文件要求且最后报价最低的供<br>应商的价格为磋商基准价,其价格分为满分15",
+            "quote": "Col1：价格分<br>(15 分) Col2：价格分统一采用低价优先法,即满足磋商文件要求且最后报价最低的供<br>应商的价格为磋商基准价,其价格分为满分15 分。其他供应商的价格<br>分统一按照下列公式计算:<br>磋商报价得分=(磋商基准价/最后磋商报价)×15%×100 对应岗位(具备证书的须提供对应证书扫描<br>件),上述人员不得兼任。<br>2、响应文件中提供供应商为上述人员缴纳的<br>近3 个月内(任意一个月即可)的社保证明<br>材料,否则不予计分,具体详见供应商须知前<br>附表,社保证明提供任意五险之一即可。：价格分统一采用低价优先法,即满足磋商文件要求且最后报价最低的供<br>应商的价格为磋商基准价,其价格分为满分15 分。其他供应商的价格<br>分统一按照下列公式计算:<br>磋商报价得分=(磋商基准价/最后磋商报价)×15%×100 Col4：价格分统一采用",
             "pages": [
-              37
+              38
             ],
-            "page": 37,
+            "page": 38,
+            "printed_page": 36,
+            "printed_pages": [
+              36
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 37 页",
-              "index": 37,
+              "label": "PDF 第38页",
+              "index": 38,
               "pages": [
-                37
+                38
               ]
             },
-            "detection": "clause",
+            "detection": "table",
             "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
             "uncited_reason": null,
             "audit_status": "pending_audit"
@@ -2279,19 +2126,23 @@
             "clause_id": "TB-0074",
             "block": "scoring",
             "label": "评分要求",
-            "summary": "(3)人员数量短缺、主要人员相关人员资格证书大量缺失、岗位安排不合理得1 分;",
-            "quote": "(3)人员数量短缺、主要人员相关人员资格证书大量缺失、岗位安排不合理得1 分;",
+            "summary": "2、响应文件中提供供应商为上述人员缴纳的近3 个月内(任意一个月即可)的社保证明材料,否则不予计分,具体详见供应商须知前附表,社保证明提供任意五险之一即可。",
+            "quote": "2、响应文件中提供供应商为上述人员缴纳的近3 个月内(任意一个月即可)的社保证明材料,否则不予计分,具体详见供应商须知前附表,社保证明提供任意五险之一即可。",
             "pages": [
-              37
+              38
             ],
-            "page": 37,
+            "page": 38,
+            "printed_page": 36,
+            "printed_pages": [
+              36
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 37 页",
-              "index": 37,
+              "label": "PDF 第38页",
+              "index": 38,
               "pages": [
-                37
+                38
               ]
             },
             "detection": "clause",
@@ -2303,19 +2154,23 @@
             "clause_id": "TB-0075",
             "block": "scoring",
             "label": "评分要求",
-            "summary": "(4)较差或未提供方案,不得分。",
-            "quote": "(4)较差或未提供方案,不得分。",
+            "summary": "每提供1 个得3 分,满分9 分。",
+            "quote": "每提供1 个得3 分,满分9 分。",
             "pages": [
-              37
+              38
             ],
-            "page": 37,
+            "page": 38,
+            "printed_page": 36,
+            "printed_pages": [
+              36
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 37 页",
-              "index": 37,
+              "label": "PDF 第38页",
+              "index": 38,
               "pages": [
-                37
+                38
               ]
             },
             "detection": "clause",
@@ -2327,19 +2182,23 @@
             "clause_id": "TB-0076",
             "block": "scoring",
             "label": "评分要求",
-            "summary": "注:1、响应文件中须提供具体人员花名册及 0-10 分",
-            "quote": "注:1、响应文件中须提供具体人员花名册及 0-10 分",
+            "summary": "价格分 (15 分) 价格分统一采用低价优先法,即满足磋商文件要求且最后报价最低的供应商的价格为磋商基准价,其价格分为满分15 分。其他供应商的价格分统一按照下",
+            "quote": "价格分 (15 分) 价格分统一采用低价优先法,即满足磋商文件要求且最后报价最低的供应商的价格为磋商基准价,其价格分为满分15 分。其他供应商的价格分统一按照下列公式计算: 磋商报价得分=(磋商基准价/最后磋商报价)×15%×100",
             "pages": [
-              37
+              38
             ],
-            "page": 37,
+            "page": 38,
+            "printed_page": 36,
+            "printed_pages": [
+              36
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 37 页",
-              "index": 37,
+              "label": "PDF 第38页",
+              "index": 38,
               "pages": [
-                37
+                38
               ]
             },
             "detection": "clause",
@@ -2351,22 +2210,26 @@
             "clause_id": "TB-0077",
             "block": "scoring",
             "label": "评分要求",
-            "summary": "Col1：供应商管理<br>体系认证 Col2：供应商具有经中国国家认证认可监督管理委<br>员会认证机构颁发的有效期内的<br>1.质量管理体系认证证书;<b",
-            "quote": "Col1：供应商管理<br>体系认证 Col2：供应商具有经中国国家认证认可监督管理委<br>员会认证机构颁发的有效期内的<br>1.质量管理体系认证证书;<br>2.环境管理体系认证证书;<br>3.职业健康安全管理体系认证证书;<br>每提供1 个得3 分,满分9 分。<br>注:响应文件中同时提供证书扫描件及全国<br>认证认可信息公共服务平台官网证书信息查<br>询截图。 对应岗位(具备证书的须提供对应证书扫描<br>件),上述人员不得兼任。<br>2、响应文件中提供供应商为上述人员缴纳的<br>近3 个月内(任意一个月即可)的社保证明<br>材料,否则不予计分,具体详见供应商须知前<br>附表,社保证明提供任意五险之一即可。：0-9 分",
+            "summary": "2.3.3 分值汇总",
+            "quote": "2.3.3 分值汇总",
             "pages": [
               38
             ],
             "page": 38,
+            "printed_page": 36,
+            "printed_pages": [
+              36
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 38 页",
+              "label": "PDF 第38页",
               "index": 38,
               "pages": [
                 38
               ]
             },
-            "detection": "table",
+            "detection": "clause",
             "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
             "uncited_reason": null,
             "audit_status": "pending_audit"
@@ -2375,22 +2238,26 @@
             "clause_id": "TB-0078",
             "block": "scoring",
             "label": "评分要求",
-            "summary": "Col1：价格分<br>(15 分) Col2：价格分统一采用低价优先法,即满足磋商文件要求且最后报价最低的供<br>应商的价格为磋商基准价,其价格分为满分15",
-            "quote": "Col1：价格分<br>(15 分) Col2：价格分统一采用低价优先法,即满足磋商文件要求且最后报价最低的供<br>应商的价格为磋商基准价,其价格分为满分15 分。其他供应商的价格<br>分统一按照下列公式计算:<br>磋商报价得分=(磋商基准价/最后磋商报价)×15%×100 对应岗位(具备证书的须提供对应证书扫描<br>件),上述人员不得兼任。<br>2、响应文件中提供供应商为上述人员缴纳的<br>近3 个月内(任意一个月即可)的社保证明<br>材料,否则不予计分,具体详见供应商须知前<br>附表,社保证明提供任意五险之一即可。：价格分统一采用低价优先法,即满足磋商文件要求且最后报价最低的供<br>应商的价格为磋商基准价,其价格分为满分15 分。其他供应商的价格<br>分统一按照下列公式计算:<br>磋商报价得分=(磋商基准价/最后磋商报价)×15%×100 Col4：价格分统一采用",
+            "summary": "(1)磋商小组各成员应当独立对每个有效响应的文件进行评价、打分,然后汇总每个供应商每项评分因素的得分,再取各位评委评分之平均值,四舍五入保留至小数点后两位数,得",
+            "quote": "(1)磋商小组各成员应当独立对每个有效响应的文件进行评价、打分,然后汇总每个供应商每项评分因素的得分,再取各位评委评分之平均值,四舍五入保留至小数点后两位数,得到该供应商的技术资信分。",
             "pages": [
               38
             ],
             "page": 38,
+            "printed_page": 36,
+            "printed_pages": [
+              36
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 38 页",
+              "label": "PDF 第38页",
               "index": 38,
               "pages": [
                 38
               ]
             },
-            "detection": "table",
+            "detection": "clause",
             "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
             "uncited_reason": null,
             "audit_status": "pending_audit"
@@ -2399,310 +2266,26 @@
             "clause_id": "TB-0079",
             "block": "scoring",
             "label": "评分要求",
-            "summary": "2、响应文件中提供供应商为上述人员缴纳的近3 个月内(任意一个月即可)的社保证明材料,否则不予计分,具体详见供应商须知前附表,社保证明提供任意五险之一即可。",
-            "quote": "2、响应文件中提供供应商为上述人员缴纳的近3 个月内(任意一个月即可)的社保证明材料,否则不予计分,具体详见供应商须知前附表,社保证明提供任意五险之一即可。",
-            "pages": [
-              38
-            ],
-            "page": 38,
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "第 38 页",
-              "index": 38,
-              "pages": [
-                38
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0080",
-            "block": "scoring",
-            "label": "评分要求",
-            "summary": "每提供1 个得3 分,满分9 分。",
-            "quote": "每提供1 个得3 分,满分9 分。",
-            "pages": [
-              38
-            ],
-            "page": 38,
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "第 38 页",
-              "index": 38,
-              "pages": [
-                38
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0081",
-            "block": "scoring",
-            "label": "评分要求",
-            "summary": "0-9 分价格分 (15 分) 价格分统一采用低价优先法,即满足磋商文件要求且最后报价最低的供应商的价格为磋商基准价,其价格分为满分15 分。其他供应商的价格分",
-            "quote": "0-9 分价格分 (15 分) 价格分统一采用低价优先法,即满足磋商文件要求且最后报价最低的供应商的价格为磋商基准价,其价格分为满分15 分。其他供应商的价格分统一按照下列公式计算: 磋商报价得分=(磋商基准价/最后磋商报价)×15%×100",
-            "pages": [
-              38
-            ],
-            "page": 38,
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "第 38 页",
-              "index": 38,
-              "pages": [
-                38
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0082",
-            "block": "scoring",
-            "label": "评分要求",
-            "summary": "2.3.3 分值汇总",
-            "quote": "2.3.3 分值汇总",
-            "pages": [
-              38
-            ],
-            "page": 38,
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "第 38 页",
-              "index": 38,
-              "pages": [
-                38
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0083",
-            "block": "scoring",
-            "label": "评分要求",
-            "summary": "(1)磋商小组各成员应当独立对每个有效响应的文件进行评价、打分,然后汇总每个供应商每项评分因素的得分,再取各位评委评分之平均值,四舍五入保留至小数点后两位数,得",
-            "quote": "(1)磋商小组各成员应当独立对每个有效响应的文件进行评价、打分,然后汇总每个供应商每项评分因素的得分,再取各位评委评分之平均值,四舍五入保留至小数点后两位数,得到该供应商的技术资信分。",
-            "pages": [
-              38
-            ],
-            "page": 38,
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "第 38 页",
-              "index": 38,
-              "pages": [
-                38
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0084",
-            "block": "scoring",
-            "label": "评分要求",
             "summary": "(2)将每个供应商的技术资信分加上根据上述标准计算出的价格分,即为该供应商的综合总得分。",
             "quote": "(2)将每个供应商的技术资信分加上根据上述标准计算出的价格分,即为该供应商的综合总得分。",
             "pages": [
               38
             ],
             "page": 38,
+            "printed_page": 36,
+            "printed_pages": [
+              36
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 38 页",
+              "label": "PDF 第38页",
               "index": 38,
               "pages": [
                 38
               ]
             },
             "detection": "clause",
-            "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0085",
-            "block": "scoring",
-            "label": "评分要求",
-            "summary": "3.5 分包",
-            "quote": "3.5 分包",
-            "pages": [
-              50
-            ],
-            "page": 50,
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "第 50 页",
-              "index": 50,
-              "pages": [
-                50
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0086",
-            "block": "scoring",
-            "label": "评分要求",
-            "summary": "3.5.1 分包的一般约定禁止分包的工程包括:本项目不允许分包 。",
-            "quote": "3.5.1 分包的一般约定禁止分包的工程包括:本项目不允许分包 。",
-            "pages": [
-              50
-            ],
-            "page": 50,
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "第 50 页",
-              "index": 50,
-              "pages": [
-                50
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0087",
-            "block": "scoring",
-            "label": "评分要求",
-            "summary": "3.5.2 分包的确定允许分包的专业工程包括:本项目不允许分包。",
-            "quote": "3.5.2 分包的确定允许分包的专业工程包括:本项目不允许分包。",
-            "pages": [
-              50
-            ],
-            "page": 50,
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "第 50 页",
-              "index": 50,
-              "pages": [
-                50
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0088",
-            "block": "scoring",
-            "label": "评分要求",
-            "summary": "3.5.4 分包合同价款关于分包合同价款支付的约定: / 。",
-            "quote": "3.5.4 分包合同价款关于分包合同价款支付的约定: / 。",
-            "pages": [
-              50
-            ],
-            "page": 50,
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "第 50 页",
-              "index": 50,
-              "pages": [
-                50
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0089",
-            "block": "scoring",
-            "label": "评分要求",
-            "summary": "13.1 分部分项工程验收",
-            "quote": "13.1 分部分项工程验收",
-            "pages": [
-              59
-            ],
-            "page": 59,
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "第 59 页",
-              "index": 59,
-              "pages": [
-                59
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0090",
-            "block": "scoring",
-            "label": "评分要求",
-            "summary": "序号：1 分包承担主<br>体类型(选<br>择)：□中型企业<br>□小微企业<br>□其他",
-            "quote": "序号：1 分包承担主<br>体类型(选<br>择)：□中型企业<br>□小微企业<br>□其他",
-            "pages": [
-              99
-            ],
-            "page": 99,
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "第 99 页",
-              "index": 99,
-              "pages": [
-                99
-              ]
-            },
-            "detection": "table",
-            "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0091",
-            "block": "scoring",
-            "label": "评分要求",
-            "summary": "序号：2 分包承担主<br>体类型(选<br>择)：□中型企业<br>□小微企业<br>□其他",
-            "quote": "序号：2 分包承担主<br>体类型(选<br>择)：□中型企业<br>□小微企业<br>□其他",
-            "pages": [
-              99
-            ],
-            "page": 99,
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "第 99 页",
-              "index": 99,
-              "pages": [
-                99
-              ]
-            },
-            "detection": "table",
             "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
             "uncited_reason": null,
             "audit_status": "pending_audit"
@@ -2713,20 +2296,25 @@
         "label": "要交的材料",
         "items": [
           {
-            "clause_id": "TB-0092",
+            "clause_id": "TB-0080",
             "block": "materials",
             "label": "要交的材料",
             "summary": "3.2 拟任项目经理建筑工程专业二级及以上注册建造师资格,具备住房和城乡建设主管部门颁发的安全生产考核合格证书(B 证),同时提供供应商所属社保机构出具的项目经",
-            "quote": "3.2 拟任项目经理建筑工程专业二级及以上注册建造师资格,具备住房和城乡建设主管部门颁发的安全生产考核合格证书(B 证),同时提供供应商所属社保机构出具的项目经理近三个月内(任意一个月)社保证明材料(至少含养老保安徽省政府采购项目竞争性磋商文件示范文本(工程类) 第2 页/共107 页险、医疗保险、工伤保险、失业保险中任意一项即可)",
+            "quote": "3.2 拟任项目经理建筑工程专业二级及以上注册建造师资格,具备住房和城乡建设主管部门颁发的安全生产考核合格证书(B 证),同时提供供应商所属社保机构出具的项目经理近三个月内(任意一个月)社保证明材料(至少含养老保险、医疗保险、工伤保险、失业保险中任意一项即可)",
             "pages": [
               3,
               4
             ],
             "page": 3,
+            "printed_page": 1,
+            "printed_pages": [
+              1,
+              2
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 3-4 页",
+              "label": "PDF 第3-4页",
               "index": 3,
               "pages": [
                 3,
@@ -2739,7 +2327,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0093",
+            "clause_id": "TB-0081",
             "block": "materials",
             "label": "要交的材料",
             "summary": "30.10：30.11 其他补充说明：项目经理其他<br>要求 1、解释权:<br>(1)构成本磋商文件的各个组成文件应互为解释,互为说<br>明;<br>(2",
@@ -2748,10 +2336,14 @@
               10
             ],
             "page": 10,
+            "printed_page": 8,
+            "printed_pages": [
+              8
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 10 页",
+              "label": "PDF 第10页",
               "index": 10,
               "pages": [
                 10
@@ -2763,7 +2355,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0094",
+            "clause_id": "TB-0082",
             "block": "materials",
             "label": "要交的材料",
             "summary": "2.项目经理社保形式:提供供应商所属社保机构出具的拟委任的项目经理社保缴费证明或其他能够证明拟委任的项目经理参加社保的有效证明材料,项目经理的社会保险的缴纳单位",
@@ -2772,10 +2364,14 @@
               10
             ],
             "page": 10,
+            "printed_page": 8,
+            "printed_pages": [
+              8
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 10 页",
+              "label": "PDF 第10页",
               "index": 10,
               "pages": [
                 10
@@ -2787,7 +2383,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0095",
+            "clause_id": "TB-0083",
             "block": "materials",
             "label": "要交的材料",
             "summary": "Col1：30.12 Col2：社保证明材料<br>(如磋商文件<br>要求提供社<br>保) 分支机构。<br>3.项目经理不得同时担任两个及以上建设工程施工",
@@ -2796,10 +2392,14 @@
               11
             ],
             "page": 11,
+            "printed_page": 9,
+            "printed_pages": [
+              9
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 11 页",
+              "label": "PDF 第11页",
               "index": 11,
               "pages": [
                 11
@@ -2811,7 +2411,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0096",
+            "clause_id": "TB-0084",
             "block": "materials",
             "label": "要交的材料",
             "summary": "5.项目经理为一级建造师的,应符合《住房和城乡建设部办公厅关于全面实行一级建造师电子注册证书的通知》 (建办市〔2021〕40 号)规定,响应文件应提供一级建造",
@@ -2820,10 +2420,14 @@
               11
             ],
             "page": 11,
+            "printed_page": 9,
+            "printed_pages": [
+              9
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 11 页",
+              "label": "PDF 第11页",
               "index": 11,
               "pages": [
                 11
@@ -2835,7 +2439,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0097",
+            "clause_id": "TB-0085",
             "block": "materials",
             "label": "要交的材料",
             "summary": "项目经理为二级建造师的,应提供符合注册地主管部门要求的注册证书。",
@@ -2844,10 +2448,14 @@
               11
             ],
             "page": 11,
+            "printed_page": 9,
+            "printed_pages": [
+              9
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 11 页",
+              "label": "PDF 第11页",
               "index": 11,
               "pages": [
                 11
@@ -2859,7 +2467,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0098",
+            "clause_id": "TB-0086",
             "block": "materials",
             "label": "要交的材料",
             "summary": "30.12 社保证明材料 (如磋商文件要求提供社保) 本项目磋商文件中要求提供的社保证明材料为下述形式之一(响应文件中须提供原件扫描件):",
@@ -2868,10 +2476,14 @@
               11
             ],
             "page": 11,
+            "printed_page": 9,
+            "printed_pages": [
+              9
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 11 页",
+              "label": "PDF 第11页",
               "index": 11,
               "pages": [
                 11
@@ -2883,7 +2495,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0099",
+            "clause_id": "TB-0087",
             "block": "materials",
             "label": "要交的材料",
             "summary": "2.社保局的书面证明材料;",
@@ -2892,10 +2504,14 @@
               11
             ],
             "page": 11,
+            "printed_page": 9,
+            "printed_pages": [
+              9
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 11 页",
+              "label": "PDF 第11页",
               "index": 11,
               "pages": [
                 11
@@ -2907,7 +2523,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0100",
+            "clause_id": "TB-0088",
             "block": "materials",
             "label": "要交的材料",
             "summary": "3.经供应商委托的第三方人力资源服务机构或与供应商有直接隶属关系的机构可以代缴社保,但须提供有关证明材料并经磋商小组确认。",
@@ -2916,10 +2532,14 @@
               11
             ],
             "page": 11,
+            "printed_page": 9,
+            "printed_pages": [
+              9
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 11 页",
+              "label": "PDF 第11页",
               "index": 11,
               "pages": [
                 11
@@ -2931,7 +2551,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0101",
+            "clause_id": "TB-0089",
             "block": "materials",
             "label": "要交的材料",
             "summary": "(2)医保证明材料。",
@@ -2940,10 +2560,14 @@
               11
             ],
             "page": 11,
+            "printed_page": 9,
+            "printed_pages": [
+              9
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 11 页",
+              "label": "PDF 第11页",
               "index": 11,
               "pages": [
                 11
@@ -2955,7 +2579,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0102",
+            "clause_id": "TB-0090",
             "block": "materials",
             "label": "要交的材料",
             "summary": "5.其他经磋商小组认可的证明材料。",
@@ -2964,10 +2588,14 @@
               11
             ],
             "page": 11,
+            "printed_page": 9,
+            "printed_pages": [
+              9
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 11 页",
+              "label": "PDF 第11页",
               "index": 11,
               "pages": [
                 11
@@ -2979,7 +2607,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0103",
+            "clause_id": "TB-0091",
             "block": "materials",
             "label": "要交的材料",
             "summary": "6.法定代表人参与项目的,无需提供社保证明材料,提供",
@@ -2988,10 +2616,14 @@
               11
             ],
             "page": 11,
+            "printed_page": 9,
+            "printed_pages": [
+              9
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 11 页",
+              "label": "PDF 第11页",
               "index": 11,
               "pages": [
                 11
@@ -3003,7 +2635,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0104",
+            "clause_id": "TB-0092",
             "block": "materials",
             "label": "要交的材料",
             "summary": "Col1：30.13 Col2：特别提醒 身份证明材料即可。：1.供应商参与政府采购,应当诚信守法、公平竞争。如有<br>以提供虚假材料(包括但不限于虚假技术参",
@@ -3012,10 +2644,14 @@
               12
             ],
             "page": 12,
+            "printed_page": 10,
+            "printed_pages": [
+              10
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 12 页",
+              "label": "PDF 第12页",
               "index": 12,
               "pages": [
                 12
@@ -3027,19 +2663,23 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0105",
+            "clause_id": "TB-0093",
             "block": "materials",
             "label": "要交的材料",
-            "summary": "安徽省政府采购项目竞争性磋商文件示范文本(工程类) 第10 页/共107 页身份证明材料即可。",
-            "quote": "安徽省政府采购项目竞争性磋商文件示范文本(工程类) 第10 页/共107 页身份证明材料即可。",
+            "summary": "身份证明材料即可。",
+            "quote": "身份证明材料即可。",
             "pages": [
               12
             ],
             "page": 12,
+            "printed_page": 10,
+            "printed_pages": [
+              10
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 12 页",
+              "label": "PDF 第12页",
               "index": 12,
               "pages": [
                 12
@@ -3051,7 +2691,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0106",
+            "clause_id": "TB-0094",
             "block": "materials",
             "label": "要交的材料",
             "summary": "8.2 供应商应提交磋商文件要求的证明文件,证明其响应内容符合磋商文件规定。该证明文件是响应文件的一部分。证明文件形式可以是文字资料、图纸和数据。",
@@ -3060,10 +2700,14 @@
               15
             ],
             "page": 15,
+            "printed_page": 13,
+            "printed_pages": [
+              13
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 15 页",
+              "label": "PDF 第15页",
               "index": 15,
               "pages": [
                 15
@@ -3075,7 +2719,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0107",
+            "clause_id": "TB-0095",
             "block": "materials",
             "label": "要交的材料",
             "summary": "供应商自行提供的与网站信息不一致的其他证明材料亦不作为初审依据。",
@@ -3084,10 +2728,14 @@
               17
             ],
             "page": 17,
+            "printed_page": 15,
+            "printed_pages": [
+              15
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 17 页",
+              "label": "PDF 第17页",
               "index": 17,
               "pages": [
                 17
@@ -3099,7 +2747,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0108",
+            "clause_id": "TB-0096",
             "block": "materials",
             "label": "要交的材料",
             "summary": "16.2 磋商小组要求供应商澄清、说明或者更正响应文件应当以书面形式(询标)作出。供应商的澄清、说明或者更正应当由法定代表人或其授权代表签字或者加盖公章(电子签",
@@ -3108,10 +2756,14 @@
               19
             ],
             "page": 19,
+            "printed_page": 17,
+            "printed_pages": [
+              17
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 19 页",
+              "label": "PDF 第19页",
               "index": 19,
               "pages": [
                 19
@@ -3123,7 +2775,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0109",
+            "clause_id": "TB-0097",
             "block": "materials",
             "label": "要交的材料",
             "summary": "Col1：6 Col2：工程施工<br>重点难点 检验部门鉴定确有质量问题,由此而发生的一切费用由成<br>交供应商自负。因成交供应商自行采购的材料质量引起的<",
@@ -3132,10 +2784,14 @@
               25
             ],
             "page": 25,
+            "printed_page": 23,
+            "printed_pages": [
+              23
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 25 页",
+              "label": "PDF 第25页",
               "index": 25,
               "pages": [
                 25
@@ -3147,7 +2803,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0110",
+            "clause_id": "TB-0098",
             "block": "materials",
             "label": "要交的材料",
             "summary": "Col1：7 Col2：报价须知 检验部门鉴定确有质量问题,由此而发生的一切费用由成<br>交供应商自负。因成交供应商自行采购的材料质量引起的<br>工程质量问",
@@ -3156,10 +2812,14 @@
               25
             ],
             "page": 25,
+            "printed_page": 23,
+            "printed_pages": [
+              23
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 25 页",
+              "label": "PDF 第25页",
               "index": 25,
               "pages": [
                 25
@@ -3171,7 +2831,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0111",
+            "clause_id": "TB-0099",
             "block": "materials",
             "label": "要交的材料",
             "summary": "Col1：8 Col2：重要说明 检验部门鉴定确有质量问题,由此而发生的一切费用由成<br>交供应商自负。因成交供应商自行采购的材料质量引起的<br>工程质量问",
@@ -3180,10 +2840,14 @@
               25
             ],
             "page": 25,
+            "printed_page": 23,
+            "printed_pages": [
+              23
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 25 页",
+              "label": "PDF 第25页",
               "index": 25,
               "pages": [
                 25
@@ -3195,7 +2859,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0112",
+            "clause_id": "TB-0100",
             "block": "materials",
             "label": "要交的材料",
             "summary": "(2)如本项目采购人对工程质量有特殊需求的,对主要设备及材料提供不少于三个的参考品牌,对于采购人参考品牌的材料,供应商可选用参考品牌或不低于参考品牌质量标准的其",
@@ -3204,13 +2868,353 @@
               25
             ],
             "page": 25,
+            "printed_page": 23,
+            "printed_pages": [
+              23
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 25 页",
+              "label": "PDF 第25页",
               "index": 25,
               "pages": [
                 25
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0101",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "性要求。初审表如下:：1 Col2：营业执照<br>等证明文<br>件 Col3：(1)供应商为企业(包括合伙企业)<br>的,应提供有效的营业执照;<br>(",
+            "quote": "性要求。初审表如下:：1 Col2：营业执照<br>等证明文<br>件 Col3：(1)供应商为企业(包括合伙企业)<br>的,应提供有效的营业执照;<br>(2)供应商为事业单位的,应提供<br>有效的事业单位法人证书;<br>(3)供应商是非企业机构的,应提<br>供有效的执业许可证或登记证书等<br>证明文件;<br>(4)供应商是个体工商户的,应提<br>供有效的个体工商户营业执照;<br>(5)供应商是自然人的,应提供有<br>效的自然人身份证明。 Col4：提供材料扫描件或电<br>子证照,应完整的体现<br>出材料或电子证照全<br>部内容。联合体磋商的<br>联合体各方均须提供。",
+            "pages": [
+              31
+            ],
+            "page": 31,
+            "printed_page": 29,
+            "printed_pages": [
+              29
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第31页",
+              "index": 31,
+              "pages": [
+                31
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0102",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(1)供应商为企业(包括合伙企业) 的,应提供有效的营业执照;",
+            "quote": "(1)供应商为企业(包括合伙企业) 的,应提供有效的营业执照;",
+            "pages": [
+              31
+            ],
+            "page": 31,
+            "printed_page": 29,
+            "printed_pages": [
+              29
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第31页",
+              "index": 31,
+              "pages": [
+                31
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0103",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(2)供应商为事业单位的,应提供有效的事业单位法人证书;",
+            "quote": "(2)供应商为事业单位的,应提供有效的事业单位法人证书;",
+            "pages": [
+              31
+            ],
+            "page": 31,
+            "printed_page": 29,
+            "printed_pages": [
+              29
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第31页",
+              "index": 31,
+              "pages": [
+                31
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0104",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(3)供应商是非企业机构的,应提供有效的执业许可证或登记证书等证明文件;",
+            "quote": "(3)供应商是非企业机构的,应提供有效的执业许可证或登记证书等证明文件;",
+            "pages": [
+              31
+            ],
+            "page": 31,
+            "printed_page": 29,
+            "printed_pages": [
+              29
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第31页",
+              "index": 31,
+              "pages": [
+                31
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0105",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(4)供应商是个体工商户的,应提供有效的个体工商户营业执照;",
+            "quote": "(4)供应商是个体工商户的,应提供有效的个体工商户营业执照;",
+            "pages": [
+              31
+            ],
+            "page": 31,
+            "printed_page": 29,
+            "printed_pages": [
+              29
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第31页",
+              "index": 31,
+              "pages": [
+                31
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0106",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(5)供应商是自然人的,应提供有效的自然人身份证明。",
+            "quote": "(5)供应商是自然人的,应提供有效的自然人身份证明。",
+            "pages": [
+              31
+            ],
+            "page": 31,
+            "printed_page": 29,
+            "printed_pages": [
+              29
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第31页",
+              "index": 31,
+              "pages": [
+                31
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0107",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "提供材料扫描件或电子证照,应完整的体现出材料或电子证照全部内容。联合体磋商的联合体各方均须提供。",
+            "quote": "提供材料扫描件或电子证照,应完整的体现出材料或电子证照全部内容。联合体磋商的联合体各方均须提供。",
+            "pages": [
+              31
+            ],
+            "page": 31,
+            "printed_page": 29,
+            "printed_pages": [
+              29
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第31页",
+              "index": 31,
+              "pages": [
+                31
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0108",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2.2 异常低价响应审查：1 Col2：异常低价响<br>应审查 Col3：(1)报价<全部通过初审供应商响应报<br>价平均值×65%;<br>(2)报价<通",
+            "quote": "2.2 异常低价响应审查：1 Col2：异常低价响<br>应审查 Col3：(1)报价<全部通过初审供应商响应报<br>价平均值×65%;<br>(2)报价<通过初审的次低报价供应商<br>响应报价×65%;<br>(3)报价<采购项目最高限价(如采购<br>项目未设定最高限价的,以采购项目预算<br>金额作为最高限价)×65%;<br>(4)磋商小组基于专业判断,认为供应<br>商报价过低,有可能影响产品质量或者不<br>能诚信履约的其他情形。<br>提醒:<br>(1)上述第(1)项数值计算:涉及总价、<br>单价的精确到“分”并四舍五入,涉及费 Col4：供应商在评审现<br>场合理的时间内对<br>价格作出解释,提供<br>项目具体成本测算<br>等与报价合理性相<br>关的书面说明及必<br>要的证明材料,包括<br>但不限于原材料成<br>本、人工成本、制造<br>费用等。",
+            "pages": [
+              32
+            ],
+            "page": 32,
+            "printed_page": 30,
+            "printed_pages": [
+              30
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第32页",
+              "index": 32,
+              "pages": [
+                32
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0109",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(1)上述第(1)项数值计算:涉及总价、 单价的精确到“分”并四舍五入,涉及费供应商在评审现场合理的时间内对价格作出解释,提供项目具体成本测算等与报价合理性相关",
+            "quote": "(1)上述第(1)项数值计算:涉及总价、 单价的精确到“分”并四舍五入,涉及费供应商在评审现场合理的时间内对价格作出解释,提供项目具体成本测算等与报价合理性相关的书面说明及必要的证明材料,包括但不限于原材料成本、人工成本、制造费用等。",
+            "pages": [
+              32
+            ],
+            "page": 32,
+            "printed_page": 30,
+            "printed_pages": [
+              30
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第32页",
+              "index": 32,
+              "pages": [
+                32
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0110",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "磋商小组启动异常低价响应审查后,属于评审标准中第(1)项至第(4)项情形的,应当要求相关供应商在评审现场合理的时间内(不少于30 分钟)对响应价格作出解释,提供",
+            "quote": "磋商小组启动异常低价响应审查后,属于评审标准中第(1)项至第(4)项情形的,应当要求相关供应商在评审现场合理的时间内(不少于30 分钟)对响应价格作出解释,提供项目具体成本测算等与报价合理性相关的书面说明及必要的证明材料,包括但不限于原材料成本、人工成本、制造费用等。其中,属于第",
+            "pages": [
+              33
+            ],
+            "page": 33,
+            "printed_page": 31,
+            "printed_pages": [
+              31
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第33页",
+              "index": 33,
+              "pages": [
+                33
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0111",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(3)项情形,供应商已随响应文件一并提交相关书面说明及必要的证明材料的, 在评审现场可不再重复提交。",
+            "quote": "(3)项情形,供应商已随响应文件一并提交相关书面说明及必要的证明材料的, 在评审现场可不再重复提交。",
+            "pages": [
+              33
+            ],
+            "page": 33,
+            "printed_page": 31,
+            "printed_pages": [
+              31
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第33页",
+              "index": 33,
+              "pages": [
+                33
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0112",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "磋商小组依据专业经验,参考同类项目中标(成交)价格、类似产品市场价格水平、行业人工费用标准、国家有关部门指导行业协会发布的行业平均成本等情况,对报价合理性进行判",
+            "quote": "磋商小组依据专业经验,参考同类项目中标(成交)价格、类似产品市场价格水平、行业人工费用标准、国家有关部门指导行业协会发布的行业平均成本等情况,对报价合理性进行判断。供应商不能提供书面说明、证明材料,或者提供的书面说明、证明材料不能证明其报价合理性的,磋商小组应当将其作为无效响应处理。",
+            "pages": [
+              33
+            ],
+            "page": 33,
+            "printed_page": 31,
+            "printed_pages": [
+              31
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第33页",
+              "index": 33,
+              "pages": [
+                33
               ]
             },
             "detection": "clause",
@@ -3222,22 +3226,26 @@
             "clause_id": "TB-0113",
             "block": "materials",
             "label": "要交的材料",
-            "summary": "性要求。初审表如下:：1 Col2：营业执照<br>等证明文<br>件 Col3：(1)供应商为企业(包括合伙企业)<br>的,应提供有效的营业执照;<br>(",
-            "quote": "性要求。初审表如下:：1 Col2：营业执照<br>等证明文<br>件 Col3：(1)供应商为企业(包括合伙企业)<br>的,应提供有效的营业执照;<br>(2)供应商为事业单位的,应提供<br>有效的事业单位法人证书;<br>(3)供应商是非企业机构的,应提<br>供有效的执业许可证或登记证书等<br>证明文件;<br>(4)供应商是个体工商户的,应提<br>供有效的个体工商户营业执照;<br>(5)供应商是自然人的,应提供有<br>效的自然人身份证明。 Col4：提供材料扫描件或电<br>子证照,应完整的体现<br>出材料或电子证照全<br>部内容。联合体磋商的<br>联合体各方均须提供。",
+            "summary": "磋商小组借助互联网等渠道查询相关信息的,应当严格遵守评审工作纪律, 不得实施影响评审公正的行为。异常低价响应审查的启动原因、审查意见和审查结果应当在评审报告中记",
+            "quote": "磋商小组借助互联网等渠道查询相关信息的,应当严格遵守评审工作纪律, 不得实施影响评审公正的行为。异常低价响应审查的启动原因、审查意见和审查结果应当在评审报告中记录,并随供应商提供的相关书面说明及证明材料,以及磋商小组有关互联网浏览、查询历史一并归档。",
             "pages": [
+              33
+            ],
+            "page": 33,
+            "printed_page": 31,
+            "printed_pages": [
               31
             ],
-            "page": 31,
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 31 页",
-              "index": 31,
+              "label": "PDF 第33页",
+              "index": 33,
               "pages": [
-                31
+                33
               ]
             },
-            "detection": "table",
+            "detection": "clause",
             "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
             "uncited_reason": null,
             "audit_status": "pending_audit"
@@ -3246,22 +3254,26 @@
             "clause_id": "TB-0114",
             "block": "materials",
             "label": "要交的材料",
-            "summary": "(1)供应商为企业(包括合伙企业) 的,应提供有效的营业执照;",
-            "quote": "(1)供应商为企业(包括合伙企业) 的,应提供有效的营业执照;",
+            "summary": "Col1：售后服务 Col2：磋商小组根据供应商提供的售后服务方案进<br>行评审,内容包括但不限于:质量保证方案、<br>应急维修时间计划。<br>1.质量保",
+            "quote": "Col1：售后服务 Col2：磋商小组根据供应商提供的售后服务方案进<br>行评审,内容包括但不限于:质量保证方案、<br>应急维修时间计划。<br>1.质量保证方案:响应文件须提供所投产品<br>质量保证方案充实可行、内容科学合理的,<br>得4 分;提供的方案内容较为充实可行、内<br>容较为详细合理的,得2 分;提供了质量保<br>障方案,方案有待进一步完善,但在一定程<br>度上能够满足采购人的基本需求的,得1<br>分;提供的内容完全不能满足采购人需求的,<br>或未提供任何内容的不得分。<br>2.应急维修时间计划:应急维修时间计划详<br>细合理的,得3 分;应急维修时间计划较为<br>详细合理的,在一定程度上能够满足采购人<br>的基本需求的,得2 分;具有应急维修时间<br>安排,但内容简约,有待完善的,得1 分;<br>提供的内容完全不能满足采购人需求的,或<br>未提",
             "pages": [
-              31
+              36
             ],
-            "page": 31,
+            "page": 36,
+            "printed_page": 34,
+            "printed_pages": [
+              34
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 31 页",
-              "index": 31,
+              "label": "PDF 第36页",
+              "index": 36,
               "pages": [
-                31
+                36
               ]
             },
-            "detection": "clause",
+            "detection": "table",
             "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
             "uncited_reason": null,
             "audit_status": "pending_audit"
@@ -3270,22 +3282,26 @@
             "clause_id": "TB-0115",
             "block": "materials",
             "label": "要交的材料",
-            "summary": "(2)供应商为事业单位的,应提供有效的事业单位法人证书;",
-            "quote": "(2)供应商为事业单位的,应提供有效的事业单位法人证书;",
+            "summary": "Col1：供应商业绩 Col2：自2023 年1 月1 日以来(以合同签订时间为<br>准),供应商具有装饰装修或改造工程业绩<br>的,每提供1 个业绩得5 ",
+            "quote": "Col1：供应商业绩 Col2：自2023 年1 月1 日以来(以合同签订时间为<br>准),供应商具有装饰装修或改造工程业绩<br>的,每提供1 个业绩得5 分,满分15 分。<br>注:响应文件中提供业绩合同和验收证明材<br>料扫描件,若合同或验收证明材料中无法体<br>现合同签订时间、项目内容等关键评审因素<br>的,须同时提供加盖业主(合同甲方)公章 得5 分;<br>(2)计划比较详细,具有一定的针对性的,<br>得3 分;<br>(3)内容需要进一步完善的,得1 分;<br>(4)差或未提供的不得分。：0-15 分",
             "pages": [
-              31
+              36
             ],
-            "page": 31,
+            "page": 36,
+            "printed_page": 34,
+            "printed_pages": [
+              34
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 31 页",
-              "index": 31,
+              "label": "PDF 第36页",
+              "index": 36,
               "pages": [
-                31
+                36
               ]
             },
-            "detection": "clause",
+            "detection": "table",
             "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
             "uncited_reason": null,
             "audit_status": "pending_audit"
@@ -3294,19 +3310,23 @@
             "clause_id": "TB-0116",
             "block": "materials",
             "label": "要交的材料",
-            "summary": "(3)供应商是非企业机构的,应提供有效的执业许可证或登记证书等证明文件;",
-            "quote": "(3)供应商是非企业机构的,应提供有效的执业许可证或登记证书等证明文件;",
+            "summary": "1.质量保证方案:响应文件须提供所投产品质量保证方案充实可行、内容科学合理的, 得4 分;提供的方案内容较为充实可行、内容较为详细合理的,得2 分;提供了质量保",
+            "quote": "1.质量保证方案:响应文件须提供所投产品质量保证方案充实可行、内容科学合理的, 得4 分;提供的方案内容较为充实可行、内容较为详细合理的,得2 分;提供了质量保障方案,方案有待进一步完善,但在一定程度上能够满足采购人的基本需求的,得1 分;提供的内容完全不能满足采购人需求的, 或未提供任何内容的不得分。",
             "pages": [
-              31
+              36
             ],
-            "page": 31,
+            "page": 36,
+            "printed_page": 34,
+            "printed_pages": [
+              34
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 31 页",
-              "index": 31,
+              "label": "PDF 第36页",
+              "index": 36,
               "pages": [
-                31
+                36
               ]
             },
             "detection": "clause",
@@ -3318,19 +3338,23 @@
             "clause_id": "TB-0117",
             "block": "materials",
             "label": "要交的材料",
-            "summary": "(4)供应商是个体工商户的,应提供有效的个体工商户营业执照;",
-            "quote": "(4)供应商是个体工商户的,应提供有效的个体工商户营业执照;",
+            "summary": "注:响应文件中提供业绩合同和验收证明材料扫描件,若合同或验收证明材料中无法体",
+            "quote": "注:响应文件中提供业绩合同和验收证明材料扫描件,若合同或验收证明材料中无法体",
             "pages": [
-              31
+              36
             ],
-            "page": 31,
+            "page": 36,
+            "printed_page": 34,
+            "printed_pages": [
+              34
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 31 页",
-              "index": 31,
+              "label": "PDF 第36页",
+              "index": 36,
               "pages": [
-                31
+                36
               ]
             },
             "detection": "clause",
@@ -3342,67 +3366,23 @@
             "clause_id": "TB-0118",
             "block": "materials",
             "label": "要交的材料",
-            "summary": "(5)供应商是自然人的,应提供有效的自然人身份证明。",
-            "quote": "(5)供应商是自然人的,应提供有效的自然人身份证明。",
+            "summary": "Col1：业绩履约评<br>价 Col2：供应商提供经评审小组认可业绩的业主履约<br>评价,评价等级为良好(满意)及以上的,<br>每提供一份证明得3 分,满",
+            "quote": "Col1：业绩履约评<br>价 Col2：供应商提供经评审小组认可业绩的业主履约<br>评价,评价等级为良好(满意)及以上的,<br>每提供一份证明得3 分,满分9 分。<br>注:响应文件中提供加盖业主(合同甲方)<br>公章或行政主管部门章的履约评价证明扫描<br>件。 的证明材料扫描件,否则不得分。：0-9 分",
             "pages": [
-              31
+              37
             ],
-            "page": 31,
+            "page": 37,
+            "printed_page": 35,
+            "printed_pages": [
+              35
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 31 页",
-              "index": 31,
+              "label": "PDF 第37页",
+              "index": 37,
               "pages": [
-                31
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0119",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "提供材料扫描件或电子证照,应完整的体现出材料或电子证照全部内容。联合体磋商的联合体各方均须提供。",
-            "quote": "提供材料扫描件或电子证照,应完整的体现出材料或电子证照全部内容。联合体磋商的联合体各方均须提供。",
-            "pages": [
-              31
-            ],
-            "page": 31,
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "第 31 页",
-              "index": 31,
-              "pages": [
-                31
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0120",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "2.2 异常低价响应审查：1 Col2：异常低价响<br>应审查 Col3：(1)报价<全部通过初审供应商响应报<br>价平均值×65%;<br>(2)报价<通",
-            "quote": "2.2 异常低价响应审查：1 Col2：异常低价响<br>应审查 Col3：(1)报价<全部通过初审供应商响应报<br>价平均值×65%;<br>(2)报价<通过初审的次低报价供应商<br>响应报价×65%;<br>(3)报价<采购项目最高限价(如采购<br>项目未设定最高限价的,以采购项目预算<br>金额作为最高限价)×65%;<br>(4)磋商小组基于专业判断,认为供应<br>商报价过低,有可能影响产品质量或者不<br>能诚信履约的其他情形。<br>提醒:<br>(1)上述第(1)项数值计算:涉及总价、<br>单价的精确到“分”并四舍五入,涉及费 Col4：供应商在评审现<br>场合理的时间内对<br>价格作出解释,提供<br>项目具体成本测算<br>等与报价合理性相<br>关的书面说明及必<br>要的证明材料,包括<br>但不限于原材料成<br>本、人工成本、制造<br>费用等。",
-            "pages": [
-              32
-            ],
-            "page": 32,
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "第 32 页",
-              "index": 32,
-              "pages": [
-                32
+                37
               ]
             },
             "detection": "table",
@@ -3411,22 +3391,82 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0121",
+            "clause_id": "TB-0119",
             "block": "materials",
             "label": "要交的材料",
-            "summary": "(1)上述第(1)项数值计算:涉及总价、 单价的精确到“分”并四舍五入,涉及费供应商在评审现场合理的时间内对价格作出解释,提供项目具体成本测算等与报价合理性相关",
-            "quote": "(1)上述第(1)项数值计算:涉及总价、 单价的精确到“分”并四舍五入,涉及费供应商在评审现场合理的时间内对价格作出解释,提供项目具体成本测算等与报价合理性相关的书面说明及必要的证明材料,包括但不限于原材料成本、人工成本、制造费用等。",
+            "summary": "Col1：项目经理实<br>力 Col2：1.供应商为本项目配备的项目经理具有建筑<br>工程相关专业中级职称证书的得3 分,高级<br>工程师职称的得5 分,",
+            "quote": "Col1：项目经理实<br>力 Col2：1.供应商为本项目配备的项目经理具有建筑<br>工程相关专业中级职称证书的得3 分,高级<br>工程师职称的得5 分,本项最高得5 分。<br>注:<br>1、响应文件中提供职称证书证书扫描件。<br>2、响应文件中提供供应商为上述人员缴纳的<br>近三个月内(任意一个月)社保证明材料扫<br>描件,否则不予计分,具体详见供应商须知<br>前附表,社保证明提供任意五险之一即可。<br>2.除拟派项目经理外,根据拟投入本项目管<br>理人员的数量、资格、岗位安排、工作经验<br>等评分。<br>(1)人员数量满足项目需求、主要人员具备<br>相关资格证书、岗位安排满足本项目实际需<br>要的得5 分;<br>(2)人员数量基本能满足项目需求、主要人<br>员相关资格证书有缺失较少、岗位安排基本<br>可行得3 分;<br>(3)人员数量短缺、主要人员",
             "pages": [
-              32
+              37
             ],
-            "page": 32,
+            "page": 37,
+            "printed_page": 35,
+            "printed_pages": [
+              35
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 32 页",
-              "index": 32,
+              "label": "PDF 第37页",
+              "index": 37,
               "pages": [
-                32
+                37
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0120",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "的证明材料扫描件,否则不得分。",
+            "quote": "的证明材料扫描件,否则不得分。",
+            "pages": [
+              37
+            ],
+            "page": 37,
+            "printed_page": 35,
+            "printed_pages": [
+              35
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第37页",
+              "index": 37,
+              "pages": [
+                37
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0121",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2、响应文件中提供供应商为上述人员缴纳的近三个月内(任意一个月)社保证明材料扫描件,否则不予计分,具体详见供应商须知前附表,社保证明提供任意五险之一即可。",
+            "quote": "2、响应文件中提供供应商为上述人员缴纳的近三个月内(任意一个月)社保证明材料扫描件,否则不予计分,具体详见供应商须知前附表,社保证明提供任意五险之一即可。",
+            "pages": [
+              37
+            ],
+            "page": 37,
+            "printed_page": 35,
+            "printed_pages": [
+              35
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第37页",
+              "index": 37,
+              "pages": [
+                37
               ]
             },
             "detection": "clause",
@@ -3438,19 +3478,23 @@
             "clause_id": "TB-0122",
             "block": "materials",
             "label": "要交的材料",
-            "summary": "磋商小组启动异常低价响应审查后,属于评审标准中第(1)项至第(4)项情形的,应当要求相关供应商在评审现场合理的时间内(不少于30 分钟)对响应价格作出解释,提供",
-            "quote": "磋商小组启动异常低价响应审查后,属于评审标准中第(1)项至第(4)项情形的,应当要求相关供应商在评审现场合理的时间内(不少于30 分钟)对响应价格作出解释,提供项目具体成本测算等与报价合理性相关的书面说明及必要的证明材料,包括但不限于原材料成本、人工成本、制造费用等。其中,属于第",
+            "summary": "注:1、响应文件中须提供具体人员花名册及0-10 分",
+            "quote": "注:1、响应文件中须提供具体人员花名册及0-10 分",
             "pages": [
-              33
+              37
             ],
-            "page": 33,
+            "page": 37,
+            "printed_page": 35,
+            "printed_pages": [
+              35
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 33 页",
-              "index": 33,
+              "label": "PDF 第37页",
+              "index": 37,
               "pages": [
-                33
+                37
               ]
             },
             "detection": "clause",
@@ -3462,22 +3506,26 @@
             "clause_id": "TB-0123",
             "block": "materials",
             "label": "要交的材料",
-            "summary": "(3)项情形,供应商已随响应文件一并提交相关书面说明及必要的证明材料的, 在评审现场可不再重复提交。",
-            "quote": "(3)项情形,供应商已随响应文件一并提交相关书面说明及必要的证明材料的, 在评审现场可不再重复提交。",
+            "summary": "Col1：供应商管理<br>体系认证 Col2：供应商具有经中国国家认证认可监督管理委<br>员会认证机构颁发的有效期内的<br>1.质量管理体系认证证书;<b",
+            "quote": "Col1：供应商管理<br>体系认证 Col2：供应商具有经中国国家认证认可监督管理委<br>员会认证机构颁发的有效期内的<br>1.质量管理体系认证证书;<br>2.环境管理体系认证证书;<br>3.职业健康安全管理体系认证证书;<br>每提供1 个得3 分,满分9 分。<br>注:响应文件中同时提供证书扫描件及全国<br>认证认可信息公共服务平台官网证书信息查<br>询截图。 对应岗位(具备证书的须提供对应证书扫描<br>件),上述人员不得兼任。<br>2、响应文件中提供供应商为上述人员缴纳的<br>近3 个月内(任意一个月即可)的社保证明<br>材料,否则不予计分,具体详见供应商须知前<br>附表,社保证明提供任意五险之一即可。：0-9 分",
             "pages": [
-              33
+              38
             ],
-            "page": 33,
+            "page": 38,
+            "printed_page": 36,
+            "printed_pages": [
+              36
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 33 页",
-              "index": 33,
+              "label": "PDF 第38页",
+              "index": 38,
               "pages": [
-                33
+                38
               ]
             },
-            "detection": "clause",
+            "detection": "table",
             "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
             "uncited_reason": null,
             "audit_status": "pending_audit"
@@ -3486,22 +3534,26 @@
             "clause_id": "TB-0124",
             "block": "materials",
             "label": "要交的材料",
-            "summary": "磋商小组依据专业经验,参考同类项目中标(成交)价格、类似产品市场价格水平、行业人工费用标准、国家有关部门指导行业协会发布的行业平均成本等情况,对报价合理性进行判",
-            "quote": "磋商小组依据专业经验,参考同类项目中标(成交)价格、类似产品市场价格水平、行业人工费用标准、国家有关部门指导行业协会发布的行业平均成本等情况,对报价合理性进行判断。供应商不能提供书面说明、证明材料,或者提供的书面说明、证明材料不能证明其报价合理性的,磋商小组应当将其作为无效响应处理。",
+            "summary": "Col1：价格分<br>(15 分) Col2：价格分统一采用低价优先法,即满足磋商文件要求且最后报价最低的供<br>应商的价格为磋商基准价,其价格分为满分15",
+            "quote": "Col1：价格分<br>(15 分) Col2：价格分统一采用低价优先法,即满足磋商文件要求且最后报价最低的供<br>应商的价格为磋商基准价,其价格分为满分15 分。其他供应商的价格<br>分统一按照下列公式计算:<br>磋商报价得分=(磋商基准价/最后磋商报价)×15%×100 对应岗位(具备证书的须提供对应证书扫描<br>件),上述人员不得兼任。<br>2、响应文件中提供供应商为上述人员缴纳的<br>近3 个月内(任意一个月即可)的社保证明<br>材料,否则不予计分,具体详见供应商须知前<br>附表,社保证明提供任意五险之一即可。：价格分统一采用低价优先法,即满足磋商文件要求且最后报价最低的供<br>应商的价格为磋商基准价,其价格分为满分15 分。其他供应商的价格<br>分统一按照下列公式计算:<br>磋商报价得分=(磋商基准价/最后磋商报价)×15%×100 Col4：价格分统一采用",
             "pages": [
-              33
+              38
             ],
-            "page": 33,
+            "page": 38,
+            "printed_page": 36,
+            "printed_pages": [
+              36
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 33 页",
-              "index": 33,
+              "label": "PDF 第38页",
+              "index": 38,
               "pages": [
-                33
+                38
               ]
             },
-            "detection": "clause",
+            "detection": "table",
             "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
             "uncited_reason": null,
             "audit_status": "pending_audit"
@@ -3510,19 +3562,23 @@
             "clause_id": "TB-0125",
             "block": "materials",
             "label": "要交的材料",
-            "summary": "磋商小组借助互联网等渠道查询相关信息的,应当严格遵守评审工作纪律, 不得实施影响评审公正的行为。异常低价响应审查的启动原因、审查意见和审查结果应当在评审报告中记",
-            "quote": "磋商小组借助互联网等渠道查询相关信息的,应当严格遵守评审工作纪律, 不得实施影响评审公正的行为。异常低价响应审查的启动原因、审查意见和审查结果应当在评审报告中记录,并随供应商提供的相关书面说明及证明材料,以及磋商小组有关互联网浏览、查询历史一并归档。",
+            "summary": "对应岗位(具备证书的须提供对应证书扫描件),上述人员不得兼任。",
+            "quote": "对应岗位(具备证书的须提供对应证书扫描件),上述人员不得兼任。",
             "pages": [
-              33
+              38
             ],
-            "page": 33,
+            "page": 38,
+            "printed_page": 36,
+            "printed_pages": [
+              36
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 33 页",
-              "index": 33,
+              "label": "PDF 第38页",
+              "index": 38,
               "pages": [
-                33
+                38
               ]
             },
             "detection": "clause",
@@ -3534,22 +3590,26 @@
             "clause_id": "TB-0126",
             "block": "materials",
             "label": "要交的材料",
-            "summary": "Col1：售后服务 Col2：磋商小组根据供应商提供的售后服务方案进<br>行评审,内容包括但不限于:质量保证方案、<br>应急维修时间计划。<br>1.质量保",
-            "quote": "Col1：售后服务 Col2：磋商小组根据供应商提供的售后服务方案进<br>行评审,内容包括但不限于:质量保证方案、<br>应急维修时间计划。<br>1.质量保证方案:响应文件须提供所投产品<br>质量保证方案充实可行、内容科学合理的,<br>得4 分;提供的方案内容较为充实可行、内<br>容较为详细合理的,得2 分;提供了质量保<br>障方案,方案有待进一步完善,但在一定程<br>度上能够满足采购人的基本需求的,得1<br>分;提供的内容完全不能满足采购人需求的,<br>或未提供任何内容的不得分。<br>2.应急维修时间计划:应急维修时间计划详<br>细合理的,得3 分;应急维修时间计划较为<br>详细合理的,在一定程度上能够满足采购人<br>的基本需求的,得2 分;具有应急维修时间<br>安排,但内容简约,有待完善的,得1 分;<br>提供的内容完全不能满足采购人需求的,或<br>未提",
+            "summary": "2、响应文件中提供供应商为上述人员缴纳的近3 个月内(任意一个月即可)的社保证明材料,否则不予计分,具体详见供应商须知前附表,社保证明提供任意五险之一即可。",
+            "quote": "2、响应文件中提供供应商为上述人员缴纳的近3 个月内(任意一个月即可)的社保证明材料,否则不予计分,具体详见供应商须知前附表,社保证明提供任意五险之一即可。",
             "pages": [
+              38
+            ],
+            "page": 38,
+            "printed_page": 36,
+            "printed_pages": [
               36
             ],
-            "page": 36,
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 36 页",
-              "index": 36,
+              "label": "PDF 第38页",
+              "index": 38,
               "pages": [
-                36
+                38
               ]
             },
-            "detection": "table",
+            "detection": "clause",
             "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
             "uncited_reason": null,
             "audit_status": "pending_audit"
@@ -3558,304 +3618,20 @@
             "clause_id": "TB-0127",
             "block": "materials",
             "label": "要交的材料",
-            "summary": "Col1：供应商业绩 Col2：自2023 年1 月1 日以来(以合同签订时间为<br>准),供应商具有装饰装修或改造工程业绩<br>的,每提供1 个业绩得5 ",
-            "quote": "Col1：供应商业绩 Col2：自2023 年1 月1 日以来(以合同签订时间为<br>准),供应商具有装饰装修或改造工程业绩<br>的,每提供1 个业绩得5 分,满分15 分。<br>注:响应文件中提供业绩合同和验收证明材<br>料扫描件,若合同或验收证明材料中无法体<br>现合同签订时间、项目内容等关键评审因素<br>的,须同时提供加盖业主(合同甲方)公章 得5 分;<br>(2)计划比较详细,具有一定的针对性的,<br>得3 分;<br>(3)内容需要进一步完善的,得1 分;<br>(4)差或未提供的不得分。：0-15 分",
-            "pages": [
-              36
-            ],
-            "page": 36,
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "第 36 页",
-              "index": 36,
-              "pages": [
-                36
-              ]
-            },
-            "detection": "table",
-            "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0128",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "1.质量保证方案:响应文件须提供所投产品质量保证方案充实可行、内容科学合理的, 得4 分;提供的方案内容较为充实可行、内容较为详细合理的,得2 分;提供了质量保",
-            "quote": "1.质量保证方案:响应文件须提供所投产品质量保证方案充实可行、内容科学合理的, 得4 分;提供的方案内容较为充实可行、内容较为详细合理的,得2 分;提供了质量保障方案,方案有待进一步完善,但在一定程度上能够满足采购人的基本需求的,得1 分;提供的内容完全不能满足采购人需求的, 或未提供任何内容的不得分。",
-            "pages": [
-              36
-            ],
-            "page": 36,
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "第 36 页",
-              "index": 36,
-              "pages": [
-                36
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0129",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "注:响应文件中提供业绩合同和验收证明材料扫描件,若合同或验收证明材料中无法体",
-            "quote": "注:响应文件中提供业绩合同和验收证明材料扫描件,若合同或验收证明材料中无法体",
-            "pages": [
-              36
-            ],
-            "page": 36,
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "第 36 页",
-              "index": 36,
-              "pages": [
-                36
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0130",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "Col1：业绩履约评<br>价 Col2：供应商提供经评审小组认可业绩的业主履约<br>评价,评价等级为良好(满意)及以上的,<br>每提供一份证明得3 分,满",
-            "quote": "Col1：业绩履约评<br>价 Col2：供应商提供经评审小组认可业绩的业主履约<br>评价,评价等级为良好(满意)及以上的,<br>每提供一份证明得3 分,满分9 分。<br>注:响应文件中提供加盖业主(合同甲方)<br>公章或行政主管部门章的履约评价证明扫描<br>件。 的证明材料扫描件,否则不得分。：0-9 分",
-            "pages": [
-              37
-            ],
-            "page": 37,
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "第 37 页",
-              "index": 37,
-              "pages": [
-                37
-              ]
-            },
-            "detection": "table",
-            "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0131",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "Col1：项目经理实<br>力 Col2：1.供应商为本项目配备的项目经理具有建筑<br>工程相关专业中级职称证书的得3 分,高级<br>工程师职称的得5 分,",
-            "quote": "Col1：项目经理实<br>力 Col2：1.供应商为本项目配备的项目经理具有建筑<br>工程相关专业中级职称证书的得3 分,高级<br>工程师职称的得5 分,本项最高得5 分。<br>注:<br>1、响应文件中提供职称证书证书扫描件。<br>2、响应文件中提供供应商为上述人员缴纳的<br>近三个月内(任意一个月)社保证明材料扫<br>描件,否则不予计分,具体详见供应商须知<br>前附表,社保证明提供任意五险之一即可。<br>2.除拟派项目经理外,根据拟投入本项目管<br>理人员的数量、资格、岗位安排、工作经验<br>等评分。<br>(1)人员数量满足项目需求、主要人员具备<br>相关资格证书、岗位安排满足本项目实际需<br>要的得5 分;<br>(2)人员数量基本能满足项目需求、主要人<br>员相关资格证书有缺失较少、岗位安排基本<br>可行得3 分;<br>(3)人员数量短缺、主要人员",
-            "pages": [
-              37
-            ],
-            "page": 37,
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "第 37 页",
-              "index": 37,
-              "pages": [
-                37
-              ]
-            },
-            "detection": "table",
-            "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0132",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "安徽省政府采购项目竞争性磋商文件示范文本(工程类) 第35 页/共107 页的证明材料扫描件,否则不得分。",
-            "quote": "安徽省政府采购项目竞争性磋商文件示范文本(工程类) 第35 页/共107 页的证明材料扫描件,否则不得分。",
-            "pages": [
-              37
-            ],
-            "page": 37,
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "第 37 页",
-              "index": 37,
-              "pages": [
-                37
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0133",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "2、响应文件中提供供应商为上述人员缴纳的近三个月内(任意一个月)社保证明材料扫描件,否则不予计分,具体详见供应商须知前附表,社保证明提供任意五险之一即可。",
-            "quote": "2、响应文件中提供供应商为上述人员缴纳的近三个月内(任意一个月)社保证明材料扫描件,否则不予计分,具体详见供应商须知前附表,社保证明提供任意五险之一即可。",
-            "pages": [
-              37
-            ],
-            "page": 37,
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "第 37 页",
-              "index": 37,
-              "pages": [
-                37
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0134",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "注:1、响应文件中须提供具体人员花名册及 0-10 分",
-            "quote": "注:1、响应文件中须提供具体人员花名册及 0-10 分",
-            "pages": [
-              37
-            ],
-            "page": 37,
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "第 37 页",
-              "index": 37,
-              "pages": [
-                37
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0135",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "Col1：供应商管理<br>体系认证 Col2：供应商具有经中国国家认证认可监督管理委<br>员会认证机构颁发的有效期内的<br>1.质量管理体系认证证书;<b",
-            "quote": "Col1：供应商管理<br>体系认证 Col2：供应商具有经中国国家认证认可监督管理委<br>员会认证机构颁发的有效期内的<br>1.质量管理体系认证证书;<br>2.环境管理体系认证证书;<br>3.职业健康安全管理体系认证证书;<br>每提供1 个得3 分,满分9 分。<br>注:响应文件中同时提供证书扫描件及全国<br>认证认可信息公共服务平台官网证书信息查<br>询截图。 对应岗位(具备证书的须提供对应证书扫描<br>件),上述人员不得兼任。<br>2、响应文件中提供供应商为上述人员缴纳的<br>近3 个月内(任意一个月即可)的社保证明<br>材料,否则不予计分,具体详见供应商须知前<br>附表,社保证明提供任意五险之一即可。：0-9 分",
-            "pages": [
-              38
-            ],
-            "page": 38,
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "第 38 页",
-              "index": 38,
-              "pages": [
-                38
-              ]
-            },
-            "detection": "table",
-            "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0136",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "Col1：价格分<br>(15 分) Col2：价格分统一采用低价优先法,即满足磋商文件要求且最后报价最低的供<br>应商的价格为磋商基准价,其价格分为满分15",
-            "quote": "Col1：价格分<br>(15 分) Col2：价格分统一采用低价优先法,即满足磋商文件要求且最后报价最低的供<br>应商的价格为磋商基准价,其价格分为满分15 分。其他供应商的价格<br>分统一按照下列公式计算:<br>磋商报价得分=(磋商基准价/最后磋商报价)×15%×100 对应岗位(具备证书的须提供对应证书扫描<br>件),上述人员不得兼任。<br>2、响应文件中提供供应商为上述人员缴纳的<br>近3 个月内(任意一个月即可)的社保证明<br>材料,否则不予计分,具体详见供应商须知前<br>附表,社保证明提供任意五险之一即可。：价格分统一采用低价优先法,即满足磋商文件要求且最后报价最低的供<br>应商的价格为磋商基准价,其价格分为满分15 分。其他供应商的价格<br>分统一按照下列公式计算:<br>磋商报价得分=(磋商基准价/最后磋商报价)×15%×100 Col4：价格分统一采用",
-            "pages": [
-              38
-            ],
-            "page": 38,
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "第 38 页",
-              "index": 38,
-              "pages": [
-                38
-              ]
-            },
-            "detection": "table",
-            "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0137",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "安徽省政府采购项目竞争性磋商文件示范文本(工程类) 第36 页/共107 页对应岗位(具备证书的须提供对应证书扫描件),上述人员不得兼任。",
-            "quote": "安徽省政府采购项目竞争性磋商文件示范文本(工程类) 第36 页/共107 页对应岗位(具备证书的须提供对应证书扫描件),上述人员不得兼任。",
-            "pages": [
-              38
-            ],
-            "page": 38,
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "第 38 页",
-              "index": 38,
-              "pages": [
-                38
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0138",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "2、响应文件中提供供应商为上述人员缴纳的近3 个月内(任意一个月即可)的社保证明材料,否则不予计分,具体详见供应商须知前附表,社保证明提供任意五险之一即可。",
-            "quote": "2、响应文件中提供供应商为上述人员缴纳的近3 个月内(任意一个月即可)的社保证明材料,否则不予计分,具体详见供应商须知前附表,社保证明提供任意五险之一即可。",
-            "pages": [
-              38
-            ],
-            "page": 38,
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "第 38 页",
-              "index": 38,
-              "pages": [
-                38
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0139",
-            "block": "materials",
-            "label": "要交的材料",
             "summary": "受益人发出的书面付款通知应由其法定代表人(负责人)或授权代理人签字并加盖公章。",
             "quote": "受益人发出的书面付款通知应由其法定代表人(负责人)或授权代理人签字并加盖公章。",
             "pages": [
               77
             ],
             "page": 77,
+            "printed_page": 75,
+            "printed_pages": [
+              75
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 77 页",
+              "label": "PDF 第77页",
               "index": 77,
               "pages": [
                 77
@@ -3867,7 +3643,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0140",
+            "clause_id": "TB-0128",
             "block": "materials",
             "label": "要交的材料",
             "summary": "九、本保函自我方法定代表人或授权代表签字并加盖公章之日起生效。",
@@ -3876,10 +3652,14 @@
               78
             ],
             "page": 78,
+            "printed_page": 76,
+            "printed_pages": [
+              76
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 78 页",
+              "label": "PDF 第78页",
               "index": 78,
               "pages": [
                 78
@@ -3891,7 +3671,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0141",
+            "clause_id": "TB-0129",
             "block": "materials",
             "label": "要交的材料",
             "summary": "受益人发出的书面付款通知应由其法定代表人(负责人)或授权代理人签字并加盖公章。",
@@ -3900,10 +3680,14 @@
               79
             ],
             "page": 79,
+            "printed_page": 77,
+            "printed_pages": [
+              77
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 79 页",
+              "label": "PDF 第79页",
               "index": 79,
               "pages": [
                 79
@@ -3915,7 +3699,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0142",
+            "clause_id": "TB-0130",
             "block": "materials",
             "label": "要交的材料",
             "summary": "九、本保函自我方法定代表人或授权代表签字并加盖公章之日起生效。",
@@ -3924,10 +3708,14 @@
               80
             ],
             "page": 80,
+            "printed_page": 78,
+            "printed_pages": [
+              78
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 80 页",
+              "label": "PDF 第80页",
               "index": 80,
               "pages": [
                 80
@@ -3939,7 +3727,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0143",
+            "clause_id": "TB-0131",
             "block": "materials",
             "label": "要交的材料",
             "summary": "受益人发出的书面付款通知应由其法定代表人(负责人)或授权代理人签字并加盖公章。",
@@ -3948,10 +3736,14 @@
               81
             ],
             "page": 81,
+            "printed_page": 79,
+            "printed_pages": [
+              79
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 81 页",
+              "label": "PDF 第81页",
               "index": 81,
               "pages": [
                 81
@@ -3963,7 +3755,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0144",
+            "clause_id": "TB-0132",
             "block": "materials",
             "label": "要交的材料",
             "summary": "九、本保函自我方法定代表人或授权代表签字并加盖公章之日起生效。",
@@ -3972,10 +3764,14 @@
               82
             ],
             "page": 82,
+            "printed_page": 80,
+            "printed_pages": [
+              80
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 82 页",
+              "label": "PDF 第82页",
               "index": 82,
               "pages": [
                 82
@@ -3987,7 +3783,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0145",
+            "clause_id": "TB-0133",
             "block": "materials",
             "label": "要交的材料",
             "summary": "十四、其他相关证明材料提供符合磋商邀请、采购需求及评标方法和标准规定的相关证明文件。",
@@ -3996,10 +3792,14 @@
               106
             ],
             "page": 106,
+            "printed_page": 104,
+            "printed_pages": [
+              104
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 106 页",
+              "label": "PDF 第106页",
               "index": 106,
               "pages": [
                 106
@@ -4011,7 +3811,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0146",
+            "clause_id": "TB-0134",
             "block": "materials",
             "label": "要交的材料",
             "summary": "特别提示: 供应商在响应文件制作时可在此栏内上传磋商文件要求上传的证明资料,如营业执照、证书等,应将上述证明材料制作成扫描件上传。",
@@ -4020,10 +3820,14 @@
               106
             ],
             "page": 106,
+            "printed_page": 104,
+            "printed_pages": [
+              104
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 106 页",
+              "label": "PDF 第106页",
               "index": 106,
               "pages": [
                 106
@@ -4035,7 +3839,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0147",
+            "clause_id": "TB-0135",
             "block": "materials",
             "label": "要交的材料",
             "summary": "二、(事项二) ... 随附相关证明材料如下: 联系人: 联系电话: 日期:",
@@ -4044,10 +3848,14 @@
               107
             ],
             "page": 107,
+            "printed_page": 105,
+            "printed_pages": [
+              105
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 107 页",
+              "label": "PDF 第107页",
               "index": 107,
               "pages": [
                 107
@@ -4064,7 +3872,7 @@
         "label": "废标项",
         "items": [
           {
-            "clause_id": "TB-0148",
+            "clause_id": "TB-0136",
             "block": "rejection",
             "label": "废标项",
             "summary": "3.3 截至提交首次响应文件截止时间,供应商存在下列有效情形之一的,其响应文件按无效处理:",
@@ -4073,10 +3881,14 @@
               4
             ],
             "page": 4,
+            "printed_page": 2,
+            "printed_pages": [
+              2
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 4 页",
+              "label": "PDF 第4页",
               "index": 4,
               "pages": [
                 4
@@ -4088,7 +3900,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0149",
+            "clause_id": "TB-0137",
             "block": "rejection",
             "label": "废标项",
             "summary": "(1)被人民法院列入失信被执行人名单的;",
@@ -4097,10 +3909,14 @@
               4
             ],
             "page": 4,
+            "printed_page": 2,
+            "printed_pages": [
+              2
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 4 页",
+              "label": "PDF 第4页",
               "index": 4,
               "pages": [
                 4
@@ -4112,7 +3928,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0150",
+            "clause_id": "TB-0138",
             "block": "rejection",
             "label": "废标项",
             "summary": "(2)被税务机关列入重大税收违法案件当事人名单的;",
@@ -4121,10 +3937,14 @@
               4
             ],
             "page": 4,
+            "printed_page": 2,
+            "printed_pages": [
+              2
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 4 页",
+              "label": "PDF 第4页",
               "index": 4,
               "pages": [
                 4
@@ -4136,7 +3956,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0151",
+            "clause_id": "TB-0139",
             "block": "rejection",
             "label": "废标项",
             "summary": "(3)被财政部门列入政府采购严重违法失信名单的;",
@@ -4145,34 +3965,14 @@
               4
             ],
             "page": 4,
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "第 4 页",
-              "index": 4,
-              "pages": [
-                4
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0152",
-            "block": "rejection",
-            "label": "废标项",
-            "summary": "注:“有效”是指“情形”规定的程度、起止期间处于有效状态。",
-            "quote": "注:“有效”是指“情形”规定的程度、起止期间处于有效状态。",
-            "pages": [
-              4
+            "printed_page": 2,
+            "printed_pages": [
+              2
             ],
-            "page": 4,
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 4 页",
+              "label": "PDF 第4页",
               "index": 4,
               "pages": [
                 4
@@ -4184,7 +3984,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0153",
+            "clause_id": "TB-0140",
             "block": "rejection",
             "label": "废标项",
             "summary": "1.5.7 以联合体形式参加政府采购活动的,联合体各方不得再单独参加或者与其他供应商另外组成联合体参加本项目磋商,否则相关响应文件将被认定为响应无效。",
@@ -4193,10 +3993,14 @@
               13
             ],
             "page": 13,
+            "printed_page": 11,
+            "printed_pages": [
+              11
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 13 页",
+              "label": "PDF 第13页",
               "index": 13,
               "pages": [
                 13
@@ -4208,33 +4012,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0154",
-            "block": "rejection",
-            "label": "废标项",
-            "summary": "6.3 任何人或任何组织向供应商提供的任何书面或口头资料,未经采购代理安徽省政府采购项目竞争性磋商文件示范文本(工程类) 第13 页/共107 页机构在网上发布",
-            "quote": "6.3 任何人或任何组织向供应商提供的任何书面或口头资料,未经采购代理安徽省政府采购项目竞争性磋商文件示范文本(工程类) 第13 页/共107 页机构在网上发布或书面通知,均作无效处理,不得作为磋商文件的组成部分。采购代理机构对供应商由此而做出的推论、理解和结论概不负责。",
-            "pages": [
-              14,
-              15
-            ],
-            "page": 14,
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "第 14-15 页",
-              "index": 14,
-              "pages": [
-                14,
-                15
-              ]
-            },
-            "detection": "cross_page",
-            "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0155",
+            "clause_id": "TB-0141",
             "block": "rejection",
             "label": "废标项",
             "summary": "9.2 最后报价均不得高于磋商文件(公告)列明的项目预算、最高投标限价, 否则其响应文件将被认定为响应无效。",
@@ -4243,10 +4021,14 @@
               15
             ],
             "page": 15,
+            "printed_page": 13,
+            "printed_pages": [
+              13
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 15 页",
+              "label": "PDF 第15页",
               "index": 15,
               "pages": [
                 15
@@ -4258,7 +4040,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0156",
+            "clause_id": "TB-0142",
             "block": "rejection",
             "label": "废标项",
             "summary": "9.3 报价在合同履行过程中是固定不变的,不得以任何理由予以变更。任何包含价格调整要求的报价,其响应文件将被认定为响应无效。",
@@ -4267,10 +4049,14 @@
               15
             ],
             "page": 15,
+            "printed_page": 13,
+            "printed_pages": [
+              13
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 15 页",
+              "label": "PDF 第15页",
               "index": 15,
               "pages": [
                 15
@@ -4282,7 +4068,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0157",
+            "clause_id": "TB-0143",
             "block": "rejection",
             "label": "废标项",
             "summary": "11.2 在磋商有效期内,供应商的磋商保持有效,供应商不得要求撤销或修改其响应文件。磋商有效期不满足要求的响应,其响应文件将被认定为响应无效。",
@@ -4291,10 +4077,14 @@
               16
             ],
             "page": 16,
+            "printed_page": 14,
+            "printed_pages": [
+              14
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 16 页",
+              "label": "PDF 第16页",
               "index": 16,
               "pages": [
                 16
@@ -4306,7 +4096,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0158",
+            "clause_id": "TB-0144",
             "block": "rejection",
             "label": "废标项",
             "summary": "12.2 供应商应当在响应文件提交截止时间前完成响应文件的传输提交(以接收到电子签收凭证为准),并可以补充、修改或者撤回响应文件。响应文件提交截止时间前未完成响",
@@ -4315,10 +4105,14 @@
               16
             ],
             "page": 16,
+            "printed_page": 14,
+            "printed_pages": [
+              14
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 16 页",
+              "label": "PDF 第16页",
               "index": 16,
               "pages": [
                 16
@@ -4330,7 +4124,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0159",
+            "clause_id": "TB-0145",
             "block": "rejection",
             "label": "废标项",
             "summary": "12.3 供应商应在供应商须知前附表规定的解密时间前对其响应文件进行解密,未在规定时间内进行解密的,响应无效。",
@@ -4339,10 +4133,14 @@
               16
             ],
             "page": 16,
+            "printed_page": 14,
+            "printed_pages": [
+              14
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 16 页",
+              "label": "PDF 第16页",
               "index": 16,
               "pages": [
                 16
@@ -4354,7 +4152,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0160",
+            "clause_id": "TB-0146",
             "block": "rejection",
             "label": "废标项",
             "summary": "14.3.1 初审。磋商小组对供应商必须满足和实质性响应的内容进行评审,供应商未实质性响应磋商文件要求导致响应无效的,磋商小组将以书面询标的方式告知有关供应商。",
@@ -4363,10 +4161,14 @@
               17
             ],
             "page": 17,
+            "printed_page": 15,
+            "printed_pages": [
+              15
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 17 页",
+              "label": "PDF 第17页",
               "index": 17,
               "pages": [
                 17
@@ -4378,7 +4180,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0161",
+            "clause_id": "TB-0147",
             "block": "rejection",
             "label": "废标项",
             "summary": "采购人或采购代理机构将在响应文件提交截止时间后至评审结束前通过“信用中国”网站(www.creditchina.gov.cn)、中国政府采购网(www.ccgp",
@@ -4387,10 +4189,14 @@
               17
             ],
             "page": 17,
+            "printed_page": 15,
+            "printed_pages": [
+              15
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 17 页",
+              "label": "PDF 第17页",
               "index": 17,
               "pages": [
                 17
@@ -4402,7 +4208,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0162",
+            "clause_id": "TB-0148",
             "block": "rejection",
             "label": "废标项",
             "summary": "以联合体形式参加磋商的,联合体成员存在以上不良信用记录的,联合体磋商将被认定为响应无效。",
@@ -4411,10 +4217,14 @@
               17
             ],
             "page": 17,
+            "printed_page": 15,
+            "printed_pages": [
+              15
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 17 页",
+              "label": "PDF 第17页",
               "index": 17,
               "pages": [
                 17
@@ -4426,31 +4236,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0163",
-            "block": "rejection",
-            "label": "废标项",
-            "summary": "Col1：7 Col2：报价须知 检验部门鉴定确有质量问题,由此而发生的一切费用由成<br>交供应商自负。因成交供应商自行采购的材料质量引起的<br>工程质量问",
-            "quote": "Col1：7 Col2：报价须知 检验部门鉴定确有质量问题,由此而发生的一切费用由成<br>交供应商自负。因成交供应商自行采购的材料质量引起的<br>工程质量问题由成交供应商承担所造成的一切损失。<br>(2)如本项目采购人对工程质量有特殊需求的,对主要设<br>备及材料提供不少于三个的参考品牌,对于采购人参考品<br>牌的材料,供应商可选用参考品牌或不低于参考品牌质量<br>标准的其它品牌;采用其它品牌的应在响应文件中提供相<br>关技术参数证明材料供磋商小组评审,未提供相关技术参<br>数证明材料或经磋商小组评审未通过的,成交后只能从采<br>购人参考品牌中进行选择,价格不予调整。<br>(3)对于采购人参考品牌的材料,供应商如认为参考品牌<br>有限定性、唯一性、明显不在同一档次等级的或者其他异<br>议的,应在本项目询问截止时间前以书面方式提交给采购<br>人或代理机构。：1、供应",
-            "pages": [
-              25
-            ],
-            "page": 25,
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "第 25 页",
-              "index": 25,
-              "pages": [
-                25
-              ]
-            },
-            "detection": "table",
-            "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0164",
+            "clause_id": "TB-0149",
             "block": "rejection",
             "label": "废标项",
             "summary": "1、供应商最后报价均不得高于磋商文件(公告)列明的项目预算、最高限价,否则其响应文件将被认定为响应无效。",
@@ -4459,10 +4245,14 @@
               25
             ],
             "page": 25,
+            "printed_page": 23,
+            "printed_pages": [
+              23
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 25 页",
+              "label": "PDF 第25页",
               "index": 25,
               "pages": [
                 25
@@ -4474,7 +4264,35 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0165",
+            "clause_id": "TB-0150",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(2)在工程项目磋商过程中,供应商最后报价与公布的最高投标限价(控制价)或项目概算相比降幅过小,或供应商最后报价明显缺乏竞争性的,磋商小组可以否决其报价。",
+            "quote": "(2)在工程项目磋商过程中,供应商最后报价与公布的最高投标限价(控制价)或项目概算相比降幅过小,或供应商最后报价明显缺乏竞争性的,磋商小组可以否决其报价。",
+            "pages": [
+              26
+            ],
+            "page": 26,
+            "printed_page": 24,
+            "printed_pages": [
+              24
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第26页",
+              "index": 26,
+              "pages": [
+                26
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0151",
             "block": "rejection",
             "label": "废标项",
             "summary": "4.对磋商报价中分部分项工程综合单价、主要材料价格、人工费(含工日数量及工日单价)、机械费以及规费等未按照工程量清单计价规范要求计价的,可作为无效投标。(如:磋",
@@ -4483,10 +4301,14 @@
               28
             ],
             "page": 28,
+            "printed_page": 26,
+            "printed_pages": [
+              26
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 28 页",
+              "label": "PDF 第28页",
               "index": 28,
               "pages": [
                 28
@@ -4498,7 +4320,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0166",
+            "clause_id": "TB-0152",
             "block": "rejection",
             "label": "废标项",
             "summary": "磋商小组依据专业经验,参考同类项目中标(成交)价格、类似产品市场价格水平、行业人工费用标准、国家有关部门指导行业协会发布的行业平均成本等情况,对报价合理性进行判",
@@ -4507,10 +4329,14 @@
               33
             ],
             "page": 33,
+            "printed_page": 31,
+            "printed_pages": [
+              31
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 33 页",
+              "label": "PDF 第33页",
               "index": 33,
               "pages": [
                 33
@@ -4522,7 +4348,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0167",
+            "clause_id": "TB-0153",
             "block": "rejection",
             "label": "废标项",
             "summary": "3.如磋商文件载明本项目分包承担主体应具备的相应资质条件,则供应商须在本表中列明分包承担主体的资质等级,并后附材料扫描件或电子证照,否则响应无效。",
@@ -4531,10 +4357,14 @@
               99
             ],
             "page": 99,
+            "printed_page": 97,
+            "printed_pages": [
+              97
+            ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "第 99 页",
+              "label": "PDF 第99页",
               "index": 99,
               "pages": [
                 99

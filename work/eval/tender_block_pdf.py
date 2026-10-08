@@ -14,7 +14,7 @@ from pathlib import Path
 
 from app.extraction import extract_pdf
 from app.ocr import DisabledOCRAdapter
-from app.tender_blocks import BLOCK_ORDER, extract_tender_blocks
+from app.tender_blocks import BLOCK_ORDER, extract_tender_blocks, printed_page_facts
 
 SOURCE_URL = "https://www.gl.gov.cn/xjwz/zwgkml/zdlyxxgk/zfcg/zhbgg/zbgg_swj/202609/P020260920414795183978.pdf"
 TITLE = "竞争性磋商文件（服务类）— 2026年八闽美食嘉年华暨鼓楼区海鲜美食消费季活动"
@@ -23,11 +23,13 @@ BUYER = "福州市鼓楼区商务局"
 DEFAULT_PDF = Path("work/public-eval/tender-blocks/pub-gl-fzsc339-cuoshang-202609.pdf")
 DEFAULT_MARKDOWN = Path("outputs/tender-blocks/pub-gl-fzsc339-pending-audit.md")
 DEFAULT_JSON = Path("outputs/tender-blocks/pub-gl-fzsc339-pending-audit.json")
-_FOOTER = re.compile(r"第\s*(\d+)\s*页\s*共\s*(\d+)\s*页")
-_KNOWN = (
-    ("资格要求", "第二十二条第一款", 2),
-    ("废标项", "资格审查和实质性响应审查不合格", 24),
-)
+_FOOTER = re.compile(r"第\s*\d+\s*页\s*[/／]?\s*共\s*\d+\s*页")
+_KNOWN_BY_FILE = {
+    "pub-gl-fzsc339-cuoshang-202609.pdf": (
+        ("资格要求", "第二十二条第一款", 2),
+        ("废标项", "资格审查和实质性响应审查不合格", 24),
+    ),
+}
 
 
 def _sha256(path: Path) -> str:
@@ -39,14 +41,19 @@ def _sha256(path: Path) -> str:
 
 
 def _footer_check(pages: list[dict]) -> dict:
-    mismatches = []
-    for page in pages:
-        number = page["page"]
-        found = _FOOTER.findall(page.get("text") or "")
-        printed = found[-1] if found else None
-        if printed != (str(number), str(len(pages))):
-            mismatches.append({"pdf_page": number, "printed": printed})
-    return {"checked_pages": len(pages), "mismatches": mismatches}
+    facts = printed_page_facts(pages)
+    return {
+        "checked_pages": len(pages),
+        "pages_with_footer": facts["pages_with_footer"],
+        "printed_page_offset": facts["printed_page_offset"],
+        "printed_page_total": facts["printed_page_total"],
+        "printed_total_consistent": facts["printed_total_consistent"],
+        "printed_totals_seen": facts["printed_totals_seen"],
+        "offsets_seen": facts["offsets_seen"],
+        "compared_with": "printed_total",
+        "mismatch_count": len(facts["mismatches"]),
+        "mismatches": facts["mismatches"],
+    }
 
 
 def _rows(result: dict) -> list[dict]:
@@ -79,10 +86,14 @@ def _counts(result: dict) -> dict:
     }
 
 
-def _known_hits(result: dict) -> list[dict]:
+def _known_for(pdf: Path) -> tuple:
+    return _KNOWN_BY_FILE.get(pdf.name, ())
+
+
+def _known_hits(result: dict, known: tuple) -> list[dict]:
     hits = []
     rows = _rows(result)
-    for label, needle, expected_page in _KNOWN:
+    for label, needle, expected_page in known:
         matched = [
             {
                 "block": item["label"],
@@ -120,7 +131,10 @@ def _markdown(payload: dict) -> str:
         f"- 本地文件：`{payload['local_path']}`",
         f"- SHA-256：`{payload['sha256']}`",
         f"- PDF 页数：{payload['pdf_page_count']}",
-        f"- 页脚核对：{payload['footer_check']['checked_pages']} 页，与「第 N 页 共 {payload['pdf_page_count']} 页」不一致的页数：{len(payload['footer_check']['mismatches'])}",
+        f"- 印制页码偏移：{_offset_text(payload['printed_page_offset'])}",
+        f"- 印制总页数（页脚「共M页」）：{_total_text(payload['printed_page_total'])}",
+        f"- 页脚核对：{_footer_sentence(payload['footer_check'])}",
+        f"- 条款原文仍含页脚：{payload['footer_in_quotes']} 条",
         "",
         "## 抽取数量",
         "",
@@ -135,14 +149,16 @@ def _markdown(payload: dict) -> str:
         block = counts["by_block"][key]
         lines.append(f"| {block['label']} | {block['cited']} | {block['cited']} |")
     lines.extend(["", "## 已知条款", ""])
+    if not payload["known_hits"]:
+        lines.append("本文件没有已知条款清单。")
     for hit in payload["known_hits"]:
         if hit["matches"]:
-            pages = ", ".join(str(item["pages"]) for item in hit["matches"])
+            pages = ", ".join(_pdf_pages(item["pages"]) for item in hit["matches"])
             lines.append(
-                f"- 第 {hit['expected_pdf_page']} 页「{hit['needle']}」抽到 {len(hit['matches'])} 条，页码 {pages}。"
+                f"- PDF 第{hit['expected_pdf_page']}页「{hit['needle']}」抽到 {len(hit['matches'])} 条，页码 {pages}。"
             )
         else:
-            lines.append(f"- 第 {hit['expected_pdf_page']} 页「{hit['needle']}」没有抽到。")
+            lines.append(f"- PDF 第{hit['expected_pdf_page']}页「{hit['needle']}」没有抽到。")
     lines.extend(
         [
             "",
@@ -159,14 +175,69 @@ def _markdown(payload: dict) -> str:
             summary = item["summary"].replace("|", "\\|")
             reason = str(item.get("uncited_reason") or "").replace("|", "\\|")
             lines.append(f"| {item['label']} | {item['status']} | {summary} | {reason} |")
-    lines.extend(["", "## 已引用条款", "", "| 块 | 页码 | 状态 | 摘要 |", "|---|---|---|---|"])
+    lines.extend(
+        [
+            "",
+            "## 已引用条款",
+            "",
+            "| 块 | PDF页 | 印制页 | 状态 | 摘要 |",
+            "|---|---|---|---|---|",
+        ]
+    )
     for key, _label in BLOCK_ORDER:
         for item in payload["extraction"]["blocks"][key]["items"]:
             summary = item["summary"].replace("|", "\\|")
-            pages = "、".join(str(number) for number in item["pages"])
-            lines.append(f"| {item['label']} | {pages} | {item['status']} | {summary} |")
+            lines.append(
+                f"| {item['label']} | {_pdf_pages(item['pages'])} | {_printed_text(item.get('printed_page'))} | {item['status']} | {summary} |"
+            )
     lines.append("")
     return "\n".join(lines)
+
+
+def _pdf_pages(pages: list[int]) -> str:
+    return "、".join(f"PDF 第{number}页" for number in pages)
+
+
+def _printed_text(value: int | None) -> str:
+    if isinstance(value, int) and not isinstance(value, bool):
+        return str(value)
+    return "未知"
+
+
+def _footer_sentence(check: dict) -> str:
+    seen_totals = check["printed_totals_seen"] or "无"
+    seen_offsets = check["offsets_seen"] or "无"
+    if check["pages_with_footer"] == 0:
+        return (
+            "没有读到「第N页共M页」或「第N页/共M页」页脚。"
+            "印制偏移和印制总页数留空，不把单独的数字当成页码。"
+        )
+    if check["printed_total_consistent"]:
+        total_text = "印制总页数一致。"
+    else:
+        total_text = "印制总页数不一致，因此不取单一总页数。"
+    return (
+        f"读到页脚的页 {check['pages_with_footer']}。"
+        f"页码偏移不一致 {check['mismatch_count']} 页。"
+        f"{total_text}"
+        f"见到的总页数 {seen_totals}，见到的偏移 {seen_offsets}。"
+    )
+
+
+def _offset_text(value: int | None) -> str:
+    if isinstance(value, int) and not isinstance(value, bool):
+        return str(value)
+    return "未知"
+
+
+def _total_text(value: int | None) -> str:
+    if isinstance(value, int) and not isinstance(value, bool):
+        return str(value)
+    return "未知"
+
+
+def _footer_in_quotes(result: dict) -> int:
+    return sum(1 for item in _rows(result) if _FOOTER.search(item.get("quote") or ""))
 
 
 def run(
@@ -178,6 +249,7 @@ def run(
     title: str = TITLE,
     project_number: str = PROJECT_NUMBER,
     buyer: str = BUYER,
+    known: tuple | None = None,
 ) -> dict:
     pages = extract_pdf(pdf, ocr_adapter=DisabledOCRAdapter())
     for index, page in enumerate(pages, 1):
@@ -188,6 +260,11 @@ def run(
     result = extract_tender_blocks(pages, filename=pdf.name)
     if result.get("product_pass") is not False or result.get("audit_status") != "pending_audit":
         raise RuntimeError("extraction did not stay pending_audit with product_pass false")
+    if any(item.get("status") == "PASS" for item in _rows(result)):
+        raise RuntimeError("a clause was marked PASS")
+    footer = _footer_check(pages)
+    if known is None:
+        known = _known_for(pdf)
     payload = {
         "audit_status": "pending_audit",
         "product_pass": False,
@@ -199,10 +276,13 @@ def run(
         "local_path": pdf.as_posix(),
         "sha256": _sha256(pdf),
         "pdf_page_count": len(pages),
+        "printed_page_offset": footer["printed_page_offset"],
+        "printed_page_total": footer["printed_page_total"],
         "ocr": "not_used",
-        "footer_check": _footer_check(pages),
+        "footer_check": footer,
+        "footer_in_quotes": _footer_in_quotes(result),
         "counts": _counts(result),
-        "known_hits": _known_hits(result),
+        "known_hits": _known_hits(result, known),
         "extraction": result,
     }
     json_path.parent.mkdir(parents=True, exist_ok=True)
