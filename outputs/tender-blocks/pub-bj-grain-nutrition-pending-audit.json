@@ -1,0 +1,5463 @@
+{
+  "audit_status": "pending_audit",
+  "product_pass": false,
+  "test_material_only": true,
+  "source_url": "http://download.ccgp.gov.cn/oss/download?uuid=A79FC84DB714D7F8E56AEDBE3A72A6",
+  "title": "2026年全谷物原配料及制品营养安全评价和高效利用项目（第3包）（二次）公开招标文件",
+  "project_number": "TC260R04D-3",
+  "buyer": "国家粮食和物资储备局科学研究院（北京市）",
+  "local_path": "work/public-eval/tender-blocks/pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+  "sha256": "15adf3995d78436150764ab6209b583c76343c1ab45206e0e9d2b95d929e2526",
+  "pdf_page_count": 123,
+  "printed_page_offset": 0,
+  "printed_page_total": 123,
+  "ocr": "not_used",
+  "footer_check": {
+    "checked_pages": 123,
+    "pages_with_footer": 89,
+    "printed_page_offset": 0,
+    "printed_page_total": 123,
+    "printed_total_consistent": true,
+    "printed_totals_seen": [
+      123
+    ],
+    "offsets_seen": [
+      0
+    ],
+    "compared_with": "printed_total",
+    "mismatch_count": 0,
+    "mismatches": []
+  },
+  "footer_in_quotes": 0,
+  "bare_page_in_quotes": 0,
+  "counts": {
+    "total": 191,
+    "with_real_page": 191,
+    "without_page": 0,
+    "by_block": {
+      "qualification": {
+        "label": "资格要求",
+        "cited": 18,
+        "items": 18
+      },
+      "scoring": {
+        "label": "评分要求",
+        "cited": 23,
+        "items": 23
+      },
+      "materials": {
+        "label": "要交的材料",
+        "cited": 100,
+        "items": 100
+      },
+      "rejection": {
+        "label": "废标项",
+        "cited": 50,
+        "items": 50
+      }
+    }
+  },
+  "structural_checks": {
+    "product_pass_false": true,
+    "audit_status_pending": true,
+    "no_pass_status": true,
+    "cited_labels_use_pdf_page": true,
+    "page_index_matches_order": true,
+    "ocr_not_used": true
+  },
+  "extraction": {
+    "audit_status": "pending_audit",
+    "product_pass": false,
+    "printed_page_offset": 0,
+    "printed_page_total": 123,
+    "blocks": {
+      "qualification": {
+        "label": "资格要求",
+        "items": [
+          {
+            "clause_id": "TB-0001",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "5.投标投标人资格要求:",
+            "quote": "5.投标投标人资格要求:",
+            "pages": [
+              4
+            ],
+            "page": 4,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第4页",
+              "index": 4,
+              "pages": [
+                4
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0002",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "5.1 投标人须符合《政府采购法》第二十二条规定;",
+            "quote": "5.1 投标人须符合《政府采购法》第二十二条规定;",
+            "pages": [
+              4
+            ],
+            "page": 4,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第4页",
+              "index": 4,
+              "pages": [
+                4
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0003",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "5.2 落实政府采购政策需满足的资格要求:",
+            "quote": "5.2 落实政府采购政策需满足的资格要求:",
+            "pages": [
+              5
+            ],
+            "page": 5,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第5页",
+              "index": 5,
+              "pages": [
+                5
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0004",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "3.本项目的特定资格要求:",
+            "quote": "3.本项目的特定资格要求:",
+            "pages": [
+              5
+            ],
+            "page": 5,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第5页",
+              "index": 5,
+              "pages": [
+                5
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0005",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "1)所投产品的原产地均应来自中华人民共和国境内或是与中华人民共和国有正常贸易往来的国家或地区的合格来源国;",
+            "quote": "1)所投产品的原产地均应来自中华人民共和国境内或是与中华人民共和国有正常贸易往来的国家或地区的合格来源国;",
+            "pages": [
+              5
+            ],
+            "page": 5,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第5页",
+              "index": 5,
+              "pages": [
+                5
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0006",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "2)若所投产品为进口产品,代理商投标需出具所投产品所属厂家针对本项目的授权函(厂家包括其在国内的独资公司。接受厂家代理商针对本项目的转授权,但需提供上述代理关系",
+            "quote": "2)若所投产品为进口产品,代理商投标需出具所投产品所属厂家针对本项目的授权函(厂家包括其在国内的独资公司。接受厂家代理商针对本项目的转授权,但需提供上述代理关系的证明。);",
+            "pages": [
+              5
+            ],
+            "page": 5,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第5页",
+              "index": 5,
+              "pages": [
+                5
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0007",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "3)单位负责人为同一人或者存在直接控股、管理关系的不同投标人,不得参加同一合同项下的政府采购活动;为本项目提供整体设计、规范编制或者项目管理、监理、检测等服务的",
+            "quote": "3)单位负责人为同一人或者存在直接控股、管理关系的不同投标人,不得参加同一合同项下的政府采购活动;为本项目提供整体设计、规范编制或者项目管理、监理、检测等服务的投标人,不得参加本项目的投标。",
+            "pages": [
+              5
+            ],
+            "page": 5,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第5页",
+              "index": 5,
+              "pages": [
+                5
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0008",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "4)按照招标公告要求购买了招标文件。",
+            "quote": "4)按照招标公告要求购买了招标文件。",
+            "pages": [
+              5
+            ],
+            "page": 5,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第5页",
+              "index": 5,
+              "pages": [
+                5
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0009",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "1.3.4 合格投标人的资格要求:",
+            "quote": "1.3.4 合格投标人的资格要求:",
+            "pages": [
+              9
+            ],
+            "page": 9,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第9页",
+              "index": 9,
+              "pages": [
+                9
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0010",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "1.3.5 是否为专门面向中小企业采购:否",
+            "quote": "1.3.5 是否为专门面向中小企业采购:否",
+            "pages": [
+              9
+            ],
+            "page": 9,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第9页",
+              "index": 9,
+              "pages": [
+                9
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0011",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "1.4 是否允许联合体投标:否",
+            "quote": "1.4 是否允许联合体投标:否",
+            "pages": [
+              9
+            ],
+            "page": 9,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第9页",
+              "index": 9,
+              "pages": [
+                9
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0012",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "接收质疑函的方式和联系方式: 质疑函应以邮件或书面形式送达,质疑函的格式和内容应当符合《政府采购质疑和投诉办法》的要求。",
+            "quote": "接收质疑函的方式和联系方式: 质疑函应以邮件或书面形式送达,质疑函的格式和内容应当符合《政府采购质疑和投诉办法》的要求。",
+            "pages": [
+              11
+            ],
+            "page": 11,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第11页",
+              "index": 11,
+              "pages": [
+                11
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0013",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "1.3.2 具备《中华人民共和国政府采购法》第二十二条关于投标人条件的规定, 遵守国家、本项目采购人本级和上级财政部门政府采购的有关规定。",
+            "quote": "1.3.2 具备《中华人民共和国政府采购法》第二十二条关于投标人条件的规定, 遵守国家、本项目采购人本级和上级财政部门政府采购的有关规定。",
+            "pages": [
+              12
+            ],
+            "page": 12,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第12页",
+              "index": 12,
+              "pages": [
+                12
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0014",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "1.4.2 联合体各方均应符合《中华人民共和国政府采购法》第二十二条规定的条件。",
+            "quote": "1.4.2 联合体各方均应符合《中华人民共和国政府采购法》第二十二条规定的条件。",
+            "pages": [
+              12
+            ],
+            "page": 12,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第12页",
+              "index": 12,
+              "pages": [
+                12
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0015",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "1.4.7 以联合体形式参加政府采购活动的,联合体各方不得再单独参加或者与其他投标人另外组成联合体参加本项目投标,否则相关投标将作为无效投标被拒绝。",
+            "quote": "1.4.7 以联合体形式参加政府采购活动的,联合体各方不得再单独参加或者与其他投标人另外组成联合体参加本项目投标,否则相关投标将作为无效投标被拒绝。",
+            "pages": [
+              13
+            ],
+            "page": 13,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第13页",
+              "index": 13,
+              "pages": [
+                13
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0016",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "1.9 凡为本次采购项目提供整体设计、规范编制或者项目管理、监理、检测等服务的投标人,不得再参加该采购项目的其他采购活动。",
+            "quote": "1.9 凡为本次采购项目提供整体设计、规范编制或者项目管理、监理、检测等服务的投标人,不得再参加该采购项目的其他采购活动。",
+            "pages": [
+              15
+            ],
+            "page": 15,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第15页",
+              "index": 15,
+              "pages": [
+                15
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0017",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "凡法律或财务上不能独立合法经营,或在法律、财务上不能独立于本项目采购人、采购代理机构的任何机构,不得参加投标",
+            "quote": "凡法律或财务上不能独立合法经营,或在法律、财务上不能独立于本项目采购人、采购代理机构的任何机构,不得参加投标",
+            "pages": [
+              15
+            ],
+            "page": 15,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第15页",
+              "index": 15,
+              "pages": [
+                15
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0018",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "3.2.1.3 软件应具备用户权限控制,操作记录跟踪,数字签名等功能;",
+            "quote": "3.2.1.3 软件应具备用户权限控制,操作记录跟踪,数字签名等功能;",
+            "pages": [
+              112
+            ],
+            "page": 112,
+            "printed_page": 112,
+            "printed_pages": [
+              112
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第112页",
+              "index": 112,
+              "pages": [
+                112
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          }
+        ]
+      },
+      "scoring": {
+        "label": "评分要求",
+        "items": [
+          {
+            "clause_id": "TB-0019",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "21：23.2 包含不允许负偏离的实质性要求和条件的条款号:品目 01:<br>*3.1.5、*3.5.3、*3.5.4 ;品目 02:*3.1.1、*3.2.",
+            "quote": "21：23.2 包含不允许负偏离的实质性要求和条件的条款号:品目 01:<br>*3.1.5、*3.5.3、*3.5.4 ;品目 02:*3.1.1、*3.2.2.1 品目<br>03:*3.1;品目 04:*3.6.1;品目 05:*3.1.5;品目 06:<br>*3.1.2.1、*3.1.3.1：评标方法:采用综合评分法,评分细则请见打分细则表。 Col3：评标方法:采用综合评分法,评分细则请见打分细则表。",
+            "pages": [
+              11
+            ],
+            "page": 11,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第11页",
+              "index": 11,
+              "pages": [
+                11
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0020",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "23.2 评标方法:采用综合评分法,评分细则请见打分细则表。",
+            "quote": "23.2 评标方法:采用综合评分法,评分细则请见打分细则表。",
+            "pages": [
+              11
+            ],
+            "page": 11,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第11页",
+              "index": 11,
+              "pages": [
+                11
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0021",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "3.1.2 分光模组类型:透射式光栅分光;",
+            "quote": "3.1.2 分光模组类型:透射式光栅分光;",
+            "pages": [
+              95
+            ],
+            "page": 95,
+            "printed_page": 95,
+            "printed_pages": [
+              95
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第95页",
+              "index": 95,
+              "pages": [
+                95
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0022",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "3.1.3 分光模组实际光谱分辨率(30 微米狭缝宽度):≤4 nm;",
+            "quote": "3.1.3 分光模组实际光谱分辨率(30 微米狭缝宽度):≤4 nm;",
+            "pages": [
+              95
+            ],
+            "page": 95,
+            "printed_page": 95,
+            "printed_pages": [
+              95
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第95页",
+              "index": 95,
+              "pages": [
+                95
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0023",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "3.1.9 设备内置专用控制系统,储存空间≥500GB,支持外接电脑连接,通过配套软件实现双重操控模式; 3.2 分样模块",
+            "quote": "3.1.9 设备内置专用控制系统,储存空间≥500GB,支持外接电脑连接,通过配套软件实现双重操控模式; 3.2 分样模块",
+            "pages": [
+              108
+            ],
+            "page": 108,
+            "printed_page": 108,
+            "printed_pages": [
+              108
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第108页",
+              "index": 108,
+              "pages": [
+                108
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0024",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "序<br>号：1 评标因<br>素：投标价<br>格 分<br>值：30 评分项目：货到项目<br>现场的含<br>税价格 分项<br>分值：30 评分标准：投",
+            "quote": "序<br>号：1 评标因<br>素：投标价<br>格 分<br>值：30 评分项目：货到项目<br>现场的含<br>税价格 分项<br>分值：30 评分标准：投标人报价得分的计算采用低价优先法,按<br>如下公式进行计算:<br>投标人报价得分=(满足招标文件要求且投标<br>价格最低的投标人评标价/投标人评标价)×<br>价格权重<br>注:评标价为投标报价根据《投标人须知》<br>23.2 条规定进行投标报价修正和价格扣除。",
+            "pages": [
+              122
+            ],
+            "page": 122,
+            "printed_page": 122,
+            "printed_pages": [
+              122
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第122页",
+              "index": 122,
+              "pages": [
+                122
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0025",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "序<br>号：2 评标因<br>素：商务部<br>分 分<br>值：3 评分项目：投标产品<br>是否具有<br>在国内的<br>成功销售<br>和使用案<br",
+            "quote": "序<br>号：2 评标因<br>素：商务部<br>分 分<br>值：3 评分项目：投标产品<br>是否具有<br>在国内的<br>成功销售<br>和使用案<br>例和投标<br>产品的验<br>收报告 分项<br>分值：3 评分标准：五年内涉及投标产品的中标通知书或合同。<br>每提供一个业绩得0.5 分,满分3 分。若无<br>则不得分。(投标人须提供有效的投标产品<br>业绩证明材料:合同不得遮挡且销售业绩合<br>同中必须至少包含合同双方印章、签字、货<br>物名称、型号、数量、合同金额、签订时间<br>等信息内容(以上内容缺少一项,业绩不予<br>承认)。提供销售业绩合同复印件须字迹清<br>晰,辨识无误。不符合上述要求或未按要求<br>提供有效证明文件的业绩在评审时将不予以<br>承认。)",
+            "pages": [
+              122
+            ],
+            "page": 122,
+            "printed_page": 122,
+            "printed_pages": [
+              122
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第122页",
+              "index": 122,
+              "pages": [
+                122
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0026",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "序<br>号：2 评标因<br>素：技术部<br>分 分<br>值：51 评分项目：关键技术<br>条款响应<br>程度 分项<br>分值：0 评分标准：技术需",
+            "quote": "序<br>号：2 评标因<br>素：技术部<br>分 分<br>值：51 评分项目：关键技术<br>条款响应<br>程度 分项<br>分值：0 评分标准：技术需求中的“*”号条款是关键技术条款,<br>共10 条,为废标项,不允许负偏离。每个条<br>款号即为一条,无论其是否隶属于上一级编<br>号。",
+            "pages": [
+              122
+            ],
+            "page": 122,
+            "printed_page": 122,
+            "printed_pages": [
+              122
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第122页",
+              "index": 122,
+              "pages": [
+                122
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0027",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "序<br>号：2 评标因<br>素：技术部<br>分 分<br>值：51 评分项目：重要技术<br>条款响应<br>程度 分项<br>分值：0-16 评分标准：",
+            "quote": "序<br>号：2 评标因<br>素：技术部<br>分 分<br>值：51 评分项目：重要技术<br>条款响应<br>程度 分项<br>分值：0-16 评分标准：技术需求中的“#”号条款是重要技术条款,<br>共16 条,负偏离每条减1 分,满分16 分,<br>最低分0 分。每个条款号即为一条,无论其<br>是否隶属于上一级编号。",
+            "pages": [
+              122
+            ],
+            "page": 122,
+            "printed_page": 122,
+            "printed_pages": [
+              122
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第122页",
+              "index": 122,
+              "pages": [
+                122
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0028",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "序<br>号：2 评标因<br>素：技术部<br>分 分<br>值：51 评分项目：一般指标<br>响应程度 分项<br>分值：0-35 评分标准：有投标人的一",
+            "quote": "序<br>号：2 评标因<br>素：技术部<br>分 分<br>值：51 评分项目：一般指标<br>响应程度 分项<br>分值：0-35 评分标准：有投标人的一般主要技术指标及配置响应完<br>全满足招标文件技术要求,应答无负偏离的<br>得35 分(共172 个)偏离项的按技术参数偏<br>离项数量用公式计算得分,得分计算公式<br>=[(172-负偏离项数量)/172]×35,(保留<br>两位小数)。注:一般指标中有要求提供佐证<br>材料的,必须按照要求提供相关证明材料,<br>并在技术偏离表中标明一般“主要技术参<br>数” 对应证明材料在投标文件中的页码。未<br>按要求提供证明材料的,评审委员会将对其<br>响应不予认可。<br>注:评审以“技术参数偏离表”填写为计算<br>依据。",
+            "pages": [
+              122
+            ],
+            "page": 122,
+            "printed_page": 122,
+            "printed_pages": [
+              122
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第122页",
+              "index": 122,
+              "pages": [
+                122
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0029",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "序<br>号：3 评标因<br>素：服务部 分<br>值：15 评分项目：安装调试 分项<br>分值：0-5 评分标准：根据投标人提供的安装和调试方案进行打",
+            "quote": "序<br>号：3 评标因<br>素：服务部 分<br>值：15 评分项目：安装调试 分项<br>分值：0-5 评分标准：根据投标人提供的安装和调试方案进行打",
+            "pages": [
+              122
+            ],
+            "page": 122,
+            "printed_page": 122,
+            "printed_pages": [
+              122
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第122页",
+              "index": 122,
+              "pages": [
+                122
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0030",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "1 投标价格 30 货到项目现场的含税价格 30 投标人报价得分的计算采用低价优先法,按如下公式进行计算: 投标人报价得分=(满足招标文件要求且投标价格最低的投",
+            "quote": "1 投标价格 30 货到项目现场的含税价格 30 投标人报价得分的计算采用低价优先法,按如下公式进行计算: 投标人报价得分=(满足招标文件要求且投标价格最低的投标人评标价/投标人评标价)× 价格权重注:评标价为投标报价根据《投标人须知》",
+            "pages": [
+              122
+            ],
+            "page": 122,
+            "printed_page": 122,
+            "printed_pages": [
+              122
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第122页",
+              "index": 122,
+              "pages": [
+                122
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0031",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "每提供一个业绩得0.5 分,满分3 分。若无则不得分。(投标人须提供有效的投标产品业绩证明材料:合同不得遮挡且销售业绩合同中必须至少包含合同双方印章、签字、货物",
+            "quote": "每提供一个业绩得0.5 分,满分3 分。若无则不得分。(投标人须提供有效的投标产品业绩证明材料:合同不得遮挡且销售业绩合同中必须至少包含合同双方印章、签字、货物名称、型号、数量、合同金额、签订时间等信息内容(以上内容缺少一项,业绩不予承认)。提供销售业绩合同复印件须字迹清晰,辨识无误。不符合上述要求或未按要求提供有效证明文件的业绩在评审时将不予以承认。) 2 技术部分 51 关键技术条款响应程度 0 技术需求中的“*”号条款是关键技术条款, 共10 条,为废标项,不允许负偏离。每个条款号即为一条,无论其是否隶属于上一级编号。",
+            "pages": [
+              122
+            ],
+            "page": 122,
+            "printed_page": 122,
+            "printed_pages": [
+              122
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第122页",
+              "index": 122,
+              "pages": [
+                122
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0032",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "重要技术条款响应程度 0-16 技术需求中的“#”号条款是重要技术条款, 共16 条,负偏离每条减1 分,满分16 分, 最低分0 分。每个条款号即为一条,无论",
+            "quote": "重要技术条款响应程度 0-16 技术需求中的“#”号条款是重要技术条款, 共16 条,负偏离每条减1 分,满分16 分, 最低分0 分。每个条款号即为一条,无论其是否隶属于上一级编号。",
+            "pages": [
+              122
+            ],
+            "page": 122,
+            "printed_page": 122,
+            "printed_pages": [
+              122
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第122页",
+              "index": 122,
+              "pages": [
+                122
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0033",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "一般指标响应程度 0-35 有投标人的一般主要技术指标及配置响应完全满足招标文件技术要求,应答无负偏离的得35 分(共172 个)偏离项的按技术参数偏离项数量用",
+            "quote": "一般指标响应程度 0-35 有投标人的一般主要技术指标及配置响应完全满足招标文件技术要求,应答无负偏离的得35 分(共172 个)偏离项的按技术参数偏离项数量用公式计算得分,得分计算公式 =[(172-负偏离项数量)/172]×35,(保留两位小数)。注:一般指标中有要求提供佐证材料的,必须按照要求提供相关证明材料, 并在技术偏离表中标明一般“主要技术参数” 对应证明材料在投标文件中的页码。未按要求提供证明材料的,评审委员会将对其响应不予认可。",
+            "pages": [
+              122
+            ],
+            "page": 122,
+            "printed_page": 122,
+            "printed_pages": [
+              122
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第122页",
+              "index": 122,
+              "pages": [
+                122
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0034",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "Col1：分 Col3：售后服务<br>方案及承<br>诺 方案：0-5 Col5：满足招标文件售后服务要求,并提供详细方<br>案。方案也应包含培训计划、范围",
+            "quote": "Col1：分 Col3：售后服务<br>方案及承<br>诺 方案：0-5 Col5：满足招标文件售后服务要求,并提供详细方<br>案。方案也应包含培训计划、范围、内容、<br>方式、考核等要素。方案要具有针对性,保<br>证培训的有效性,能够提供技术支撑和保<br>障。方案内容完整,详实可行,优于需求,<br>且有很强的针对性,得5 分;提供了常规、<br>通用的方案,基本符合项目需求,得3 分;<br>提供了简单的方案,但与项目需求有差距,<br>得1 分;无细化方案的,得0 分。",
+            "pages": [
+              123
+            ],
+            "page": 123,
+            "printed_page": 123,
+            "printed_pages": [
+              123
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第123页",
+              "index": 123,
+              "pages": [
+                123
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0035",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "Col1：分 Col3：配套增值<br>服务方案 方案：0-5 Col5：根据客户需求提供详细的方案,要有一定的<br>针对性和有效性。方案内容完整、清晰,详<",
+            "quote": "Col1：分 Col3：配套增值<br>服务方案 方案：0-5 Col5：根据客户需求提供详细的方案,要有一定的<br>针对性和有效性。方案内容完整、清晰,详<br>实可行,具有很强的针对性,得5 分;提供<br>了常规、通用的方案,基本符合项目需求,<br>得3 分;提供了简单的方案,但与项目需求<br>有差距,得1 分;无细化方案的,得0 分。",
+            "pages": [
+              123
+            ],
+            "page": 123,
+            "printed_page": 123,
+            "printed_pages": [
+              123
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第123页",
+              "index": 123,
+              "pages": [
+                123
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0036",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "Col1：4 分：节能环<br>保 Col3：1 方案：投标人所<br>投设备获<br>得相关节<br>能、环保<br>认证情况 Col5：0-1 分,包括安装",
+            "quote": "Col1：4 分：节能环<br>保 Col3：1 方案：投标人所<br>投设备获<br>得相关节<br>能、环保<br>认证情况 Col5：0-1 分,包括安装计划、时间表、技术支持、验<br>收实施方案等。方案内容完整优于需求,详<br>实可行,有很强的针对性,得5 分;提供了<br>常规、通用的方案,基本符合项目需求,得<br>3 分;提供了简单的方案,但与项目需求有<br>差距,得1 分;无细化方案的,得0 分。：除政府强制采购的节能产品外:<br>(1)节能产品:对于列入政府采购节能产品<br>品目清单的,应当优先采购的,投标人提供<br>所投产品的由国家确定的认证机构出具的、<br>处于有效期之内的节能产品认证证书复印件<br>的(加盖投标人公章),得0.5 分;否则0<br>分。<br>(2)环保产品:对于列入政府采购环境标志<br>产品品目清单的,应当优先采购的产品,投<br",
+            "pages": [
+              123
+            ],
+            "page": 123,
+            "printed_page": 123,
+            "printed_pages": [
+              123
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第123页",
+              "index": 123,
+              "pages": [
+                123
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0037",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "Col1：5 分：总分 Col3：100 分 方案：100 分 Col5：100 分 分,包括安装计划、时间表、技术支持、验<br>收实施方案等。方案内容完整优",
+            "quote": "Col1：5 分：总分 Col3：100 分 方案：100 分 Col5：100 分 分,包括安装计划、时间表、技术支持、验<br>收实施方案等。方案内容完整优于需求,详<br>实可行,有很强的针对性,得5 分;提供了<br>常规、通用的方案,基本符合项目需求,得<br>3 分;提供了简单的方案,但与项目需求有<br>差距,得1 分;无细化方案的,得0 分。：100 分",
+            "pages": [
+              123
+            ],
+            "page": 123,
+            "printed_page": 123,
+            "printed_pages": [
+              123
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第123页",
+              "index": 123,
+              "pages": [
+                123
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0038",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "分方案分,包括安装计划、时间表、技术支持、验收实施方案等。方案内容完整优于需求,详实可行,有很强的针对性,得5 分;提供了常规、通用的方案,基本符合项目需求,得",
+            "quote": "分方案分,包括安装计划、时间表、技术支持、验收实施方案等。方案内容完整优于需求,详实可行,有很强的针对性,得5 分;提供了常规、通用的方案,基本符合项目需求,得 3 分;提供了简单的方案,但与项目需求有差距,得1 分;无细化方案的,得0 分。",
+            "pages": [
+              123
+            ],
+            "page": 123,
+            "printed_page": 123,
+            "printed_pages": [
+              123
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第123页",
+              "index": 123,
+              "pages": [
+                123
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0039",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "售后服务方案及承诺 0-5 满足招标文件售后服务要求,并提供详细方案。方案也应包含培训计划、范围、内容、 方式、考核等要素。方案要具有针对性,保证培训的有效性,",
+            "quote": "售后服务方案及承诺 0-5 满足招标文件售后服务要求,并提供详细方案。方案也应包含培训计划、范围、内容、 方式、考核等要素。方案要具有针对性,保证培训的有效性,能够提供技术支撑和保障。方案内容完整,详实可行,优于需求, 且有很强的针对性,得5 分;提供了常规、 通用的方案,基本符合项目需求,得3 分; 提供了简单的方案,但与项目需求有差距, 得1 分;无细化方案的,得0 分。",
+            "pages": [
+              123
+            ],
+            "page": 123,
+            "printed_page": 123,
+            "printed_pages": [
+              123
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第123页",
+              "index": 123,
+              "pages": [
+                123
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0040",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "配套增值服务方案 0-5 根据客户需求提供详细的方案,要有一定的针对性和有效性。方案内容完整、清晰,详实可行,具有很强的针对性,得5 分;提供了常规、通用的方案",
+            "quote": "配套增值服务方案 0-5 根据客户需求提供详细的方案,要有一定的针对性和有效性。方案内容完整、清晰,详实可行,具有很强的针对性,得5 分;提供了常规、通用的方案,基本符合项目需求, 得3 分;提供了简单的方案,但与项目需求有差距,得1 分;无细化方案的,得0 分。",
+            "pages": [
+              123
+            ],
+            "page": 123,
+            "printed_page": 123,
+            "printed_pages": [
+              123
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第123页",
+              "index": 123,
+              "pages": [
+                123
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0041",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "(2)环保产品:对于列入政府采购环境标志产品品目清单的,应当优先采购的产品,投标人提供所投产品的由国家确定的认证机构出具的、处于有效期之内的环境标志产品认证证书",
+            "quote": "(2)环保产品:对于列入政府采购环境标志产品品目清单的,应当优先采购的产品,投标人提供所投产品的由国家确定的认证机构出具的、处于有效期之内的环境标志产品认证证书复印件的(加盖投标人公章),得 0.5 分;否则0 分。",
+            "pages": [
+              123
+            ],
+            "page": 123,
+            "printed_page": 123,
+            "printed_pages": [
+              123
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第123页",
+              "index": 123,
+              "pages": [
+                123
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          }
+        ]
+      },
+      "materials": {
+        "label": "要交的材料",
+        "items": [
+          {
+            "clause_id": "TB-0042",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2)若所投产品为进口产品,代理商投标需出具所投产品所属厂家针对本项目的授权函(厂家包括其在国内的独资公司。接受厂家代理商针对本项目的转授权,但需提供上述代理关系",
+            "quote": "2)若所投产品为进口产品,代理商投标需出具所投产品所属厂家针对本项目的授权函(厂家包括其在国内的独资公司。接受厂家代理商针对本项目的转授权,但需提供上述代理关系的证明。);",
+            "pages": [
+              5
+            ],
+            "page": 5,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第5页",
+              "index": 5,
+              "pages": [
+                5
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0043",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "地点:本项目只接受网上报名。请满足条件的投标人登录中招联合招标采购平台(http://www.365trade.com.cn)进行免费注册,并上传营业执照、法定",
+            "quote": "地点:本项目只接受网上报名。请满足条件的投标人登录中招联合招标采购平台(http://www.365trade.com.cn)进行免费注册,并上传营业执照、法定代表人授权书及经办人身份证复印件(以上文件均需加盖单位公章),审核通过后支付标书款并下载招标文件,招标文件售后不退。",
+            "pages": [
+              5,
+              6
+            ],
+            "page": 5,
+            "printed_page": null,
+            "printed_pages": [
+              null,
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第5-6页",
+              "index": 5,
+              "pages": [
+                5,
+                6
+              ]
+            },
+            "detection": "cross_page",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0044",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "条款号：9.1 内 容：提供投标人的最近一年任意连续三个月纳税和社保记录;<br>在法规范围内不需提供的,应做书面说明和证明文件;",
+            "quote": "条款号：9.1 内 容：提供投标人的最近一年任意连续三个月纳税和社保记录;<br>在法规范围内不需提供的,应做书面说明和证明文件;",
+            "pages": [
+              9
+            ],
+            "page": 9,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第9页",
+              "index": 9,
+              "pages": [
+                9
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0045",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "9.1 提供投标人的最近一年任意连续三个月纳税和社保记录; 在法规范围内不需提供的,应做书面说明和证明文件;",
+            "quote": "9.1 提供投标人的最近一年任意连续三个月纳税和社保记录; 在法规范围内不需提供的,应做书面说明和证明文件;",
+            "pages": [
+              9
+            ],
+            "page": 9,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第9页",
+              "index": 9,
+              "pages": [
+                9
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0046",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "21：其他: 包含不允许负偏离的实质性要求和条件的条款号:品目 01:<br>*3.1.5、*3.5.3、*3.5.4 ;品目 02:*3.1.1、*3.2.2",
+            "quote": "21：其他: 包含不允许负偏离的实质性要求和条件的条款号:品目 01:<br>*3.1.5、*3.5.3、*3.5.4 ;品目 02:*3.1.1、*3.2.2.1 品目<br>03:*3.1;品目 04:*3.6.1;品目 05:*3.1.5;品目 06:<br>*3.1.2.1、*3.1.3.1：其他: Col3：1.按统一规定的格式、顺序填写、排列,并装订、胶封成册,<br>不得采用活页方式装订。复印件应清晰整洁。<br>2.全部的规格尺寸为A4 纸型。<br>3.建议双面打印或复印。",
+            "pages": [
+              11
+            ],
+            "page": 11,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第11页",
+              "index": 11,
+              "pages": [
+                11
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0047",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "9.1 投标人应完整地按招标文件提供的投标文件格式填写投标文件,投标文件应包括以下内容: 第一部分开标一览表及资格证明文件 1 、开标一览表(见投标文件格式一)",
+            "quote": "9.1 投标人应完整地按招标文件提供的投标文件格式填写投标文件,投标文件应包括以下内容: 第一部分开标一览表及资格证明文件 1 、开标一览表(见投标文件格式一)",
+            "pages": [
+              17
+            ],
+            "page": 17,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第17页",
+              "index": 17,
+              "pages": [
+                17
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0048",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2、法人或者非法人组织的营业执照等证明文件复印件(须加盖本单位公章)或自然人的身份证明复印件",
+            "quote": "2、法人或者非法人组织的营业执照等证明文件复印件(须加盖本单位公章)或自然人的身份证明复印件",
+            "pages": [
+              17
+            ],
+            "page": 17,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第17页",
+              "index": 17,
+              "pages": [
+                17
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0049",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "3、法定代表人(或负责人)身份证明及法定代表人授权书(投标文件格式二,自然人投标的无需提供)",
+            "quote": "3、法定代表人(或负责人)身份证明及法定代表人授权书(投标文件格式二,自然人投标的无需提供)",
+            "pages": [
+              17
+            ],
+            "page": 17,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第17页",
+              "index": 17,
+              "pages": [
+                17
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0050",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "4、投标人具有良好的商业信誉和健全的财务会计制度的证明文件",
+            "quote": "4、投标人具有良好的商业信誉和健全的财务会计制度的证明文件",
+            "pages": [
+              17
+            ],
+            "page": 17,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第17页",
+              "index": 17,
+              "pages": [
+                17
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0051",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "5、投标保证金缴纳凭证复印件或投标担保函",
+            "quote": "5、投标保证金缴纳凭证复印件或投标担保函",
+            "pages": [
+              18
+            ],
+            "page": 18,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第18页",
+              "index": 18,
+              "pages": [
+                18
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0052",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "6、符合投标人须知资料表要求依法缴纳税收和社会保障资金的记录",
+            "quote": "6、符合投标人须知资料表要求依法缴纳税收和社会保障资金的记录",
+            "pages": [
+              18
+            ],
+            "page": 18,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第18页",
+              "index": 18,
+              "pages": [
+                18
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0053",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "7、参加政府采购活动前3 年内在经营活动中没有重大违法记录的书面声明",
+            "quote": "7、参加政府采购活动前3 年内在经营活动中没有重大违法记录的书面声明",
+            "pages": [
+              18
+            ],
+            "page": 18,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第18页",
+              "index": 18,
+              "pages": [
+                18
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0054",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "8、投标人须知资料表要求的其他资格证明文件第二部分商务及响应文件",
+            "quote": "8、投标人须知资料表要求的其他资格证明文件第二部分商务及响应文件",
+            "pages": [
+              18
+            ],
+            "page": 18,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第18页",
+              "index": 18,
+              "pages": [
+                18
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0055",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "1、投标书(投标文件格式六)",
+            "quote": "1、投标书(投标文件格式六)",
+            "pages": [
+              18
+            ],
+            "page": 18,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第18页",
+              "index": 18,
+              "pages": [
+                18
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0056",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2、投标分项报价表(投标文件格式七)",
+            "quote": "2、投标分项报价表(投标文件格式七)",
+            "pages": [
+              18
+            ],
+            "page": 18,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第18页",
+              "index": 18,
+              "pages": [
+                18
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0057",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "3、商务条款偏离表(投标文件格式八)",
+            "quote": "3、商务条款偏离表(投标文件格式八)",
+            "pages": [
+              18
+            ],
+            "page": 18,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第18页",
+              "index": 18,
+              "pages": [
+                18
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0058",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "4、缴纳中标服务费承诺书(投标文件格式九)",
+            "quote": "4、缴纳中标服务费承诺书(投标文件格式九)",
+            "pages": [
+              18
+            ],
+            "page": 18,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第18页",
+              "index": 18,
+              "pages": [
+                18
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0059",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "5、符合《政府采购促进中小企业发展暂行办法》、《关于政府采购支持监狱企业发展有关问题的通知》和《三部门联合发布关于促进残疾人就业政府采购政策的通知》价格扣减条件",
+            "quote": "5、符合《政府采购促进中小企业发展暂行办法》、《关于政府采购支持监狱企业发展有关问题的通知》和《三部门联合发布关于促进残疾人就业政府采购政策的通知》价格扣减条件的投标人须提交 5-1《投标人企业类型声明函》(投标文件格式十) 5-2《残疾人福利性单位声明函》(投标文件格式十一)",
+            "pages": [
+              18
+            ],
+            "page": 18,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第18页",
+              "index": 18,
+              "pages": [
+                18
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0060",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "6、投标人商务符合性承诺函(投标文件格式十二)",
+            "quote": "6、投标人商务符合性承诺函(投标文件格式十二)",
+            "pages": [
+              18
+            ],
+            "page": 18,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第18页",
+              "index": 18,
+              "pages": [
+                18
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0061",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "7、投标人关联单位的说明",
+            "quote": "7、投标人关联单位的说明",
+            "pages": [
+              18
+            ],
+            "page": 18,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第18页",
+              "index": 18,
+              "pages": [
+                18
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0062",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "8、投标文件还应包括投标人须知第10 条的所有响应文件",
+            "quote": "8、投标文件还应包括投标人须知第10 条的所有响应文件",
+            "pages": [
+              18
+            ],
+            "page": 18,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第18页",
+              "index": 18,
+              "pages": [
+                18
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0063",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "9.3 投标人提供的所有资格证明文件均应为合法、有效文件,否则将被视为该文件未被递交。",
+            "quote": "9.3 投标人提供的所有资格证明文件均应为合法、有效文件,否则将被视为该文件未被递交。",
+            "pages": [
+              18
+            ],
+            "page": 18,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第18页",
+              "index": 18,
+              "pages": [
+                18
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0064",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "10.1 投标人应提交证明文件,证明其拟供的合同项下的服务合格性符合招标文件规定。该证明文件是投标文件的一部分。",
+            "quote": "10.1 投标人应提交证明文件,证明其拟供的合同项下的服务合格性符合招标文件规定。该证明文件是投标文件的一部分。",
+            "pages": [
+              18
+            ],
+            "page": 18,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第18页",
+              "index": 18,
+              "pages": [
+                18
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0065",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "12.1 投标人应提交投标人须知资料表中规定的投标保证金,并作为其投标的一部分。",
+            "quote": "12.1 投标人应提交投标人须知资料表中规定的投标保证金,并作为其投标的一部分。",
+            "pages": [
+              19
+            ],
+            "page": 19,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第19页",
+              "index": 19,
+              "pages": [
+                19
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0066",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "14.1 投标人应按投标人须知资料表中的规定准备和递交投标文件资格证明文件、商务和技术文件正本、副本和电子文档,每份资格证明文件、 商务和技术文件须清楚地标明“",
+            "quote": "14.1 投标人应按投标人须知资料表中的规定准备和递交投标文件资格证明文件、商务和技术文件正本、副本和电子文档,每份资格证明文件、 商务和技术文件须清楚地标明“正本”或“副本”。若正本和副本不符,以正本为准。",
+            "pages": [
+              20
+            ],
+            "page": 20,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第20页",
+              "index": 20,
+              "pages": [
+                20
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0067",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "14.2 投标文件的正本需打印或用不褪色墨水书写,并由投标人的法定代表人或经其正式授权的代表按招标文件规定在投标文件上签字并加盖单位印章。授权代表须持有书面的“",
+            "quote": "14.2 投标文件的正本需打印或用不褪色墨水书写,并由投标人的法定代表人或经其正式授权的代表按招标文件规定在投标文件上签字并加盖单位印章。授权代表须持有书面的“法定代表人授权书”(标准格式附后),并将其附在投标文件中。如对投标文件进行了修改,则应由投标人的法定代表人或经其正式授权的代表在每一修改处签字。投标文件的副本可采用正本的复印件。",
+            "pages": [
+              20,
+              21
+            ],
+            "page": 20,
+            "printed_page": null,
+            "printed_pages": [
+              null,
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第20-21页",
+              "index": 20,
+              "pages": [
+                20,
+                21
+              ]
+            },
+            "detection": "cross_page",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0068",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "15.1 为方便开标及进行资格审查,投标人应将投标文件第一部分和第二部分的内容分开单独密封提交,并在封皮正面标明“第一部分开标一览表及资格证明文件”或“第二部分",
+            "quote": "15.1 为方便开标及进行资格审查,投标人应将投标文件第一部分和第二部分的内容分开单独密封提交,并在封皮正面标明“第一部分开标一览表及资格证明文件”或“第二部分商务及响应文件”字样。",
+            "pages": [
+              21
+            ],
+            "page": 21,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第21页",
+              "index": 21,
+              "pages": [
+                21
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0069",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "20.3 投标人为满足服务需求而使用的产品,如被列入财政部与国家主管部门颁发的节能产品目录或环境标志产品目录或无线局域网产品目录或为政府强制采购的节能产品的,应",
+            "quote": "20.3 投标人为满足服务需求而使用的产品,如被列入财政部与国家主管部门颁发的节能产品目录或环境标志产品目录或无线局域网产品目录或为政府强制采购的节能产品的,应提供相关证明,在评标时予以优先采购, 具体优先采购办法见第七章评标方法和标准。",
+            "pages": [
+              23,
+              24
+            ],
+            "page": 23,
+            "printed_page": null,
+            "printed_pages": [
+              null,
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第23-24页",
+              "index": 23,
+              "pages": [
+                23,
+                24
+              ]
+            },
+            "detection": "cross_page",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0070",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "20.4.2 查询及记录方式:采购人或采购代理机构经办人将查询网页打印存档备查。投标人不良信用记录以采购人或采购代理机构查询结果为准,在本招标文件规定的查询时间",
+            "quote": "20.4.2 查询及记录方式:采购人或采购代理机构经办人将查询网页打印存档备查。投标人不良信用记录以采购人或采购代理机构查询结果为准,在本招标文件规定的查询时间之后,网站信息发生的任何变更均不再作为评标依据,投标人自行提供的与网站信息不一致的其他证明材料亦不作为评标依据。",
+            "pages": [
+              24
+            ],
+            "page": 24,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第24页",
+              "index": 24,
+              "pages": [
+                24
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0071",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "23.4 根据财政部、司法部《关于政府采购支持监狱企业发展有关问题》的通知(财库〔2014〕68 号)规定,监狱企业参加政府采购活动时,应当提供由省级以上监狱管",
+            "quote": "23.4 根据财政部、司法部《关于政府采购支持监狱企业发展有关问题》的通知(财库〔2014〕68 号)规定,监狱企业参加政府采购活动时,应当提供由省级以上监狱管理局、戒毒管理局(含新疆生产建设兵团)出具的属于监狱企业的证明文件复印件并加盖公章。监狱企业视同小型、微型企业,享受预留份额、评审中价格扣除等政府采购促进中小企业发展的政府采购政策。",
+            "pages": [
+              26
+            ],
+            "page": 26,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第26页",
+              "index": 26,
+              "pages": [
+                26
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0072",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "23.5 根据财政部、民政部、中国残疾人联合会《关于促进残疾人就业政府采购政策的通知》(财库〔2017〕141 号)规定,符合条件的残疾人福利性单位在参加政府采",
+            "quote": "23.5 根据财政部、民政部、中国残疾人联合会《关于促进残疾人就业政府采购政策的通知》(财库〔2017〕141 号)规定,符合条件的残疾人福利性单位在参加政府采购活动时,应当提供本通知规定的《残疾人福利性单位声明函》,并对声明的真实性负责。残疾人福利性单位视同小型、 微型企业,享受预留份额、评审中价格扣除等政府采购促进中小企业发展的政府采购政策。残疾人福利性单位属于小型、微型企业的,不重复享受政策。",
+            "pages": [
+              26
+            ],
+            "page": 26,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第26页",
+              "index": 26,
+              "pages": [
+                26
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0073",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "23.6 节能产品、环境标志产品依据品目清单和认证证书实施政府优先采购和强制采购。采购人拟采购的产品属于品目清单范围的,采购人及其委托的采购代理机构应当依据国家",
+            "quote": "23.6 节能产品、环境标志产品依据品目清单和认证证书实施政府优先采购和强制采购。采购人拟采购的产品属于品目清单范围的,采购人及其委托的采购代理机构应当依据国家确定的认证机构出具的、处于有效期之内的节能产品、环境标志产品认证证书,对获得证书的产品实施政府优先采购或强制采购(节能产品、环境标志产品认证证书复印件须加盖公章)。",
+            "pages": [
+              26
+            ],
+            "page": 26,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第26页",
+              "index": 26,
+              "pages": [
+                26
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0074",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "8.3 对于进口仪器,卖方应提供以下单据作为买方验收依据: a) 商业发票正本一份; b) 装箱单:注明合同号、唛头等正本一份; c) 制造厂商/卖方出具的货物",
+            "quote": "8.3 对于进口仪器,卖方应提供以下单据作为买方验收依据: a) 商业发票正本一份; b) 装箱单:注明合同号、唛头等正本一份; c) 制造厂商/卖方出具的货物的质保证书和原产地证明书正本一份; 对于国产仪器,卖方应提供以下单据作为买方验收依据: a) 合同金额100%的财务收据或资金往来发票; b) 装箱单正本一份; c) 制造厂商/卖方出具的货物的质保证书和原产地证明书正本一份;",
+            "pages": [
+              41
+            ],
+            "page": 41,
+            "printed_page": 41,
+            "printed_pages": [
+              41
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第41页",
+              "index": 41,
+              "pages": [
+                41
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0075",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "11.1 卖方应提供货物运至合同规定的最终目的地所需要的包装,以防止货物在转运中损坏或变质。这类包装应采取防潮、防晒、防锈、防腐蚀、防震动及防止其它损坏的必要保",
+            "quote": "11.1 卖方应提供货物运至合同规定的最终目的地所需要的包装,以防止货物在转运中损坏或变质。这类包装应采取防潮、防晒、防锈、防腐蚀、防震动及防止其它损坏的必要保护措施,从而保护货物能够经受多次搬运、装卸及长途运输。卖方应承担由于其包装或其防护措施不妥而引起的货物锈蚀、损坏和丢失的任何损失的责任或费用。",
+            "pages": [
+              42
+            ],
+            "page": 42,
+            "printed_page": 42,
+            "printed_pages": [
+              42
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第42页",
+              "index": 42,
+              "pages": [
+                42
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0076",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "14.3 卖方应提供合同条款资料表/技术规格中规定的所有服务。为履行要求的伴随服务的报价或双方商定的费用应包括在合同价中。",
+            "quote": "14.3 卖方应提供合同条款资料表/技术规格中规定的所有服务。为履行要求的伴随服务的报价或双方商定的费用应包括在合同价中。",
+            "pages": [
+              43
+            ],
+            "page": 43,
+            "printed_page": 43,
+            "printed_pages": [
+              43
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第43页",
+              "index": 43,
+              "pages": [
+                43
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0077",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "Col1：5 第三节合同专用条款：应提供的伴随服务:<br>应提供的伴随服务:以招标文件第四章相应技术需求中内容为准,且<br>1、卖方应在货物发出15 天前以",
+            "quote": "Col1：5 第三节合同专用条款：应提供的伴随服务:<br>应提供的伴随服务:以招标文件第四章相应技术需求中内容为准,且<br>1、卖方应在货物发出15 天前以邮件等形式将合同号、货物名称、数量、包装箱件数、总<br>毛重、总体积(立方米)和备妥交货日期通知买方。<br>2、卖方负责货物的运输,无偿提供在现场的指导安装、调试、技术培训。<br>3、合同签订90 天之内,卖方应将每台设备和仪器的中文技术资料一套,如目录索引、图<br>纸、操作手册、使用指南、维修指南和/或服务手册和示意图寄给买方。如果买方确认卖<br>方提供的技术资料不完整或在运输过程中丢失,卖方将在收到买方通知后7 天内将这些<br>资料免费寄给买方。<br>4、自验收合格之日算起,货物实行“三包”质保期36 个月,(详见招标文件第四章技<br>术需求相应内容)。质保期内出现问题,卖方提供免费上门维修服务和免费予以更换,并",
+            "pages": [
+              50
+            ],
+            "page": 50,
+            "printed_page": 50,
+            "printed_pages": [
+              50
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第50页",
+              "index": 50,
+              "pages": [
+                50
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0078",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "5 应提供的伴随服务: 应提供的伴随服务:以招标文件第四章相应技术需求中内容为准,且",
+            "quote": "5 应提供的伴随服务: 应提供的伴随服务:以招标文件第四章相应技术需求中内容为准,且",
+            "pages": [
+              50
+            ],
+            "page": 50,
+            "printed_page": 50,
+            "printed_pages": [
+              50
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第50页",
+              "index": 50,
+              "pages": [
+                50
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0079",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "投标文件格式第一部分开标一览表及资格证明文件 1 、开标一览表(见投标文件格式一)",
+            "quote": "投标文件格式第一部分开标一览表及资格证明文件 1 、开标一览表(见投标文件格式一)",
+            "pages": [
+              59
+            ],
+            "page": 59,
+            "printed_page": 59,
+            "printed_pages": [
+              59
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第59页",
+              "index": 59,
+              "pages": [
+                59
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0080",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2、法人或者非法人组织的营业执照等证明文件复印件(须加盖本单位公章)或自然人的身份证明复印件",
+            "quote": "2、法人或者非法人组织的营业执照等证明文件复印件(须加盖本单位公章)或自然人的身份证明复印件",
+            "pages": [
+              59
+            ],
+            "page": 59,
+            "printed_page": 59,
+            "printed_pages": [
+              59
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第59页",
+              "index": 59,
+              "pages": [
+                59
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0081",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "3、法定代表人身份证明及法定代表人授权书(投标文件格式二,自然人投标的无需提供)",
+            "quote": "3、法定代表人身份证明及法定代表人授权书(投标文件格式二,自然人投标的无需提供)",
+            "pages": [
+              59
+            ],
+            "page": 59,
+            "printed_page": 59,
+            "printed_pages": [
+              59
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第59页",
+              "index": 59,
+              "pages": [
+                59
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0082",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "5、投标保证金缴纳凭证复印件或投标担保函",
+            "quote": "5、投标保证金缴纳凭证复印件或投标担保函",
+            "pages": [
+              59
+            ],
+            "page": 59,
+            "printed_page": 59,
+            "printed_pages": [
+              59
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第59页",
+              "index": 59,
+              "pages": [
+                59
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0083",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "8、投标人须知资料表要求的其他资格证明文件",
+            "quote": "8、投标人须知资料表要求的其他资格证明文件",
+            "pages": [
+              59
+            ],
+            "page": 59,
+            "printed_page": 59,
+            "printed_pages": [
+              59
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第59页",
+              "index": 59,
+              "pages": [
+                59
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0084",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "1.提供有效的营业执照等证明文件复印件,复印件上应加盖本单位公章。",
+            "quote": "1.提供有效的营业执照等证明文件复印件,复印件上应加盖本单位公章。",
+            "pages": [
+              61
+            ],
+            "page": 61,
+            "printed_page": 61,
+            "printed_pages": [
+              61
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第61页",
+              "index": 61,
+              "pages": [
+                61
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0085",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2. 投标人为自然人的,应提供身份证明的复印件。",
+            "quote": "2. 投标人为自然人的,应提供身份证明的复印件。",
+            "pages": [
+              61
+            ],
+            "page": 61,
+            "printed_page": 61,
+            "printed_pages": [
+              61
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第61页",
+              "index": 61,
+              "pages": [
+                61
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0086",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "3.联合体投标应提供联合体各方满足以上要求的证明文件。",
+            "quote": "3.联合体投标应提供联合体各方满足以上要求的证明文件。",
+            "pages": [
+              61
+            ],
+            "page": 61,
+            "printed_page": 61,
+            "printed_pages": [
+              61
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第61页",
+              "index": 61,
+              "pages": [
+                61
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0087",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "3 法定代表人身份证明及法定代表人授权书(投标文件格式二,自然人投标的无需提供) 3-1 法定代表人身份证明投标人: 单位性质: 地址: 成立时间: 年月日经营",
+            "quote": "3 法定代表人身份证明及法定代表人授权书(投标文件格式二,自然人投标的无需提供) 3-1 法定代表人身份证明投标人: 单位性质: 地址: 成立时间: 年月日经营期限: 姓名: 性别: 年龄: 职务: 系 (投标人名称)的法定代表人。",
+            "pages": [
+              62
+            ],
+            "page": 62,
+            "printed_page": 62,
+            "printed_pages": [
+              62
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第62页",
+              "index": 62,
+              "pages": [
+                62
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0088",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "1、投标人在投标文件中,必须提供本单位上年度经会计师事务所出具的审计报告复印件并加盖本单位公章。",
+            "quote": "1、投标人在投标文件中,必须提供本单位上年度经会计师事务所出具的审计报告复印件并加盖本单位公章。",
+            "pages": [
+              65
+            ],
+            "page": 65,
+            "printed_page": 65,
+            "printed_pages": [
+              65
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第65页",
+              "index": 65,
+              "pages": [
+                65
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0089",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2、如投标人无法提供上年度审计报告,则需提供银行出具的证明文件。",
+            "quote": "2、如投标人无法提供上年度审计报告,则需提供银行出具的证明文件。",
+            "pages": [
+              65
+            ],
+            "page": 65,
+            "printed_page": 65,
+            "printed_pages": [
+              65
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第65页",
+              "index": 65,
+              "pages": [
+                65
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0090",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "银行证明文件可提供原件,也可提供银行在开标日前三个月内开具证明文件的复印件。若提供的是复印件,招标采购单位保留审核原件的权利。",
+            "quote": "银行证明文件可提供原件,也可提供银行在开标日前三个月内开具证明文件的复印件。若提供的是复印件,招标采购单位保留审核原件的权利。",
+            "pages": [
+              65
+            ],
+            "page": 65,
+            "printed_page": 65,
+            "printed_pages": [
+              65
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第65页",
+              "index": 65,
+              "pages": [
+                65
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0091",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "4、如果是联合体投标,联合体各方均需提供上述证明。",
+            "quote": "4、如果是联合体投标,联合体各方均需提供上述证明。",
+            "pages": [
+              65
+            ],
+            "page": 65,
+            "printed_page": 65,
+            "printed_pages": [
+              65
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第65页",
+              "index": 65,
+              "pages": [
+                65
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0092",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "5 投标保证金缴纳凭证复印件或投标担保函",
+            "quote": "5 投标保证金缴纳凭证复印件或投标担保函",
+            "pages": [
+              66
+            ],
+            "page": 66,
+            "printed_page": 66,
+            "printed_pages": [
+              66
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第66页",
+              "index": 66,
+              "pages": [
+                66
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0093",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "1.按照投标人须知资料表中的规定提供复印件。",
+            "quote": "1.按照投标人须知资料表中的规定提供复印件。",
+            "pages": [
+              67
+            ],
+            "page": 67,
+            "printed_page": 67,
+            "printed_pages": [
+              67
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第67页",
+              "index": 67,
+              "pages": [
+                67
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0094",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2.复印件上应加盖本单位公章。",
+            "quote": "2.复印件上应加盖本单位公章。",
+            "pages": [
+              67
+            ],
+            "page": 67,
+            "printed_page": 67,
+            "printed_pages": [
+              67
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第67页",
+              "index": 67,
+              "pages": [
+                67
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0095",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "3.如果是联合体投标,联合体各方均需提供上述证明。",
+            "quote": "3.如果是联合体投标,联合体各方均需提供上述证明。",
+            "pages": [
+              67
+            ],
+            "page": 67,
+            "printed_page": 67,
+            "printed_pages": [
+              67
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第67页",
+              "index": 67,
+              "pages": [
+                67
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0096",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2.按照招标文件的规定加盖公章(自然人投标的无需盖章,需要签字)。",
+            "quote": "2.按照招标文件的规定加盖公章(自然人投标的无需盖章,需要签字)。",
+            "pages": [
+              68
+            ],
+            "page": 68,
+            "printed_page": 68,
+            "printed_pages": [
+              68
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第68页",
+              "index": 68,
+              "pages": [
+                68
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0097",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "3.如果是联合体投标,联合体各方均需提供上述证明。",
+            "quote": "3.如果是联合体投标,联合体各方均需提供上述证明。",
+            "pages": [
+              68
+            ],
+            "page": 68,
+            "printed_page": 68,
+            "printed_pages": [
+              68
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第68页",
+              "index": 68,
+              "pages": [
+                68
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0098",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "8 投标人须知资料表要求的其他资格证明文件说明:",
+            "quote": "8 投标人须知资料表要求的其他资格证明文件说明:",
+            "pages": [
+              69
+            ],
+            "page": 69,
+            "printed_page": 69,
+            "printed_pages": [
+              69
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第69页",
+              "index": 69,
+              "pages": [
+                69
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0099",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "1.应提供投标人须知资料表要求的其他资格证明文件。",
+            "quote": "1.应提供投标人须知资料表要求的其他资格证明文件。",
+            "pages": [
+              69
+            ],
+            "page": 69,
+            "printed_page": 69,
+            "printed_pages": [
+              69
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第69页",
+              "index": 69,
+              "pages": [
+                69
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0100",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2.复印件上应加盖本单位公章(自然人投标的无需盖章,需要签字)。",
+            "quote": "2.复印件上应加盖本单位公章(自然人投标的无需盖章,需要签字)。",
+            "pages": [
+              69
+            ],
+            "page": 69,
+            "printed_page": 69,
+            "printed_pages": [
+              69
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第69页",
+              "index": 69,
+              "pages": [
+                69
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0101",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "3. 如果是联合体投标,联合体各方需提供的满足招标文件要求的其他资格证明文件。",
+            "quote": "3. 如果是联合体投标,联合体各方需提供的满足招标文件要求的其他资格证明文件。",
+            "pages": [
+              69
+            ],
+            "page": 69,
+            "printed_page": 69,
+            "printed_pages": [
+              69
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第69页",
+              "index": 69,
+              "pages": [
+                69
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0102",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "9 投标人所投产品为进口产品提供以下证明文件,制造厂家的授权书制造商资格声明(参考格式,仅当招标文件要求必须提供产品制造厂家授权文件时须提供)",
+            "quote": "9 投标人所投产品为进口产品提供以下证明文件,制造厂家的授权书制造商资格声明(参考格式,仅当招标文件要求必须提供产品制造厂家授权文件时须提供)",
+            "pages": [
+              70
+            ],
+            "page": 70,
+            "printed_page": 70,
+            "printed_pages": [
+              70
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第70页",
+              "index": 70,
+              "pages": [
+                70
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0103",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "1、名称及概况:",
+            "quote": "1、名称及概况:",
+            "pages": [
+              70
+            ],
+            "page": 70,
+            "printed_page": 70,
+            "printed_pages": [
+              70
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第70页",
+              "index": 70,
+              "pages": [
+                70
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0104",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(1)制造厂家名称:",
+            "quote": "(1)制造厂家名称:",
+            "pages": [
+              70
+            ],
+            "page": 70,
+            "printed_page": 70,
+            "printed_pages": [
+              70
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第70页",
+              "index": 70,
+              "pages": [
+                70
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0105",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(2)地址及邮编:",
+            "quote": "(2)地址及邮编:",
+            "pages": [
+              70
+            ],
+            "page": 70,
+            "printed_page": 70,
+            "printed_pages": [
+              70
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第70页",
+              "index": 70,
+              "pages": [
+                70
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0106",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(3)成立和注册日期:",
+            "quote": "(3)成立和注册日期:",
+            "pages": [
+              70
+            ],
+            "page": 70,
+            "printed_page": 70,
+            "printed_pages": [
+              70
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第70页",
+              "index": 70,
+              "pages": [
+                70
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0107",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(4)主管部门:",
+            "quote": "(4)主管部门:",
+            "pages": [
+              70
+            ],
+            "page": 70,
+            "printed_page": 70,
+            "printed_pages": [
+              70
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第70页",
+              "index": 70,
+              "pages": [
+                70
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0108",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(5)企业性质:",
+            "quote": "(5)企业性质:",
+            "pages": [
+              70
+            ],
+            "page": 70,
+            "printed_page": 70,
+            "printed_pages": [
+              70
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第70页",
+              "index": 70,
+              "pages": [
+                70
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0109",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(6)法人代表:",
+            "quote": "(6)法人代表:",
+            "pages": [
+              70
+            ],
+            "page": 70,
+            "printed_page": 70,
+            "printed_pages": [
+              70
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第70页",
+              "index": 70,
+              "pages": [
+                70
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0110",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(7)职员人数:",
+            "quote": "(7)职员人数:",
+            "pages": [
+              70
+            ],
+            "page": 70,
+            "printed_page": 70,
+            "printed_pages": [
+              70
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第70页",
+              "index": 70,
+              "pages": [
+                70
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0111",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "制造厂家的授权书(参考格式,仅当招标文件要求必须提供产品制造厂家授权文件时须提供) 致:采购人或采购代理机构我们(制造商名称)是按(国家名称)法律成立的一家制造",
+            "quote": "制造厂家的授权书(参考格式,仅当招标文件要求必须提供产品制造厂家授权文件时须提供) 致:采购人或采购代理机构我们(制造商名称)是按(国家名称)法律成立的一家制造商,主要营业地点设在(制造商地址)。兹指派按(国家名称)的法律正式成立的,主要营业地点设在(代理商地址)的(代理商名称)作为我方真正的合法的代理人进行下列有效的活动:",
+            "pages": [
+              72
+            ],
+            "page": 72,
+            "printed_page": 72,
+            "printed_pages": [
+              72
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第72页",
+              "index": 72,
+              "pages": [
+                72
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0112",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(1)代表我方办理贵方第 (项目编号) 号招标公告要求提供的由我方制造的 (设备名称及型号)的货物及服务的有关事宜, 并对我方具有约束力。",
+            "quote": "(1)代表我方办理贵方第 (项目编号) 号招标公告要求提供的由我方制造的 (设备名称及型号)的货物及服务的有关事宜, 并对我方具有约束力。",
+            "pages": [
+              72
+            ],
+            "page": 72,
+            "printed_page": 72,
+            "printed_pages": [
+              72
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第72页",
+              "index": 72,
+              "pages": [
+                72
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0113",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(2)作为制造商,我方保证以投标合作者来约束自己,并对该投标共同和分别承担招标文件中所规定的义务。",
+            "quote": "(2)作为制造商,我方保证以投标合作者来约束自己,并对该投标共同和分别承担招标文件中所规定的义务。",
+            "pages": [
+              72
+            ],
+            "page": 72,
+            "printed_page": 72,
+            "printed_pages": [
+              72
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第72页",
+              "index": 72,
+              "pages": [
+                72
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0114",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(3)我方兹授予 (代理商名称) 作为我方的被授权人,全权办理和履行上述我方为完成本项目所必须的事宜,具有替换或撤销的全权。兹确认 (代理商名称) 或其正式授权",
+            "quote": "(3)我方兹授予 (代理商名称) 作为我方的被授权人,全权办理和履行上述我方为完成本项目所必须的事宜,具有替换或撤销的全权。兹确认 (代理商名称) 或其正式授权代表依此合法地办理一切事宜。",
+            "pages": [
+              72
+            ],
+            "page": 72,
+            "printed_page": 72,
+            "printed_pages": [
+              72
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第72页",
+              "index": 72,
+              "pages": [
+                72
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0115",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(4) 我方于年月日签署本文件。",
+            "quote": "(4) 我方于年月日签署本文件。",
+            "pages": [
+              72
+            ],
+            "page": 72,
+            "printed_page": 72,
+            "printed_pages": [
+              72
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第72页",
+              "index": 72,
+              "pages": [
+                72
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0116",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "1、投标书(投标文件格式六)",
+            "quote": "1、投标书(投标文件格式六)",
+            "pages": [
+              74
+            ],
+            "page": 74,
+            "printed_page": 74,
+            "printed_pages": [
+              74
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第74页",
+              "index": 74,
+              "pages": [
+                74
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0117",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2、投标分项报价表(投标文件格式七)",
+            "quote": "2、投标分项报价表(投标文件格式七)",
+            "pages": [
+              74
+            ],
+            "page": 74,
+            "printed_page": 74,
+            "printed_pages": [
+              74
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第74页",
+              "index": 74,
+              "pages": [
+                74
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0118",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "3、偏离表(投标文件格式八)",
+            "quote": "3、偏离表(投标文件格式八)",
+            "pages": [
+              74
+            ],
+            "page": 74,
+            "printed_page": 74,
+            "printed_pages": [
+              74
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第74页",
+              "index": 74,
+              "pages": [
+                74
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0119",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "4、缴纳中标服务费承诺书(投标文件格式九)",
+            "quote": "4、缴纳中标服务费承诺书(投标文件格式九)",
+            "pages": [
+              74
+            ],
+            "page": 74,
+            "printed_page": 74,
+            "printed_pages": [
+              74
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第74页",
+              "index": 74,
+              "pages": [
+                74
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0120",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "5、符合《政府采购促进中小企业发展暂行办法》、《关于政府采购支持监狱企业发展有关问题的通知》和《三部门联合发布关于促进残疾人就业政府采购政策的通知》价格扣减条件",
+            "quote": "5、符合《政府采购促进中小企业发展暂行办法》、《关于政府采购支持监狱企业发展有关问题的通知》和《三部门联合发布关于促进残疾人就业政府采购政策的通知》价格扣减条件的投标人须提交 5-1《投标人企业类型声明函》(投标文件格式十) 5-2《残疾人福利性单位声明函》(投标文件格式十一) 5-3 残疾人福利性单位声明函(投标文件格式十二) 5-4 关于符合本国产品标准的声明函(投标文件格式十三)",
+            "pages": [
+              74
+            ],
+            "page": 74,
+            "printed_page": 74,
+            "printed_pages": [
+              74
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第74页",
+              "index": 74,
+              "pages": [
+                74
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0121",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "6、投标人商务符合性承诺函(投标文件格式十四)",
+            "quote": "6、投标人商务符合性承诺函(投标文件格式十四)",
+            "pages": [
+              74
+            ],
+            "page": 74,
+            "printed_page": 74,
+            "printed_pages": [
+              74
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第74页",
+              "index": 74,
+              "pages": [
+                74
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0122",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "7、投标人关联单位的说明",
+            "quote": "7、投标人关联单位的说明",
+            "pages": [
+              74
+            ],
+            "page": 74,
+            "printed_page": 74,
+            "printed_pages": [
+              74
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第74页",
+              "index": 74,
+              "pages": [
+                74
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0123",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "8、投标文件还应包括投标人须知第10 条的所有响应文件1 投标书(投标文件格式六) 致:中招国际招标有限公司根据贵方为(项目名称)项目的投标邀请(招标编号),签",
+            "quote": "8、投标文件还应包括投标人须知第10 条的所有响应文件1 投标书(投标文件格式六) 致:中招国际招标有限公司根据贵方为(项目名称)项目的投标邀请(招标编号),签字代表(姓名、职务)经正式授权并代表投标人(投标人名称、地址)提交下述文件正本份、副本份及电子文档份:",
+            "pages": [
+              74,
+              75
+            ],
+            "page": 74,
+            "printed_page": 74,
+            "printed_pages": [
+              74,
+              75
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第74-75页",
+              "index": 74,
+              "pages": [
+                74,
+                75
+              ]
+            },
+            "detection": "cross_page",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0124",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(1)投标分项报价表",
+            "quote": "(1)投标分项报价表",
+            "pages": [
+              75
+            ],
+            "page": 75,
+            "printed_page": 75,
+            "printed_pages": [
+              75
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第75页",
+              "index": 75,
+              "pages": [
+                75
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0125",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(2)商务条款偏离表",
+            "quote": "(2)商务条款偏离表",
+            "pages": [
+              75
+            ],
+            "page": 75,
+            "printed_page": 75,
+            "printed_pages": [
+              75
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第75页",
+              "index": 75,
+              "pages": [
+                75
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0126",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(3)资格证明文件",
+            "quote": "(3)资格证明文件",
+            "pages": [
+              75
+            ],
+            "page": 75,
+            "printed_page": 75,
+            "printed_pages": [
+              75
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第75页",
+              "index": 75,
+              "pages": [
+                75
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0127",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(4)遵守国家有关法律、法规和规章,按招标文件中投标人须知和技术规格要求提供的有关文件",
+            "quote": "(4)遵守国家有关法律、法规和规章,按招标文件中投标人须知和技术规格要求提供的有关文件",
+            "pages": [
+              75
+            ],
+            "page": 75,
+            "printed_page": 75,
+            "printed_pages": [
+              75
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第75页",
+              "index": 75,
+              "pages": [
+                75
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0128",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(5)以形式出具的金额为人民币元的投标保证金。",
+            "quote": "(5)以形式出具的金额为人民币元的投标保证金。",
+            "pages": [
+              75
+            ],
+            "page": 75,
+            "printed_page": 75,
+            "printed_pages": [
+              75
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第75页",
+              "index": 75,
+              "pages": [
+                75
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0129",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "5 符合《政府采购促进中小企业发展暂行办法》、《关于政府采购支持监狱企业发展有关问题的通知》和《三部门联合发布关于促进残疾人就业政府采购政策的通知》价格扣减条件",
+            "quote": "5 符合《政府采购促进中小企业发展暂行办法》、《关于政府采购支持监狱企业发展有关问题的通知》和《三部门联合发布关于促进残疾人就业政府采购政策的通知》价格扣减条件的投标人须提交 5-1 中小企业声明函(投标文件格式十) 本公司(联合体)郑重声明,根据《政府采购促进中小企业发展管理办法》 (财库〔2020〕46 号)的规定,本公司(联合体)参加(单位名称)的(项目名称)采购活动,提供的货物全部由符合政策要求的中小企业制造。相关企业(含联合体中的中小企业、签订分包意向协议的中小企业)的具体情况如下:",
+            "pages": [
+              84
+            ],
+            "page": 84,
+            "printed_page": 84,
+            "printed_pages": [
+              84
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第84页",
+              "index": 84,
+              "pages": [
+                84
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0130",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "1. (标的名称),属于(采购文件中明确的所属行业)行业;制造商为(企业名称),从业人员人,营业收入为万元,资产总额为万元,属于(中型企业、小型企业、微型企业)",
+            "quote": "1. (标的名称),属于(采购文件中明确的所属行业)行业;制造商为(企业名称),从业人员人,营业收入为万元,资产总额为万元,属于(中型企业、小型企业、微型企业);",
+            "pages": [
+              84
+            ],
+            "page": 84,
+            "printed_page": 84,
+            "printed_pages": [
+              84
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第84页",
+              "index": 84,
+              "pages": [
+                84
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0131",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2. (标的名称),属于(采购文件中明确的所属行业)行业;制造商为(企业名称),从业人员人,营业收入为万元,资产总额为万元,属于(中型企业、小型企业、微型企业)",
+            "quote": "2. (标的名称),属于(采购文件中明确的所属行业)行业;制造商为(企业名称),从业人员人,营业收入为万元,资产总额为万元,属于(中型企业、小型企业、微型企业); ...... 以上企业,不属于大企业的分支机构,不存在控股股东为大企业的情形, 也不存在与大企业的负责人为同一人的情形。",
+            "pages": [
+              84
+            ],
+            "page": 84,
+            "printed_page": 84,
+            "printed_pages": [
+              84
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第84页",
+              "index": 84,
+              "pages": [
+                84
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0132",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "注:投标文件应提供合同复印件加盖公章,合同复印件应至少包括合同或协议首页、时间页、服务内容页、签字盖章页,复印件作为证明材料,未提供证明材料或材料不齐全的,投标",
+            "quote": "注:投标文件应提供合同复印件加盖公章,合同复印件应至少包括合同或协议首页、时间页、服务内容页、签字盖章页,复印件作为证明材料,未提供证明材料或材料不齐全的,投标人提供的业绩将不予认可。",
+            "pages": [
+              92
+            ],
+            "page": 92,
+            "printed_page": 92,
+            "printed_pages": [
+              92
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第92页",
+              "index": 92,
+              "pages": [
+                92
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0133",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "需提供证明文件包括但不限于:产品彩页或检测报告,(根据品目01:短波红外光斑光谱关联成像系统3.6.",
+            "quote": "需提供证明文件包括但不限于:产品彩页或检测报告,(根据品目01:短波红外光斑光谱关联成像系统3.6.",
+            "pages": [
+              95
+            ],
+            "page": 95,
+            "printed_page": 95,
+            "printed_pages": [
+              95
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第95页",
+              "index": 95,
+              "pages": [
+                95
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0134",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2、3.6.3 要求,需提供软件功能模块截图并提供某一种样品自动荧光图像渲染结果彩图,并加盖公章。根据品目02:太赫兹时域光谱仪3.2.6.2 要求,需提供激光",
+            "quote": "2、3.6.3 要求,需提供软件功能模块截图并提供某一种样品自动荧光图像渲染结果彩图,并加盖公章。根据品目02:太赫兹时域光谱仪3.2.6.2 要求,需提供激光干涉仪或千分表测量数据,并加盖公章。根据品目05:粮食油料不完善粒分析仪3.1.2 要求,需提供包括准确度、重复性和台间差等参数的验证报告,并加盖公章。),不提供视为未响应。",
+            "pages": [
+              95
+            ],
+            "page": 95,
+            "printed_page": 95,
+            "printed_pages": [
+              95
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第95页",
+              "index": 95,
+              "pages": [
+                95
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0135",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "一、技术需求部分",
+            "quote": "一、技术需求部分",
+            "pages": [
+              95
+            ],
+            "page": 95,
+            "printed_page": 95,
+            "printed_pages": [
+              95
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第95页",
+              "index": 95,
+              "pages": [
+                95
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0136",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "1. 用途主要用于粮食产后储运加工环节关键品质快速无损检测,通过构建样品光谱和图谱数据与关键品质指标的智能算法模型,实现粮食蛋白、脂肪、微量元素、病变元素、感染",
+            "quote": "1. 用途主要用于粮食产后储运加工环节关键品质快速无损检测,通过构建样品光谱和图谱数据与关键品质指标的智能算法模型,实现粮食蛋白、脂肪、微量元素、病变元素、感染菌种及毒素等指标快速无损检测及分布可视化表示与分析。",
+            "pages": [
+              95
+            ],
+            "page": 95,
+            "printed_page": 95,
+            "printed_pages": [
+              95
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第95页",
+              "index": 95,
+              "pages": [
+                95
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0137",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "#3.2.6.2 位移台定位精度:≤10 μm,提供激光干涉仪或千分表测量数据(提供证明材料);",
+            "quote": "#3.2.6.2 位移台定位精度:≤10 μm,提供激光干涉仪或千分表测量数据(提供证明材料);",
+            "pages": [
+              99
+            ],
+            "page": 99,
+            "printed_page": 99,
+            "printed_pages": [
+              99
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第99页",
+              "index": 99,
+              "pages": [
+                99
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0138",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "5.投标人所投产品列入无线局域网产品清单,应提供相关证明,在评标时予以优先采购,具体优惠措施为:若采用综合评标法,得分相同时,排序在前。",
+            "quote": "5.投标人所投产品列入无线局域网产品清单,应提供相关证明,在评标时予以优先采购,具体优惠措施为:若采用综合评标法,得分相同时,排序在前。",
+            "pages": [
+              116
+            ],
+            "page": 116,
+            "printed_page": 116,
+            "printed_pages": [
+              116
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第116页",
+              "index": 116,
+              "pages": [
+                116
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0139",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "评审委员会启动异常低价投标(响应)审查后,属于前述第1项至第4项情形的,应当要求相关供应商在评审现场合理的时间内对投标(响应)价格作出解释,提供项目具体成本测算",
+            "quote": "评审委员会启动异常低价投标(响应)审查后,属于前述第1项至第4项情形的,应当要求相关供应商在评审现场合理的时间内对投标(响应)价格作出解释,提供项目具体成本测算等与报价合理性相关的书面说明及必要的证明材料,包括但不限于原材料成本、人工成本、制造费用等,给予相关供应商的合理时间一般不少于30分钟。其中,属于第3项情形,供应商已随投标(响应)文件一并提交相关书面说明及必要的证明材料的,在评审现场可不再重复提交。",
+            "pages": [
+              117,
+              118
+            ],
+            "page": 117,
+            "printed_page": 117,
+            "printed_pages": [
+              117,
+              118
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第117-118页",
+              "index": 117,
+              "pages": [
+                117,
+                118
+              ]
+            },
+            "detection": "cross_page",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0140",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "Col1：4 分：节能环<br>保 Col3：1 方案：投标人所<br>投设备获<br>得相关节<br>能、环保<br>认证情况 Col5：0-1 分,包括安装",
+            "quote": "Col1：4 分：节能环<br>保 Col3：1 方案：投标人所<br>投设备获<br>得相关节<br>能、环保<br>认证情况 Col5：0-1 分,包括安装计划、时间表、技术支持、验<br>收实施方案等。方案内容完整优于需求,详<br>实可行,有很强的针对性,得5 分;提供了<br>常规、通用的方案,基本符合项目需求,得<br>3 分;提供了简单的方案,但与项目需求有<br>差距,得1 分;无细化方案的,得0 分。：除政府强制采购的节能产品外:<br>(1)节能产品:对于列入政府采购节能产品<br>品目清单的,应当优先采购的,投标人提供<br>所投产品的由国家确定的认证机构出具的、<br>处于有效期之内的节能产品认证证书复印件<br>的(加盖投标人公章),得0.5 分;否则0<br>分。<br>(2)环保产品:对于列入政府采购环境标志<br>产品品目清单的,应当优先采购的产品,投<br",
+            "pages": [
+              123
+            ],
+            "page": 123,
+            "printed_page": 123,
+            "printed_pages": [
+              123
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第123页",
+              "index": 123,
+              "pages": [
+                123
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0141",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(2)环保产品:对于列入政府采购环境标志产品品目清单的,应当优先采购的产品,投标人提供所投产品的由国家确定的认证机构出具的、处于有效期之内的环境标志产品认证证书",
+            "quote": "(2)环保产品:对于列入政府采购环境标志产品品目清单的,应当优先采购的产品,投标人提供所投产品的由国家确定的认证机构出具的、处于有效期之内的环境标志产品认证证书复印件的(加盖投标人公章),得 0.5 分;否则0 分。",
+            "pages": [
+              123
+            ],
+            "page": 123,
+            "printed_page": 123,
+            "printed_pages": [
+              123
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第123页",
+              "index": 123,
+              "pages": [
+                123
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          }
+        ]
+      },
+      "rejection": {
+        "label": "废标项",
+        "items": [
+          {
+            "clause_id": "TB-0142",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "1.3.5 若投标人须知资料表中写明专门面向中小企业采购的,如投标人为非中小企业,其投标将作为无效投标被拒绝。",
+            "quote": "1.3.5 若投标人须知资料表中写明专门面向中小企业采购的,如投标人为非中小企业,其投标将作为无效投标被拒绝。",
+            "pages": [
+              12
+            ],
+            "page": 12,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第12页",
+              "index": 12,
+              "pages": [
+                12
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0143",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "若投标须知前附表中未写明允许采购进口产品,如投标人所投产品为进口产品,其投标将被认定为投标无效。",
+            "quote": "若投标须知前附表中未写明允许采购进口产品,如投标人所投产品为进口产品,其投标将被认定为投标无效。",
+            "pages": [
+              12
+            ],
+            "page": 12,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第12页",
+              "index": 12,
+              "pages": [
+                12
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0144",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "1.4.7 以联合体形式参加政府采购活动的,联合体各方不得再单独参加或者与其他投标人另外组成联合体参加本项目投标,否则相关投标将作为无效投标被拒绝。",
+            "quote": "1.4.7 以联合体形式参加政府采购活动的,联合体各方不得再单独参加或者与其他投标人另外组成联合体参加本项目投标,否则相关投标将作为无效投标被拒绝。",
+            "pages": [
+              13
+            ],
+            "page": 13,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第13页",
+              "index": 13,
+              "pages": [
+                13
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0145",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "1.5 单位负责人为同一人或者存在直接控股、管理关系的不同投标人,其投标将作为无效投标被否决。",
+            "quote": "1.5 单位负责人为同一人或者存在直接控股、管理关系的不同投标人,其投标将作为无效投标被否决。",
+            "pages": [
+              13
+            ],
+            "page": 13,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第13页",
+              "index": 13,
+              "pages": [
+                13
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0146",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "1.6 为本项目提供整体设计、规范编制或者项目管理、监理、检测等服务的投标人,其投标将作为无效投标被否决。",
+            "quote": "1.6 为本项目提供整体设计、规范编制或者项目管理、监理、检测等服务的投标人,其投标将作为无效投标被否决。",
+            "pages": [
+              13
+            ],
+            "page": 13,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第13页",
+              "index": 13,
+              "pages": [
+                13
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0147",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "1.7 投标人在投标过程中不得向采购人提供、给予任何有价值的物品,影响其正常决策行为。一经发现,其投标将作为无效投标被否决。",
+            "quote": "1.7 投标人在投标过程中不得向采购人提供、给予任何有价值的物品,影响其正常决策行为。一经发现,其投标将作为无效投标被否决。",
+            "pages": [
+              13
+            ],
+            "page": 13,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第13页",
+              "index": 13,
+              "pages": [
+                13
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0148",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "1.8.5.6 关于节能、环保的政策要求投标人所投产品如被列入财政部与国家主管部门颁发的《节能产品政府采购品目清单》或《环境标志产品政府采购品目清单》,应提供国",
+            "quote": "1.8.5.6 关于节能、环保的政策要求投标人所投产品如被列入财政部与国家主管部门颁发的《节能产品政府采购品目清单》或《环境标志产品政府采购品目清单》,应提供国家确定的认证机构出具的、处于有效期之内的节能产品、环境标志产品认证证书,在评标时予以优先采购。如招标人所采购产品为政府强制采购的节能产品,投标人所投产品必须提供国家确定的认证机构出具的、处于有效期之内的节能产品认证证书, 否则其投标将作为无效投标被拒绝。",
+            "pages": [
+              15
+            ],
+            "page": 15,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第15页",
+              "index": 15,
+              "pages": [
+                15
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0149",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "2.3 投标人报价超过招标文件规定的预算金额或者分项、分包最高限价的, 其投标将作为无效投标被否决。",
+            "quote": "2.3 投标人报价超过招标文件规定的预算金额或者分项、分包最高限价的, 其投标将作为无效投标被否决。",
+            "pages": [
+              15
+            ],
+            "page": 15,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第15页",
+              "index": 15,
+              "pages": [
+                15
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0150",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "5.2 投标人应认真阅读招标文件所有的事项、格式、条款和技术规范等。如投标人没有按照招标文件要求提交全部资料,或者投标文件没有对招标文件在各方面都做出实质性响应",
+            "quote": "5.2 投标人应认真阅读招标文件所有的事项、格式、条款和技术规范等。如投标人没有按照招标文件要求提交全部资料,或者投标文件没有对招标文件在各方面都做出实质性响应是投标人的风险,并可能导致其投标被拒绝。",
+            "pages": [
+              16
+            ],
+            "page": 16,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第16页",
+              "index": 16,
+              "pages": [
+                16
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0151",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "8.1 投标人可对招标文件其中一包或几包进行投标,除非在投标人须知资料表中另有规定。投标人对所投分包招标文件中所列的所有服务内容进行投标,如仅响应一包中的部分服",
+            "quote": "8.1 投标人可对招标文件其中一包或几包进行投标,除非在投标人须知资料表中另有规定。投标人对所投分包招标文件中所列的所有服务内容进行投标,如仅响应一包中的部分服务,其投标将作为无效投标被否决。",
+            "pages": [
+              17
+            ],
+            "page": 17,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第17页",
+              "index": 17,
+              "pages": [
+                17
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0152",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "11.1 所有投标均以人民币报价。投标人的投标报价应遵守《中华人民共和国价格法》。同时,根据《中华人民共和国政府采购法》第二条的规定,为保证公平竞争,如有服务需",
+            "quote": "11.1 所有投标均以人民币报价。投标人的投标报价应遵守《中华人民共和国价格法》。同时,根据《中华人民共和国政府采购法》第二条的规定,为保证公平竞争,如有服务需求主体部分的赠与行为,将导致其投标被拒绝。",
+            "pages": [
+              18,
+              19
+            ],
+            "page": 18,
+            "printed_page": null,
+            "printed_pages": [
+              null,
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第18-19页",
+              "index": 18,
+              "pages": [
+                18,
+                19
+              ]
+            },
+            "detection": "cross_page",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0153",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "11.3 投标人所报的各分项投标报价在合同履行过程中是固定不变的,不得以任何理由予以变更。任何包含价格调整要求的投标,将被认为是无效投标而被拒绝。",
+            "quote": "11.3 投标人所报的各分项投标报价在合同履行过程中是固定不变的,不得以任何理由予以变更。任何包含价格调整要求的投标,将被认为是无效投标而被拒绝。",
+            "pages": [
+              19
+            ],
+            "page": 19,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第19页",
+              "index": 19,
+              "pages": [
+                19
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0154",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "下列任何情况发生,投标保证金不予退还:",
+            "quote": "下列任何情况发生,投标保证金不予退还:",
+            "pages": [
+              19
+            ],
+            "page": 19,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第19页",
+              "index": 19,
+              "pages": [
+                19
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0155",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(1)在投标有效期内,投标人撤销投标的;",
+            "quote": "(1)在投标有效期内,投标人撤销投标的;",
+            "pages": [
+              19
+            ],
+            "page": 19,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第19页",
+              "index": 19,
+              "pages": [
+                19
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0156",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(2)中标人不按本须知第30 条的规定与采购人签订合同的;",
+            "quote": "(2)中标人不按本须知第30 条的规定与采购人签订合同的;",
+            "pages": [
+              19
+            ],
+            "page": 19,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第19页",
+              "index": 19,
+              "pages": [
+                19
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0157",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(3)中标人不按本须知第31 条的规定提交履约保证金的;",
+            "quote": "(3)中标人不按本须知第31 条的规定提交履约保证金的;",
+            "pages": [
+              19
+            ],
+            "page": 19,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第19页",
+              "index": 19,
+              "pages": [
+                19
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0158",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(4)中标人不按本须知第32 条的规定缴纳中标服务费;",
+            "quote": "(4)中标人不按本须知第32 条的规定缴纳中标服务费;",
+            "pages": [
+              19
+            ],
+            "page": 19,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第19页",
+              "index": 19,
+              "pages": [
+                19
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0159",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(5)存在的串通投标情形的;",
+            "quote": "(5)存在的串通投标情形的;",
+            "pages": [
+              19
+            ],
+            "page": 19,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第19页",
+              "index": 19,
+              "pages": [
+                19
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0160",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(6)存在向采购人、代理机构或评标专家行贿事实的。",
+            "quote": "(6)存在向采购人、代理机构或评标专家行贿事实的。",
+            "pages": [
+              19
+            ],
+            "page": 19,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第19页",
+              "index": 19,
+              "pages": [
+                19
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0161",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "12.4 投标人没有根据本须知12.1 和第12.3 条规定提交投标保证金的,将被视为无效投标被拒绝。",
+            "quote": "12.4 投标人没有根据本须知12.1 和第12.3 条规定提交投标保证金的,将被视为无效投标被拒绝。",
+            "pages": [
+              19
+            ],
+            "page": 19,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第19页",
+              "index": 19,
+              "pages": [
+                19
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0162",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "13.1 投标应在规定的提交投标文件截止之日起,按照投标人须知资料表中规定时间内保持有效。投标有效期不满足要求的投标,将被视为无效投标被拒绝。",
+            "quote": "13.1 投标应在规定的提交投标文件截止之日起,按照投标人须知资料表中规定时间内保持有效。投标有效期不满足要求的投标,将被视为无效投标被拒绝。",
+            "pages": [
+              20
+            ],
+            "page": 20,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第20页",
+              "index": 20,
+              "pages": [
+                20
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0163",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "14.3 所有投标文件采用不可拆装的胶订方式装订,否则将被视为无效投标被拒绝。",
+            "quote": "14.3 所有投标文件采用不可拆装的胶订方式装订,否则将被视为无效投标被拒绝。",
+            "pages": [
+              21
+            ],
+            "page": 21,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第21页",
+              "index": 21,
+              "pages": [
+                21
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0164",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "15.4 如果投标人未按上述要求密封,或者资格证明文件密封装订在其他投标文件中,其投标将作为无效投标被否决。",
+            "quote": "15.4 如果投标人未按上述要求密封,或者资格证明文件密封装订在其他投标文件中,其投标将作为无效投标被否决。",
+            "pages": [
+              21
+            ],
+            "page": 21,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第21页",
+              "index": 21,
+              "pages": [
+                21
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0165",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "同时出现两种以上不一致的,按照前款规定的顺序修正。修正后的报价按照第20.2 条的规定经投标人确认后产生约束力。投标人不确认的, 将被视为无效投标被拒绝。",
+            "quote": "同时出现两种以上不一致的,按照前款规定的顺序修正。修正后的报价按照第20.2 条的规定经投标人确认后产生约束力。投标人不确认的, 将被视为无效投标被拒绝。",
+            "pages": [
+              23
+            ],
+            "page": 23,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第23页",
+              "index": 23,
+              "pages": [
+                23
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0166",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "20.4 采购人或采购代理机构将在开标前一个工作日至投标截止后一小时期间查询投标人的信用记录,投标人存在不良信用记录的,其投标将被作为无效投标被拒绝。",
+            "quote": "20.4 采购人或采购代理机构将在开标前一个工作日至投标截止后一小时期间查询投标人的信用记录,投标人存在不良信用记录的,其投标将被作为无效投标被拒绝。",
+            "pages": [
+              24
+            ],
+            "page": 24,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第24页",
+              "index": 24,
+              "pages": [
+                24
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0167",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "以联合体形式参加投标的,联合体任何成员存在以上不良信用记录的, 联合体投标将被作为无效投标被拒绝。",
+            "quote": "以联合体形式参加投标的,联合体任何成员存在以上不良信用记录的, 联合体投标将被作为无效投标被拒绝。",
+            "pages": [
+              24
+            ],
+            "page": 24,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第24页",
+              "index": 24,
+              "pages": [
+                24
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0168",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "22.1 在比较与评价之前,根据本须知的规定,评标委员会要审查每份投标文件是否实质上响应了招标文件的要求。实质上响应的投标应该是与招标文件要求的全部条款、条件和",
+            "quote": "22.1 在比较与评价之前,根据本须知的规定,评标委员会要审查每份投标文件是否实质上响应了招标文件的要求。实质上响应的投标应该是与招标文件要求的全部条款、条件和规格相符,没有重大偏离的投标。对关键条款的偏离、保留和反对,将被认为是实质上的偏离,属于无效投标被拒绝。评标委员会决定投标的响应性只根据招标文件要求、投标文件内容及财政主管部门指定相关信息发布媒体。",
+            "pages": [
+              24
+            ],
+            "page": 24,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第24页",
+              "index": 24,
+              "pages": [
+                24
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0169",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "22.2 实质上没有响应招标文件要求的投标将被作为无效投标被拒绝。投标人不得通过修正或撤销不符合要求的偏离或保留从而使其投标成为实",
+            "quote": "22.2 实质上没有响应招标文件要求的投标将被作为无效投标被拒绝。投标人不得通过修正或撤销不符合要求的偏离或保留从而使其投标成为实",
+            "pages": [
+              24
+            ],
+            "page": 24,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第24页",
+              "index": 24,
+              "pages": [
+                24
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0170",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "质上响应的投标。如发现下列情况之一的,其投标将被作为无效投标被拒绝:",
+            "quote": "质上响应的投标。如发现下列情况之一的,其投标将被作为无效投标被拒绝:",
+            "pages": [
+              25
+            ],
+            "page": 25,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第25页",
+              "index": 25,
+              "pages": [
+                25
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0171",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(1)未按招标文件规定的形式和金额交纳投标保证金的;",
+            "quote": "(1)未按招标文件规定的形式和金额交纳投标保证金的;",
+            "pages": [
+              25
+            ],
+            "page": 25,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第25页",
+              "index": 25,
+              "pages": [
+                25
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0172",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(2)未按照招标文件规定要求签署、盖章的;",
+            "quote": "(2)未按照招标文件规定要求签署、盖章的;",
+            "pages": [
+              25
+            ],
+            "page": 25,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第25页",
+              "index": 25,
+              "pages": [
+                25
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0173",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(3)未满足招标文件中技术条款的实质性要求;",
+            "quote": "(3)未满足招标文件中技术条款的实质性要求;",
+            "pages": [
+              25
+            ],
+            "page": 25,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第25页",
+              "index": 25,
+              "pages": [
+                25
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0174",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(4)与其他投标人串通投标,或者与招标人串通投标妨碍其他投标人竞争行为,损害采购人或者其他投标人合法权益的;",
+            "quote": "(4)与其他投标人串通投标,或者与招标人串通投标妨碍其他投标人竞争行为,损害采购人或者其他投标人合法权益的;",
+            "pages": [
+              25
+            ],
+            "page": 25,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第25页",
+              "index": 25,
+              "pages": [
+                25
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0175",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(5)属于招标文件规定的其他无效投标情形;",
+            "quote": "(5)属于招标文件规定的其他无效投标情形;",
+            "pages": [
+              25
+            ],
+            "page": 25,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第25页",
+              "index": 25,
+              "pages": [
+                25
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0176",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(6)评标委员会认为投标人的报价明显低于其他通过符合性检查投标人的报价,有可能影响履约的,且投标人未按照规定证明其报价合理性的;",
+            "quote": "(6)评标委员会认为投标人的报价明显低于其他通过符合性检查投标人的报价,有可能影响履约的,且投标人未按照规定证明其报价合理性的;",
+            "pages": [
+              25
+            ],
+            "page": 25,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第25页",
+              "index": 25,
+              "pages": [
+                25
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0177",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(7)投标文件含有采购人不能接受的附加条件的;",
+            "quote": "(7)投标文件含有采购人不能接受的附加条件的;",
+            "pages": [
+              25
+            ],
+            "page": 25,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第25页",
+              "index": 25,
+              "pages": [
+                25
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0178",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(8)不符合法规和招标文件中规定的其他实质性要求的。",
+            "quote": "(8)不符合法规和招标文件中规定的其他实质性要求的。",
+            "pages": [
+              25
+            ],
+            "page": 25,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第25页",
+              "index": 25,
+              "pages": [
+                25
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0179",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "出现下列情形之一,将导致项目废标即本项目的所有投标被拒绝:",
+            "quote": "出现下列情形之一,将导致项目废标即本项目的所有投标被拒绝:",
+            "pages": [
+              27
+            ],
+            "page": 27,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第27页",
+              "index": 27,
+              "pages": [
+                27
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0180",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(1)符合专业条件的投标人或者对招标文件做实质性响应的投标人不足三家;",
+            "quote": "(1)符合专业条件的投标人或者对招标文件做实质性响应的投标人不足三家;",
+            "pages": [
+              27
+            ],
+            "page": 27,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第27页",
+              "index": 27,
+              "pages": [
+                27
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0181",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(2)出现影响采购公正的违法、违规行为的;",
+            "quote": "(2)出现影响采购公正的违法、违规行为的;",
+            "pages": [
+              27
+            ],
+            "page": 27,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第27页",
+              "index": 27,
+              "pages": [
+                27
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0182",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(3)投标人的报价均超过了采购预算,采购人不能支付的;",
+            "quote": "(3)投标人的报价均超过了采购预算,采购人不能支付的;",
+            "pages": [
+              27
+            ],
+            "page": 27,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第27页",
+              "index": 27,
+              "pages": [
+                27
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0183",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(4)因重大变故,采购任务取消的。",
+            "quote": "(4)因重大变故,采购任务取消的。",
+            "pages": [
+              27
+            ],
+            "page": 27,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第27页",
+              "index": 27,
+              "pages": [
+                27
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0184",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "25.3 投标人试图影响采购人、采购代理机构和评标委员会的任何活动,将导致其投标被拒绝,并承担相应的法律责任。",
+            "quote": "25.3 投标人试图影响采购人、采购代理机构和评标委员会的任何活动,将导致其投标被拒绝,并承担相应的法律责任。",
+            "pages": [
+              27
+            ],
+            "page": 27,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第27页",
+              "index": 27,
+              "pages": [
+                27
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0185",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "3.如果不提供详细分项报价将视为没有实质性响应招标文件。",
+            "quote": "3.如果不提供详细分项报价将视为没有实质性响应招标文件。",
+            "pages": [
+              77
+            ],
+            "page": 77,
+            "printed_page": 77,
+            "printed_pages": [
+              77
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第77页",
+              "index": 77,
+              "pages": [
+                77
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0186",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "3 偏离表(投标文件格式八) 3-1 合同条款偏离表(投标文件格式八) 3-1合同条款偏离表项目编号/包号:_____________________ 项目名称",
+            "quote": "3 偏离表(投标文件格式八) 3-1 合同条款偏离表(投标文件格式八) 3-1合同条款偏离表项目编号/包号:_____________________ 项目名称:_____________ 序号招标文件条目号(页码) 招标文件要求投标文件内容偏离情况说明对本项目合同条款的偏离情况(应进行选择,未选择投标无效): □无偏离(如无偏离,仅选择无偏离即可;无偏离即为对合同条款中的所有要求,均视作投标人已对之理解和响应。) □有偏离(如有偏离,则应在本表中对负偏离项逐一列明,否则投标无效;对合同条款中的所有要求,除本表列明的偏离外,均视作投标人已对之理解和响应。)注: “偏离情况”列应据实填写“正偏离”或“负偏离”。",
+            "pages": [
+              78
+            ],
+            "page": 78,
+            "printed_page": 78,
+            "printed_pages": [
+              78
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第78页",
+              "index": 78,
+              "pages": [
+                78
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0187",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "3-2 技术参数偏离表(投标文件格式八) 技术参数偏离表项目编号/包号:_____________________ 项目名称:____________ 序号招标",
+            "quote": "3-2 技术参数偏离表(投标文件格式八) 技术参数偏离表项目编号/包号:_____________________ 项目名称:____________ 序号招标文件条目号或页码招标文件要求投标文件内容偏离情况说明对本项目技术参数条款的偏离情况(应进行选择,未选择投标无效): □无偏离(如无偏离,仅选择无偏离即可;无偏离即为对招标文件中的所有商务、技术要求,符合性评审时均视作投标人已对之理解和响应。) □有偏离(如有偏离,则应在本表中对负偏离项逐一列明,否则投标无效;对招标文件中的所有商务、技术要求,除本表列明的偏离外,符合性评审时均视作投标人已对之理解和响应。)注:",
+            "pages": [
+              80
+            ],
+            "page": 80,
+            "printed_page": 80,
+            "printed_pages": [
+              80
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第80页",
+              "index": 80,
+              "pages": [
+                80
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0188",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "1.“偏离情况”列应据实填写“正偏离”或“负偏离”或“无偏离”。",
+            "quote": "1.“偏离情况”列应据实填写“正偏离”或“负偏离”或“无偏离”。",
+            "pages": [
+              80
+            ],
+            "page": 80,
+            "printed_page": 80,
+            "printed_pages": [
+              80
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第80页",
+              "index": 80,
+              "pages": [
+                80
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0189",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "技术参数 *不满足废标项,#为重点项目,其余技术参数均为一般项。",
+            "quote": "技术参数 *不满足废标项,#为重点项目,其余技术参数均为一般项。",
+            "pages": [
+              95
+            ],
+            "page": 95,
+            "printed_page": 95,
+            "printed_pages": [
+              95
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第95页",
+              "index": 95,
+              "pages": [
+                95
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0190",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "评审委员会依据专业经验,参考同类项目中标(成交)价格、类似产品市场价格水平、行业人工费用标准、国家有关部门指导行业协会发布的行业平均成本等情况,对报价合理性进行",
+            "quote": "评审委员会依据专业经验,参考同类项目中标(成交)价格、类似产品市场价格水平、行业人工费用标准、国家有关部门指导行业协会发布的行业平均成本等情况,对报价合理性进行判断。投标(响应)供应商不能提供书面说明、 证明材料,或者提供的书面说明、证明材料不能证明其报价合理性的,评审委员会应当将其作为无效投标(响应)处理。",
+            "pages": [
+              118
+            ],
+            "page": 118,
+            "printed_page": 118,
+            "printed_pages": [
+              118
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第118页",
+              "index": 118,
+              "pages": [
+                118
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0191",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "每提供一个业绩得0.5 分,满分3 分。若无则不得分。(投标人须提供有效的投标产品业绩证明材料:合同不得遮挡且销售业绩合同中必须至少包含合同双方印章、签字、货物",
+            "quote": "每提供一个业绩得0.5 分,满分3 分。若无则不得分。(投标人须提供有效的投标产品业绩证明材料:合同不得遮挡且销售业绩合同中必须至少包含合同双方印章、签字、货物名称、型号、数量、合同金额、签订时间等信息内容(以上内容缺少一项,业绩不予承认)。提供销售业绩合同复印件须字迹清晰,辨识无误。不符合上述要求或未按要求提供有效证明文件的业绩在评审时将不予以承认。) 2 技术部分 51 关键技术条款响应程度 0 技术需求中的“*”号条款是关键技术条款, 共10 条,为废标项,不允许负偏离。每个条款号即为一条,无论其是否隶属于上一级编号。",
+            "pages": [
+              122
+            ],
+            "page": 122,
+            "printed_page": 122,
+            "printed_pages": [
+              122
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第122页",
+              "index": 122,
+              "pages": [
+                122
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          }
+        ]
+      }
+    },
+    "uncited": []
+  }
+}

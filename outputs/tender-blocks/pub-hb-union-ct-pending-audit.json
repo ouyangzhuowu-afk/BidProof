@@ -25,35 +25,42 @@
     "mismatches": []
   },
   "footer_in_quotes": 0,
-  "bare_page_in_quotes": 8,
+  "bare_page_in_quotes": 6,
   "counts": {
-    "total": 282,
-    "with_real_page": 282,
+    "total": 288,
+    "with_real_page": 288,
     "without_page": 0,
     "by_block": {
       "qualification": {
         "label": "资格要求",
-        "cited": 92,
-        "items": 92
+        "cited": 112,
+        "items": 112
       },
       "scoring": {
         "label": "评分要求",
-        "cited": 16,
-        "items": 16
+        "cited": 14,
+        "items": 14
       },
       "materials": {
         "label": "要交的材料",
-        "cited": 138,
-        "items": 138
+        "cited": 103,
+        "items": 103
       },
       "rejection": {
         "label": "废标项",
-        "cited": 36,
-        "items": 36
+        "cited": 59,
+        "items": 59
       }
     }
   },
-  "known_hits": [],
+  "structural_checks": {
+    "product_pass_false": true,
+    "audit_status_pending": true,
+    "no_pass_status": true,
+    "cited_labels_use_pdf_page": true,
+    "page_index_matches_order": true,
+    "ocr_not_used": true
+  },
   "extraction": {
     "audit_status": "pending_audit",
     "product_pass": false,
@@ -65,34 +72,6 @@
         "items": [
           {
             "clause_id": "TB-0001",
-            "block": "qualification",
-            "label": "资格要求",
-            "summary": "二、申请人的资格要求",
-            "quote": "二、申请人的资格要求",
-            "pages": [
-              3
-            ],
-            "page": 3,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第3页",
-              "index": 3,
-              "pages": [
-                3
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0002",
             "block": "qualification",
             "label": "资格要求",
             "summary": "1.满足《中华人民共和国政府采购法》第二十二条规定,即:",
@@ -120,7 +99,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0003",
+            "clause_id": "TB-0002",
             "block": "qualification",
             "label": "资格要求",
             "summary": "(1)具有独立承担民事责任的能力;",
@@ -148,11 +127,39 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0004",
+            "clause_id": "TB-0003",
             "block": "qualification",
             "label": "资格要求",
             "summary": "(2)具有良好的商业信誉和健全的财务会计制度;",
             "quote": "(2)具有良好的商业信誉和健全的财务会计制度;",
+            "pages": [
+              3
+            ],
+            "page": 3,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第3页",
+              "index": 3,
+              "pages": [
+                3
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0004",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "(3)具有履行合同所必需的设备和专业技术能力;",
+            "quote": "(3)具有履行合同所必需的设备和专业技术能力;",
             "pages": [
               3
             ],
@@ -515,34 +522,6 @@
             "clause_id": "TB-0017",
             "block": "qualification",
             "label": "资格要求",
-            "summary": "三、获取招标文件",
-            "quote": "三、获取招标文件",
-            "pages": [
-              4
-            ],
-            "page": 4,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第4页",
-              "index": 4,
-              "pages": [
-                4
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0018",
-            "block": "qualification",
-            "label": "资格要求",
             "summary": "1.时间:2026 年5 月19 日至2026 年5 月25 日,每天上午8:30 至12:00, 下午14:00 至17:00(北京时间,法定节假日除外)",
             "quote": "1.时间:2026 年5 月19 日至2026 年5 月25 日,每天上午8:30 至12:00, 下午14:00 至17:00(北京时间,法定节假日除外)",
             "pages": [
@@ -568,7 +547,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0019",
+            "clause_id": "TB-0018",
             "block": "qualification",
             "label": "资格要求",
             "summary": "2.地点:网上获取",
@@ -596,7 +575,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0020",
+            "clause_id": "TB-0019",
             "block": "qualification",
             "label": "资格要求",
             "summary": "3.方式:",
@@ -624,7 +603,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0021",
+            "clause_id": "TB-0020",
             "block": "qualification",
             "label": "资格要求",
             "summary": "(1)登录“湖北省招标股份有限公司数智云采云采购平台”(下简称“数智云采”,网址: https://cjyc.hbbidding.com.cn/hubeiyth",
@@ -652,7 +631,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0022",
+            "clause_id": "TB-0021",
             "block": "qualification",
             "label": "资格要求",
             "summary": "(2)注册登记,具体操作参见“数智云采”首页-帮助中心-阳光采购操作指南-供应商注册及文件领取操作手册。",
@@ -680,7 +659,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0023",
+            "clause_id": "TB-0022",
             "block": "qualification",
             "label": "资格要求",
             "summary": "(3)文件下载,进入“数智云采”首页, 页面下滚至“快捷登录”,点击“供应商/投标人登录”,登录进入“阳光采购”模块,选择对应项目下载采购/招标文件。",
@@ -708,7 +687,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0024",
+            "clause_id": "TB-0023",
             "block": "qualification",
             "label": "资格要求",
             "summary": "(4)“数智云采”系统操作其他相关问题,详见“数智云采”首页-帮助中心-常见问题指引,或添加技术咨询4 qq:3836438780。若投标人参与多包的投标,请投",
@@ -739,35 +718,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0025",
-            "block": "qualification",
-            "label": "资格要求",
-            "summary": "4.售价:300 元",
-            "quote": "4.售价:300 元",
-            "pages": [
-              5
-            ],
-            "page": 5,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第5页",
-              "index": 5,
-              "pages": [
-                5
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0026",
+            "clause_id": "TB-0024",
             "block": "qualification",
             "label": "资格要求",
             "summary": "四、提交投标文件截止时间、开标时间和地点",
@@ -795,7 +746,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0027",
+            "clause_id": "TB-0025",
             "block": "qualification",
             "label": "资格要求",
             "summary": "1.开始时间:2026 年6 月9 日14 点00 分(北京时间)",
@@ -823,7 +774,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0028",
+            "clause_id": "TB-0026",
             "block": "qualification",
             "label": "资格要求",
             "summary": "2.截止时间:2026 年6 月9 日14 点30 分(北京时间)",
@@ -851,7 +802,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0029",
+            "clause_id": "TB-0027",
             "block": "qualification",
             "label": "资格要求",
             "summary": "3.地点:武汉市中北路108 号兴业银行大厦广泽中心三层湖北省招标股份有限公司开标评标室(3-",
@@ -879,7 +830,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0030",
+            "clause_id": "TB-0028",
             "block": "qualification",
             "label": "资格要求",
             "summary": "五、公告期限自本公告发布之日起5 个工作日。",
@@ -907,7 +858,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0031",
+            "clause_id": "TB-0029",
             "block": "qualification",
             "label": "资格要求",
             "summary": "六、其他补充事宜",
@@ -935,7 +886,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0032",
+            "clause_id": "TB-0030",
             "block": "qualification",
             "label": "资格要求",
             "summary": "1、信息发布媒体",
@@ -963,7 +914,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0033",
+            "clause_id": "TB-0031",
             "block": "qualification",
             "label": "资格要求",
             "summary": "(一)中国政府采购网(网址:http://www.ccgp.gov.cn/)",
@@ -991,7 +942,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0034",
+            "clause_id": "TB-0032",
             "block": "qualification",
             "label": "资格要求",
             "summary": "(二)协和医院电子招标采购平台(https://zbb.whuh.com)",
@@ -1019,7 +970,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0035",
+            "clause_id": "TB-0033",
             "block": "qualification",
             "label": "资格要求",
             "summary": "2、落实政府采购政策需满足的资格要求:本项目不属于专门面向中小企业采购的项目,投标人依法享受政府采购强制、优先采购节能产品政策;政府采购优先采购环保产品政策;政",
@@ -1047,7 +998,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0036",
+            "clause_id": "TB-0034",
             "block": "qualification",
             "label": "资格要求",
             "summary": "七、对本次招标提出询问,请按以下方式联系",
@@ -1075,7 +1026,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0037",
+            "clause_id": "TB-0035",
             "block": "qualification",
             "label": "资格要求",
             "summary": "1.采购人信息名称:华中科技大学同济医学院附属协和医院地址:湖北省武汉市解放大道1277号联系方式:李老师,电话:027-85726571",
@@ -1103,7 +1054,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0038",
+            "clause_id": "TB-0036",
             "block": "qualification",
             "label": "资格要求",
             "summary": "2. 采购代理机构信息:",
@@ -1131,7 +1082,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0039",
+            "clause_id": "TB-0037",
             "block": "qualification",
             "label": "资格要求",
             "summary": "4.投标人(也称“供应商”、“申请人”):指向采购人提供货物、工程或者服务的法人、其他组织或者自然人。分支机构不得参加政府采购活动,但银行、保险、石油石化、电力",
@@ -1159,35 +1110,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0040",
-            "block": "qualification",
-            "label": "资格要求",
-            "summary": "1.4.",
-            "quote": "1.4.",
-            "pages": [
-              11
-            ],
-            "page": 11,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第11页",
-              "index": 11,
-              "pages": [
-                11
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0041",
+            "clause_id": "TB-0038",
             "block": "qualification",
             "label": "资格要求",
             "summary": "1.具备第一章《投标邀请》规定的关于申请人的资格要求。",
@@ -1215,7 +1138,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0042",
+            "clause_id": "TB-0039",
             "block": "qualification",
             "label": "资格要求",
             "summary": "2.以第一章《投标邀请》规定的方式获得了本项目的招标文件。",
@@ -1243,7 +1166,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0043",
+            "clause_id": "TB-0040",
             "block": "qualification",
             "label": "资格要求",
             "summary": "5.联合体:指两个以上的自然人、法人或者其他组织组成一个联合体,以一个供应商的身份共同参加政府采购。联合体投标的,招标文件获取手续由联合体中任一成员单位办理均可",
@@ -1271,7 +1194,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0044",
+            "clause_id": "TB-0041",
             "block": "qualification",
             "label": "资格要求",
             "summary": "6.公益一类事业单位、使用事业编制且由财政拨款保障的群团组织,不得作为政府购买服务的购买主体和承接主体。",
@@ -1299,7 +1222,63 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0045",
+            "clause_id": "TB-0042",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "1.项目属性见《投标人须知前附表》。",
+            "quote": "1.项目属性见《投标人须知前附表》。",
+            "pages": [
+              11
+            ],
+            "page": 11,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第11页",
+              "index": 11,
+              "pages": [
+                11
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0043",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "2.核心产品见《投标人须知前附表》。",
+            "quote": "2.核心产品见《投标人须知前附表》。",
+            "pages": [
+              11
+            ],
+            "page": 11,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第11页",
+              "index": 11,
+              "pages": [
+                11
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0044",
             "block": "qualification",
             "label": "资格要求",
             "summary": "1.本国产品应当符合以下条件:",
@@ -1327,7 +1306,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0046",
+            "clause_id": "TB-0045",
             "block": "qualification",
             "label": "资格要求",
             "summary": "(1)在中国境内生产。产品应当在中国境内生产,即在中华人民共和国关境内实现从原材料、组件到产品的属性改变。属性改变是指经过制造、加工或者组装等工序,产生完全不同",
@@ -1355,7 +1334,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0047",
+            "clause_id": "TB-0046",
             "block": "qualification",
             "label": "资格要求",
             "summary": "(2)在中国境内生产的组件成本占比达到规定比例。产品在中国境内生产的组件成本占比应当达到规定比例,计算公式为: 财政部会同有关行业主管部门,分产品确定在中国境内",
@@ -1383,7 +1362,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0048",
+            "clause_id": "TB-0047",
             "block": "qualification",
             "label": "资格要求",
             "summary": "(1)项条件的产品在政府采购活动中视同本国产品。",
@@ -1411,7 +1390,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0049",
+            "clause_id": "TB-0048",
             "block": "qualification",
             "label": "资格要求",
             "summary": "(3)特定产品的关键组件、关键工序符合相关要求。对特定产品,在符合第",
@@ -1439,7 +1418,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0050",
+            "clause_id": "TB-0049",
             "block": "qualification",
             "label": "资格要求",
             "summary": "(1)项和第",
@@ -1467,7 +1446,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0051",
+            "clause_id": "TB-0050",
             "block": "qualification",
             "label": "资格要求",
             "summary": "(2)项条件的基础上,应当符合财政部会同有关行业主管部门确定的其关键组件、关键工序在中国境内生产、完成等要求。财政部会同有关行业主管部门自本通知施行之日起5 年",
@@ -1495,35 +1474,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0052",
-            "block": "qualification",
-            "label": "资格要求",
-            "summary": "3.2.",
-            "quote": "3.2.",
-            "pages": [
-              15
-            ],
-            "page": 15,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第15页",
-              "index": 15,
-              "pages": [
-                15
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0053",
+            "clause_id": "TB-0051",
             "block": "qualification",
             "label": "资格要求",
             "summary": "2.本国产品标准的适用范围本国产品标准适用于货物,包括政府采购货物项目和服务项目中涉及的货物。适用本国产品标准的货物具体是指《政府采购品目分类目录》中的货物类产",
@@ -1551,7 +1502,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0054",
+            "clause_id": "TB-0052",
             "block": "qualification",
             "label": "资格要求",
             "summary": "3.对本国产品的支持政策见第五章《评标程序、方法和标准》。",
@@ -1579,7 +1530,122 @@
             "audit_status": "pending_audit"
           },
           {
+            "clause_id": "TB-0053",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "1.采购人或采购代理机构将按招标文件的规定,在投标截止时间的同一时间和招标文件预先确定的地点组织开标。",
+            "quote": "1.采购人或采购代理机构将按招标文件的规定,在投标截止时间的同一时间和招标文件预先确定的地点组织开标。",
+            "pages": [
+              24
+            ],
+            "page": 24,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第24页",
+              "index": 24,
+              "pages": [
+                24
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0054",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "2.开标时,应当由投标人或者其推选的代表检查投标文件的密封情况;",
+            "quote": "2.开标时,应当由投标人或者其推选的代表检查投标文件的密封情况;",
+            "pages": [
+              24
+            ],
+            "page": 24,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第24页",
+              "index": 24,
+              "pages": [
+                24
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
             "clause_id": "TB-0055",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "1.见第四章《资格审查》。",
+            "quote": "1.见第四章《资格审查》。",
+            "pages": [
+              24
+            ],
+            "page": 24,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第24页",
+              "index": 24,
+              "pages": [
+                24
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0056",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "1.评标委员会根据政府采购有关规定和本次采购项目的特点进行组建,24 并负责具体评标事务,独立履行职责。",
+            "quote": "1.评标委员会根据政府采购有关规定和本次采购项目的特点进行组建,24 并负责具体评标事务,独立履行职责。",
+            "pages": [
+              24,
+              25
+            ],
+            "page": 24,
+            "printed_page": null,
+            "printed_pages": [
+              null,
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第24-25页",
+              "index": 24,
+              "pages": [
+                24,
+                25
+              ]
+            },
+            "detection": "cross_page",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0057",
             "block": "qualification",
             "label": "资格要求",
             "summary": "2.评审专家须符合《财政部关于在政府采购活动中查询及使用信用记录有关问题的通知》(财库〔2016〕125 号)的规定。依法自行选定评审专家的,采购人和采购代理机",
@@ -1607,7 +1673,119 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0056",
+            "clause_id": "TB-0058",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "1.见第五章《评标程序、方法和标准》。",
+            "quote": "1.见第五章《评标程序、方法和标准》。",
+            "pages": [
+              25
+            ],
+            "page": 25,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第25页",
+              "index": 25,
+              "pages": [
+                25
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0059",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "1.采购人将在评标报告确定的中标候选人名单中按顺序确定中标人;采购人是否授权评标委员会直接确定中标人,见《投标人须知前附表》。",
+            "quote": "1.采购人将在评标报告确定的中标候选人名单中按顺序确定中标人;采购人是否授权评标委员会直接确定中标人,见《投标人须知前附表》。",
+            "pages": [
+              25
+            ],
+            "page": 25,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第25页",
+              "index": 25,
+              "pages": [
+                25
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0060",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "2.中标候选人并列的,按照第五章《评标程序、方法和标准》要求确定中标人。",
+            "quote": "2.中标候选人并列的,按照第五章《评标程序、方法和标准》要求确定中标人。",
+            "pages": [
+              25
+            ],
+            "page": 25,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第25页",
+              "index": 25,
+              "pages": [
+                25
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0061",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "1.采购人或采购代理机构自中标人确定之日起2 个工作日内,在信息发布媒体公告中标结果,同时向中标人发出中标通知书,中标公告期限为1 个工作日。",
+            "quote": "1.采购人或采购代理机构自中标人确定之日起2 个工作日内,在信息发布媒体公告中标结果,同时向中标人发出中标通知书,中标公告期限为1 个工作日。",
+            "pages": [
+              25
+            ],
+            "page": 25,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第25页",
+              "index": 25,
+              "pages": [
+                25
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0062",
             "block": "qualification",
             "label": "资格要求",
             "summary": "2.中标通知书对采购人和中标供应商均具有法律效力。中标通知书发出后,采购人改变中标结果的,或者中标供应商放弃中标项目的,应当依法承担法律责任。",
@@ -1635,7 +1813,63 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0057",
+            "clause_id": "TB-0063",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "3.【电子标】中标通知书将通过电子交易平台发出。",
+            "quote": "3.【电子标】中标通知书将通过电子交易平台发出。",
+            "pages": [
+              25
+            ],
+            "page": 25,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第25页",
+              "index": 25,
+              "pages": [
+                25
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0064",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "1.在公告中标结果的同时,采购代理机构同时以《投标人须知前附表》",
+            "quote": "1.在公告中标结果的同时,采购代理机构同时以《投标人须知前附表》",
+            "pages": [
+              25
+            ],
+            "page": 25,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第25页",
+              "index": 25,
+              "pages": [
+                25
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0065",
             "block": "qualification",
             "label": "资格要求",
             "summary": "序号：1. 资格要求：具有独立承担民事责任的能力 须提供的资料：如投标人是企业(包括合伙企业),应提供在工商部门注册的<br>有效“企业法人营业执照”或“营业执",
@@ -1663,7 +1897,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0058",
+            "clause_id": "TB-0066",
             "block": "qualification",
             "label": "资格要求",
             "summary": "序号：1. 资格要求：具有良好的商业信誉和健全的财<br>务会计制度 须提供的资料：由投标人对以下内容提供书面承诺及声明,或提供相应证明材<br>料。<br>投",
@@ -1691,7 +1925,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0059",
+            "clause_id": "TB-0067",
             "block": "qualification",
             "label": "资格要求",
             "summary": "序号：1. 资格要求：具有履行合同所必需的设备和专<br>业技术能力 须提供的资料：由投标人提供书面承诺及声明,或提供相应证明材料。",
@@ -1719,7 +1953,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0060",
+            "clause_id": "TB-0068",
             "block": "qualification",
             "label": "资格要求",
             "summary": "序号：1. 资格要求：有依法缴纳税收和社会保障资金<br>的良好记录 须提供的资料：由投标人对以下内容提供书面承诺及声明,或提供相应证明材<br>料。<br>投",
@@ -1747,7 +1981,175 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0061",
+            "clause_id": "TB-0069",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "一、资格审查程序",
+            "quote": "一、资格审查程序",
+            "pages": [
+              34
+            ],
+            "page": 34,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第34页",
+              "index": 34,
+              "pages": [
+                34
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0070",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "1.开标结束后,采购人或采购代理机构将根据《资格审查要求》中的规定,对投标人进行资格审查,并形成资格审查结果。",
+            "quote": "1.开标结束后,采购人或采购代理机构将根据《资格审查要求》中的规定,对投标人进行资格审查,并形成资格审查结果。",
+            "pages": [
+              34
+            ],
+            "page": 34,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第34页",
+              "index": 34,
+              "pages": [
+                34
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0071",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "2.《资格审查要求》中对格式有要求的,除招标文件另有规定外,均为实质性格式文件。",
+            "quote": "2.《资格审查要求》中对格式有要求的,除招标文件另有规定外,均为实质性格式文件。",
+            "pages": [
+              34
+            ],
+            "page": 34,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第34页",
+              "index": 34,
+              "pages": [
+                34
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0072",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "3.投标人《资格性响应文件》有任何一项不符合《资格审查要求》的,资格审查不合格, 其投标无效。",
+            "quote": "3.投标人《资格性响应文件》有任何一项不符合《资格审查要求》的,资格审查不合格, 其投标无效。",
+            "pages": [
+              34
+            ],
+            "page": 34,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第34页",
+              "index": 34,
+              "pages": [
+                34
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0073",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "4.资格审查合格的投标人不足3 家的,不进行评标。",
+            "quote": "4.资格审查合格的投标人不足3 家的,不进行评标。",
+            "pages": [
+              34
+            ],
+            "page": 34,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第34页",
+              "index": 34,
+              "pages": [
+                34
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0074",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "二、资格审查要求序号",
+            "quote": "二、资格审查要求序号",
+            "pages": [
+              34
+            ],
+            "page": 34,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第34页",
+              "index": 34,
+              "pages": [
+                34
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0075",
             "block": "qualification",
             "label": "资格要求",
             "summary": "1. 具有独立承担民事责任的能力如投标人是企业(包括合伙企业),应提供在工商部门注册的有效“企业法人营业执照”或“营业执照”;如投标人是事业单位,应提供有效的“",
@@ -1775,7 +2177,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0062",
+            "clause_id": "TB-0076",
             "block": "qualification",
             "label": "资格要求",
             "summary": "具有良好的商业信誉和健全的财务会计制度由投标人对以下内容提供书面承诺及声明,或提供相应证明材料。",
@@ -1803,7 +2205,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0063",
+            "clause_id": "TB-0077",
             "block": "qualification",
             "label": "资格要求",
             "summary": "具有履行合同所必需的设备和专业技术能力由投标人提供书面承诺及声明,或提供相应证明材料。",
@@ -1831,7 +2233,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0064",
+            "clause_id": "TB-0078",
             "block": "qualification",
             "label": "资格要求",
             "summary": "Col1：2. Col2：单位负责人为同一人或者存在直<br>接控股、管理关系的不同投标人,<br>不得参加本项目同一合同项下的<br>政府采购活动 递交投标文",
@@ -1859,7 +2261,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0065",
+            "clause_id": "TB-0079",
             "block": "qualification",
             "label": "资格要求",
             "summary": "Col1：3. Col2：为本采购项目提供整体设计、规范<br>编制或者项目管理、监理、检测等<br>服务的,不得再参加本项目的其他<br>招标采购活动。 递交",
@@ -1887,7 +2289,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0066",
+            "clause_id": "TB-0080",
             "block": "qualification",
             "label": "资格要求",
             "summary": "Col1：7. Col2：投标人须具备有效的《辐射安全许<br>可证》 递交投标文件截止时间的当月成立但因社会保障资金管<br>理机关原因导致其尚未依法缴纳社会",
@@ -1915,7 +2317,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0067",
+            "clause_id": "TB-0081",
             "block": "qualification",
             "label": "资格要求",
             "summary": "2. 单位负责人为同一人或者存在直接控股、管理关系的不同投标人, 不得参加本项目同一合同项下的政府采购活动由投标人提供书面承诺及声明,或提供相应证明材料。",
@@ -1943,7 +2345,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0068",
+            "clause_id": "TB-0082",
             "block": "qualification",
             "label": "资格要求",
             "summary": "7. 投标人须具备有效的《辐射安全许可证》 若适用,应提供相关证明材料(符合《基本标准》豁免水平的放射性同位素和射线装置以及有条件豁免要求的含源设备,在生产单位",
@@ -1971,7 +2373,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0069",
+            "clause_id": "TB-0083",
             "block": "qualification",
             "label": "资格要求",
             "summary": "序号：1. 资格要求：具有独立承担民事责任的能力 须提供的资料：如投标人是企业(包括合伙企业),应提供在工商部<br>门注册的有效“企业法人营业执照”或“营业执",
@@ -1999,7 +2401,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0070",
+            "clause_id": "TB-0084",
             "block": "qualification",
             "label": "资格要求",
             "summary": "序号：1. 资格要求：具有良好的商业信誉和健全的<br>财务会计制度 须提供的资料：由投标人对以下内容提供书面承诺及声明,或提供相<br>应证明材料。<br>投",
@@ -2027,7 +2429,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0071",
+            "clause_id": "TB-0085",
             "block": "qualification",
             "label": "资格要求",
             "summary": "序号：1. 资格要求：具有履行合同所必需的设备和<br>专业技术能力 须提供的资料：由投标人提供书面承诺及声明,或提供相应证明材<br>料。",
@@ -2055,7 +2457,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0072",
+            "clause_id": "TB-0086",
             "block": "qualification",
             "label": "资格要求",
             "summary": "序号：1. 资格要求：有依法缴纳税收和社会保障资<br>金的良好记录 须提供的资料：由投标人对以下内容提供书面承诺及声明,或提供相<br>应证明材料。<br>投",
@@ -2083,7 +2485,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0073",
+            "clause_id": "TB-0087",
             "block": "qualification",
             "label": "资格要求",
             "summary": "1. 具有独立承担民事责任的能力如投标人是企业(包括合伙企业),应提供在工商部门注册的有效“企业法人营业执照”或“营业执照”; 如投标人是事业单位,应提供有效的",
@@ -2111,7 +2513,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0074",
+            "clause_id": "TB-0088",
             "block": "qualification",
             "label": "资格要求",
             "summary": "具有良好的商业信誉和健全的财务会计制度由投标人对以下内容提供书面承诺及声明,或提供相应证明材料。",
@@ -2139,7 +2541,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0075",
+            "clause_id": "TB-0089",
             "block": "qualification",
             "label": "资格要求",
             "summary": "具有履行合同所必需的设备和专业技术能力由投标人提供书面承诺及声明,或提供相应证明材料。",
@@ -2167,7 +2569,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0076",
+            "clause_id": "TB-0090",
             "block": "qualification",
             "label": "资格要求",
             "summary": "依法免税或不需要缴纳社会保障资金的投标人, 具有相应文件证明其依法免税或不需要缴纳社会保障资金。",
@@ -2195,7 +2597,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0077",
+            "clause_id": "TB-0091",
             "block": "qualification",
             "label": "资格要求",
             "summary": "序号：参加政府采购活动前三年内,在<br>经营活动中没有重大违法记录 资格要求：由投标人提供书面承诺及声明,或提供相应证明材<br>料。",
@@ -2223,7 +2625,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0078",
+            "clause_id": "TB-0092",
             "block": "qualification",
             "label": "资格要求",
             "summary": "序号：法律、行政法规规定的其他条件 资格要求：由投标人提供书面承诺及声明,或提供相应证明材<br>料。",
@@ -2251,7 +2653,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0079",
+            "clause_id": "TB-0093",
             "block": "qualification",
             "label": "资格要求",
             "summary": "序号：2. 资格要求：单位负责人为同一人或者存在<br>直接控股、管理关系的不同投标<br>人,不得参加本项目同一合同项<br>下的政府采购活动 须提供的资料：",
@@ -2279,7 +2681,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0080",
+            "clause_id": "TB-0094",
             "block": "qualification",
             "label": "资格要求",
             "summary": "序号：3. 资格要求：为本采购项目提供整体设计、规<br>范编制或者项目管理、监理、检<br>测等服务的,不得再参加本项目<br>的其他招标采购活动。 须提供的",
@@ -2307,7 +2709,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0081",
+            "clause_id": "TB-0095",
             "block": "qualification",
             "label": "资格要求",
             "summary": "序号：4. 资格要求：未被列入失信被执行人、重大税<br>收违法失信主体,未被列入政府<br>采购严重违法失信行为记录名<br>单。 须提供的资料：以采购人和采",
@@ -2335,7 +2737,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0082",
+            "clause_id": "TB-0096",
             "block": "qualification",
             "label": "资格要求",
             "summary": "序号：5. 资格要求：(1)投标人为生产企业的,从<br>事第一类医疗器械生产的,应取<br>得《第一类医疗器械生产备案凭<br>证》;从事第二类、第三类医疗<",
@@ -2363,7 +2765,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0083",
+            "clause_id": "TB-0097",
             "block": "qualification",
             "label": "资格要求",
             "summary": "序号：6. 资格要求：(2)投标产品属于《医疗器械<br>监督管理条例》规定的第一类医<br>疗器械产品应提供《第一类医疗<br>器械备案凭证》,属于第二类、<",
@@ -2391,7 +2793,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0084",
+            "clause_id": "TB-0098",
             "block": "qualification",
             "label": "资格要求",
             "summary": "序号：7. 资格要求：投标人须具备有效的《辐射安全<br>许可证》 须提供的资料：若适用,应提供相关证明材料(符合《基本标准》豁<br>免水平的放射性同位素和射",
@@ -2419,7 +2821,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0085",
+            "clause_id": "TB-0099",
             "block": "qualification",
             "label": "资格要求",
             "summary": "2. 单位负责人为同一人或者存在直接控股、管理关系的不同投标人,不得参加本项目同一合同项下的政府采购活动由投标人提供书面承诺及声明,或提供相应证明材料。",
@@ -2447,7 +2849,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0086",
+            "clause_id": "TB-0100",
             "block": "qualification",
             "label": "资格要求",
             "summary": "3. 为本采购项目提供整体设计、规范编制或者项目管理、监理、检测等服务的,不得再参加本项目的其他招标采购活动。",
@@ -2475,7 +2877,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0087",
+            "clause_id": "TB-0101",
             "block": "qualification",
             "label": "资格要求",
             "summary": "7. 投标人须具备有效的《辐射安全许可证》 若适用,应提供相关证明材料(符合《基本标准》豁免水平的放射性同位素和射线装置以及有条件豁免要求的含源设备,在生产单位",
@@ -2503,7 +2905,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0088",
+            "clause_id": "TB-0102",
             "block": "qualification",
             "label": "资格要求",
             "summary": "序号：8. 资格要求：如国家法律法规对市场准入有<br>要求的还应符合相关规定 须提供的资料：由投标人提供书面承诺及声明",
@@ -2531,7 +2933,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0089",
+            "clause_id": "TB-0103",
             "block": "qualification",
             "label": "资格要求",
             "summary": "二、资格性响应文件格式投标文件(资格性响应文件)封面(非实质性格式) 投标文件资格性响应文件项目编号: 项目名称: 投标人: 20 年月日66 1 满足《中华人",
@@ -2562,7 +2964,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0090",
+            "clause_id": "TB-0104",
             "block": "qualification",
             "label": "资格要求",
             "summary": "(一)具有良好的商业信誉和健全的财务会计制度;",
@@ -2590,7 +2992,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0091",
+            "clause_id": "TB-0105",
             "block": "qualification",
             "label": "资格要求",
             "summary": "(二)具有履行合同所必需的设备和专业技术能力;",
@@ -2618,7 +3020,181 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0092",
+            "clause_id": "TB-0106",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "三、其他响应文件格式投标文件(其他响应文件)封面(非实质性格式) 投标文件其他响应文件项目编号: 项目名称: 投标人: 20 年月日72 1 技术要求偏离表(实",
+            "quote": "三、其他响应文件格式投标文件(其他响应文件)封面(非实质性格式) 投标文件其他响应文件项目编号: 项目名称: 投标人: 20 年月日72 1 技术要求偏离表(实质性格式) 技术要求偏离表项目编号/包号:___________ 项目名称:__________ 序号招标文件技术要求条目号(页码) 招标文件要求投标响应内容偏离情况说明证明材料对应页码注:",
+            "pages": [
+              72,
+              73
+            ],
+            "page": 72,
+            "printed_page": null,
+            "printed_pages": [
+              null,
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第72-73页",
+              "index": 72,
+              "pages": [
+                72,
+                73
+              ]
+            },
+            "detection": "cross_page",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0107",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "1.对招标文件中的所有技术要求,除本表所列明的所有偏离外,均视作供应商已对之理解和响应。此表中若无任何文字说明,内容为空白的,投标无效。",
+            "quote": "1.对招标文件中的所有技术要求,除本表所列明的所有偏离外,均视作供应商已对之理解和响应。此表中若无任何文字说明,内容为空白的,投标无效。",
+            "pages": [
+              73
+            ],
+            "page": 73,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第73页",
+              "index": 73,
+              "pages": [
+                73
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0108",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "2.“偏离情况”列应据实填写“无偏离”、“正偏离”或“负偏离”。",
+            "quote": "2.“偏离情况”列应据实填写“无偏离”、“正偏离”或“负偏离”。",
+            "pages": [
+              73
+            ],
+            "page": 73,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第73页",
+              "index": 73,
+              "pages": [
+                73
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0109",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "5. 投标人名称(加盖公章):____________ 日期:_____年______月______日74 2 商务要求偏离表(实质性格式) 商务要求偏离表项目",
+            "quote": "5. 投标人名称(加盖公章):____________ 日期:_____年______月______日74 2 商务要求偏离表(实质性格式) 商务要求偏离表项目编号/包号:___________ 项目名称:__________ 序号招标文件技术要求条目号(页码) 招标文件要求投标响应内容偏离情况说明注:",
+            "pages": [
+              74,
+              75
+            ],
+            "page": 74,
+            "printed_page": null,
+            "printed_pages": [
+              null,
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第74-75页",
+              "index": 74,
+              "pages": [
+                74,
+                75
+              ]
+            },
+            "detection": "cross_page",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0110",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "1.对招标文件中的所有商务要求,除本表所列明的所有偏离外,均视作供应商已对之理解和响应。此表中若无任何文字说明,内容为空白的,投标无效。",
+            "quote": "1.对招标文件中的所有商务要求,除本表所列明的所有偏离外,均视作供应商已对之理解和响应。此表中若无任何文字说明,内容为空白的,投标无效。",
+            "pages": [
+              75
+            ],
+            "page": 75,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第75页",
+              "index": 75,
+              "pages": [
+                75
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0111",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "2.“偏离情况”列应据实填写“无偏离”、“正偏离”或“负偏离”。",
+            "quote": "2.“偏离情况”列应据实填写“无偏离”、“正偏离”或“负偏离”。",
+            "pages": [
+              75
+            ],
+            "page": 75,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第75页",
+              "index": 75,
+              "pages": [
+                75
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0112",
             "block": "qualification",
             "label": "资格要求",
             "summary": "2.如本招标文件《投标人须知资料表》载明本项目分包承担主体应具备的相应资质条件, 则投标人须在本表中列明分包承担主体的资质等级,并后附资质证书电子件,否则投标无",
@@ -2651,7 +3227,35 @@
         "label": "评分要求",
         "items": [
           {
-            "clause_id": "TB-0093",
+            "clause_id": "TB-0113",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "2.综合评分法,指投标文件满足招标文件全部实质性要求,且按照评审因素的量化指标评审得分最高的投标人为中标候选人的评标方法,见《评标标准》,招标文件中没有规定的评",
+            "quote": "2.综合评分法,指投标文件满足招标文件全部实质性要求,且按照评审因素的量化指标评审得分最高的投标人为中标候选人的评标方法,见《评标标准》,招标文件中没有规定的评标标准不得作为评审的依据。",
+            "pages": [
+              42
+            ],
+            "page": 42,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第42页",
+              "index": 42,
+              "pages": [
+                42
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0114",
             "block": "scoring",
             "label": "评分要求",
             "summary": "评标项目：价格评审<br>(30 分) 评标分项：投标报价 分值：30 子项目及分值：满足招标文件要求且投标价格最低的投标报价为评标基准价,其<br>价格分为满",
@@ -2679,7 +3283,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0094",
+            "clause_id": "TB-0115",
             "block": "scoring",
             "label": "评分要求",
             "summary": "评标项目：商务评审<br>(7 分) 评标分项：项目业绩 分值：5 子项目及分值：投标人或所投产品制造商曾为类似项目供货的业绩,每提供1 项<br>类似项目业绩",
@@ -2707,7 +3311,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0095",
+            "clause_id": "TB-0116",
             "block": "scoring",
             "label": "评分要求",
             "summary": "评标项目：商务评审<br>(7 分) 评标分项：备品备件 分值：2 子项目及分值：有完善的维修、备品备件、备机的体系得2 分,未提供完整的得<br>1 分,无得",
@@ -2735,7 +3339,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0096",
+            "clause_id": "TB-0117",
             "block": "scoring",
             "label": "评分要求",
             "summary": "评标项目：技术评审<br>(63 分) 评标分项：投标产品<br>的技术指<br>标 分值：41 子项目及分值：第三章采购需求中技术要求和参数项完全满足招标文件",
@@ -2763,7 +3367,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0097",
+            "clause_id": "TB-0118",
             "block": "scoring",
             "label": "评分要求",
             "summary": "评标项目：技术评审<br>(63 分) 评标分项：培训方案 分值：4 子项目及分值：根据投标人的培训方案进行评审。<br>评审因素:1培训计划(2 分);2培训",
@@ -2791,7 +3395,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0098",
+            "clause_id": "TB-0119",
             "block": "scoring",
             "label": "评分要求",
             "summary": "评标项目：技术评审<br>(63 分) 评标分项：交货及安<br>装方案 分值：9 子项目及分值：根据投标人的交货及安装方案进行评审。<br>评审因素:1交货实",
@@ -2819,7 +3423,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0099",
+            "clause_id": "TB-0120",
             "block": "scoring",
             "label": "评分要求",
             "summary": "二、评标标准评标项目评标分项分值子项目及分值价格评审 (30 分) 投标报价 30 满足招标文件要求且投标价格最低的投标报价为评标基准价,其价格分为满分。其他投",
@@ -2847,7 +3451,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0100",
+            "clause_id": "TB-0121",
             "block": "scoring",
             "label": "评分要求",
             "summary": "商务评审 (7 分) 项目业绩 5 投标人或所投产品制造商曾为类似项目供货的业绩,每提供1 项类似项目业绩的得1 分,此项满分5 分。类似业绩是指供货内容包含本",
@@ -2875,7 +3479,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0101",
+            "clause_id": "TB-0122",
             "block": "scoring",
             "label": "评分要求",
             "summary": "备品备件 2 有完善的维修、备品备件、备机的体系得2 分,未提供完整的得 1 分,无得0 分。",
@@ -2903,35 +3507,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0102",
-            "block": "scoring",
-            "label": "评分要求",
-            "summary": "技术评审 (63 分) 投标产品的技术指标 41",
-            "quote": "技术评审 (63 分) 投标产品的技术指标 41",
-            "pages": [
-              45
-            ],
-            "page": 45,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第45页",
-              "index": 45,
-              "pages": [
-                45
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0103",
+            "clause_id": "TB-0123",
             "block": "scoring",
             "label": "评分要求",
             "summary": "得41 分。每有1 项标注“*”的参数指标项(12 项)负偏离或不满足的扣1 分;每有1 项无标识的参数指标项(58 项)负偏离或不满足的扣0.5 分,本项最低",
@@ -2959,7 +3535,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0104",
+            "clause_id": "TB-0124",
             "block": "scoring",
             "label": "评分要求",
             "summary": "评标项目：售后服务 评标分项：9 分值：根据投标人的售后服务方案进行评审。<br>评审因素:1服务标准、应急维修处理等(3 分);2售后服务<br>方案及其人员",
@@ -2987,35 +3563,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0105",
-            "block": "scoring",
-            "label": "评分要求",
-            "summary": "评标项目：总分 评标分项：总分 分值：100",
-            "quote": "评标项目：总分 评标分项：总分 分值：100",
-            "pages": [
-              46
-            ],
-            "page": 46,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第46页",
-              "index": 46,
-              "pages": [
-                46
-              ]
-            },
-            "detection": "table",
-            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0106",
+            "clause_id": "TB-0125",
             "block": "scoring",
             "label": "评分要求",
             "summary": "45 评标项目评标分项分值子项目及分值售后服务 9 根据投标人的售后服务方案进行评审。",
@@ -3043,35 +3591,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0107",
-            "block": "scoring",
-            "label": "评分要求",
-            "summary": "评标项目：合计 评标分项：合计 分值：100",
-            "quote": "评标项目：合计 评标分项：合计 分值：100",
-            "pages": [
-              57
-            ],
-            "page": 57,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第57页",
-              "index": 57,
-              "pages": [
-                57
-              ]
-            },
-            "detection": "table",
-            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0108",
+            "clause_id": "TB-0126",
             "block": "scoring",
             "label": "评分要求",
             "summary": "56 评标导航表(非实质性格式) 评标项目评标分项分值子项目及分值响应情况对应页码价格部分 (*分) 商务部分 (*分) 技术部分 (*分) 合计 100 备注",
@@ -3104,7 +3624,7 @@
         "label": "要交的材料",
         "items": [
           {
-            "clause_id": "TB-0109",
+            "clause_id": "TB-0127",
             "block": "materials",
             "label": "要交的材料",
             "summary": "(5) 投标产品属于《医疗器械监督管理条例》规定的第一类医疗器械产品应提供《第一类医疗器械备案凭证》,属于第二类、第三类医疗器械产品须提供《医疗器械注册证》(如",
@@ -3132,35 +3652,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0110",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "1.中小企业、监狱企业及残疾人福利性单位",
-            "quote": "1.中小企业、监狱企业及残疾人福利性单位",
-            "pages": [
-              11
-            ],
-            "page": 11,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第11页",
-              "index": 11,
-              "pages": [
-                11
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0111",
+            "clause_id": "TB-0128",
             "block": "materials",
             "label": "要交的材料",
             "summary": "1.中小企业是指在中华人民共和国境内依法设立,依据国务院批准11 的中小企业划分标准确定的中型企业、小型企业和微型企业,但与大企业的负责人为同一人,或者与大企业",
@@ -3191,7 +3683,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0112",
+            "clause_id": "TB-0129",
             "block": "materials",
             "label": "要交的材料",
             "summary": "2.供应商提供的货物、工程或者服务符合下列情形的,享受中小企业扶持政策:",
@@ -3219,7 +3711,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0113",
+            "clause_id": "TB-0130",
             "block": "materials",
             "label": "要交的材料",
             "summary": "(1)在货物采购项目中,货物由中小企业制造,即货物由中小企业生产且使用该中小企业商号或者注册商标;",
@@ -3247,7 +3739,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0114",
+            "clause_id": "TB-0131",
             "block": "materials",
             "label": "要交的材料",
             "summary": "(2)在工程采购项目中,工程由中小企业承建,即工程施工单位为中小企业;",
@@ -3275,7 +3767,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0115",
+            "clause_id": "TB-0132",
             "block": "materials",
             "label": "要交的材料",
             "summary": "(3)在服务采购项目中,服务由中小企业承接,即提供服务的人员为中小企业依照《中华人民共和国劳动合同法》订立劳动合同的从业人员。",
@@ -3303,35 +3795,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0116",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "3.1.",
-            "quote": "3.1.",
-            "pages": [
-              12
-            ],
-            "page": 12,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第12页",
-              "index": 12,
-              "pages": [
-                12
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0117",
+            "clause_id": "TB-0133",
             "block": "materials",
             "label": "要交的材料",
             "summary": "3.在货物采购项目中,供应商提供的货物既有中小企业制造货物, 也有大型企业制造货物的,不享受中小企业扶持政策。",
@@ -3359,7 +3823,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0118",
+            "clause_id": "TB-0134",
             "block": "materials",
             "label": "要交的材料",
             "summary": "4.以联合体形式参加政府采购活动,联合体各方均为中小企业的, 联合体视同中小企业。其中,联合体各方均为小微企业的,联合体视同小微企业。",
@@ -3387,7 +3851,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0119",
+            "clause_id": "TB-0135",
             "block": "materials",
             "label": "要交的材料",
             "summary": "5.在政府采购活动中,监狱企业视同小型、微型企业,享受预留份额、评审中价格扣除等政府采购促进中小企业发展的政府采购政策。监狱企业定义:是指由司法部认定的为罪犯、",
@@ -3418,35 +3882,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0120",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "3.1.",
-            "quote": "3.1.",
-            "pages": [
-              13
-            ],
-            "page": 13,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第13页",
-              "index": 13,
-              "pages": [
-                13
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0121",
+            "clause_id": "TB-0136",
             "block": "materials",
             "label": "要交的材料",
             "summary": "6.在政府采购活动中,残疾人福利性单位视同小型、微型企业,享受预留份额、评审中价格扣除等促进中小企业发展的政府采购政策。享受政府采购支持政策的残疾人福利性单位应",
@@ -3474,7 +3910,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0122",
+            "clause_id": "TB-0137",
             "block": "materials",
             "label": "要交的材料",
             "summary": "(1)安置的残疾人占本单位在职职工人数的比例不低于25%(含 25%),并且安置的残疾人人数不少于10 人(含10 人);",
@@ -3502,7 +3938,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0123",
+            "clause_id": "TB-0138",
             "block": "materials",
             "label": "要交的材料",
             "summary": "(2)依法与安置的每位残疾人签订了一年以上(含一年)的劳动合同或服务协议;",
@@ -3530,7 +3966,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0124",
+            "clause_id": "TB-0139",
             "block": "materials",
             "label": "要交的材料",
             "summary": "(3)为安置的每位残疾人按月足额缴纳了基本养老保险、基本医疗保险、失业保险、工伤保险和生育保险等社会保险费;",
@@ -3558,7 +3994,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0125",
+            "clause_id": "TB-0140",
             "block": "materials",
             "label": "要交的材料",
             "summary": "(4)通过银行等金融机构向安置的每位残疾人,按月支付了不低于单位所在区县适用的经省级人民政府批准的月最低工资标准的工资;",
@@ -3586,7 +4022,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0126",
+            "clause_id": "TB-0141",
             "block": "materials",
             "label": "要交的材料",
             "summary": "(5)提供本单位制造的货物、承担的工程或者服务(以下简称产品),或者提供其他残疾人福利性单位制造的货物(不包括使用非残疾人福利性单位注册商标的货物); 前款所称",
@@ -3614,7 +4050,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0127",
+            "clause_id": "TB-0142",
             "block": "materials",
             "label": "要交的材料",
             "summary": "7.本项目是否专门面向中小企业预留采购份额见第一章《投标邀请》。",
@@ -3642,7 +4078,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0128",
+            "clause_id": "TB-0143",
             "block": "materials",
             "label": "要交的材料",
             "summary": "8.采购标的对应的中小企业划分标准所属行业见第三章《采购需求》。",
@@ -3670,7 +4106,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0129",
+            "clause_id": "TB-0144",
             "block": "materials",
             "label": "要交的材料",
             "summary": "9.落实中小企业扶持政策的价格调整见第五章《评标程序、方法和标准》。",
@@ -3698,7 +4134,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0130",
+            "clause_id": "TB-0145",
             "block": "materials",
             "label": "要交的材料",
             "summary": "2.本国产品标准及相关政策",
@@ -3726,35 +4162,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0131",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "3.2.",
-            "quote": "3.2.",
-            "pages": [
-              13
-            ],
-            "page": 13,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第13页",
-              "index": 13,
-              "pages": [
-                13
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0132",
+            "clause_id": "TB-0146",
             "block": "materials",
             "label": "要交的材料",
             "summary": "1.本国产品应当符合以下条件:",
@@ -3782,7 +4190,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0133",
+            "clause_id": "TB-0147",
             "block": "materials",
             "label": "要交的材料",
             "summary": "(1)在中国境内生产。产品应当在中国境内生产,即在中华人民共和国关境内实现从原材料、组件到产品的属性改变。属性改变是指经过制造、加工或者组装等工序,产生完全不同",
@@ -3810,7 +4218,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0134",
+            "clause_id": "TB-0148",
             "block": "materials",
             "label": "要交的材料",
             "summary": "(2)在中国境内生产的组件成本占比达到规定比例。产品在中国境内生产的组件成本占比应当达到规定比例,计算公式为: 财政部会同有关行业主管部门,分产品确定在中国境内",
@@ -3838,7 +4246,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0135",
+            "clause_id": "TB-0149",
             "block": "materials",
             "label": "要交的材料",
             "summary": "(1)项条件的产品在政府采购活动中视同本国产品。",
@@ -3866,7 +4274,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0136",
+            "clause_id": "TB-0150",
             "block": "materials",
             "label": "要交的材料",
             "summary": "(3)特定产品的关键组件、关键工序符合相关要求。对特定产品,在符合第",
@@ -3894,7 +4302,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0137",
+            "clause_id": "TB-0151",
             "block": "materials",
             "label": "要交的材料",
             "summary": "(1)项和第",
@@ -3922,7 +4330,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0138",
+            "clause_id": "TB-0152",
             "block": "materials",
             "label": "要交的材料",
             "summary": "(2)项条件的基础上,应当符合财政部会同有关行业主管部门确定的其关键组件、关键工序在中国境内生产、完成等要求。财政部会同有关行业主管部门自本通知施行之日起5 年",
@@ -3950,35 +4358,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0139",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "3.2.",
-            "quote": "3.2.",
-            "pages": [
-              15
-            ],
-            "page": 15,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第15页",
-              "index": 15,
-              "pages": [
-                15
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0140",
+            "clause_id": "TB-0153",
             "block": "materials",
             "label": "要交的材料",
             "summary": "2.本国产品标准的适用范围本国产品标准适用于货物,包括政府采购货物项目和服务项目中涉及的货物。适用本国产品标准的货物具体是指《政府采购品目分类目录》中的货物类产",
@@ -4006,7 +4386,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0141",
+            "clause_id": "TB-0154",
             "block": "materials",
             "label": "要交的材料",
             "summary": "3.对本国产品的支持政策见第五章《评标程序、方法和标准》。",
@@ -4034,7 +4414,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0142",
+            "clause_id": "TB-0155",
             "block": "materials",
             "label": "要交的材料",
             "summary": "(2)有关证明文件。供应商对其提供的产品出具《关于符合本国产品标准的声明函》或财政部会同有关部门规定的有关证明文件。出具符合要求的《声明函》或有关证明文件的,该",
@@ -4065,7 +4445,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0143",
+            "clause_id": "TB-0156",
             "block": "materials",
             "label": "要交的材料",
             "summary": "1.招标文件(也称采购文件)包括以下部分:",
@@ -4093,7 +4473,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0144",
+            "clause_id": "TB-0157",
             "block": "materials",
             "label": "要交的材料",
             "summary": "4.投标文件份数见《投标人须知前附表》。投标文件的正本与副本应分别装订成册,副本可为正本的复印件或扫描件。正本和副本的封面上应清楚地标记“正本”或“副本”的字样",
@@ -4121,7 +4501,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0145",
+            "clause_id": "TB-0158",
             "block": "materials",
             "label": "要交的材料",
             "summary": "序号：1. 资格要求：有依法缴纳税收和社会保障资金<br>的良好记录 须提供的资料：由投标人对以下内容提供书面承诺及声明,或提供相应证明材<br>料。<br>投",
@@ -4149,7 +4529,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0146",
+            "clause_id": "TB-0159",
             "block": "materials",
             "label": "要交的材料",
             "summary": "须提供的资料",
@@ -4177,7 +4557,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0147",
+            "clause_id": "TB-0160",
             "block": "materials",
             "label": "要交的材料",
             "summary": "1. 具有独立承担民事责任的能力如投标人是企业(包括合伙企业),应提供在工商部门注册的有效“企业法人营业执照”或“营业执照”;如投标人是事业单位,应提供有效的“",
@@ -4205,7 +4585,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0148",
+            "clause_id": "TB-0161",
             "block": "materials",
             "label": "要交的材料",
             "summary": "具有良好的商业信誉和健全的财务会计制度由投标人对以下内容提供书面承诺及声明,或提供相应证明材料。",
@@ -4233,7 +4613,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0149",
+            "clause_id": "TB-0162",
             "block": "materials",
             "label": "要交的材料",
             "summary": "2)相应证明材料,且二者内容不一致的,采购人或者采购代理机构有权任选其中一种进行评审,由投标人自行承担一切后果。",
@@ -4261,7 +4641,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0150",
+            "clause_id": "TB-0163",
             "block": "materials",
             "label": "要交的材料",
             "summary": "具有履行合同所必需的设备和专业技术能力由投标人提供书面承诺及声明,或提供相应证明材料。",
@@ -4289,7 +4669,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0151",
+            "clause_id": "TB-0164",
             "block": "materials",
             "label": "要交的材料",
             "summary": "有依法缴纳税收和社会保障资金的良好记录由投标人对以下内容提供书面承诺及声明,或提供相应证明材料。",
@@ -4317,7 +4697,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0152",
+            "clause_id": "TB-0165",
             "block": "materials",
             "label": "要交的材料",
             "summary": "Col1：参加政府采购活动前三年内,在经<br>营活动中没有重大违法记录 Col2：由投标人提供书面承诺及声明,或提供相应证明材料。",
@@ -4345,7 +4725,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0153",
+            "clause_id": "TB-0166",
             "block": "materials",
             "label": "要交的材料",
             "summary": "Col1：法律、行政法规规定的其他条件 Col2：由投标人提供书面承诺及声明,或提供相应证明材料。",
@@ -4373,7 +4753,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0154",
+            "clause_id": "TB-0167",
             "block": "materials",
             "label": "要交的材料",
             "summary": "Col1：2. Col2：单位负责人为同一人或者存在直<br>接控股、管理关系的不同投标人,<br>不得参加本项目同一合同项下的<br>政府采购活动 递交投标文",
@@ -4401,7 +4781,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0155",
+            "clause_id": "TB-0168",
             "block": "materials",
             "label": "要交的材料",
             "summary": "Col1：3. Col2：为本采购项目提供整体设计、规范<br>编制或者项目管理、监理、检测等<br>服务的,不得再参加本项目的其他<br>招标采购活动。 递交",
@@ -4429,7 +4809,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0156",
+            "clause_id": "TB-0169",
             "block": "materials",
             "label": "要交的材料",
             "summary": "Col1：5. Col2：(1)投标人为生产企业的,从事<br>第一类医疗器械生产的,应取得<br>《第一类医疗器械生产备案凭证》;<br>从事第二类、第三类医",
@@ -4457,7 +4837,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0157",
+            "clause_id": "TB-0170",
             "block": "materials",
             "label": "要交的材料",
             "summary": "Col1：6. Col2：(2)投标产品属于《医疗器械监<br>督管理条例》规定的第一类医疗器<br>械产品应提供《第一类医疗器械备<br>案凭证》,属于第二类",
@@ -4485,7 +4865,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0158",
+            "clause_id": "TB-0171",
             "block": "materials",
             "label": "要交的材料",
             "summary": "Col1：7. Col2：投标人须具备有效的《辐射安全许<br>可证》 递交投标文件截止时间的当月成立但因社会保障资金管<br>理机关原因导致其尚未依法缴纳社会",
@@ -4513,7 +4893,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0159",
+            "clause_id": "TB-0172",
             "block": "materials",
             "label": "要交的材料",
             "summary": "2. 单位负责人为同一人或者存在直接控股、管理关系的不同投标人, 不得参加本项目同一合同项下的政府采购活动由投标人提供书面承诺及声明,或提供相应证明材料。",
@@ -4541,7 +4921,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0160",
+            "clause_id": "TB-0173",
             "block": "materials",
             "label": "要交的材料",
             "summary": "若适用,应提供相关证明材料。",
@@ -4569,7 +4949,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0161",
+            "clause_id": "TB-0174",
             "block": "materials",
             "label": "要交的材料",
             "summary": "7. 投标人须具备有效的《辐射安全许可证》 若适用,应提供相关证明材料(符合《基本标准》豁免水平的放射性同位素和射线装置以及有条件豁免要求的含源设备,在生产单位",
@@ -4597,7 +4977,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0162",
+            "clause_id": "TB-0175",
             "block": "materials",
             "label": "要交的材料",
             "summary": "一、评标程序及方法",
@@ -4625,7 +5005,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0163",
+            "clause_id": "TB-0176",
             "block": "materials",
             "label": "要交的材料",
             "summary": "1.投标文件的符合性审查",
@@ -4653,7 +5033,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0164",
+            "clause_id": "TB-0177",
             "block": "materials",
             "label": "要交的材料",
             "summary": "1.评标委员会对资格审查合格的投标人的投标文件进行符合性审查,以确定其是否满足招标文件的实质性要求。",
@@ -4681,7 +5061,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0165",
+            "clause_id": "TB-0178",
             "block": "materials",
             "label": "要交的材料",
             "summary": "2.评标委员会根据《符合性审查要求》中规定的审查因素和审查内容,对投标人的投标文件是否实质上响应招标文件进行符合性审查,并形成符合性审查评审结果。",
@@ -4709,175 +5089,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0166",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "(一)不同投标人的投标文件由同一单位或者个人编制;",
-            "quote": "(一)不同投标人的投标文件由同一单位或者个人编制;",
-            "pages": [
-              39
-            ],
-            "page": 39,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第39页",
-              "index": 39,
-              "pages": [
-                39
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0167",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "(二)不同投标人委托同一单位或者个人办理投标事宜;",
-            "quote": "(二)不同投标人委托同一单位或者个人办理投标事宜;",
-            "pages": [
-              39
-            ],
-            "page": 39,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第39页",
-              "index": 39,
-              "pages": [
-                39
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0168",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "(三)不同投标人的投标文件载明的项目管理成员或者联系人员为同一人;",
-            "quote": "(三)不同投标人的投标文件载明的项目管理成员或者联系人员为同一人;",
-            "pages": [
-              39
-            ],
-            "page": 39,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第39页",
-              "index": 39,
-              "pages": [
-                39
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0169",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "(四)不同投标人的投标文件异常一致或者投标报价呈规律性差异;",
-            "quote": "(四)不同投标人的投标文件异常一致或者投标报价呈规律性差异;",
-            "pages": [
-              39
-            ],
-            "page": 39,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第39页",
-              "index": 39,
-              "pages": [
-                39
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0170",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "(五)不同投标人的投标文件相互混装;",
-            "quote": "(五)不同投标人的投标文件相互混装;",
-            "pages": [
-              40
-            ],
-            "page": 40,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第40页",
-              "index": 40,
-              "pages": [
-                40
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0171",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "(六)不同投标人的投标保证金从同一单位或者个人的账户转出。",
-            "quote": "(六)不同投标人的投标保证金从同一单位或者个人的账户转出。",
-            "pages": [
-              40
-            ],
-            "page": 40,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第40页",
-              "index": 40,
-              "pages": [
-                40
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0172",
+            "clause_id": "TB-0179",
             "block": "materials",
             "label": "要交的材料",
             "summary": "1.评标过程中,评标委员会将以书面形式要求投标人对其投标文件中含义不明确、 同类问题表述不一致或者有明显文字和计算错误的内容,作出必要的澄清、说明或者补正。投标",
@@ -4905,7 +5117,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0173",
+            "clause_id": "TB-0180",
             "block": "materials",
             "label": "要交的材料",
             "summary": "2.评标委员会启动异常低价投标(响应)审查后,属于前述第1 项至第4 项情形的,应当要求相关供应商在评审现场合理的时间内对投标(响应) 价格作出解释,提供项目具",
@@ -4933,63 +5145,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0174",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "2.2.",
-            "quote": "2.2.",
-            "pages": [
-              40
-            ],
-            "page": 40,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第40页",
-              "index": 40,
-              "pages": [
-                40
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0175",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "3.评标委员会依据专业经验,参考同类项目中标(成交)价格、类似产品市场价格水平、行业人工费用标准、国家有关部门指导行业协会发布的行业平均成本等情况,对报价合理性",
-            "quote": "3.评标委员会依据专业经验,参考同类项目中标(成交)价格、类似产品市场价格水平、行业人工费用标准、国家有关部门指导行业协会发布的行业平均成本等情况,对报价合理性进行判断。投标(响应)供应商不能提供书面说明、证明材料,或者提供的书面说明、证明材料不能证明其报价合理性的,评标委员会应当将其作为无效投标(响应)处理。",
-            "pages": [
-              40
-            ],
-            "page": 40,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第40页",
-              "index": 40,
-              "pages": [
-                40
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0176",
+            "clause_id": "TB-0181",
             "block": "materials",
             "label": "要交的材料",
             "summary": "4.采购人、采购代理机构应当为评标委员会在评审现场及时获取同类项目40 中标(成交)价格、类似产品市场价格水平、行业人工费用标准、国家有关部门指导行业协会发布的",
@@ -5020,35 +5176,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0177",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "2.2.",
-            "quote": "2.2.",
-            "pages": [
-              41
-            ],
-            "page": 41,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第41页",
-              "index": 41,
-              "pages": [
-                41
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0178",
+            "clause_id": "TB-0182",
             "block": "materials",
             "label": "要交的材料",
             "summary": "5.异常低价投标(响应)审查的启动原因、审查意见和审查结果应当在评审报告中记录,并随供应商提供的相关书面说明及证明材料,以及评标委员会有关互联网浏览、查询历史一",
@@ -5076,7 +5204,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0179",
+            "clause_id": "TB-0183",
             "block": "materials",
             "label": "要交的材料",
             "summary": "6.对报价触发异常低价投标(响应)审查程序后仍中标(成交)的供应商, 采购人要重点关注其履约承诺、实际履约情况等。如供应商中标(成交) 后无正当理由拒不签订政府",
@@ -5104,35 +5232,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0180",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "3.投标报价须包含招标文件全部内容,如分项报价表有缺漏视为已含在其他各项报价中,将不对投标总价进行调整。评标委员会有权要求投标人在评标现场合理的时间内对此进行书",
-            "quote": "3.投标报价须包含招标文件全部内容,如分项报价表有缺漏视为已含在其他各项报价中,将不对投标总价进行调整。评标委员会有权要求投标人在评标现场合理的时间内对此进行书面确认,投标人不确认的,视为将一个采购包中的内容拆分投标,其投标无效。",
-            "pages": [
-              41
-            ],
-            "page": 41,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第41页",
-              "index": 41,
-              "pages": [
-                41
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0181",
+            "clause_id": "TB-0184",
             "block": "materials",
             "label": "要交的材料",
             "summary": "4.投标文件报价出现前后不一致的,除招标文件另有规定外,按照下列规定修正。",
@@ -5160,7 +5260,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0182",
+            "clause_id": "TB-0185",
             "block": "materials",
             "label": "要交的材料",
             "summary": "注:须提供合同复印件或中标通知书作为证明材料(所提供的合同可以不牵涉到金额等相关商业机密信息,但必须提供合同采购内容页、合同双方签署页及合同签署双方的完整信息)",
@@ -5188,7 +5288,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0183",
+            "clause_id": "TB-0186",
             "block": "materials",
             "label": "要交的材料",
             "summary": "得41 分。每有1 项标注“*”的参数指标项(12 项)负偏离或不满足的扣1 分;每有1 项无标识的参数指标项(58 项)负偏离或不满足的扣0.5 分,本项最低",
@@ -5216,7 +5316,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0184",
+            "clause_id": "TB-0187",
             "block": "materials",
             "label": "要交的材料",
             "summary": "3、设备整机及零部件保修期为甲方(临床使用部门及医学工程科人员)和乙方共同验收合格之日起60 个月,乙方需提供设备生产厂家60 个月的保修证明,保修期内因设备质",
@@ -5244,38 +5344,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0185",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "50 投标文件封面:封面(非实质性格式) 投标文件 (正本/副本) 项目编号: 项目名称: 投标人名称(加盖公章): 日期: 年月日51 投标文件目录(略)",
-            "quote": "50 投标文件封面:封面(非实质性格式) 投标文件 (正本/副本) 项目编号: 项目名称: 投标人名称(加盖公章): 日期: 年月日51 投标文件目录(略)",
-            "pages": [
-              51,
-              52
-            ],
-            "page": 51,
-            "printed_page": null,
-            "printed_pages": [
-              null,
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第51-52页",
-              "index": 51,
-              "pages": [
-                51,
-                52
-              ]
-            },
-            "detection": "cross_page",
-            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0186",
+            "clause_id": "TB-0188",
             "block": "materials",
             "label": "要交的材料",
             "summary": "序号：1. 资格要求：有依法缴纳税收和社会保障资<br>金的良好记录 须提供的资料：由投标人对以下内容提供书面承诺及声明,或提供相<br>应证明材料。<br>投",
@@ -5303,7 +5372,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0187",
+            "clause_id": "TB-0189",
             "block": "materials",
             "label": "要交的材料",
             "summary": "须提供的资料对应页码",
@@ -5331,7 +5400,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0188",
+            "clause_id": "TB-0190",
             "block": "materials",
             "label": "要交的材料",
             "summary": "1. 具有独立承担民事责任的能力如投标人是企业(包括合伙企业),应提供在工商部门注册的有效“企业法人营业执照”或“营业执照”; 如投标人是事业单位,应提供有效的",
@@ -5359,7 +5428,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0189",
+            "clause_id": "TB-0191",
             "block": "materials",
             "label": "要交的材料",
             "summary": "具有良好的商业信誉和健全的财务会计制度由投标人对以下内容提供书面承诺及声明,或提供相应证明材料。",
@@ -5387,7 +5456,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0190",
+            "clause_id": "TB-0192",
             "block": "materials",
             "label": "要交的材料",
             "summary": "2) 相应证明材料,且二者内容不一致的,采购人或者采购代理机构有权任选其中一种进行评审,由投标人自行承担一切后果。",
@@ -5415,7 +5484,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0191",
+            "clause_id": "TB-0193",
             "block": "materials",
             "label": "要交的材料",
             "summary": "具有履行合同所必需的设备和专业技术能力由投标人提供书面承诺及声明,或提供相应证明材料。",
@@ -5443,7 +5512,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0192",
+            "clause_id": "TB-0194",
             "block": "materials",
             "label": "要交的材料",
             "summary": "有依法缴纳税收和社会保障资金的良好记录由投标人对以下内容提供书面承诺及声明,或提供相应证明材料。",
@@ -5471,7 +5540,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0193",
+            "clause_id": "TB-0195",
             "block": "materials",
             "label": "要交的材料",
             "summary": "序号：相应证明材料,且二者内容不一致的,采购人或者采<br>购代理机构有权任选其中一种进行评审,由投标人自<br>行承担一切后果。",
@@ -5499,7 +5568,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0194",
+            "clause_id": "TB-0196",
             "block": "materials",
             "label": "要交的材料",
             "summary": "序号：4. 资格要求：未被列入失信被执行人、重大税<br>收违法失信主体,未被列入政府<br>采购严重违法失信行为记录名<br>单。 须提供的资料：以采购人和采",
@@ -5527,7 +5596,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0195",
+            "clause_id": "TB-0197",
             "block": "materials",
             "label": "要交的材料",
             "summary": "序号：5. 资格要求：(1)投标人为生产企业的,从<br>事第一类医疗器械生产的,应取<br>得《第一类医疗器械生产备案凭<br>证》;从事第二类、第三类医疗<",
@@ -5555,7 +5624,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0196",
+            "clause_id": "TB-0198",
             "block": "materials",
             "label": "要交的材料",
             "summary": "序号：6. 资格要求：(2)投标产品属于《医疗器械<br>监督管理条例》规定的第一类医<br>疗器械产品应提供《第一类医疗<br>器械备案凭证》,属于第二类、<",
@@ -5583,7 +5652,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0197",
+            "clause_id": "TB-0199",
             "block": "materials",
             "label": "要交的材料",
             "summary": "须提供的资料对应页码相应证明材料,且二者内容不一致的,采购人或者采购代理机构有权任选其中一种进行评审,由投标人自行承担一切后果。",
@@ -5611,7 +5680,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0198",
+            "clause_id": "TB-0200",
             "block": "materials",
             "label": "要交的材料",
             "summary": "参加政府采购活动前三年内,在经营活动中没有重大违法记录由投标人提供书面承诺及声明,或提供相应证明材料。",
@@ -5639,7 +5708,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0199",
+            "clause_id": "TB-0201",
             "block": "materials",
             "label": "要交的材料",
             "summary": "法律、行政法规规定的其他条件由投标人提供书面承诺及声明,或提供相应证明材料。",
@@ -5667,7 +5736,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0200",
+            "clause_id": "TB-0202",
             "block": "materials",
             "label": "要交的材料",
             "summary": "2. 单位负责人为同一人或者存在直接控股、管理关系的不同投标人,不得参加本项目同一合同项下的政府采购活动由投标人提供书面承诺及声明,或提供相应证明材料。",
@@ -5695,7 +5764,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0201",
+            "clause_id": "TB-0203",
             "block": "materials",
             "label": "要交的材料",
             "summary": "由投标人提供书面承诺及声明,或提供相应证明材料。",
@@ -5723,7 +5792,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0202",
+            "clause_id": "TB-0204",
             "block": "materials",
             "label": "要交的材料",
             "summary": "若适用,应提供相关证明材料。",
@@ -5751,7 +5820,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0203",
+            "clause_id": "TB-0205",
             "block": "materials",
             "label": "要交的材料",
             "summary": "7. 投标人须具备有效的《辐射安全许可证》 若适用,应提供相关证明材料(符合《基本标准》豁免水平的放射性同位素和射线装置以及有条件豁免要求的含源设备,在生产单位",
@@ -5779,7 +5848,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0204",
+            "clause_id": "TB-0206",
             "block": "materials",
             "label": "要交的材料",
             "summary": "序号：8. 资格要求：如国家法律法规对市场准入有<br>要求的还应符合相关规定 须提供的资料：由投标人提供书面承诺及声明",
@@ -5807,7 +5876,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0205",
+            "clause_id": "TB-0207",
             "block": "materials",
             "label": "要交的材料",
             "summary": "须提供的资料对应页码外),其他销售、使用单位无需逐一办理豁免备案手续;由使用单位完成备案的,仅该单位的使用活动可免于辐射安全监管)",
@@ -5835,206 +5904,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0206",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "(一)不同投标人的投标文件由同一单位或者个人编制;",
-            "quote": "(一)不同投标人的投标文件由同一单位或者个人编制;",
-            "pages": [
-              56
-            ],
-            "page": 56,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第56页",
-              "index": 56,
-              "pages": [
-                56
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0207",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "(二)不同投标人委托同一单位或者个人办理投标事宜;",
-            "quote": "(二)不同投标人委托同一单位或者个人办理投标事宜;",
-            "pages": [
-              56
-            ],
-            "page": 56,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第56页",
-              "index": 56,
-              "pages": [
-                56
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
             "clause_id": "TB-0208",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "(三)不同投标人的投标文件载明的项目管理成员或者联系人员为同一人;",
-            "quote": "(三)不同投标人的投标文件载明的项目管理成员或者联系人员为同一人;",
-            "pages": [
-              56
-            ],
-            "page": 56,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第56页",
-              "index": 56,
-              "pages": [
-                56
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0209",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "(四)不同投标人的投标文件异常一致或者投标报价呈规律性差异;",
-            "quote": "(四)不同投标人的投标文件异常一致或者投标报价呈规律性差异;",
-            "pages": [
-              56
-            ],
-            "page": 56,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第56页",
-              "index": 56,
-              "pages": [
-                56
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0210",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "(五)不同投标人的投标文件相互混装;",
-            "quote": "(五)不同投标人的投标文件相互混装;",
-            "pages": [
-              56
-            ],
-            "page": 56,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第56页",
-              "index": 56,
-              "pages": [
-                56
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0211",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "(六)不同投标人的投标保证金从同一单位或者个人的账户转出。",
-            "quote": "(六)不同投标人的投标保证金从同一单位或者个人的账户转出。",
-            "pages": [
-              56
-            ],
-            "page": 56,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第56页",
-              "index": 56,
-              "pages": [
-                56
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0212",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "投标人名称(加盖公章)___________ 日期:_____年______月______日59 2 授权委托书(实质性格式) 授权委托书本人_______(姓",
-            "quote": "投标人名称(加盖公章)___________ 日期:_____年______月______日59 2 授权委托书(实质性格式) 授权委托书本人_______(姓名)系________________(投标人名称)的法定代表人(单位负责人),现委托_______(姓名)为我方代理人。代理人根据授权,以我方名义签署、 澄清确认、提交、撤回、修改________________(项目名称)投标文件和处理有关事宜, 其法律后果由我方承担。",
-            "pages": [
-              59,
-              60
-            ],
-            "page": 59,
-            "printed_page": null,
-            "printed_pages": [
-              null,
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第59-60页",
-              "index": 59,
-              "pages": [
-                59,
-                60
-              ]
-            },
-            "detection": "cross_page",
-            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0213",
             "block": "materials",
             "label": "要交的材料",
             "summary": "投标人名称(加盖公章):________________ 法定代表人(单位负责人)(签字或签章):________________ 委托代理人(签字或签章):_",
@@ -6062,7 +5932,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0214",
+            "clause_id": "TB-0209",
             "block": "materials",
             "label": "要交的材料",
             "summary": "1.若供应商为事业单位或其他组织或分支机构,则法定代表人(单位负责人)处的签署人可为单位负责人。",
@@ -6090,7 +5960,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0215",
+            "clause_id": "TB-0210",
             "block": "materials",
             "label": "要交的材料",
             "summary": "2.若投标文件中签字之处均为法定代表人(单位负责人)本人签署,则可不提供本《授权委托书》,但须提供《法定代表人(单位负责人)身份证明》;否则,不需要提供《法定代",
@@ -6118,7 +5988,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0216",
+            "clause_id": "TB-0211",
             "block": "materials",
             "label": "要交的材料",
             "summary": "3.供应商为自然人的情形,可不提供本《授权委托书》。",
@@ -6146,7 +6016,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0217",
+            "clause_id": "TB-0212",
             "block": "materials",
             "label": "要交的材料",
             "summary": "4.供应商应随本《授权委托书》同时提供法定代表人(单位负责人)及委托代理人的有效的身份证、护照等身份证明文件电子件。提供身份证的,应同时提供身份证双面电子件。",
@@ -6174,7 +6044,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0218",
+            "clause_id": "TB-0213",
             "block": "materials",
             "label": "要交的材料",
             "summary": "附:法定代表人(单位负责人)身份证、护照等身份证明文件电子件: 投标人名称(加盖公章):________________ 法定代表人(单位负责人)(签字或签章)",
@@ -6202,7 +6072,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0219",
+            "clause_id": "TB-0214",
             "block": "materials",
             "label": "要交的材料",
             "summary": "1.若供应商为事业单位或其他组织或分支机构,则法定代表人(单位负责人)处的签署人可为单位负责人。",
@@ -6230,7 +6100,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0220",
+            "clause_id": "TB-0215",
             "block": "materials",
             "label": "要交的材料",
             "summary": "2.若投标文件中签字之处均为法定代表人(单位负责人)本人签署,则可不提供本《授权委托书》,但须提供《法定代表人(单位负责人)身份证明》;否则,不需要提供《法定代",
@@ -6258,7 +6128,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0221",
+            "clause_id": "TB-0216",
             "block": "materials",
             "label": "要交的材料",
             "summary": "3.供应商为自然人的情形,可不提供本身份证明。",
@@ -6286,7 +6156,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0222",
+            "clause_id": "TB-0217",
             "block": "materials",
             "label": "要交的材料",
             "summary": "4.供应商应随本身份证明提供法定代表人(单位负责人)的有效的身份证、护照等身份证明文件电子件。提供身份证的,应同时提供身份证双面电子件。",
@@ -6314,11 +6184,11 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0223",
+            "clause_id": "TB-0218",
             "block": "materials",
             "label": "要交的材料",
-            "summary": "投标人名称(加盖公章):____________ 日期:_____年______月______日",
-            "quote": "投标人名称(加盖公章):____________ 日期:_____年______月______日",
+            "summary": "1.此表中,每包的投标报价应和《投标分项报价表》中的总价相一致。",
+            "quote": "1.此表中,每包的投标报价应和《投标分项报价表》中的总价相一致。",
             "pages": [
               62
             ],
@@ -6342,100 +6212,63 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0224",
+            "clause_id": "TB-0219",
             "block": "materials",
             "label": "要交的材料",
-            "summary": "投标人名称(加盖公章):____________ 日期:_____年______月______日64 5 投标保证金凭证/交款单据电子件(实质性格式) (招标代",
-            "quote": "投标人名称(加盖公章):____________ 日期:_____年______月______日64 5 投标保证金凭证/交款单据电子件(实质性格式) (招标代理机构): 我方提供万元的投标保证金作为项目(招标编号: )的投标担保。现保证:我方在规定的投标有效期内撤销或修改投标文件的,或者在收到中标通知书后无正当理由拒签合同或拒交规定履约担保的,投标保证金不予退还。",
+            "summary": "2.本表必须按包分别填写。",
+            "quote": "2.本表必须按包分别填写。",
             "pages": [
-              64,
-              65
+              62
             ],
-            "page": 64,
+            "page": 62,
             "printed_page": null,
             "printed_pages": [
-              null,
               null
             ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "PDF 第64-65页",
-              "index": 64,
+              "label": "PDF 第62页",
+              "index": 62,
               "pages": [
-                64,
-                65
+                62
               ]
             },
-            "detection": "cross_page",
+            "detection": "clause",
             "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
             "uncited_reason": null,
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0225",
+            "clause_id": "TB-0220",
             "block": "materials",
             "label": "要交的材料",
-            "summary": "投标人名称(加盖公章):____________ 日期:_____年______月______日投标保证金提交证明65",
-            "quote": "投标人名称(加盖公章):____________ 日期:_____年______月______日投标保证金提交证明65",
+            "summary": "投标人名称(加盖公章):____________ 日期:_____年______月______日投标保证金提交证明",
+            "quote": "投标人名称(加盖公章):____________ 日期:_____年______月______日投标保证金提交证明",
             "pages": [
-              65,
-              66
+              65
             ],
             "page": 65,
             "printed_page": null,
             "printed_pages": [
-              null,
               null
             ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "PDF 第65-66页",
+              "label": "PDF 第65页",
               "index": 65,
               "pages": [
-                65,
-                66
+                65
               ]
             },
-            "detection": "cross_page",
+            "detection": "clause",
             "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
             "uncited_reason": null,
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0226",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "投标人名称(加盖公章):____________ 日期:_____年______月______日68 3",
-            "quote": "投标人名称(加盖公章):____________ 日期:_____年______月______日68 3",
-            "pages": [
-              68,
-              69
-            ],
-            "page": 68,
-            "printed_page": null,
-            "printed_pages": [
-              null,
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第68-69页",
-              "index": 68,
-              "pages": [
-                68,
-                69
-              ]
-            },
-            "detection": "cross_page",
-            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0227",
+            "clause_id": "TB-0221",
             "block": "materials",
             "label": "要交的材料",
             "summary": "三、其他响应文件格式投标文件(其他响应文件)封面(非实质性格式) 投标文件其他响应文件项目编号: 项目名称: 投标人: 20 年月日72 1 技术要求偏离表(实",
@@ -6466,35 +6299,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0228",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "1.对招标文件中的所有技术要求,除本表所列明的所有偏离外,均视作供应商已对之理解和响应。此表中若无任何文字说明,内容为空白的,投标无效。",
-            "quote": "1.对招标文件中的所有技术要求,除本表所列明的所有偏离外,均视作供应商已对之理解和响应。此表中若无任何文字说明,内容为空白的,投标无效。",
-            "pages": [
-              73
-            ],
-            "page": 73,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第73页",
-              "index": 73,
-              "pages": [
-                73
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0229",
+            "clause_id": "TB-0222",
             "block": "materials",
             "label": "要交的材料",
             "summary": "2.“偏离情况”列应据实填写“无偏离”、“正偏离”或“负偏离”。",
@@ -6522,35 +6327,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0230",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "投标人名称(加盖公章):____________ 日期:_____年______月______日",
-            "quote": "投标人名称(加盖公章):____________ 日期:_____年______月______日",
-            "pages": [
-              73
-            ],
-            "page": 73,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第73页",
-              "index": 73,
-              "pages": [
-                73
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0231",
+            "clause_id": "TB-0223",
             "block": "materials",
             "label": "要交的材料",
             "summary": "5. 投标人名称(加盖公章):____________ 日期:_____年______月______日74 2 商务要求偏离表(实质性格式) 商务要求偏离表项目",
@@ -6581,35 +6358,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0232",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "1.对招标文件中的所有商务要求,除本表所列明的所有偏离外,均视作供应商已对之理解和响应。此表中若无任何文字说明,内容为空白的,投标无效。",
-            "quote": "1.对招标文件中的所有商务要求,除本表所列明的所有偏离外,均视作供应商已对之理解和响应。此表中若无任何文字说明,内容为空白的,投标无效。",
-            "pages": [
-              75
-            ],
-            "page": 75,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第75页",
-              "index": 75,
-              "pages": [
-                75
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0233",
+            "clause_id": "TB-0224",
             "block": "materials",
             "label": "要交的材料",
             "summary": "2.“偏离情况”列应据实填写“无偏离”、“正偏离”或“负偏离”。",
@@ -6637,94 +6386,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0234",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "投标人名称(加盖公章):____________ 日期:_____年______月______日75 3 中小企业证明文件说明:",
-            "quote": "投标人名称(加盖公章):____________ 日期:_____年______月______日75 3 中小企业证明文件说明:",
-            "pages": [
-              75,
-              76
-            ],
-            "page": 75,
-            "printed_page": null,
-            "printed_pages": [
-              null,
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第75-76页",
-              "index": 75,
-              "pages": [
-                75,
-                76
-              ]
-            },
-            "detection": "cross_page",
-            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0235",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "1)中小企业参加政府采购活动,应当出具《中小企业声明函》或《残疾人福利性单位声明函》或由省级以上监狱管理局、戒毒管理局(含新疆生产建设兵团)出具的属于监狱企业的",
-            "quote": "1)中小企业参加政府采购活动,应当出具《中小企业声明函》或《残疾人福利性单位声明函》或由省级以上监狱管理局、戒毒管理局(含新疆生产建设兵团)出具的属于监狱企业的证明文件,以证明中小企业身份。《中小企业声明函》由参加政府采购活动的投标人出具。联合体投标的,《中小企业声明函》可由牵头人出具。",
-            "pages": [
-              76
-            ],
-            "page": 76,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第76页",
-              "index": 76,
-              "pages": [
-                76
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0236",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "2)对于联合体中由中小企业承担的部分,或者分包给中小企业的部分,必须全部由中小企业制造、承建或者承接。供应商应当在声明函“标的名称”部分标明联合体中中小企业承担",
-            "quote": "2)对于联合体中由中小企业承担的部分,或者分包给中小企业的部分,必须全部由中小企业制造、承建或者承接。供应商应当在声明函“标的名称”部分标明联合体中中小企业承担的具体内容或者中小企业的具体分包内容。",
-            "pages": [
-              76
-            ],
-            "page": 76,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第76页",
-              "index": 76,
-              "pages": [
-                76
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0237",
+            "clause_id": "TB-0225",
             "block": "materials",
             "label": "要交的材料",
             "summary": "78 监狱企业证明文件【如适用】 (监狱企业应当提供由省级及以上监狱管理局、戒毒管理局(含新疆生产建设兵团)出具的监狱企业的证明文件,格式自行编写。) 投标人名",
@@ -6755,91 +6417,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0238",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "序号分包承担主体名称分包承担主体类型(选择) 资质等级拟分包合同内容拟分包合同金额(人民币元) 占合同金额的比例(%) 1 □中型企业 □小微企业 □其他 2 ",
-            "quote": "序号分包承担主体名称分包承担主体类型(选择) 资质等级拟分包合同内容拟分包合同金额(人民币元) 占合同金额的比例(%) 1 □中型企业 □小微企业 □其他 2 □中型企业 □小微企业 □其他 ... 合计: 投标人名称(加盖公章):____________ 日期:_____年______月______日注:",
-            "pages": [
-              81
-            ],
-            "page": 81,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第81页",
-              "index": 81,
-              "pages": [
-                81
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0239",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "1.如本项目(包)允许分包,且投标人拟进行分包时,必须提供;如未提供,或提供了但未填写分包承担主体名称、拟分包合同内容、拟分包合同金额,投标无效。",
-            "quote": "1.如本项目(包)允许分包,且投标人拟进行分包时,必须提供;如未提供,或提供了但未填写分包承担主体名称、拟分包合同内容、拟分包合同金额,投标无效。",
-            "pages": [
-              81
-            ],
-            "page": 81,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第81页",
-              "index": 81,
-              "pages": [
-                81
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0240",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "2.如本招标文件《投标人须知资料表》载明本项目分包承担主体应具备的相应资质条件, 则投标人须在本表中列明分包承担主体的资质等级,并后附资质证书电子件,否则投标无",
-            "quote": "2.如本招标文件《投标人须知资料表》载明本项目分包承担主体应具备的相应资质条件, 则投标人须在本表中列明分包承担主体的资质等级,并后附资质证书电子件,否则投标无效。",
-            "pages": [
-              81
-            ],
-            "page": 81,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第81页",
-              "index": 81,
-              "pages": [
-                81
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0241",
+            "clause_id": "TB-0226",
             "block": "materials",
             "label": "要交的材料",
             "summary": "3.投标人“为落实政府采购政策”而向中小企业分包时请仔细阅读资格证明文件格式中说明,并建议按要求在资格证明文件中提供相关全部文件;投标人非“为落实政府采购政策”",
@@ -6867,35 +6445,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0242",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "1.投标人“为落实政府采购政策”而向中小企业分包时必须提供,否则投标无效;且建议按照采购文件要求在资格证明文件部分提供;",
-            "quote": "1.投标人“为落实政府采购政策”而向中小企业分包时必须提供,否则投标无效;且建议按照采购文件要求在资格证明文件部分提供;",
-            "pages": [
-              82
-            ],
-            "page": 82,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第82页",
-              "index": 82,
-              "pages": [
-                82
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0243",
+            "clause_id": "TB-0227",
             "block": "materials",
             "label": "要交的材料",
             "summary": "2.投标人满足《政府采购促进中小企业发展管理办法》(财库〔2020〕46 号)第九条有关规定,拟享受中小企业政策优惠措施的,仍需提供本协议,否则不予认可;",
@@ -6923,7 +6473,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0244",
+            "clause_id": "TB-0228",
             "block": "materials",
             "label": "要交的材料",
             "summary": "4)在后续的投诉处理或监督检查中,如果对产品是否符合标准产生争议,财政部门可能要求供应商或制造商提供相关证明材料(如组件采购合同、生产记录等)。若无法提供有效证",
@@ -6951,7 +6501,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0245",
+            "clause_id": "TB-0229",
             "block": "materials",
             "label": "要交的材料",
             "summary": "84 财政部会同有关部门规定的有关证明文件 (出具符合要求的《声明函》或有关证明文件的,该产品视为本国产品,采购人、采购代理机构不得再要求供应商提供其他证明材料",
@@ -6980,34 +6530,6 @@
             "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
             "uncited_reason": null,
             "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0246",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "投标人名称(加盖公章):____________ 日期:_____年______月______日",
-            "quote": "投标人名称(加盖公章):____________ 日期:_____年______月______日",
-            "pages": [
-              86
-            ],
-            "page": 86,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第86页",
-              "index": 86,
-              "pages": [
-                86
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
           }
         ]
       },
@@ -7015,7 +6537,7 @@
         "label": "废标项",
         "items": [
           {
-            "clause_id": "TB-0247",
+            "clause_id": "TB-0230",
             "block": "rejection",
             "label": "废标项",
             "summary": "(4)“数智云采”系统操作其他相关问题,详见“数智云采”首页-帮助中心-常见问题指引,或添加技术咨询4 qq:3836438780。若投标人参与多包的投标,请投",
@@ -7046,7 +6568,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0248",
+            "clause_id": "TB-0231",
             "block": "rejection",
             "label": "废标项",
             "summary": "3.如本项目采购产品属于实施政府强制采购品目清单范围的节能产品,则投标人所报产品必须获得国家确定的认证机构出具的、处于有效期之内的节能产品认证证书,否则投标无效",
@@ -7074,7 +6596,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0249",
+            "clause_id": "TB-0232",
             "block": "rejection",
             "label": "废标项",
             "summary": "2.投标人应认真阅读招标文件的全部内容。投标人应按照招标文件要求提18 交投标文件并保证所提供的全部资料的真实性,并对招标文件做出实质性响应,否则投标无效。",
@@ -7105,7 +6627,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0250",
+            "clause_id": "TB-0233",
             "block": "rejection",
             "label": "废标项",
             "summary": "1.本项目如划分采购包,投标人可以对本项目的其中一个采购包进行投标, 也可同时对多个采购包进行投标。投标人应当对所投采购包对应第三章 《采购需求》所列的全部内容",
@@ -7133,7 +6655,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0251",
+            "clause_id": "TB-0234",
             "block": "rejection",
             "label": "废标项",
             "summary": "2.投标文件的部分格式要求,见第七章《投标文件格式》。对于招标文件中标记了“实质性格式”文件的,投标人不得改变格式中给定的文字所表达的含义,不得删减格式中的实质",
@@ -7161,7 +6683,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0252",
+            "clause_id": "TB-0235",
             "block": "rejection",
             "label": "废标项",
             "summary": "4.投标人的报价超过招标文件规定的预算金额或者分项、分包最高限价的,其投标无效。",
@@ -7189,7 +6711,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0253",
+            "clause_id": "TB-0236",
             "block": "rejection",
             "label": "废标项",
             "summary": "5.投标人不能提供任何有选择性或可调整的报价(第三章《采购需求》 另有规定的除外),否则其投标无效。",
@@ -7217,7 +6739,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0254",
+            "clause_id": "TB-0237",
             "block": "rejection",
             "label": "废标项",
             "summary": "3.投标保证金到账(保函提交)截止时间同投标截止时间。以支票、汇票、本票、网上银行支付等形式提交投标保证金的,应在投标截止时间前到账;以金融机构、担保机构出具的",
@@ -7245,7 +6767,91 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0255",
+            "clause_id": "TB-0238",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "8.有下列情形之一的,采购人或采购代理机构可以不予退还投标保证金:",
+            "quote": "8.有下列情形之一的,采购人或采购代理机构可以不予退还投标保证金:",
+            "pages": [
+              21
+            ],
+            "page": 21,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第21页",
+              "index": 21,
+              "pages": [
+                21
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0239",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "1.投标有效期内投标人撤销投标文件的;",
+            "quote": "1.投标有效期内投标人撤销投标文件的;",
+            "pages": [
+              22
+            ],
+            "page": 22,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第22页",
+              "index": 22,
+              "pages": [
+                22
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0240",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "2.法律、行政法规规定的其他情形。",
+            "quote": "2.法律、行政法规规定的其他情形。",
+            "pages": [
+              22
+            ],
+            "page": 22,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第22页",
+              "index": 22,
+              "pages": [
+                22
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0241",
             "block": "rejection",
             "label": "废标项",
             "summary": "1.投标文件应在本招标文件《投标人须知前附表》中规定的投标有效期内保持有效,投标人不得要求撤销或修改其投标文件。投标有效期少于招标文件规定期限的,其投标无效。",
@@ -7273,7 +6879,91 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0256",
+            "clause_id": "TB-0242",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "2.因特殊原因,采购人或采购代理机构可在原投标有效期截止之前,要求投标人延长投标文件的有效期。接受该要求的投标人将不会被要求和允许修改其投标。投标人也可以拒绝延",
+            "quote": "2.因特殊原因,采购人或采购代理机构可在原投标有效期截止之前,要求投标人延长投标文件的有效期。接受该要求的投标人将不会被要求和允许修改其投标。投标人也可以拒绝延长投标有效期的要求,且不承担任何责任。上述要求和答复都应以书面形式提交。",
+            "pages": [
+              22
+            ],
+            "page": 22,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第22页",
+              "index": 22,
+              "pages": [
+                22
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0243",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "1.投标人应当按照招标文件的要求编制投标文件并进行签署及盖章。投标文件应当对招标文件提出的要求和条件作出明确响应。",
+            "quote": "1.投标人应当按照招标文件的要求编制投标文件并进行签署及盖章。投标文件应当对招标文件提出的要求和条件作出明确响应。",
+            "pages": [
+              22
+            ],
+            "page": 22,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第22页",
+              "index": 22,
+              "pages": [
+                22
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0244",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "2.【电子标】投标文件应在供应商客户端中进行编制,并生成投标文件。",
+            "quote": "2.【电子标】投标文件应在供应商客户端中进行编制,并生成投标文件。",
+            "pages": [
+              22
+            ],
+            "page": 22,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第22页",
+              "index": 22,
+              "pages": [
+                22
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0245",
             "block": "rejection",
             "label": "废标项",
             "summary": "1.投标人应当在招标文件要求提交投标文件的截止时间前,将投标文件密封送达投标地点。采购人或者采购代理机构收到投标文件后,应当如实记载投标文件的送达时间和密封情况",
@@ -7301,7 +6991,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0257",
+            "clause_id": "TB-0246",
             "block": "rejection",
             "label": "废标项",
             "summary": "3.投标人应当遵循公平竞争的原则,不得恶意串通,不得妨碍其他投标人的竞争行为,不得损害采购人或者其他投标人的合法权益。在评标过程中发现投标人有上述情形的,评标委",
@@ -7329,7 +7019,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0258",
+            "clause_id": "TB-0247",
             "block": "rejection",
             "label": "废标项",
             "summary": "4.【电子标】投标人应在《投标人须知前附表》规定的时间内对投标文件进行解密,因非系统原因导致的解密失败,视为投标无效。【电子标】开标将通过电子交易平台宣布投标人",
@@ -7357,7 +7047,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0259",
+            "clause_id": "TB-0248",
             "block": "rejection",
             "label": "废标项",
             "summary": "1.在招标采购中,出现下列情形之一的,应予废标:",
@@ -7385,35 +7075,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0260",
-            "block": "rejection",
-            "label": "废标项",
-            "summary": "25.1.",
-            "quote": "25.1.",
-            "pages": [
-              25
-            ],
-            "page": 25,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第25页",
-              "index": 25,
-              "pages": [
-                25
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0261",
+            "clause_id": "TB-0249",
             "block": "rejection",
             "label": "废标项",
             "summary": "1.符合专业条件的供应商或者对招标文件作实质响应的供应商不足三家的;",
@@ -7441,35 +7103,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0262",
-            "block": "rejection",
-            "label": "废标项",
-            "summary": "25.1.",
-            "quote": "25.1.",
-            "pages": [
-              26
-            ],
-            "page": 26,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第26页",
-              "index": 26,
-              "pages": [
-                26
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0263",
+            "clause_id": "TB-0250",
             "block": "rejection",
             "label": "废标项",
             "summary": "2.出现影响采购公正的违法、违规行为的;",
@@ -7497,7 +7131,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0264",
+            "clause_id": "TB-0251",
             "block": "rejection",
             "label": "废标项",
             "summary": "3.投标人的报价均超过了采购预算,采购人不能支付的;",
@@ -7525,7 +7159,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0265",
+            "clause_id": "TB-0252",
             "block": "rejection",
             "label": "废标项",
             "summary": "4.因重大变故,采购任务取消的。",
@@ -7553,7 +7187,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0266",
+            "clause_id": "TB-0253",
             "block": "rejection",
             "label": "废标项",
             "summary": "2.废标后,采购人应当将废标理由通知所有投标人。",
@@ -7581,11 +7215,11 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0267",
+            "clause_id": "TB-0254",
             "block": "rejection",
             "label": "废标项",
-            "summary": "26 签订合同",
-            "quote": "26 签订合同",
+            "summary": "1.中标人、采购人应当自中标通知书发出之日起30 日内,按照招标文件和中标人投标文件的规定签订书面合同。所签订的合同不得对招标文件确定的事项和中标人投标文件作实",
+            "quote": "1.中标人、采购人应当自中标通知书发出之日起30 日内,按照招标文件和中标人投标文件的规定签订书面合同。所签订的合同不得对招标文件确定的事项和中标人投标文件作实质性修改。",
             "pages": [
               26
             ],
@@ -7609,7 +7243,63 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0268",
+            "clause_id": "TB-0255",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "2.中标人拒绝与采购人签订合同的,采购人可以按照评标报告推荐的中标候选人名单排序,确定下一候选人为中标人,也可以重新开展政府采购活动。",
+            "quote": "2.中标人拒绝与采购人签订合同的,采购人可以按照评标报告推荐的中标候选人名单排序,确定下一候选人为中标人,也可以重新开展政府采购活动。",
+            "pages": [
+              26
+            ],
+            "page": 26,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第26页",
+              "index": 26,
+              "pages": [
+                26
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0256",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "3.联合体中标的,联合体各方应当共同与采购人签订合同,就采购合同约定的事项向采购人承担连带责任。",
+            "quote": "3.联合体中标的,联合体各方应当共同与采购人签订合同,就采购合同约定的事项向采购人承担连带责任。",
+            "pages": [
+              26
+            ],
+            "page": 26,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第26页",
+              "index": 26,
+              "pages": [
+                26
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0257",
             "block": "rejection",
             "label": "废标项",
             "summary": "4.采购人允许采用分包方式履行合同的,中标人可以依法在中标后将中标项目的非主体、非关键性工作采取分包方式履行合同。本项目的非主体、非关键性工作是否允许分包,见《",
@@ -7637,7 +7327,147 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0269",
+            "clause_id": "TB-0258",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "5.依据《政府采购促进中小企业发展管理办法》(财库〔2020〕46 号) 规定享受扶持政策获得政府采购合同的,小微企业不得将合同分包给大中型企业,中型企业不得将",
+            "quote": "5.依据《政府采购促进中小企业发展管理办法》(财库〔2020〕46 号) 规定享受扶持政策获得政府采购合同的,小微企业不得将合同分包给大中型企业,中型企业不得将合同分包给大型企业。",
+            "pages": [
+              26
+            ],
+            "page": 26,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第26页",
+              "index": 26,
+              "pages": [
+                26
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0259",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "6.政府采购合同不能转包。",
+            "quote": "6.政府采购合同不能转包。",
+            "pages": [
+              26
+            ],
+            "page": 26,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第26页",
+              "index": 26,
+              "pages": [
+                26
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0260",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "7.“政采贷”融资指引:详见《投标人须知前附表》。",
+            "quote": "7.“政采贷”融资指引:详见《投标人须知前附表》。",
+            "pages": [
+              26
+            ],
+            "page": 26,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第26页",
+              "index": 26,
+              "pages": [
+                26
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0261",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "1.中标人应按照《投标人须知前附表》规定缴纳履约保证金。",
+            "quote": "1.中标人应按照《投标人须知前附表》规定缴纳履约保证金。",
+            "pages": [
+              26
+            ],
+            "page": 26,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第26页",
+              "index": 26,
+              "pages": [
+                26
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0262",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "2.中标人不履行与招标人订立的合同的,履约保证金不予退还,给招标人造成的损失超过履约保证金数额的,还应当对超过部分予以赔偿;",
+            "quote": "2.中标人不履行与招标人订立的合同的,履约保证金不予退还,给招标人造成的损失超过履约保证金数额的,还应当对超过部分予以赔偿;",
+            "pages": [
+              26
+            ],
+            "page": 26,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第26页",
+              "index": 26,
+              "pages": [
+                26
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0263",
             "block": "rejection",
             "label": "废标项",
             "summary": "1. CT 1 套货物工业 ☑是 □否 ☑是 □否 □是 ☑否 □是 ☑否说明:投标人应当对所投采购包“采购标的一览表”所列的全部内容进行投标,不得将一个采购包",
@@ -7665,7 +7495,35 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0270",
+            "clause_id": "TB-0264",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "三、商务要求以下标注★的条款为实质性要求,不满足要求的将导致投标被拒绝。投标人须在商务要求偏离表中进行逐条响应。",
+            "quote": "三、商务要求以下标注★的条款为实质性要求,不满足要求的将导致投标被拒绝。投标人须在商务要求偏离表中进行逐条响应。",
+            "pages": [
+              32
+            ],
+            "page": 32,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第32页",
+              "index": 32,
+              "pages": [
+                32
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0265",
             "block": "rejection",
             "label": "废标项",
             "summary": "3.投标人《资格性响应文件》有任何一项不符合《资格审查要求》的,资格审查不合格, 其投标无效。",
@@ -7685,6 +7543,146 @@
               "index": 34,
               "pages": [
                 34
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0266",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "Col1：9 Col2：视为串通投标 符合性审查要求：不存在《政府采购货物和服务招标投标管理办法》<br>视为投标人串通投标的情形:<br>(一)不同投标人的投",
+            "quote": "Col1：9 Col2：视为串通投标 符合性审查要求：不存在《政府采购货物和服务招标投标管理办法》<br>视为投标人串通投标的情形:<br>(一)不同投标人的投标文件由同一单位或者个人<br>编制;<br>(二)不同投标人委托同一单位或者个人办理投标<br>事宜;<br>(三)不同投标人的投标文件载明的项目管理成员<br>或者联系人员为同一人;<br>(四)不同投标人的投标文件异常一致或者投标报<br>价呈规律性差异;",
+            "pages": [
+              39
+            ],
+            "page": 39,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第39页",
+              "index": 39,
+              "pages": [
+                39
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0267",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "一、评标程序及方法",
+            "quote": "一、评标程序及方法",
+            "pages": [
+              39
+            ],
+            "page": 39,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第39页",
+              "index": 39,
+              "pages": [
+                39
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0268",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "1.投标文件的符合性审查",
+            "quote": "1.投标文件的符合性审查",
+            "pages": [
+              39
+            ],
+            "page": 39,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第39页",
+              "index": 39,
+              "pages": [
+                39
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0269",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "1.评标委员会对资格审查合格的投标人的投标文件进行符合性审查,以确定其是否满足招标文件的实质性要求。",
+            "quote": "1.评标委员会对资格审查合格的投标人的投标文件进行符合性审查,以确定其是否满足招标文件的实质性要求。",
+            "pages": [
+              39
+            ],
+            "page": 39,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第39页",
+              "index": 39,
+              "pages": [
+                39
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0270",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "2.评标委员会根据《符合性审查要求》中规定的审查因素和审查内容,对投标人的投标文件是否实质上响应招标文件进行符合性审查,并形成符合性审查评审结果。",
+            "quote": "2.评标委员会根据《符合性审查要求》中规定的审查因素和审查内容,对投标人的投标文件是否实质上响应招标文件进行符合性审查,并形成符合性审查评审结果。",
+            "pages": [
+              39
+            ],
+            "page": 39,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第39页",
+              "index": 39,
+              "pages": [
+                39
               ]
             },
             "detection": "clause",
@@ -7724,6 +7722,90 @@
             "clause_id": "TB-0272",
             "block": "rejection",
             "label": "废标项",
+            "summary": "Col1：10 Col2：附加条件 (五)不同投标人的投标文件相互混装;<br>(六)不同投标人的投标保证金从同一单位或者个<br>人的账户转出。：投标文件未含",
+            "quote": "Col1：10 Col2：附加条件 (五)不同投标人的投标文件相互混装;<br>(六)不同投标人的投标保证金从同一单位或者个<br>人的账户转出。：投标文件未含有采购人不能接受的附加条件的。",
+            "pages": [
+              40
+            ],
+            "page": 40,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第40页",
+              "index": 40,
+              "pages": [
+                40
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0273",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "Col1：11 Col2：其他无效情形 (五)不同投标人的投标文件相互混装;<br>(六)不同投标人的投标保证金从同一单位或者个<br>人的账户转出。：投标人、",
+            "quote": "Col1：11 Col2：其他无效情形 (五)不同投标人的投标文件相互混装;<br>(六)不同投标人的投标保证金从同一单位或者个<br>人的账户转出。：投标人、投标文件不存在不符合法律、法规和招标<br>文件规定的其他无效情形。",
+            "pages": [
+              40
+            ],
+            "page": 40,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第40页",
+              "index": 40,
+              "pages": [
+                40
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0274",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(五)不同投标人的投标文件相互混装;",
+            "quote": "(五)不同投标人的投标文件相互混装;",
+            "pages": [
+              40
+            ],
+            "page": 40,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第40页",
+              "index": 40,
+              "pages": [
+                40
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0275",
+            "block": "rejection",
+            "label": "废标项",
             "summary": "3.评标委员会依据专业经验,参考同类项目中标(成交)价格、类似产品市场价格水平、行业人工费用标准、国家有关部门指导行业协会发布的行业平均成本等情况,对报价合理性",
             "quote": "3.评标委员会依据专业经验,参考同类项目中标(成交)价格、类似产品市场价格水平、行业人工费用标准、国家有关部门指导行业协会发布的行业平均成本等情况,对报价合理性进行判断。投标(响应)供应商不能提供书面说明、证明材料,或者提供的书面说明、证明材料不能证明其报价合理性的,评标委员会应当将其作为无效投标(响应)处理。",
             "pages": [
@@ -7749,7 +7831,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0273",
+            "clause_id": "TB-0276",
             "block": "rejection",
             "label": "废标项",
             "summary": "3.投标报价须包含招标文件全部内容,如分项报价表有缺漏视为已含在其他各项报价中,将不对投标总价进行调整。评标委员会有权要求投标人在评标现场合理的时间内对此进行书",
@@ -7777,7 +7859,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0274",
+            "clause_id": "TB-0277",
             "block": "rejection",
             "label": "废标项",
             "summary": "7.修正后的报价经投标人书面确认后产生约束力,投标人不确认的,其投标无效。",
@@ -7805,7 +7887,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0275",
+            "clause_id": "TB-0278",
             "block": "rejection",
             "label": "废标项",
             "summary": "4.采用最低评标价法时,提供相同品牌产品(单一产品或核心产品品牌相同)的不同投标人参加同一合同项下投标的,以其中通过资格审查、符合性审查且报价最低的参加评标;报",
@@ -7833,7 +7915,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0276",
+            "clause_id": "TB-0279",
             "block": "rejection",
             "label": "废标项",
             "summary": "2、对于招标文件中标记了“实质性格式”文件的,投标人不得改变格式中给定的文字所表达的含义,不得删减格式中的实质性内容,不得自行添加与格式中给定的文字内容相矛盾的",
@@ -7861,7 +7943,63 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0277",
+            "clause_id": "TB-0280",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "序号：9 审查因素：视为串通投标 审查内容：不存在《政府采购货物和服务招标投标管理办<br>法》视为投标人串通投标的情形:<br>(一)不同投标人的投标文件由同",
+            "quote": "序号：9 审查因素：视为串通投标 审查内容：不存在《政府采购货物和服务招标投标管理办<br>法》视为投标人串通投标的情形:<br>(一)不同投标人的投标文件由同一单位或者个<br>人编制;<br>(二)不同投标人委托同一单位或者个人办理投<br>标事宜;<br>(三)不同投标人的投标文件载明的项目管理成<br>员或者联系人员为同一人;<br>(四)不同投标人的投标文件异常一致或者投标<br>报价呈规律性差异;<br>(五)不同投标人的投标文件相互混装;<br>(六)不同投标人的投标保证金从同一单位或者<br>个人的账户转出。",
+            "pages": [
+              56
+            ],
+            "page": 56,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第56页",
+              "index": 56,
+              "pages": [
+                56
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0281",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(五)不同投标人的投标文件相互混装;",
+            "quote": "(五)不同投标人的投标文件相互混装;",
+            "pages": [
+              56
+            ],
+            "page": 56,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第56页",
+              "index": 56,
+              "pages": [
+                56
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0282",
             "block": "rejection",
             "label": "废标项",
             "summary": "2.表中列明采购标的一览表中的全部产品,否则投标无效。表中制造商规模请填写“大型”、“中型”、“小型”、“微型”或“其他”,中小企业的定义见第二章《投标人须知》",
@@ -7889,7 +8027,35 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0278",
+            "clause_id": "TB-0283",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "64 5 投标保证金凭证/交款单据电子件(实质性格式) (招标代理机构): 我方提供万元的投标保证金作为项目(招标编号: )的投标担保。现保证:我方在规定的投标",
+            "quote": "64 5 投标保证金凭证/交款单据电子件(实质性格式) (招标代理机构): 我方提供万元的投标保证金作为项目(招标编号: )的投标担保。现保证:我方在规定的投标有效期内撤销或修改投标文件的,或者在收到中标通知书后无正当理由拒签合同或拒交规定履约担保的,投标保证金不予退还。",
+            "pages": [
+              65
+            ],
+            "page": 65,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第65页",
+              "index": 65,
+              "pages": [
+                65
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0284",
             "block": "rejection",
             "label": "废标项",
             "summary": "1.对招标文件中的所有技术要求,除本表所列明的所有偏离外,均视作供应商已对之理解和响应。此表中若无任何文字说明,内容为空白的,投标无效。",
@@ -7917,7 +8083,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0279",
+            "clause_id": "TB-0285",
             "block": "rejection",
             "label": "废标项",
             "summary": "1.对招标文件中的所有商务要求,除本表所列明的所有偏离外,均视作供应商已对之理解和响应。此表中若无任何文字说明,内容为空白的,投标无效。",
@@ -7945,7 +8111,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0280",
+            "clause_id": "TB-0286",
             "block": "rejection",
             "label": "废标项",
             "summary": "1.如本项目(包)允许分包,且投标人拟进行分包时,必须提供;如未提供,或提供了但未填写分包承担主体名称、拟分包合同内容、拟分包合同金额,投标无效。",
@@ -7973,7 +8139,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0281",
+            "clause_id": "TB-0287",
             "block": "rejection",
             "label": "废标项",
             "summary": "2.如本招标文件《投标人须知资料表》载明本项目分包承担主体应具备的相应资质条件, 则投标人须在本表中列明分包承担主体的资质等级,并后附资质证书电子件,否则投标无",
@@ -8001,7 +8167,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0282",
+            "clause_id": "TB-0288",
             "block": "rejection",
             "label": "废标项",
             "summary": "1.投标人“为落实政府采购政策”而向中小企业分包时必须提供,否则投标无效;且建议按照采购文件要求在资格证明文件部分提供;",
