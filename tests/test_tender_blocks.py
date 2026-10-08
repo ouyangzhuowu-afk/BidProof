@@ -1,3 +1,4 @@
+import re
 from pathlib import Path
 
 from fastapi.testclient import TestClient
@@ -316,3 +317,141 @@ def test_scan_response_includes_paged_blocks(monkeypatch):
     stored = tender_blocks_for_run({"state": {"tender_blocks": run["tender_blocks"]}})
     assert stored["product_pass"] is False
     client.delete(f"/api/runs/{run['run_id']}")
+
+
+def test_rejected_response_and_invalid_quote_use_the_pdf_sentences():
+    """The six missed 废标 sentences, with the PDF's own line breaks and commas."""
+    cases = (
+        (
+            19,
+            (
+                "第19 页共66 页\n"
+                "供应商有责任检查自身情况,在响应文件中对是否违反以上一般规定做出\n"
+                "如实声明,否则其响应文件将被否决。"
+            ),
+            "供应商有责任检查自身情况,在响应文件中对是否违反以上一般规定做出如实声明,否则其响应文件将被否决。",
+        ),
+        (
+            20,
+            (
+                "第 20 页 共 66 页\n"
+                "(6)如本项目不接受联合体报价而供应商为联合体的,或者本项目接受联\n"
+                "合体报价但供应商组成的联合体不符合本章第3.2 条规定的,其报价无效。"
+            ),
+            "(6)如本项目不接受联合体报价而供应商为联合体的,或者本项目接受联合体报价但供应商组成的联合体不符合本章第3.2 条规定的,其报价无效。",
+        ),
+        (
+            21,
+            (
+                "7.1 供应商可按照采购包号,对竞争性磋商文件中载明的全部或部分采购包\n"
+                "进行响应。对于能够详细列明采购标的技术、服务要求的采购项目,供应商响应\n"
+                "时,对同一个采购包内所有的采购内容和要求必须进行完整响应,否则其相应采\n"
+                "购包的响应文件将被否决。"
+            ),
+            "对于能够详细列明采购标的技术、服务要求的采购项目,供应商响应时,对同一个采购包内所有的采购内容和要求必须进行完整响应,否则其相应采购包的响应文件将被否决。",
+        ),
+        (
+            21,
+            (
+                "7.2 供应商代表在同一个合同项下只能接受一个供应商的委托参加响应磋\n"
+                "商,否则其响应文件将被否决。"
+            ),
+            "7.2 供应商代表在同一个合同项下只能接受一个供应商的委托参加响应磋商,否则其响应文件将被否决。",
+        ),
+        (
+            22,
+            (
+                "9.1 响应文件有效期见竞争性磋商须知前附表第4 项,响应文件承诺的有效\n"
+                "期不得少于磋商文件载明的有效期,否则其响应文件将被否决。"
+            ),
+            "9.1 响应文件有效期见竞争性磋商须知前附表第4 项,响应文件承诺的有效期不得少于磋商文件载明的有效期,否则其响应文件将被否决。",
+        ),
+        (
+            22,
+            (
+                "10.2 磋商保证金为响应文件的重要组成部分之一。磋商保证金用于保护本\n"
+                "次磋商活动免受供应商的违约或失信行为而引起的风险。未按规定提交磋商保证\n"
+                "金的,其响应文件将被否决。"
+            ),
+            "未按规定提交磋商保证金的,其响应文件将被否决。",
+        ),
+    )
+    footer = re.compile(r"第\s*\d+\s*页\s*共\s*\d+\s*页")
+    for page, source, sentence in cases:
+        result = extract_tender_blocks([_page(page, source)], filename="pub-gl-fzsc339.pdf")
+        found = _blocks(result)
+        matched = [item for item in found["rejection"] if sentence in item["quote"]]
+
+        assert len(matched) == 1
+        assert matched[0]["page"] == page
+        assert matched[0]["pages"] == [page]
+        assert matched[0]["status"] == "NEEDS_REVIEW"
+        assert matched[0]["status"] != "PASS"
+        assert footer.search(matched[0]["quote"]) is None
+        assert result["product_pass"] is False
+        assert result["audit_status"] == "pending_audit"
+        assert all(item["status"] == "NEEDS_REVIEW" for group in found.values() for item in group)
+
+
+def test_page_footer_inside_a_wrapped_sentence_is_not_kept():
+    pages = [
+        _page(
+            22,
+            "未按规定提交磋商保证\n第22 页共66 页\n金的,其响应文件将被否决。",
+        )
+    ]
+    rejection = _blocks(extract_tender_blocks(pages, filename="footer.pdf"))["rejection"]
+
+    assert len(rejection) == 1
+    assert rejection[0]["quote"] == "未按规定提交磋商保证金的,其响应文件将被否决。"
+    assert "页" not in rejection[0]["quote"]
+    assert rejection[0]["page"] == 22
+    assert rejection[0]["status"] == "NEEDS_REVIEW"
+
+
+def test_complaint_rules_and_deposit_forfeit_are_not_rejection_or_materials():
+    pages = [
+        _page(
+            22,
+            "10.4 如果供应商发生以下任何一种情况时,其磋商保证金将被不予退还或\n"
+            "通过保函进行索赔:\n"
+            "(1)供应商在提交响应文件截止时间后撤回响应文件的;\n"
+            "(2)供应商在响应文件中提供虚假材料的;",
+        ),
+        _page(
+            28,
+            "2所质疑项目的基本信息,至少包括:项目编号、项目名称等;\n"
+            "3所质疑的具体事项(以下简称:“质疑事项”);\n"
+            "4质疑人自身权益受到损害的事实依据和证明材料,至少包括:\n"
+            "备注:若证据无法有效表明信息或证明材料为合法或公开渠道获得,则前述信息或证明材料视为无效。\n"
+            "5针对质疑事项提出的明确请求和法律依据,如:暂停采购活动、修改磋商文件、成交结果无效、废标、重新采购等。",
+        ),
+        _page(22, "未按规定提交磋商保证金的,其响应文件将被否决。"),
+    ]
+    found = _blocks(extract_tender_blocks(pages, filename="procedure.pdf"))
+    kept = _quotes(found["rejection"] + found["materials"] + found["qualification"] + found["scoring"])
+
+    assert "虚假材料" not in kept
+    assert "保证金将被不予退还" not in kept
+    assert "通过保函进行索赔" not in kept
+    assert "质疑事项" not in kept
+    assert "视为无效" not in kept
+    assert "废标、重新采购" not in kept
+    assert any("其响应文件将被否决" in item["quote"] and item["page"] == 22 for item in found["rejection"])
+    assert all(item["status"] == "NEEDS_REVIEW" for group in found.values() for item in group)
+
+
+def test_invalid_response_stays_rejection_when_it_also_mentions_a_deposit_claim():
+    pages = [
+        _page(
+            18,
+            "5.1.3 若供应商有任何试图干扰具体评审事务,影响磋商小组独立履行职责的行为,其响应无效且不予退还磋商保证金或通过保函进行索赔。",
+        )
+    ]
+    found = _blocks(extract_tender_blocks(pages, filename="claim.pdf"))
+
+    assert len(found["rejection"]) == 1
+    assert "其响应无效" in found["rejection"][0]["quote"]
+    assert found["rejection"][0]["page"] == 18
+    assert found["rejection"][0]["status"] == "NEEDS_REVIEW"
+    assert found["materials"] == []

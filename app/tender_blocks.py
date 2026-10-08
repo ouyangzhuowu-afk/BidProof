@@ -45,8 +45,8 @@ _HEADER_CELLS = {
     "情形",
 }
 _REJECTION_OUTCOME = re.compile(
-    r"否决其?投标|不予受理|废标|无效投标|投标无效|无效响应|响应无效|作无效处理|"
-    r"按无效|视为无效|资格审查不合格|取消投标资格|不得参加本次|应予(以)?废标"
+    r"否决其?投标|被否决|不予受理|废标|无效投标|投标无效|无效响应|响应无效|作无效处理|"
+    r"按无效|视为无效|报价无效|资格审查不合格|取消投标资格|不得参加本次|应予(以)?废标"
 )
 _NEGATED_REJECTION = re.compile(
     r"不作为[^。]{0,30}(否决|废标|无效)"
@@ -67,6 +67,9 @@ _CHAPTER_LINE = re.compile(r"^\s*第[0-9一二三四五六七八九十]+[章节�
 _CLOCK = re.compile(r"\d+\s*时\s*\d+\s*分|\d+\s*分钟")
 _MATERIALS_LEAD = re.compile(r"响应文件包括|投标文件包括|包括下列(?:内容|文件|材料)|应提交下列|须提交下列")
 _NOISE = re.compile(r"[{}]|function\s|var\s|document\.|@media|font-size|background(?:-color)?:")
+_PAGE_FOOTER = re.compile(r"第\s*\d+\s*页\s*共\s*\d+\s*页")
+_FORFEIT_LEAD = re.compile(r"保证金将被不予退还")
+_COMPLAINT = re.compile(r"质疑函|质疑事项|质疑人|提出质疑")
 _SECTION_KEYS: tuple[tuple[str, tuple[str, ...]], ...] = (
     ("rejection", ("废标", "无效响应", "无效投标", "否决投标", "投标无效", "响应无效")),
     ("scoring", ("评分标准", "评分办法", "评审办法", "综合评分", "评审因素")),
@@ -104,13 +107,21 @@ def extract_tender_blocks(pages: list[dict[str, Any]], filename: str | None = No
         text = clause["text"]
         if not _keep(text):
             continue
-        if clause["kind"] == "item" and not _CHILD_ITEM.match(text) and _lead_kind(text) is None and not _materials_lead(text):
+        if (
+            clause["kind"] == "item"
+            and not _CHILD_ITEM.match(text)
+            and _lead_kind(text) is None
+            and not _materials_lead(text)
+            and not _forfeit_lead(text)
+        ):
             list_mode = None
         lead = _lead_kind(text)
         if lead == "rejection":
             list_mode = "rejection"
         elif lead == "suppress":
             list_mode = "suppress"
+        elif _forfeit_lead(text):
+            list_mode = "forfeit"
         elif _materials_lead(text):
             list_mode = "materials"
         active_mode = list_mode
@@ -216,7 +227,7 @@ def _event(
 ) -> dict[str, Any]:
     return {
         "kind": kind,
-        "text": " ".join(text.split()),
+        "text": _strip_footer(" ".join(text.split())),
         "pages": list(pages_on),
         "locator": dict(locator) if locator else None,
         "headers": headers,
@@ -284,14 +295,16 @@ def _classify(clause: dict[str, Any], section: str | None, list_mode: str | None
         return _classify_row(clause.get("headers") or [], clause.get("cells") or [], clause["text"])
     text = clause["text"]
     blocks: set[str] = set()
-    if list_mode == "suppress":
+    # 质疑/投诉写法，以及保证金不予退还的情形，不是废标，也不是要交的投标材料。
+    leave_out = list_mode == "forfeit" or _complaint_procedure(text)
+    if list_mode == "suppress" or leave_out:
         pass
     elif (list_mode == "rejection" and not _negated(text)) or _is_rejection(text):
         blocks.add("rejection")
-    inherited = None if list_mode in {"rejection", "suppress"} else section
+    inherited = None if list_mode in {"rejection", "suppress", "forfeit"} else section
     if _is_scoring(text, inherited):
         blocks.add("scoring")
-    if (list_mode == "materials" and _CHILD_ITEM.match(text)) or _is_materials(text, inherited):
+    if not leave_out and ((list_mode == "materials" and _CHILD_ITEM.match(text)) or _is_materials(text, inherited)):
         blocks.add("materials")
     if _is_qualification(text, inherited):
         blocks.add("qualification")
@@ -350,6 +363,21 @@ def _is_rejection(text: str) -> bool:
 
 def _negated(text: str) -> bool:
     return _NEGATED_REJECTION.search(text) is not None
+
+
+def _forfeit_lead(text: str) -> bool:
+    return _FORFEIT_LEAD.search(text) is not None
+
+
+def _complaint_procedure(text: str) -> bool:
+    """质疑/投诉的办理要求。其中的「废标」「视为无效」「证明材料」不是投标结论。"""
+    if not _COMPLAINT.search(text):
+        return False
+    return re.search(r"被否决|报价无效|按无效|应予(以)?废标|无效响应|响应无效", text) is None
+
+
+def _strip_footer(text: str) -> str:
+    return _PAGE_FOOTER.sub("", text).strip()
 
 
 def _cross_reference_only(text: str) -> bool:
@@ -729,6 +757,9 @@ def _split_prose(text: str) -> list[tuple[str, str]]:
         line = raw.strip()
         if not line or _NOISE.search(line):
             flush()
+            continue
+        line = _strip_footer(line)
+        if not line:
             continue
         if _is_section_heading(line):
             flush()
