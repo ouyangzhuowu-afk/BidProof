@@ -405,33 +405,6 @@ def list_evidence_assets(workspace_id: str, path: Path | str | None = None) -> l
     return assets
 
 
-def update_review(run_id: str, review: dict[str, Any], path: Path | str | None = None, *, expected_revision: int | None = None) -> dict[str, Any] | None:
-    """Apply a review in one transaction so concurrent reviewers cannot silently clobber each other."""
-    with connect(path) as connection:
-        row = _row(connection.execute(sa.select(runs_table).where(runs_table.c.run_id == run_id)))
-        if row is None:
-            return None
-        run = _run_from_storage(row)
-        if expected_revision is not None and int(run.get("revision", 1)) != int(expected_revision):
-            from fastapi import HTTPException
-
-            raise HTTPException(status_code=409, detail="该任务已被他人更新，请刷新后重试")
-        run["review"] = review
-        run["updated_at"] = review["updated_at"]
-        run["revision"] = int(run.get("revision", 1)) + 1
-        values = _run_to_storage(run)
-        result = connection.execute(
-            sa.update(runs_table)
-            .where(runs_table.c.run_id == run_id, runs_table.c.revision == int(run["revision"]) - 1)
-            .values(**values)
-        )
-        if result.rowcount != 1:
-            from fastapi import HTTPException
-
-            raise HTTPException(status_code=409, detail="该任务已被他人更新，请刷新后重试")
-    return run
-
-
 def delete_run(run_id: str, path: Path | str | None = None) -> bool:
     with connect(path) as connection:
         for table in (comments, remediations, accuracy_feedback, scan_jobs):
@@ -1772,44 +1745,6 @@ def user_can_access_project(principal: dict[str, str], project_id: str | None, p
     if not members:
         return True
     return any(row["user_id"] == principal.get("user_id") for row in members)
-
-
-def load_idempotency(workspace_id: str, key: str, path: Path | str | None = None) -> dict[str, Any] | None:
-    with engine(path).connect() as connection:
-        return _row(
-            connection.execute(
-                sa.select(idempotency_keys).where(
-                    idempotency_keys.c.workspace_id == workspace_id,
-                    idempotency_keys.c.idempotency_key == key,
-                )
-            )
-        )
-
-
-def store_idempotency(
-    workspace_id: str,
-    key: str,
-    method: str,
-    path_value: str,
-    request_hash: str,
-    status_code: int,
-    response_json: Any,
-    db_path: Path | str | None = None,
-) -> None:
-    with connect(db_path) as connection:
-        connection.execute(
-            sa.insert(idempotency_keys).values(
-                record_id=_new_id(),
-                workspace_id=workspace_id,
-                idempotency_key=key,
-                method=method,
-                path=path_value,
-                request_hash=request_hash,
-                status_code=status_code,
-                response_json=response_json,
-                created_at=_now(),
-            )
-        )
 
 
 def cleanup_expired(*, path: Path | str | None = None) -> dict[str, int]:
