@@ -107,7 +107,7 @@ def _known_hits(result: dict) -> list[dict]:
 def _markdown(payload: dict) -> str:
     counts = payload["counts"]
     lines = [
-        "# 招标四块抽取 · 鼓楼区竞争性磋商 PDF pending_audit",
+        f"# 招标四块抽取 · {payload['title']} pending_audit",
         "",
         "- `audit_status`: `pending_audit`",
         "- `product_pass`: `false`",
@@ -169,7 +169,16 @@ def _markdown(payload: dict) -> str:
     return "\n".join(lines)
 
 
-def run(pdf: Path, markdown_path: Path, json_path: Path) -> dict:
+def run(
+    pdf: Path,
+    markdown_path: Path,
+    json_path: Path,
+    *,
+    source_url: str = SOURCE_URL,
+    title: str = TITLE,
+    project_number: str = PROJECT_NUMBER,
+    buyer: str = BUYER,
+) -> dict:
     pages = extract_pdf(pdf, ocr_adapter=DisabledOCRAdapter())
     for index, page in enumerate(pages, 1):
         if page.get("page") != index or page.get("locator", {}).get("kind") != "page":
@@ -183,10 +192,10 @@ def run(pdf: Path, markdown_path: Path, json_path: Path) -> dict:
         "audit_status": "pending_audit",
         "product_pass": False,
         "test_material_only": True,
-        "source_url": SOURCE_URL,
-        "title": TITLE,
-        "project_number": PROJECT_NUMBER,
-        "buyer": BUYER,
+        "source_url": source_url,
+        "title": title,
+        "project_number": project_number,
+        "buyer": buyer,
         "local_path": pdf.as_posix(),
         "sha256": _sha256(pdf),
         "pdf_page_count": len(pages),
@@ -208,8 +217,20 @@ def main() -> None:
     parser.add_argument("--pdf", type=Path, default=DEFAULT_PDF)
     parser.add_argument("--markdown", type=Path, default=DEFAULT_MARKDOWN)
     parser.add_argument("--json", type=Path, default=DEFAULT_JSON)
+    parser.add_argument("--source-url", default=SOURCE_URL)
+    parser.add_argument("--title", default=TITLE)
+    parser.add_argument("--project-number", default=PROJECT_NUMBER)
+    parser.add_argument("--buyer", default=BUYER)
     args = parser.parse_args()
-    payload = run(args.pdf, args.markdown, args.json)
+    payload = run(
+        args.pdf,
+        args.markdown,
+        args.json,
+        source_url=args.source_url,
+        title=args.title,
+        project_number=args.project_number,
+        buyer=args.buyer,
+    )
     counts = payload["counts"]
     print(
         json.dumps(

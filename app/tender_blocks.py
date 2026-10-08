@@ -70,6 +70,21 @@ _NOISE = re.compile(r"[{}]|function\s|var\s|document\.|@media|font-size|backgrou
 _PAGE_FOOTER = re.compile(r"第\s*\d+\s*页\s*共\s*\d+\s*页")
 _FORFEIT_LEAD = re.compile(r"保证金将被不予退还")
 _COMPLAINT = re.compile(r"质疑函|质疑事项|质疑人|提出质疑")
+# 谁不能参加，是资格限制，不是已经递交的文件被否决。
+_PARTICIPATION_LIMIT = re.compile(r"不得(?!不)(?:(?![。！？]).){0,48}(?:参加|组成联合体)")
+# 响应文件本身被拒绝接收。单独的「拒收货物/服务」不算。
+_DOCUMENT_REJECTION = re.compile(r"无效文件|不予接收")
+_DOCUMENT_REFUSAL = re.compile(
+    r"(?:响应文件|投标文件|报价文件|申请文件)(?:(?![。！？]).){0,80}拒收"
+    r"|拒收(?:(?![。！？]).){0,24}(?:响应文件|投标文件|报价文件|申请文件)"
+)
+_NEGATED_DOCUMENT = re.compile(r"不视为无效文件|不属于无效文件|不作为无效文件|不得拒收|不予拒收|应当接收|应予接收")
+# 条款自己已经给出投标结论时，提到质疑也不算质疑程序。
+_BID_RULE_BESIDE_COMPLAINT = re.compile(
+    r"被否决|报价无效|按无效|应予(以)?废标|无效响应|响应无效|无效文件|不予接收|"
+    r"无效投标|投标无效|否决其?投标|资格审查不合格|取消投标资格|"
+    r"不得(?!不)(?:(?![。！？]).){0,48}(?:参加|组成联合体)"
+)
 _SECTION_KEYS: tuple[tuple[str, tuple[str, ...]], ...] = (
     ("rejection", ("废标", "无效响应", "无效投标", "否决投标", "投标无效", "响应无效")),
     ("scoring", ("评分标准", "评分办法", "评审办法", "综合评分", "评审因素")),
@@ -304,7 +319,7 @@ def _classify(clause: dict[str, Any], section: str | None, list_mode: str | None
     inherited = None if list_mode in {"rejection", "suppress", "forfeit"} else section
     if _is_scoring(text, inherited):
         blocks.add("scoring")
-    if not leave_out and ((list_mode == "materials" and _CHILD_ITEM.match(text)) or _is_materials(text, inherited)):
+    if not leave_out and _keeps_materials(text, inherited, list_mode):
         blocks.add("materials")
     if _is_qualification(text, inherited):
         blocks.add("qualification")
@@ -352,6 +367,8 @@ def _classify_row(headers: list[str], cells: list[str], text: str) -> set[str]:
 
 
 def _is_rejection(text: str) -> bool:
+    if _document_rejected(text):
+        return True
     if _cross_reference_only(text):
         return False
     parts = re.split(r"[，,；;]", text)
@@ -370,10 +387,33 @@ def _forfeit_lead(text: str) -> bool:
 
 
 def _complaint_procedure(text: str) -> bool:
-    """质疑/投诉的办理要求。其中的「废标」「视为无效」「证明材料」不是投标结论。"""
+    """质疑函怎么写、谁可以提、如何答复。顺带提到质疑的投标结论仍保留。"""
     if not _COMPLAINT.search(text):
         return False
-    return re.search(r"被否决|报价无效|按无效|应予(以)?废标|无效响应|响应无效", text) is None
+    return _BID_RULE_BESIDE_COMPLAINT.search(text) is None
+
+
+def _participation_limit(text: str) -> bool:
+    return _PARTICIPATION_LIMIT.search(text) is not None
+
+
+def _document_rejected(text: str) -> bool:
+    """响应/投标文件被判定无效或被拒绝接收。"""
+    if _NEGATED_DOCUMENT.search(text):
+        return False
+    if _DOCUMENT_REJECTION.search(text):
+        return True
+    return _DOCUMENT_REFUSAL.search(text) is not None
+
+
+def _refund_procedure(text: str) -> bool:
+    """保证金何时退、怎么退。这不是要放进响应文件的材料。"""
+    if not re.search(r"保证金|保函", text) or not re.search(r"退还|退回", text):
+        return False
+    without_forfeit = re.sub(r"不予退还|不退还|不得退还", "", text)
+    if not re.search(r"退还|退回", without_forfeit):
+        return False
+    return re.search(r"(?:须|应|应当|必须)(?:提交|提供|递交).{0,12}退(?:还|款)申请", text) is None
 
 
 def _strip_footer(text: str) -> str:
@@ -407,6 +447,16 @@ def _is_scoring(text: str, section: str | None) -> bool:
     return section == "scoring" and re.search(r"评审因素|评分标准|得分", text) is not None and len(text) <= 80
 
 
+_SUBMISSION_DUTY = re.compile(r"须提供|应提供|应提交|须提交|复印件|加盖公章|资格证明文件")
+
+
+def _keeps_materials(text: str, section: str | None, list_mode: str | None) -> bool:
+    """Refund timing is not a document to enclose. A real submission duty still is."""
+    if _refund_procedure(text) and _SUBMISSION_DUTY.search(text) is None:
+        return False
+    return (list_mode == "materials" and _CHILD_ITEM.match(text)) or _is_materials(text, section)
+
+
 def _is_materials(text: str, section: str | None) -> bool:
     if re.search(r"未提供不(计分|得分)", text) and not re.search(r"须提供|应提供|应提交|须提交", text):
         return False
@@ -425,6 +475,8 @@ def _materials_lead(text: str) -> bool:
 
 
 def _is_qualification(text: str, section: str | None) -> bool:
+    if _participation_limit(text):
+        return True
     if re.search(r"(?:供应商|投标人|申请人).{0,12}资格(?:条件|要求)|资格(?:条件|要求)\s*[:：]|特定资格|基本资格|政府采购法》第二十二条|须具备|应具备|应当符合", text):
         return True
     return bool(

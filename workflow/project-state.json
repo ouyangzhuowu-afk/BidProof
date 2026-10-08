@@ -53,9 +53,12 @@
         "outputs/tender-blocks/public-text-pending-audit.json",
         "work/public-eval/tender-blocks/pub-gl-fzsc339-cuoshang-202609.pdf",
         "outputs/tender-blocks/pub-gl-fzsc339-pending-audit.md",
-        "outputs/tender-blocks/pub-gl-fzsc339-pending-audit.json"
+        "outputs/tender-blocks/pub-gl-fzsc339-pending-audit.json",
+        "work/public-eval/tender-blocks/pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
+        "outputs/tender-blocks/pub-ah-ahmu-nursing-lab-pending-audit.md",
+        "outputs/tender-blocks/pub-ah-ahmu-nursing-lab-pending-audit.json"
       ],
-      "validation": "Extends the existing page extraction. Clauses without an original page stay UNKNOWN or NEEDS_REVIEW. product_pass=false. CER/F1/TEDS thresholds unchanged. No pilot/ICP ledger writes. T-005 not modified. Public 66-page consultation PDF pub-gl-fzsc339 uses the PDF page index; 245 extracted clauses all carry that page number (qualification 21, scoring 57, materials 148, rejection 19).",
+      "validation": "Extends the existing page extraction. Clauses without an original page stay UNKNOWN or NEEDS_REVIEW. product_pass=false. CER/F1/TEDS thresholds unchanged. No pilot/ICP ledger writes. T-005 not modified. Public 66-page consultation PDF pub-gl-fzsc339 uses the PDF page index; 251 extracted clauses all carry that page number (qualification 26, scoring 57, materials 147, rejection 21). Held-out Anhui consultation PDF pub-ah-ahmu-nursing-lab is 109 PDF pages, 167 clauses, all with the PDF page index. Rules were not adjusted after that run.",
       "note": "pending_audit only. Not a product PASS. Repo text notices stay uncited. The Gulou consultation PDF is test material, not a pilot."
     }
   ],
@@ -1409,13 +1412,31 @@
       "path": "outputs/tender-blocks/pub-gl-fzsc339-pending-audit.md",
       "kind": "tender-four-blocks-report",
       "status": "pending_audit",
-      "note": "245 clauses, all with PDF page numbers. product_pass=false."
+      "note": "251 clauses, all with PDF page numbers. product_pass=false."
     },
     {
       "path": "outputs/tender-blocks/pub-gl-fzsc339-pending-audit.json",
       "kind": "tender-four-blocks-report",
       "status": "pending_audit",
       "note": "Machine-readable Gulou consultation extraction. product_pass=false."
+    },
+    {
+      "path": "work/public-eval/tender-blocks/pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
+      "kind": "tender-four-blocks-pdf",
+      "status": "pending_audit",
+      "note": "Public Anhui consultation PDF. Held-out test material only. Not a pilot."
+    },
+    {
+      "path": "outputs/tender-blocks/pub-ah-ahmu-nursing-lab-pending-audit.md",
+      "kind": "tender-four-blocks-report",
+      "status": "pending_audit",
+      "note": "167 clauses, all with PDF page numbers. product_pass=false."
+    },
+    {
+      "path": "outputs/tender-blocks/pub-ah-ahmu-nursing-lab-pending-audit.json",
+      "kind": "tender-four-blocks-report",
+      "status": "pending_audit",
+      "note": "Machine-readable Anhui consultation extraction. product_pass=false. Printed page numbers do not match the PDF index."
     }
   ],
   "next_best_action": {
@@ -1433,7 +1454,7 @@
     ],
     "note": "Do not write demo/test rows into pilot/ICP ledgers. Do not claim business TARGET_MET. Pilot scan results are always NEEDS_REVIEW and cannot count as accuracy acceptance. On real input: copy template → fill → pilot_ledger/icp_ledger --row-json. Readiness: uv run python -m work.pilot_readiness --json."
   },
-  "updated_at": "2026-10-08T04:00:00+00:00",
+  "updated_at": "2026-10-08T04:25:00+00:00",
   "sandbox_roadmap": {
     "locked_at": "2026-09-16",
     "gates": {

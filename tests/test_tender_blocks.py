@@ -455,3 +455,105 @@ def test_invalid_response_stays_rejection_when_it_also_mentions_a_deposit_claim(
     assert found["rejection"][0]["page"] == 18
     assert found["rejection"][0]["status"] == "NEEDS_REVIEW"
     assert found["materials"] == []
+
+
+def test_pdf_participation_limits_and_refused_file_keep_their_pages():
+    """Three missed sentences from the Gulou PDF, on the page where each one starts."""
+    cases = (
+        (
+            19,
+            "qualification",
+            (
+                "3.1.2 为采购项目提供整体设计、规范编制或项目管理、监理、检测等服务\n"
+                "的供应商,不得再参加该采购项目除整体设计、规范编制和项目管理、监理、检\n"
+                "测等服务之外的其他采购活动。"
+            ),
+            "3.1.2 为采购项目提供整体设计、规范编制或项目管理、监理、检测等服务的供应商,不得再参加该采购项目除整体设计、规范编制和项目管理、监理、检测等服务之外的其他采购活动。",
+        ),
+        (
+            20,
+            "qualification",
+            (
+                "(2)联合体各方不得再单独参加或与其他供应商另外组成联合体参加同一\n"
+                "合同项下的响应磋商。"
+            ),
+            "(2)联合体各方不得再单独参加或与其他供应商另外组成联合体参加同一合同项下的响应磋商。",
+        ),
+        (
+            23,
+            "rejection",
+            (
+                "12.2 供应商应当在磋商文件规定的提交响应文件截止时间前,将首次响应\n"
+                "文件密封送达磋商文件规定的指定地点。在截止时间后送达的首次响应文件为无\n"
+                "效文件,采购人、采购代理机构或者磋商小组将不予接收。"
+            ),
+            "在截止时间后送达的首次响应文件为无效文件,采购人、采购代理机构或者磋商小组将不予接收。",
+        ),
+    )
+    for page, block, source, sentence in cases:
+        result = extract_tender_blocks([_page(page, source)], filename="pub-gl-fzsc339.pdf")
+        found = _blocks(result)
+        matched = [item for item in found[block] if sentence in item["quote"]]
+
+        assert len(matched) == 1
+        assert matched[0]["page"] == page
+        assert matched[0]["pages"] == [page]
+        assert matched[0]["status"] == "NEEDS_REVIEW"
+        assert result["product_pass"] is False
+        assert result["audit_status"] == "pending_audit"
+    designer = _blocks(
+        extract_tender_blocks(
+            [_page(19, cases[0][2])],
+            filename="pub-gl-fzsc339.pdf",
+        )
+    )
+    assert designer["rejection"] == []
+    consortium = _blocks(
+        extract_tender_blocks(
+            [_page(20, cases[1][2])],
+            filename="pub-gl-fzsc339.pdf",
+        )
+    )
+    assert consortium["rejection"] == []
+
+
+def test_participation_document_refusal_and_refund_timing_are_categories():
+    pages = [
+        _page(3, "为本项目编制规范的单位,不得再参加该项目的施工投标。"),
+        _page(4, "联合体成员不得与其他投标人另行组成联合体。"),
+        _page(5, "逾期递交的投标文件,招标人将拒收该投标文件。"),
+        _page(6, "合同履行中,买方可以拒收不合格货物,并要求更换。"),
+        _page(7, "未成交供应商的投标保证金,在中标通知书发出后5个工作日内退还。"),
+        _page(8, "投标人须提交投标保证金凭证复印件。"),
+        _page(9, "供应商提出质疑后,该投标文件仍按投标无效处理。"),
+        _page(10, "投标人须提供近三年无重大投诉记录的书面声明并加盖公章。"),
+    ]
+    found = _blocks(extract_tender_blocks(pages, filename="categories.pdf"))
+
+    assert any(item["page"] == 3 and "不得再参加" in item["quote"] for item in found["qualification"])
+    assert all("施工投标" not in item["quote"] for item in found["rejection"])
+    assert any(item["page"] == 4 and "组成联合体" in item["quote"] for item in found["qualification"])
+    assert any(item["page"] == 5 and "拒收该投标文件" in item["quote"] for item in found["rejection"])
+    assert all("不合格货物" not in item["quote"] for item in found["rejection"])
+    assert all("工作日内退还" not in item["quote"] for item in found["materials"])
+    assert any(item["page"] == 8 and "复印件" in item["quote"] for item in found["materials"])
+    assert any(item["page"] == 9 and "投标无效" in item["quote"] for item in found["rejection"])
+    assert any(item["page"] == 10 and "无重大投诉" in item["quote"] for item in found["materials"])
+    assert all(item["status"] == "NEEDS_REVIEW" for group in found.values() for item in group)
+
+
+def test_deposit_refund_timing_from_the_pdf_is_not_a_material():
+    pages = [
+        _page(
+            22,
+            "10.3.1 采购人或者采购代理机构将在采购活动结束后及时退还供应商的保证金,"
+            "但因供应商自身原因导致无法及时退还的除外"
+            "(比如:成交的供应商未向采购代理机构出具已签订合同证明材料)。"
+            "未成交供应商的保证金将在成交通知书发出后5 个工作日内退还。",
+        )
+    ]
+    found = _blocks(extract_tender_blocks(pages, filename="refund.pdf"))
+
+    assert found["materials"] == []
+    assert found["rejection"] == []
+    assert all(item["status"] == "NEEDS_REVIEW" for group in found.values() for item in group)
