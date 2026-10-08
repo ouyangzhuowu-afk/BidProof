@@ -1,0 +1,6134 @@
+{
+  "audit_status": "pending_audit",
+  "product_pass": false,
+  "test_material_only": true,
+  "source_url": "http://download.ccgp.gov.cn/oss/download?uuid=56316DE66B036E134C915933064FB4",
+  "title": "山东省防震减灾科技园区室外场地及室外管网工程竞争性磋商文件",
+  "project_number": "HYHA2026-1891",
+  "buyer": "山东省地震局（山东省济南市）",
+  "local_path": "work/public-eval/tender-blocks/pub-sd-eq-yard-cuoshang-2026.pdf",
+  "sha256": "9e37c069f32647cb34f818578f5ea9a5dc00d0fc2e0a8080847107d7ab55263f",
+  "pdf_page_count": 122,
+  "printed_page_offset": null,
+  "printed_page_total": null,
+  "ocr": "not_used",
+  "footer_check": {
+    "checked_pages": 122,
+    "pages_with_footer": 0,
+    "printed_page_offset": null,
+    "printed_page_total": null,
+    "printed_total_consistent": false,
+    "printed_totals_seen": [],
+    "offsets_seen": [],
+    "compared_with": "printed_total",
+    "mismatch_count": 0,
+    "mismatches": []
+  },
+  "footer_in_quotes": 0,
+  "bare_page_in_quotes": 0,
+  "counts": {
+    "total": 215,
+    "with_real_page": 215,
+    "without_page": 0,
+    "by_block": {
+      "qualification": {
+        "label": "资格要求",
+        "cited": 22,
+        "items": 22
+      },
+      "scoring": {
+        "label": "评分要求",
+        "cited": 29,
+        "items": 29
+      },
+      "materials": {
+        "label": "要交的材料",
+        "cited": 94,
+        "items": 94
+      },
+      "rejection": {
+        "label": "废标项",
+        "cited": 70,
+        "items": 70
+      }
+    }
+  },
+  "structural_checks": {
+    "product_pass_false": true,
+    "audit_status_pending": true,
+    "no_pass_status": true,
+    "cited_labels_use_pdf_page": true,
+    "page_index_matches_order": true,
+    "ocr_not_used": true
+  },
+  "extraction": {
+    "audit_status": "pending_audit",
+    "product_pass": false,
+    "printed_page_offset": null,
+    "printed_page_total": null,
+    "blocks": {
+      "qualification": {
+        "label": "资格要求",
+        "items": [
+          {
+            "clause_id": "TB-0001",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "二、申请人的资格要求:",
+            "quote": "二、申请人的资格要求:",
+            "pages": [
+              3
+            ],
+            "page": 3,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第3页",
+              "index": 3,
+              "pages": [
+                3
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0002",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "1.满足《中华人民共和国政府采购法》第二十二条规定;",
+            "quote": "1.满足《中华人民共和国政府采购法》第二十二条规定;",
+            "pages": [
+              3
+            ],
+            "page": 3,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第3页",
+              "index": 3,
+              "pages": [
+                3
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0003",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "2.落实政府采购政策需满足的资格要求:无。",
+            "quote": "2.落实政府采购政策需满足的资格要求:无。",
+            "pages": [
+              3
+            ],
+            "page": 3,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第3页",
+              "index": 3,
+              "pages": [
+                3
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0004",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "3.本项目的特定资格要求:",
+            "quote": "3.本项目的特定资格要求:",
+            "pages": [
+              3
+            ],
+            "page": 3,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第3页",
+              "index": 3,
+              "pages": [
+                3
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0005",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "1)供应商具有建筑工程施工总承包三级及以上资质或市政公用工程施工总承包三级及以上资质,同时具有有效的安全生产许可证。",
+            "quote": "1)供应商具有建筑工程施工总承包三级及以上资质或市政公用工程施工总承包三级及以上资质,同时具有有效的安全生产许可证。",
+            "pages": [
+              3
+            ],
+            "page": 3,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第3页",
+              "index": 3,
+              "pages": [
+                3
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0006",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "2)拟派本项目的项目负责人(项目经理)须具有二级及以上注册建造师证书(建筑工程专业或市政公用工程专业)及安全生产考核合格证书(B 证)(一级建造师注册证书必须为",
+            "quote": "2)拟派本项目的项目负责人(项目经理)须具有二级及以上注册建造师证书(建筑工程专业或市政公用工程专业)及安全生产考核合格证书(B 证)(一级建造师注册证书必须为电子证书并符合《住房和城乡建设部办公厅关于全面实行一级建造师电子注册证书的通知》(建办市〔2021〕40 号)的规定)。",
+            "pages": [
+              3
+            ],
+            "page": 3,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第3页",
+              "index": 3,
+              "pages": [
+                3
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0007",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "3)在“信用中国”、中国政府采购网网站中被列入失信被执行人、重大税收违法案件当事人名单、政府采购严重违法失信行为记录名单的供应商,不得参加本次政府采购活动;",
+            "quote": "3)在“信用中国”、中国政府采购网网站中被列入失信被执行人、重大税收违法案件当事人名单、政府采购严重违法失信行为记录名单的供应商,不得参加本次政府采购活动;",
+            "pages": [
+              3
+            ],
+            "page": 3,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第3页",
+              "index": 3,
+              "pages": [
+                3
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0008",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "4)单位负责人为同一人或者存在直接控股、管理关系的不同供应商,不得参加同一合同项下(同一包号)的政府采购活动;",
+            "quote": "4)单位负责人为同一人或者存在直接控股、管理关系的不同供应商,不得参加同一合同项下(同一包号)的政府采购活动;",
+            "pages": [
+              4
+            ],
+            "page": 4,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第4页",
+              "index": 4,
+              "pages": [
+                4
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0009",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "5)为采购项目提供过整体设计、规范编制或者项目管理、监理、检测等服务的供应商及其附属机构,不得再参加该采购项目的其他采购活动。",
+            "quote": "5)为采购项目提供过整体设计、规范编制或者项目管理、监理、检测等服务的供应商及其附属机构,不得再参加该采购项目的其他采购活动。",
+            "pages": [
+              4
+            ],
+            "page": 4,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第4页",
+              "index": 4,
+              "pages": [
+                4
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0010",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "供应商需提供的资格证明材料:",
+            "quote": "供应商需提供的资格证明材料:",
+            "pages": [
+              7
+            ],
+            "page": 7,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第7页",
+              "index": 7,
+              "pages": [
+                7
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0011",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "(1)标有统一社会信用代码的营业执照;",
+            "quote": "(1)标有统一社会信用代码的营业执照;",
+            "pages": [
+              7
+            ],
+            "page": 7,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第7页",
+              "index": 7,
+              "pages": [
+                7
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0012",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "(2)竞争性磋商公告中资格条件要求的资质证书、安全生产许可证;",
+            "quote": "(2)竞争性磋商公告中资格条件要求的资质证书、安全生产许可证;",
+            "pages": [
+              7
+            ],
+            "page": 7,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第7页",
+              "index": 7,
+              "pages": [
+                7
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0013",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "(3)竞争性磋商公告中资格条件要求的项目负责人的建造师注册证书、安全考核合格证书(B 证);",
+            "quote": "(3)竞争性磋商公告中资格条件要求的项目负责人的建造师注册证书、安全考核合格证书(B 证);",
+            "pages": [
+              7
+            ],
+            "page": 7,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第7页",
+              "index": 7,
+              "pages": [
+                7
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0014",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "(4)供应商具有良好的商业信誉和健全的财务会计制度,须提供相关证明材料: 提供2024年或2025年财务会计报表,或2024年或2025年经审计的财务报告 (包",
+            "quote": "(4)供应商具有良好的商业信誉和健全的财务会计制度,须提供相关证明材料: 提供2024年或2025年财务会计报表,或2024年或2025年经审计的财务报告 (包括资产负债表、利润表、现金流量表),或首次响应文件递交截止时间前六个月内基本开户银行出具的资信证明; 如成立时间较短的供应商,可提供成立至今的相关证明材料。",
+            "pages": [
+              7
+            ],
+            "page": 7,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第7页",
+              "index": 7,
+              "pages": [
+                7
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0015",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "(5)供应商具有依法缴纳税收和社会保障资金的良好记录,须提供相关证明材料。其中: 缴纳税收的证明材料,应提供首次响应文件递交截止前三个月内任意一个月的依法缴税凭",
+            "quote": "(5)供应商具有依法缴纳税收和社会保障资金的良好记录,须提供相关证明材料。其中: 缴纳税收的证明材料,应提供首次响应文件递交截止前三个月内任意一个月的依法缴税凭据; 缴纳社会保障资金的证明材料,应提供首次响应文件递交截止前三个月内任意一个月的缴纳社会保险的凭据;",
+            "pages": [
+              7
+            ],
+            "page": 7,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第7页",
+              "index": 7,
+              "pages": [
+                7
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0016",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "(6)参加政府采购活动前三年内,在经营活动中没有重大违法记录的书面声明;其中: 重大违法记录是指供应商因违法经营受到刑事处罚或者责令停产停业、吊销许可证或者执照",
+            "quote": "(6)参加政府采购活动前三年内,在经营活动中没有重大违法记录的书面声明;其中: 重大违法记录是指供应商因违法经营受到刑事处罚或者责令停产停业、吊销许可证或者执照、较大数额罚款等行政处罚。",
+            "pages": [
+              8
+            ],
+            "page": 8,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第8页",
+              "index": 8,
+              "pages": [
+                8
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0017",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "(7)单位负责人为同一人或者存在直接控股、管理关系的不同供应商,不得参加同一包的报价或者未划分包的同一项目的报价,供应商须提供书面声明。",
+            "quote": "(7)单位负责人为同一人或者存在直接控股、管理关系的不同供应商,不得参加同一包的报价或者未划分包的同一项目的报价,供应商须提供书面声明。",
+            "pages": [
+              8
+            ],
+            "page": 8,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第8页",
+              "index": 8,
+              "pages": [
+                8
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0018",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "(8)为采购项目提供过整体设计、规范编制或者项目管理、监理、检测等服务的供应商及其附属机构,不得再参加该采购项目的其他采购活动,供应商须提供书面声明。",
+            "quote": "(8)为采购项目提供过整体设计、规范编制或者项目管理、监理、检测等服务的供应商及其附属机构,不得再参加该采购项目的其他采购活动,供应商须提供书面声明。",
+            "pages": [
+              8
+            ],
+            "page": 8,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第8页",
+              "index": 8,
+              "pages": [
+                8
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0019",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "(9)供应商依法按要求获取了采购文件。",
+            "quote": "(9)供应商依法按要求获取了采购文件。",
+            "pages": [
+              8
+            ],
+            "page": 8,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第8页",
+              "index": 8,
+              "pages": [
+                8
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0020",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "(10)供应商符合法律、行政法规规定的其他要求。",
+            "quote": "(10)供应商符合法律、行政法规规定的其他要求。",
+            "pages": [
+              8
+            ],
+            "page": 8,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第8页",
+              "index": 8,
+              "pages": [
+                8
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0021",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "(1)按《政府采购法实施条例》第十七条的规定,应提供的基本资格条件证明材料,详见供应商须知前附表;",
+            "quote": "(1)按《政府采购法实施条例》第十七条的规定,应提供的基本资格条件证明材料,详见供应商须知前附表;",
+            "pages": [
+              20
+            ],
+            "page": 20,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第20页",
+              "index": 20,
+              "pages": [
+                20
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0022",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "8、不存在禁止参加政府采购活动情形的书面声明不存在禁止参加政府采购活动情形的书面声明 (采购人名称): 《中华人民共和国政府采购法实施条例》第十八条第二款“为采",
+            "quote": "8、不存在禁止参加政府采购活动情形的书面声明不存在禁止参加政府采购活动情形的书面声明 (采购人名称): 《中华人民共和国政府采购法实施条例》第十八条第二款“为采购项目提供整体设计、规范编制或者项目管理、监理、检测等服务的供应商,不得再参加该采购项目的其他采购活动。” 我单位郑重声明:我单位不存在上述禁止参加政府采购活动的情形。",
+            "pages": [
+              115
+            ],
+            "page": 115,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第115页",
+              "index": 115,
+              "pages": [
+                115
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          }
+        ]
+      },
+      "scoring": {
+        "label": "评分要求",
+        "items": [
+          {
+            "clause_id": "TB-0023",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "29.4 节能环保产品优惠办法工程内容中如伴随有工程材料或工程设备供货时,所报工程材料或工程设备属于节能环保产品的,执行政府采购优惠政策;供应商所报设备(产品)",
+            "quote": "29.4 节能环保产品优惠办法工程内容中如伴随有工程材料或工程设备供货时,所报工程材料或工程设备属于节能环保产品的,执行政府采购优惠政策;供应商所报设备(产品)属于《环境标志产品政府采购品目清单》(《财政部生态环境部关于印发环境标志产品政府采购品目清单的通知》(财库〔2019〕18 号))、《节能产品政府采购品目清单》(财政部发展改革委《关于印发节能产品政府采购品目清单的通知》(财库〔2019〕19 号)内的环保、节能产品的,应在响应文件显著位置列出某项/某些产品属于节能、环保产品, 并列明节能、环保产品的生产厂家及产品品牌、型号等;同时,在节能环保产品报价表后,附经市场监管总局公布的认证机构出具的有效的国家节能产品认证证书或中国环境标志产品认证证书,否则,可能会导致所投报的节能环保产品因无法认定而不给予政府采购政策优惠(评审加分或价格扣除)。★其中,所报产品为政府强制采购产品的(《节能产品政府采购品目清单》中以“★”标注的产品品目)而未提供国家节能产品认证证书的,按无效报价处理。",
+            "pages": [
+              32
+            ],
+            "page": 32,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第32页",
+              "index": 32,
+              "pages": [
+                32
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0024",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "报价<br>部分<br>25<br>分：报价<br>部分<br>25<br>分 总报价评<br>审：报价合理<br>性 20：5 以满足磋商文件要求且最终报价最",
+            "quote": "报价<br>部分<br>25<br>分：报价<br>部分<br>25<br>分 总报价评<br>审：报价合理<br>性 20：5 以满足磋商文件要求且最终报价最低的价格为评审基准价,<br>其报价得分为满分 20 分,其他供应商的报价得分按照下列<br>公式计算:报价得分=(评审基准价÷最终报价)×20,得<br>分精确到小数点后2 位。：磋商小组根据总体报价、综合单价及各项主材单价的合理<br>性、报价表格规范性、各项费用的完整性5 项内容进行评<br>审,满分5 分,每项内容每存在一处不合理、不规范、不完<br>整、瑕疵的扣1 分,扣完为止。",
+            "pages": [
+              40
+            ],
+            "page": 40,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第40页",
+              "index": 40,
+              "pages": [
+                40
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0025",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "报价<br>部分<br>25<br>分：商务<br>部分<br>5 分 总报价评<br>审：同类业绩 20：3 以满足磋商文件要求且最终报价最低的价格为评审基准",
+            "quote": "报价<br>部分<br>25<br>分：商务<br>部分<br>5 分 总报价评<br>审：同类业绩 20：3 以满足磋商文件要求且最终报价最低的价格为评审基准价,<br>其报价得分为满分 20 分,其他供应商的报价得分按照下列<br>公式计算:报价得分=(评审基准价÷最终报价)×20,得<br>分精确到小数点后2 位。：2023 年1 月1 日至今(以合同签订时间为准)完成类似工<br>程项目业绩1 项得1 分,最多得3 分(需提供合同关键页复<br>印件并加盖公章)。<br>注:时间以合同具体签订日期为准,供应商须将类似项目<br>业绩的合同关键页复印件加盖单位公章后制作在响应文件<br>中,否则视为无效业绩不得分。分包合同、补充合同不计<br>分。<br>",
+            "pages": [
+              40
+            ],
+            "page": 40,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第40页",
+              "index": 40,
+              "pages": [
+                40
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0026",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "报价<br>部分<br>25<br>分：商务<br>部分<br>5 分 总报价评<br>审：项目负责<br>人业绩 20：2 以满足磋商文件要求且最终报价最低的",
+            "quote": "报价<br>部分<br>25<br>分：商务<br>部分<br>5 分 总报价评<br>审：项目负责<br>人业绩 20：2 以满足磋商文件要求且最终报价最低的价格为评审基准价,<br>其报价得分为满分 20 分,其他供应商的报价得分按照下列<br>公式计算:报价得分=(评审基准价÷最终报价)×20,得<br>分精确到小数点后2 位。：拟派项目负责人自2023 年1 月1 日至报价截止之日承接的<br>类似工程项目业绩,每提供1 项得1 分,满分2 分。<br>注:(**1**)供应商须将类似项目业绩的合同关键页复印件加<br>盖单位公章后制作在响应文件中,否则视为无效业绩不得",
+            "pages": [
+              40
+            ],
+            "page": 40,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第40页",
+              "index": 40,
+              "pages": [
+                40
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0027",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "二、评审细则评审细则报价部分 25 分总报价评审 20 以满足磋商文件要求且最终报价最低的价格为评审基准价, 其报价得分为满分20 分,其他供应商的报价得分按照",
+            "quote": "二、评审细则评审细则报价部分 25 分总报价评审 20 以满足磋商文件要求且最终报价最低的价格为评审基准价, 其报价得分为满分20 分,其他供应商的报价得分按照下列公式计算:报价得分=(评审基准价÷最终报价)×20,得分精确到小数点后2 位。",
+            "pages": [
+              40
+            ],
+            "page": 40,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第40页",
+              "index": 40,
+              "pages": [
+                40
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0028",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "报价合理性 5 磋商小组根据总体报价、综合单价及各项主材单价的合理性、报价表格规范性、各项费用的完整性5 项内容进行评审,满分5 分,每项内容每存在一处不合理、",
+            "quote": "报价合理性 5 磋商小组根据总体报价、综合单价及各项主材单价的合理性、报价表格规范性、各项费用的完整性5 项内容进行评审,满分5 分,每项内容每存在一处不合理、不规范、不完整、瑕疵的扣1 分,扣完为止。",
+            "pages": [
+              40
+            ],
+            "page": 40,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第40页",
+              "index": 40,
+              "pages": [
+                40
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0029",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "同类业绩 3 2023 年1 月1 日至今(以合同签订时间为准)完成类似工程项目业绩1 项得1 分,最多得3 分(需提供合同关键页复印件并加盖公章)。",
+            "quote": "同类业绩 3 2023 年1 月1 日至今(以合同签订时间为准)完成类似工程项目业绩1 项得1 分,最多得3 分(需提供合同关键页复印件并加盖公章)。",
+            "pages": [
+              40
+            ],
+            "page": 40,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第40页",
+              "index": 40,
+              "pages": [
+                40
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0030",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "项目负责人业绩 2 拟派项目负责人自2023 年1 月1 日至报价截止之日承接的类似工程项目业绩,每提供1 项得1 分,满分2 分。",
+            "quote": "项目负责人业绩 2 拟派项目负责人自2023 年1 月1 日至报价截止之日承接的类似工程项目业绩,每提供1 项得1 分,满分2 分。",
+            "pages": [
+              40
+            ],
+            "page": 40,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第40页",
+              "index": 40,
+              "pages": [
+                40
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0031",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "Col1：技术<br>部分<br>70<br>分 Col2：施工组织<br>设计方案 Col3：33 分。(2)时间以合同具体签订日期为准。(3)合同中须<br",
+            "quote": "Col1：技术<br>部分<br>70<br>分 Col2：施工组织<br>设计方案 Col3：33 分。(2)时间以合同具体签订日期为准。(3)合同中须<br>显示项目负责人信息,否则不得分。(4)分包合同、补充<br>合同不计分。(5)企业业绩和项目负责人类似项目业绩不<br>重复计分。：1)施工方案及技术措施内容完整、科学合理、切实可行、<br>措施得力的得4 分,每发现一处瑕疵、不完善或者不合理扣<br>0.5 分,扣完为止,方案内容不可行或未提供不得分。<br>2)质量保证措施内容完整、质量保证体系齐全、切实可<br>行、科学合理的得4 分,每发现一处瑕疵、不完善或者不合<br>理扣0.5 分,扣完为止,方案内容不可行或未提供不得分。<br>3)施工现场平面布置和临时设施、临时道路布置合理、措<br>施完善、针对性强、切实可行的得4 分,每发现一处瑕疵、<br>不完善或者不合理扣",
+            "pages": [
+              41
+            ],
+            "page": 41,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第41页",
+              "index": 41,
+              "pages": [
+                41
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0032",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "(4)分包合同、补充合同不计分。",
+            "quote": "(4)分包合同、补充合同不计分。",
+            "pages": [
+              41
+            ],
+            "page": 41,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第41页",
+              "index": 41,
+              "pages": [
+                41
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0033",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "3)施工现场平面布置和临时设施、临时道路布置合理、措施完善、针对性强、切实可行的得4 分,每发现一处瑕疵、 不完善或者不合理扣0.5 分,扣完为止,方案内容不可",
+            "quote": "3)施工现场平面布置和临时设施、临时道路布置合理、措施完善、针对性强、切实可行的得4 分,每发现一处瑕疵、 不完善或者不合理扣0.5 分,扣完为止,方案内容不可行或未提供不得分。",
+            "pages": [
+              41
+            ],
+            "page": 41,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第41页",
+              "index": 41,
+              "pages": [
+                41
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0034",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "4)施工机械设备及劳动力安排计划(包括保障进度计划需要的主要施工机械设备、劳动力需求计划及保证措施、材料设备进场计划及其他保证措施等),施工机械设备齐全、性能先",
+            "quote": "4)施工机械设备及劳动力安排计划(包括保障进度计划需要的主要施工机械设备、劳动力需求计划及保证措施、材料设备进场计划及其他保证措施等),施工机械设备齐全、性能先进、劳力安排有序、施工保障措施有力的得4 分,每发现一处瑕疵、不完善或者不合理扣0.5 分,扣完为止,方案内容不可行或未提供不得分。",
+            "pages": [
+              41
+            ],
+            "page": 41,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第41页",
+              "index": 41,
+              "pages": [
+                41
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0035",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "5)施工文明措施计划内容完整、科学合理、切实可行、针对性强的得4 分,每发现一处瑕疵、不完善或者不合理扣 0.5 分,扣完为止,方案内容不可行或未提供不得分。",
+            "quote": "5)施工文明措施计划内容完整、科学合理、切实可行、针对性强的得4 分,每发现一处瑕疵、不完善或者不合理扣 0.5 分,扣完为止,方案内容不可行或未提供不得分。",
+            "pages": [
+              41
+            ],
+            "page": 41,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第41页",
+              "index": 41,
+              "pages": [
+                41
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0036",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "6)安全保障措施(包含但不限于高空、登高作业安全防护措施、对危险性较大的工程、安装安全围栏警示牌保护措施、现场施工安全、施工现场周边人员安全保护方案等)内容完整",
+            "quote": "6)安全保障措施(包含但不限于高空、登高作业安全防护措施、对危险性较大的工程、安装安全围栏警示牌保护措施、现场施工安全、施工现场周边人员安全保护方案等)内容完整、科学合理、切实可行、措施得力的得4 分,每发现一处瑕疵、不完善或者不合理扣0.5 分,扣完为止,方案内容不可行或未提供不得分。",
+            "pages": [
+              41
+            ],
+            "page": 41,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第41页",
+              "index": 41,
+              "pages": [
+                41
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0037",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "Col1：主要材料<br>及设备 Col2：5 Col3：对供应商所报主要材料及设备(钢筋、混凝土、ALJG 配电<br>箱、接地系统、海绵城市地面一体机)进行",
+            "quote": "Col1：主要材料<br>及设备 Col2：5 Col3：对供应商所报主要材料及设备(钢筋、混凝土、ALJG 配电<br>箱、接地系统、海绵城市地面一体机)进行综合评价。主要<br>材料及设备规格、型号等信息完整,质量、环保、节能等符<br>合相关标准,主要材料品质优良,第三方检测报告、认证、<br>图片等证明资料有效完整,得5 分。每发现一处不完整、有<br>瑕疵扣0.5 分,扣完为止。",
+            "pages": [
+              42
+            ],
+            "page": 42,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第42页",
+              "index": 42,
+              "pages": [
+                42
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0038",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "Col1：施工总工<br>期计划 Col2：9 Col3：从工期总体合理性、施工进度计划完整性、关键线路与节点<br>控制、工序衔接与交叉施工安排、工期保障措施",
+            "quote": "Col1：施工总工<br>期计划 Col2：9 Col3：从工期总体合理性、施工进度计划完整性、关键线路与节点<br>控制、工序衔接与交叉施工安排、工期保障措施、履约承诺<br>与违约响应6 方面进行综合评价,满分9 分,每方面内容科<br>学合理、切实可行、可实施性强的得1.5 分,每发现一处瑕<br>疵、不完善或者不合理扣0.5 分,扣完为止,方案内容不可<br>行或未提供不得分。",
+            "pages": [
+              42
+            ],
+            "page": 42,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第42页",
+              "index": 42,
+              "pages": [
+                42
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0039",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "Col1：项目管理<br>机构 Col2：9 Col3：对人员配备(项目经理、技术负责人、工程施工管理人员<br>等)数量、结构安排及分工情况、人员管理制度三个",
+            "quote": "Col1：项目管理<br>机构 Col2：9 Col3：对人员配备(项目经理、技术负责人、工程施工管理人员<br>等)数量、结构安排及分工情况、人员管理制度三个方面进<br>行评价,满分9 分,每方面科学、合理、完善、切实可行,<br>得3 分,每发现一处瑕疵、不完善或者不合理扣0.5 分,扣<br>完为止,方案内容不可行或未提供不得分。",
+            "pages": [
+              42
+            ],
+            "page": 42,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第42页",
+              "index": 42,
+              "pages": [
+                42
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0040",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "Col1：工程保修<br>方案 Col2：8 Col3：从保修范围与内容、保修组织机构与人员、保修响应机制、<br>保修措施与质量保证4 方面进行综合评价,满分",
+            "quote": "Col1：工程保修<br>方案 Col2：8 Col3：从保修范围与内容、保修组织机构与人员、保修响应机制、<br>保修措施与质量保证4 方面进行综合评价,满分8 分,每方<br>面内容科学合理、切实可行、可实施性强的得2 分,每发现",
+            "pages": [
+              42
+            ],
+            "page": 42,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第42页",
+              "index": 42,
+              "pages": [
+                42
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0041",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "地下设施的保护加固措施等完整、科学、合理、切实可行的得3 分,每发现一处瑕疵、不完善或者不合理扣0.5 分,扣完为止,方案内容不可行或未提供不得分。",
+            "quote": "地下设施的保护加固措施等完整、科学、合理、切实可行的得3 分,每发现一处瑕疵、不完善或者不合理扣0.5 分,扣完为止,方案内容不可行或未提供不得分。",
+            "pages": [
+              42
+            ],
+            "page": 42,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第42页",
+              "index": 42,
+              "pages": [
+                42
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0042",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "8)成品保护方案内容详细完整、措施科学合理、切实可行的得3 分,每发现一处瑕疵、不完善或者不合理扣0.5 分, 扣完为止,方案内容不可行或未提供不得分。",
+            "quote": "8)成品保护方案内容详细完整、措施科学合理、切实可行的得3 分,每发现一处瑕疵、不完善或者不合理扣0.5 分, 扣完为止,方案内容不可行或未提供不得分。",
+            "pages": [
+              42
+            ],
+            "page": 42,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第42页",
+              "index": 42,
+              "pages": [
+                42
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0043",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "9)任何可能的紧急情况的处理措施、预案以及抵抗风险 (包括工程施工过程中可能遇到的各种风险)的措施,内容完善、科学合理、切实可行的得3 分,每发现一处瑕疵、不完",
+            "quote": "9)任何可能的紧急情况的处理措施、预案以及抵抗风险 (包括工程施工过程中可能遇到的各种风险)的措施,内容完善、科学合理、切实可行的得3 分,每发现一处瑕疵、不完善或者不合理扣0.5 分,扣完为止,方案内容不可行或未提供不得分。",
+            "pages": [
+              42
+            ],
+            "page": 42,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第42页",
+              "index": 42,
+              "pages": [
+                42
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0044",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "Col1：延续质保<br>服务 Col2：6 Col3：在基本要求的基础上,工程整体质保期每增加1 年,得2<br>分,最高得6 分。",
+            "quote": "Col1：延续质保<br>服务 Col2：6 Col3：在基本要求的基础上,工程整体质保期每增加1 年,得2<br>分,最高得6 分。",
+            "pages": [
+              43
+            ],
+            "page": 43,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第43页",
+              "index": 43,
+              "pages": [
+                43
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0045",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "三、评审执行的政府采购政策评审过程中,应执行政府采购政策,因此,综合评审打分时,需按以下要求计算、调整最后打分:",
+            "quote": "三、评审执行的政府采购政策评审过程中,应执行政府采购政策,因此,综合评审打分时,需按以下要求计算、调整最后打分:",
+            "pages": [
+              43
+            ],
+            "page": 43,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第43页",
+              "index": 43,
+              "pages": [
+                43
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0046",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "1)中小微企业政府采购政策:对小型和微型企业的最后报价给予5% 的价格扣除,用扣除后的价格参与评审; 接受大中型企业与小微企业组成联合体或者允许大中型企业向一家",
+            "quote": "1)中小微企业政府采购政策:对小型和微型企业的最后报价给予5% 的价格扣除,用扣除后的价格参与评审; 接受大中型企业与小微企业组成联合体或者允许大中型企业向一家或者多家小微企业分包的采购项目,对于联合协议或者分包意向协议约定小微企业的合同份额占到合同总金额30%以上的,则在评审过程中评审价格可给予联合体__2_%的价格扣除。如果联合体各方均为小型、微型企业的,联合体视同为小型、微型企业,但联合体各方均应按竞争性磋商文件要求提供中小企业声明函;",
+            "pages": [
+              43
+            ],
+            "page": 43,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第43页",
+              "index": 43,
+              "pages": [
+                43
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0047",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "2)残疾人福利性单位、监狱企业政府采购优惠政策:同小微企业。",
+            "quote": "2)残疾人福利性单位、监狱企业政府采购优惠政策:同小微企业。",
+            "pages": [
+              43
+            ],
+            "page": 43,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第43页",
+              "index": 43,
+              "pages": [
+                43
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0048",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "如供应商提供的产品属于《环境标志产品政府采购品目清单》(《财政部生态环境部关于印发环境标志产品政府采购品目清单的通知》(财库〔2019〕18 号))、 《节能产",
+            "quote": "如供应商提供的产品属于《环境标志产品政府采购品目清单》(《财政部生态环境部关于印发环境标志产品政府采购品目清单的通知》(财库〔2019〕18 号))、 《节能产品政府采购品目清单》(财政部发展改革委《关于印发节能产品政府采购品目清单的通知》)(财库〔2019〕19 号)范围的环保、节能产品,应在响应文件中附国家节能产品认证证书或中国环境标志产品认证证书,并在报价表中注明,未按要求提供和注明的,将不给予加分。其中,所报产品为政府强制采购产品的(《节能产品政府采购品目清单》中以“★”标注的产品品目)而未提供国家节能产品认证证书的,按无效报价处理。",
+            "pages": [
+              43
+            ],
+            "page": 43,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第43页",
+              "index": 43,
+              "pages": [
+                43
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0049",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "按照《财政部办公厅住房城乡建设部办公厅工业和信息化部办公厅关于印发一处瑕疵、不完善或者不合理扣0.5 分,扣完为止,方案内容不可行或未提供不得分。",
+            "quote": "按照《财政部办公厅住房城乡建设部办公厅工业和信息化部办公厅关于印发一处瑕疵、不完善或者不合理扣0.5 分,扣完为止,方案内容不可行或未提供不得分。",
+            "pages": [
+              43
+            ],
+            "page": 43,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第43页",
+              "index": 43,
+              "pages": [
+                43
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0050",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "3、环境标志产品明细表环境标志产品明细表(如有) 项目编号: 项目名称: 序号产品名称制造商品牌规格型号中国环境标志认证证书编号认证证书有效截止日期价格单价 (",
+            "quote": "3、环境标志产品明细表环境标志产品明细表(如有) 项目编号: 项目名称: 序号产品名称制造商品牌规格型号中国环境标志认证证书编号认证证书有效截止日期价格单价 (元) 数量小计 (元) 1 2 3 ... 4 合计说明:所报产品属于《环境标志产品政府采购品目清单》(财库〔2019〕18 号)内的品目,按规定格式逐项填写,附《中国环境标志产品认证证书》,否则评审时不予加分。",
+            "pages": [
+              102
+            ],
+            "page": 102,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第102页",
+              "index": 102,
+              "pages": [
+                102
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0051",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "1. 所报产品属于《节能产品政府采购品目清单》(财库〔2019〕19 号)内的品目,按规定格式逐项填写,附《国家节能产品认证证书》,否则评审时不予加分。",
+            "quote": "1. 所报产品属于《节能产品政府采购品目清单》(财库〔2019〕19 号)内的品目,按规定格式逐项填写,附《国家节能产品认证证书》,否则评审时不予加分。",
+            "pages": [
+              110
+            ],
+            "page": 110,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第110页",
+              "index": 110,
+              "pages": [
+                110
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          }
+        ]
+      },
+      "materials": {
+        "label": "要交的材料",
+        "items": [
+          {
+            "clause_id": "TB-0052",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "采购代理机构将查询到的供应商失信行为事由、处理机关名称及处理日期、 处理有效期间等,以屏幕截图的方式保存,并承诺查询记录仅用于本次采购活动过程中,不用于其他目的",
+            "quote": "采购代理机构将查询到的供应商失信行为事由、处理机关名称及处理日期、 处理有效期间等,以屏幕截图的方式保存,并承诺查询记录仅用于本次采购活动过程中,不用于其他目的。供应商不良信用记录以采购人或采购代理机构现场查询结果为准,并如实记录查询情况。供应商自行提供的与网站信息不一致的其他证明材料亦不作为资格审查的依据。在本采购文件规定的查询时间之后,网站信息发生的任何变更均不再作为评审依据。",
+            "pages": [
+              7
+            ],
+            "page": 7,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第7页",
+              "index": 7,
+              "pages": [
+                7
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0053",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "供应商需提供的资格证明材料:",
+            "quote": "供应商需提供的资格证明材料:",
+            "pages": [
+              7
+            ],
+            "page": 7,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第7页",
+              "index": 7,
+              "pages": [
+                7
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0054",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(1)标有统一社会信用代码的营业执照;",
+            "quote": "(1)标有统一社会信用代码的营业执照;",
+            "pages": [
+              7
+            ],
+            "page": 7,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第7页",
+              "index": 7,
+              "pages": [
+                7
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0055",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(2)竞争性磋商公告中资格条件要求的资质证书、安全生产许可证;",
+            "quote": "(2)竞争性磋商公告中资格条件要求的资质证书、安全生产许可证;",
+            "pages": [
+              7
+            ],
+            "page": 7,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第7页",
+              "index": 7,
+              "pages": [
+                7
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0056",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(3)竞争性磋商公告中资格条件要求的项目负责人的建造师注册证书、安全考核合格证书(B 证);",
+            "quote": "(3)竞争性磋商公告中资格条件要求的项目负责人的建造师注册证书、安全考核合格证书(B 证);",
+            "pages": [
+              7
+            ],
+            "page": 7,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第7页",
+              "index": 7,
+              "pages": [
+                7
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0057",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(4)供应商具有良好的商业信誉和健全的财务会计制度,须提供相关证明材料: 提供2024年或2025年财务会计报表,或2024年或2025年经审计的财务报告 (包",
+            "quote": "(4)供应商具有良好的商业信誉和健全的财务会计制度,须提供相关证明材料: 提供2024年或2025年财务会计报表,或2024年或2025年经审计的财务报告 (包括资产负债表、利润表、现金流量表),或首次响应文件递交截止时间前六个月内基本开户银行出具的资信证明; 如成立时间较短的供应商,可提供成立至今的相关证明材料。",
+            "pages": [
+              7
+            ],
+            "page": 7,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第7页",
+              "index": 7,
+              "pages": [
+                7
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0058",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(5)供应商具有依法缴纳税收和社会保障资金的良好记录,须提供相关证明材料。其中: 缴纳税收的证明材料,应提供首次响应文件递交截止前三个月内任意一个月的依法缴税凭",
+            "quote": "(5)供应商具有依法缴纳税收和社会保障资金的良好记录,须提供相关证明材料。其中: 缴纳税收的证明材料,应提供首次响应文件递交截止前三个月内任意一个月的依法缴税凭据; 缴纳社会保障资金的证明材料,应提供首次响应文件递交截止前三个月内任意一个月的缴纳社会保险的凭据;",
+            "pages": [
+              7
+            ],
+            "page": 7,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第7页",
+              "index": 7,
+              "pages": [
+                7
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0059",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "注:依法免税或不需要缴纳社会保障资金的供应商,须提供相应文件证明其依法免税或不需要缴纳社会保障资金。",
+            "quote": "注:依法免税或不需要缴纳社会保障资金的供应商,须提供相应文件证明其依法免税或不需要缴纳社会保障资金。",
+            "pages": [
+              7,
+              8
+            ],
+            "page": 7,
+            "printed_page": null,
+            "printed_pages": [
+              null,
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第7-8页",
+              "index": 7,
+              "pages": [
+                7,
+                8
+              ]
+            },
+            "detection": "cross_page",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0060",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(6)参加政府采购活动前三年内,在经营活动中没有重大违法记录的书面声明;其中: 重大违法记录是指供应商因违法经营受到刑事处罚或者责令停产停业、吊销许可证或者执照",
+            "quote": "(6)参加政府采购活动前三年内,在经营活动中没有重大违法记录的书面声明;其中: 重大违法记录是指供应商因违法经营受到刑事处罚或者责令停产停业、吊销许可证或者执照、较大数额罚款等行政处罚。",
+            "pages": [
+              8
+            ],
+            "page": 8,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第8页",
+              "index": 8,
+              "pages": [
+                8
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0061",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(7)单位负责人为同一人或者存在直接控股、管理关系的不同供应商,不得参加同一包的报价或者未划分包的同一项目的报价,供应商须提供书面声明。",
+            "quote": "(7)单位负责人为同一人或者存在直接控股、管理关系的不同供应商,不得参加同一包的报价或者未划分包的同一项目的报价,供应商须提供书面声明。",
+            "pages": [
+              8
+            ],
+            "page": 8,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第8页",
+              "index": 8,
+              "pages": [
+                8
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0062",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(8)为采购项目提供过整体设计、规范编制或者项目管理、监理、检测等服务的供应商及其附属机构,不得再参加该采购项目的其他采购活动,供应商须提供书面声明。",
+            "quote": "(8)为采购项目提供过整体设计、规范编制或者项目管理、监理、检测等服务的供应商及其附属机构,不得再参加该采购项目的其他采购活动,供应商须提供书面声明。",
+            "pages": [
+              8
+            ],
+            "page": 8,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第8页",
+              "index": 8,
+              "pages": [
+                8
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0063",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(9)供应商依法按要求获取了采购文件。",
+            "quote": "(9)供应商依法按要求获取了采购文件。",
+            "pages": [
+              8
+            ],
+            "page": 8,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第8页",
+              "index": 8,
+              "pages": [
+                8
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0064",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(10)供应商符合法律、行政法规规定的其他要求。",
+            "quote": "(10)供应商符合法律、行政法规规定的其他要求。",
+            "pages": [
+              8
+            ],
+            "page": 8,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第8页",
+              "index": 8,
+              "pages": [
+                8
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0065",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "序号：11 内 容：首次响应文件密封和标记:<br>供应商应将首次响应文件正本、副本、电子版及首轮报价一览表密封,并在<br>封面明显处注明以下内容:<br>1",
+            "quote": "序号：11 内 容：首次响应文件密封和标记:<br>供应商应将首次响应文件正本、副本、电子版及首轮报价一览表密封,并在<br>封面明显处注明以下内容:<br>1)项目编号、项目名称<br>2)正本或副本或电子版或首轮报价一览表<br>3)供应商名称(加盖公章)、地址、电话<br>4)每一密封件在封口处注明“首次响应文件递交截止时间之前不准启封”<br>字样。<br>注:所有副本密封在一个包封内即可。",
+            "pages": [
+              9
+            ],
+            "page": 9,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第9页",
+              "index": 9,
+              "pages": [
+                9
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0066",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "4)各轮报价中的税率为不可竞争费用,增值税税率执行9%。措施项目清单中相关费率应符合山东省建设工程费用项目组成及计算规则的最新要求。",
+            "quote": "4)各轮报价中的税率为不可竞争费用,增值税税率执行9%。措施项目清单中相关费率应符合山东省建设工程费用项目组成及计算规则的最新要求。",
+            "pages": [
+              9
+            ],
+            "page": 9,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第9页",
+              "index": 9,
+              "pages": [
+                9
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0067",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "序号：27 内 容：★所报产品属于《节能产品政府采购品目清单》内政府强制采购产品的,须<br>在响应文件中提供该产品有效的《国家节能产品认证证书》复印件并加盖供",
+            "quote": "序号：27 内 容：★所报产品属于《节能产品政府采购品目清单》内政府强制采购产品的,须<br>在响应文件中提供该产品有效的《国家节能产品认证证书》复印件并加盖供应商<br>公章。未按强制节能清单参与报价或未按竞争性磋商文件要求提供相关证明材料<br>的,均属于无效报价。<br>",
+            "pages": [
+              12
+            ],
+            "page": 12,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第12页",
+              "index": 12,
+              "pages": [
+                12
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0068",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "4.竞争性磋商文件组成本磋商文件由竞争性磋商文件目录所列内容及按本磋商文件要求发出的澄清、答疑和修改组成。",
+            "quote": "4.竞争性磋商文件组成本磋商文件由竞争性磋商文件目录所列内容及按本磋商文件要求发出的澄清、答疑和修改组成。",
+            "pages": [
+              18
+            ],
+            "page": 18,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第18页",
+              "index": 18,
+              "pages": [
+                18
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0069",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "5.竞争性磋商文件答疑供应商对竞争性磋商文件如有疑问,应于前附表所述时间以前以书面形式通知到代理机构。在前附表所述时间之前,代理机构将视情况以书面形式予以答复,",
+            "quote": "5.竞争性磋商文件答疑供应商对竞争性磋商文件如有疑问,应于前附表所述时间以前以书面形式通知到代理机构。在前附表所述时间之前,代理机构将视情况以书面形式予以答复,如有必要可将答复内容包括原提出的问题(但不表明问题的来源),分发给所有取得同一竞争性磋商文件的供应商。供应商须在收到代理机构的书面答复后24小时内书面回复。",
+            "pages": [
+              18
+            ],
+            "page": 18,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第18页",
+              "index": 18,
+              "pages": [
+                18
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0070",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "6.竞争性磋商文件澄清和修改",
+            "quote": "6.竞争性磋商文件澄清和修改",
+            "pages": [
+              18
+            ],
+            "page": 18,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第18页",
+              "index": 18,
+              "pages": [
+                18
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0071",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "7.1供应商和代理机构就采购活动过程中交换的文件和来往信函均使用中文。",
+            "quote": "7.1供应商和代理机构就采购活动过程中交换的文件和来往信函均使用中文。",
+            "pages": [
+              19
+            ],
+            "page": 19,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第19页",
+              "index": 19,
+              "pages": [
+                19
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0072",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "8.响应文件组成响应文件由三部分组成,包括商务文件、技术文件、资格资质证明文件。",
+            "quote": "8.响应文件组成响应文件由三部分组成,包括商务文件、技术文件、资格资质证明文件。",
+            "pages": [
+              19
+            ],
+            "page": 19,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第19页",
+              "index": 19,
+              "pages": [
+                19
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0073",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "8.1 商务文件",
+            "quote": "8.1 商务文件",
+            "pages": [
+              19
+            ],
+            "page": 19,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第19页",
+              "index": 19,
+              "pages": [
+                19
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0074",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(1)报价函;",
+            "quote": "(1)报价函;",
+            "pages": [
+              19
+            ],
+            "page": 19,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第19页",
+              "index": 19,
+              "pages": [
+                19
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0075",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(2)法定代表人授权委托书;",
+            "quote": "(2)法定代表人授权委托书;",
+            "pages": [
+              19
+            ],
+            "page": 19,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第19页",
+              "index": 19,
+              "pages": [
+                19
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0076",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(3)首轮报价一览表;",
+            "quote": "(3)首轮报价一览表;",
+            "pages": [
+              19
+            ],
+            "page": 19,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第19页",
+              "index": 19,
+              "pages": [
+                19
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0077",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(4)已标价工程量清单;",
+            "quote": "(4)已标价工程量清单;",
+            "pages": [
+              19
+            ],
+            "page": 19,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第19页",
+              "index": 19,
+              "pages": [
+                19
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0078",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(5)综合单价分析表;",
+            "quote": "(5)综合单价分析表;",
+            "pages": [
+              19
+            ],
+            "page": 19,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第19页",
+              "index": 19,
+              "pages": [
+                19
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0079",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(6)主要设备/材料表;",
+            "quote": "(6)主要设备/材料表;",
+            "pages": [
+              19
+            ],
+            "page": 19,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第19页",
+              "index": 19,
+              "pages": [
+                19
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0080",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(7)供应商基本情况表;",
+            "quote": "(7)供应商基本情况表;",
+            "pages": [
+              19
+            ],
+            "page": 19,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第19页",
+              "index": 19,
+              "pages": [
+                19
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0081",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(8)业绩一览表;",
+            "quote": "(8)业绩一览表;",
+            "pages": [
+              19
+            ],
+            "page": 19,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第19页",
+              "index": 19,
+              "pages": [
+                19
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0082",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(9)正在施工的和新承接的项目情况表;",
+            "quote": "(9)正在施工的和新承接的项目情况表;",
+            "pages": [
+              19
+            ],
+            "page": 19,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第19页",
+              "index": 19,
+              "pages": [
+                19
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0083",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(10)商务偏离表;",
+            "quote": "(10)商务偏离表;",
+            "pages": [
+              19
+            ],
+            "page": 19,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第19页",
+              "index": 19,
+              "pages": [
+                19
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0084",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(11)优惠条件及合理化建议;",
+            "quote": "(11)优惠条件及合理化建议;",
+            "pages": [
+              19
+            ],
+            "page": 19,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第19页",
+              "index": 19,
+              "pages": [
+                19
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0085",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(12)供应商认为需要加以说明的其他内容。",
+            "quote": "(12)供应商认为需要加以说明的其他内容。",
+            "pages": [
+              19
+            ],
+            "page": 19,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第19页",
+              "index": 19,
+              "pages": [
+                19
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0086",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "8.2 技术文件",
+            "quote": "8.2 技术文件",
+            "pages": [
+              19
+            ],
+            "page": 19,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第19页",
+              "index": 19,
+              "pages": [
+                19
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0087",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(1)施工组织设计;",
+            "quote": "(1)施工组织设计;",
+            "pages": [
+              19
+            ],
+            "page": 19,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第19页",
+              "index": 19,
+              "pages": [
+                19
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0088",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "1)施工方案及技术措施;",
+            "quote": "1)施工方案及技术措施;",
+            "pages": [
+              19
+            ],
+            "page": 19,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第19页",
+              "index": 19,
+              "pages": [
+                19
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0089",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2)质量保证措施;",
+            "quote": "2)质量保证措施;",
+            "pages": [
+              19
+            ],
+            "page": 19,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第19页",
+              "index": 19,
+              "pages": [
+                19
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0090",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "3)施工现场总平面布置(施工总平面图,绘出现场临时设施布置图表并附文字说明,说明临时设施、加工车间、现场办公、设备及仓储、供电、供水、卫生、生活、 道路、消防等",
+            "quote": "3)施工现场总平面布置(施工总平面图,绘出现场临时设施布置图表并附文字说明,说明临时设施、加工车间、现场办公、设备及仓储、供电、供水、卫生、生活、 道路、消防等设施的情况和布置);",
+            "pages": [
+              19
+            ],
+            "page": 19,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第19页",
+              "index": 19,
+              "pages": [
+                19
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0091",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "4)施工机械设备及劳动力安排计划(包括保障进度计划需要的主要施工机械设备、劳动力需求计划及保证措施、材料设备进场计划及其他保证措施等);",
+            "quote": "4)施工机械设备及劳动力安排计划(包括保障进度计划需要的主要施工机械设备、劳动力需求计划及保证措施、材料设备进场计划及其他保证措施等);",
+            "pages": [
+              19,
+              20
+            ],
+            "page": 19,
+            "printed_page": null,
+            "printed_pages": [
+              null,
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第19-20页",
+              "index": 19,
+              "pages": [
+                19,
+                20
+              ]
+            },
+            "detection": "cross_page",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0092",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "5)施工文明措施计划;",
+            "quote": "5)施工文明措施计划;",
+            "pages": [
+              20
+            ],
+            "page": 20,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第20页",
+              "index": 20,
+              "pages": [
+                20
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0093",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "6)安全保障措施(包含但不限于高空、登高作业安全防护措施、对危险性较大的工程、安装安全围栏警示牌保护措施、现场施工安全、施工现场周边人员安全保护方案等);",
+            "quote": "6)安全保障措施(包含但不限于高空、登高作业安全防护措施、对危险性较大的工程、安装安全围栏警示牌保护措施、现场施工安全、施工现场周边人员安全保护方案等);",
+            "pages": [
+              20
+            ],
+            "page": 20,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第20页",
+              "index": 20,
+              "pages": [
+                20
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0094",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "7)减少噪音、降低环境污染、地下管线及其他地上地下设施的保护加固措施;",
+            "quote": "7)减少噪音、降低环境污染、地下管线及其他地上地下设施的保护加固措施;",
+            "pages": [
+              20
+            ],
+            "page": 20,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第20页",
+              "index": 20,
+              "pages": [
+                20
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0095",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "8)成品保护方案;",
+            "quote": "8)成品保护方案;",
+            "pages": [
+              20
+            ],
+            "page": 20,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第20页",
+              "index": 20,
+              "pages": [
+                20
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0096",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "9)任何可能的紧急情况的处理措施、预案以及抵抗风险(包括工程施工过程中可能遇到的各种风险);",
+            "quote": "9)任何可能的紧急情况的处理措施、预案以及抵抗风险(包括工程施工过程中可能遇到的各种风险);",
+            "pages": [
+              20
+            ],
+            "page": 20,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第20页",
+              "index": 20,
+              "pages": [
+                20
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0097",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "10)磋商文件规定的其他内容。",
+            "quote": "10)磋商文件规定的其他内容。",
+            "pages": [
+              20
+            ],
+            "page": 20,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第20页",
+              "index": 20,
+              "pages": [
+                20
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0098",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(2)合理化建议及相关优惠承诺和应急措施(如有);",
+            "quote": "(2)合理化建议及相关优惠承诺和应急措施(如有);",
+            "pages": [
+              20
+            ],
+            "page": 20,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第20页",
+              "index": 20,
+              "pages": [
+                20
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0099",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(3)技术要求偏离表;",
+            "quote": "(3)技术要求偏离表;",
+            "pages": [
+              20
+            ],
+            "page": 20,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第20页",
+              "index": 20,
+              "pages": [
+                20
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0100",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(4)供应商认为需要提供的其他材料或说明。",
+            "quote": "(4)供应商认为需要提供的其他材料或说明。",
+            "pages": [
+              20
+            ],
+            "page": 20,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第20页",
+              "index": 20,
+              "pages": [
+                20
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0101",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "8.3 资格、资质证明文件:",
+            "quote": "8.3 资格、资质证明文件:",
+            "pages": [
+              20
+            ],
+            "page": 20,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第20页",
+              "index": 20,
+              "pages": [
+                20
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0102",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(1)按《政府采购法实施条例》第十七条的规定,应提供的基本资格条件证明材料,详见供应商须知前附表;",
+            "quote": "(1)按《政府采购法实施条例》第十七条的规定,应提供的基本资格条件证明材料,详见供应商须知前附表;",
+            "pages": [
+              20
+            ],
+            "page": 20,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第20页",
+              "index": 20,
+              "pages": [
+                20
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0103",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(2)符合本项目要求的资质条件证明材料,详见供应商须知前附表;",
+            "quote": "(2)符合本项目要求的资质条件证明材料,详见供应商须知前附表;",
+            "pages": [
+              20
+            ],
+            "page": 20,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第20页",
+              "index": 20,
+              "pages": [
+                20
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0104",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(3)供应商认为需要提交的其他相关证明文件。",
+            "quote": "(3)供应商认为需要提交的其他相关证明文件。",
+            "pages": [
+              20
+            ],
+            "page": 20,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第20页",
+              "index": 20,
+              "pages": [
+                20
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0105",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "10.2 本次竞争性磋商过程中,各合格供应商均有再次报价的机会,再次报价时, 原则上在首次响应文件中的首轮报价的基础上进行整体浮动(已标价工程量清单中的各清单子",
+            "quote": "10.2 本次竞争性磋商过程中,各合格供应商均有再次报价的机会,再次报价时, 原则上在首次响应文件中的首轮报价的基础上进行整体浮动(已标价工程量清单中的各清单子项单价、合价均按同比例调整,但增值税税率、暂列金、暂估价、以及有要求的措施费费率除外)。除非磋商小组对本项目技术要求(含工程量清单项)有变更,否则不允许修改调整所投报的工程量清单项、清单描述及工程量、工程材料(设备)品牌规格、施工组织设计和项目管理机构。",
+            "pages": [
+              21
+            ],
+            "page": 21,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第21页",
+              "index": 21,
+              "pages": [
+                21
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0106",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "10.9 本项目总报价中应包含设备材料进场检测检验费(如有)、竣工验收费(如有)、竞争性磋商采购代理服务费,但不需单独列项。",
+            "quote": "10.9 本项目总报价中应包含设备材料进场检测检验费(如有)、竣工验收费(如有)、竞争性磋商采购代理服务费,但不需单独列项。",
+            "pages": [
+              22
+            ],
+            "page": 22,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第22页",
+              "index": 22,
+              "pages": [
+                22
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0107",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "11.2 响应文件应用不褪色的材料打印或复印(A4 幅面)。",
+            "quote": "11.2 响应文件应用不褪色的材料打印或复印(A4 幅面)。",
+            "pages": [
+              22
+            ],
+            "page": 22,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第22页",
+              "index": 22,
+              "pages": [
+                22
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0108",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "20.5 磋商会议仪式后,磋商小组视情可能会安排(或委托工作人员)核验供应商相关证明材料,核验内容详见供应商须知前附表。",
+            "quote": "20.5 磋商会议仪式后,磋商小组视情可能会安排(或委托工作人员)核验供应商相关证明材料,核验内容详见供应商须知前附表。",
+            "pages": [
+              24
+            ],
+            "page": 24,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第24页",
+              "index": 24,
+              "pages": [
+                24
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0109",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "评审委员会启动异常低价投标(响应)审查后,属于前述第1 项至第4 项情形的,应当要求相关供应商在评审现场合理的时间内对投标(响应)价格作出解释,提供项目具体成本",
+            "quote": "评审委员会启动异常低价投标(响应)审查后,属于前述第1 项至第4 项情形的,应当要求相关供应商在评审现场合理的时间内对投标(响应)价格作出解释,提供项目具体成本测算等与报价合理性相关的书面说明及必要的证明材料,包括但不限于原材料成本、人工成本、制造费用等。给予相关供应商的合理时间一般不少于30 分钟。其中,属于第3 项情形,供应商已随投标(响应)文件一并提交相关书面说明及必要的证明材料的,在评审现场可不再重复提交。",
+            "pages": [
+              28
+            ],
+            "page": 28,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第28页",
+              "index": 28,
+              "pages": [
+                28
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0110",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(1)响应文件中首轮报价一览表(报价表)内容与响应文件中相应内容不一致的,以首轮报价一览表(报价表)为准;",
+            "quote": "(1)响应文件中首轮报价一览表(报价表)内容与响应文件中相应内容不一致的,以首轮报价一览表(报价表)为准;",
+            "pages": [
+              28
+            ],
+            "page": 28,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第28页",
+              "index": 28,
+              "pages": [
+                28
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0111",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "29.1.4 依据《财政部工业和信息化部关于印发<政府采购促进中小企业发展管理办法>的通知》(财库〔2020〕46 号)规定,中型、小型和微型企业参与的须提供《",
+            "quote": "29.1.4 依据《财政部工业和信息化部关于印发<政府采购促进中小企业发展管理办法>的通知》(财库〔2020〕46 号)规定,中型、小型和微型企业参与的须提供《中小企业声明函》(格式见附件)并对声明函的真实性负责;如果联合体各方均为小型、 微型企业的,联合体视同为小型、微型企业,但联合体各方均应按竞争性磋商文件要求提供《中小企业声明函》。",
+            "pages": [
+              30
+            ],
+            "page": 30,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第30页",
+              "index": 30,
+              "pages": [
+                30
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0112",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "29.1.7中标、成交供应商享受本办法规定的中小企业扶持政策的,采购人、采购代理机构应当随中标、成交结果公开中标、成交供应商的《中小企业声明函》。供应商提供声明",
+            "quote": "29.1.7中标、成交供应商享受本办法规定的中小企业扶持政策的,采购人、采购代理机构应当随中标、成交结果公开中标、成交供应商的《中小企业声明函》。供应商提供声明函内容不实的,属于提供虚假材料谋取中标、成交,依照《中华人民共和国政府采购法》等国家有关规定追究相应责任。",
+            "pages": [
+              30
+            ],
+            "page": 30,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第30页",
+              "index": 30,
+              "pages": [
+                30
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0113",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2)参加政府采购活动的监狱企业应当在响应文件中提供监狱企业证明复印件,否则不予认定。监狱企业证明须由省级以上监狱管理局、戒毒管理局(含新疆生产建设兵团)出具。",
+            "quote": "2)参加政府采购活动的监狱企业应当在响应文件中提供监狱企业证明复印件,否则不予认定。监狱企业证明须由省级以上监狱管理局、戒毒管理局(含新疆生产建设兵团)出具。",
+            "pages": [
+              31
+            ],
+            "page": 31,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第31页",
+              "index": 31,
+              "pages": [
+                31
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0114",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "残疾人福利性单位的评标价格=最后报价×(1—扣除比例); 供应商属于享受政府采购支持政策的“残疾人福利性单位”的,需提供《残疾人福利性单位声明函》(格式见磋商文",
+            "quote": "残疾人福利性单位的评标价格=最后报价×(1—扣除比例); 供应商属于享受政府采购支持政策的“残疾人福利性单位”的,需提供《残疾人福利性单位声明函》(格式见磋商文件第七章“响应文件格式”),并对声明的真实性负责。成交供应商为残疾人福利性单位的,采购代理机构将随成交结果同时公告其 《残疾人福利性单位声明函》。",
+            "pages": [
+              31
+            ],
+            "page": 31,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第31页",
+              "index": 31,
+              "pages": [
+                31
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0115",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(3)本项目中如涉及国家强制性产品认证证书(CCC 认证证书)、电信设备进网许可证、无线电发射设备核准证等市场准入类资质的,应严格执行国家相关法律法规的要求。",
+            "quote": "(3)本项目中如涉及国家强制性产品认证证书(CCC 认证证书)、电信设备进网许可证、无线电发射设备核准证等市场准入类资质的,应严格执行国家相关法律法规的要求。",
+            "pages": [
+              33
+            ],
+            "page": 33,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第33页",
+              "index": 33,
+              "pages": [
+                33
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0116",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "33.5 依据《政府采购质疑和投诉办法》(财政部令第94 号),供应商可以委托代理人进行质疑和投诉。其授权委托书应当载明代理人的姓名或者名称、代理事项、 具体权",
+            "quote": "33.5 依据《政府采购质疑和投诉办法》(财政部令第94 号),供应商可以委托代理人进行质疑和投诉。其授权委托书应当载明代理人的姓名或者名称、代理事项、 具体权限、期限和相关事项。供应商为自然人的,应当由本人签字;供应商为法人或者其他组织的,应当由法定代表人、主要负责人签字或者盖章,并加盖公章。",
+            "pages": [
+              36
+            ],
+            "page": 36,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第36页",
+              "index": 36,
+              "pages": [
+                36
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0117",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(1)供应商的姓名或者名称、地址、邮编、联系人及联系电话;",
+            "quote": "(1)供应商的姓名或者名称、地址、邮编、联系人及联系电话;",
+            "pages": [
+              37
+            ],
+            "page": 37,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第37页",
+              "index": 37,
+              "pages": [
+                37
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0118",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(2)质疑项目的名称、编号;",
+            "quote": "(2)质疑项目的名称、编号;",
+            "pages": [
+              37
+            ],
+            "page": 37,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第37页",
+              "index": 37,
+              "pages": [
+                37
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0119",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(4)事实依据;",
+            "quote": "(4)事实依据;",
+            "pages": [
+              37
+            ],
+            "page": 37,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第37页",
+              "index": 37,
+              "pages": [
+                37
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0120",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(5)必要的法律依据;",
+            "quote": "(5)必要的法律依据;",
+            "pages": [
+              37
+            ],
+            "page": 37,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第37页",
+              "index": 37,
+              "pages": [
+                37
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0121",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "供应商为自然人的,应当由本人签字;供应商为法人或者其他组织的,应当由法定代表人、主要负责人,或者其授权代表签字或者盖章,并加盖公章。",
+            "quote": "供应商为自然人的,应当由本人签字;供应商为法人或者其他组织的,应当由法定代表人、主要负责人,或者其授权代表签字或者盖章,并加盖公章。",
+            "pages": [
+              37
+            ],
+            "page": 37,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第37页",
+              "index": 37,
+              "pages": [
+                37
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0122",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "报价<br>部分<br>25<br>分：商务<br>部分<br>5 分 总报价评<br>审：同类业绩 20：3 以满足磋商文件要求且最终报价最低的价格为评审基准",
+            "quote": "报价<br>部分<br>25<br>分：商务<br>部分<br>5 分 总报价评<br>审：同类业绩 20：3 以满足磋商文件要求且最终报价最低的价格为评审基准价,<br>其报价得分为满分 20 分,其他供应商的报价得分按照下列<br>公式计算:报价得分=(评审基准价÷最终报价)×20,得<br>分精确到小数点后2 位。：2023 年1 月1 日至今(以合同签订时间为准)完成类似工<br>程项目业绩1 项得1 分,最多得3 分(需提供合同关键页复<br>印件并加盖公章)。<br>注:时间以合同具体签订日期为准,供应商须将类似项目<br>业绩的合同关键页复印件加盖单位公章后制作在响应文件<br>中,否则视为无效业绩不得分。分包合同、补充合同不计<br>分。<br>",
+            "pages": [
+              40
+            ],
+            "page": 40,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第40页",
+              "index": 40,
+              "pages": [
+                40
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0123",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "报价<br>部分<br>25<br>分：商务<br>部分<br>5 分 总报价评<br>审：项目负责<br>人业绩 20：2 以满足磋商文件要求且最终报价最低的",
+            "quote": "报价<br>部分<br>25<br>分：商务<br>部分<br>5 分 总报价评<br>审：项目负责<br>人业绩 20：2 以满足磋商文件要求且最终报价最低的价格为评审基准价,<br>其报价得分为满分 20 分,其他供应商的报价得分按照下列<br>公式计算:报价得分=(评审基准价÷最终报价)×20,得<br>分精确到小数点后2 位。：拟派项目负责人自2023 年1 月1 日至报价截止之日承接的<br>类似工程项目业绩,每提供1 项得1 分,满分2 分。<br>注:(**1**)供应商须将类似项目业绩的合同关键页复印件加<br>盖单位公章后制作在响应文件中,否则视为无效业绩不得",
+            "pages": [
+              40
+            ],
+            "page": 40,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第40页",
+              "index": 40,
+              "pages": [
+                40
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0124",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "同类业绩 3 2023 年1 月1 日至今(以合同签订时间为准)完成类似工程项目业绩1 项得1 分,最多得3 分(需提供合同关键页复印件并加盖公章)。",
+            "quote": "同类业绩 3 2023 年1 月1 日至今(以合同签订时间为准)完成类似工程项目业绩1 项得1 分,最多得3 分(需提供合同关键页复印件并加盖公章)。",
+            "pages": [
+              40
+            ],
+            "page": 40,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第40页",
+              "index": 40,
+              "pages": [
+                40
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0125",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "〈政府采购支持绿色建材促进建筑品质提升政策项目实施指南〉的通知》(财办库 〔2023〕52 号)要求,明确为必选类、或采购文件已定为必须提供的可选类绿色建材的,",
+            "quote": "〈政府采购支持绿色建材促进建筑品质提升政策项目实施指南〉的通知》(财办库 〔2023〕52 号)要求,明确为必选类、或采购文件已定为必须提供的可选类绿色建材的,供应商应在供货时应当出具所提供建材产品符合需求标准的证明性文件,包括国家统一推行的绿色建材产品认证证书,或符合需求标准的有效检测报告等。",
+            "pages": [
+              44
+            ],
+            "page": 44,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第44页",
+              "index": 44,
+              "pages": [
+                44
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0126",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(六)本合同附件在合同订立及履行过程中形成的与合同有关的文件、有关工程的洽商、变更等书面协议或文件均构成合同文件组成部分。",
+            "quote": "(六)本合同附件在合同订立及履行过程中形成的与合同有关的文件、有关工程的洽商、变更等书面协议或文件均构成合同文件组成部分。",
+            "pages": [
+              46
+            ],
+            "page": 46,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第46页",
+              "index": 46,
+              "pages": [
+                46
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0127",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "所有材料、构配件、设备须合格、环保、耐用,优先选用成熟稳定、抗老化、耐腐蚀、 抗震性能良好的产品,进场须提供合格证、检测报告、备案证明,经采购人验收合格后方可使",
+            "quote": "所有材料、构配件、设备须合格、环保、耐用,优先选用成熟稳定、抗老化、耐腐蚀、 抗震性能良好的产品,进场须提供合格证、检测报告、备案证明,经采购人验收合格后方可使用。",
+            "pages": [
+              87
+            ],
+            "page": 87,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第87页",
+              "index": 87,
+              "pages": [
+                87
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0128",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "5、进场材料须提供合格证及产品检验报告。",
+            "quote": "5、进场材料须提供合格证及产品检验报告。",
+            "pages": [
+              88
+            ],
+            "page": 88,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第88页",
+              "index": 88,
+              "pages": [
+                88
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0129",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(附法定代表人身份证明复印件) (附授权代理人身份证明复印件) 单位名称(盖章): 法定代表人签字或盖章: 授权代理人签字: 年月日",
+            "quote": "(附法定代表人身份证明复印件) (附授权代理人身份证明复印件) 单位名称(盖章): 法定代表人签字或盖章: 授权代理人签字: 年月日",
+            "pages": [
+              92
+            ],
+            "page": 92,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第92页",
+              "index": 92,
+              "pages": [
+                92
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0130",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "格式六、业绩一览表业绩一览表项目名称: 项目编号: 合同名称工程名称采购人名称竣工时间合同金额联系人联系电话说明:请在此表后附合同或其他相关证明材料。具体要求详",
+            "quote": "格式六、业绩一览表业绩一览表项目名称: 项目编号: 合同名称工程名称采购人名称竣工时间合同金额联系人联系电话说明:请在此表后附合同或其他相关证明材料。具体要求详见评审办法。",
+            "pages": [
+              98
+            ],
+            "page": 98,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第98页",
+              "index": 98,
+              "pages": [
+                98
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0131",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "格式八、落实政府采购政策相关证明材料(如有)",
+            "quote": "格式八、落实政府采购政策相关证明材料(如有)",
+            "pages": [
+              100
+            ],
+            "page": 100,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第100页",
+              "index": 100,
+              "pages": [
+                100
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0132",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2、不符合相应条件的供应商无需提供。",
+            "quote": "2、不符合相应条件的供应商无需提供。",
+            "pages": [
+              100
+            ],
+            "page": 100,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第100页",
+              "index": 100,
+              "pages": [
+                100
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0133",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "注:不符合相应条件的供应商无需提供。",
+            "quote": "注:不符合相应条件的供应商无需提供。",
+            "pages": [
+              101
+            ],
+            "page": 101,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第101页",
+              "index": 101,
+              "pages": [
+                101
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0134",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "1.所报产品属于绿色产品的,按规定格式逐项填写,附绿色产品认证证书(如为绿色建材则按要求在供货时提供相关证明材料),否则不享受扶持政策。",
+            "quote": "1.所报产品属于绿色产品的,按规定格式逐项填写,附绿色产品认证证书(如为绿色建材则按要求在供货时提供相关证明材料),否则不享受扶持政策。",
+            "pages": [
+              111
+            ],
+            "page": 111,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第111页",
+              "index": 111,
+              "pages": [
+                111
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0135",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "1、法人或者其他组织的营业执照等证明文件",
+            "quote": "1、法人或者其他组织的营业执照等证明文件",
+            "pages": [
+              112
+            ],
+            "page": 112,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第112页",
+              "index": 112,
+              "pages": [
+                112
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0136",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2、资质证书、安全生产许可证;",
+            "quote": "2、资质证书、安全生产许可证;",
+            "pages": [
+              112
+            ],
+            "page": 112,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第112页",
+              "index": 112,
+              "pages": [
+                112
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0137",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "3、项目负责人的建造师注册证书、安全考核合格证书(B 证);",
+            "quote": "3、项目负责人的建造师注册证书、安全考核合格证书(B 证);",
+            "pages": [
+              112
+            ],
+            "page": 112,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第112页",
+              "index": 112,
+              "pages": [
+                112
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0138",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "4、具有良好的商业信誉和健全的财务会计制度的证明材料;",
+            "quote": "4、具有良好的商业信誉和健全的财务会计制度的证明材料;",
+            "pages": [
+              112
+            ],
+            "page": 112,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第112页",
+              "index": 112,
+              "pages": [
+                112
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0139",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "5、具有依法缴纳税收和社会保障资金的良好记录的证明材料;",
+            "quote": "5、具有依法缴纳税收和社会保障资金的良好记录的证明材料;",
+            "pages": [
+              112
+            ],
+            "page": 112,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第112页",
+              "index": 112,
+              "pages": [
+                112
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0140",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "6、参加政府采购活动前3 年内在经营活动中没有重大违法记录的书面声明或信用承诺函参加政府采购活动前三年内,在经营活动中没有重大违法记录的书面声明 (采购人名称)",
+            "quote": "6、参加政府采购活动前3 年内在经营活动中没有重大违法记录的书面声明或信用承诺函参加政府采购活动前三年内,在经营活动中没有重大违法记录的书面声明 (采购人名称): 我单位郑重声明:自本项目开标之日起向前追溯三年,我单位没有以下重大违法记录:因违法经营受到刑事处罚或者责令停产停业、吊销许可证或者执照、较大数额罚款等行政处罚。",
+            "pages": [
+              113
+            ],
+            "page": 113,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第113页",
+              "index": 113,
+              "pages": [
+                113
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0141",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "7、供应商不存在关联关系声明单位负责人不为同一人或者不存在直接控股、管理关系的书面声明供应商应当如实披露与本单位存在下列关联关系的单位名称,如无,请填写“无”:",
+            "quote": "7、供应商不存在关联关系声明单位负责人不为同一人或者不存在直接控股、管理关系的书面声明供应商应当如实披露与本单位存在下列关联关系的单位名称,如无,请填写“无”:",
+            "pages": [
+              114
+            ],
+            "page": 114,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第114页",
+              "index": 114,
+              "pages": [
+                114
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0142",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(1)与供应商单位负责人为同一人的其他单位;",
+            "quote": "(1)与供应商单位负责人为同一人的其他单位;",
+            "pages": [
+              114
+            ],
+            "page": 114,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第114页",
+              "index": 114,
+              "pages": [
+                114
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0143",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(2)与供应商存在直接控股、管理关系的其他单位:",
+            "quote": "(2)与供应商存在直接控股、管理关系的其他单位:",
+            "pages": [
+              114
+            ],
+            "page": 114,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第114页",
+              "index": 114,
+              "pages": [
+                114
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0144",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "9、符合本项目特殊资格要求的证明材料",
+            "quote": "9、符合本项目特殊资格要求的证明材料",
+            "pages": [
+              116
+            ],
+            "page": 116,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第116页",
+              "index": 116,
+              "pages": [
+                116
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0145",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "4)施工机械设备及劳动力安排计划(包括保障进度计划需要的主要施工机械设备、劳动力需求计划及保证措施、材料设备进场计划及其他保证措施等);",
+            "quote": "4)施工机械设备及劳动力安排计划(包括保障进度计划需要的主要施工机械设备、劳动力需求计划及保证措施、材料设备进场计划及其他保证措施等);",
+            "pages": [
+              117
+            ],
+            "page": 117,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第117页",
+              "index": 117,
+              "pages": [
+                117
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          }
+        ]
+      },
+      "rejection": {
+        "label": "废标项",
+        "items": [
+          {
+            "clause_id": "TB-0146",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "重要提示: 本采购文件中,标注有“★”或“☆”的条款,为本采购文件中的实质性条款,且属于在磋商过程中不会变动的内容。供应商未实质性响应的,将按无效报价处理。",
+            "quote": "重要提示: 本采购文件中,标注有“★”或“☆”的条款,为本采购文件中的实质性条款,且属于在磋商过程中不会变动的内容。供应商未实质性响应的,将按无效报价处理。",
+            "pages": [
+              6
+            ],
+            "page": 6,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第6页",
+              "index": 6,
+              "pages": [
+                6
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0147",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "磋商报价超过预算金额或最高限价的,按无效报价处理。",
+            "quote": "磋商报价超过预算金额或最高限价的,按无效报价处理。",
+            "pages": [
+              6
+            ],
+            "page": 6,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第6页",
+              "index": 6,
+              "pages": [
+                6
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0148",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "其中,通过“信用中国”网站、中国政府采购网查询失信被执行人名单、重大税收违法失信主体名单、政府采购严重违法失信行为记录名单的时间:递交首次响应文件截止时间当日。",
+            "quote": "其中,通过“信用中国”网站、中国政府采购网查询失信被执行人名单、重大税收违法失信主体名单、政府采购严重违法失信行为记录名单的时间:递交首次响应文件截止时间当日。两个以上的自然人、法人或者其他组织组成一个联合体,以一个供应商的身份共同参加政府采购活动的,应当对所有联合体成员进行信用记录查询,联合体成员存在上述不良信用记录的,视同联合体存在不良信用记录,其报价将按无效报价处理。",
+            "pages": [
+              6,
+              7
+            ],
+            "page": 6,
+            "printed_page": null,
+            "printed_pages": [
+              null,
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第6-7页",
+              "index": 6,
+              "pages": [
+                6,
+                7
+              ]
+            },
+            "detection": "cross_page",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0149",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "1)磋商保证金以网银或电汇方式提交的,磋商保证金到账截止时间为递交首次响应文件截止时间,逾期到账的,将被视为“未按本竞争性磋商文件提交磋商保证金”,其响应文件无",
+            "quote": "1)磋商保证金以网银或电汇方式提交的,磋商保证金到账截止时间为递交首次响应文件截止时间,逾期到账的,将被视为“未按本竞争性磋商文件提交磋商保证金”,其响应文件无效;",
+            "pages": [
+              10
+            ],
+            "page": 10,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第10页",
+              "index": 10,
+              "pages": [
+                10
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0150",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "2)磋商保证金须从供应商单位账户转出;未按规定提交磋商保证金的供应商,其响应文件无效;",
+            "quote": "2)磋商保证金须从供应商单位账户转出;未按规定提交磋商保证金的供应商,其响应文件无效;",
+            "pages": [
+              10
+            ],
+            "page": 10,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第10页",
+              "index": 10,
+              "pages": [
+                10
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0151",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "首次响应文件递交地点:详见竞争性磋商公告截止时间后送达的响应文件为无效文件,采购人、采购代理机构应当拒收。",
+            "quote": "首次响应文件递交地点:详见竞争性磋商公告截止时间后送达的响应文件为无效文件,采购人、采购代理机构应当拒收。",
+            "pages": [
+              10
+            ],
+            "page": 10,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第10页",
+              "index": 10,
+              "pages": [
+                10
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0152",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "联系人:李树鹏联系方式:0531-58622497 26 采购标的对应的中小企业划分标准所属行业: ☑建筑业,具体划分标准详见本章附表2 27 ★所报产品属于《",
+            "quote": "联系人:李树鹏联系方式:0531-58622497 26 采购标的对应的中小企业划分标准所属行业: ☑建筑业,具体划分标准详见本章附表2 27 ★所报产品属于《节能产品政府采购品目清单》内政府强制采购产品的,须在响应文件中提供该产品有效的《国家节能产品认证证书》复印件并加盖供应商公章。未按强制节能清单参与报价或未按竞争性磋商文件要求提供相关证明材料的,均属于无效报价。",
+            "pages": [
+              12
+            ],
+            "page": 12,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第12页",
+              "index": 12,
+              "pages": [
+                12
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0153",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "★10.3 供应商各轮报价(首轮报价、再次报价、最后报价)均不得超过采购预算或最高限价,否则响应无效。",
+            "quote": "★10.3 供应商各轮报价(首轮报价、再次报价、最后报价)均不得超过采购预算或最高限价,否则响应无效。",
+            "pages": [
+              21
+            ],
+            "page": 21,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第21页",
+              "index": 21,
+              "pages": [
+                21
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0154",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "★10.4 措施项目清单中的安全生产、环境保护、文明施工、临时设施措施费的报价应满足国家及省相关部门规定,各轮报价中总报价对应费率均不得低于工程适用 《山东省建",
+            "quote": "★10.4 措施项目清单中的安全生产、环境保护、文明施工、临时设施措施费的报价应满足国家及省相关部门规定,各轮报价中总报价对应费率均不得低于工程适用 《山东省建设工程费用项目组成及计算规则》(2025 版)所对应的费率,否则,响应无效。",
+            "pages": [
+              21
+            ],
+            "page": 21,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第21页",
+              "index": 21,
+              "pages": [
+                21
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0155",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "★10.5 供应商应按工程量清单中提供的暂列金额、专业工程暂估价金额准确填报在总报价内,各轮报价均不得修改或竞争,否则响应无效。",
+            "quote": "★10.5 供应商应按工程量清单中提供的暂列金额、专业工程暂估价金额准确填报在总报价内,各轮报价均不得修改或竞争,否则响应无效。",
+            "pages": [
+              21
+            ],
+            "page": 21,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第21页",
+              "index": 21,
+              "pages": [
+                21
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0156",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "本工程增值税率执行9%,各轮报价均不得修改或竞争,否则响应无效。",
+            "quote": "本工程增值税率执行9%,各轮报价均不得修改或竞争,否则响应无效。",
+            "pages": [
+              21
+            ],
+            "page": 21,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第21页",
+              "index": 21,
+              "pages": [
+                21
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0157",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "★10.6 报价文件不得改变工程量清单(含修正内容)的项目编码、项目名称、特征描述(分部分项工程项目清单)、计量单位、工程量、工作内容(措施项目清单) 等已标明",
+            "quote": "★10.6 报价文件不得改变工程量清单(含修正内容)的项目编码、项目名称、特征描述(分部分项工程项目清单)、计量单位、工程量、工作内容(措施项目清单) 等已标明条件,也不得改变招标工程量清单(含修正内容)项目的排序方式,否则作无效报价处理。招标文件允许补充列项的除外。",
+            "pages": [
+              21,
+              22
+            ],
+            "page": 21,
+            "printed_page": null,
+            "printed_pages": [
+              null,
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第21-22页",
+              "index": 21,
+              "pages": [
+                21,
+                22
+              ]
+            },
+            "detection": "cross_page",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0158",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "★10.7 供应商应在响应文件提交时完整提交与已标价工程量清单中综合单价及合价一致的费用构成明细表,相关表格应符合本招标文件提供的“分部分项工程项目清单综合单价",
+            "quote": "★10.7 供应商应在响应文件提交时完整提交与已标价工程量清单中综合单价及合价一致的费用构成明细表,相关表格应符合本招标文件提供的“分部分项工程项目清单综合单价分析表”、“措施项目清单构成明细分析表”等有关规定。未按本条提交上述表格或未按要求填报的,作无效报价处理。",
+            "pages": [
+              22
+            ],
+            "page": 22,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第22页",
+              "index": 22,
+              "pages": [
+                22
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0159",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "12.首次响应文件签署 ★12.1 首次响应文件应加盖供应商公章(不得使用其他形式如带有“专用章”等字样的印章)并经法定代表人或其委托代理人签署(签字或加盖人名",
+            "quote": "12.首次响应文件签署 ★12.1 首次响应文件应加盖供应商公章(不得使用其他形式如带有“专用章”等字样的印章)并经法定代表人或其委托代理人签署(签字或加盖人名章),由委托代理人签字的响应文件中须附授权委托书。供应商代表必须按采购文件的规定签署响应文件正本(副本可用正本复印件)。未按采购文件要求签署及盖章的响应文件无效。",
+            "pages": [
+              22
+            ],
+            "page": 22,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第22页",
+              "index": 22,
+              "pages": [
+                22
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0160",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "15.2 供应商有下列情形之一的,磋商保证金不予退还,采购人和代理机构有权依法向其提出索赔,供应商应当赔偿因此给采购人造成的全部损失:",
+            "quote": "15.2 供应商有下列情形之一的,磋商保证金不予退还,采购人和代理机构有权依法向其提出索赔,供应商应当赔偿因此给采购人造成的全部损失:",
+            "pages": [
+              23
+            ],
+            "page": 23,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第23页",
+              "index": 23,
+              "pages": [
+                23
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0161",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "1)供应商在提交响应文件截止时间后撤销响应文件的;",
+            "quote": "1)供应商在提交响应文件截止时间后撤销响应文件的;",
+            "pages": [
+              23
+            ],
+            "page": 23,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第23页",
+              "index": 23,
+              "pages": [
+                23
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0162",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "2)供应商在响应文件中提供虚假材料的;",
+            "quote": "2)供应商在响应文件中提供虚假材料的;",
+            "pages": [
+              23
+            ],
+            "page": 23,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第23页",
+              "index": 23,
+              "pages": [
+                23
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0163",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "3)除因不可抗力或磋商文件认可的情形以外,成交供应商不与采购人签订合同的;",
+            "quote": "3)除因不可抗力或磋商文件认可的情形以外,成交供应商不与采购人签订合同的;",
+            "pages": [
+              23
+            ],
+            "page": 23,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第23页",
+              "index": 23,
+              "pages": [
+                23
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0164",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "4)供应商与采购人、其他供应商或者采购代理机构恶意串通的;",
+            "quote": "4)供应商与采购人、其他供应商或者采购代理机构恶意串通的;",
+            "pages": [
+              23
+            ],
+            "page": 23,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第23页",
+              "index": 23,
+              "pages": [
+                23
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0165",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "5)法律法规和采购文件规定的其他情形。",
+            "quote": "5)法律法规和采购文件规定的其他情形。",
+            "pages": [
+              23
+            ],
+            "page": 23,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第23页",
+              "index": 23,
+              "pages": [
+                23
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0166",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "15.5 磋商保证金的退还:",
+            "quote": "15.5 磋商保证金的退还:",
+            "pages": [
+              23
+            ],
+            "page": 23,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第23页",
+              "index": 23,
+              "pages": [
+                23
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0167",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "1)未成交供应商的磋商保证金,在成交通知书发出后5 个工作日内退还;",
+            "quote": "1)未成交供应商的磋商保证金,在成交通知书发出后5 个工作日内退还;",
+            "pages": [
+              23
+            ],
+            "page": 23,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第23页",
+              "index": 23,
+              "pages": [
+                23
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0168",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "2)成交供应商的磋商保证金在签订合同后5 个工作日内予以退还。",
+            "quote": "2)成交供应商的磋商保证金在签订合同后5 个工作日内予以退还。",
+            "pages": [
+              23
+            ],
+            "page": 23,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第23页",
+              "index": 23,
+              "pages": [
+                23
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0169",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "16.1 本项目报价有效期见供应商须知前附表。★报价函的有效期比本须知规定的有效期短的,将被视为非实质性响应,采购人有权拒绝。",
+            "quote": "16.1 本项目报价有效期见供应商须知前附表。★报价函的有效期比本须知规定的有效期短的,将被视为非实质性响应,采购人有权拒绝。",
+            "pages": [
+              23
+            ],
+            "page": 23,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第23页",
+              "index": 23,
+              "pages": [
+                23
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0170",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "18.1 本项目只接受现场递交书面形式的响应文件,其他形式的不予接收。",
+            "quote": "18.1 本项目只接受现场递交书面形式的响应文件,其他形式的不予接收。",
+            "pages": [
+              24
+            ],
+            "page": 24,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第24页",
+              "index": 24,
+              "pages": [
+                24
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0171",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "★24.5 如出现下列情形之一的,视为对竞争性磋商文件没有做出实质性响应,按照无效响应文件处理:",
+            "quote": "★24.5 如出现下列情形之一的,视为对竞争性磋商文件没有做出实质性响应,按照无效响应文件处理:",
+            "pages": [
+              25,
+              26
+            ],
+            "page": 25,
+            "printed_page": null,
+            "printed_pages": [
+              null,
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第25-26页",
+              "index": 25,
+              "pages": [
+                25,
+                26
+              ]
+            },
+            "detection": "cross_page",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0172",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "1)未按采购文件规定要求签署、盖章的;",
+            "quote": "1)未按采购文件规定要求签署、盖章的;",
+            "pages": [
+              26
+            ],
+            "page": 26,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第26页",
+              "index": 26,
+              "pages": [
+                26
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0173",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "2)未按规定交纳磋商保证金的;",
+            "quote": "2)未按规定交纳磋商保证金的;",
+            "pages": [
+              26
+            ],
+            "page": 26,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第26页",
+              "index": 26,
+              "pages": [
+                26
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0174",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "3)本项目要求中伴随有产品供货时,所投报产品未明确注明允许投报进口产品而投报进口产品的;",
+            "quote": "3)本项目要求中伴随有产品供货时,所投报产品未明确注明允许投报进口产品而投报进口产品的;",
+            "pages": [
+              26
+            ],
+            "page": 26,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第26页",
+              "index": 26,
+              "pages": [
+                26
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0175",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "4)首轮报价超过采购预算或最高限价的;",
+            "quote": "4)首轮报价超过采购预算或最高限价的;",
+            "pages": [
+              26
+            ],
+            "page": 26,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第26页",
+              "index": 26,
+              "pages": [
+                26
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0176",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "5)在首次响应文件中,未响应标注有“★”或“☆”的,在磋商过程中不会实质性变动的条款;",
+            "quote": "5)在首次响应文件中,未响应标注有“★”或“☆”的,在磋商过程中不会实质性变动的条款;",
+            "pages": [
+              26
+            ],
+            "page": 26,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第26页",
+              "index": 26,
+              "pages": [
+                26
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0177",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "6)应提供而未提供政府强制采购节能产品的;",
+            "quote": "6)应提供而未提供政府强制采购节能产品的;",
+            "pages": [
+              26
+            ],
+            "page": 26,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第26页",
+              "index": 26,
+              "pages": [
+                26
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0178",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "7)存在串通报价等违反政府采购公平竞争行为的;",
+            "quote": "7)存在串通报价等违反政府采购公平竞争行为的;",
+            "pages": [
+              26
+            ],
+            "page": 26,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第26页",
+              "index": 26,
+              "pages": [
+                26
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0179",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "8)以他人名义报价或者在响应文件中提供虚假材料的;",
+            "quote": "8)以他人名义报价或者在响应文件中提供虚假材料的;",
+            "pages": [
+              26
+            ],
+            "page": 26,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第26页",
+              "index": 26,
+              "pages": [
+                26
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0180",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "9)法律法规和采购文件规定的其他情形。",
+            "quote": "9)法律法规和采购文件规定的其他情形。",
+            "pages": [
+              26
+            ],
+            "page": 26,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第26页",
+              "index": 26,
+              "pages": [
+                26
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0181",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "★24.6 磋商小组确定为非实质性响应的响应文件为无效响应文件,供应商不能通过修正或撤销响应文件中的不符之处而使其成为实质性响应的响应文件。",
+            "quote": "★24.6 磋商小组确定为非实质性响应的响应文件为无效响应文件,供应商不能通过修正或撤销响应文件中的不符之处而使其成为实质性响应的响应文件。",
+            "pages": [
+              26
+            ],
+            "page": 26,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第26页",
+              "index": 26,
+              "pages": [
+                26
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0182",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "★投标(响应)供应商不能提供书面说明、证明材料,或者提供的书面说明、证明材料不能证明其报价合理性的,评审委员会应当将其作为无效投标(响应)处理。",
+            "quote": "★投标(响应)供应商不能提供书面说明、证明材料,或者提供的书面说明、证明材料不能证明其报价合理性的,评审委员会应当将其作为无效投标(响应)处理。",
+            "pages": [
+              28
+            ],
+            "page": 28,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第28页",
+              "index": 28,
+              "pages": [
+                28
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0183",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "★供应商所投同一个包中,两个或以上单独密封的首轮报价一览表不一致的,视为投报多个方案,除非竞争性磋商文件明确规定接受备选方案外,均按未实质性响应磋商文件处理。",
+            "quote": "★供应商所投同一个包中,两个或以上单独密封的首轮报价一览表不一致的,视为投报多个方案,除非竞争性磋商文件明确规定接受备选方案外,均按未实质性响应磋商文件处理。",
+            "pages": [
+              29
+            ],
+            "page": 29,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第29页",
+              "index": 29,
+              "pages": [
+                29
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0184",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "★磋商小组应要求供应商法定代表人或其委托代理人对修正后的报价签字确认, 供应商不确认的,其响应无效。",
+            "quote": "★磋商小组应要求供应商法定代表人或其委托代理人对修正后的报价签字确认, 供应商不确认的,其响应无效。",
+            "pages": [
+              29
+            ],
+            "page": 29,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第29页",
+              "index": 29,
+              "pages": [
+                29
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0185",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "供应商有义务以书面形式对其响应文件中含义不明确、同类问题表述不一致或有明显文字和计算错误的内容进行澄清和说明,但澄清和说明的内容不得超出响应文件的范围或改变响应",
+            "quote": "供应商有义务以书面形式对其响应文件中含义不明确、同类问题表述不一致或有明显文字和计算错误的内容进行澄清和说明,但澄清和说明的内容不得超出响应文件的范围或改变响应文件的实质性内容。供应商澄清和说明的内容构成响应文件的组成部分;★拒不进行澄清、说明或补正的,磋商小组可以视其为未实质性响应的响应文件,响应文件无效。",
+            "pages": [
+              29
+            ],
+            "page": 29,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第29页",
+              "index": 29,
+              "pages": [
+                29
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0186",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "29.4 节能环保产品优惠办法工程内容中如伴随有工程材料或工程设备供货时,所报工程材料或工程设备属于节能环保产品的,执行政府采购优惠政策;供应商所报设备(产品)",
+            "quote": "29.4 节能环保产品优惠办法工程内容中如伴随有工程材料或工程设备供货时,所报工程材料或工程设备属于节能环保产品的,执行政府采购优惠政策;供应商所报设备(产品)属于《环境标志产品政府采购品目清单》(《财政部生态环境部关于印发环境标志产品政府采购品目清单的通知》(财库〔2019〕18 号))、《节能产品政府采购品目清单》(财政部发展改革委《关于印发节能产品政府采购品目清单的通知》(财库〔2019〕19 号)内的环保、节能产品的,应在响应文件显著位置列出某项/某些产品属于节能、环保产品, 并列明节能、环保产品的生产厂家及产品品牌、型号等;同时,在节能环保产品报价表后,附经市场监管总局公布的认证机构出具的有效的国家节能产品认证证书或中国环境标志产品认证证书,否则,可能会导致所投报的节能环保产品因无法认定而不给予政府采购政策优惠(评审加分或价格扣除)。★其中,所报产品为政府强制采购产品的(《节能产品政府采购品目清单》中以“★”标注的产品品目)而未提供国家节能产品认证证书的,按无效报价处理。",
+            "pages": [
+              32
+            ],
+            "page": 32,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第32页",
+              "index": 32,
+              "pages": [
+                32
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0187",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "30.违法违规情形供应商出现《中华人民共和国政府采购法实施条例》《政府采购货物和服务招标投标管理办法》等规定的串通投标或影响采购的违法行为,其报价无效。采购人或",
+            "quote": "30.违法违规情形供应商出现《中华人民共和国政府采购法实施条例》《政府采购货物和服务招标投标管理办法》等规定的串通投标或影响采购的违法行为,其报价无效。采购人或磋商小组将书面报告本级财政部门,给采购人、采购代理机构造成损失的,采购人、采购代理机构有索赔的权利,供应商应予以赔偿。",
+            "pages": [
+              33,
+              34
+            ],
+            "page": 33,
+            "printed_page": null,
+            "printed_pages": [
+              null,
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第33-34页",
+              "index": 33,
+              "pages": [
+                33,
+                34
+              ]
+            },
+            "detection": "cross_page",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0188",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "30.1 参照《政府采购货物和服务招标投标管理办法》,有下列情形之一的,视为投标人串通报价,其报价无效:",
+            "quote": "30.1 参照《政府采购货物和服务招标投标管理办法》,有下列情形之一的,视为投标人串通报价,其报价无效:",
+            "pages": [
+              34
+            ],
+            "page": 34,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第34页",
+              "index": 34,
+              "pages": [
+                34
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0189",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(一)不同供应商的响应文件由同一单位或者个人编制;",
+            "quote": "(一)不同供应商的响应文件由同一单位或者个人编制;",
+            "pages": [
+              34
+            ],
+            "page": 34,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第34页",
+              "index": 34,
+              "pages": [
+                34
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0190",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(二)不同供应商委托同一单位或者个人办理响应事宜;",
+            "quote": "(二)不同供应商委托同一单位或者个人办理响应事宜;",
+            "pages": [
+              34
+            ],
+            "page": 34,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第34页",
+              "index": 34,
+              "pages": [
+                34
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0191",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(三)不同供应商的响应文件载明的项目管理成员或者联系人员为同一人;",
+            "quote": "(三)不同供应商的响应文件载明的项目管理成员或者联系人员为同一人;",
+            "pages": [
+              34
+            ],
+            "page": 34,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第34页",
+              "index": 34,
+              "pages": [
+                34
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0192",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(四)不同供应商的响应文件异常一致或者各轮报价呈规律性差异;",
+            "quote": "(四)不同供应商的响应文件异常一致或者各轮报价呈规律性差异;",
+            "pages": [
+              34
+            ],
+            "page": 34,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第34页",
+              "index": 34,
+              "pages": [
+                34
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0193",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(五)不同供应商的响应文件相互混装;",
+            "quote": "(五)不同供应商的响应文件相互混装;",
+            "pages": [
+              34
+            ],
+            "page": 34,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第34页",
+              "index": 34,
+              "pages": [
+                34
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0194",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(六)不同供应商的磋商保证金从同一单位或者个人的账户转出。",
+            "quote": "(六)不同供应商的磋商保证金从同一单位或者个人的账户转出。",
+            "pages": [
+              34
+            ],
+            "page": 34,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第34页",
+              "index": 34,
+              "pages": [
+                34
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0195",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "30.2 除法律法规规定的情形外,评审过程中发现存在以下情形之一的,相关供应商的报价无效:",
+            "quote": "30.2 除法律法规规定的情形外,评审过程中发现存在以下情形之一的,相关供应商的报价无效:",
+            "pages": [
+              34
+            ],
+            "page": 34,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第34页",
+              "index": 34,
+              "pages": [
+                34
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0196",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(一)不同供应商的电子投标(响应)文件上传计算机的网卡MAC 地址、CPU 序列号和硬盘序列号等硬件信息相同的(如采用电子标);",
+            "quote": "(一)不同供应商的电子投标(响应)文件上传计算机的网卡MAC 地址、CPU 序列号和硬盘序列号等硬件信息相同的(如采用电子标);",
+            "pages": [
+              34
+            ],
+            "page": 34,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第34页",
+              "index": 34,
+              "pages": [
+                34
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0197",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(二)不同供应商的电子投标(响应)文件由同一电子设备编制、打印加密或者上传;",
+            "quote": "(二)不同供应商的电子投标(响应)文件由同一电子设备编制、打印加密或者上传;",
+            "pages": [
+              34
+            ],
+            "page": 34,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第34页",
+              "index": 34,
+              "pages": [
+                34
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0198",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(三)不同供应商的投标(响应)文件联系人为同一人或不同联系人的联系电话一致的;",
+            "quote": "(三)不同供应商的投标(响应)文件联系人为同一人或不同联系人的联系电话一致的;",
+            "pages": [
+              34
+            ],
+            "page": 34,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第34页",
+              "index": 34,
+              "pages": [
+                34
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0199",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(四)不同供应商的投标(响应)文件的内容存在两处以上细节错误一致,且无法合理解释的;",
+            "quote": "(四)不同供应商的投标(响应)文件的内容存在两处以上细节错误一致,且无法合理解释的;",
+            "pages": [
+              34
+            ],
+            "page": 34,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第34页",
+              "index": 34,
+              "pages": [
+                34
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0200",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(五)不同供应商的法定代表人、委托代理人、项目经理、项目负责人等由同一个单位缴纳社会保险或者领取报酬的;",
+            "quote": "(五)不同供应商的法定代表人、委托代理人、项目经理、项目负责人等由同一个单位缴纳社会保险或者领取报酬的;",
+            "pages": [
+              34
+            ],
+            "page": 34,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第34页",
+              "index": 34,
+              "pages": [
+                34
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0201",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(六)不同供应商投标(响应)文件中法定代表人或者负责人由同一人签字的;",
+            "quote": "(六)不同供应商投标(响应)文件中法定代表人或者负责人由同一人签字的;",
+            "pages": [
+              34
+            ],
+            "page": 34,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第34页",
+              "index": 34,
+              "pages": [
+                34
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0202",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(七)其它经认定可能涉嫌串通的情形。",
+            "quote": "(七)其它经认定可能涉嫌串通的情形。",
+            "pages": [
+              34
+            ],
+            "page": 34,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第34页",
+              "index": 34,
+              "pages": [
+                34
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0203",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "注:时间以合同具体签订日期为准,供应商须将类似项目业绩的合同关键页复印件加盖单位公章后制作在响应文件中,否则视为无效业绩不得分。分包合同、补充合同不计分。",
+            "quote": "注:时间以合同具体签订日期为准,供应商须将类似项目业绩的合同关键页复印件加盖单位公章后制作在响应文件中,否则视为无效业绩不得分。分包合同、补充合同不计分。",
+            "pages": [
+              40
+            ],
+            "page": 40,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第40页",
+              "index": 40,
+              "pages": [
+                40
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0204",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(1)供应商须将类似项目业绩的合同关键页复印件加盖单位公章后制作在响应文件中,否则视为无效业绩不得",
+            "quote": "(1)供应商须将类似项目业绩的合同关键页复印件加盖单位公章后制作在响应文件中,否则视为无效业绩不得",
+            "pages": [
+              40
+            ],
+            "page": 40,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第40页",
+              "index": 40,
+              "pages": [
+                40
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0205",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "如供应商提供的产品属于《环境标志产品政府采购品目清单》(《财政部生态环境部关于印发环境标志产品政府采购品目清单的通知》(财库〔2019〕18 号))、 《节能产",
+            "quote": "如供应商提供的产品属于《环境标志产品政府采购品目清单》(《财政部生态环境部关于印发环境标志产品政府采购品目清单的通知》(财库〔2019〕18 号))、 《节能产品政府采购品目清单》(财政部发展改革委《关于印发节能产品政府采购品目清单的通知》)(财库〔2019〕19 号)范围的环保、节能产品,应在响应文件中附国家节能产品认证证书或中国环境标志产品认证证书,并在报价表中注明,未按要求提供和注明的,将不给予加分。其中,所报产品为政府强制采购产品的(《节能产品政府采购品目清单》中以“★”标注的产品品目)而未提供国家节能产品认证证书的,按无效报价处理。",
+            "pages": [
+              43
+            ],
+            "page": 43,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第43页",
+              "index": 43,
+              "pages": [
+                43
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0206",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "2.供应商的响应报价应涵盖本工程的全部范围、工作内容,以及完整、合格地履行合同所需的全部金额。报价不得高于项目预算(或最高限价),否则其响应无效。",
+            "quote": "2.供应商的响应报价应涵盖本工程的全部范围、工作内容,以及完整、合格地履行合同所需的全部金额。报价不得高于项目预算(或最高限价),否则其响应无效。",
+            "pages": [
+              58
+            ],
+            "page": 58,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第58页",
+              "index": 58,
+              "pages": [
+                58
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0207",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "3.供应商应当在接收竞争性磋商文件后,在供应商须知前附表中规定时间内根据竞争性磋商文件说明的工程特点及合同要求复查竞争性磋商文件中计划工期的可行性及其风险与影响",
+            "quote": "3.供应商应当在接收竞争性磋商文件后,在供应商须知前附表中规定时间内根据竞争性磋商文件说明的工程特点及合同要求复查竞争性磋商文件中计划工期的可行性及其风险与影响。对计划工期存有疑问或异议的,应按竞争性磋商文件的规定以书面形式提请采购人澄清或修正。供应商对计划工期或采购人澄清或修正后的计划工期无疑问或无异议的,供应商应根据自身的实施方案、施工技术、管理水平、合同履约风险及专业分包工程工期等合理确定响应工期并报价。响应工期不得超过采购人的计划工期或澄清修正的计划工期,否则,其响应无效。",
+            "pages": [
+              58
+            ],
+            "page": 58,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第58页",
+              "index": 58,
+              "pages": [
+                58
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0208",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "6. 报价文件不得改变工程量清单(含修正内容)的项目编码、项目名称、特征描述(分部分项工程项目清单)、计量单位、工程量、工作内容(措施项目清单)等已标明条件,也",
+            "quote": "6. 报价文件不得改变工程量清单(含修正内容)的项目编码、项目名称、特征描述(分部分项工程项目清单)、计量单位、工程量、工作内容(措施项目清单)等已标明条件,也不得改变工程量清单(含修正内容)项目的排序方式,否则,其响应无效。竞争性磋商文件允许补充列项的除外。",
+            "pages": [
+              59
+            ],
+            "page": 59,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第59页",
+              "index": 59,
+              "pages": [
+                59
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0209",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(6)措施项目清单中的安全生产、环境保护、文明施工、临时设施措施费的报价应满足国家及省相关部门规定,总报价对应费率不得低于工程适用《山东省建设工程费用项目组成及",
+            "quote": "(6)措施项目清单中的安全生产、环境保护、文明施工、临时设施措施费的报价应满足国家及省相关部门规定,总报价对应费率不得低于工程适用《山东省建设工程费用项目组成及计算规则》(2025 版)所对应的费率,否则,响应无效。",
+            "pages": [
+              60,
+              61
+            ],
+            "page": 60,
+            "printed_page": null,
+            "printed_pages": [
+              null,
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第60-61页",
+              "index": 60,
+              "pages": [
+                60,
+                61
+              ]
+            },
+            "detection": "cross_page",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0210",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "17.供应商应按工程量清单中提供的暂列金额、专业工程暂估价金额,准确填报在相应总报价内,不得修改或竞争,否则响应无效。",
+            "quote": "17.供应商应按工程量清单中提供的暂列金额、专业工程暂估价金额,准确填报在相应总报价内,不得修改或竞争,否则响应无效。",
+            "pages": [
+              61
+            ],
+            "page": 61,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第61页",
+              "index": 61,
+              "pages": [
+                61
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0211",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "本工程实行一般计税法/简易计税法,增值税税率执行9%,不得竞争报价,否则,响应无效。",
+            "quote": "本工程实行一般计税法/简易计税法,增值税税率执行9%,不得竞争报价,否则,响应无效。",
+            "pages": [
+              61
+            ],
+            "page": 61,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第61页",
+              "index": 61,
+              "pages": [
+                61
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0212",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "22..供应商应在响应文件提交时完整提交与已标价工程量清单中综合单价及合价一致的费用构成明细表,相关表格应符合本竞争性磋商文件提供的“分部分项工程项目清单综合单",
+            "quote": "22..供应商应在响应文件提交时完整提交与已标价工程量清单中综合单价及合价一致的费用构成明细表,相关表格应符合本竞争性磋商文件提供的“分部分项工程项目清单综合单价分析表”、“措施项目清单构成明细分析表”、“措施项目拆分表”、“大型机械进出场费用组成明细表”的有关规定。未按本条提交上述表格或未按要求填报的,响应无效。",
+            "pages": [
+              61
+            ],
+            "page": 61,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第61页",
+              "index": 61,
+              "pages": [
+                61
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0213",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "2、如所报产品为政府强制采购节能产品,按规定格式逐项填写,提供《国家节能产品认证证书》,否则按无效报价处理。",
+            "quote": "2、如所报产品为政府强制采购节能产品,按规定格式逐项填写,提供《国家节能产品认证证书》,否则按无效报价处理。",
+            "pages": [
+              103
+            ],
+            "page": 103,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第103页",
+              "index": 103,
+              "pages": [
+                103
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0214",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "1.如不提供本声明函,将作无效报价处理。",
+            "quote": "1.如不提供本声明函,将作无效报价处理。",
+            "pages": [
+              114
+            ],
+            "page": 114,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第114页",
+              "index": 114,
+              "pages": [
+                114
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0215",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "1.如不提供本声明函,将作无效报价处理。",
+            "quote": "1.如不提供本声明函,将作无效报价处理。",
+            "pages": [
+              115
+            ],
+            "page": 115,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第115页",
+              "index": 115,
+              "pages": [
+                115
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          }
+        ]
+      }
+    },
+    "uncited": []
+  }
+}

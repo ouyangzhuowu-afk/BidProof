@@ -39,6 +39,39 @@
       ],
       "validation": "Live RapidOCR vs text-layer GT. Prior public-eval docs 12. New completed PDFs 7, new not-scored HTML notices 2, one CCGP HTTPS fetch HTTP 403 not counted. Old set unchanged: CER 3.17% / F1 76.00% / TEDS 87.85%, all GATE_FAIL. Expanded public set on the same pages: CER 4.96% GATE_FAIL (54 pages), F1 97.17% GATE_PASS, TEDS 95.80% GATE_PASS (19 pages). Overall GATE_FAIL. product_pass=false. Synthetic rows excluded from the gate. Joe local PDF intake 2026-09-29: 12/12 duplicate by filename and sha256, 0 newly added, 0 provenance-unverified. No pilot/ICP ledger writes. T-005 not modified.",
       "note": "pending_audit only. Not a product PASS and not a business unblock."
+    },
+    {
+      "id": "S-TENDER-BLOCKS-2026-10-04",
+      "title": "招标文件按资格、评分、要交材料、废标四块抽取并强制原文页码",
+      "status": "pending_audit",
+      "priority": "P1",
+      "dependencies": [],
+      "artifacts": [
+        "app/tender_blocks.py",
+        "tests/test_tender_blocks.py",
+        "outputs/tender-blocks/public-text-pending-audit.md",
+        "outputs/tender-blocks/public-text-pending-audit.json",
+        "work/public-eval/tender-blocks/pub-gl-fzsc339-cuoshang-202609.pdf",
+        "outputs/tender-blocks/pub-gl-fzsc339-pending-audit.md",
+        "outputs/tender-blocks/pub-gl-fzsc339-pending-audit.json",
+        "work/public-eval/tender-blocks/pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
+        "outputs/tender-blocks/pub-ah-ahmu-nursing-lab-pending-audit.md",
+        "outputs/tender-blocks/pub-ah-ahmu-nursing-lab-pending-audit.json",
+        "work/public-eval/tender-blocks/pub-sd-eq-yard-cuoshang-2026.pdf",
+        "outputs/tender-blocks/pub-sd-eq-yard-pending-audit.md",
+        "outputs/tender-blocks/pub-sd-eq-yard-pending-audit.json",
+        "work/public-eval/tender-blocks/pub-hb-union-ct-zhaobiao-2026.pdf",
+        "outputs/tender-blocks/pub-hb-union-ct-pending-audit.md",
+        "outputs/tender-blocks/pub-hb-union-ct-pending-audit.json",
+        "work/public-eval/tender-blocks/pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+        "outputs/tender-blocks/pub-bj-grain-nutrition-pending-audit.md",
+        "outputs/tender-blocks/pub-bj-grain-nutrition-pending-audit.json",
+        "work/public-eval/tender-blocks/pub-nm-saihan-customs-zhaobiao-2026.pdf",
+        "outputs/tender-blocks/pub-nm-saihan-customs-pending-audit.md",
+        "outputs/tender-blocks/pub-nm-saihan-customs-pending-audit.json"
+      ],
+      "validation": "Extends the existing page extraction. Clauses without an original page stay UNKNOWN or NEEDS_REVIEW. product_pass=false. CER/F1/TEDS thresholds unchanged. No pilot/ICP ledger writes. T-005 not modified. Numbered sub-items inherit the lead sentence. Rejection wording covers 响应文件无效/投标文件无效/作无效报价处理/非实质性响应. Scoring excludes ranking, award, notification, score intros, N分项, and 企业划型 text. Post-award bans are not qualification. Bond-template body is not a material. Bare page indexes at a page edge are stripped. Numbered children under a qualification or rejection lead inherit that block, including decimal children and children after a note. Rejection wording also covers bid refusal, deemed-invalid bids, a missed substantive response, collusion enumerations, and bond non-refund lists. The same sentence on one page is kept once; an invalidity sentence filed as both materials and rejection stays rejection. The runner checks structure for any file and does not hardcode one project's number, buyer, URL, or page numbers. Fuzhou 66 pages: 294 clauses (qualification 32, scoring 42, materials 179, rejection 41), printed offset 0, printed total 66, footer residue 0, bare-page residue 0. Anhui 109 pages: 192 clauses (qualification 54, scoring 32, materials 73, rejection 33), printed offset 2, printed totals 107 and 109, footer residue 0, bare-page residue 0. Shandong 122 pages: 215 clauses (qualification 22, scoring 29, materials 94, rejection 70), no printed-page footer, footer residue 0, bare-page residue 0. Hubei 87 pages: 292 clauses (qualification 112, scoring 14, materials 103, rejection 63), no printed-page footer, footer residue 0, bare-page residue 6. Beijing open tender is 123 pages, SHA-256 15adf3995d78436150764ab6209b583c76343c1ab45206e0e9d2b95d929e2526, 191 clauses (qualification 18, scoring 23, materials 100, rejection 50), printed offset 0, printed total 123, footer residue 0, bare-page residue 0. Rules were not adjusted after the Beijing run. A declared star or asterisk pulls a clause that carries that marker into rejection. A blank deviation form is not rejection. Saihan customs open tender is 78 pages, SHA-256 6efaa7f4cd4a67169fc6bc0645113ad8748cfb4a600691dcd53cad6a2a41b789, 194 clauses (qualification 27, scoring 37, materials 67, rejection 63), no printed-page footer, footer residue 0, bare-page residue 1. It is an open tender. Rules were not adjusted after that run.",
+      "note": "pending_audit only. Not a product PASS. Repo text notices stay uncited. The Gulou consultation PDF is test material, not a pilot."
     }
   ],
   "completed": [
@@ -1362,6 +1395,132 @@
       "kind": "public-eval-runbook",
       "status": "pending_audit",
       "note": "Adds the S-A-OCR-PUBLIC-EXPAND reproduce section. Not verified."
+    },
+    {
+      "path": "app/tender_blocks.py",
+      "kind": "tender-four-blocks",
+      "status": "pending_audit",
+      "note": "Four-block tender extraction with page citations. Not a product PASS."
+    },
+    {
+      "path": "outputs/tender-blocks/public-text-pending-audit.md",
+      "kind": "tender-four-blocks-report",
+      "status": "pending_audit",
+      "note": "Uncited clauses from public texts already in the repo. product_pass=false."
+    },
+    {
+      "path": "outputs/tender-blocks/public-text-pending-audit.json",
+      "kind": "tender-four-blocks-report",
+      "status": "pending_audit",
+      "note": "Machine-readable uncited clause list. product_pass=false."
+    },
+    {
+      "path": "work/public-eval/tender-blocks/pub-gl-fzsc339-cuoshang-202609.pdf",
+      "kind": "tender-four-blocks-pdf",
+      "status": "pending_audit",
+      "note": "Public 66-page consultation PDF. Test material only. Not a pilot."
+    },
+    {
+      "path": "outputs/tender-blocks/pub-gl-fzsc339-pending-audit.md",
+      "kind": "tender-four-blocks-report",
+      "status": "pending_audit",
+      "note": "294 clauses, all with PDF page numbers. product_pass=false. Printed offset 0. Footer residue 0."
+    },
+    {
+      "path": "outputs/tender-blocks/pub-gl-fzsc339-pending-audit.json",
+      "kind": "tender-four-blocks-report",
+      "status": "pending_audit",
+      "note": "Machine-readable Gulou consultation extraction. product_pass=false."
+    },
+    {
+      "path": "work/public-eval/tender-blocks/pub-ah-ahmu-nursing-lab-cuoshang-2026.pdf",
+      "kind": "tender-four-blocks-pdf",
+      "status": "pending_audit",
+      "note": "Public Anhui consultation PDF. Held-out test material only. Not a pilot."
+    },
+    {
+      "path": "outputs/tender-blocks/pub-ah-ahmu-nursing-lab-pending-audit.md",
+      "kind": "tender-four-blocks-report",
+      "status": "pending_audit",
+      "note": "192 clauses, all with PDF page numbers. product_pass=false. Printed offset 2. Footer residue 0."
+    },
+    {
+      "path": "outputs/tender-blocks/pub-ah-ahmu-nursing-lab-pending-audit.json",
+      "kind": "tender-four-blocks-report",
+      "status": "pending_audit",
+      "note": "Machine-readable Anhui consultation extraction. product_pass=false. Printed offset 2. Printed total is not unanimous (107 and 109)."
+    },
+    {
+      "path": "work/public-eval/tender-blocks/pub-sd-eq-yard-cuoshang-2026.pdf",
+      "kind": "tender-four-blocks-pdf",
+      "status": "pending_audit",
+      "note": "Public Shandong consultation PDF from ccgp.gov.cn. Held-out test material only. Not a pilot."
+    },
+    {
+      "path": "outputs/tender-blocks/pub-sd-eq-yard-pending-audit.md",
+      "kind": "tender-four-blocks-report",
+      "status": "pending_audit",
+      "note": "215 clauses, all with PDF page numbers. product_pass=false. No printed-page footer, so printed offset is null. Footer residue 0."
+    },
+    {
+      "path": "outputs/tender-blocks/pub-sd-eq-yard-pending-audit.json",
+      "kind": "tender-four-blocks-report",
+      "status": "pending_audit",
+      "note": "Machine-readable Shandong consultation extraction. product_pass=false. pending_audit."
+    },
+    {
+      "path": "work/public-eval/tender-blocks/pub-hb-union-ct-zhaobiao-2026.pdf",
+      "kind": "tender-four-blocks-pdf",
+      "status": "pending_audit",
+      "note": "Public Hubei open-tender PDF from ccgp.gov.cn. Test material only. Not a pilot. Run once after the rules were frozen."
+    },
+    {
+      "path": "outputs/tender-blocks/pub-hb-union-ct-pending-audit.md",
+      "kind": "tender-four-blocks-report",
+      "status": "pending_audit",
+      "note": "292 clauses, all with PDF page numbers. product_pass=false. No printed-page footer. Footer residue 0. Bare-page residue 6."
+    },
+    {
+      "path": "outputs/tender-blocks/pub-hb-union-ct-pending-audit.json",
+      "kind": "tender-four-blocks-report",
+      "status": "pending_audit",
+      "note": "Machine-readable Hubei open-tender extraction. product_pass=false. pending_audit."
+    },
+    {
+      "path": "work/public-eval/tender-blocks/pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+      "kind": "tender-four-blocks-pdf",
+      "status": "pending_audit",
+      "note": "Public Beijing open-tender PDF. Test material only. Not a pilot. Run once after the rules were frozen."
+    },
+    {
+      "path": "outputs/tender-blocks/pub-bj-grain-nutrition-pending-audit.md",
+      "kind": "tender-four-blocks-report",
+      "status": "pending_audit",
+      "note": "191 clauses, all with PDF page numbers. product_pass=false. Printed offset 0. Printed total 123. Footer residue 0."
+    },
+    {
+      "path": "outputs/tender-blocks/pub-bj-grain-nutrition-pending-audit.json",
+      "kind": "tender-four-blocks-report",
+      "status": "pending_audit",
+      "note": "Machine-readable Beijing open-tender extraction. product_pass=false. pending_audit."
+    },
+    {
+      "path": "work/public-eval/tender-blocks/pub-nm-saihan-customs-zhaobiao-2026.pdf",
+      "kind": "tender-four-blocks-pdf",
+      "status": "pending_audit",
+      "note": "Public Inner Mongolia open-tender PDF. Test material only. Not a pilot. Run once after the rules were frozen."
+    },
+    {
+      "path": "outputs/tender-blocks/pub-nm-saihan-customs-pending-audit.md",
+      "kind": "tender-four-blocks-report",
+      "status": "pending_audit",
+      "note": "194 clauses, all with PDF page numbers. product_pass=false. No printed-page footer. Footer residue 0. Bare-page residue 1."
+    },
+    {
+      "path": "outputs/tender-blocks/pub-nm-saihan-customs-pending-audit.json",
+      "kind": "tender-four-blocks-report",
+      "status": "pending_audit",
+      "note": "Machine-readable Saihan customs open-tender extraction. product_pass=false. pending_audit."
     }
   ],
   "next_best_action": {
@@ -1379,7 +1538,7 @@
     ],
     "note": "Do not write demo/test rows into pilot/ICP ledgers. Do not claim business TARGET_MET. Pilot scan results are always NEEDS_REVIEW and cannot count as accuracy acceptance. On real input: copy template → fill → pilot_ledger/icp_ledger --row-json. Readiness: uv run python -m work.pilot_readiness --json."
   },
-  "updated_at": "2026-09-29T07:20:00+00:00",
+  "updated_at": "2026-10-08T16:05:00+00:00",
   "sandbox_roadmap": {
     "locked_at": "2026-09-16",
     "gates": {
