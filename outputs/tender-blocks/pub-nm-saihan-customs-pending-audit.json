@@ -1,0 +1,5537 @@
+{
+  "audit_status": "pending_audit",
+  "product_pass": false,
+  "test_material_only": true,
+  "source_url": "http://lasa.customs.gov.cn/hhht_customs/attachDir/2026/09/2026090715053296323.pdf",
+  "title": "中华人民共和国赛罕海关鄂尔多斯大街办公区物业管理及食堂委托运营管理项目公开招标文件",
+  "project_number": "CT-ZB00272-2026",
+  "buyer": "中华人民共和国赛罕海关（内蒙古自治区呼和浩特市）",
+  "local_path": "work/public-eval/tender-blocks/pub-nm-saihan-customs-zhaobiao-2026.pdf",
+  "sha256": "6efaa7f4cd4a67169fc6bc0645113ad8748cfb4a600691dcd53cad6a2a41b789",
+  "pdf_page_count": 78,
+  "printed_page_offset": null,
+  "printed_page_total": null,
+  "ocr": "not_used",
+  "footer_check": {
+    "checked_pages": 78,
+    "pages_with_footer": 0,
+    "printed_page_offset": null,
+    "printed_page_total": null,
+    "printed_total_consistent": false,
+    "printed_totals_seen": [],
+    "offsets_seen": [],
+    "compared_with": "printed_total",
+    "mismatch_count": 0,
+    "mismatches": []
+  },
+  "footer_in_quotes": 0,
+  "bare_page_in_quotes": 1,
+  "counts": {
+    "total": 194,
+    "with_real_page": 194,
+    "without_page": 0,
+    "by_block": {
+      "qualification": {
+        "label": "资格要求",
+        "cited": 27,
+        "items": 27
+      },
+      "scoring": {
+        "label": "评分要求",
+        "cited": 37,
+        "items": 37
+      },
+      "materials": {
+        "label": "要交的材料",
+        "cited": 67,
+        "items": 67
+      },
+      "rejection": {
+        "label": "废标项",
+        "cited": 63,
+        "items": 63
+      }
+    }
+  },
+  "structural_checks": {
+    "product_pass_false": true,
+    "audit_status_pending": true,
+    "no_pass_status": true,
+    "cited_labels_use_pdf_page": true,
+    "page_index_matches_order": true,
+    "ocr_not_used": true
+  },
+  "extraction": {
+    "audit_status": "pending_audit",
+    "product_pass": false,
+    "printed_page_offset": null,
+    "printed_page_total": null,
+    "blocks": {
+      "qualification": {
+        "label": "资格要求",
+        "items": [
+          {
+            "clause_id": "TB-0001",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "二、申请人的资格要求:",
+            "quote": "二、申请人的资格要求:",
+            "pages": [
+              3
+            ],
+            "page": 3,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第3页",
+              "index": 3,
+              "pages": [
+                3
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0002",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "1.满足《中华人民共和国政府采购法》第二十二条规定;",
+            "quote": "1.满足《中华人民共和国政府采购法》第二十二条规定;",
+            "pages": [
+              3
+            ],
+            "page": 3,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第3页",
+              "index": 3,
+              "pages": [
+                3
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0003",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "2.落实政府采购政策需满足的资格要求:本项目为专门面向中小企业采购;",
+            "quote": "2.落实政府采购政策需满足的资格要求:本项目为专门面向中小企业采购;",
+            "pages": [
+              3
+            ],
+            "page": 3,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第3页",
+              "index": 3,
+              "pages": [
+                3
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0004",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "3.本项目的特定资格要求:无;",
+            "quote": "3.本项目的特定资格要求:无;",
+            "pages": [
+              3
+            ],
+            "page": 3,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第3页",
+              "index": 3,
+              "pages": [
+                3
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0005",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "4.本项目其他要求:",
+            "quote": "4.本项目其他要求:",
+            "pages": [
+              3
+            ],
+            "page": 3,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第3页",
+              "index": 3,
+              "pages": [
+                3
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0006",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "(1)单位负责人为同一人或者存在直接控股、管理关系的不同供应商,不得参加同一合同项下的政府采购活动。除单一来源采购项目外,为采购项目提供整体设计、规范编制或者项",
+            "quote": "(1)单位负责人为同一人或者存在直接控股、管理关系的不同供应商,不得参加同一合同项下的政府采购活动。除单一来源采购项目外,为采购项目提供整体设计、规范编制或者项目管理、监理、检测等服务的供应商,不得再参加该采购项目的其他采购活动;",
+            "pages": [
+              3
+            ],
+            "page": 3,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第3页",
+              "index": 3,
+              "pages": [
+                3
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0007",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "(2)对在“信用中国”网站(www.creditchina.gov.cn)、中国政府采购网(www.ccgp.gov.cn)等渠道列入失信被执行人、重大税收违法",
+            "quote": "(2)对在“信用中国”网站(www.creditchina.gov.cn)、中国政府采购网(www.ccgp.gov.cn)等渠道列入失信被执行人、重大税收违法失信主体、政府采购严重违法失信行为记录名单及其他不符合《中华人民共和国政府采购法》第二十二条规定条件的供应商,不得参与政府采购活动。",
+            "pages": [
+              4
+            ],
+            "page": 4,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第4页",
+              "index": 4,
+              "pages": [
+                4
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0008",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "5.2 单位负责人为同一人或者存在直接控股、管理关系的不同投标人,不得参加同一合同项下的政府采购活动。",
+            "quote": "5.2 单位负责人为同一人或者存在直接控股、管理关系的不同投标人,不得参加同一合同项下的政府采购活动。",
+            "pages": [
+              9
+            ],
+            "page": 9,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第9页",
+              "index": 9,
+              "pages": [
+                9
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0009",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "5.3 为采购项目提供整体设计、规范编制或者项目管理、监理、检测等服务的投标人,不得再参加该采购项目的其他采购活动。",
+            "quote": "5.3 为采购项目提供整体设计、规范编制或者项目管理、监理、检测等服务的投标人,不得再参加该采购项目的其他采购活动。",
+            "pages": [
+              9
+            ],
+            "page": 9,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第9页",
+              "index": 9,
+              "pages": [
+                9
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0010",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "6.2 联合体各方均应当具备《中华人民共和国政府采购法》第二十二条规定的条件,并在投标文件中提供联合体各方的相关证明材料。",
+            "quote": "6.2 联合体各方均应当具备《中华人民共和国政府采购法》第二十二条规定的条件,并在投标文件中提供联合体各方的相关证明材料。",
+            "pages": [
+              9
+            ],
+            "page": 9,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第9页",
+              "index": 9,
+              "pages": [
+                9
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0011",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "6.5 以联合体形式参加政府采购活动的,联合体各方不得再单独参加或者与其他投标人另外组成联合体参加同一合同项下的政府采购活动。",
+            "quote": "6.5 以联合体形式参加政府采购活动的,联合体各方不得再单独参加或者与其他投标人另外组成联合体参加同一合同项下的政府采购活动。",
+            "pages": [
+              10
+            ],
+            "page": 10,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第10页",
+              "index": 10,
+              "pages": [
+                10
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0012",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "十二、特定资格要求证明材料",
+            "quote": "十二、特定资格要求证明材料",
+            "pages": [
+              55
+            ],
+            "page": 55,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第55页",
+              "index": 55,
+              "pages": [
+                55
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0013",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "十三、联合体说明",
+            "quote": "十三、联合体说明",
+            "pages": [
+              55
+            ],
+            "page": 55,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第55页",
+              "index": 55,
+              "pages": [
+                55
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0014",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "十四、中小企业声明函",
+            "quote": "十四、中小企业声明函",
+            "pages": [
+              55
+            ],
+            "page": 55,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第55页",
+              "index": 55,
+              "pages": [
+                55
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0015",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "十五、监狱企业证明文件",
+            "quote": "十五、监狱企业证明文件",
+            "pages": [
+              55
+            ],
+            "page": 55,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第55页",
+              "index": 55,
+              "pages": [
+                55
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0016",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "十六、残疾人福利性单位声明函",
+            "quote": "十六、残疾人福利性单位声明函",
+            "pages": [
+              55
+            ],
+            "page": 55,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第55页",
+              "index": 55,
+              "pages": [
+                55
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0017",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "十七、主要商务要求承诺书",
+            "quote": "十七、主要商务要求承诺书",
+            "pages": [
+              55
+            ],
+            "page": 55,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第55页",
+              "index": 55,
+              "pages": [
+                55
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0018",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "十八、技术偏离表",
+            "quote": "十八、技术偏离表",
+            "pages": [
+              55
+            ],
+            "page": 55,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第55页",
+              "index": 55,
+              "pages": [
+                55
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0019",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "十九、项目组成人员一览表",
+            "quote": "十九、项目组成人员一览表",
+            "pages": [
+              55
+            ],
+            "page": 55,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第55页",
+              "index": 55,
+              "pages": [
+                55
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0020",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "二十、项目实施方案、质量保证及售后服务承诺等",
+            "quote": "二十、项目实施方案、质量保证及售后服务承诺等",
+            "pages": [
+              55
+            ],
+            "page": 55,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第55页",
+              "index": 55,
+              "pages": [
+                55
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0021",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "二十一、投标人业绩情况表",
+            "quote": "二十一、投标人业绩情况表",
+            "pages": [
+              55
+            ],
+            "page": 55,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第55页",
+              "index": 55,
+              "pages": [
+                55
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0022",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "二十二、其他证明材料说明:投标人必须自行编制页码,页码连贯。",
+            "quote": "二十二、其他证明材料说明:投标人必须自行编制页码,页码连贯。",
+            "pages": [
+              55
+            ],
+            "page": 55,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第55页",
+              "index": 55,
+              "pages": [
+                55
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0023",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "十二、特定资格要求证明材料(如有)",
+            "quote": "十二、特定资格要求证明材料(如有)",
+            "pages": [
+              68
+            ],
+            "page": 68,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第68页",
+              "index": 68,
+              "pages": [
+                68
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0024",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "十三、联合体说明需明确是否为联合体,格式内容自拟,签字盖章69 (以下格式文件由投标人根据需要选用)",
+            "quote": "十三、联合体说明需明确是否为联合体,格式内容自拟,签字盖章69 (以下格式文件由投标人根据需要选用)",
+            "pages": [
+              69,
+              70
+            ],
+            "page": 69,
+            "printed_page": null,
+            "printed_pages": [
+              null,
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第69-70页",
+              "index": 69,
+              "pages": [
+                69,
+                70
+              ]
+            },
+            "detection": "cross_page",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0025",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "十四、中小企业声明函(工程、服务) 本公司(联合体)郑重声明,根据《政府采购促进中小企业发展管理办法》(财库 〔2020〕46 号)的规定,本公司(联合体)参加",
+            "quote": "十四、中小企业声明函(工程、服务) 本公司(联合体)郑重声明,根据《政府采购促进中小企业发展管理办法》(财库 〔2020〕46 号)的规定,本公司(联合体)参加(单位名称)的(项目名称)采购活动,工程的施工单位全部为符合政策要求的中小企业(或者:服务全部由符合政策要求的中小企业承接)。相关企业(含联合体中的中小企业、签订分包意向协议的中小企业) 的具体情况如下:",
+            "pages": [
+              70
+            ],
+            "page": 70,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第70页",
+              "index": 70,
+              "pages": [
+                70
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0026",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "1.(标的名称),属于(采购文件中明确的所属行业);承建(承接)企业为(企业名称),从业人员人,营业收入为万元,资产总额为万元1, 属于(中型企业、小型企业、微",
+            "quote": "1.(标的名称),属于(采购文件中明确的所属行业);承建(承接)企业为(企业名称),从业人员人,营业收入为万元,资产总额为万元1, 属于(中型企业、小型企业、微型企业);",
+            "pages": [
+              70
+            ],
+            "page": 70,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第70页",
+              "index": 70,
+              "pages": [
+                70
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0027",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "2.(标的名称),属于(采购文件中明确的所属行业);承建(承接)企业为(企业名称),从业人员人,营业收入为万元,资产总额为万元,属于(中型企业、小型企业、微型企",
+            "quote": "2.(标的名称),属于(采购文件中明确的所属行业);承建(承接)企业为(企业名称),从业人员人,营业收入为万元,资产总额为万元,属于(中型企业、小型企业、微型企业); ...... 以上企业,不属于大企业的分支机构,不存在控股股东为大企业的情形,也不存在与大企业的负责人为同一人的情形。",
+            "pages": [
+              70
+            ],
+            "page": 70,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第70页",
+              "index": 70,
+              "pages": [
+                70
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          }
+        ]
+      },
+      "scoring": {
+        "label": "评分要求",
+        "items": [
+          {
+            "clause_id": "TB-0028",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "技术部分<br>(54分)：技术部分<br>(54分) 物业服务方案<br>(20分)：食堂服务方案<br>(6分) 根据投标人针对本项目提供的物业服务方案进行",
+            "quote": "技术部分<br>(54分)：技术部分<br>(54分) 物业服务方案<br>(20分)：食堂服务方案<br>(6分) 根据投标人针对本项目提供的物业服务方案进行评审:应至少<br>包括1安全服务方案2安保服务方案3保洁服务方案4房屋维<br>修维护方案5绿化服务方案6排水设备维修维护方案7供电设<br>备维修维护方案8收发传达、会议服务方案9宿舍管理方案;<br>10其他服务方案;<br>针对以上10项内容进行评审,每项2分,最高得20分。每缺少一<br>项内容扣2分,每项中每存在一处缺陷扣0.5分,每项最多扣2<br>分。(注:“缺陷”指以下任意一种情形:内容不切合行业实<br>际、不符合国家法规政策;或内容凭空编造,与实际情况不符,<br>存在偏差;或内容过于简略;或存在与项目无关的文字内容;<br>或内容不适用项目实际情况;或内容逻辑漏洞或原理错误;或<br>地点区域错误;或套用其他",
+            "pages": [
+              29
+            ],
+            "page": 29,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第29页",
+              "index": 29,
+              "pages": [
+                29
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0029",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "技术部分<br>(54分)：技术部分<br>(54分) 物业服务方案<br>(20分)：食堂食品安全<br>(6分) 根据投标人针对本项目提供的物业服务方案进行",
+            "quote": "技术部分<br>(54分)：技术部分<br>(54分) 物业服务方案<br>(20分)：食堂食品安全<br>(6分) 根据投标人针对本项目提供的物业服务方案进行评审:应至少<br>包括1安全服务方案2安保服务方案3保洁服务方案4房屋维<br>修维护方案5绿化服务方案6排水设备维修维护方案7供电设<br>备维修维护方案8收发传达、会议服务方案9宿舍管理方案;<br>10其他服务方案;<br>针对以上10项内容进行评审,每项2分,最高得20分。每缺少一<br>项内容扣2分,每项中每存在一处缺陷扣0.5分,每项最多扣2<br>分。(注:“缺陷”指以下任意一种情形:内容不切合行业实<br>际、不符合国家法规政策;或内容凭空编造,与实际情况不符,<br>存在偏差;或内容过于简略;或存在与项目无关的文字内容;<br>或内容不适用项目实际情况;或内容逻辑漏洞或原理错误;或<br>地点区域错误;或套用其他",
+            "pages": [
+              29
+            ],
+            "page": 29,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第29页",
+              "index": 29,
+              "pages": [
+                29
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0030",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "技术部分<br>(54分)：技术部分<br>(54分) 物业服务方案<br>(20分)：食堂卫生安全保障措<br>施(6分) 根据投标人针对本项目提供的物业服务",
+            "quote": "技术部分<br>(54分)：技术部分<br>(54分) 物业服务方案<br>(20分)：食堂卫生安全保障措<br>施(6分) 根据投标人针对本项目提供的物业服务方案进行评审:应至少<br>包括1安全服务方案2安保服务方案3保洁服务方案4房屋维<br>修维护方案5绿化服务方案6排水设备维修维护方案7供电设<br>备维修维护方案8收发传达、会议服务方案9宿舍管理方案;<br>10其他服务方案;<br>针对以上10项内容进行评审,每项2分,最高得20分。每缺少一<br>项内容扣2分,每项中每存在一处缺陷扣0.5分,每项最多扣2<br>分。(注:“缺陷”指以下任意一种情形:内容不切合行业实<br>际、不符合国家法规政策;或内容凭空编造,与实际情况不符,<br>存在偏差;或内容过于简略;或存在与项目无关的文字内容;<br>或内容不适用项目实际情况;或内容逻辑漏洞或原理错误;或<br>地点区域错误;或",
+            "pages": [
+              29
+            ],
+            "page": 29,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第29页",
+              "index": 29,
+              "pages": [
+                29
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0031",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "28 技术部分 (54分) 物业服务方案 (20分) 根据投标人针对本项目提供的物业服务方案进行评审:应至少包括1安全服务方案2安保服务方案3保洁服务方案4房屋",
+            "quote": "28 技术部分 (54分) 物业服务方案 (20分) 根据投标人针对本项目提供的物业服务方案进行评审:应至少包括1安全服务方案2安保服务方案3保洁服务方案4房屋维修维护方案5绿化服务方案6排水设备维修维护方案7供电设备维修维护方案8收发传达、会议服务方案9宿舍管理方案; 10其他服务方案; 针对以上10项内容进行评审,每项2分,最高得20分。每缺少一项内容扣2分,每项中每存在一处缺陷扣0.5分,每项最多扣2 分。(注:“缺陷”指以下任意一种情形:内容不切合行业实际、不符合国家法规政策;或内容凭空编造,与实际情况不符, 存在偏差;或内容过于简略;或存在与项目无关的文字内容; 或内容不适用项目实际情况;或内容逻辑漏洞或原理错误;或地点区域错误;或套用其他项目方案;或前后内容互相矛盾; 或专业领域知识阐述有误。) 食堂服务方案 (6分) 根据投标人针对本项目提供的食堂服务方案进行评审:应至少包括",
+            "pages": [
+              29
+            ],
+            "page": 29,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第29页",
+              "index": 29,
+              "pages": [
+                29
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0032",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "1.食品质量安全保障措施;",
+            "quote": "1.食品质量安全保障措施;",
+            "pages": [
+              29
+            ],
+            "page": 29,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第29页",
+              "index": 29,
+              "pages": [
+                29
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0033",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "2.原材料质量保障措施;",
+            "quote": "2.原材料质量保障措施;",
+            "pages": [
+              29
+            ],
+            "page": 29,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第29页",
+              "index": 29,
+              "pages": [
+                29
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0034",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "3.成品质量安全保障措施;",
+            "quote": "3.成品质量安全保障措施;",
+            "pages": [
+              29
+            ],
+            "page": 29,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第29页",
+              "index": 29,
+              "pages": [
+                29
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0035",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "4.配料质量安全保障措施。",
+            "quote": "4.配料质量安全保障措施。",
+            "pages": [
+              29
+            ],
+            "page": 29,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第29页",
+              "index": 29,
+              "pages": [
+                29
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0036",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "针对以上4项内容进行评审,每项1.5分,最高得6分。每缺少一项内容扣1.5分,每项中每存在一处缺陷扣0.5分,每项最多扣 1.5分。(注:“缺陷”指以下任意一种",
+            "quote": "针对以上4项内容进行评审,每项1.5分,最高得6分。每缺少一项内容扣1.5分,每项中每存在一处缺陷扣0.5分,每项最多扣 1.5分。(注:“缺陷”指以下任意一种情形:内容不切合行业实际、不符合国家法规政策;或内容凭空编造,与实际情况不符,存在偏差;或内容过于简略;或存在与项目无关的文字内容;或内容不适用项目实际情况;或内容逻辑漏洞或原理错误; 或地点区域错误;或套用其他项目方案;或前后内容互相矛盾; 或专业领域知识阐述有误。) 食堂卫生安全保障措施(6分) 根据投标人针对本项目提供的食堂卫生安全保障措施进行评审:应至少包括1食堂卫生保障措施;2个人卫生保障措施; 3餐具清洗消毒卫生保障措施。",
+            "pages": [
+              29
+            ],
+            "page": 29,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第29页",
+              "index": 29,
+              "pages": [
+                29
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0037",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "针对以上3项内容进行评审,每项2分,最高得6分。每缺少一项内容扣2分,每项中每存在一处缺陷扣0.5分,每项最多扣2分。",
+            "quote": "针对以上3项内容进行评审,每项2分,最高得6分。每缺少一项内容扣2分,每项中每存在一处缺陷扣0.5分,每项最多扣2分。",
+            "pages": [
+              29
+            ],
+            "page": 29,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第29页",
+              "index": 29,
+              "pages": [
+                29
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0038",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "Col1：管理制度<br>(10分) Col2：根据投标人针对本项目提供的管理制度进行评审,应至少包括:<br>1服务管理;2组织机构设置;3岗位设置及岗位职责",
+            "quote": "Col1：管理制度<br>(10分) Col2：根据投标人针对本项目提供的管理制度进行评审,应至少包括:<br>1服务管理;2组织机构设置;3岗位设置及岗位职责;4人<br>员培训;5人员考勤管理;6保密和思想政治教育;7档案管<br>理;8服务改进措施;9重大活动后勤保障;10服务热线及紧<br>急维修管理等内容的制度及服务标准。<br>针对以上10项内容进行评审,每项1分,最高得10分。每缺少一<br>项内容扣1分,每项中每存在一处缺陷扣0.5分,每项最多扣1<br>分。(注:“缺陷”指以下任意一种情形:内容不切合行业实<br>际、不符合国家法规政策;或内容凭空编造,与实际情况不符,<br>存在偏差;或内容过于简略;或存在与项目无关的文字内容;<br>或内容不适用项目实际情况;或内容逻辑漏洞或原理错误;或<br>地点区域错误;或套用其他项目方案;或前后内容互相矛盾;<br>或专业领域知",
+            "pages": [
+              30
+            ],
+            "page": 30,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第30页",
+              "index": 30,
+              "pages": [
+                30
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0039",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "Col1：应急预案及节能方案<br>(6分) Col2：根据投标人提供的应急预案及节能方案进行评审:应至少包括<br>1停水、停电、停气应急预案;2食物中毒应急",
+            "quote": "Col1：应急预案及节能方案<br>(6分) Col2：根据投标人提供的应急预案及节能方案进行评审:应至少包括<br>1停水、停电、停气应急预案;2食物中毒应急预案;3消防<br>安全突发事件应急预案;4电梯故障与救援响应预案;5社会<br>安全类事件、季节性及恶劣天气等自然灾害应急预案;6节能<br>降耗减排措施。<br>针对以上6项内容进行评审,每项1分,最高得6分。每缺少一项<br>内容扣1分,每项中每存在一处缺陷扣0.5分,每项最多扣1分。<br>(注:“缺陷”指以下任意一种情形:内容不切合行业实际、<br>不符合国家法规政策;或内容凭空编造,与实际情况不符,存<br>在偏差;或内容过于简略;或存在与项目无关的文字内容;或<br>内容不适用项目实际情况;或内容逻辑漏洞或原理错误;或地<br>点区域错误;或套用其他项目方案;或前后内容互相矛盾;或<br>专业领域知识阐述有误。)",
+            "pages": [
+              30
+            ],
+            "page": 30,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第30页",
+              "index": 30,
+              "pages": [
+                30
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0040",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "Col1：商务部分<br>(26分) Col2：业绩(10分) 专业领域知识阐述有误。)：投标人近二年(2024年8月1日至递交投标文件截止时间)具有<br>的",
+            "quote": "Col1：商务部分<br>(26分) Col2：业绩(10分) 专业领域知识阐述有误。)：投标人近二年(2024年8月1日至递交投标文件截止时间)具有<br>的同类项目业绩一份得1分,提供有效合同(合同需提供首页、<br>基本内容页、盖章页等可证明业绩内容的关键页),本项最多得<br>10分;注:业绩以合同签订日期为准。<br>同类项目界定:物业或包含餐厅(食堂)服务的物业项目",
+            "pages": [
+              30
+            ],
+            "page": 30,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第30页",
+              "index": 30,
+              "pages": [
+                30
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0041",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "Col1：商务部分<br>(26分) Col2：人员配备(16分) 专业领域知识阐述有误。)：1.拟派项目经理具有物业管理经验10年(含)以上得5分,5年<br",
+            "quote": "Col1：商务部分<br>(26分) Col2：人员配备(16分) 专业领域知识阐述有误。)：1.拟派项目经理具有物业管理经验10年(含)以上得5分,5年<br>(含)-10年(不含)得3分;3年(含)-5年(不含)得1分,<br>三年以下不得分。提供工作经验证明(如工作合同)扫描件加<br>盖投标人公章,证明材料齐全得分,未提供或提供不全不得分。<br>2.厨师长具有三级/高级及以上中式烹调师资格证的得3分,提<br>供证书扫描件及身份证扫描件加盖投标人公章,否则不得分。<br>3.厨师长具有担任厨师长经验10年(含)以上得5分,5年(含)<br>-10年(不含)得3分;3年(含)-5年(不含)得1分,三年以<br>下不得分。提供工作经验证明(如工作合同)扫描件加盖投标<br>人公章,证明材料齐全得分,未提供或提供不全不得分。<br>4.食品安全管理员具有《食品安全管理员证书》或《食品安",
+            "pages": [
+              30
+            ],
+            "page": 30,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第30页",
+              "index": 30,
+              "pages": [
+                30
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0042",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "29 专业领域知识阐述有误。) 管理制度 (10分) 根据投标人针对本项目提供的管理制度进行评审,应至少包括: 1服务管理;2组织机构设置;3岗位设置及岗位职责",
+            "quote": "29 专业领域知识阐述有误。) 管理制度 (10分) 根据投标人针对本项目提供的管理制度进行评审,应至少包括: 1服务管理;2组织机构设置;3岗位设置及岗位职责;4人员培训;5人员考勤管理;6保密和思想政治教育;7档案管理;8服务改进措施;9重大活动后勤保障;10服务热线及紧急维修管理等内容的制度及服务标准。",
+            "pages": [
+              30
+            ],
+            "page": 30,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第30页",
+              "index": 30,
+              "pages": [
+                30
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0043",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "针对以上10项内容进行评审,每项1分,最高得10分。每缺少一项内容扣1分,每项中每存在一处缺陷扣0.5分,每项最多扣1 分。(注:“缺陷”指以下任意一种情形:内",
+            "quote": "针对以上10项内容进行评审,每项1分,最高得10分。每缺少一项内容扣1分,每项中每存在一处缺陷扣0.5分,每项最多扣1 分。(注:“缺陷”指以下任意一种情形:内容不切合行业实际、不符合国家法规政策;或内容凭空编造,与实际情况不符, 存在偏差;或内容过于简略;或存在与项目无关的文字内容; 或内容不适用项目实际情况;或内容逻辑漏洞或原理错误;或地点区域错误;或套用其他项目方案;或前后内容互相矛盾; 或专业领域知识阐述有误。) 应急预案及节能方案 (6分) 根据投标人提供的应急预案及节能方案进行评审:应至少包括 1停水、停电、停气应急预案;2食物中毒应急预案;3消防安全突发事件应急预案;4电梯故障与救援响应预案;5社会安全类事件、季节性及恶劣天气等自然灾害应急预案;6节能降耗减排措施。",
+            "pages": [
+              30
+            ],
+            "page": 30,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第30页",
+              "index": 30,
+              "pages": [
+                30
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0044",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "(注:“缺陷”指以下任意一种情形:内容不切合行业实际、 不符合国家法规政策;或内容凭空编造,与实际情况不符,存在偏差;或内容过于简略;或存在与项目无关的文字内容",
+            "quote": "(注:“缺陷”指以下任意一种情形:内容不切合行业实际、 不符合国家法规政策;或内容凭空编造,与实际情况不符,存在偏差;或内容过于简略;或存在与项目无关的文字内容;或内容不适用项目实际情况;或内容逻辑漏洞或原理错误;或地点区域错误;或套用其他项目方案;或前后内容互相矛盾;或专业领域知识阐述有误。) 商务部分 (26分) 业绩(10分) 投标人近二年(2024年8月1日至递交投标文件截止时间)具有的同类项目业绩一份得1分,提供有效合同(合同需提供首页、 基本内容页、盖章页等可证明业绩内容的关键页),本项最多得 10分;注:业绩以合同签订日期为准。",
+            "pages": [
+              30
+            ],
+            "page": 30,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第30页",
+              "index": 30,
+              "pages": [
+                30
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0045",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "4.食品安全管理员具有《食品安全管理员证书》或《食品安全管理员培训合格证书》得3分,提供证书扫描件及身份证扫描件加盖投标人公章,否则不得分。",
+            "quote": "4.食品安全管理员具有《食品安全管理员证书》或《食品安全管理员培训合格证书》得3分,提供证书扫描件及身份证扫描件加盖投标人公章,否则不得分。",
+            "pages": [
+              30
+            ],
+            "page": 30,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第30页",
+              "index": 30,
+              "pages": [
+                30
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0046",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "30 投标报价 (20分) 投标报价得分 (20分) 投标报价得分=(评标基准价/投标报价)×价格分值【注:满足招标文件要求且投标价格最低的投标报价为评标基准价",
+            "quote": "30 投标报价 (20分) 投标报价得分 (20分) 投标报价得分=(评标基准价/投标报价)×价格分值【注:满足招标文件要求且投标价格最低的投标报价为评标基准价。】 最低报价不是中标的唯一依据。因落实政府采购政策进行价格调整的,以调整后的价格计算评标基准价和投标报价。",
+            "pages": [
+              31
+            ],
+            "page": 31,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第31页",
+              "index": 31,
+              "pages": [
+                31
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0047",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "36 附件二:物业管理委托服务考核表物业管理委托服务考核表被考评对象综合得分考评人考评时间范围至验收时间考核项目细分指标权重 (分) 指标具体内容及定义评分物业",
+            "quote": "36 附件二:物业管理委托服务考核表物业管理委托服务考核表被考评对象综合得分考评人考评时间范围至验收时间考核项目细分指标权重 (分) 指标具体内容及定义评分物业服务安全服务 (40 分) 管理 3 至少有一名项目经理驻场服务,承担区域消防安全责任巡查机制 7 覆盖全物理区域无死角隐患排查、报告、整改制度。建立监控、保安、各机房等重点安全区域的安全巡查台账制度。",
+            "pages": [
+              37
+            ],
+            "page": 37,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第37页",
+              "index": 37,
+              "pages": [
+                37
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0048",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "保洁服务 (10 分) 服务机制 7 办公楼内大厅、过道、楼梯、天台、电梯间、卫生间、茶水间、公共活动场所等公共部位进行批次保洁作业。办公垃圾等废弃物分类、清理",
+            "quote": "保洁服务 (10 分) 服务机制 7 办公楼内大厅、过道、楼梯、天台、电梯间、卫生间、茶水间、公共活动场所等公共部位进行批次保洁作业。办公垃圾等废弃物分类、清理,卫生间清理等工作批次保洁作业。",
+            "pages": [
+              37
+            ],
+            "page": 37,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第37页",
+              "index": 37,
+              "pages": [
+                37
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0049",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "房屋维修维护作业 (10 分) 服务机制 7 办公楼(区)房屋建筑物部件、附属构筑物的日常养护、养护台账记录服务机制 3 配置本项工作职能的对应人员履职能力。",
+            "quote": "房屋维修维护作业 (10 分) 服务机制 7 办公楼(区)房屋建筑物部件、附属构筑物的日常养护、养护台账记录服务机制 3 配置本项工作职能的对应人员履职能力。",
+            "pages": [
+              37
+            ],
+            "page": 37,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第37页",
+              "index": 37,
+              "pages": [
+                37
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0050",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "37 设备维护服务 (10 分) 设施日常养护。",
+            "quote": "37 设备维护服务 (10 分) 设施日常养护。",
+            "pages": [
+              38
+            ],
+            "page": 38,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第38页",
+              "index": 38,
+              "pages": [
+                38
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0051",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "供电设备维护服务 (10 分) 服务机制 7 办公楼(区)供电系统设施、设备日常管理、养护维修。",
+            "quote": "供电设备维护服务 (10 分) 服务机制 7 办公楼(区)供电系统设施、设备日常管理、养护维修。",
+            "pages": [
+              38
+            ],
+            "page": 38,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第38页",
+              "index": 38,
+              "pages": [
+                38
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0052",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "物业服务收发传达服务 (2 分) 服务机制 1 办公楼(区)外来人员的来访记录台账。",
+            "quote": "物业服务收发传达服务 (2 分) 服务机制 1 办公楼(区)外来人员的来访记录台账。",
+            "pages": [
+              38
+            ],
+            "page": 38,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第38页",
+              "index": 38,
+              "pages": [
+                38
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0053",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "会议服务 (3 分) 服务机制 3 办公楼(区)内发生的会前的会场清洁、 供水以及会议室会议物品保管。",
+            "quote": "会议服务 (3 分) 服务机制 3 办公楼(区)内发生的会前的会场清洁、 供水以及会议室会议物品保管。",
+            "pages": [
+              38
+            ],
+            "page": 38,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第38页",
+              "index": 38,
+              "pages": [
+                38
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0054",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "宿舍管理 (7 分) 服务机制 7 南楼宿舍公共区域保洁服务、宿舍人员入住资格审核、物品管理、退宿等入住管理。",
+            "quote": "宿舍管理 (7 分) 服务机制 7 南楼宿舍公共区域保洁服务、宿舍人员入住资格审核、物品管理、退宿等入住管理。",
+            "pages": [
+              38
+            ],
+            "page": 38,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第38页",
+              "index": 38,
+              "pages": [
+                38
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0055",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "其他服务 (5 分) 服务机制 1 物品搬运劳务服务、紧急跑腿服务、代收代缴水电燃气费及供暖费委托单位临时交办的工作。委托单位电动车充电卡保管节能管理 4 严格",
+            "quote": "其他服务 (5 分) 服务机制 1 物品搬运劳务服务、紧急跑腿服务、代收代缴水电燃气费及供暖费委托单位临时交办的工作。委托单位电动车充电卡保管节能管理 4 严格落实节能管理要求合计 100 加分项餐饮物业服务创新服务 5 合同约定外增值服务。",
+            "pages": [
+              38
+            ],
+            "page": 38,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第38页",
+              "index": 38,
+              "pages": [
+                38
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0056",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "减<br>分<br>项：说明:<br>考核得分为评判平均加权得分,注:80 分(含)以上,判定为优秀,100%拨款;60 分-80 分(不含),<br>判定为良",
+            "quote": "减<br>分<br>项：说明:<br>考核得分为评判平均加权得分,注:80 分(含)以上,判定为优秀,100%拨款;60 分-80 分(不含),<br>判定为良好,100%拨款,由被考核单位出具整改报告,再次检查合格后拨款;60 分(不含)以下,<br>判定为不合格,扣除5%服务费,由被考核单位出具整改报告,再次检查合格,扣款不予拨付。 餐 饮<br>物 业<br>服务：说明:<br>考核得分为评判平均加权得分,注:80 分(含)以上,判定为优秀,100%拨款;60 分-80 分(不含),<br>判定为良好,100%拨款,由被考核单位出具整改报告,再次检查合格后拨款;60 分(不含)以下,<br>判定为不合格,扣除5%服务费,由被考核单位出具整改报告,再次检查合格,扣款不予拨付。 未及时发<br>现岗位安<br>全隐患：说明:<br>考核得分为评判平均加权得分,注:80 分(含)以上,判定",
+            "pages": [
+              39
+            ],
+            "page": 39,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第39页",
+              "index": 39,
+              "pages": [
+                39
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0057",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "38 减分项餐饮物业服务未及时发现岗位安全隐患 5 四不两直检查中发现但岗位人员未发现的安全隐患等发生食品安全问题 (构成重大事故按有关规定处理) 10 发生食",
+            "quote": "38 减分项餐饮物业服务未及时发现岗位安全隐患 5 四不两直检查中发现但岗位人员未发现的安全隐患等发生食品安全问题 (构成重大事故按有关规定处理) 10 发生食材不新鲜、留样不符合规范等但未对人员健康造成较大影响事情处理重要问题未达到要求 5 对需整改问题、领导交办重要工作未及时有效办理等发生合理投诉 5 职工投诉合理的问题合计 25 被考核人员签名考核小组人员签名考核建议说明: 考核得分为评判平均加权得分,注:80 分(含)以上,判定为优秀,100%拨款;60 分-80 分(不含), 判定为良好,100%拨款,由被考核单位出具整改报告,再次检查合格后拨款;60 分(不含)以下, 判定为不合格,扣除5%服务费,由被考核单位出具整改报告,再次检查合格,扣款不予拨付。",
+            "pages": [
+              39
+            ],
+            "page": 39,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第39页",
+              "index": 39,
+              "pages": [
+                39
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0058",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "45 附件二:食堂委托运营管理服务考核表食堂委托运营管理服务考核表被考评对象综合得分考评人考评时间范围至验收时间考核项目细分指标权重 (分) 指标具体内容及定义",
+            "quote": "45 附件二:食堂委托运营管理服务考核表食堂委托运营管理服务考核表被考评对象综合得分考评人考评时间范围至验收时间考核项目细分指标权重 (分) 指标具体内容及定义评分餐饮服务食品安全 (30 分) 食材采购与验收 5 食材采购从合法、正规的供应商采购食材,确保食材新鲜、无变质、无污染。",
+            "pages": [
+              46
+            ],
+            "page": 46,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第46页",
+              "index": 46,
+              "pages": [
+                46
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0059",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "服务质量 (20 分) 菜品质量 3 菜品丰富多样,每周菜品更新率不低于 30%。",
+            "quote": "服务质量 (20 分) 菜品质量 3 菜品丰富多样,每周菜品更新率不低于 30%。",
+            "pages": [
+              46
+            ],
+            "page": 46,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第46页",
+              "index": 46,
+              "pages": [
+                46
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0060",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "餐饮服务环境卫生 (20 分) 厨房卫生 4 厨房地面、墙面、设备保持清洁,无油污、无积水。厨房垃圾及时清理,垃圾桶加盖并定期消毒。",
+            "quote": "餐饮服务环境卫生 (20 分) 厨房卫生 4 厨房地面、墙面、设备保持清洁,无油污、无积水。厨房垃圾及时清理,垃圾桶加盖并定期消毒。",
+            "pages": [
+              46
+            ],
+            "page": 46,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第46页",
+              "index": 46,
+              "pages": [
+                46
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0061",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "经营管理 (10 分) 成本控制 4 合理控制食材成本,确保菜品价格稳定。",
+            "quote": "经营管理 (10 分) 成本控制 4 合理控制食材成本,确保菜品价格稳定。",
+            "pages": [
+              47
+            ],
+            "page": 47,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第47页",
+              "index": 47,
+              "pages": [
+                47
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0062",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "安全管理 (20 分) 安全设施 5 食堂配备完善的消防设施,定期检查并确保其正常运行。",
+            "quote": "安全管理 (20 分) 安全设施 5 食堂配备完善的消防设施,定期检查并确保其正常运行。",
+            "pages": [
+              47
+            ],
+            "page": 47,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第47页",
+              "index": 47,
+              "pages": [
+                47
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0063",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "合计 100 加分项餐饮物业服务创新服务 5 合同约定外增值服务。",
+            "quote": "合计 100 加分项餐饮物业服务创新服务 5 合同约定外增值服务。",
+            "pages": [
+              47
+            ],
+            "page": 47,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第47页",
+              "index": 47,
+              "pages": [
+                47
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0064",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "职工满意度 5 餐饮调研职工满意度达到90%以上应急事情处理 5 突发应急事件,处理及时,没有造成更大的安全隐患和财产安全节能管理 5 节能创新成效显著表扬 5",
+            "quote": "职工满意度 5 餐饮调研职工满意度达到90%以上应急事情处理 5 突发应急事件,处理及时,没有造成更大的安全隐患和财产安全节能管理 5 节能创新成效显著表扬 5 领导提出对服务(物业、餐饮)褒奖合计 25 减分项餐饮物业服务未及时发现岗位安全隐患 5 四不两直检查中发现但岗位人员未发现的安全隐患等发生食品安全问题(构成重大事故按有关规定处理) 10 发生食材不新鲜、留样不符合规范等但未对人员健康造成较大影响事情处理重要问题未达到要求 5 对需整改问题、领导交办重要工作未及时有效办理等发生合理投诉 5 职工投诉合理的问题合计 2547 被考核人员签名考核小组人员签名考核建议说明: 考核得分为评判平均加权得分,注:80 分(含)以上,判定为优秀,100%拨款;60 分-80 分(不含), 判定为良好,100%拨款,由被考核单位出具整改报告,再次检查合格后拨款;60 分(不含)以下,判定为不合格",
+            "pages": [
+              47,
+              48
+            ],
+            "page": 47,
+            "printed_page": null,
+            "printed_pages": [
+              null,
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第47-48页",
+              "index": 47,
+              "pages": [
+                47,
+                48
+              ]
+            },
+            "detection": "cross_page",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          }
+        ]
+      },
+      "materials": {
+        "label": "要交的材料",
+        "items": [
+          {
+            "clause_id": "TB-0065",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "Col1：15 Col2：投标文件的密封和标记 2.投标保证金不接受以现金方式提交。<br>3.收款单位:内蒙古自治区机械设备成套有限责任公司<br>开户银行:",
+            "quote": "Col1：15 Col2：投标文件的密封和标记 2.投标保证金不接受以现金方式提交。<br>3.收款单位:内蒙古自治区机械设备成套有限责任公司<br>开户银行:中国银行内蒙古自治区分行营业部<br>账号:1540 0205 7353<br>行号:1041 9101 4056：(1)投标文件应采用胶装,正、副本分别牢固装订成册。投<br>标文件的副本可采用正本的复印件,正副本不一致时以正本为<br>准,电子版与纸质版不一致时以纸质为准。<br>(2)投标人应将开标一览表一份包封提交,并在封套上标明<br>“开标一览表”。<br>(3)投标文件正本和副本分别单独密封,并在信封上标明“正<br>本”、“副本”字样。<br>(4)电子文档以U盘形式单独密封,并标明“电子文件字样”<br>(5)封口处加盖投标人印章或密封章。<br>封套应按以下格式显著标志:<br>(1)交: 内蒙古自治区机械设备成",
+            "pages": [
+              7
+            ],
+            "page": 7,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第7页",
+              "index": 7,
+              "pages": [
+                7
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0066",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "1.1 投标人选择以支票、汇票、本票、保函等非现金形式缴纳投标保证金的,投标人将相关证明材料原件扫描添加至投标文件中,同时在开标时提供证明材料。",
+            "quote": "1.1 投标人选择以支票、汇票、本票、保函等非现金形式缴纳投标保证金的,投标人将相关证明材料原件扫描添加至投标文件中,同时在开标时提供证明材料。",
+            "pages": [
+              8
+            ],
+            "page": 8,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第8页",
+              "index": 8,
+              "pages": [
+                8
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0067",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "5.1 符合本招标文件规定的资格要求,并按照要求提供相关证明材料。",
+            "quote": "5.1 符合本招标文件规定的资格要求,并按照要求提供相关证明材料。",
+            "pages": [
+              9
+            ],
+            "page": 9,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第9页",
+              "index": 9,
+              "pages": [
+                9
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0068",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "6.2 联合体各方均应当具备《中华人民共和国政府采购法》第二十二条规定的条件,并在投标文件中提供联合体各方的相关证明材料。",
+            "quote": "6.2 联合体各方均应当具备《中华人民共和国政府采购法》第二十二条规定的条件,并在投标文件中提供联合体各方的相关证明材料。",
+            "pages": [
+              9
+            ],
+            "page": 9,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第9页",
+              "index": 9,
+              "pages": [
+                9
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0069",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "Col1：具有履行合同所必需的<br>设备和专业技术能力 截止之日前一年内(至少一个月)缴纳社会保险的凭证。(以专用收据或社会<br>保险缴纳清单为准)3.或提",
+            "quote": "Col1：具有履行合同所必需的<br>设备和专业技术能力 截止之日前一年内(至少一个月)缴纳社会保险的凭证。(以专用收据或社会<br>保险缴纳清单为准)3.或提供有依法缴纳税收和社会保障资金的良好记录的承<br>诺函。注:其他组织和自然人也需要提供缴纳税收的凭据及缴纳社保的凭据。<br>依法免税或不需要缴纳社会保障资金的供应商,应提供相应文件证明其依法免<br>税或不需要缴纳社会保障资金。需同时提供上述第1、2 项证明材料,或单独提<br>供上述第3 项承诺函。：审查供应商出具的“具有履行合同所必须的设备和专业技术能力”声明(格式<br>自拟)。",
+            "pages": [
+              13
+            ],
+            "page": 13,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第13页",
+              "index": 13,
+              "pages": [
+                13
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0070",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "Col1：参加政府采购活动前3<br>年内在经营活动中没有<br>重大违法记录 截止之日前一年内(至少一个月)缴纳社会保险的凭证。(以专用收据或社会<br>保险",
+            "quote": "Col1：参加政府采购活动前3<br>年内在经营活动中没有<br>重大违法记录 截止之日前一年内(至少一个月)缴纳社会保险的凭证。(以专用收据或社会<br>保险缴纳清单为准)3.或提供有依法缴纳税收和社会保障资金的良好记录的承<br>诺函。注:其他组织和自然人也需要提供缴纳税收的凭据及缴纳社保的凭据。<br>依法免税或不需要缴纳社会保障资金的供应商,应提供相应文件证明其依法免<br>税或不需要缴纳社会保障资金。需同时提供上述第1、2 项证明材料,或单独提<br>供上述第3 项承诺函。：审查供应商参加本次采购活动前3 年内在经营活动中没有重大违法记录的书面<br>声明。",
+            "pages": [
+              13
+            ],
+            "page": 13,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第13页",
+              "index": 13,
+              "pages": [
+                13
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0071",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "Col1：信用记录 截止之日前一年内(至少一个月)缴纳社会保险的凭证。(以专用收据或社会<br>保险缴纳清单为准)3.或提供有依法缴纳税收和社会保障资金的良好记",
+            "quote": "Col1：信用记录 截止之日前一年内(至少一个月)缴纳社会保险的凭证。(以专用收据或社会<br>保险缴纳清单为准)3.或提供有依法缴纳税收和社会保障资金的良好记录的承<br>诺函。注:其他组织和自然人也需要提供缴纳税收的凭据及缴纳社保的凭据。<br>依法免税或不需要缴纳社会保障资金的供应商,应提供相应文件证明其依法免<br>税或不需要缴纳社会保障资金。需同时提供上述第1、2 项证明材料,或单独提<br>供上述第3 项承诺函。：资格审查时,供应商未被列入失信被执行人、重大税收违法失信主体、政府采<br>购严重违法失信行为记录名单。",
+            "pages": [
+              13
+            ],
+            "page": 13,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第13页",
+              "index": 13,
+              "pages": [
+                13
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0072",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "Col1：联合体投标 截止之日前一年内(至少一个月)缴纳社会保险的凭证。(以专用收据或社会<br>保险缴纳清单为准)3.或提供有依法缴纳税收和社会保障资金的良好",
+            "quote": "Col1：联合体投标 截止之日前一年内(至少一个月)缴纳社会保险的凭证。(以专用收据或社会<br>保险缴纳清单为准)3.或提供有依法缴纳税收和社会保障资金的良好记录的承<br>诺函。注:其他组织和自然人也需要提供缴纳税收的凭据及缴纳社保的凭据。<br>依法免税或不需要缴纳社会保障资金的供应商,应提供相应文件证明其依法免<br>税或不需要缴纳社会保障资金。需同时提供上述第1、2 项证明材料,或单独提<br>供上述第3 项承诺函。：本项目不接受联合体响应。",
+            "pages": [
+              13
+            ],
+            "page": 13,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第13页",
+              "index": 13,
+              "pages": [
+                13
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0073",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "Col1：本采购包属于专门面向<br>中小企业采购 截止之日前一年内(至少一个月)缴纳社会保险的凭证。(以专用收据或社会<br>保险缴纳清单为准)3.或提供有依",
+            "quote": "Col1：本采购包属于专门面向<br>中小企业采购 截止之日前一年内(至少一个月)缴纳社会保险的凭证。(以专用收据或社会<br>保险缴纳清单为准)3.或提供有依法缴纳税收和社会保障资金的良好记录的承<br>诺函。注:其他组织和自然人也需要提供缴纳税收的凭据及缴纳社保的凭据。<br>依法免税或不需要缴纳社会保障资金的供应商,应提供相应文件证明其依法免<br>税或不需要缴纳社会保障资金。需同时提供上述第1、2 项证明材料,或单独提<br>供上述第3 项承诺函。：参与的投标人服务全部由符合政策要求的中小微企业承接。提供《中小企业声<br>明函》,残疾人福利性单位提供《残疾人福利性单位声明函》,监狱企业提供<br>由省级以上监狱管理局、戒毒管理局(含新疆生产建设兵团)出具的属于监狱<br>企业的证明文件。",
+            "pages": [
+              13
+            ],
+            "page": 13,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第13页",
+              "index": 13,
+              "pages": [
+                13
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0074",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(一)投标人的姓名或者名称、地址、邮编、联系人及联系电话;",
+            "quote": "(一)投标人的姓名或者名称、地址、邮编、联系人及联系电话;",
+            "pages": [
+              14
+            ],
+            "page": 14,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第14页",
+              "index": 14,
+              "pages": [
+                14
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0075",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(二)质疑项目的名称、编号;",
+            "quote": "(二)质疑项目的名称、编号;",
+            "pages": [
+              14
+            ],
+            "page": 14,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第14页",
+              "index": 14,
+              "pages": [
+                14
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0076",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(四)事实依据;",
+            "quote": "(四)事实依据;",
+            "pages": [
+              14
+            ],
+            "page": 14,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第14页",
+              "index": 14,
+              "pages": [
+                14
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0077",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(五)必要的法律依据;",
+            "quote": "(五)必要的法律依据;",
+            "pages": [
+              14
+            ],
+            "page": 14,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第14页",
+              "index": 14,
+              "pages": [
+                14
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0078",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "投标人为自然人的,应当由本人签字;投标人为法人或者其他组织的,应当由法定代表人、主要负责人,或者其授权代表签字或者盖章,并加盖公章。",
+            "quote": "投标人为自然人的,应当由本人签字;投标人为法人或者其他组织的,应当由法定代表人、主要负责人,或者其授权代表签字或者盖章,并加盖公章。",
+            "pages": [
+              14
+            ],
+            "page": 14,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第14页",
+              "index": 14,
+              "pages": [
+                14
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0079",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "3.2 投诉人投诉时,应当提交投诉书和必要的证明材料,并按照被投诉采购人、采购代理机构(以下简称被投诉人)和与投诉事项有关的供应商数量提供投诉书的副本。投诉书应",
+            "quote": "3.2 投诉人投诉时,应当提交投诉书和必要的证明材料,并按照被投诉采购人、采购代理机构(以下简称被投诉人)和与投诉事项有关的供应商数量提供投诉书的副本。投诉书应当包括下列内容:",
+            "pages": [
+              15
+            ],
+            "page": 15,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第15页",
+              "index": 15,
+              "pages": [
+                15
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0080",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(一)投诉人和被投诉人的姓名或者名称、通讯地址、邮编、联系人及联系电话;",
+            "quote": "(一)投诉人和被投诉人的姓名或者名称、通讯地址、邮编、联系人及联系电话;",
+            "pages": [
+              15
+            ],
+            "page": 15,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第15页",
+              "index": 15,
+              "pages": [
+                15
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0081",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(二)质疑和质疑答复情况说明及相关证明材料;",
+            "quote": "(二)质疑和质疑答复情况说明及相关证明材料;",
+            "pages": [
+              15
+            ],
+            "page": 15,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第15页",
+              "index": 15,
+              "pages": [
+                15
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0082",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(三)具体、明确的投诉事项和与投诉事项相关的投诉请求;",
+            "quote": "(三)具体、明确的投诉事项和与投诉事项相关的投诉请求;",
+            "pages": [
+              15
+            ],
+            "page": 15,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第15页",
+              "index": 15,
+              "pages": [
+                15
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0083",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(四)事实依据;",
+            "quote": "(四)事实依据;",
+            "pages": [
+              15
+            ],
+            "page": 15,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第15页",
+              "index": 15,
+              "pages": [
+                15
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0084",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(五)法律依据;",
+            "quote": "(五)法律依据;",
+            "pages": [
+              15
+            ],
+            "page": 15,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第15页",
+              "index": 15,
+              "pages": [
+                15
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0085",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(六)提起投诉的日期。",
+            "quote": "(六)提起投诉的日期。",
+            "pages": [
+              15
+            ],
+            "page": 15,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第15页",
+              "index": 15,
+              "pages": [
+                15
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0086",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "投诉人为自然人的,应当由本人签字;投诉人为法人或者其他组织的,应当由法定代表人、主要负责人,或者其授权代表签字或者盖章,并加盖公章。",
+            "quote": "投诉人为自然人的,应当由本人签字;投诉人为法人或者其他组织的,应当由法定代表人、主要负责人,或者其授权代表签字或者盖章,并加盖公章。",
+            "pages": [
+              15
+            ],
+            "page": 15,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第15页",
+              "index": 15,
+              "pages": [
+                15
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0087",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "1.主要商务要求：付款方式 Col2：采购方根据每个月的考核结果及履约情况评价按月支付物业食堂服务费,<br>付款前中标人需提供符合财政支付要求的发票。",
+            "quote": "1.主要商务要求：付款方式 Col2：采购方根据每个月的考核结果及履约情况评价按月支付物业食堂服务费,<br>付款前中标人需提供符合财政支付要求的发票。",
+            "pages": [
+              16
+            ],
+            "page": 16,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第16页",
+              "index": 16,
+              "pages": [
+                16
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0088",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "服务地点采购人要求的地点付款方式采购方根据每个月的考核结果及履约情况评价按月支付物业食堂服务费, 付款前中标人需提供符合财政支付要求的发票。",
+            "quote": "服务地点采购人要求的地点付款方式采购方根据每个月的考核结果及履约情况评价按月支付物业食堂服务费, 付款前中标人需提供符合财政支付要求的发票。",
+            "pages": [
+              16
+            ],
+            "page": 16,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第16页",
+              "index": 16,
+              "pages": [
+                16
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0089",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "投标人应提交证明其有资格参加投标和中标后有能力履行合同的相关文件,并作为其投标文件的一部分,所有文件必须真实可靠、不得伪造,否则将按相关规定予以处罚。",
+            "quote": "投标人应提交证明其有资格参加投标和中标后有能力履行合同的相关文件,并作为其投标文件的一部分,所有文件必须真实可靠、不得伪造,否则将按相关规定予以处罚。",
+            "pages": [
+              23
+            ],
+            "page": 23,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第23页",
+              "index": 23,
+              "pages": [
+                23
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0090",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "三、具备履行合同所必需的设备和专业技术能力的证明材料。",
+            "quote": "三、具备履行合同所必需的设备和专业技术能力的证明材料。",
+            "pages": [
+              23
+            ],
+            "page": 23,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第23页",
+              "index": 23,
+              "pages": [
+                23
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0091",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "五、按照招标文件要求,投标人应当提交的其他资格、资信证明文件。",
+            "quote": "五、按照招标文件要求,投标人应当提交的其他资格、资信证明文件。",
+            "pages": [
+              23
+            ],
+            "page": 23,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第23页",
+              "index": 23,
+              "pages": [
+                23
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0092",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "投标人的澄清、说明或者补正应当采用书面形式,并加盖公章,或者由法定代表人或其授权的代表签字。投标人的澄清、说明或者补正不得超出投标文件的范围或者改变投标文件的实",
+            "quote": "投标人的澄清、说明或者补正应当采用书面形式,并加盖公章,或者由法定代表人或其授权的代表签字。投标人的澄清、说明或者补正不得超出投标文件的范围或者改变投标文件的实质性内容。",
+            "pages": [
+              24
+            ],
+            "page": 24,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第24页",
+              "index": 24,
+              "pages": [
+                24
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0093",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2.5 投标人属于中小企业的,应提供《中小企业声明函》;属于监狱企业的,应提供由省级以上监狱管理局、戒毒管理局(含新疆生产建设兵团)出具的属于监狱企业的证明文件",
+            "quote": "2.5 投标人属于中小企业的,应提供《中小企业声明函》;属于监狱企业的,应提供由省级以上监狱管理局、戒毒管理局(含新疆生产建设兵团)出具的属于监狱企业的证明文件;属于残疾人福利性单位的, 应提供《残疾人福利性单位声明函》。投标人应当按照《中小企业声明函》《残疾人福利性单位声明函》",
+            "pages": [
+              26
+            ],
+            "page": 26,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第26页",
+              "index": 26,
+              "pages": [
+                26
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0094",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "评审委员会启动异常低价投标(响应)审查后,属于前述第1 项至第4 项情形的,应当要求相关供应商在评审现场合理的时间内对投标(响应)价格作出解释,提供项目具体成本",
+            "quote": "评审委员会启动异常低价投标(响应)审查后,属于前述第1 项至第4 项情形的,应当要求相关供应商在评审现场合理的时间内对投标(响应)价格作出解释,提供项目具体成本测算等与报价合理性相关的书面说明及必要的证明材料,包括但不限于原材料成本、人工成本、制造费用等,给予相关供应商的合理时间一般不少于30 分钟。其中,属于第3 项情形,供应商已随投标(响应)文件一并提交相关书面说明及必要的证明材料的,在评审现场可不再重复提交。",
+            "pages": [
+              28
+            ],
+            "page": 28,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第28页",
+              "index": 28,
+              "pages": [
+                28
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0095",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "Col1：商务部分<br>(26分) Col2：业绩(10分) 专业领域知识阐述有误。)：投标人近二年(2024年8月1日至递交投标文件截止时间)具有<br>的",
+            "quote": "Col1：商务部分<br>(26分) Col2：业绩(10分) 专业领域知识阐述有误。)：投标人近二年(2024年8月1日至递交投标文件截止时间)具有<br>的同类项目业绩一份得1分,提供有效合同(合同需提供首页、<br>基本内容页、盖章页等可证明业绩内容的关键页),本项最多得<br>10分;注:业绩以合同签订日期为准。<br>同类项目界定:物业或包含餐厅(食堂)服务的物业项目",
+            "pages": [
+              30
+            ],
+            "page": 30,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第30页",
+              "index": 30,
+              "pages": [
+                30
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0096",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(注:“缺陷”指以下任意一种情形:内容不切合行业实际、 不符合国家法规政策;或内容凭空编造,与实际情况不符,存在偏差;或内容过于简略;或存在与项目无关的文字内容",
+            "quote": "(注:“缺陷”指以下任意一种情形:内容不切合行业实际、 不符合国家法规政策;或内容凭空编造,与实际情况不符,存在偏差;或内容过于简略;或存在与项目无关的文字内容;或内容不适用项目实际情况;或内容逻辑漏洞或原理错误;或地点区域错误;或套用其他项目方案;或前后内容互相矛盾;或专业领域知识阐述有误。) 商务部分 (26分) 业绩(10分) 投标人近二年(2024年8月1日至递交投标文件截止时间)具有的同类项目业绩一份得1分,提供有效合同(合同需提供首页、 基本内容页、盖章页等可证明业绩内容的关键页),本项最多得 10分;注:业绩以合同签订日期为准。",
+            "pages": [
+              30
+            ],
+            "page": 30,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第30页",
+              "index": 30,
+              "pages": [
+                30
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0097",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "1.拟派项目经理具有物业管理经验10年(含)以上得5分,5年 (含)-10年(不含)得3分;3年(含)-5年(不含)得1分, 三年以下不得分。提供工作经验证明(",
+            "quote": "1.拟派项目经理具有物业管理经验10年(含)以上得5分,5年 (含)-10年(不含)得3分;3年(含)-5年(不含)得1分, 三年以下不得分。提供工作经验证明(如工作合同)扫描件加盖投标人公章,证明材料齐全得分,未提供或提供不全不得分。",
+            "pages": [
+              30
+            ],
+            "page": 30,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第30页",
+              "index": 30,
+              "pages": [
+                30
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0098",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2.厨师长具有三级/高级及以上中式烹调师资格证的得3分,提供证书扫描件及身份证扫描件加盖投标人公章,否则不得分。",
+            "quote": "2.厨师长具有三级/高级及以上中式烹调师资格证的得3分,提供证书扫描件及身份证扫描件加盖投标人公章,否则不得分。",
+            "pages": [
+              30
+            ],
+            "page": 30,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第30页",
+              "index": 30,
+              "pages": [
+                30
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0099",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "3.厨师长具有担任厨师长经验10年(含)以上得5分,5年(含) -10年(不含)得3分;3年(含)-5年(不含)得1分,三年以下不得分。提供工作经验证明(如工作",
+            "quote": "3.厨师长具有担任厨师长经验10年(含)以上得5分,5年(含) -10年(不含)得3分;3年(含)-5年(不含)得1分,三年以下不得分。提供工作经验证明(如工作合同)扫描件加盖投标人公章,证明材料齐全得分,未提供或提供不全不得分。",
+            "pages": [
+              30
+            ],
+            "page": 30,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第30页",
+              "index": 30,
+              "pages": [
+                30
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0100",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "4.食品安全管理员具有《食品安全管理员证书》或《食品安全管理员培训合格证书》得3分,提供证书扫描件及身份证扫描件加盖投标人公章,否则不得分。",
+            "quote": "4.食品安全管理员具有《食品安全管理员证书》或《食品安全管理员培训合格证书》得3分,提供证书扫描件及身份证扫描件加盖投标人公章,否则不得分。",
+            "pages": [
+              30
+            ],
+            "page": 30,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第30页",
+              "index": 30,
+              "pages": [
+                30
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0101",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "Col1：供应商对履约情<br>况的总结及提供<br>的相关证明材料 (参考格式)：注:供应商根据采购合同的约定,对履约情况(包括但不限于采购合同中约定<br>",
+            "quote": "Col1：供应商对履约情<br>况的总结及提供<br>的相关证明材料 (参考格式)：注:供应商根据采购合同的约定,对履约情况(包括但不限于采购合同中约定<br>的服务内容、服务要求、服务质量、人员配置、服务成果、服务成果的交付等)<br>进行总结,并提供相应的履约证明材料作为附件。",
+            "pages": [
+              51
+            ],
+            "page": 51,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第51页",
+              "index": 51,
+              "pages": [
+                51
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0102",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "注:验收依据可根据项目具体情况适当增加供应商对履约情况的总结及提供的相关证明材料注:供应商根据采购合同的约定,对履约情况(包括但不限于采购合同中约定的服务内容、",
+            "quote": "注:验收依据可根据项目具体情况适当增加供应商对履约情况的总结及提供的相关证明材料注:供应商根据采购合同的约定,对履约情况(包括但不限于采购合同中约定的服务内容、服务要求、服务质量、人员配置、服务成果、服务成果的交付等) 进行总结,并提供相应的履约证明材料作为附件。",
+            "pages": [
+              51
+            ],
+            "page": 51,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第51页",
+              "index": 51,
+              "pages": [
+                51
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0103",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "1.采购人代表:",
+            "quote": "1.采购人代表:",
+            "pages": [
+              51
+            ],
+            "page": 51,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第51页",
+              "index": 51,
+              "pages": [
+                51
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0104",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2.采购代理机构代表:",
+            "quote": "2.采购代理机构代表:",
+            "pages": [
+              51
+            ],
+            "page": 51,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第51页",
+              "index": 51,
+              "pages": [
+                51
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0105",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "3.第三方专业机构代表及专家:",
+            "quote": "3.第三方专业机构代表及专家:",
+            "pages": [
+              51
+            ],
+            "page": 51,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第51页",
+              "index": 51,
+              "pages": [
+                51
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0106",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "4.其他供应商代表:",
+            "quote": "4.其他供应商代表:",
+            "pages": [
+              51
+            ],
+            "page": 51,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第51页",
+              "index": 51,
+              "pages": [
+                51
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0107",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "五、缴纳投标保证金证明材料",
+            "quote": "五、缴纳投标保证金证明材料",
+            "pages": [
+              55
+            ],
+            "page": 55,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第55页",
+              "index": 55,
+              "pages": [
+                55
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0108",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "七、具有独立承担民事责任的能力的证明材料",
+            "quote": "七、具有独立承担民事责任的能力的证明材料",
+            "pages": [
+              55
+            ],
+            "page": 55,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第55页",
+              "index": 55,
+              "pages": [
+                55
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0109",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "十、具有履行合同所必需的设备和专业技术能力的证明材料",
+            "quote": "十、具有履行合同所必需的设备和专业技术能力的证明材料",
+            "pages": [
+              55
+            ],
+            "page": 55,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第55页",
+              "index": 55,
+              "pages": [
+                55
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0110",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "十二、特定资格要求证明材料",
+            "quote": "十二、特定资格要求证明材料",
+            "pages": [
+              55
+            ],
+            "page": 55,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第55页",
+              "index": 55,
+              "pages": [
+                55
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0111",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "十三、联合体说明",
+            "quote": "十三、联合体说明",
+            "pages": [
+              55
+            ],
+            "page": 55,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第55页",
+              "index": 55,
+              "pages": [
+                55
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0112",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "十四、中小企业声明函",
+            "quote": "十四、中小企业声明函",
+            "pages": [
+              55
+            ],
+            "page": 55,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第55页",
+              "index": 55,
+              "pages": [
+                55
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0113",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "十五、监狱企业证明文件",
+            "quote": "十五、监狱企业证明文件",
+            "pages": [
+              55
+            ],
+            "page": 55,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第55页",
+              "index": 55,
+              "pages": [
+                55
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0114",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "十六、残疾人福利性单位声明函",
+            "quote": "十六、残疾人福利性单位声明函",
+            "pages": [
+              55
+            ],
+            "page": 55,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第55页",
+              "index": 55,
+              "pages": [
+                55
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0115",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "十七、主要商务要求承诺书",
+            "quote": "十七、主要商务要求承诺书",
+            "pages": [
+              55
+            ],
+            "page": 55,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第55页",
+              "index": 55,
+              "pages": [
+                55
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0116",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "十八、技术偏离表",
+            "quote": "十八、技术偏离表",
+            "pages": [
+              55
+            ],
+            "page": 55,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第55页",
+              "index": 55,
+              "pages": [
+                55
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0117",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "十九、项目组成人员一览表",
+            "quote": "十九、项目组成人员一览表",
+            "pages": [
+              55
+            ],
+            "page": 55,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第55页",
+              "index": 55,
+              "pages": [
+                55
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0118",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "二十、项目实施方案、质量保证及售后服务承诺等",
+            "quote": "二十、项目实施方案、质量保证及售后服务承诺等",
+            "pages": [
+              55
+            ],
+            "page": 55,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第55页",
+              "index": 55,
+              "pages": [
+                55
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0119",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "二十一、投标人业绩情况表",
+            "quote": "二十一、投标人业绩情况表",
+            "pages": [
+              55
+            ],
+            "page": 55,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第55页",
+              "index": 55,
+              "pages": [
+                55
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0120",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "二十二、其他证明材料说明:投标人必须自行编制页码,页码连贯。",
+            "quote": "二十二、其他证明材料说明:投标人必须自行编制页码,页码连贯。",
+            "pages": [
+              55
+            ],
+            "page": 55,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第55页",
+              "index": 55,
+              "pages": [
+                55
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0121",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "五、缴纳投标保证金证明材料投标人应提供缴纳保证金的证明材料原件扫描件",
+            "quote": "五、缴纳投标保证金证明材料投标人应提供缴纳保证金的证明材料原件扫描件",
+            "pages": [
+              61
+            ],
+            "page": 61,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第61页",
+              "index": 61,
+              "pages": [
+                61
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0122",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "七、具有独立承担民事责任的能力的证明材料按照第二章资格性审查内容提供。",
+            "quote": "七、具有独立承担民事责任的能力的证明材料按照第二章资格性审查内容提供。",
+            "pages": [
+              63
+            ],
+            "page": 63,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第63页",
+              "index": 63,
+              "pages": [
+                63
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0123",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "十、具有履行合同所必需的设备和专业技术能力的证明材料按照第二章资格性审查内容提供。",
+            "quote": "十、具有履行合同所必需的设备和专业技术能力的证明材料按照第二章资格性审查内容提供。",
+            "pages": [
+              66
+            ],
+            "page": 66,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第66页",
+              "index": 66,
+              "pages": [
+                66
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0124",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "十二、特定资格要求证明材料(如有)",
+            "quote": "十二、特定资格要求证明材料(如有)",
+            "pages": [
+              68
+            ],
+            "page": 68,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第68页",
+              "index": 68,
+              "pages": [
+                68
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0125",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "十三、联合体说明需明确是否为联合体,格式内容自拟,签字盖章69 (以下格式文件由投标人根据需要选用)",
+            "quote": "十三、联合体说明需明确是否为联合体,格式内容自拟,签字盖章69 (以下格式文件由投标人根据需要选用)",
+            "pages": [
+              69,
+              70
+            ],
+            "page": 69,
+            "printed_page": null,
+            "printed_pages": [
+              null,
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第69-70页",
+              "index": 69,
+              "pages": [
+                69,
+                70
+              ]
+            },
+            "detection": "cross_page",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0126",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "十四、中小企业声明函(工程、服务) 本公司(联合体)郑重声明,根据《政府采购促进中小企业发展管理办法》(财库 〔2020〕46 号)的规定,本公司(联合体)参加",
+            "quote": "十四、中小企业声明函(工程、服务) 本公司(联合体)郑重声明,根据《政府采购促进中小企业发展管理办法》(财库 〔2020〕46 号)的规定,本公司(联合体)参加(单位名称)的(项目名称)采购活动,工程的施工单位全部为符合政策要求的中小企业(或者:服务全部由符合政策要求的中小企业承接)。相关企业(含联合体中的中小企业、签订分包意向协议的中小企业) 的具体情况如下:",
+            "pages": [
+              70
+            ],
+            "page": 70,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第70页",
+              "index": 70,
+              "pages": [
+                70
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0127",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "1.(标的名称),属于(采购文件中明确的所属行业);承建(承接)企业为(企业名称),从业人员人,营业收入为万元,资产总额为万元1, 属于(中型企业、小型企业、微",
+            "quote": "1.(标的名称),属于(采购文件中明确的所属行业);承建(承接)企业为(企业名称),从业人员人,营业收入为万元,资产总额为万元1, 属于(中型企业、小型企业、微型企业);",
+            "pages": [
+              70
+            ],
+            "page": 70,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第70页",
+              "index": 70,
+              "pages": [
+                70
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0128",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2.(标的名称),属于(采购文件中明确的所属行业);承建(承接)企业为(企业名称),从业人员人,营业收入为万元,资产总额为万元,属于(中型企业、小型企业、微型企",
+            "quote": "2.(标的名称),属于(采购文件中明确的所属行业);承建(承接)企业为(企业名称),从业人员人,营业收入为万元,资产总额为万元,属于(中型企业、小型企业、微型企业); ...... 以上企业,不属于大企业的分支机构,不存在控股股东为大企业的情形,也不存在与大企业的负责人为同一人的情形。",
+            "pages": [
+              70
+            ],
+            "page": 70,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第70页",
+              "index": 70,
+              "pages": [
+                70
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0129",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "二十一、投标人业绩情况表序号使用单位业绩名称合同总价签订时间 1 2 3 4 ... 投标人根据上述业绩情况后附证明材料。",
+            "quote": "二十一、投标人业绩情况表序号使用单位业绩名称合同总价签订时间 1 2 3 4 ... 投标人根据上述业绩情况后附证明材料。",
+            "pages": [
+              77
+            ],
+            "page": 77,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第77页",
+              "index": 77,
+              "pages": [
+                77
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0130",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "二十二、其他证明材料",
+            "quote": "二十二、其他证明材料",
+            "pages": [
+              78
+            ],
+            "page": 78,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第78页",
+              "index": 78,
+              "pages": [
+                78
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0131",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2.投标人认为需提供的其他资料。",
+            "quote": "2.投标人认为需提供的其他资料。",
+            "pages": [
+              78
+            ],
+            "page": 78,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第78页",
+              "index": 78,
+              "pages": [
+                78
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          }
+        ]
+      },
+      "rejection": {
+        "label": "废标项",
+        "items": [
+          {
+            "clause_id": "TB-0132",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "2.投标保证金不接受以现金方式提交。",
+            "quote": "2.投标保证金不接受以现金方式提交。",
+            "pages": [
+              7
+            ],
+            "page": 7,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第7页",
+              "index": 7,
+              "pages": [
+                7
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0133",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "3.收款单位:内蒙古自治区机械设备成套有限责任公司开户银行:中国银行内蒙古自治区分行营业部账号:1540 0205 7353 行号:1041 9101 4056",
+            "quote": "3.收款单位:内蒙古自治区机械设备成套有限责任公司开户银行:中国银行内蒙古自治区分行营业部账号:1540 0205 7353 行号:1041 9101 4056 14 投标文件签字、盖章要求投标文件的正本需打印或用不褪色墨水书写,并由法定代表人或经其正式授权的代表签字。授权代表要以书面形式出具证明,其《法人授权委托书》除应附在投标文件中外,还需单独提交一份,在递交投标文件时,同授权代表身份证一同出示, 以证明合法投标身份。投标文件中的任何行间重要的插字、涂改和增删,必须由法定代表人或经其正式授权的代表在旁边签字才有效。盖章:投标单位公章。",
+            "pages": [
+              7
+            ],
+            "page": 7,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第7页",
+              "index": 7,
+              "pages": [
+                7
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0134",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(1)投标文件应采用胶装,正、副本分别牢固装订成册。投标文件的副本可采用正本的复印件,正副本不一致时以正本为准,电子版与纸质版不一致时以纸质为准。",
+            "quote": "(1)投标文件应采用胶装,正、副本分别牢固装订成册。投标文件的副本可采用正本的复印件,正副本不一致时以正本为准,电子版与纸质版不一致时以纸质为准。",
+            "pages": [
+              7
+            ],
+            "page": 7,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第7页",
+              "index": 7,
+              "pages": [
+                7
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0135",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(2)投标人应将开标一览表一份包封提交,并在封套上标明 “开标一览表”。",
+            "quote": "(2)投标人应将开标一览表一份包封提交,并在封套上标明 “开标一览表”。",
+            "pages": [
+              7
+            ],
+            "page": 7,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第7页",
+              "index": 7,
+              "pages": [
+                7
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0136",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(3)投标文件正本和副本分别单独密封,并在信封上标明“正本”、“副本”字样。",
+            "quote": "(3)投标文件正本和副本分别单独密封,并在信封上标明“正本”、“副本”字样。",
+            "pages": [
+              7
+            ],
+            "page": 7,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第7页",
+              "index": 7,
+              "pages": [
+                7
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0137",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(4)电子文档以U盘形式单独密封,并标明“电子文件字样”。",
+            "quote": "(4)电子文档以U盘形式单独密封,并标明“电子文件字样”。",
+            "pages": [
+              7
+            ],
+            "page": 7,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第7页",
+              "index": 7,
+              "pages": [
+                7
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0138",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(5)封口处加盖投标人印章或密封章。",
+            "quote": "(5)封口处加盖投标人印章或密封章。",
+            "pages": [
+              7
+            ],
+            "page": 7,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第7页",
+              "index": 7,
+              "pages": [
+                7
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0139",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(2)项目名称:",
+            "quote": "(2)项目名称:",
+            "pages": [
+              7
+            ],
+            "page": 7,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第7页",
+              "index": 7,
+              "pages": [
+                7
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0140",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(3)项目编号:",
+            "quote": "(3)项目编号:",
+            "pages": [
+              7
+            ],
+            "page": 7,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第7页",
+              "index": 7,
+              "pages": [
+                7
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0141",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(4)投标人名称:",
+            "quote": "(4)投标人名称:",
+            "pages": [
+              7
+            ],
+            "page": 7,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第7页",
+              "index": 7,
+              "pages": [
+                7
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0142",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(5)年月日时前不得启封。",
+            "quote": "(5)年月日时前不得启封。",
+            "pages": [
+              7
+            ],
+            "page": 7,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第7页",
+              "index": 7,
+              "pages": [
+                7
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0143",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "17 有效投标人家数符合专业条件的投标人或者对招标文件作实质性响应的投标人不足三家的,应予废标;投标人不足三家的,不得开标;合格投标人不足三家的,不得评标。",
+            "quote": "17 有效投标人家数符合专业条件的投标人或者对招标文件作实质性响应的投标人不足三家的,应予废标;投标人不足三家的,不得开标;合格投标人不足三家的,不得评标。",
+            "pages": [
+              7
+            ],
+            "page": 7,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第7页",
+              "index": 7,
+              "pages": [
+                7
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0144",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "1.3.2 有下列情形之一的,投标保证金将不予退还:",
+            "quote": "1.3.2 有下列情形之一的,投标保证金将不予退还:",
+            "pages": [
+              8
+            ],
+            "page": 8,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第8页",
+              "index": 8,
+              "pages": [
+                8
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0145",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(1)中标后,无正当理由放弃中标资格的;",
+            "quote": "(1)中标后,无正当理由放弃中标资格的;",
+            "pages": [
+              8
+            ],
+            "page": 8,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第8页",
+              "index": 8,
+              "pages": [
+                8
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0146",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(2)中标后,无正当理由不与采购人签订合同的;",
+            "quote": "(2)中标后,无正当理由不与采购人签订合同的;",
+            "pages": [
+              8
+            ],
+            "page": 8,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第8页",
+              "index": 8,
+              "pages": [
+                8
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0147",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(3)在签订合同时,向采购人提出附加条件的;",
+            "quote": "(3)在签订合同时,向采购人提出附加条件的;",
+            "pages": [
+              8
+            ],
+            "page": 8,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第8页",
+              "index": 8,
+              "pages": [
+                8
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0148",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(4)不按照招标文件要求提交履约保证金的;",
+            "quote": "(4)不按照招标文件要求提交履约保证金的;",
+            "pages": [
+              8
+            ],
+            "page": 8,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第8页",
+              "index": 8,
+              "pages": [
+                8
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0149",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(5)在签订合同时,投标人要求修改、补充和撤销投标文件的实质性内容的;",
+            "quote": "(5)在签订合同时,投标人要求修改、补充和撤销投标文件的实质性内容的;",
+            "pages": [
+              8
+            ],
+            "page": 8,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第8页",
+              "index": 8,
+              "pages": [
+                8
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0150",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(6)投标文件中提供虚假材料的;",
+            "quote": "(6)投标文件中提供虚假材料的;",
+            "pages": [
+              8
+            ],
+            "page": 8,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第8页",
+              "index": 8,
+              "pages": [
+                8
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0151",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(7)与采购人、其他投标人或者采购代理机构恶意串通的;",
+            "quote": "(7)与采购人、其他投标人或者采购代理机构恶意串通的;",
+            "pages": [
+              8
+            ],
+            "page": 8,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第8页",
+              "index": 8,
+              "pages": [
+                8
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0152",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(8)投标人在提交投标文件截止时间后,撤回投标文件的;",
+            "quote": "(8)投标人在提交投标文件截止时间后,撤回投标文件的;",
+            "pages": [
+              8
+            ],
+            "page": 8,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第8页",
+              "index": 8,
+              "pages": [
+                8
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0153",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(9)法律法规和招标文件规定的其他情形。",
+            "quote": "(9)法律法规和招标文件规定的其他情形。",
+            "pages": [
+              8
+            ],
+            "page": 8,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第8页",
+              "index": 8,
+              "pages": [
+                8
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0154",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "7.1 所有文件使用的语言文字为简体中文。专用术语使用外文的,应附有简体中文注释,否则视为无效。",
+            "quote": "7.1 所有文件使用的语言文字为简体中文。专用术语使用外文的,应附有简体中文注释,否则视为无效。",
+            "pages": [
+              10
+            ],
+            "page": 10,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第10页",
+              "index": 10,
+              "pages": [
+                10
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0155",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "同时出现两种以上不一致的,按照前款规定的顺序修正。修正后的报价投标人应当采用书面形式,并加盖公章,或者由法定代表人或其授权的代表签字确认后产生约束力,但不得超出",
+            "quote": "同时出现两种以上不一致的,按照前款规定的顺序修正。修正后的报价投标人应当采用书面形式,并加盖公章,或者由法定代表人或其授权的代表签字确认后产生约束力,但不得超出投标文件的范围或者改变投标文件的实质性内容,投标人不确认的,其投标无效。",
+            "pages": [
+              11
+            ],
+            "page": 11,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第11页",
+              "index": 11,
+              "pages": [
+                11
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0156",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "2.2 资格审查中有任意一项未通过的,审查结果为未通过,未通过资格审查的投标人按无效投标处理。",
+            "quote": "2.2 资格审查中有任意一项未通过的,审查结果为未通过,未通过资格审查的投标人按无效投标处理。",
+            "pages": [
+              12
+            ],
+            "page": 12,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第12页",
+              "index": 12,
+              "pages": [
+                12
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0157",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "项目“废标”后,采购代理机构将在内蒙古招标投标公共服务平台、呼和浩特海关官网上发布“废标公告”。",
+            "quote": "项目“废标”后,采购代理机构将在内蒙古招标投标公共服务平台、呼和浩特海关官网上发布“废标公告”。",
+            "pages": [
+              13
+            ],
+            "page": 13,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第13页",
+              "index": 13,
+              "pages": [
+                13
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0158",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "4.1 标“★”条款为实质性条款,供应商不能出现任何负偏离,否则按无效响应处理。签订合同时, 中标人需向采购方出具相关人员证书,否则其中标结果无效。",
+            "quote": "4.1 标“★”条款为实质性条款,供应商不能出现任何负偏离,否则按无效响应处理。签订合同时, 中标人需向采购方出具相关人员证书,否则其中标结果无效。",
+            "pages": [
+              22
+            ],
+            "page": 22,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第22页",
+              "index": 22,
+              "pages": [
+                22
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0159",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "4.2 供应商必须在分项报价中分别报出物业管理服务费与食堂委托运营服务费且不能超过分项预算, 否则视为无效投标。",
+            "quote": "4.2 供应商必须在分项报价中分别报出物业管理服务费与食堂委托运营服务费且不能超过分项预算, 否则视为无效投标。",
+            "pages": [
+              22
+            ],
+            "page": 22,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第22页",
+              "index": 22,
+              "pages": [
+                22
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0160",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "5.有下列情形之一的,视为投标人串通投标,其投标无效:",
+            "quote": "5.有下列情形之一的,视为投标人串通投标,其投标无效:",
+            "pages": [
+              25
+            ],
+            "page": 25,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第25页",
+              "index": 25,
+              "pages": [
+                25
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0161",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(1)不同投标人的投标文件由同一单位或者个人编制,包括但不限于不同投标人上传的投标文件项目内部识别码一致的情形;",
+            "quote": "(1)不同投标人的投标文件由同一单位或者个人编制,包括但不限于不同投标人上传的投标文件项目内部识别码一致的情形;",
+            "pages": [
+              25
+            ],
+            "page": 25,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第25页",
+              "index": 25,
+              "pages": [
+                25
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0162",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(2)不同投标人委托同一单位或者个人办理投标事宜;",
+            "quote": "(2)不同投标人委托同一单位或者个人办理投标事宜;",
+            "pages": [
+              25
+            ],
+            "page": 25,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第25页",
+              "index": 25,
+              "pages": [
+                25
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0163",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(3)不同投标人的投标文件载明的项目管理成员或者联系人员为同一人;",
+            "quote": "(3)不同投标人的投标文件载明的项目管理成员或者联系人员为同一人;",
+            "pages": [
+              25
+            ],
+            "page": 25,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第25页",
+              "index": 25,
+              "pages": [
+                25
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0164",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(4)不同投标人的投标文件异常一致或者投标报价呈规律性差异;",
+            "quote": "(4)不同投标人的投标文件异常一致或者投标报价呈规律性差异;",
+            "pages": [
+              25
+            ],
+            "page": 25,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第25页",
+              "index": 25,
+              "pages": [
+                25
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0165",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(5)不同投标人的投标文件相互混装;",
+            "quote": "(5)不同投标人的投标文件相互混装;",
+            "pages": [
+              25
+            ],
+            "page": 25,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第25页",
+              "index": 25,
+              "pages": [
+                25
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0166",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(6)不同投标人的投标保证金从同一单位或个人的账户转出。",
+            "quote": "(6)不同投标人的投标保证金从同一单位或个人的账户转出。",
+            "pages": [
+              25
+            ],
+            "page": 25,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第25页",
+              "index": 25,
+              "pages": [
+                25
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0167",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "6.有下列情形之一的,属于恶意串通投标,其投标无效,并追究法律责任:",
+            "quote": "6.有下列情形之一的,属于恶意串通投标,其投标无效,并追究法律责任:",
+            "pages": [
+              25
+            ],
+            "page": 25,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第25页",
+              "index": 25,
+              "pages": [
+                25
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0168",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(1)投标人直接或者间接从采购人或者采购代理机构处获得其他投标人的相关情况并修改其投标文件;",
+            "quote": "(1)投标人直接或者间接从采购人或者采购代理机构处获得其他投标人的相关情况并修改其投标文件;",
+            "pages": [
+              25
+            ],
+            "page": 25,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第25页",
+              "index": 25,
+              "pages": [
+                25
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0169",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(2)投标人按照采购人或者采购代理机构的授意撤换、修改投标文件;",
+            "quote": "(2)投标人按照采购人或者采购代理机构的授意撤换、修改投标文件;",
+            "pages": [
+              25
+            ],
+            "page": 25,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第25页",
+              "index": 25,
+              "pages": [
+                25
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0170",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(3)投标人之间协商报价、技术方案等投标文件的实质性内容;",
+            "quote": "(3)投标人之间协商报价、技术方案等投标文件的实质性内容;",
+            "pages": [
+              25
+            ],
+            "page": 25,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第25页",
+              "index": 25,
+              "pages": [
+                25
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0171",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(4)属于同一集团、协会、商会等组织成员的投标人按照该组织要求协同参加政府采购活动;",
+            "quote": "(4)属于同一集团、协会、商会等组织成员的投标人按照该组织要求协同参加政府采购活动;",
+            "pages": [
+              25
+            ],
+            "page": 25,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第25页",
+              "index": 25,
+              "pages": [
+                25
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0172",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(5)投标人之间事先约定由某一特定投标人中标、成交;",
+            "quote": "(5)投标人之间事先约定由某一特定投标人中标、成交;",
+            "pages": [
+              25
+            ],
+            "page": 25,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第25页",
+              "index": 25,
+              "pages": [
+                25
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0173",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(6)投标人之间商定部分投标人放弃参加政府采购活动或者放弃中标、成交;",
+            "quote": "(6)投标人之间商定部分投标人放弃参加政府采购活动或者放弃中标、成交;",
+            "pages": [
+              25
+            ],
+            "page": 25,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第25页",
+              "index": 25,
+              "pages": [
+                25
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0174",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(7)投标人与采购人或者采购代理机构之间、投标人相互之间,为谋求特定投标人中标、成交或者排斥其他投标人的其他串通行为。",
+            "quote": "(7)投标人与采购人或者采购代理机构之间、投标人相互之间,为谋求特定投标人中标、成交或者排斥其他投标人的其他串通行为。",
+            "pages": [
+              25
+            ],
+            "page": 25,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第25页",
+              "index": 25,
+              "pages": [
+                25
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0175",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "7.投标无效的情形投标人存在下列情况之一的,投标无效:",
+            "quote": "7.投标无效的情形投标人存在下列情况之一的,投标无效:",
+            "pages": [
+              25
+            ],
+            "page": 25,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第25页",
+              "index": 25,
+              "pages": [
+                25
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0176",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(1)未按照招标文件的规定提交投标保证金的;",
+            "quote": "(1)未按照招标文件的规定提交投标保证金的;",
+            "pages": [
+              25
+            ],
+            "page": 25,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第25页",
+              "index": 25,
+              "pages": [
+                25
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0177",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(2)投标文件未按招标文件要求签署、盖章的;",
+            "quote": "(2)投标文件未按招标文件要求签署、盖章的;",
+            "pages": [
+              25
+            ],
+            "page": 25,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第25页",
+              "index": 25,
+              "pages": [
+                25
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0178",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(3)不具备招标文件中规定的资格要求的;",
+            "quote": "(3)不具备招标文件中规定的资格要求的;",
+            "pages": [
+              25
+            ],
+            "page": 25,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第25页",
+              "index": 25,
+              "pages": [
+                25
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0179",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(4)报价超过招标文件中规定的预算金额或者最高限价的;",
+            "quote": "(4)报价超过招标文件中规定的预算金额或者最高限价的;",
+            "pages": [
+              25
+            ],
+            "page": 25,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第25页",
+              "index": 25,
+              "pages": [
+                25
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0180",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(5)投标文件含有采购人不能接受的附加条件的;",
+            "quote": "(5)投标文件含有采购人不能接受的附加条件的;",
+            "pages": [
+              25
+            ],
+            "page": 25,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第25页",
+              "index": 25,
+              "pages": [
+                25
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0181",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(6)法律、法规和招标文件规定的其他无效情形。",
+            "quote": "(6)法律、法规和招标文件规定的其他无效情形。",
+            "pages": [
+              25
+            ],
+            "page": 25,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第25页",
+              "index": 25,
+              "pages": [
+                25
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0182",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "8.废标的情形出现下列情形之一的,应予以废标。",
+            "quote": "8.废标的情形出现下列情形之一的,应予以废标。",
+            "pages": [
+              25
+            ],
+            "page": 25,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第25页",
+              "index": 25,
+              "pages": [
+                25
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0183",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(1)符合专业条件的投标人或者对招标文件作实质响应的投标人不足3 家;或参与竞争的核心产品品牌不足3 个的;",
+            "quote": "(1)符合专业条件的投标人或者对招标文件作实质响应的投标人不足3 家;或参与竞争的核心产品品牌不足3 个的;",
+            "pages": [
+              25
+            ],
+            "page": 25,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第25页",
+              "index": 25,
+              "pages": [
+                25
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0184",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(2)出现影响采购公正的违法、违规行为的;",
+            "quote": "(2)出现影响采购公正的违法、违规行为的;",
+            "pages": [
+              25
+            ],
+            "page": 25,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第25页",
+              "index": 25,
+              "pages": [
+                25
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0185",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(3)投标人的报价均超过了采购预算的;",
+            "quote": "(3)投标人的报价均超过了采购预算的;",
+            "pages": [
+              25
+            ],
+            "page": 25,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第25页",
+              "index": 25,
+              "pages": [
+                25
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0186",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(4)因重大变故,采购任务取消的。",
+            "quote": "(4)因重大变故,采购任务取消的。",
+            "pages": [
+              26
+            ],
+            "page": 26,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第26页",
+              "index": 26,
+              "pages": [
+                26
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0187",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "9.定标评标委员会按照招标文件确定的评标方法、步骤、标准,对投标文件进行评审。评标结束后,采购人在评标报告确定的中标候选人名单中按顺序确定中标人。",
+            "quote": "9.定标评标委员会按照招标文件确定的评标方法、步骤、标准,对投标文件进行评审。评标结束后,采购人在评标报告确定的中标候选人名单中按顺序确定中标人。",
+            "pages": [
+              26
+            ],
+            "page": 26,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第26页",
+              "index": 26,
+              "pages": [
+                26
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0188",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "二、落实政府采购政策",
+            "quote": "二、落实政府采购政策",
+            "pages": [
+              26
+            ],
+            "page": 26,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第26页",
+              "index": 26,
+              "pages": [
+                26
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0189",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "1.节约能源、保护环境采购的产品属于品目清单范围的,将依据国家确定的认证机构出具的、处于有效期之内的节能产品、环境标志产品认证证书,对获得证书的产品实施政府优先",
+            "quote": "1.节约能源、保护环境采购的产品属于品目清单范围的,将依据国家确定的认证机构出具的、处于有效期之内的节能产品、环境标志产品认证证书,对获得证书的产品实施政府优先采购或强制采购,具体按照本招标文件相关要求执行。",
+            "pages": [
+              26
+            ],
+            "page": 26,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第26页",
+              "index": 26,
+              "pages": [
+                26
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0190",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "1.2 符合性审查中有任意一项未通过的,审查结果为未通过。投标人未通过符合性审查的,投标无效。",
+            "quote": "1.2 符合性审查中有任意一项未通过的,审查结果为未通过。投标人未通过符合性审查的,投标无效。",
+            "pages": [
+              27
+            ],
+            "page": 27,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第27页",
+              "index": 27,
+              "pages": [
+                27
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0191",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "投标有效期是否符合招标文件要求其他要求招标文件要求的其他无效投标情形;围标、串标和法律法规规定的其它无效投标条款。",
+            "quote": "投标有效期是否符合招标文件要求其他要求招标文件要求的其他无效投标情形;围标、串标和法律法规规定的其它无效投标条款。",
+            "pages": [
+              27
+            ],
+            "page": 27,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第27页",
+              "index": 27,
+              "pages": [
+                27
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0192",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "2.投标报价审查评标委员会认为投标人的报价明显低于其他通过符合性审查投标人的报价,有可能影响产品质量或者不能诚信履约的,应当要求其在评标现场合理的时间内提供书面",
+            "quote": "2.投标报价审查评标委员会认为投标人的报价明显低于其他通过符合性审查投标人的报价,有可能影响产品质量或者不能诚信履约的,应当要求其在评标现场合理的时间内提供书面说明,必要时提交相关证明材料;投标人不能证明其报价合理性的,评标委员会应当将其作为无效投标处理。",
+            "pages": [
+              27
+            ],
+            "page": 27,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第27页",
+              "index": 27,
+              "pages": [
+                27
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0193",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "4.相同品牌审查(本项目为服务不适用) 采用最低评标价法的采购项目,提供相同品牌产品的不同投标人参加同一合同项下投标的,以其中通过资格审查、符合性审查且报价最低",
+            "quote": "4.相同品牌审查(本项目为服务不适用) 采用最低评标价法的采购项目,提供相同品牌产品的不同投标人参加同一合同项下投标的,以其中通过资格审查、符合性审查且报价最低的参加评标;报价相同的,由采购人或者采购人委托评标委员会按27 照招标文件规定的方式确定一个参加评标的投标人,招标文件未规定的采取随机抽取方式确定,其他投标无效。",
+            "pages": [
+              27,
+              28
+            ],
+            "page": 27,
+            "printed_page": null,
+            "printed_pages": [
+              null,
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第27-28页",
+              "index": 27,
+              "pages": [
+                27,
+                28
+              ]
+            },
+            "detection": "cross_page",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0194",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "评审委员会依据专业经验,参考同类项目中标(成交)价格、类似产品市场价格水平、行业人工费用标准、国家有关部门指导行业协会发布的行业平均成本等情况,对报价合理性进行",
+            "quote": "评审委员会依据专业经验,参考同类项目中标(成交)价格、类似产品市场价格水平、行业人工费用标准、国家有关部门指导行业协会发布的行业平均成本等情况,对报价合理性进行判断。投标(响应)供应商不能提供书面说明、证明材料,或者提供的书面说明、证明材料不能证明其报价合理性的,评审委员会应当将其作为无效投标(响应)处理。",
+            "pages": [
+              28
+            ],
+            "page": 28,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第28页",
+              "index": 28,
+              "pages": [
+                28
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          }
+        ]
+      }
+    },
+    "uncited": []
+  }
+}

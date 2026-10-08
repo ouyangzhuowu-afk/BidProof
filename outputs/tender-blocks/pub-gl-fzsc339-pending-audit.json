@@ -31,8 +31,8 @@
   "footer_in_quotes": 0,
   "bare_page_in_quotes": 0,
   "counts": {
-    "total": 295,
-    "with_real_page": 295,
+    "total": 294,
+    "with_real_page": 294,
     "without_page": 0,
     "by_block": {
       "qualification": {
@@ -52,8 +52,8 @@
       },
       "rejection": {
         "label": "废标项",
-        "cited": 42,
-        "items": 42
+        "cited": 41,
+        "items": 41
       }
     }
   },
@@ -7270,34 +7270,6 @@
             "clause_id": "TB-0257",
             "block": "rejection",
             "label": "废标项",
-            "summary": "响应情况 “二、技术要求”中的各项条款内容的逐项响应情况并结合相关佐证材料(如有),由磋商小组进行评议并打分:完全满足磋商文件要求的得32 分; 标注“★”的技",
-            "quote": "响应情况 “二、技术要求”中的各项条款内容的逐项响应情况并结合相关佐证材料(如有),由磋商小组进行评议并打分:完全满足磋商文件要求的得32 分; 标注“★”的技术参数为不允许负偏离的实质性要求,若出现任一项负偏离(或未响应)的按无效响应处理;其他指标(共计5 项),每负偏离一项扣 6.4 分,扣完为止,正偏离不加分。",
-            "pages": [
-              12
-            ],
-            "page": 12,
-            "printed_page": 12,
-            "printed_pages": [
-              12
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第12页",
-              "index": 12,
-              "pages": [
-                12
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0258",
-            "block": "rejection",
-            "label": "废标项",
             "summary": "磋商小组依据专业经验,参考同类项目中标(成交)价格、类似产品市场价格水平、行业人工费用标准、国家有关部门指导行业协会发布的行业平均成本等情况,对报价合理性进行判",
             "quote": "磋商小组依据专业经验,参考同类项目中标(成交)价格、类似产品市场价格水平、行业人工费用标准、国家有关部门指导行业协会发布的行业平均成本等情况,对报价合理性进行判断。投标(响应)供应商不能提供书面说明、证明材料,或者提供的书面说明、证明材料不能证明其报价合理性的,磋商小组应当将其作为无效投标(响应)处理。",
             "pages": [
@@ -7323,7 +7295,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0259",
+            "clause_id": "TB-0258",
             "block": "rejection",
             "label": "废标项",
             "summary": "5.1.3 若供应商有任何试图干扰具体评审事务,影响磋商小组独立履行职责的行为,其响应无效且不予退还磋商保证金或通过保函进行索赔。情节严重的, 由财政部门列入不",
@@ -7351,7 +7323,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0260",
+            "clause_id": "TB-0259",
             "block": "rejection",
             "label": "废标项",
             "summary": "供应商有责任检查自身情况,在响应文件中对是否违反以上一般规定做出如实声明,否则其响应文件将被否决。",
@@ -7379,7 +7351,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0261",
+            "clause_id": "TB-0260",
             "block": "rejection",
             "label": "废标项",
             "summary": "(6)如本项目不接受联合体报价而供应商为联合体的,或者本项目接受联合体报价但供应商组成的联合体不符合本章第3.2 条规定的,其报价无效。",
@@ -7407,7 +7379,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0262",
+            "clause_id": "TB-0261",
             "block": "rejection",
             "label": "废标项",
             "summary": "7.1 供应商可按照采购包号,对竞争性磋商文件中载明的全部或部分采购包进行响应。对于能够详细列明采购标的技术、服务要求的采购项目,供应商响应时,对同一个采购包内",
@@ -7435,7 +7407,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0263",
+            "clause_id": "TB-0262",
             "block": "rejection",
             "label": "废标项",
             "summary": "7.2 供应商代表在同一个合同项下只能接受一个供应商的委托参加响应磋商,否则其响应文件将被否决。",
@@ -7463,7 +7435,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0264",
+            "clause_id": "TB-0263",
             "block": "rejection",
             "label": "废标项",
             "summary": "9.1 响应文件有效期见竞争性磋商须知前附表第4 项,响应文件承诺的有效期不得少于磋商文件载明的有效期,否则其响应文件将被否决。",
@@ -7491,7 +7463,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0265",
+            "clause_id": "TB-0264",
             "block": "rejection",
             "label": "废标项",
             "summary": "10.2 磋商保证金为响应文件的重要组成部分之一。磋商保证金用于保护本次磋商活动免受供应商的违约或失信行为而引起的风险。未按规定提交磋商保证金的,其响应文件将被",
@@ -7519,7 +7491,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0266",
+            "clause_id": "TB-0265",
             "block": "rejection",
             "label": "废标项",
             "summary": "10.4 如果供应商发生以下任何一种情况时,其磋商保证金将被不予退还或通过保函进行索赔:",
@@ -7547,7 +7519,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0267",
+            "clause_id": "TB-0266",
             "block": "rejection",
             "label": "废标项",
             "summary": "(1)供应商在提交响应文件截止时间后撤回响应文件的;",
@@ -7575,7 +7547,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0268",
+            "clause_id": "TB-0267",
             "block": "rejection",
             "label": "废标项",
             "summary": "(2)供应商在响应文件中提供虚假材料的;",
@@ -7603,7 +7575,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0269",
+            "clause_id": "TB-0268",
             "block": "rejection",
             "label": "废标项",
             "summary": "(3)除因不可抗力或磋商文件认可的情形以外,成交供应商不与采购人签订合同的;",
@@ -7631,7 +7603,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0270",
+            "clause_id": "TB-0269",
             "block": "rejection",
             "label": "废标项",
             "summary": "(4)供应商与采购人、其他供应商或者采购代理机构恶意串通的;",
@@ -7659,7 +7631,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0271",
+            "clause_id": "TB-0270",
             "block": "rejection",
             "label": "废标项",
             "summary": "(5)供应商在提交最后报价后要求退出磋商的;",
@@ -7687,7 +7659,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0272",
+            "clause_id": "TB-0271",
             "block": "rejection",
             "label": "废标项",
             "summary": "(6)供应商假借以他人名义参加磋商或者以其他方式弄虚作假,骗取成交;",
@@ -7715,7 +7687,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0273",
+            "clause_id": "TB-0272",
             "block": "rejection",
             "label": "废标项",
             "summary": "(7)国家法律法规以及磋商文件中规定的其他磋商保证金不予退还的情形。",
@@ -7743,7 +7715,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0274",
+            "clause_id": "TB-0273",
             "block": "rejection",
             "label": "废标项",
             "summary": "上述不予退还磋商保证金的情况不能抵偿给采购人或采购代理机构造成损失的,供应商还要承担赔偿责任。",
@@ -7771,7 +7743,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0275",
+            "clause_id": "TB-0274",
             "block": "rejection",
             "label": "废标项",
             "summary": "12.2 供应商应当在磋商文件规定的提交响应文件截止时间前,将首次响应文件密封送达磋商文件规定的指定地点。在截止时间后送达的首次响应文件为无效文件,采购人、采购",
@@ -7799,7 +7771,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0276",
+            "clause_id": "TB-0275",
             "block": "rejection",
             "label": "废标项",
             "summary": "书”),或者加盖供应商单位公章方可生效,否则采购人、采购代理机构或磋商小组将视为无效补充、修改或者撤回。采购人、采购代理机构或磋商小组不接受供应商口头、电话、传",
@@ -7827,7 +7799,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0277",
+            "clause_id": "TB-0276",
             "block": "rejection",
             "label": "废标项",
             "summary": "如果供应商资格审查和实质性响应审查不合格,则其响应文件将被磋商小组否决,按无效处理,不进入磋商阶段,磋商小组将告知有关供应商。",
@@ -7855,7 +7827,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0278",
+            "clause_id": "TB-0277",
             "block": "rejection",
             "label": "废标项",
             "summary": "14.2.1 供应商有下列情况之一者,其提交的响应文件将被视为未实质性响应磋商文件要求,磋商小组将否决其响应文件,按无效处理: 采购包1: 序号符合审查要求概况",
@@ -7883,7 +7855,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0279",
+            "clause_id": "TB-0278",
             "block": "rejection",
             "label": "废标项",
             "summary": "14.8 最后报价是供应商响应文件的有效组成部分。如果供应商的最后报价明显低于其他最后报价,使得其最后报价有可能影响商品或服务质量或者不能诚信履约的,供应商应当",
@@ -7911,7 +7883,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0280",
+            "clause_id": "TB-0279",
             "block": "rejection",
             "label": "废标项",
             "summary": "(3)乙方不按合同约定履约的,甲方可以解除采购合同,并对乙方已缴纳的履约保证金作“不予退还”处理。同时,乙方须按以下约定向甲方支付违约金:",
@@ -7939,7 +7911,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0281",
+            "clause_id": "TB-0280",
             "block": "rejection",
             "label": "废标项",
             "summary": "(4)其他违约情形",
@@ -7967,7 +7939,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0282",
+            "clause_id": "TB-0281",
             "block": "rejection",
             "label": "废标项",
             "summary": "十四、不可抗力事件处理本条款中的不可抗力指不能预见、不能避免、不能克服的客观情况,包括但不限于:自然灾害如地震、台风、洪水、火灾及政府行为、法律规定或其适用的变",
@@ -7995,7 +7967,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0283",
+            "clause_id": "TB-0282",
             "block": "rejection",
             "label": "废标项",
             "summary": "十五、解决争议的方法",
@@ -8023,7 +7995,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0284",
+            "clause_id": "TB-0283",
             "block": "rejection",
             "label": "废标项",
             "summary": "4、我方已经按照磋商文件要求提交磋商保证金,磋商保证金有效期与响应文件有效期一致,我方如果发生任何竞争性磋商文件中所述不予退还磋商保证金的情况,则我方的磋商保证",
@@ -8051,7 +8023,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0285",
+            "clause_id": "TB-0284",
             "block": "rejection",
             "label": "废标项",
             "summary": "1、我方已知晓竞争性磋商文件要求并认真审核自身情况,在此郑重声明, 我方具备并满足下列各项条款的规定。本声明如有虚假或不实之处,我方将失去合格供应商资格且我方的",
@@ -8079,7 +8051,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0286",
+            "clause_id": "TB-0285",
             "block": "rejection",
             "label": "废标项",
             "summary": "(1)具有独立承担民事责任的能力",
@@ -8107,7 +8079,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0287",
+            "clause_id": "TB-0286",
             "block": "rejection",
             "label": "废标项",
             "summary": "(2)具有良好的商业信誉和健全的财务会计制度",
@@ -8135,7 +8107,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0288",
+            "clause_id": "TB-0287",
             "block": "rejection",
             "label": "废标项",
             "summary": "(3)具有履行合同所必需的设备和专业技术能力",
@@ -8163,7 +8135,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0289",
+            "clause_id": "TB-0288",
             "block": "rejection",
             "label": "废标项",
             "summary": "(4)有依法缴纳税收和社会保障资金的良好记录",
@@ -8191,7 +8163,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0290",
+            "clause_id": "TB-0289",
             "block": "rejection",
             "label": "废标项",
             "summary": "(5)参加政府采购活动前三年内,在经营活动中没有重大违法记录",
@@ -8219,7 +8191,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0291",
+            "clause_id": "TB-0290",
             "block": "rejection",
             "label": "废标项",
             "summary": "(6)法律、行政法规规定的其他条件。",
@@ -8247,7 +8219,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0292",
+            "clause_id": "TB-0291",
             "block": "rejection",
             "label": "废标项",
             "summary": "2、经查询,供应商参加本项目采购活动(响应文件递交截止时间)前三年内被列入失信被执行人名单、重大税收违法案件当事人名单、政府采购严重违法失信行为记录名单及其他重",
@@ -8275,7 +8247,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0293",
+            "clause_id": "TB-0292",
             "block": "rejection",
             "label": "废标项",
             "summary": "(1)竞争性磋商文件(含技术和服务要求等)规定的各相关条款要求,如果供应商在响应文件中没有以书面方式对竞争性磋商文件规定的各项要求和条款提出不满足或不响应或负偏",
@@ -8303,7 +8275,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0294",
+            "clause_id": "TB-0293",
             "block": "rejection",
             "label": "废标项",
             "summary": "(1)竞争性磋商文件(含技术和服务要求等)规定的各相关条款要求,如果供应商在响应文件中没有以书面方式对竞争性磋商文件规定的各项要求和条款提出不满足或不响应或负偏",
@@ -8331,7 +8303,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0295",
+            "clause_id": "TB-0294",
             "block": "rejection",
             "label": "废标项",
             "summary": "2、供应商须按磋商文件中明确的所属行业填列,多品目项目中须按上表要求逐条填列,否则,其提供的中小企业声明将被判定为无效声明函,由此造成的后果由供应商自行承担(涉",

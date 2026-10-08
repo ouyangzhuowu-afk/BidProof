@@ -5291,90 +5291,6 @@
             "clause_id": "TB-0186",
             "block": "rejection",
             "label": "废标项",
-            "summary": "3 偏离表(投标文件格式八) 3-1 合同条款偏离表(投标文件格式八) 3-1合同条款偏离表项目编号/包号:_____________________ 项目名称",
-            "quote": "3 偏离表(投标文件格式八) 3-1 合同条款偏离表(投标文件格式八) 3-1合同条款偏离表项目编号/包号:_____________________ 项目名称:_____________ 序号招标文件条目号(页码) 招标文件要求投标文件内容偏离情况说明对本项目合同条款的偏离情况(应进行选择,未选择投标无效): □无偏离(如无偏离,仅选择无偏离即可;无偏离即为对合同条款中的所有要求,均视作投标人已对之理解和响应。) □有偏离(如有偏离,则应在本表中对负偏离项逐一列明,否则投标无效;对合同条款中的所有要求,除本表列明的偏离外,均视作投标人已对之理解和响应。)注: “偏离情况”列应据实填写“正偏离”或“负偏离”。",
-            "pages": [
-              78
-            ],
-            "page": 78,
-            "printed_page": 78,
-            "printed_pages": [
-              78
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第78页",
-              "index": 78,
-              "pages": [
-                78
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0187",
-            "block": "rejection",
-            "label": "废标项",
-            "summary": "3-2 技术参数偏离表(投标文件格式八) 技术参数偏离表项目编号/包号:_____________________ 项目名称:____________ 序号招标",
-            "quote": "3-2 技术参数偏离表(投标文件格式八) 技术参数偏离表项目编号/包号:_____________________ 项目名称:____________ 序号招标文件条目号或页码招标文件要求投标文件内容偏离情况说明对本项目技术参数条款的偏离情况(应进行选择,未选择投标无效): □无偏离(如无偏离,仅选择无偏离即可;无偏离即为对招标文件中的所有商务、技术要求,符合性评审时均视作投标人已对之理解和响应。) □有偏离(如有偏离,则应在本表中对负偏离项逐一列明,否则投标无效;对招标文件中的所有商务、技术要求,除本表列明的偏离外,符合性评审时均视作投标人已对之理解和响应。)注:",
-            "pages": [
-              80
-            ],
-            "page": 80,
-            "printed_page": 80,
-            "printed_pages": [
-              80
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第80页",
-              "index": 80,
-              "pages": [
-                80
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0188",
-            "block": "rejection",
-            "label": "废标项",
-            "summary": "1.“偏离情况”列应据实填写“正偏离”或“负偏离”或“无偏离”。",
-            "quote": "1.“偏离情况”列应据实填写“正偏离”或“负偏离”或“无偏离”。",
-            "pages": [
-              80
-            ],
-            "page": 80,
-            "printed_page": 80,
-            "printed_pages": [
-              80
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第80页",
-              "index": 80,
-              "pages": [
-                80
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0189",
-            "block": "rejection",
-            "label": "废标项",
             "summary": "技术参数 *不满足废标项,#为重点项目,其余技术参数均为一般项。",
             "quote": "技术参数 *不满足废标项,#为重点项目,其余技术参数均为一般项。",
             "pages": [
@@ -5392,6 +5308,90 @@
               "index": 95,
               "pages": [
                 95
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0187",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "*3.1.5 短波红外成像传感器实际物理像素(不允许另做差分计算):≥ 640*1200;",
+            "quote": "*3.1.5 短波红外成像传感器实际物理像素(不允许另做差分计算):≥ 640*1200;",
+            "pages": [
+              95
+            ],
+            "page": 95,
+            "printed_page": 95,
+            "printed_pages": [
+              95
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第95页",
+              "index": 95,
+              "pages": [
+                95
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0188",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "*3.5.3 光谱成像数据一体化自动畸变校正精度:≥99.5%。",
+            "quote": "*3.5.3 光谱成像数据一体化自动畸变校正精度:≥99.5%。",
+            "pages": [
+              96
+            ],
+            "page": 96,
+            "printed_page": 96,
+            "printed_pages": [
+              96
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第96页",
+              "index": 96,
+              "pages": [
+                96
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0189",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "*3.5.4 自动化采集试验箱具备温度监测预警功能:实时显示短波红外成像传感器实际制冷温度,范围0-100°C,具备控制阀成像传感器不达到制冷温度不开放采集功能",
+            "quote": "*3.5.4 自动化采集试验箱具备温度监测预警功能:实时显示短波红外成像传感器实际制冷温度,范围0-100°C,具备控制阀成像传感器不达到制冷温度不开放采集功能。",
+            "pages": [
+              96
+            ],
+            "page": 96,
+            "printed_page": 96,
+            "printed_pages": [
+              96
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第96页",
+              "index": 96,
+              "pages": [
+                96
               ]
             },
             "detection": "clause",

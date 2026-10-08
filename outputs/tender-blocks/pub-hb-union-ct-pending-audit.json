@@ -27,8 +27,8 @@
   "footer_in_quotes": 0,
   "bare_page_in_quotes": 6,
   "counts": {
-    "total": 288,
-    "with_real_page": 288,
+    "total": 292,
+    "with_real_page": 292,
     "without_page": 0,
     "by_block": {
       "qualification": {
@@ -48,8 +48,8 @@
       },
       "rejection": {
         "label": "废标项",
-        "cited": 59,
-        "items": 59
+        "cited": 63,
+        "items": 63
       }
     }
   },
@@ -7498,6 +7498,118 @@
             "clause_id": "TB-0264",
             "block": "rejection",
             "label": "废标项",
+            "summary": "序号：1 重要性：★ 内容：交货期 实施标准：签订合同后一个月内",
+            "quote": "序号：1 重要性：★ 内容：交货期 实施标准：签订合同后一个月内",
+            "pages": [
+              32
+            ],
+            "page": 32,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第32页",
+              "index": 32,
+              "pages": [
+                32
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0265",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "序号：2 重要性：★ 内容：交货地点 实施标准：华中科技大学同济医学院附属协和医院",
+            "quote": "序号：2 重要性：★ 内容：交货地点 实施标准：华中科技大学同济医学院附属协和医院",
+            "pages": [
+              32
+            ],
+            "page": 32,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第32页",
+              "index": 32,
+              "pages": [
+                32
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0266",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "序号：3 重要性：★ 内容：质保期 实施标准：安装验收合格后五年或以上",
+            "quote": "序号：3 重要性：★ 内容：质保期 实施标准：安装验收合格后五年或以上",
+            "pages": [
+              32
+            ],
+            "page": 32,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第32页",
+              "index": 32,
+              "pages": [
+                32
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0267",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "序号：4 重要性：★ 内容：付款条件 实施标准：货到验收合格,设备安装、调试运转正<br>常,乙方为甲方培训结束,甲方无疑问<br>后,甲方向乙方支付设备总价的",
+            "quote": "序号：4 重要性：★ 内容：付款条件 实施标准：货到验收合格,设备安装、调试运转正<br>常,乙方为甲方培训结束,甲方无疑问<br>后,甲方向乙方支付设备总价的95%的<br>货款;质保期内按设备总价的5%作为<br>尾款,2 年后支付设备总价5%的尾款。",
+            "pages": [
+              32
+            ],
+            "page": 32,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第32页",
+              "index": 32,
+              "pages": [
+                32
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-hb-union-ct-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0268",
+            "block": "rejection",
+            "label": "废标项",
             "summary": "三、商务要求以下标注★的条款为实质性要求,不满足要求的将导致投标被拒绝。投标人须在商务要求偏离表中进行逐条响应。",
             "quote": "三、商务要求以下标注★的条款为实质性要求,不满足要求的将导致投标被拒绝。投标人须在商务要求偏离表中进行逐条响应。",
             "pages": [
@@ -7523,7 +7635,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0265",
+            "clause_id": "TB-0269",
             "block": "rejection",
             "label": "废标项",
             "summary": "3.投标人《资格性响应文件》有任何一项不符合《资格审查要求》的,资格审查不合格, 其投标无效。",
@@ -7551,7 +7663,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0266",
+            "clause_id": "TB-0270",
             "block": "rejection",
             "label": "废标项",
             "summary": "Col1：9 Col2：视为串通投标 符合性审查要求：不存在《政府采购货物和服务招标投标管理办法》<br>视为投标人串通投标的情形:<br>(一)不同投标人的投",
@@ -7579,7 +7691,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0267",
+            "clause_id": "TB-0271",
             "block": "rejection",
             "label": "废标项",
             "summary": "一、评标程序及方法",
@@ -7607,7 +7719,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0268",
+            "clause_id": "TB-0272",
             "block": "rejection",
             "label": "废标项",
             "summary": "1.投标文件的符合性审查",
@@ -7635,7 +7747,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0269",
+            "clause_id": "TB-0273",
             "block": "rejection",
             "label": "废标项",
             "summary": "1.评标委员会对资格审查合格的投标人的投标文件进行符合性审查,以确定其是否满足招标文件的实质性要求。",
@@ -7663,7 +7775,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0270",
+            "clause_id": "TB-0274",
             "block": "rejection",
             "label": "废标项",
             "summary": "2.评标委员会根据《符合性审查要求》中规定的审查因素和审查内容,对投标人的投标文件是否实质上响应招标文件进行符合性审查,并形成符合性审查评审结果。",
@@ -7691,7 +7803,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0271",
+            "clause_id": "TB-0275",
             "block": "rejection",
             "label": "废标项",
             "summary": "投标人的投标文件有任何一项不符合《符合性审查要求》要求的,投标无效。",
@@ -7719,7 +7831,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0272",
+            "clause_id": "TB-0276",
             "block": "rejection",
             "label": "废标项",
             "summary": "Col1：10 Col2：附加条件 (五)不同投标人的投标文件相互混装;<br>(六)不同投标人的投标保证金从同一单位或者个<br>人的账户转出。：投标文件未含",
@@ -7747,7 +7859,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0273",
+            "clause_id": "TB-0277",
             "block": "rejection",
             "label": "废标项",
             "summary": "Col1：11 Col2：其他无效情形 (五)不同投标人的投标文件相互混装;<br>(六)不同投标人的投标保证金从同一单位或者个<br>人的账户转出。：投标人、",
@@ -7775,7 +7887,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0274",
+            "clause_id": "TB-0278",
             "block": "rejection",
             "label": "废标项",
             "summary": "(五)不同投标人的投标文件相互混装;",
@@ -7803,7 +7915,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0275",
+            "clause_id": "TB-0279",
             "block": "rejection",
             "label": "废标项",
             "summary": "3.评标委员会依据专业经验,参考同类项目中标(成交)价格、类似产品市场价格水平、行业人工费用标准、国家有关部门指导行业协会发布的行业平均成本等情况,对报价合理性",
@@ -7831,7 +7943,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0276",
+            "clause_id": "TB-0280",
             "block": "rejection",
             "label": "废标项",
             "summary": "3.投标报价须包含招标文件全部内容,如分项报价表有缺漏视为已含在其他各项报价中,将不对投标总价进行调整。评标委员会有权要求投标人在评标现场合理的时间内对此进行书",
@@ -7859,7 +7971,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0277",
+            "clause_id": "TB-0281",
             "block": "rejection",
             "label": "废标项",
             "summary": "7.修正后的报价经投标人书面确认后产生约束力,投标人不确认的,其投标无效。",
@@ -7887,7 +7999,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0278",
+            "clause_id": "TB-0282",
             "block": "rejection",
             "label": "废标项",
             "summary": "4.采用最低评标价法时,提供相同品牌产品(单一产品或核心产品品牌相同)的不同投标人参加同一合同项下投标的,以其中通过资格审查、符合性审查且报价最低的参加评标;报",
@@ -7915,7 +8027,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0279",
+            "clause_id": "TB-0283",
             "block": "rejection",
             "label": "废标项",
             "summary": "2、对于招标文件中标记了“实质性格式”文件的,投标人不得改变格式中给定的文字所表达的含义,不得删减格式中的实质性内容,不得自行添加与格式中给定的文字内容相矛盾的",
@@ -7943,7 +8055,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0280",
+            "clause_id": "TB-0284",
             "block": "rejection",
             "label": "废标项",
             "summary": "序号：9 审查因素：视为串通投标 审查内容：不存在《政府采购货物和服务招标投标管理办<br>法》视为投标人串通投标的情形:<br>(一)不同投标人的投标文件由同",
@@ -7971,7 +8083,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0281",
+            "clause_id": "TB-0285",
             "block": "rejection",
             "label": "废标项",
             "summary": "(五)不同投标人的投标文件相互混装;",
@@ -7999,7 +8111,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0282",
+            "clause_id": "TB-0286",
             "block": "rejection",
             "label": "废标项",
             "summary": "2.表中列明采购标的一览表中的全部产品,否则投标无效。表中制造商规模请填写“大型”、“中型”、“小型”、“微型”或“其他”,中小企业的定义见第二章《投标人须知》",
@@ -8027,7 +8139,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0283",
+            "clause_id": "TB-0287",
             "block": "rejection",
             "label": "废标项",
             "summary": "64 5 投标保证金凭证/交款单据电子件(实质性格式) (招标代理机构): 我方提供万元的投标保证金作为项目(招标编号: )的投标担保。现保证:我方在规定的投标",
@@ -8055,7 +8167,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0284",
+            "clause_id": "TB-0288",
             "block": "rejection",
             "label": "废标项",
             "summary": "1.对招标文件中的所有技术要求,除本表所列明的所有偏离外,均视作供应商已对之理解和响应。此表中若无任何文字说明,内容为空白的,投标无效。",
@@ -8083,7 +8195,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0285",
+            "clause_id": "TB-0289",
             "block": "rejection",
             "label": "废标项",
             "summary": "1.对招标文件中的所有商务要求,除本表所列明的所有偏离外,均视作供应商已对之理解和响应。此表中若无任何文字说明,内容为空白的,投标无效。",
@@ -8111,7 +8223,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0286",
+            "clause_id": "TB-0290",
             "block": "rejection",
             "label": "废标项",
             "summary": "1.如本项目(包)允许分包,且投标人拟进行分包时,必须提供;如未提供,或提供了但未填写分包承担主体名称、拟分包合同内容、拟分包合同金额,投标无效。",
@@ -8139,7 +8251,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0287",
+            "clause_id": "TB-0291",
             "block": "rejection",
             "label": "废标项",
             "summary": "2.如本招标文件《投标人须知资料表》载明本项目分包承担主体应具备的相应资质条件, 则投标人须在本表中列明分包承担主体的资质等级,并后附资质证书电子件,否则投标无",
@@ -8167,7 +8279,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0288",
+            "clause_id": "TB-0292",
             "block": "rejection",
             "label": "废标项",
             "summary": "1.投标人“为落实政府采购政策”而向中小企业分包时必须提供,否则投标无效;且建议按照采购文件要求在资格证明文件部分提供;",
