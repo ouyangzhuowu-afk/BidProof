@@ -8,7 +8,7 @@
     "project_id": {"const": "project-025-bid-evidence-agent"},
     "goal": {"type": "string", "minLength": 1},
     "current_stage": {"type": "string", "minLength": 1},
-    "stage_status": {"enum": ["pending", "in_progress", "completed", "blocked", "needs_verification"]},
+    "stage_status": {"enum": ["pending", "in_progress", "completed", "blocked", "needs_verification", "pending_audit"]},
     "success_criteria": {"type": "object", "required": ["engineering", "business"]},
     "completed": {"type": "array"},
     "in_progress": {"type": "array"},

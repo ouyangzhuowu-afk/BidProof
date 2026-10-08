@@ -17,7 +17,30 @@
   },
   "current_stage": "sandbox-campaign-A",
   "stage_status": "in_progress",
-  "in_progress": [],
+  "in_progress": [
+    {
+      "id": "S-A-OCR-PUBLIC-EXPAND",
+      "title": "用新的公开招标/中标文件扩展 OCR 评测集并重跑 CER/F1/TEDS",
+      "status": "pending_audit",
+      "priority": "P1",
+      "campaign": "A",
+      "dependencies": [
+        "S-A-02",
+        "S-A-03",
+        "S-A-06",
+        "C-025"
+      ],
+      "artifacts": [
+        "work/eval/public_expand.py",
+        "work/public-eval/manifest.json",
+        "work/public-eval/FETCH.md",
+        "outputs/ocr-benchmark/public-expand-report.md",
+        "outputs/ocr-benchmark/public-expand-report.json"
+      ],
+      "validation": "Live RapidOCR vs text-layer GT. Prior public-eval docs 12. New completed PDFs 7, new not-scored HTML notices 2, one CCGP HTTPS fetch HTTP 403 not counted. Old set unchanged: CER 3.17% / F1 76.00% / TEDS 87.85%, all GATE_FAIL. Expanded public set on the same pages: CER 4.96% GATE_FAIL (54 pages), F1 97.17% GATE_PASS, TEDS 95.80% GATE_PASS (19 pages). Overall GATE_FAIL. product_pass=false. Synthetic rows excluded from the gate. Joe local PDF intake 2026-09-29: 12/12 duplicate by filename and sha256, 0 newly added, 0 provenance-unverified. No pilot/ICP ledger writes. T-005 not modified.",
+      "note": "pending_audit only. Not a product PASS and not a business unblock."
+    }
+  ],
   "completed": [
     {
       "id": "C-001",
@@ -511,7 +534,7 @@
         "outputs/sandbox-gate-productization-spec.md",
         "work/eval/TEDS_HARNESS.md"
       ],
-      "validation": "TEDS harness mean teds=0.8785 GATE_FAIL vs ≥90% (honest); product_pass=false; hard-OR aggregator + scan_quality.ocr_engineering_gates force NEEDS_REVIEW; no pilot/ICP writes; T-005 not bumped.",
+      "validation": "TEDS harness mean teds=0.8785 GATE_FAIL vs ≥90% (honest) on 16 pages (outputs/ocr-benchmark/teds-report.json); product_pass=false; hard-OR aggregator + scan_quality.ocr_engineering_gates force NEEDS_REVIEW; no pilot/ICP writes; T-005 not bumped.",
       "note": "Engineering GATE_FAIL is expected on sandbox hypotheses; not a product PASS."
     },
     {
@@ -660,6 +683,30 @@
       ],
       "validation": "main 0909587 推送后 Render 蓝本自动部署，约 3 分钟内切换：/ 开始提供 /static/marketing/assets/index-WmSIqwZA.css（旧包为 index-BBUKyzI9.css）。实测 /、/app、/healthz、/readyz、/privacy、/robots.txt、/sitemap.xml、/api/auth/status 全 200；匿名 GET /api/runs 401；已下线的 /static/landing.html 404；/static/legal.css 200。除 app.js 外静态资源与提交内容逐行一致（app.js 仅差镜像刻意剥离的 32 字节 sourcemap 指针，与 2026-09-24 记录一致）。真实浏览器 1440 与 390 视口加载新首页，点「开始检查」进入 /app 并弹出认证对话框。",
       "note": "线上 /api/auth/status 返回 passwordless {email:false, phone:false, oauth:[]} 且 personal_signup_enabled=true——没有配置投递渠道时验证码与 OAuth 入口按设计不展示，认证对话框回落为密码登录；这不是故障，开启需要运营方提供真实密钥（T-UX-AUTH-EXTERNAL-2026-09-24）。验收为工程验收，不构成企业业务验收，也不改变 T-005 与 OCR 门禁状态。"
+    },
+    {
+      "id": "C-T005-READY-2026-09-28",
+      "title": "T-005 pilot readiness scaffolding only",
+      "status": "verified",
+      "dependencies": [
+        "T-002",
+        "C-005",
+        "C-013"
+      ],
+      "artifacts": [
+        "docs/pilot/t005-readiness-2026-09-28.md",
+        "docs/pilot/t005-intake-checklist.md",
+        "work/pilot_readiness.py",
+        "work/pilot-row.template.json",
+        "work/icp-row.template.json",
+        "outputs/pilot-ledger.csv",
+        "outputs/icp-outreach.csv"
+      ],
+      "validation": "Audit passed scaffold-only readiness on PR #13 (https://github.com/ouyangzhuowu-afk/BidProof/pull/13), squash-merged as 792ff23189281f22c75d3539302f43aba7fe2552. Not business acceptance. T-005 stays blocked.",
+      "note": "scaffold-only. Pilot scan results are always NEEDS_REVIEW and cannot count as accuracy acceptance.",
+      "audited_by": "Audit",
+      "pull_request": "https://github.com/ouyangzhuowu-afk/BidProof/pull/13",
+      "merge_commit": "792ff23189281f22c75d3539302f43aba7fe2552"
     }
   ],
   "backlog": [
@@ -680,9 +727,9 @@
         "work/pilot-row.template.json",
         "work/icp-row.template.json"
       ],
-      "validation": "已建立 14 字段 pilot 台账、11 字段 ICP 触达台账、fail-closed 校验、快速追加 CLI 与 intake 模板；当前 0 条真实任务、0 条 ICP 触达、0 条付款意愿，等待首批真实企业输入",
-      "blocked_reason": "Sandbox phase locked 2026-09-16: human enterprise pilot deferred from this phase KPIs. Do not write real enterprise rows into pilot-ledger / icp-outreach. Campaign A engineering leaves (S-A-01..07 except open quality gates) are seeded; OCR CER/F1/TEDS still GATE_FAIL.",
-      "note": "deferred_for_sandbox_phase (status=blocked; not cancelled)"
+      "validation": "Sandbox deferral D-SANDBOX-2026-09-16 still holds. D-T005-UNBLOCK-2026-09-28 is scaffold-only and is not a business unblock. Ledgers remain empty of business rows. Business acceptance remains NOT_STARTED. Demo/test rows forbidden. TEDS GATE_FAIL mean 87.85% on 16 pages (outputs/ocr-benchmark/teds-report.json).",
+      "note": "deferred_for_sandbox_phase (status=blocked; not cancelled). Pilot scan results are always NEEDS_REVIEW and cannot count as accuracy acceptance.",
+      "blocked_reason": "Sandbox phase locked 2026-09-16: human enterprise pilot deferred from this phase KPIs. Joe did not unblock T-005 on 2026-09-28. Do not write real enterprise rows into pilot-ledger / icp-outreach. OCR CER/F1/TEDS still GATE_FAIL; product forces NEEDS_REVIEW."
     },
     {
       "id": "T-UX-AUTH-EXTERNAL-2026-09-24",
@@ -770,20 +817,34 @@
       "date": "2026-09-24",
       "decided_by": "agent",
       "evidence": "docs/production/render-pilot-2026-09-24.md"
+    },
+    {
+      "id": "D-T005-UNBLOCK-2026-09-28",
+      "decision": "Record pilot-readiness scaffolding only. This does not lift the T-005 process gate and is not a business unblock.",
+      "reason": "Joe did not clear or unblock T-005 on 2026-09-28. The only traceable authorization is Joe telling Edith to fix PR #13.",
+      "date": "2026-09-29",
+      "decided_by": "Edith (orchestration)",
+      "evidence": "Joe telling Edith in a Grok Bot private chat on 2026-09-29 11:20 (Asia/Shanghai): '修 #13，真实企业材料在本地已有' (fix #13; real enterprise materials already exist locally). That only authorizes fixing #13; it is not a business unblock.",
+      "scope": "scaffold-only",
+      "scope_detail": "pilot readiness scaffolding only",
+      "pilot_scan_results": "Pilot scan results are always NEEDS_REVIEW and cannot count as accuracy acceptance.",
+      "does_not_supersede": "D-SANDBOX-2026-09-16"
     }
   ],
   "open_questions": [
     {
       "id": "Q-001",
       "question": "首批真实试运行企业何时可提供？",
-      "impact": "阻塞业务付费验证",
-      "owner": "user"
+      "impact": "阻塞业务付费验证；沙箱推迟仍然有效，脚手架不是业务解阻",
+      "owner": "Joe",
+      "status": "open"
     },
     {
       "id": "Q-002",
       "question": "首批真实企业任务、人工确认和付款意愿何时可提供？",
-      "impact": "阻塞业务验收，不影响工程栈继续完善",
-      "owner": "user"
+      "impact": "阻塞业务验收结论从 NOT_STARTED 升级；不影响工程栈",
+      "owner": "Joe",
+      "status": "open"
     },
     {
       "id": "Q-SANDBOX-1",
@@ -1110,7 +1171,7 @@
       "path": "outputs/ocr-benchmark/teds-report.md",
       "kind": "teds-harness-report",
       "status": "verified",
-      "note": "S-A-06: honest GATE_FAIL mean teds≈87.8%; not a product PASS"
+      "note": "S-A-06: GATE_FAIL mean teds=0.8785 (87.85%) on 16 pages; outputs/ocr-benchmark/teds-report.json; not a product PASS"
     },
     {
       "path": "work/eval/teds_harness.py",
@@ -1250,20 +1311,75 @@
       "path": "docs/ux-0924/README.md",
       "status": "verified",
       "description": "0924 物料包导航、认证渠道配置与验收边界"
+    },
+    {
+      "path": "docs/pilot/t005-readiness-2026-09-28.md",
+      "kind": "pilot-readiness-record",
+      "status": "verified",
+      "note": "scaffold-only",
+      "audited_by": "Audit",
+      "pull_request": "https://github.com/ouyangzhuowu-afk/BidProof/pull/13",
+      "merge_commit": "792ff23189281f22c75d3539302f43aba7fe2552"
+    },
+    {
+      "path": "docs/pilot/t005-intake-checklist.md",
+      "kind": "pilot-intake-checklist",
+      "status": "verified",
+      "note": "scaffold-only",
+      "audited_by": "Audit",
+      "pull_request": "https://github.com/ouyangzhuowu-afk/BidProof/pull/13",
+      "merge_commit": "792ff23189281f22c75d3539302f43aba7fe2552"
+    },
+    {
+      "path": "work/pilot_readiness.py",
+      "kind": "pilot-readiness-cli",
+      "status": "verified",
+      "note": "scaffold-only",
+      "audited_by": "Audit",
+      "pull_request": "https://github.com/ouyangzhuowu-afk/BidProof/pull/13",
+      "merge_commit": "792ff23189281f22c75d3539302f43aba7fe2552"
+    },
+    {
+      "path": "work/eval/public_expand.py",
+      "kind": "ocr-public-expand",
+      "status": "pending_audit",
+      "note": "S-A-OCR-PUBLIC-EXPAND live OCR eval. Not verified."
+    },
+    {
+      "path": "outputs/ocr-benchmark/public-expand-report.md",
+      "kind": "ocr-public-expand-report",
+      "status": "pending_audit",
+      "note": "Expanded CER/F1/TEDS. Overall GATE_FAIL. Not verified."
+    },
+    {
+      "path": "outputs/ocr-benchmark/public-expand-report.json",
+      "kind": "ocr-public-expand-report",
+      "status": "pending_audit",
+      "note": "Machine-readable expanded gate. Not verified."
+    },
+    {
+      "path": "work/public-eval/FETCH.md",
+      "kind": "public-eval-runbook",
+      "status": "pending_audit",
+      "note": "Adds the S-A-OCR-PUBLIC-EXPAND reproduce section. Not verified."
     }
   ],
   "next_best_action": {
     "task_id": "T-005",
     "title": "建立真实任务验收台账与 45 天 ICP 试运行",
-    "reason": "Campaign A engineering leaves S-A-01..S-A-07 are seeded/harnessed. OCR CER/F1/TEDS remain honest GATE_FAIL. Next business leaf is T-005 real-enterprise pilot (blocked on real input).",
+    "reason": "D-SANDBOX-2026-09-16 still defers the human pilot. D-T005-UNBLOCK-2026-09-28 is scaffold-only (Edith orchestration) and is not a business unblock. Next business leaf is real enterprise input, not demo data.",
     "blocked_by": [
-      "real enterprise pilot input",
-      "OCR gates CER/F1/TEDS unmet"
+      "Joe: real enterprise pilot input",
+      "Joe: real ICP outreach input",
+      "D-SANDBOX-2026-09-16"
     ],
-    "parallel": [],
-    "note": "Do not write demo rows into pilot/ICP ledgers. Do not claim product PASS. Engineering fallback: improve OCR until gates pass while waiting for T-005 input. The production candidate is live on Render (C-RENDER-LIVE-2026-09-24); Render's blueprint sync never deletes an existing service variable, so a stale BIDPROOF_TRIAL_JOIN_CODE is dropped with a warning instead of blocking boot (D-RENDER-TRIALCODE-2026-09-24). Since 2026-09-24 the shipped landing and unified auth are C-UX-AUTH-2026-09-24; turning the one-time-code and OAuth entry points on is an operator action (T-UX-AUTH-EXTERNAL-2026-09-24) that needs real provider credentials, and no repository change can substitute for it."
+    "parallel": [
+      "OCR engineering gates still GATE_FAIL: line CER 3.17%, key-field F1 76.00%, TEDS 87.85% on 16 pages (outputs/ocr-benchmark/teds-report.json). Product forces NEEDS_REVIEW.",
+      "T-UX-AUTH-EXTERNAL-2026-09-24 needs real provider credentials"
+    ],
+    "note": "Do not write demo/test rows into pilot/ICP ledgers. Do not claim business TARGET_MET. Pilot scan results are always NEEDS_REVIEW and cannot count as accuracy acceptance. On real input: copy template → fill → pilot_ledger/icp_ledger --row-json. Readiness: uv run python -m work.pilot_readiness --json."
   },
-  "updated_at": "2026-09-24T09:05:00+00:00",
+  "updated_at": "2026-09-29T07:20:00+00:00",
   "sandbox_roadmap": {
     "locked_at": "2026-09-16",
     "gates": {

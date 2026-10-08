@@ -61,3 +61,23 @@ uv run python -m work.eval.rapidocr_line_cer
 The line-CER command is expected to remain `GATE_FAIL` on the sandbox hypotheses (intentional; not a product PASS).
 
 Key-field GT seed (S-A-04) is separate: `uv run python -m work.eval.key_field_gt`. See `work/eval/KEY_FIELD_GT.md`. That command does **not** compute F1.
+
+## S-A-OCR-PUBLIC-EXPAND (2026-09-29)
+
+Additional public PDFs are appended to this same manifest with `leaf_id=S-A-OCR-PUBLIC-EXPAND`. They are eval samples only.
+
+- Deduplicate against this manifest and against `work/training-corpus/tender-public/manifest.json`. A duplicate SHA is a fetch failure and is not counted.
+- `source2-fujian` and anything under `outputs/case-studies/` or `work/training-corpus/` cannot become GT.
+- Synthetic rows stay in the OCR report appendix and are excluded from the expanded gate.
+- Ground truth is the PDF text layer, or a PyMuPDF table whose cells are confirmed in that text layer. Published HTML notices without an official PDF are stored redacted and marked not-scored. OCR output is never ground truth.
+- Thresholds stay CER ≤ 2%, key-field F1 ≥ 97%, TEDS ≥ 90%.
+- Line CER segments table-of-contents leaders before alignment. TEDS places RapidOCR text into the PDF ruling-line grid. Stored ground truth stays the text layer. Pages are not dropped.
+
+```bash
+uv run --extra ocr python -m work.eval.public_expand --build
+uv run python -m work.eval.public_expand --report
+```
+
+The report is `outputs/ocr-benchmark/public-expand-report.md`. It repeats the published old-set numbers and the expanded live-OCR numbers. `product_pass` stays false. This leaf does not write pilot or ICP ledgers and does not change T-005.
+
+Joe's 2026-09-29 local drop (`work/eval/fixtures/joe_local_pdfs_2026-09-29.json`, 12 PDFs) matches completed rows already in this manifest by filename and SHA-256. Those 12 stay duplicates: 0 newly added, 0 provenance-unverified. Provenance in the report is the existing `source_url` / `fetched_at` / `license_or_usage_note`.

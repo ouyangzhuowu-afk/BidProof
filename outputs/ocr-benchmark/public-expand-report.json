@@ -1,0 +1,1633 @@
+{
+  "leaf_id": "S-A-OCR-PUBLIC-EXPAND",
+  "generated_at": "2026-09-29T09:06:12.123118+00:00",
+  "claim_scope": "engineering_gate_only",
+  "product_pass": false,
+  "business_pass": false,
+  "t005": false,
+  "forced_requirement_status": "NEEDS_REVIEW",
+  "thresholds": {
+    "line_cer_max": 0.02,
+    "key_field_f1_min": 0.97,
+    "teds_min": 0.9
+  },
+  "prior_completed_documents": 12,
+  "new_completed_documents": 7,
+  "new_scored_pages": {
+    "cer": 54,
+    "teds": 19,
+    "key_field_rows": 34
+  },
+  "new_not_scored": 2,
+  "new_scored_documents": 7,
+  "not_scored": [
+    {
+      "document_id": "pub-gx-ventilator-monitors",
+      "page": 1,
+      "scored": false,
+      "reason": "embedded text layer too short; OCR was not used as ground truth",
+      "source_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1024FPA/undefined/450103/10007341141/20266/264475cd-19b9-493f-b4e3-142276a4f506.pdf",
+      "fetched_at": "2026-09-16T11:47:36Z",
+      "license_or_usage_note": "公开政府采购/公共资源交易平台公开发布的招标采购文件，仅作为内部工程能力回归的公开 DATA 备份；不用于对外产品承诺，不替代官方分发授权。"
+    },
+    {
+      "document_id": "pub-ccgp-zycg-ac-award-202609",
+      "title": "中央国家机关2026年空调批量集中采购项目-9月中标公告",
+      "publisher": "中国政府采购网",
+      "source_type": "national_public_procurement_portal",
+      "notice_kind": "award",
+      "source_url": "http://www.ccgp.gov.cn/cggg/zygg/zbgg/202609/t20260914_27319969.htm",
+      "scored": false,
+      "fetched_at": "2026-09-29T07:16:40Z",
+      "license_or_usage_note": "公开政府采购/公共资源交易平台公开发布的招标采购文件，仅作为内部工程能力回归的公开 DATA 备份；不用于对外产品承诺，不替代官方分发授权。",
+      "reason": "Published HTML is authoritative, but the notice has no official PDF page image. A synthetic render was not created and is excluded from CER/F1/TEDS.",
+      "stored_text": "work/public-eval/notices/pub-ccgp-zycg-ac-award-202609.txt",
+      "sha256": "0cf5bbafc6296acef88d65098947854aa27c63c899864d28b4e94180c822bf80",
+      "gt_source": "published_html"
+    },
+    {
+      "document_id": "pub-gxggzy-femtosecond-2026",
+      "title": "2026年广西大型医用设备（飞秒激光手术系统）集中采购公开招标公告",
+      "publisher": "广西壮族自治区公共资源交易中心",
+      "source_type": "provincial_public_resource_platform",
+      "notice_kind": "tender_announcement",
+      "source_url": "http://gxggzy.gxzf.gov.cn/yxcgptrk/yxcgpt_tzgg_234096/tzgg_hc/t28134257.shtml",
+      "scored": false,
+      "fetched_at": "2026-09-29T07:16:40Z",
+      "license_or_usage_note": "公开政府采购/公共资源交易平台公开发布的招标采购文件，仅作为内部工程能力回归的公开 DATA 备份；不用于对外产品承诺，不替代官方分发授权。",
+      "reason": "Published HTML is authoritative, but the notice has no official PDF page image. A synthetic render was not created and is excluded from CER/F1/TEDS.",
+      "stored_text": "work/public-eval/notices/pub-gxggzy-femtosecond-2026.txt",
+      "sha256": "72549172233827a5fbec5998f8f38a2b53db1f7dd4ecb5c0d8cb2aec6b94b733",
+      "gt_source": "published_html"
+    }
+  ],
+  "old_set": {
+    "line_cer": 0.031746031746031744,
+    "line_cer_gate": "GATE_FAIL",
+    "line_cer_pages": 3,
+    "page_cer": 0.4603174603174603,
+    "key_field_f1": 0.76,
+    "key_field_f1_gate": "GATE_FAIL",
+    "tp": 57,
+    "fp": 15,
+    "fn": 21,
+    "fn_names": {
+      "bid_bond": 4,
+      "contract_end": 3,
+      "budget": 2,
+      "ceiling": 2,
+      "deadline": 2,
+      "procurement_method": 2,
+      "qualification_ref": 2,
+      "agent": 1,
+      "project_code": 1,
+      "project_name": 1,
+      "purchaser": 1
+    },
+    "teds": 0.8784546114752891,
+    "teds_gate": "GATE_FAIL",
+    "teds_pages_scored": 16,
+    "cer_pages": [
+      {
+        "doc_id": "sandbox-public-001",
+        "page": 1,
+        "page_cer": 0.5957446808510638,
+        "line_cer": 0.02127659574468085
+      },
+      {
+        "doc_id": "sandbox-public-002",
+        "page": 1,
+        "page_cer": 0.09090909090909091,
+        "line_cer": 0.09090909090909091
+      },
+      {
+        "doc_id": "sandbox-weak-001",
+        "page": 1,
+        "page_cer": 0.0,
+        "line_cer": 0.0
+      }
+    ],
+    "teds_pages": [
+      {
+        "doc_id": "fixture-001",
+        "page": 14,
+        "teds": 1.0
+      },
+      {
+        "doc_id": "fixture-001",
+        "page": 32,
+        "teds": 0.7333333333333334
+      },
+      {
+        "doc_id": "fixture-002",
+        "page": 33,
+        "teds": 0.873015873015873
+      },
+      {
+        "doc_id": "fixture-002",
+        "page": 37,
+        "teds": 1.0
+      },
+      {
+        "doc_id": "fixture-003",
+        "page": 29,
+        "teds": 1.0
+      },
+      {
+        "doc_id": "fixture-003",
+        "page": 35,
+        "teds": 0.7333333333333334
+      },
+      {
+        "doc_id": "pub-gx-nanning-vascular-doppler",
+        "page": 3,
+        "teds": 1.0
+      },
+      {
+        "doc_id": "pub-gx-nanning-vascular-doppler",
+        "page": 16,
+        "teds": 0.75
+      },
+      {
+        "doc_id": "pub-gx-nanning-vascular-doppler",
+        "page": 17,
+        "teds": 0.9431818181818182
+      },
+      {
+        "doc_id": "pub-gx-ventilator-monitors",
+        "page": 15,
+        "teds": 1.0
+      },
+      {
+        "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
+        "page": 51,
+        "teds": 0.7413793103448276
+      },
+      {
+        "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
+        "page": 73,
+        "teds": 0.8157894736842105
+      },
+      {
+        "doc_id": "synthetic-teds-bid-opening",
+        "page": 1,
+        "teds": 1.0
+      },
+      {
+        "doc_id": "synthetic-teds-quote-detail",
+        "page": 1,
+        "teds": 0.6470588235294117
+      },
+      {
+        "doc_id": "synthetic-teds-score",
+        "page": 1,
+        "teds": 0.8181818181818181
+      },
+      {
+        "doc_id": "synthetic-teds-deviation",
+        "page": 1,
+        "teds": 1.0
+      }
+    ],
+    "note": "Published sandbox harness on the frozen hypotheses. Includes synthetic rows. Reproduced, not replaced."
+  },
+  "synthetic_appendix": {
+    "line_cer": 0.031746031746031744,
+    "line_cer_gate": "GATE_FAIL",
+    "line_cer_pages": 3,
+    "page_cer": 0.4603174603174603,
+    "key_field_f1": 0.10256410256410256,
+    "key_field_f1_gate": "GATE_FAIL",
+    "tp": 4,
+    "fp": 68,
+    "fn": 2,
+    "fn_names": {
+      "bid_bond": 1,
+      "budget": 1
+    },
+    "teds": 0.8663101604278074,
+    "teds_gate": "GATE_FAIL",
+    "teds_pages_scored": 4,
+    "cer_pages": [
+      {
+        "doc_id": "sandbox-public-001",
+        "page": 1,
+        "page_cer": 0.5957446808510638,
+        "line_cer": 0.02127659574468085
+      },
+      {
+        "doc_id": "sandbox-public-002",
+        "page": 1,
+        "page_cer": 0.09090909090909091,
+        "line_cer": 0.09090909090909091
+      },
+      {
+        "doc_id": "sandbox-weak-001",
+        "page": 1,
+        "page_cer": 0.0,
+        "line_cer": 0.0
+      }
+    ],
+    "teds_pages": [
+      {
+        "doc_id": "synthetic-teds-bid-opening",
+        "page": 1,
+        "teds": 1.0
+      },
+      {
+        "doc_id": "synthetic-teds-quote-detail",
+        "page": 1,
+        "teds": 0.6470588235294117
+      },
+      {
+        "doc_id": "synthetic-teds-score",
+        "page": 1,
+        "teds": 0.8181818181818181
+      },
+      {
+        "doc_id": "synthetic-teds-deviation",
+        "page": 1,
+        "teds": 1.0
+      }
+    ],
+    "note": "Synthetic sandbox rows and synthetic scan material are excluded from the gate."
+  },
+  "expanded_with_frozen_hypotheses": {
+    "line_cer": 0.14696873199284263,
+    "line_cer_gate": "GATE_FAIL",
+    "line_cer_pages": 54,
+    "page_cer": 0.15148758074788463,
+    "key_field_f1": 0.9454545454545454,
+    "key_field_f1_gate": "GATE_FAIL",
+    "tp": 104,
+    "fp": 9,
+    "fn": 3,
+    "fn_names": {
+      "budget": 1,
+      "ceiling": 1,
+      "project_code": 1
+    },
+    "teds": 0.9677534377328016,
+    "teds_gate": "GATE_PASS",
+    "teds_pages_scored": 31,
+    "cer_pages": [
+      {
+        "doc_id": "fixture-001",
+        "page": 2,
+        "page_cer": 0.017777777777777778,
+        "line_cer": 0.017777777777777778
+      },
+      {
+        "doc_id": "fixture-001",
+        "page": 3,
+        "page_cer": 0.0021929824561403508,
+        "line_cer": 0.0021929824561403508
+      },
+      {
+        "doc_id": "fixture-001",
+        "page": 14,
+        "page_cer": 0.009259259259259259,
+        "line_cer": 0.009259259259259259
+      },
+      {
+        "doc_id": "fixture-001",
+        "page": 32,
+        "page_cer": 0.494949494949495,
+        "line_cer": 0.1717171717171717
+      },
+      {
+        "doc_id": "fixture-002",
+        "page": 1,
+        "page_cer": 0.0,
+        "line_cer": 0.0
+      },
+      {
+        "doc_id": "fixture-002",
+        "page": 3,
+        "page_cer": 0.019230769230769232,
+        "line_cer": 0.023076923076923078
+      },
+      {
+        "doc_id": "fixture-002",
+        "page": 6,
+        "page_cer": 0.07845433255269321,
+        "line_cer": 0.15807962529274006
+      },
+      {
+        "doc_id": "fixture-002",
+        "page": 33,
+        "page_cer": 0.2971887550200803,
+        "line_cer": 0.0
+      },
+      {
+        "doc_id": "fixture-002",
+        "page": 37,
+        "page_cer": 0.0344311377245509,
+        "line_cer": 0.017964071856287425
+      },
+      {
+        "doc_id": "fixture-003",
+        "page": 1,
+        "page_cer": 0.013333333333333334,
+        "line_cer": 0.013333333333333334
+      },
+      {
+        "doc_id": "fixture-003",
+        "page": 4,
+        "page_cer": 0.1819620253164557,
+        "line_cer": 0.2199367088607595
+      },
+      {
+        "doc_id": "fixture-003",
+        "page": 5,
+        "page_cer": 0.21357850070721357,
+        "line_cer": 0.3521923620933522
+      },
+      {
+        "doc_id": "fixture-003",
+        "page": 9,
+        "page_cer": 0.08190224570673713,
+        "line_cer": 0.03038309114927345
+      },
+      {
+        "doc_id": "fixture-003",
+        "page": 29,
+        "page_cer": 0.08538587848932677,
+        "line_cer": 0.0361247947454844
+      },
+      {
+        "doc_id": "fixture-003",
+        "page": 35,
+        "page_cer": 0.1595744680851064,
+        "line_cer": 0.0851063829787234
+      },
+      {
+        "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
+        "page": 1,
+        "page_cer": 0.006329113924050633,
+        "line_cer": 0.006329113924050633
+      },
+      {
+        "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
+        "page": 3,
+        "page_cer": 0.12012012012012012,
+        "line_cer": 0.0045045045045045045
+      },
+      {
+        "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
+        "page": 4,
+        "page_cer": 0.0048638132295719845,
+        "line_cer": 0.0029182879377431907
+      },
+      {
+        "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
+        "page": 51,
+        "page_cer": 0.015950920245398775,
+        "line_cer": 0.001226993865030675
+      },
+      {
+        "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
+        "page": 73,
+        "page_cer": 0.08428246013667426,
+        "line_cer": 0.04328018223234624
+      },
+      {
+        "doc_id": "pub-gx-nanning-vascular-doppler",
+        "page": 3,
+        "page_cer": 0.2421185372005044,
+        "line_cer": 0.005044136191677175
+      },
+      {
+        "doc_id": "pub-gx-nanning-vascular-doppler",
+        "page": 16,
+        "page_cer": 0.013539651837524178,
+        "line_cer": 0.005802707930367505
+      },
+      {
+        "doc_id": "pub-gx-nanning-vascular-doppler",
+        "page": 17,
+        "page_cer": 0.07719298245614035,
+        "line_cer": 0.056140350877192984
+      },
+      {
+        "doc_id": "pub-gx-qintang-flow-cytometer",
+        "page": 1,
+        "page_cer": 0.027210884353741496,
+        "line_cer": 0.027210884353741496
+      },
+      {
+        "doc_id": "pub-gx-qintang-flow-cytometer",
+        "page": 3,
+        "page_cer": 0.010869565217391304,
+        "line_cer": 0.008152173913043478
+      },
+      {
+        "doc_id": "pub-gx-qintang-flow-cytometer",
+        "page": 4,
+        "page_cer": 0.0023612750885478157,
+        "line_cer": 0.0
+      },
+      {
+        "doc_id": "pub-gx-ventilator-monitors",
+        "page": 3,
+        "page_cer": 0.0034924330616996507,
+        "line_cer": 0.012805587892898719
+      },
+      {
+        "doc_id": "pub-gx-ventilator-monitors",
+        "page": 4,
+        "page_cer": 0.004550625711035267,
+        "line_cer": 0.0022753128555176336
+      },
+      {
+        "doc_id": "pub-gx-ventilator-monitors",
+        "page": 5,
+        "page_cer": 0.03339041095890411,
+        "line_cer": 0.04280821917808219
+      },
+      {
+        "doc_id": "pub-gx-ventilator-monitors",
+        "page": 15,
+        "page_cer": 0.16252390057361377,
+        "line_cer": 0.0038240917782026767
+      },
+      {
+        "doc_id": "pub-gx-youjiang-ultrasound",
+        "page": 2,
+        "page_cer": 0.006060606060606061,
+        "line_cer": 0.006060606060606061
+      },
+      {
+        "doc_id": "pub-gx-youjiang-ultrasound",
+        "page": 4,
+        "page_cer": 0.0016638935108153079,
+        "line_cer": 0.0016638935108153079
+      },
+      {
+        "doc_id": "pub-gx-youjiang-ultrasound",
+        "page": 5,
+        "page_cer": 0.04954954954954955,
+        "line_cer": 0.0777027027027027
+      },
+      {
+        "doc_id": "pub-gx-youjiang-ultrasound",
+        "page": 6,
+        "page_cer": 0.03923444976076555,
+        "line_cer": 0.08995215311004785
+      },
+      {
+        "doc_id": "pub-gx-tianlin-yuegui-devices-2026",
+        "page": 1,
+        "page_cer": 0.425,
+        "line_cer": 0.425
+      },
+      {
+        "doc_id": "pub-gx-tianlin-yuegui-devices-2026",
+        "page": 2,
+        "page_cer": 0.8326100433973962,
+        "line_cer": 0.8908865468071916
+      },
+      {
+        "doc_id": "pub-gx-tianlin-yuegui-devices-2026",
+        "page": 8,
+        "page_cer": 0.047752808988764044,
+        "line_cer": 0.032303370786516857
+      },
+      {
+        "doc_id": "pub-gx-nanxishan-dr-mammo-2026",
+        "page": 1,
+        "page_cer": 0.0,
+        "line_cer": 0.0
+      },
+      {
+        "doc_id": "pub-gx-nanxishan-dr-mammo-2026",
+        "page": 2,
+        "page_cer": 0.7371428571428571,
+        "line_cer": 0.8038095238095239
+      },
+      {
+        "doc_id": "pub-gx-nanxishan-dr-mammo-2026",
+        "page": 9,
+        "page_cer": 0.09482758620689655,
+        "line_cer": 0.006896551724137931
+      },
+      {
+        "doc_id": "pub-gx-minzu-ultrasound-2026",
+        "page": 1,
+        "page_cer": 0.1189083820662768,
+        "line_cer": 0.15009746588693956
+      },
+      {
+        "doc_id": "pub-gx-minzu-ultrasound-2026",
+        "page": 2,
+        "page_cer": 0.046906187624750496,
+        "line_cer": 0.18463073852295409
+      },
+      {
+        "doc_id": "pub-gx-minzu-ultrasound-2026",
+        "page": 6,
+        "page_cer": 0.03535911602209945,
+        "line_cer": 0.026519337016574586
+      },
+      {
+        "doc_id": "pub-gx-hechi-mine-safety-2026",
+        "page": 1,
+        "page_cer": 0.04310344827586207,
+        "line_cer": 0.05172413793103448
+      },
+      {
+        "doc_id": "pub-gx-hechi-mine-safety-2026",
+        "page": 2,
+        "page_cer": 0.7267080745341615,
+        "line_cer": 0.9099378881987578
+      },
+      {
+        "doc_id": "pub-gx-hechi-mine-safety-2026",
+        "page": 3,
+        "page_cer": 0.07202680067001675,
+        "line_cer": 0.0016750418760469012
+      },
+      {
+        "doc_id": "pub-gx-info-center-compute-2026",
+        "page": 1,
+        "page_cer": 0.0,
+        "line_cer": 0.022770398481973434
+      },
+      {
+        "doc_id": "pub-gx-info-center-compute-2026",
+        "page": 2,
+        "page_cer": 0.0011061946902654867,
+        "line_cer": 0.03871681415929203
+      },
+      {
+        "doc_id": "pub-gx-info-center-compute-2026",
+        "page": 5,
+        "page_cer": 0.11072261072261072,
+        "line_cer": 0.10139860139860139
+      },
+      {
+        "doc_id": "pub-gx-yibiatong-phase2-2026",
+        "page": 2,
+        "page_cer": 0.8413361169102297,
+        "line_cer": 0.9331941544885177
+      },
+      {
+        "doc_id": "pub-gx-yibiatong-phase2-2026",
+        "page": 3,
+        "page_cer": 0.05875706214689266,
+        "line_cer": 0.00903954802259887
+      },
+      {
+        "doc_id": "pub-gx-nonggang-patrol-2026",
+        "page": 2,
+        "page_cer": 0.8938156359393232,
+        "line_cer": 0.9311551925320887
+      },
+      {
+        "doc_id": "pub-gx-nonggang-patrol-2026",
+        "page": 3,
+        "page_cer": 0.0028208744710860366,
+        "line_cer": 0.0
+      },
+      {
+        "doc_id": "pub-gx-nonggang-patrol-2026",
+        "page": 9,
+        "page_cer": 0.1095679012345679,
+        "line_cer": 0.006172839506172839
+      }
+    ],
+    "teds_pages": [
+      {
+        "doc_id": "fixture-001",
+        "page": 14,
+        "teds": 1.0
+      },
+      {
+        "doc_id": "fixture-001",
+        "page": 32,
+        "teds": 0.9333333333333333
+      },
+      {
+        "doc_id": "fixture-002",
+        "page": 33,
+        "teds": 1.0
+      },
+      {
+        "doc_id": "fixture-002",
+        "page": 37,
+        "teds": 1.0
+      },
+      {
+        "doc_id": "fixture-003",
+        "page": 29,
+        "teds": 1.0
+      },
+      {
+        "doc_id": "fixture-003",
+        "page": 35,
+        "teds": 1.0
+      },
+      {
+        "doc_id": "pub-gx-nanning-vascular-doppler",
+        "page": 3,
+        "teds": 0.9855072463768116
+      },
+      {
+        "doc_id": "pub-gx-nanning-vascular-doppler",
+        "page": 16,
+        "teds": 1.0
+      },
+      {
+        "doc_id": "pub-gx-nanning-vascular-doppler",
+        "page": 17,
+        "teds": 0.9772727272727273
+      },
+      {
+        "doc_id": "pub-gx-ventilator-monitors",
+        "page": 15,
+        "teds": 0.9811320754716981
+      },
+      {
+        "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
+        "page": 51,
+        "teds": 1.0
+      },
+      {
+        "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
+        "page": 73,
+        "teds": 0.9210526315789473
+      },
+      {
+        "doc_id": "fixture-001",
+        "page": 14,
+        "teds": 1.0
+      },
+      {
+        "doc_id": "fixture-001",
+        "page": 32,
+        "teds": 0.9333333333333333
+      },
+      {
+        "doc_id": "fixture-002",
+        "page": 33,
+        "teds": 1.0
+      },
+      {
+        "doc_id": "fixture-002",
+        "page": 37,
+        "teds": 1.0
+      },
+      {
+        "doc_id": "fixture-003",
+        "page": 29,
+        "teds": 1.0
+      },
+      {
+        "doc_id": "fixture-003",
+        "page": 35,
+        "teds": 1.0
+      },
+      {
+        "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
+        "page": 51,
+        "teds": 1.0
+      },
+      {
+        "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
+        "page": 73,
+        "teds": 0.9210526315789473
+      },
+      {
+        "doc_id": "pub-gx-nanning-vascular-doppler",
+        "page": 3,
+        "teds": 0.9855072463768116
+      },
+      {
+        "doc_id": "pub-gx-nanning-vascular-doppler",
+        "page": 16,
+        "teds": 1.0
+      },
+      {
+        "doc_id": "pub-gx-nanning-vascular-doppler",
+        "page": 17,
+        "teds": 0.9772727272727273
+      },
+      {
+        "doc_id": "pub-gx-ventilator-monitors",
+        "page": 15,
+        "teds": 0.9811320754716981
+      },
+      {
+        "doc_id": "pub-gx-tianlin-yuegui-devices-2026",
+        "page": 8,
+        "teds": 0.75
+      },
+      {
+        "doc_id": "pub-gx-nanxishan-dr-mammo-2026",
+        "page": 9,
+        "teds": 0.9047619047619048
+      },
+      {
+        "doc_id": "pub-gx-minzu-ultrasound-2026",
+        "page": 6,
+        "teds": 0.9333333333333333
+      },
+      {
+        "doc_id": "pub-gx-hechi-mine-safety-2026",
+        "page": 3,
+        "teds": 1.0
+      },
+      {
+        "doc_id": "pub-gx-info-center-compute-2026",
+        "page": 5,
+        "teds": 0.9090909090909091
+      },
+      {
+        "doc_id": "pub-gx-yibiatong-phase2-2026",
+        "page": 3,
+        "teds": 1.0
+      },
+      {
+        "doc_id": "pub-gx-nonggang-patrol-2026",
+        "page": 9,
+        "teds": 0.9065743944636678
+      }
+    ],
+    "note": "Diagnostic mix of frozen sandbox hypotheses and new rows. Not the live OCR gate."
+  },
+  "expanded": {
+    "line_cer": 0.04963968493380258,
+    "line_cer_gate": "GATE_FAIL",
+    "line_cer_pages": 54,
+    "page_cer": 0.06371711077593431,
+    "key_field_f1": 0.9716981132075472,
+    "key_field_f1_gate": "GATE_PASS",
+    "tp": 103,
+    "fp": 3,
+    "fn": 3,
+    "fn_names": {
+      "budget": 1,
+      "ceiling": 1,
+      "project_code": 1
+    },
+    "teds": 0.9580030818780702,
+    "teds_gate": "GATE_PASS",
+    "teds_pages_scored": 19,
+    "cer_pages": [
+      {
+        "doc_id": "fixture-001",
+        "page": 2,
+        "page_cer": 0.017777777777777778,
+        "line_cer": 0.017777777777777778
+      },
+      {
+        "doc_id": "fixture-001",
+        "page": 3,
+        "page_cer": 0.0021929824561403508,
+        "line_cer": 0.0021929824561403508
+      },
+      {
+        "doc_id": "fixture-001",
+        "page": 14,
+        "page_cer": 0.009259259259259259,
+        "line_cer": 0.009259259259259259
+      },
+      {
+        "doc_id": "fixture-001",
+        "page": 32,
+        "page_cer": 0.494949494949495,
+        "line_cer": 0.1717171717171717
+      },
+      {
+        "doc_id": "fixture-002",
+        "page": 1,
+        "page_cer": 0.0,
+        "line_cer": 0.0
+      },
+      {
+        "doc_id": "fixture-002",
+        "page": 3,
+        "page_cer": 0.019230769230769232,
+        "line_cer": 0.023076923076923078
+      },
+      {
+        "doc_id": "fixture-002",
+        "page": 6,
+        "page_cer": 0.07845433255269321,
+        "line_cer": 0.15807962529274006
+      },
+      {
+        "doc_id": "fixture-002",
+        "page": 33,
+        "page_cer": 0.2971887550200803,
+        "line_cer": 0.0
+      },
+      {
+        "doc_id": "fixture-002",
+        "page": 37,
+        "page_cer": 0.0344311377245509,
+        "line_cer": 0.017964071856287425
+      },
+      {
+        "doc_id": "fixture-003",
+        "page": 1,
+        "page_cer": 0.013333333333333334,
+        "line_cer": 0.013333333333333334
+      },
+      {
+        "doc_id": "fixture-003",
+        "page": 4,
+        "page_cer": 0.1819620253164557,
+        "line_cer": 0.2199367088607595
+      },
+      {
+        "doc_id": "fixture-003",
+        "page": 5,
+        "page_cer": 0.21357850070721357,
+        "line_cer": 0.3521923620933522
+      },
+      {
+        "doc_id": "fixture-003",
+        "page": 9,
+        "page_cer": 0.08190224570673713,
+        "line_cer": 0.03038309114927345
+      },
+      {
+        "doc_id": "fixture-003",
+        "page": 29,
+        "page_cer": 0.08538587848932677,
+        "line_cer": 0.0361247947454844
+      },
+      {
+        "doc_id": "fixture-003",
+        "page": 35,
+        "page_cer": 0.1595744680851064,
+        "line_cer": 0.0851063829787234
+      },
+      {
+        "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
+        "page": 1,
+        "page_cer": 0.006329113924050633,
+        "line_cer": 0.006329113924050633
+      },
+      {
+        "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
+        "page": 3,
+        "page_cer": 0.12012012012012012,
+        "line_cer": 0.0045045045045045045
+      },
+      {
+        "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
+        "page": 4,
+        "page_cer": 0.0048638132295719845,
+        "line_cer": 0.0029182879377431907
+      },
+      {
+        "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
+        "page": 51,
+        "page_cer": 0.015950920245398775,
+        "line_cer": 0.001226993865030675
+      },
+      {
+        "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
+        "page": 73,
+        "page_cer": 0.08428246013667426,
+        "line_cer": 0.04328018223234624
+      },
+      {
+        "doc_id": "pub-gx-nanning-vascular-doppler",
+        "page": 3,
+        "page_cer": 0.2421185372005044,
+        "line_cer": 0.005044136191677175
+      },
+      {
+        "doc_id": "pub-gx-nanning-vascular-doppler",
+        "page": 16,
+        "page_cer": 0.013539651837524178,
+        "line_cer": 0.005802707930367505
+      },
+      {
+        "doc_id": "pub-gx-nanning-vascular-doppler",
+        "page": 17,
+        "page_cer": 0.07719298245614035,
+        "line_cer": 0.056140350877192984
+      },
+      {
+        "doc_id": "pub-gx-qintang-flow-cytometer",
+        "page": 1,
+        "page_cer": 0.027210884353741496,
+        "line_cer": 0.027210884353741496
+      },
+      {
+        "doc_id": "pub-gx-qintang-flow-cytometer",
+        "page": 3,
+        "page_cer": 0.010869565217391304,
+        "line_cer": 0.008152173913043478
+      },
+      {
+        "doc_id": "pub-gx-qintang-flow-cytometer",
+        "page": 4,
+        "page_cer": 0.0023612750885478157,
+        "line_cer": 0.0
+      },
+      {
+        "doc_id": "pub-gx-ventilator-monitors",
+        "page": 3,
+        "page_cer": 0.0034924330616996507,
+        "line_cer": 0.012805587892898719
+      },
+      {
+        "doc_id": "pub-gx-ventilator-monitors",
+        "page": 4,
+        "page_cer": 0.004550625711035267,
+        "line_cer": 0.0022753128555176336
+      },
+      {
+        "doc_id": "pub-gx-ventilator-monitors",
+        "page": 5,
+        "page_cer": 0.03339041095890411,
+        "line_cer": 0.04280821917808219
+      },
+      {
+        "doc_id": "pub-gx-ventilator-monitors",
+        "page": 15,
+        "page_cer": 0.16252390057361377,
+        "line_cer": 0.0038240917782026767
+      },
+      {
+        "doc_id": "pub-gx-youjiang-ultrasound",
+        "page": 2,
+        "page_cer": 0.006060606060606061,
+        "line_cer": 0.006060606060606061
+      },
+      {
+        "doc_id": "pub-gx-youjiang-ultrasound",
+        "page": 4,
+        "page_cer": 0.0016638935108153079,
+        "line_cer": 0.0016638935108153079
+      },
+      {
+        "doc_id": "pub-gx-youjiang-ultrasound",
+        "page": 5,
+        "page_cer": 0.04954954954954955,
+        "line_cer": 0.0777027027027027
+      },
+      {
+        "doc_id": "pub-gx-youjiang-ultrasound",
+        "page": 6,
+        "page_cer": 0.05071770334928229,
+        "line_cer": 0.08995215311004785
+      },
+      {
+        "doc_id": "pub-gx-tianlin-yuegui-devices-2026",
+        "page": 1,
+        "page_cer": 0.425,
+        "line_cer": 0.425
+      },
+      {
+        "doc_id": "pub-gx-tianlin-yuegui-devices-2026",
+        "page": 2,
+        "page_cer": 0.03787878787878788,
+        "line_cer": 0.045454545454545456
+      },
+      {
+        "doc_id": "pub-gx-tianlin-yuegui-devices-2026",
+        "page": 8,
+        "page_cer": 0.047752808988764044,
+        "line_cer": 0.032303370786516857
+      },
+      {
+        "doc_id": "pub-gx-nanxishan-dr-mammo-2026",
+        "page": 1,
+        "page_cer": 0.0,
+        "line_cer": 0.0
+      },
+      {
+        "doc_id": "pub-gx-nanxishan-dr-mammo-2026",
+        "page": 2,
+        "page_cer": 0.041666666666666664,
+        "line_cer": 0.041666666666666664
+      },
+      {
+        "doc_id": "pub-gx-nanxishan-dr-mammo-2026",
+        "page": 9,
+        "page_cer": 0.09482758620689655,
+        "line_cer": 0.006896551724137931
+      },
+      {
+        "doc_id": "pub-gx-minzu-ultrasound-2026",
+        "page": 1,
+        "page_cer": 0.1189083820662768,
+        "line_cer": 0.15009746588693956
+      },
+      {
+        "doc_id": "pub-gx-minzu-ultrasound-2026",
+        "page": 2,
+        "page_cer": 0.046906187624750496,
+        "line_cer": 0.18463073852295409
+      },
+      {
+        "doc_id": "pub-gx-minzu-ultrasound-2026",
+        "page": 6,
+        "page_cer": 0.03535911602209945,
+        "line_cer": 0.026519337016574586
+      },
+      {
+        "doc_id": "pub-gx-hechi-mine-safety-2026",
+        "page": 1,
+        "page_cer": 0.04310344827586207,
+        "line_cer": 0.05172413793103448
+      },
+      {
+        "doc_id": "pub-gx-hechi-mine-safety-2026",
+        "page": 2,
+        "page_cer": 0.047058823529411764,
+        "line_cer": 0.047058823529411764
+      },
+      {
+        "doc_id": "pub-gx-hechi-mine-safety-2026",
+        "page": 3,
+        "page_cer": 0.07202680067001675,
+        "line_cer": 0.0016750418760469012
+      },
+      {
+        "doc_id": "pub-gx-info-center-compute-2026",
+        "page": 1,
+        "page_cer": 0.0,
+        "line_cer": 0.022770398481973434
+      },
+      {
+        "doc_id": "pub-gx-info-center-compute-2026",
+        "page": 2,
+        "page_cer": 0.0011061946902654867,
+        "line_cer": 0.03871681415929203
+      },
+      {
+        "doc_id": "pub-gx-info-center-compute-2026",
+        "page": 5,
+        "page_cer": 0.11072261072261072,
+        "line_cer": 0.10139860139860139
+      },
+      {
+        "doc_id": "pub-gx-yibiatong-phase2-2026",
+        "page": 2,
+        "page_cer": 0.06172839506172839,
+        "line_cer": 0.09876543209876543
+      },
+      {
+        "doc_id": "pub-gx-yibiatong-phase2-2026",
+        "page": 3,
+        "page_cer": 0.05875706214689266,
+        "line_cer": 0.00903954802259887
+      },
+      {
+        "doc_id": "pub-gx-nonggang-patrol-2026",
+        "page": 2,
+        "page_cer": 0.023809523809523808,
+        "line_cer": 0.023809523809523808
+      },
+      {
+        "doc_id": "pub-gx-nonggang-patrol-2026",
+        "page": 3,
+        "page_cer": 0.0028208744710860366,
+        "line_cer": 0.0
+      },
+      {
+        "doc_id": "pub-gx-nonggang-patrol-2026",
+        "page": 9,
+        "page_cer": 0.1095679012345679,
+        "line_cer": 0.006172839506172839
+      }
+    ],
+    "teds_pages": [
+      {
+        "doc_id": "fixture-001",
+        "page": 14,
+        "teds": 1.0
+      },
+      {
+        "doc_id": "fixture-001",
+        "page": 32,
+        "teds": 0.9333333333333333
+      },
+      {
+        "doc_id": "fixture-002",
+        "page": 33,
+        "teds": 1.0
+      },
+      {
+        "doc_id": "fixture-002",
+        "page": 37,
+        "teds": 1.0
+      },
+      {
+        "doc_id": "fixture-003",
+        "page": 29,
+        "teds": 1.0
+      },
+      {
+        "doc_id": "fixture-003",
+        "page": 35,
+        "teds": 1.0
+      },
+      {
+        "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
+        "page": 51,
+        "teds": 1.0
+      },
+      {
+        "doc_id": "pub-gx-daxin-ultrasound-anesthesia",
+        "page": 73,
+        "teds": 0.9210526315789473
+      },
+      {
+        "doc_id": "pub-gx-nanning-vascular-doppler",
+        "page": 3,
+        "teds": 0.9855072463768116
+      },
+      {
+        "doc_id": "pub-gx-nanning-vascular-doppler",
+        "page": 16,
+        "teds": 1.0
+      },
+      {
+        "doc_id": "pub-gx-nanning-vascular-doppler",
+        "page": 17,
+        "teds": 0.9772727272727273
+      },
+      {
+        "doc_id": "pub-gx-ventilator-monitors",
+        "page": 15,
+        "teds": 0.9811320754716981
+      },
+      {
+        "doc_id": "pub-gx-tianlin-yuegui-devices-2026",
+        "page": 8,
+        "teds": 0.75
+      },
+      {
+        "doc_id": "pub-gx-nanxishan-dr-mammo-2026",
+        "page": 9,
+        "teds": 0.9047619047619048
+      },
+      {
+        "doc_id": "pub-gx-minzu-ultrasound-2026",
+        "page": 6,
+        "teds": 0.9333333333333333
+      },
+      {
+        "doc_id": "pub-gx-hechi-mine-safety-2026",
+        "page": 3,
+        "teds": 1.0
+      },
+      {
+        "doc_id": "pub-gx-info-center-compute-2026",
+        "page": 5,
+        "teds": 0.9090909090909091
+      },
+      {
+        "doc_id": "pub-gx-yibiatong-phase2-2026",
+        "page": 3,
+        "teds": 1.0
+      },
+      {
+        "doc_id": "pub-gx-nonggang-patrol-2026",
+        "page": 9,
+        "teds": 0.9065743944636678
+      }
+    ],
+    "note": "Live RapidOCR hypotheses versus text-layer or published-table GT. Synthetic rows excluded. Thresholds unchanged."
+  },
+  "sources": [
+    {
+      "document_id": "pub-gx-tianlin-yuegui-devices-2026",
+      "title": "田林县人民医院2026年粤桂协作医疗设备采购项目（重）",
+      "source_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1024FPA/451002/10007840528/20269/f8eed91a-ced0-4f90-b3e5-3f52cb0310e8.pdf",
+      "fetched_at": "2026-09-29T07:03:43Z",
+      "license_or_usage_note": "公开政府采购/公共资源交易平台公开发布的招标采购文件，仅作为内部工程能力回归的公开 DATA 备份；不用于对外产品承诺，不替代官方分发授权。",
+      "sha256": "18ff6026e73fa8540ffdf9d7ac4b2ba9cac095a3001b16fcd6e618ad251e1401",
+      "pages": 95,
+      "scored": true,
+      "notice_kind": "tender"
+    },
+    {
+      "document_id": "pub-gx-nanxishan-dr-mammo-2026",
+      "title": "南溪山医院医疗设备一批(七)(移动DR、数字化乳腺摄影系统)",
+      "source_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1024FPA/undefined/451023/10007869185/20266/63b1529b-f21d-4882-9b25-8e28cd0ea795.pdf",
+      "fetched_at": "2026-09-29T07:03:43Z",
+      "license_or_usage_note": "公开政府采购/公共资源交易平台公开发布的招标采购文件，仅作为内部工程能力回归的公开 DATA 备份；不用于对外产品承诺，不替代官方分发授权。",
+      "sha256": "9915f36a6224b8721fd09d20067bd43ad4e3003a7531ec9d7d55bc9fc7fbaa2c",
+      "pages": 97,
+      "scored": true,
+      "notice_kind": "tender"
+    },
+    {
+      "document_id": "pub-gx-minzu-ultrasound-2026",
+      "title": "广西壮族自治区民族医院2026年第一批医疗设备采购（重）预公示",
+      "source_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1024FPA/450105/10007739021/20268/73fe9f93-b477-45e4-aca4-82575e2fddb3.pdf",
+      "fetched_at": "2026-09-29T07:03:43Z",
+      "license_or_usage_note": "公开政府采购/公共资源交易平台公开发布的招标采购文件，仅作为内部工程能力回归的公开 DATA 备份；不用于对外产品承诺，不替代官方分发授权。",
+      "sha256": "1956fc85fc9a83421b9de0683020c6af66fc9ce930076a807d86e28cf1c338aa",
+      "pages": 56,
+      "scored": true,
+      "notice_kind": "tender_preview"
+    },
+    {
+      "document_id": "pub-gx-hechi-mine-safety-2026",
+      "title": "河池市非煤矿山信息化安全生产监管平台采购项目",
+      "source_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1024FPA/459900/10007955488/20268/f3024e4f-b0c8-4028-a41c-a104f84170ac.pdf",
+      "fetched_at": "2026-09-29T07:03:43Z",
+      "license_or_usage_note": "公开政府采购/公共资源交易平台公开发布的招标采购文件，仅作为内部工程能力回归的公开 DATA 备份；不用于对外产品承诺，不替代官方分发授权。",
+      "sha256": "7a53b2c074ebb92652d0d73cfab65111ada7764a33962f954bf00f0a037fa002",
+      "pages": 167,
+      "scored": true,
+      "notice_kind": "tender"
+    },
+    {
+      "document_id": "pub-gx-info-center-compute-2026",
+      "title": "广西壮族自治区信息中心智能算力服务采购预公示",
+      "source_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1014AN/450105/10007739021/20264/0c3ffbda-fcea-4b8c-9c68-79ffa275b205.pdf",
+      "fetched_at": "2026-09-29T07:03:43Z",
+      "license_or_usage_note": "公开政府采购/公共资源交易平台公开发布的招标采购文件，仅作为内部工程能力回归的公开 DATA 备份；不用于对外产品承诺，不替代官方分发授权。",
+      "sha256": "a20d6aeff3317444ccc101316489cc4957b5476485cdfad1320257e2acfb9a7c",
+      "pages": 73,
+      "scored": true,
+      "notice_kind": "tender_preview"
+    },
+    {
+      "document_id": "pub-gx-yibiatong-phase2-2026",
+      "title": "广西“一表通”数据管理系统二期项目",
+      "source_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1023FP/450602/10007282833/20264/86bddd9d-c42f-4aff-bb47-0f411e1f0875.pdf",
+      "fetched_at": "2026-09-29T07:03:43Z",
+      "license_or_usage_note": "公开政府采购/公共资源交易平台公开发布的招标采购文件，仅作为内部工程能力回归的公开 DATA 备份；不用于对外产品承诺，不替代官方分发授权。",
+      "sha256": "08946a88c1489e4a611978cc2bc8f5448333eae14947772da6efa09045d61bfb",
+      "pages": 85,
+      "scored": true,
+      "notice_kind": "tender"
+    },
+    {
+      "document_id": "pub-gx-nonggang-patrol-2026",
+      "title": "广西弄岗国家级自然保护区信息化综合管护系统项目（重）",
+      "source_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1024FPA/undefined/451402/10011601115/20266/87f8411e-98ac-4d46-b6f1-5a029b9a9ace.pdf",
+      "fetched_at": "2026-09-29T07:03:43Z",
+      "license_or_usage_note": "公开政府采购/公共资源交易平台公开发布的招标采购文件，仅作为内部工程能力回归的公开 DATA 备份；不用于对外产品承诺，不替代官方分发授权。",
+      "sha256": "6f18ca80c6f849a943f8c86b6292719e75c4d7ac9582410025d814d28e2c8b8c",
+      "pages": 148,
+      "scored": true,
+      "notice_kind": "tender"
+    },
+    {
+      "document_id": "pub-gx-ventilator-monitors",
+      "title": null,
+      "source_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1024FPA/undefined/450103/10007341141/20266/264475cd-19b9-493f-b4e3-142276a4f506.pdf",
+      "fetched_at": "2026-09-16T11:47:36Z",
+      "license_or_usage_note": "公开政府采购/公共资源交易平台公开发布的招标采购文件，仅作为内部工程能力回归的公开 DATA 备份；不用于对外产品承诺，不替代官方分发授权。",
+      "scored": false,
+      "not_scored_reason": "embedded text layer too short; OCR was not used as ground truth",
+      "notice_kind": null
+    },
+    {
+      "document_id": "pub-ccgp-zycg-ac-award-202609",
+      "title": "中央国家机关2026年空调批量集中采购项目-9月中标公告",
+      "source_url": "http://www.ccgp.gov.cn/cggg/zygg/zbgg/202609/t20260914_27319969.htm",
+      "fetched_at": "2026-09-29T07:16:40Z",
+      "license_or_usage_note": "公开政府采购/公共资源交易平台公开发布的招标采购文件，仅作为内部工程能力回归的公开 DATA 备份；不用于对外产品承诺，不替代官方分发授权。",
+      "scored": false,
+      "not_scored_reason": "Published HTML is authoritative, but the notice has no official PDF page image. A synthetic render was not created and is excluded from CER/F1/TEDS.",
+      "notice_kind": "award"
+    },
+    {
+      "document_id": "pub-gxggzy-femtosecond-2026",
+      "title": "2026年广西大型医用设备（飞秒激光手术系统）集中采购公开招标公告",
+      "source_url": "http://gxggzy.gxzf.gov.cn/yxcgptrk/yxcgpt_tzgg_234096/tzgg_hc/t28134257.shtml",
+      "fetched_at": "2026-09-29T07:16:40Z",
+      "license_or_usage_note": "公开政府采购/公共资源交易平台公开发布的招标采购文件，仅作为内部工程能力回归的公开 DATA 备份；不用于对外产品承诺，不替代官方分发授权。",
+      "scored": false,
+      "not_scored_reason": "Published HTML is authoritative, but the notice has no official PDF page image. A synthetic render was not created and is excluded from CER/F1/TEDS.",
+      "notice_kind": "tender_announcement"
+    }
+  ],
+  "failure_causes": [
+    {
+      "metric": "line_cer",
+      "cause": "TOC pages still count. Before alignment, split 目录 headings are joined, dot leaders are removed, and a bare OCR page number is put back on the preceding title. Line CER remains above 2% on the same pages because non-leader characters still disagree.",
+      "evidence": [
+        {
+          "doc_id": "pub-gx-tianlin-yuegui-devices-2026",
+          "page": 1,
+          "line_cer": 0.425,
+          "page_cer": 0.425
+        },
+        {
+          "doc_id": "fixture-003",
+          "page": 5,
+          "line_cer": 0.3521923620933522,
+          "page_cer": 0.21357850070721357
+        },
+        {
+          "doc_id": "fixture-003",
+          "page": 4,
+          "line_cer": 0.2199367088607595,
+          "page_cer": 0.1819620253164557
+        },
+        {
+          "doc_id": "pub-gx-minzu-ultrasound-2026",
+          "page": 2,
+          "line_cer": 0.18463073852295409,
+          "page_cer": 0.046906187624750496
+        },
+        {
+          "doc_id": "fixture-001",
+          "page": 32,
+          "line_cer": 0.1717171717171717,
+          "page_cer": 0.494949494949495
+        }
+      ],
+      "pages_above_10_percent": 8,
+      "pages": 54,
+      "toc_like_pages": [
+        "pub-gx-daxin-ultrasound-anesthesia#p51",
+        "pub-gx-tianlin-yuegui-devices-2026#p2",
+        "pub-gx-nanxishan-dr-mammo-2026#p2",
+        "pub-gx-hechi-mine-safety-2026#p2",
+        "pub-gx-yibiatong-phase2-2026#p2",
+        "pub-gx-nonggang-patrol-2026#p2"
+      ]
+    },
+    {
+      "metric": "key_field_f1",
+      "cause": "Exact NFKC field match fails when RapidOCR drops or alters the authoritative span (dates, amounts, agency names).",
+      "evidence": {
+        "budget": 1,
+        "ceiling": 1,
+        "project_code": 1
+      },
+      "tp": 103,
+      "fp": 3,
+      "fn": 3
+    }
+  ],
+  "improvement_directions": [
+    "Keep thresholds at CER≤2%, F1≥97%, TEDS≥90%. Do not drop low-scoring public pages.",
+    "TOC dot leaders are already segmented before line CER. Further CER gains have to come from the characters RapidOCR still misses on the same pages.",
+    "Normalize key-field hypotheses with a constrained parser (amount, date, project code) instead of exact full-span equality, and keep the text-layer string as GT.",
+    "Table hypotheses already use the PDF ruling-line grid. Remaining TEDS misses are OCR characters inside those cells, still scored against the text-layer HTML.",
+    "Leave image-only pages not-scored until a human transcript exists. Do not promote OCR text to ground truth.",
+    "Keep training-corpus PDFs and synthetic scans out of this gate so later fine-tunes cannot leak into the reported numbers."
+  ],
+  "gt_policy": "embedded PDF text layer or PyMuPDF table extract confirmed against that text layer; published HTML for not-scored notices. OCR is never GT.",
+  "hypothesis_policy": "rapidocr_onnxruntime on a 1.5x render of the official PDF page. TOC dot leaders are segmented before line CER. Table hypotheses place OCR text into the PDF ruling-line grid. Ground truth stays the text layer.",
+  "gate": "GATE_FAIL",
+  "joe_local_pdf_intake": {
+    "intake_id": "joe-local-pdfs-2026-09-29",
+    "note": "Same filename or SHA-256 as a completed public-eval document is a duplicate and is not counted again.",
+    "counts": {
+      "duplicate": 12,
+      "newly_added_scored": 0,
+      "newly_added_not_scored": 0,
+      "provenance_unverified": 0
+    },
+    "duplicate": [
+      {
+        "filename": "pub-gx-daxin-ultrasound-anesthesia.pdf",
+        "sha256": "ee2a69cba1ae8ef7cb27a71d89f8aaafbc9ec832647adc453029c0bebec3277d",
+        "bytes": 1043634,
+        "classification": "duplicate",
+        "matched_by": [
+          "sha256",
+          "filename"
+        ],
+        "matched_document_id": "pub-gx-daxin-ultrasound-anesthesia",
+        "source_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-gov-open-doc/1023FP/450103/10007339275/20261/be962ee4-51f0-46f2-a542-3bf7fe68bd71.pdf",
+        "fetched_at": "2026-09-16T11:47:36Z",
+        "license_or_usage_note": "公开政府采购/公共资源交易平台公开发布的招标采购文件，仅作为内部工程能力回归的公开 DATA 备份；不用于对外产品承诺，不替代官方分发授权。",
+        "existing_cer_pages": [
+          1,
+          3,
+          4,
+          51,
+          73
+        ],
+        "counts_as_new_document": false
+      },
+      {
+        "filename": "pub-gx-guiping-hospital-it.pdf",
+        "sha256": "f6bb275e1ce3022f91898b4e361034e066d7ac15df0f21c3c8d19e6a1d1de537",
+        "bytes": 766259,
+        "classification": "duplicate",
+        "matched_by": [
+          "sha256",
+          "filename"
+        ],
+        "matched_document_id": "pub-gx-guiping-hospital-it",
+        "source_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1014AN/450103/10007300794/20268/ba5ac90a-96fe-4f8f-bd50-361317e042e4.pdf",
+        "fetched_at": "2026-09-16T11:47:36Z",
+        "license_or_usage_note": "公开政府采购/公共资源交易平台公开发布的招标采购文件，仅作为内部工程能力回归的公开 DATA 备份；不用于对外产品承诺，不替代官方分发授权。",
+        "existing_cer_pages": [],
+        "counts_as_new_document": false
+      },
+      {
+        "filename": "pub-gx-luocheng-smart-hospital.pdf",
+        "sha256": "446b710182365ba03189ccebf43cc32c7183742f3df67a8ee0d3f7426434c4b9",
+        "bytes": 3972652,
+        "classification": "duplicate",
+        "matched_by": [
+          "sha256",
+          "filename"
+        ],
+        "matched_document_id": "pub-gx-luocheng-smart-hospital",
+        "source_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1024FPA/450502/10009782286/20267/cfbe15f8-d793-487c-9c11-f255d321062d.pdf",
+        "fetched_at": "2026-09-16T11:47:36Z",
+        "license_or_usage_note": "公开政府采购/公共资源交易平台公开发布的招标采购文件，仅作为内部工程能力回归的公开 DATA 备份；不用于对外产品承诺，不替代官方分发授权。",
+        "existing_cer_pages": [],
+        "counts_as_new_document": false
+      },
+      {
+        "filename": "pub-gx-nanning-vascular-doppler.pdf",
+        "sha256": "59e5b5814d4b8c340f3237871a9f3f35870b7468aa5dbe0a081c774554a22486",
+        "bytes": 997786,
+        "classification": "duplicate",
+        "matched_by": [
+          "sha256",
+          "filename"
+        ],
+        "matched_document_id": "pub-gx-nanning-vascular-doppler",
+        "source_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-gov-open-doc/1024FPA/450103/10007339269/20262/e485f8f3-9a31-4bc8-9a18-404b826dcb1a.pdf",
+        "fetched_at": "2026-09-16T11:43:11Z",
+        "license_or_usage_note": "公开政府采购/公共资源交易平台公开发布的招标采购文件，仅作为内部工程能力回归的公开 DATA 备份；不用于对外产品承诺，不替代官方分发授权。",
+        "existing_cer_pages": [
+          3,
+          16,
+          17
+        ],
+        "counts_as_new_document": false
+      },
+      {
+        "filename": "pub-gx-niv-sleep-monitor.pdf",
+        "sha256": "beefafc9d5906dda55cbc25164f102959045872754a6664f199b85351f0f7779",
+        "bytes": 811186,
+        "classification": "duplicate",
+        "matched_by": [
+          "sha256",
+          "filename"
+        ],
+        "matched_document_id": "pub-gx-niv-sleep-monitor",
+        "source_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1024FPA/450103/10007339432/20268/d1063021-8810-48f4-9b0b-58a7e3f1a227.pdf",
+        "fetched_at": "2026-09-16T11:47:36Z",
+        "license_or_usage_note": "公开政府采购/公共资源交易平台公开发布的招标采购文件，仅作为内部工程能力回归的公开 DATA 备份；不用于对外产品承诺，不替代官方分发授权。",
+        "existing_cer_pages": [],
+        "counts_as_new_document": false
+      },
+      {
+        "filename": "pub-gx-qintang-flow-cytometer.pdf",
+        "sha256": "ff8495e75653d60f936cb22491581c4933d41a377bb328fd70dbadd503f026f5",
+        "bytes": 568442,
+        "classification": "duplicate",
+        "matched_by": [
+          "sha256",
+          "filename"
+        ],
+        "matched_document_id": "pub-gx-qintang-flow-cytometer",
+        "source_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1024FPA/undefined/450899/10009653243/20266/b75de483-40d0-4916-93de-a1dbbc97d84a.pdf",
+        "fetched_at": "2026-09-16T11:47:36Z",
+        "license_or_usage_note": "公开政府采购/公共资源交易平台公开发布的招标采购文件，仅作为内部工程能力回归的公开 DATA 备份；不用于对外产品承诺，不替代官方分发授权。",
+        "existing_cer_pages": [
+          1,
+          3,
+          4
+        ],
+        "counts_as_new_document": false
+      },
+      {
+        "filename": "pub-gx-ventilator-monitors.pdf",
+        "sha256": "c52e7d6e84dd1dc82f6800fa4d361a48d9c2c77278590af6d53a89012a12659e",
+        "bytes": 737939,
+        "classification": "duplicate",
+        "matched_by": [
+          "sha256",
+          "filename"
+        ],
+        "matched_document_id": "pub-gx-ventilator-monitors",
+        "source_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1024FPA/undefined/450103/10007341141/20266/264475cd-19b9-493f-b4e3-142276a4f506.pdf",
+        "fetched_at": "2026-09-16T11:47:36Z",
+        "license_or_usage_note": "公开政府采购/公共资源交易平台公开发布的招标采购文件，仅作为内部工程能力回归的公开 DATA 备份；不用于对外产品承诺，不替代官方分发授权。",
+        "existing_cer_pages": [
+          3,
+          4,
+          5,
+          15
+        ],
+        "counts_as_new_document": false
+      },
+      {
+        "filename": "pub-gx-youjiang-ultrasound.pdf",
+        "sha256": "c385256a47c8c00c048a03fd96de3297484f158345a06b34bc3ebb4923fbac54",
+        "bytes": 850657,
+        "classification": "duplicate",
+        "matched_by": [
+          "sha256",
+          "filename"
+        ],
+        "matched_document_id": "pub-gx-youjiang-ultrasound",
+        "source_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-xc-gov-open-doc/1024FPA/undefined/450103/10007339425/20266/572479dc-2493-43cc-8e66-5186ff6dab02.pdf",
+        "fetched_at": "2026-09-16T11:43:11Z",
+        "license_or_usage_note": "公开政府采购/公共资源交易平台公开发布的招标采购文件，仅作为内部工程能力回归的公开 DATA 备份；不用于对外产品承诺，不替代官方分发授权。",
+        "existing_cer_pages": [
+          2,
+          4,
+          5,
+          6
+        ],
+        "counts_as_new_document": false
+      },
+      {
+        "filename": "pub-gx-yulin-dermatology-his.pdf",
+        "sha256": "670ad070261956f8a2c662e3265f09e352786c02920ef4fb9a24d09a7014295d",
+        "bytes": 827569,
+        "classification": "duplicate",
+        "matched_by": [
+          "sha256",
+          "filename"
+        ],
+        "matched_document_id": "pub-gx-yulin-dermatology-his",
+        "source_url": "https://obs.gcy.zfcg.gxzf.gov.cn/guangxi-gov-open-doc/1023FP/450999/10008210707/20263/434f78b2-57f6-44a1-8840-28a423677952.pdf",
+        "fetched_at": "2026-09-16T11:47:36Z",
+        "license_or_usage_note": "公开政府采购/公共资源交易平台公开发布的招标采购文件，仅作为内部工程能力回归的公开 DATA 备份；不用于对外产品承诺，不替代官方分发授权。",
+        "existing_cer_pages": [],
+        "counts_as_new_document": false
+      },
+      {
+        "filename": "source2-nanjing.pdf",
+        "sha256": "b90b22d14736992e3a5ad8fa2c29c4d23a603654faa3fffbead330c6615defd2",
+        "bytes": 1211751,
+        "classification": "duplicate",
+        "matched_by": [
+          "sha256",
+          "filename"
+        ],
+        "matched_document_id": "fixture-001",
+        "source_url": "https://njggzy.nanjing.gov.cn/njweb/tz/20240730/676b45b5-113e-4aff-b074-1e6fd738090e.html",
+        "fetched_at": "2026-08-24",
+        "license_or_usage_note": "公开政府采购/公共资源交易平台公开发布的招标采购文件，仅作为内部工程能力回归的公开 DATA 备份；不用于对外产品承诺，不替代官方分发授权。",
+        "existing_cer_pages": [
+          2,
+          3,
+          14,
+          32
+        ],
+        "counts_as_new_document": false
+      },
+      {
+        "filename": "source2-shaanxi.pdf",
+        "sha256": "a6c1f042b077ecbacf5877ac682415ede3dcd64980490eb9d9379867e4fd2b7d",
+        "bytes": 583492,
+        "classification": "duplicate",
+        "matched_by": [
+          "sha256",
+          "filename"
+        ],
+        "matched_document_id": "fixture-002",
+        "source_url": "https://www.ccgp-shaanxi.gov.cn/gpx-bid-file/ZF_JGBM_000003/610001/2024/10/21/8a69c58e90e72f300192ac9d3d5b467b/gpx-template/8a69c2509211dc7a0192adb56a814416.pdf?accessCode=9b3feae299491ee3179981e5e497afd4",
+        "fetched_at": "2026-08-24",
+        "license_or_usage_note": "公开政府采购/公共资源交易平台公开发布的招标采购文件，仅作为内部工程能力回归的公开 DATA 备份；不用于对外产品承诺，不替代官方分发授权。",
+        "existing_cer_pages": [
+          1,
+          3,
+          6,
+          33,
+          37
+        ],
+        "counts_as_new_document": false
+      },
+      {
+        "filename": "source4-zbtb.pdf",
+        "sha256": "e233f7b45ec3eb26ea8e41c542fcf37b3601cfdf7243bfe1c7956e641eecebf3",
+        "bytes": 994191,
+        "classification": "duplicate",
+        "matched_by": [
+          "sha256",
+          "filename"
+        ],
+        "matched_document_id": "fixture-003",
+        "source_url": "https://weekly.zbtb.org.cn/2024/1b3441f1ffc3d22.pdf",
+        "fetched_at": "2026-08-24",
+        "license_or_usage_note": "公开政府采购/公共资源交易平台公开发布的招标采购文件，仅作为内部工程能力回归的公开 DATA 备份；不用于对外产品承诺，不替代官方分发授权。",
+        "existing_cer_pages": [
+          1,
+          4,
+          5,
+          9,
+          29,
+          35
+        ],
+        "counts_as_new_document": false
+      }
+    ],
+    "newly_added_scored": [],
+    "newly_added_not_scored": [],
+    "provenance_unverified": [],
+    "collected_by": "Joe",
+    "approved_for_eval_by": "Edith",
+    "local_source": "work/public-eval/pdfs"
+  }
+}
