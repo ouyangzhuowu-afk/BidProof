@@ -9,7 +9,6 @@ export default [
     ignores: [
       // These modules own the escape/innerHTML boundary.
       'src/ui/render.js',
-      'src/escape.js',
       'src/core/icons.js',
       'src/main.js',
       'src/app.js',

@@ -25,9 +25,9 @@ export default defineConfig({
     target: ['chrome111', 'edge111', 'firefox113', 'safari16.4'],
     emptyOutDir: false,
     minify: 'oxc',
-    // 打开 sourcemap：旧版关闭后，线上 app.js 的报错完全无法定位。
-    // 若不希望对外暴露源码，改为 'hidden' 并只上传给监控系统。
-    sourcemap: true,
+    // Do not ship public sourcemaps under /static (Docker already strips *.map).
+    // Local debugging: set BIDPROOF_FRONTEND_SOURCEMAP=1 when building.
+    sourcemap: process.env.BIDPROOF_FRONTEND_SOURCEMAP === '1',
     cssCodeSplit: false,
     lib: {
       entry: resolve(root, 'src/main.js'),

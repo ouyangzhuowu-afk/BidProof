@@ -97,3 +97,6 @@ _incoming-*/
 # 本机验证日志（命令输出、回环验证码、一次性驱动脚本）
 outputs/verify-logs/
 
+# Frontend sourcemaps are opt-in via BIDPROOF_FRONTEND_SOURCEMAP=1; never commit public maps.
+static/**/*.map
+
