@@ -45,8 +45,11 @@ _HEADER_CELLS = {
     "情形",
 }
 _REJECTION_OUTCOME = re.compile(
-    r"否决其?投标|否决其报价|被否决|不予受理|废标|无效投标|投标无效|无效响应|响应无效|作无效处理|"
-    r"按无效|视为无效|报价无效|资格审查不合格|取消投标资格|不得参加本次|应予(以)?废标"
+    r"否决其?投标|否决其报价|被否决|不予受理|废标|"
+    r"无效投标|投标无效|投标文件无效|其投标无效|"
+    r"无效响应|响应无效|响应文件无效|其响应无效|"
+    r"作无效报价处理|无效报价|作无效处理|按无效|视为无效|报价无效|"
+    r"非实质性响应|资格审查不合格|取消投标资格|应予(以)?废标"
 )
 _NEGATED_REJECTION = re.compile(
     r"不作为[^。]{0,30}(否决|废标|无效)"
@@ -58,31 +61,62 @@ _NEGATED_REJECTION = re.compile(
     r"|不予废标"
     r"|不视为无效"
 )
-_REJECTION_LEAD = re.compile(r"有下列|出现下列|存在下列|下列情况之一|下列情形之一|属无效|应予(以)?废标")
-_ITEM_START = re.compile(
-    r"^\s*(?:[（(]\d+[）)]|\d+[、.．]|[（(][一二三四五六七八九十]+[）)]|[一二三四五六七八九十]+、)"
+_REJECTION_LEAD = re.compile(
+    r"有下列|出现下列|存在下列|下列情况之一|下列情形之一|以下情况之一|以下情形之一|属无效|应予(以)?废标"
 )
-_CHILD_ITEM = re.compile(r"^\s*[（(]")
+_ITEM_START = re.compile(
+    r"^\s*(?:"
+    r"[（(]\d+[）)]|\d+[)）]|\d+[、.．]"
+    r"|[（(][一二三四五六七八九十]+[）)]|[一二三四五六七八九十]+、"
+    r")"
+)
+# 带括号、顿号、右括号的列举，以及「1.」这种清单项。单独的「26.澄清」不算子项。
+_CHILD_ITEM = re.compile(
+    r"^\s*(?:"
+    r"[（(]\d+[）)]|[（(][一二三四五六七八九十]+[）)]"
+    r"|\d+[)）、]"
+    r"|[一二三四五六七八九十]+、"
+    r"|\d+[.．](?!\d)"
+    r")"
+)
+_BARE_SECTION_TITLE = re.compile(r"^\d+[.．]\s*[\u3400-\u9fff]{1,8}$")
 _CHAPTER_LINE = re.compile(r"^\s*第[0-9一二三四五六七八九十]+[章节篇]")
 _CLOCK = re.compile(r"\d+\s*[时点]\s*\d+\s*分|\d+\s*分钟")
-_MATERIALS_LEAD = re.compile(r"响应文件包括|投标文件包括|包括下列(?:内容|文件|材料)|应提交下列|须提交下列")
+_MATERIALS_LEAD = re.compile(
+    r"响应文件包括|投标文件包括|报价文件包括|"
+    r"响应文件由|投标文件由|报价文件由|文件组成|"
+    r"包括下列(?:内容|文件|材料)|应提交下列|须提交下列|包括以下|包括但不限于"
+)
 _NOISE = re.compile(r"[{}]|function\s|var\s|document\.|@media|font-size|background(?:-color)?:")
 # 「第N页共M页」 and 「第N页/共M页」, including spaces and a fullwidth slash.
 _PAGE_FOOTER = re.compile(r"第\s*\d+\s*页\s*[/／]?\s*共\s*\d+\s*页")
 _PAGE_FOOTER_NUM = re.compile(r"第\s*(\d+)\s*页\s*[/／]?\s*共\s*(\d+)\s*页")
-_SCORE_CONTEXT = re.compile(r"分值|得分|评分标准|评分办法|满分|加分|扣分|计分|打分|不得分|不计分")
-_SCORE_AMOUNT = re.compile(r"\d+\s*分(?!体|别|布|析|公司|包|钟|部)|扣\s*\d+")
-_DEFINITION_NOTE = re.compile(
-    r"^\s*注\s*[:：]"
-    r"|^\s*注\s*[「“\"']"
-    r"|[「“\"][^」”\"]{1,12}[」”\"]\s*是指"
+# 「得分」单独出现只说明有分数，不说明这一句在打分。排序、通知、方法定义另判。
+_SCORE_CONTEXT = re.compile(r"分值|评分标准|评分办法|满分|加分|扣分|计分|打分|不得分|不计分")
+_SCORE_AMOUNT = re.compile(r"\d+\s*分(?!体|别|布|析|公司|包|钟|部|项)|扣\s*\d+")
+_SCORE_ASSIGNMENT = re.compile(
+    r"得\s*\d+(?:\.\d+)?\s*分|扣\s*\d+(?:\.\d+)?\s*分|加\s*\d+(?:\.\d+)?\s*分|"
+    r"不得分|不计分|得分\s*[=＝]"
 )
+_SCORE_INTRO = re.compile(r"满分(?:为)?\s*\d+\s*分[^。]{0,16}(?:细则|标准)[^。]{0,4}如下")
+_SCORING_PROCESS = re.compile(
+    r"推荐[^。]{0,24}(?:成交|中标)候选|确定成交|确定中标|评审报告|"
+    r"告知[^。]{0,40}得分|公告[^。]{0,24}得分|"
+    r"综合评分法[^。]{0,12}是指|"
+    r"由高到低|由低到高|从高到低|顺序推荐|排列推荐|"
+    r"按照[^。]{0,40}得分[^。]{0,24}(?:排序|推荐|确定)"
+)
+_ENTERPRISE_SIZE = re.compile(r"划型|大中小微型?企业划分|中小企业划型|统计上大中小")
+_DEFINITION_NOTE = re.compile(r"[「“\"][^」”\"]{1,12}[」”\"]\s*是指")
 _INFORMAL_MATERIAL = re.compile(
     r"(?:非正式|非书面|口头|宣传|参考|内部|未经[^。；;]{0,20}(?:发布|通知|公布))"
     r"[^。；;]{0,16}(?:资料|材料|信息|通知)"
 )
 _RESPONSE_FILE = re.compile(r"响应文件|投标文件|报价文件|申请文件")
-_POST_AWARD = re.compile(r"合同履行|履行合同|签订合同后|合同签订后|成交后|中标后|履约期间|合同期内|合同执行")
+_POST_AWARD = re.compile(
+    r"合同履行|履行合同|签订合同后|合同签订后|成交后|中标后|履约期间|合同期内|合同执行|"
+    r"拒绝[^。]{0,24}签(?:订)?(?:政府采购)?合同|重新开展"
+)
 _THIS_PROCUREMENT = re.compile(r"本次|本项目|该项目|该采购|政府采购|响应磋商|投标|磋商|同一合同项下")
 _FORFEIT_LEAD = re.compile(r"保证金将被不予退还")
 _COMPLAINT = re.compile(r"质疑函|质疑事项|质疑人|提出质疑")
@@ -100,9 +134,37 @@ _DOCUMENT_REFUSAL = re.compile(
 _NEGATED_DOCUMENT = re.compile(r"不视为无效文件|不属于无效文件|不作为无效文件|不得拒收|不予拒收|应当接收|应予接收")
 # 条款自己已经给出投标结论时，提到质疑也不算质疑程序。
 _BID_RULE_BESIDE_COMPLAINT = re.compile(
-    r"被否决|报价无效|按无效|应予(以)?废标|无效响应|响应无效|无效文件|不予接收|"
+    r"被否决|报价无效|无效报价|按无效|应予(以)?废标|无效响应|响应无效|响应文件无效|"
+    r"投标文件无效|作无效报价处理|非实质性响应|无效文件|不予接收|"
     r"无效投标|投标无效|否决其?投标|否决其报价|资格审查不合格|取消投标资格|"
     r"不得(?!不)(?:(?![。！？]).){0,48}(?:参加|组成联合体)"
+)
+_INLINE_MARK = re.compile(
+    r"[（(]\d{1,2}[）)]|[（(][一二三四五六七八九十]+[）)]|"
+    r"(?<!\d)\d{1,2}[)）]|(?<!\d)\d{1,2}[、．]|(?<!\d)\d{1,2}\.(?!\d)"
+)
+_FRONT_HEADER_LINE = re.compile(r"^(?:序号|条款号|内容|说明|栏目|编列内容|内|容|说|明)$")
+_FRONT_PREFIX = re.compile(
+    r"^(?:(?:供应商|投标人|磋商)须知)+(?:前附表)(?:序号|条款号|内容|说明|栏目)*"
+    r"|^(?:序号内容|序号说明|条款号内容|内容说明)"
+)
+_TOC_LINE = re.compile(r"[\.．·…]{4,}\s*\d+\s*$")
+_EMAIL = re.compile(r"@|邮箱|电子邮箱|电子邮件")
+_QUOTE_SOFT_CAP = 400
+_QUOTE_HARD_CAP = 1200
+_HEADER_LABELS = (
+    "序号",
+    "项目",
+    "分值",
+    "比例",
+    "描述",
+    "是否客观",
+    "评审因素",
+    "评分标准",
+    "内容",
+    "说明",
+    "适用对象",
+    "栏目",
 )
 _SECTION_KEYS: tuple[tuple[str, tuple[str, ...]], ...] = (
     ("rejection", ("废标", "无效响应", "无效投标", "否决投标", "投标无效", "响应无效")),
@@ -135,23 +197,20 @@ def extract_tender_blocks(pages: list[dict[str, Any]], filename: str | None = No
     uncited: list[dict[str, Any]] = []
     section: str | None = None
     list_mode: str | None = None
+    carried: set[str] = set()
     for clause in clauses:
         if clause["kind"] == "heading":
             found = _section_of(clause["text"])
             section = found
             list_mode = None
+            carried = set()
             continue
         text = clause["text"]
         if not _keep(text):
             continue
-        if (
-            clause["kind"] == "item"
-            and not _CHILD_ITEM.match(text)
-            and _lead_kind(text) is None
-            and not _materials_lead(text)
-            and not _forfeit_lead(text)
-        ):
+        if clause["kind"] == "item" and _ends_open_list(text):
             list_mode = None
+            carried = set()
         lead = _lead_kind(text)
         if lead == "rejection":
             list_mode = "rejection"
@@ -163,12 +222,24 @@ def extract_tender_blocks(pages: list[dict[str, Any]], filename: str | None = No
             list_mode = "materials"
         active_mode = list_mode
         blocks = _classify(clause, section, active_mode)
-        if clause["kind"] == "paragraph" and lead is None:
+        if clause["kind"] == "item" and carried and not _ends_open_list(text):
+            blocks |= _inherited_blocks(text, carried)
+        if (
+            clause["kind"] == "paragraph"
+            and lead is None
+            and not _opens_item_list(text)
+            and not _materials_lead(text)
+            and not _forfeit_lead(text)
+        ):
             list_mode = None
         elif lead is None and clause["kind"] == "item":
             list_mode = active_mode
         else:
             list_mode = active_mode
+        if _opens_item_list(text) and blocks:
+            carried = set(blocks)
+        elif clause["kind"] != "item" and not _bundle_label(text):
+            carried = set()
         if not blocks:
             continue
         for block in BLOCK_LABELS:
@@ -253,7 +324,8 @@ def _events(pages: list[dict[str, Any]], banners: set[str] | None = None) -> lis
         text = str(page.get("text") or "")
         if not structured:
             text = _consume_flat_tables(text, pages_on, locator, events)
-        for kind, piece in _split_prose(text, banners or set()):
+        page_number = pages_on[0] if len(pages_on) == 1 else None
+        for kind, piece in _split_prose(text, banners or set(), page_number):
             events.append(_event(kind, piece, pages_on, locator, None, None))
         index += 1
     return events
@@ -269,7 +341,7 @@ def _event(
 ) -> dict[str, Any]:
     return {
         "kind": kind,
-        "text": _strip_footer(" ".join(text.split())),
+        "text": _clean_clause(text),
         "pages": list(pages_on),
         "locator": dict(locator) if locator else None,
         "headers": headers,
@@ -318,7 +390,7 @@ def _can_continue(pending: dict[str, Any], event: dict[str, Any]) -> bool:
     if _closed_text(pending["text"]):
         return False
     nxt = event["text"]
-    if _REJECTION_LEAD.search(nxt) or _section_of(nxt):
+    if _REJECTION_LEAD.search(nxt) or _is_section_heading(nxt):
         return False
     if "，" not in pending["text"] and len(_compact(pending["text"])) <= 24 and len(_compact(nxt)) > 8:
         return False
@@ -393,7 +465,9 @@ def _classify_row(headers: list[str], cells: list[str], text: str) -> set[str]:
         blocks.discard("rejection")
     if explicit_keep:
         blocks.discard("rejection")
-    if "scoring" in blocks and not _has_clause_subject(text):
+    if "scoring" in blocks and (
+        not _has_clause_subject(text) or _scoring_process(text) or _header_echo(text) or _enterprise_size_only(text)
+    ):
         blocks.discard("scoring")
     return blocks
 
@@ -483,12 +557,40 @@ def _lead_kind(text: str) -> str | None:
 def _is_scoring(text: str, section: str | None) -> bool:
     if re.search(r"不作为评分|不计入评分|不予记分", text):
         return False
+    if _enterprise_size_only(text) or _scoring_process(text) or _header_echo(text):
+        return False
     if not _has_clause_subject(text):
         return False
     clockless = _CLOCK.sub("", text)
-    if _SCORE_CONTEXT.search(clockless) or _SCORE_AMOUNT.search(clockless):
+    if _SCORE_ASSIGNMENT.search(clockless) or _SCORE_CONTEXT.search(clockless) or _SCORE_AMOUNT.search(clockless):
         return True
     return section == "scoring" and re.search(r"评审因素|评分标准|评分办法", text) is not None and len(text) <= 80
+
+
+def _scoring_process(text: str) -> bool:
+    """Ranking, award, notification, and a bare 'the rules follow' line are not criteria."""
+    if _SCORE_INTRO.search(text):
+        return True
+    if _SCORE_ASSIGNMENT.search(text):
+        return False
+    return _SCORING_PROCESS.search(text) is not None
+
+
+def _enterprise_size_only(text: str) -> bool:
+    """企业划型标准 explains firm size. It is not a score unless it also assigns points."""
+    if _ENTERPRISE_SIZE.search(text) is None:
+        return False
+    return _SCORE_ASSIGNMENT.search(text) is None
+
+
+def _header_echo(text: str) -> bool:
+    """A row that only repeats column titles is not a criterion."""
+    if _SCORE_ASSIGNMENT.search(text) or _SCORE_AMOUNT.search(text) or re.search(r"[。！？]", text):
+        return False
+    compact = _compact(re.sub(r"<br\s*/?>|Col\d+：", "", text, flags=re.IGNORECASE))
+    for label in _HEADER_LABELS:
+        compact = compact.replace(label, "")
+    return len(re.findall(r"[\u3400-\u9fff]", compact)) < 4
 
 
 def _has_clause_subject(text: str) -> bool:
@@ -516,20 +618,42 @@ def _invalidates_unofficial_material(text: str) -> bool:
     ) is not None
 
 
-_SUBMISSION_DUTY = re.compile(r"须提供|应提供|应提交|须提交|复印件|加盖公章|资格证明文件")
+_SUBMISSION_DUTY = re.compile(
+    r"(?:须|应|应当|必须|需)(?:提供|提交|递交)|复印件|加盖公章|资格证明文件|资格证明材料"
+)
+_BOND_TEMPLATE = re.compile(r"本保函|本担保书")
+_BOND_BODY = re.compile(r"见索即付|不可撤销|担保人|开立人|担保范围")
+
+
+def _bond_template(text: str) -> bool:
+    """The body of a guarantee letter is not a document the bidder must enclose."""
+    if re.search(r"(?:须|应|应当|必须|需)(?:提交|提供|递交|缴纳)[^。]{0,16}(?:保函|保证金|担保)", text):
+        return False
+    if _BOND_TEMPLATE.search(text):
+        return True
+    return bool(re.search(r"保函|担保书|担保函", text) and _BOND_BODY.search(text))
 
 
 def _keeps_materials(text: str, section: str | None, list_mode: str | None) -> bool:
     """Refund timing is not a document to enclose. A real submission duty still is."""
+    if _bond_template(text):
+        return False
     if _refund_procedure(text) and _SUBMISSION_DUTY.search(text) is None:
         return False
-    return (list_mode == "materials" and _CHILD_ITEM.match(text)) or _is_materials(text, section)
+    return (list_mode == "materials" and _is_child_item(text)) or _is_materials(text, section)
 
 
 def _is_materials(text: str, section: str | None) -> bool:
-    if re.search(r"未提供不(计分|得分)", text) and not re.search(r"须提供|应提供|应提交|须提交", text):
+    if _bond_template(text):
         return False
-    if re.search(r"须提供|应提供|应提交|须提交|证明材料|复印件|加盖公章|资格证明文件", text):
+    if re.search(r"未提供不(计分|得分)", text) and not re.search(r"(?:须|应|应当|必须|需)(?:提供|提交)", text):
+        return False
+    if re.search(r"未(?:按要求)?(?:提供|提交)|应提供而未提供", text) and not re.search(
+        r"(?:须|应|应当|必须)(?:提供|提交)[^。]{0,12}(?:复印件|证书|执照|材料|文件)",
+        text,
+    ):
+        return False
+    if re.search(r"(?:须|应|应当|必须|需)(?:提供|提交|递交)|证明材料|复印件|加盖公章|资格证明文件", text):
         return True
     return bool(
         section == "materials"
@@ -546,7 +670,11 @@ def _materials_lead(text: str) -> bool:
 def _is_qualification(text: str, section: str | None) -> bool:
     if _participation_limit(text):
         return True
-    if re.search(r"(?:供应商|投标人|申请人).{0,12}资格(?:条件|要求)|资格(?:条件|要求)\s*[:：]|特定资格|基本资格|政府采购法》第二十二条|须具备|应具备|应当符合", text):
+    if re.search(
+        r"(?:供应商|投标人|申请人).{0,12}资格(?:条件|要求)|资格(?:条件|要求|证明)\s*[:：]|"
+        r"特定资格|基本资格|资格证明材料|政府采购法》第二十二条|须具备|应具备|应当符合",
+        text,
+    ):
         return True
     return bool(
         section == "qualification"
@@ -566,7 +694,61 @@ def _section_of(text: str) -> str | None:
 
 def _keep(text: str) -> bool:
     compact = _compact(text)
-    return not (len(compact) < 4 or _NOISE.search(text))
+    if len(compact) < 4 or _NOISE.search(text):
+        return False
+    if _TOC_LINE.search(text) and _REJECTION_OUTCOME.search(text) is None:
+        return False
+    return not _contact_only(text)
+
+
+def _contact_only(text: str) -> bool:
+    """A contact channel is not a clause unless the same sentence scores or rejects."""
+    if _EMAIL.search(text) is None:
+        return False
+    if re.search(r"无效|否决|废标|满分|不得分", text):
+        return False
+    return re.search(r"(?:须|应|应当|必须)(?:提供|提交|递交)", text) is None
+
+
+def _opens_item_list(text: str) -> bool:
+    if re.search(r"下列|以下|如下|包括以下|包括下列|包括但不限于|情形之一|情况之一|文件由|文件组成", text):
+        return True
+    return text.rstrip().endswith(("：", ":"))
+
+
+def _is_child_item(text: str) -> bool:
+    if _BARE_SECTION_TITLE.match(text.strip()):
+        return False
+    return _CHILD_ITEM.match(text) is not None
+
+
+def _ends_open_list(text: str) -> bool:
+    """A new numbered section ends the list. A short bundle title such as 「8.1 商务文件」 does not."""
+    if _is_child_item(text) or not _ITEM_START.match(text):
+        return False
+    return not (
+        re.match(r"^\s*\d+\.\d+", text)
+        and not re.search(r"[，。！？；;]", text)
+        and len(_compact(text)) <= 24
+    )
+
+
+def _bundle_label(text: str) -> bool:
+    compact = _compact(text)
+    if re.search(r"[，。！？；;]", text) or len(compact) > 24:
+        return False
+    return bool(re.match(r"^\d+(?:\.\d+)+", text) and re.search(r"(?:文件|部分|内容|材料)$", compact))
+
+
+def _inherited_blocks(text: str, carried: set[str]) -> set[str]:
+    extra = set(carried)
+    if _bond_template(text):
+        extra.discard("materials")
+    if _negated(text) or _definition_note(text):
+        extra.discard("rejection")
+    if _POST_AWARD.search(text):
+        extra.discard("qualification")
+    return extra
 
 
 def _item(
@@ -582,7 +764,7 @@ def _item(
     detection = "table" if clause["kind"] == "table_row" else "clause"
     if len(pages) > 1 or clause.get("cross_page"):
         detection = "cross_page"
-    quote = clause["text"][:400]
+    quote = _bounded_quote(clause["text"])
     printed_pages = [_printed_on(number, printed_by_page) for number in pages]
     return {
         "clause_id": "",
@@ -720,7 +902,7 @@ def _force_status(raw: dict[str, Any], label: str, block: str) -> dict[str, Any]
         "block": block,
         "label": label,
         "summary": str(raw.get("summary") or raw.get("quote") or "")[:80],
-        "quote": str(raw.get("quote") or raw.get("summary") or "")[:400],
+        "quote": _bounded_quote(str(raw.get("quote") or raw.get("summary") or "")),
         "pages": pages,
         "page": pages[0] if pages else None,
         "printed_page": printed_page,
@@ -757,6 +939,28 @@ def _assign_ids(result: dict[str, Any]) -> None:
     result["product_pass"] = False
 
 
+def _bounded_quote(text: str) -> str:
+    """Keep a short quote, but do not cut off an invalidity consequence that sits past it."""
+    if len(text) <= _QUOTE_SOFT_CAP:
+        return text
+    last = None
+    for match in _REJECTION_OUTCOME.finditer(text):
+        last = match
+    if last is None or last.end() <= _QUOTE_SOFT_CAP:
+        return text[:_QUOTE_SOFT_CAP]
+    end = last.end()
+    period = re.search(r"[。！？]", text[end:end + 80])
+    if period:
+        end += period.end()
+    return text[: min(end, _QUOTE_HARD_CAP)]
+
+
+def _passage(text: str) -> str:
+    cleaned = re.sub(r"<br\s*/?>", "", text, flags=re.IGNORECASE)
+    cleaned = re.sub(r"Col\d+：", "", cleaned)
+    return _compact(cleaned)
+
+
 def _dedupe(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
     seen: set[tuple[str, tuple[int, ...], str]] = set()
     kept: list[dict[str, Any]] = []
@@ -766,7 +970,23 @@ def _dedupe(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
             continue
         seen.add(key)
         kept.append(item)
-    return kept
+    table_passages = [
+        (item["pages"], _passage(item["quote"]))
+        for item in kept
+        if item.get("detection") == "table" and len(_passage(item["quote"])) >= 20
+    ]
+    if not table_passages:
+        return kept
+    filtered: list[dict[str, Any]] = []
+    for item in kept:
+        passage = _passage(item["quote"])
+        if item.get("detection") != "table" and len(passage) >= 20 and any(
+            set(item["pages"]) & set(pages) and (passage in table or table in passage)
+            for pages, table in table_passages
+        ):
+            continue
+        filtered.append(item)
+    return filtered
 
 
 def _original_pages(page: dict[str, Any]) -> list[int]:
@@ -952,9 +1172,14 @@ def _join_wrapped(parts: list[str]) -> str:
 
 
 def _is_section_heading(line: str) -> bool:
+    if _ITEM_START.match(line):
+        return False
     if _CHAPTER_LINE.match(line):
         return True
     if len(line) > 40 or "，" in line or "," in line or "。" in line:
+        return False
+    # A lead that introduces the following items is a sentence, not a section title.
+    if line.rstrip().endswith(("：", ":")) or re.search(r"下列|如下", line):
         return False
     return _section_of(line) is not None
 
@@ -986,8 +1211,81 @@ def _score_only_line(line: str) -> bool:
     return re.fullmatch(r"(?:得|扣|加)?\d+分|满分\d+分|\d+[-~～至到]\d+分", compact) is not None
 
 
-def _split_prose(text: str, banners: set[str] | None = None) -> list[tuple[str, str]]:
+def _score_fragment(line: str) -> bool:
+    """A tail such as 「0.5分,扣完为止」 or a bare label 「商务部分5分」 belongs to the previous sentence."""
+    compact = _compact(line).strip("；;。")
+    if re.match(r"^\d+(?:\.\d+)?分", compact):
+        return True
+    return re.fullmatch(r"[\u3400-\u9fff]{2,12}\d+(?:\.\d+)?分", compact) is not None
+
+
+def _clean_clause(text: str) -> str:
+    text = _strip_footer(text)
+    text = re.sub(r"^\d+\.\d{2,}(?!\d)\s+", "", text)
+    text = _FRONT_PREFIX.sub("", text)
+    return " ".join(text.split()).strip()
+
+
+def _page_edge_skips(lines: list[str], page_number: int | None) -> set[int]:
+    """Drop a bare page index at the page edge, and a front-table header repeated under it."""
+    content: list[int] = []
+    for index, raw in enumerate(lines):
+        line = _strip_footer(raw.strip())
+        if line and not _NOISE.search(raw):
+            content.append(index)
+    skip: set[int] = set()
+    if not content:
+        return skip
+    edges = {content[0], content[-1]}
+    if page_number is not None:
+        for index in edges:
+            line = _strip_footer(lines[index].strip())
+            if re.fullmatch(r"\d{1,3}", line) and int(line) == page_number:
+                skip.add(index)
+    header_run: list[int] = []
+    for index in content[:8]:
+        if index in skip:
+            continue
+        line = _strip_footer(lines[index].strip())
+        if page_number is not None and re.fullmatch(r"\d{1,3}", line) and int(line) == page_number:
+            continue
+        if _FRONT_HEADER_LINE.fullmatch(line):
+            header_run.append(index)
+            continue
+        break
+    names = {_strip_footer(lines[index].strip()) for index in header_run}
+    if names & {"序号", "内容", "说明", "条款号", "栏目", "编列内容"}:
+        skip.update(header_run)
+    return skip
+
+
+def _explode_items(text: str) -> list[tuple[str, str]]:
+    """Numbered sub-items written on one line each become their own clause."""
+    marks = [match for match in _INLINE_MARK.finditer(text) if match.start() > 0]
+    if not marks:
+        kind = "item" if _ITEM_START.match(text) else "paragraph"
+        return [(kind, text)]
+    pieces: list[tuple[str, str]] = []
+    lead = text[: marks[0].start()].strip()
+    if lead:
+        pieces.append(("paragraph" if not _ITEM_START.match(lead) else "item", lead))
+    bounds = [*marks, None]
+    for index, mark in enumerate(marks):
+        end = bounds[index + 1].start() if bounds[index + 1] is not None else len(text)
+        chunk = text[mark.start():end].strip()
+        if chunk:
+            pieces.append(("item", chunk))
+    return pieces
+
+
+def _split_prose(
+    text: str,
+    banners: set[str] | None = None,
+    page_number: int | None = None,
+) -> list[tuple[str, str]]:
     banners = banners or set()
+    raw_lines = text.splitlines()
+    skip = _page_edge_skips(raw_lines, page_number)
     pieces: list[tuple[str, str]] = []
     buffer_kind = ""
     buffer: list[str] = []
@@ -995,11 +1293,29 @@ def _split_prose(text: str, banners: set[str] | None = None) -> list[tuple[str, 
     def flush() -> None:
         nonlocal buffer_kind, buffer
         if buffer:
-            pieces.append((buffer_kind, _join_wrapped(buffer)))
+            joined = _join_wrapped(buffer)
+            if buffer_kind == "heading":
+                pieces.append((buffer_kind, joined))
+            else:
+                pieces.extend(_explode_items(joined))
         buffer_kind = ""
         buffer = []
 
-    for raw in text.splitlines():
+    def absorb(line: str) -> None:
+        if buffer:
+            buffer.append(line)
+            if _sentence_end(line) or (line.endswith(_CLOSED) and buffer_kind == "item"):
+                flush()
+            return
+        if pieces and _score_fragment(line):
+            kind, previous = pieces[-1]
+            pieces[-1] = (kind, _join_wrapped([previous, line]))
+            return
+        pieces.append(("paragraph", line))
+
+    for index, raw in enumerate(raw_lines):
+        if index in skip:
+            continue
         line = raw.strip()
         if not line or _NOISE.search(line):
             flush()
@@ -1007,12 +1323,17 @@ def _split_prose(text: str, banners: set[str] | None = None) -> list[tuple[str, 
         line = _strip_footer(line)
         if not line or line in banners:
             continue
-        if _score_only_line(line):
-            # Keep it as its own piece so a wrapped sentence can absorb it.
-            # Alone, it has no subject and is not a clause.
-            flush()
-            pieces.append(("paragraph", line))
+        if _score_fragment(line) or _score_only_line(line):
+            # A fragment joins the sentence before it. A bare score on the next page stays separate
+            # so the cross-page joiner can attach it.
+            if buffer:
+                buffer.append(line)
+                flush()
+            else:
+                absorb(line)
             continue
+        if re.match(r"^注\s*[:：]", line) and buffer:
+            flush()
         if _is_section_heading(line):
             flush()
             pieces.append(("heading", line))

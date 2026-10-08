@@ -135,6 +135,7 @@ def _markdown(payload: dict) -> str:
         f"- 印制总页数（页脚「共M页」）：{_total_text(payload['printed_page_total'])}",
         f"- 页脚核对：{_footer_sentence(payload['footer_check'])}",
         f"- 条款原文仍含页脚：{payload['footer_in_quotes']} 条",
+        f"- 条款原文仍夹着页首页尾的裸页码：{payload['bare_page_in_quotes']} 条",
         "",
         "## 抽取数量",
         "",
@@ -240,6 +241,18 @@ def _footer_in_quotes(result: dict) -> int:
     return sum(1 for item in _rows(result) if _FOOTER.search(item.get("quote") or ""))
 
 
+def _bare_page_in_quotes(result: dict) -> int:
+    """A PDF page index glued between CJK characters, the residue of a bare page number."""
+    count = 0
+    for item in _rows(result):
+        quote = item.get("quote") or ""
+        for number in item.get("pages") or []:
+            if re.search(rf"(?<=[\u3400-\u9fff])\s*{int(number)}\s*(?=[\u3400-\u9fff])", quote):
+                count += 1
+                break
+    return count
+
+
 def run(
     pdf: Path,
     markdown_path: Path,
@@ -281,6 +294,7 @@ def run(
         "ocr": "not_used",
         "footer_check": footer,
         "footer_in_quotes": _footer_in_quotes(result),
+        "bare_page_in_quotes": _bare_page_in_quotes(result),
         "counts": _counts(result),
         "known_hits": _known_hits(result, known),
         "extraction": result,

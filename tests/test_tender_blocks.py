@@ -704,3 +704,152 @@ def test_rejecting_the_quote_is_a_rejection_item():
     assert rejection[0]["locator"]["label"] == "PDF 第11页"
     assert rejection[0]["status"] == "NEEDS_REVIEW"
     assert rejection[0]["printed_page"] is None
+
+
+def test_numbered_subitems_inherit_the_lead_and_stay_separate():
+    pages = [
+        _page(
+            4,
+            "下列情形之一的，响应文件无效："
+            "（1）未按规定交纳保证金的；"
+            "（2）逾期送达响应文件的。",
+        ),
+        _page(
+            5,
+            "除上述情形外，存在以下情形之一的，其投标无效：\n"
+            "（一）不同投标人的投标文件由同一单位编制；\n"
+            "（二）不同投标人委托同一单位办理投标事宜。",
+        ),
+        _page(
+            6,
+            "供应商需提供的资格证明材料：\n（1）营业执照；\n（2）资质证书。",
+        ),
+        _page(
+            7,
+            "响应文件由商务文件和技术文件组成。\n"
+            "8.1 商务文件\n"
+            "（1）报价函；\n"
+            "（2）已标价工程量清单；\n"
+            "（3）商务偏离表。",
+        ),
+    ]
+    found = _blocks(extract_tender_blocks(pages, filename="lists.pdf"))
+
+    invalid_file = [item for item in found["rejection"] if item["page"] == 4]
+    assert len(invalid_file) >= 2
+    assert any("交纳保证金" in item["quote"] for item in invalid_file)
+    assert any("逾期送达" in item["quote"] for item in invalid_file)
+    assert all("交纳保证金" not in item["quote"] or "逾期送达" not in item["quote"] for item in invalid_file)
+    bid_invalid = [item for item in found["rejection"] if item["page"] == 5]
+    assert any("同一单位编制" in item["quote"] for item in bid_invalid)
+    assert any("办理投标事宜" in item["quote"] for item in bid_invalid)
+    qualification = [item["quote"] for item in found["qualification"] if item["page"] == 6]
+    assert any("营业执照" in quote for quote in qualification)
+    assert any("资质证书" in quote for quote in qualification)
+    materials = [item["quote"] for item in found["materials"] if item["page"] == 7]
+    assert any("报价函" in quote for quote in materials)
+    assert any("工程量清单" in quote for quote in materials)
+    assert any("商务偏离表" in quote for quote in materials)
+
+
+def test_invalidity_wording_and_a_note_are_judged_by_content():
+    pages = [
+        _page(2, "★未响应实质性条款的，响应文件无效。"),
+        _page(3, "报价明显低于成本且不能说明的，作无效报价处理。"),
+        _page(4, "未实质性响应招标文件的，按非实质性响应处理。"),
+        _page(5, "投标人串通投标的，其投标无效。"),
+        _page(6, "注：未盖章的，其响应无效。"),
+        _page(7, "注：“有效”是指证书载明的有效期尚未届满。"),
+        _page(8, "被列入失信名单的供应商，不得参加本次政府采购活动。"),
+    ]
+    found = _blocks(extract_tender_blocks(pages, filename="wording.pdf"))
+    rejection = _quotes(found["rejection"])
+
+    assert "响应文件无效" in rejection
+    assert "作无效报价处理" in rejection
+    assert "非实质性响应" in rejection
+    assert "其投标无效" in rejection
+    assert "其响应无效" in rejection
+    assert "有效期尚未届满" not in rejection
+    assert any("不得参加本次" in item["quote"] for item in found["qualification"])
+    assert "不得参加本次" not in rejection
+    assert all(item["status"] == "NEEDS_REVIEW" for item in found["rejection"])
+
+
+def test_process_text_size_rules_and_split_items_are_not_scoring():
+    pages = [
+        _page(2, "采购人按照综合得分排序确定成交供应商。"),
+        _page(2, "成交候选供应商按照综合评审总得分由高到低顺序排列推荐。"),
+        _page(3, "综合评分法，是指得分最高的供应商为成交候选供应商的评审方法。"),
+        _page(4, "采购代理机构告知未成交供应商本人的评审得分和排序。"),
+        _page(5, "本项目综合评分满分为100分，具体评分细则如下："),
+        _page(6, "技术方案完善的得5分，未提供不得分。"),
+        _page(7, "3 分项计算可调价主要材料价差的，应在价差调整金额列填写。"),
+        _page(8, "分部分项工程量清单另行提供，不作为评审依据。"),
+        _page(9, "中小企业划型标准规定，从业人员300人以下的为中小微型企业。"),
+    ]
+    found = _blocks(extract_tender_blocks(pages, filename="scores-tight.pdf"))
+    scoring = _quotes(found["scoring"])
+
+    assert "确定成交供应商" not in scoring
+    assert "由高到低" not in scoring
+    assert "评审方法" not in scoring
+    assert "告知未成交" not in scoring
+    assert "细则如下" not in scoring
+    assert "技术方案完善" in scoring
+    assert "分项计算" not in scoring
+    assert "分部分项" not in scoring
+    assert "划型标准" not in scoring
+
+
+def test_post_award_bans_and_bond_templates_are_not_qualification_or_materials():
+    pages = [
+        _page(2, "成交供应商拒绝签订合同的不得参加重新开展的采购活动。"),
+        _page(3, "本保函为见索即付，担保人承担连带责任。"),
+        _page(4, "投标人须提交投标保函。"),
+        _page(5, "为本项目提供设计的单位，不得再参加本次采购的施工投标。"),
+    ]
+    found = _blocks(extract_tender_blocks(pages, filename="after-award.pdf"))
+
+    assert all("重新开展" not in item["quote"] for item in found["qualification"])
+    assert all("本保函" not in item["quote"] for item in found["materials"])
+    assert any("投标保函" in item["quote"] for item in found["materials"])
+    assert any("本次采购" in item["quote"] for item in found["qualification"])
+
+
+def test_page_edges_fragments_and_quote_tails_stay_readable():
+    pages = [
+        _page(33, "未盖章的，磋"),
+        _page(34, "34\n商文件按无效处理。"),
+        _page(9, "施工组织设计合理的，\n商务部分5分"),
+        _page(10, "方案有缺陷的，每处\n0.5分,扣完为止。"),
+        _page(11, "349.98 报价超过最高限价的，投标无效。"),
+        _page(12, "第一章 投标邀请………………12\n未按要求签署的，投标文件无效。"),
+        _page(13, "疑问请发至 bid@example.com 邮箱。"),
+        _page(14, "供应商须知前附表序号内容未按要求密封的，其投标无效。"),
+        _page(
+            15,
+            "节能产品政策说明，" + ("应当优先采购列入清单的节能产品，" * 30) + "所报产品未提供认证证书的，响应无效。",
+        ),
+    ]
+    found = _blocks(extract_tender_blocks(pages, filename="cleanup.pdf"))
+    rejection = found["rejection"]
+    scoring = found["scoring"]
+    everything = _quotes([item for group in found.values() for item in group])
+
+    sealed = [item for item in rejection if "商文件按无效处理" in item["quote"]]
+    assert len(sealed) == 1
+    assert "34" not in sealed[0]["quote"]
+    assert sealed[0]["pages"] == [33, 34]
+    assert any("施工组织设计" in item["quote"] and "商务部分5分" in item["quote"] for item in scoring)
+    assert any("扣完为止" in item["quote"] and "方案有缺陷" in item["quote"] for item in scoring)
+    assert all(not item["quote"].startswith("0.5分") for item in scoring)
+    limit = [item for item in rejection if "最高限价" in item["quote"]]
+    assert limit and not limit[0]["quote"].startswith("349.98")
+    assert "投标邀请" not in everything
+    assert "example.com" not in everything
+    prefixed = [item for item in rejection if "密封" in item["quote"]]
+    assert prefixed and prefixed[0]["quote"].startswith("未按要求密封")
+    long_quote = [item for item in rejection if "认证证书" in item["quote"]]
+    assert long_quote and "响应无效" in long_quote[0]["quote"]
+    assert len(long_quote[0]["quote"]) > 400
