@@ -1,0 +1,18 @@
+{
+  "required_cohorts": [
+    "old",
+    "expanded"
+  ],
+  "report_version": {
+    "old": "20261002T130041.238532p0000",
+    "expanded": "20261002T130041.238532p0000"
+  },
+  "report_hash": {
+    "old": "3cd49c88aa1f46546547f31f2df78e7fd5b300b8affe0e117b6a33edf1a43793",
+    "expanded": "025d9189a5a7b3f793b2d12cd517ee357a426129a52c1e09de1599bcdda92352"
+  },
+  "gate": "GATE_FAIL",
+  "product_pass": false,
+  "generated_at": "2026-10-02T13:00:41.238532+00:00",
+  "note": "Read each cohort under cohorts/<name>/<version>/. Never average or pick-best."
+}

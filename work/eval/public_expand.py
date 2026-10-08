@@ -33,7 +33,12 @@ from work.eval.key_field_gt import KEY_FIELD_NAMES, NATIONAL_ID_RE, PHONE_RE
 from work.eval.ocr_benchmark import _norm
 from work.eval.page_annotation import load_annotations
 from work.eval.rapidocr_line_cer import evaluate_line_cer, load_hypotheses
-from work.eval.sandbox_gates import KEY_FIELD_F1_MIN, LINE_CER_MAX, TEDS_MIN
+from work.eval.sandbox_gates import (
+    KEY_FIELD_F1_MIN,
+    LINE_CER_MAX,
+    TEDS_MIN,
+    is_measured_number,
+)
 from work.eval.teds_gt import rows_to_table_html
 from work.eval.teds_harness import evaluate_teds
 
@@ -46,10 +51,12 @@ NOTICES = ROOT / "work" / "public-eval" / "notices"
 TRAINING_MANIFEST = ROOT / "work" / "training-corpus" / "tender-public" / "manifest.json"
 FIXTURE_DIR = ROOT / "work" / "eval" / "fixtures"
 OUT_DIR = ROOT / "outputs" / "ocr-benchmark"
+COHORT_ROOT = OUT_DIR / "cohorts"
 REPORT_JSON = OUT_DIR / "public-expand-report.json"
 REPORT_MD = OUT_DIR / "public-expand-report.md"
 FORBIDDEN_OUTPUT_TOKENS = ("pilot-ledger", "icp-outreach")
 FORBIDDEN_PATH_TOKENS = ("training-corpus", "case-studies", "source2-fujian")
+REQUIRED_REPORT_COHORTS = ("old", "expanded")
 
 CER_GT_PATH = FIXTURE_DIR / "public_expand_pages.jsonl"
 CER_HYP_PATH = FIXTURE_DIR / "public_expand_hypotheses.jsonl"
@@ -445,22 +452,32 @@ def _write_jsonl(path: Path, rows: list[dict[str, Any]]) -> None:
     path.write_text(payload, encoding="utf-8")
 
 
+def _measured(value: float | None) -> float | None:
+    """Finite measured metric, or None. Missing / NaN must not become 0.0."""
+    if not is_measured_number(value):
+        return None
+    return float(value)
+
+
 def _gate_cer(value: float | None) -> str:
-    if value is None:
+    number = _measured(value)
+    if number is None:
         return "GATE_FAIL"
-    return "GATE_PASS" if value <= LINE_CER_MAX else "GATE_FAIL"
+    return "GATE_PASS" if number <= LINE_CER_MAX else "GATE_FAIL"
 
 
 def _gate_f1(value: float | None) -> str:
-    if value is None:
+    number = _measured(value)
+    if number is None:
         return "GATE_FAIL"
-    return "GATE_PASS" if value >= KEY_FIELD_F1_MIN else "GATE_FAIL"
+    return "GATE_PASS" if number >= KEY_FIELD_F1_MIN else "GATE_FAIL"
 
 
 def _gate_teds(value: float | None) -> str:
-    if value is None:
+    number = _measured(value)
+    if number is None:
         return "GATE_FAIL"
-    return "GATE_PASS" if value >= TEDS_MIN else "GATE_FAIL"
+    return "GATE_PASS" if number >= TEDS_MIN else "GATE_FAIL"
 
 
 def _pct(value: float | None) -> str:
@@ -903,6 +920,9 @@ def build_report_from_fixtures() -> dict[str, Any]:
         if report["expanded"]["line_cer_gate"] == "GATE_PASS"
         and report["expanded"]["key_field_f1_gate"] == "GATE_PASS"
         and report["expanded"]["teds_gate"] == "GATE_PASS"
+        and report["old_set"]["line_cer_gate"] == "GATE_PASS"
+        and report["old_set"]["key_field_f1_gate"] == "GATE_PASS"
+        and report["old_set"]["teds_gate"] == "GATE_PASS"
         else "GATE_FAIL"
     )
     report["joe_local_pdf_intake"] = load_joe_local_pdf_intake(manifest)
@@ -1049,7 +1069,8 @@ def render_markdown(report: dict[str, Any]) -> str:
             f"{_pct(appendix['teds'])} | {appendix['teds_gate']} |"
         ),
         "",
-        f"Overall expanded gate: **{report['gate']}**. `product_pass=false`.",
+        f"Overall gate (old AND expanded): **{report['gate']}**. `product_pass=false`.",
+        "Expanded PASS cannot override old FAIL. Cohorts are written under `outputs/ocr-benchmark/cohorts/`.",
         "",
         f"Expanded F1 counts: TP {new['tp']} / FP {new['fp']} / FN {new['fn']}.",
         "",
@@ -1122,81 +1143,263 @@ def render_markdown(report: dict[str, Any]) -> str:
     return "\n".join(lines)
 
 
-def write_reports(report: dict[str, Any]) -> None:
-    assert_safe_output(OUT_DIR)
-    OUT_DIR.mkdir(parents=True, exist_ok=True)
-    markdown = render_markdown(report)
-    REPORT_MD.write_text(markdown, encoding="utf-8")
-    payload = {key: value for key, value in report.items()}
-    REPORT_JSON.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    _write_gate_snapshot("line-cer-report", "line_cer", report["expanded"]["line_cer"], report["expanded"]["line_cer_gate"], report)
-    _write_gate_snapshot(
-        "key-field-f1-report",
-        "key_field_f1",
-        report["expanded"]["key_field_f1"],
-        report["expanded"]["key_field_f1_gate"],
-        report,
-    )
-    _write_gate_snapshot("teds-report", "teds", report["expanded"]["teds"], report["expanded"]["teds_gate"], report)
+def _repo_relative(path: Path) -> str:
+    """Repo-relative POSIX path. Never an absolute ``/workspace`` path."""
+    resolved = path.resolve()
+    try:
+        return resolved.relative_to(ROOT.resolve()).as_posix()
+    except ValueError:
+        return Path(path).as_posix().lstrip("/")
 
 
-def _write_gate_snapshot(
+def _report_version_id(generated_at: str) -> str:
+    """Stable-ish version folder name from the report timestamp (no overwrite of prior runs)."""
+    stamp = (generated_at or "").replace(":", "").replace("+", "p").replace("-", "")
+    stamp = "".join(ch for ch in stamp if ch.isalnum() or ch in "._")
+    return stamp or datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+
+
+def _cohort_metric_hash(metrics: dict[str, Any], *, cohort: str, report_version: str) -> str:
+    payload = {
+        "cohort": cohort,
+        "report_version": report_version,
+        "line_cer": metrics.get("line_cer"),
+        "key_field_f1": metrics.get("key_field_f1"),
+        "teds": metrics.get("teds"),
+        "line_cer_gate": metrics.get("line_cer_gate"),
+        "key_field_f1_gate": metrics.get("key_field_f1_gate"),
+        "teds_gate": metrics.get("teds_gate"),
+    }
+    blob = json.dumps(payload, sort_keys=True, ensure_ascii=False, default=str).encode("utf-8")
+    return hashlib.sha256(blob).hexdigest()
+
+
+def _write_cohort_metric_file(
+    out_dir: Path,
+    *,
     stem: str,
     metric: str,
     value: float | None,
     gate: str,
-    report: dict[str, Any],
+    cohort: str,
+    report_version: str,
+    report_hash: str,
+    generated_at: str,
+    extra: dict[str, Any] | None = None,
 ) -> None:
-    body = {
-        "generated_at": report["generated_at"],
+    # A missing / NaN metric stays null. It must never be written as 0.0, which
+    # would satisfy line CER ≤ line_cer_max and mint a false GATE_PASS.
+    stored = _measured(value)
+    if stored is None:
+        gate = "GATE_FAIL"
+    body: dict[str, Any] = {
+        "generated_at": generated_at,
         "claim_scope": "engineering_gate_only",
-        metric: 0.0 if value is None else value,
+        "cohort": cohort,
+        "source": cohort,
+        "report_version": report_version,
+        "report_hash": report_hash,
+        metric: stored,
         "gate": gate,
         "product_pass": False,
         "business_pass": False,
         "forced_requirement_status": "NEEDS_REVIEW",
         "leaf_id": LEAF_ID,
-        "old_set": {
-            "line_cer": report["old_set"]["line_cer"],
-            "line_cer_gate": report["old_set"]["line_cer_gate"],
-            "key_field_f1": report["old_set"]["key_field_f1"],
-            "key_field_f1_gate": report["old_set"]["key_field_f1_gate"],
-            "teds": report["old_set"]["teds"],
-            "teds_gate": report["old_set"]["teds_gate"],
-        },
         "synthetic_appendix_excluded_from_gate": True,
-        "note": "Top-level metric is the expanded public live-OCR set. Old published numbers are under old_set.",
+        "note": f"Cohort `{cohort}` metrics only. Other cohorts live in sibling dirs under cohorts/.",
     }
     if metric == "line_cer":
-        body["line_cer_gate"] = LINE_CER_MAX
-        body["pages"] = report["expanded"]["cer_pages"]
+        body["line_cer_max"] = LINE_CER_MAX
     if metric == "key_field_f1":
         body["key_field_f1_min"] = KEY_FIELD_F1_MIN
-        body["tp"] = report["expanded"]["tp"]
-        body["fp"] = report["expanded"]["fp"]
-        body["fn"] = report["expanded"]["fn"]
     if metric == "teds":
         body["teds_min"] = TEDS_MIN
-        body["pages_scored"] = report["expanded"]["teds_pages_scored"]
-        body["teds_gt_pages"] = report["expanded"]["teds_pages_scored"]
-        body["pages"] = report["expanded"]["teds_pages"]
-    path = OUT_DIR / f"{stem}.json"
-    md_path = OUT_DIR / f"{stem}.md"
+    if extra:
+        body.update(extra)
+    # Re-apply after extra so a nested payload cannot turn a missing CER into 0.0
+    # or flip product_pass.
+    body[metric] = stored
+    body["gate"] = gate
+    body["product_pass"] = False
+    body["forced_requirement_status"] = "NEEDS_REVIEW"
+    path = out_dir / f"{stem}.json"
+    md_path = out_dir / f"{stem}.md"
     assert_safe_output(path)
     path.write_text(json.dumps(body, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     md_path.write_text(
         "\n".join(
             [
-                f"# {stem}",
+                f"# {stem} ({cohort})",
                 "",
-                f"Expanded public live-OCR `{metric}` = **{_pct(value)}** → **{gate}**.",
-                f"Old published set remains {report['old_set']['line_cer_gate']} / {report['old_set']['key_field_f1_gate']} / {report['old_set']['teds_gate']}.",
-                "Synthetic appendix is excluded. Not a product PASS. Not T-005.",
+                f"Cohort `{cohort}` `{metric}` = **{_pct(stored)}** → **{gate}**.",
+                f"report_version=`{report_version}` report_hash=`{report_hash[:12]}`.",
+                "Not a product PASS. Not T-005.",
                 "",
             ]
         ),
         encoding="utf-8",
     )
+
+
+def _write_cohort_bundle(
+    report: dict[str, Any],
+    *,
+    cohort: str,
+    metrics: dict[str, Any],
+    report_version: str,
+) -> dict[str, str]:
+    """Write one versioned cohort directory and point CURRENT at it. Never deletes prior versions."""
+    assert_safe_output(COHORT_ROOT)
+    version_dir = COHORT_ROOT / cohort / report_version
+    if version_dir.exists():
+        # Keep history immutable: bump with a short content suffix instead of overwriting.
+        report_hash = _cohort_metric_hash(metrics, cohort=cohort, report_version=report_version)
+        report_version = f"{report_version}_{report_hash[:8]}"
+        version_dir = COHORT_ROOT / cohort / report_version
+    version_dir.mkdir(parents=True, exist_ok=True)
+    report_hash = _cohort_metric_hash(metrics, cohort=cohort, report_version=report_version)
+    generated_at = str(report.get("generated_at") or "")
+
+    cer_extra: dict[str, Any] = {}
+    f1_extra: dict[str, Any] = {}
+    teds_extra: dict[str, Any] = {}
+    if cohort == "expanded":
+        cer_extra["pages"] = metrics.get("cer_pages") or []
+        f1_extra.update({"tp": metrics.get("tp"), "fp": metrics.get("fp"), "fn": metrics.get("fn")})
+        teds_extra.update(
+            {
+                "pages_scored": metrics.get("teds_pages_scored"),
+                "teds_gt_pages": metrics.get("teds_pages_scored"),
+                "pages": metrics.get("teds_pages") or [],
+            }
+        )
+    elif cohort == "old":
+        cer_extra["pages"] = metrics.get("cer_pages") or []
+        f1_extra.update({"tp": metrics.get("tp"), "fp": metrics.get("fp"), "fn": metrics.get("fn")})
+        teds_extra.update(
+            {
+                "pages_scored": metrics.get("teds_pages_scored"),
+                "teds_gt_pages": metrics.get("teds_pages_scored"),
+                "pages": metrics.get("teds_pages") or [],
+            }
+        )
+
+    _write_cohort_metric_file(
+        version_dir,
+        stem="line-cer-report",
+        metric="line_cer",
+        value=metrics.get("line_cer"),
+        gate=str(metrics.get("line_cer_gate") or "GATE_FAIL"),
+        cohort=cohort,
+        report_version=report_version,
+        report_hash=report_hash,
+        generated_at=generated_at,
+        extra=cer_extra,
+    )
+    _write_cohort_metric_file(
+        version_dir,
+        stem="key-field-f1-report",
+        metric="key_field_f1",
+        value=metrics.get("key_field_f1"),
+        gate=str(metrics.get("key_field_f1_gate") or "GATE_FAIL"),
+        cohort=cohort,
+        report_version=report_version,
+        report_hash=report_hash,
+        generated_at=generated_at,
+        extra=f1_extra,
+    )
+    _write_cohort_metric_file(
+        version_dir,
+        stem="teds-report",
+        metric="teds",
+        value=metrics.get("teds"),
+        gate=str(metrics.get("teds_gate") or "GATE_FAIL"),
+        cohort=cohort,
+        report_version=report_version,
+        report_hash=report_hash,
+        generated_at=generated_at,
+        extra=teds_extra,
+    )
+    manifest = {
+        "cohort": cohort,
+        "report_version": report_version,
+        "report_hash": report_hash,
+        "generated_at": generated_at,
+        "product_pass": False,
+        "business_pass": False,
+        "forced_requirement_status": "NEEDS_REVIEW",
+        "metrics": {
+            "line_cer": metrics.get("line_cer"),
+            "line_cer_gate": metrics.get("line_cer_gate"),
+            "key_field_f1": metrics.get("key_field_f1"),
+            "key_field_f1_gate": metrics.get("key_field_f1_gate"),
+            "teds": metrics.get("teds"),
+            "teds_gate": metrics.get("teds_gate"),
+        },
+        "note": "Versioned cohort snapshot. Sibling versions under this cohort dir are retained.",
+    }
+    (version_dir / "cohort-manifest.json").write_text(
+        json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+    pointer = COHORT_ROOT / cohort / "CURRENT"
+    assert_safe_output(pointer)
+    pointer.write_text(report_version + "\n", encoding="utf-8")
+    return {
+        "report_version": report_version,
+        "report_hash": report_hash,
+        "path": _repo_relative(version_dir),
+    }
+
+
+def write_reports(report: dict[str, Any]) -> dict[str, Any]:
+    """Write the combined markdown/json report plus separate versioned cohort dirs.
+
+    Does not overwrite historical cohort version folders. Does not replace the
+    independent sandbox harness outputs with expanded-only numbers.
+    """
+    assert_safe_output(OUT_DIR)
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
+    report_version = _report_version_id(str(report.get("generated_at") or ""))
+    cohort_meta: dict[str, Any] = {}
+    for cohort in REQUIRED_REPORT_COHORTS:
+        key = "old_set" if cohort == "old" else "expanded"
+        metrics = report[key]
+        cohort_meta[cohort] = _write_cohort_bundle(
+            report, cohort=cohort, metrics=metrics, report_version=report_version
+        )
+    report = dict(report)
+    report["report_version"] = {name: meta["report_version"] for name, meta in cohort_meta.items()}
+    report["report_hash"] = {name: meta["report_hash"] for name, meta in cohort_meta.items()}
+    report["cohort_paths"] = {name: meta["path"] for name, meta in cohort_meta.items()}
+    # Overall gate requires every required cohort to pass all three metrics.
+    cohort_gates = []
+    for cohort in REQUIRED_REPORT_COHORTS:
+        metrics = report["old_set" if cohort == "old" else "expanded"]
+        cohort_gates.append(
+            metrics.get("line_cer_gate") == "GATE_PASS"
+            and metrics.get("key_field_f1_gate") == "GATE_PASS"
+            and metrics.get("teds_gate") == "GATE_PASS"
+        )
+    report["gate"] = "GATE_PASS" if all(cohort_gates) else "GATE_FAIL"
+    report["product_pass"] = False
+    markdown = render_markdown(report)
+    REPORT_MD.write_text(markdown, encoding="utf-8")
+    REPORT_JSON.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    # Index pointer for quality_gates / operators. Does not delete prior versions.
+    index = {
+        "required_cohorts": list(REQUIRED_REPORT_COHORTS),
+        "report_version": report["report_version"],
+        "report_hash": report["report_hash"],
+        "gate": report["gate"],
+        "product_pass": False,
+        "generated_at": report.get("generated_at"),
+        "note": "Read each cohort under cohorts/<name>/<version>/. Never average or pick-best.",
+    }
+    index_path = COHORT_ROOT / "index.json"
+    assert_safe_output(index_path)
+    COHORT_ROOT.mkdir(parents=True, exist_ok=True)
+    index_path.write_text(json.dumps(index, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    return report
 
 
 def _provenance(row: dict[str, Any], fetched_at: str) -> dict[str, Any]:
@@ -1748,15 +1951,20 @@ def main(argv: list[str] | None = None) -> int:
             sidecar.write_text(json.dumps(current + notices, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         if args.build or args.report:
             report = build_report_from_fixtures()
-            write_reports(report)
+            report = write_reports(report)
             print(
                 json.dumps(
                     {
                         "gate": report["gate"],
+                        "report_version": report.get("report_version"),
+                        "report_hash": report.get("report_hash"),
                         "old_set": {
                             "line_cer": report["old_set"]["line_cer"],
+                            "line_cer_gate": report["old_set"]["line_cer_gate"],
                             "key_field_f1": report["old_set"]["key_field_f1"],
+                            "key_field_f1_gate": report["old_set"]["key_field_f1_gate"],
                             "teds": report["old_set"]["teds"],
+                            "teds_gate": report["old_set"]["teds_gate"],
                         },
                         "expanded": {
                             "line_cer": report["expanded"]["line_cer"],

@@ -1,0 +1,37 @@
+{
+  "generated_at": "2026-10-02T13:00:41.238532+00:00",
+  "claim_scope": "engineering_gate_only",
+  "cohort": "old",
+  "source": "old",
+  "report_version": "20261002T130041.238532p0000",
+  "report_hash": "3cd49c88aa1f46546547f31f2df78e7fd5b300b8affe0e117b6a33edf1a43793",
+  "line_cer": 0.031746031746031744,
+  "gate": "GATE_FAIL",
+  "product_pass": false,
+  "business_pass": false,
+  "forced_requirement_status": "NEEDS_REVIEW",
+  "leaf_id": "S-A-OCR-PUBLIC-EXPAND",
+  "synthetic_appendix_excluded_from_gate": true,
+  "note": "Cohort `old` metrics only. Other cohorts live in sibling dirs under cohorts/.",
+  "line_cer_max": 0.02,
+  "pages": [
+    {
+      "doc_id": "sandbox-public-001",
+      "page": 1,
+      "page_cer": 0.5957446808510638,
+      "line_cer": 0.02127659574468085
+    },
+    {
+      "doc_id": "sandbox-public-002",
+      "page": 1,
+      "page_cer": 0.09090909090909091,
+      "line_cer": 0.09090909090909091
+    },
+    {
+      "doc_id": "sandbox-weak-001",
+      "page": 1,
+      "page_cer": 0.0,
+      "line_cer": 0.0
+    }
+  ]
+}

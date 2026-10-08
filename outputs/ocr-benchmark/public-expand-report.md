@@ -18,7 +18,8 @@ Synthetic rows are in the appendix and are not in the expanded gate. Thresholds 
 | Expanded public set (live OCR) | 4.96% | GATE_FAIL | 97.17% | GATE_PASS | 95.80% | GATE_PASS |
 | Synthetic appendix (not in gate) | 3.17% | GATE_FAIL | 10.26% | GATE_FAIL | 86.63% | GATE_FAIL |
 
-Overall expanded gate: **GATE_FAIL**. `product_pass=false`.
+Overall gate (old AND expanded): **GATE_FAIL**. `product_pass=false`.
+Expanded PASS cannot override old FAIL. Cohorts are written under `outputs/ocr-benchmark/cohorts/`.
 
 Expanded F1 counts: TP 103 / FP 3 / FN 3.
 
@@ -79,4 +80,4 @@ uv run --extra ocr python -m work.eval.public_expand --build
 uv run python -m work.eval.public_expand --report
 ```
 
-Generated at `2026-09-29T09:06:12.123118+00:00`.
+Generated at `2026-10-02T13:00:41.238532+00:00`.

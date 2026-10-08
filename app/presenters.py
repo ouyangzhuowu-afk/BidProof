@@ -44,10 +44,13 @@ def scan_quality(tender_pages: list[dict], evidence_pages: list[dict]) -> dict:
         "ocr_failed_pages": sum(page.get("ocr_status") == "FAILED" for page in pages),
         "low_text_confidence_pages": sum(bool(page.get("low_text_confidence")) for page in pages),
         "ocr_engineering_gates": gates,
+        "ocr_report_version": gates.get("report_version"),
+        "ocr_report_hash": gates.get("report_hash"),
         "interpretation": (
             "规则初筛结果，必须结合原文定位和人工复核；OCR 抽取成功不等于语义判断准确。"
             f" 工程门禁 {gates['engineering_gate']}："
             "未达标或未评测的 CER/F1/TEDS 时产品路径保持 NEEDS_REVIEW。"
+            f" 报告版本 {gates.get('report_version')} / 哈希 {gates.get('report_hash')}。"
         ),
     }
 
@@ -57,6 +60,8 @@ def quality_for_run(run: dict) -> dict:
     gates = quality_gates.engineering_gate_snapshot()
     if quality.get("total_pages") is not None:
         quality["ocr_engineering_gates"] = gates
+        quality["ocr_report_version"] = gates.get("report_version")
+        quality["ocr_report_hash"] = gates.get("report_hash")
         return quality
     total_pages = sum(int(document.get("pages") or 0) for document in run.get("source_documents", []))
     return {
@@ -66,10 +71,13 @@ def quality_for_run(run: dict) -> dict:
         "ocr_failed_pages": 0,
         "low_text_confidence_pages": 0,
         "ocr_engineering_gates": gates,
+        "ocr_report_version": gates.get("report_version"),
+        "ocr_report_hash": gates.get("report_hash"),
         "interpretation": (
             "历史任务未保存逐定位单元的文本质量元数据；结果仍需结合原文定位和人工复核。"
             f" 工程门禁 {gates['engineering_gate']}："
             "未达标或未评测的 CER/F1/TEDS 时产品路径保持 NEEDS_REVIEW。"
+            f" 报告版本 {gates.get('report_version')} / 哈希 {gates.get('report_hash')}。"
         ),
     }
 
