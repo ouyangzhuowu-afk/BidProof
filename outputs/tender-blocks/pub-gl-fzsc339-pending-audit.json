@@ -31,8 +31,8 @@
   "footer_in_quotes": 0,
   "bare_page_in_quotes": 0,
   "counts": {
-    "total": 294,
-    "with_real_page": 294,
+    "total": 321,
+    "with_real_page": 321,
     "without_page": 0,
     "by_block": {
       "qualification": {
@@ -52,8 +52,8 @@
       },
       "rejection": {
         "label": "废标项",
-        "cited": 41,
-        "items": 41
+        "cited": 68,
+        "items": 68
       }
     }
   },
@@ -526,8 +526,8 @@
             "clause_id": "TB-0017",
             "block": "qualification",
             "label": "资格要求",
-            "summary": "(五)团队要求为满足本项目实施需要,并确保项目按质、按量、按时及有序进行,供应商应成立一个完善和稳定的项目团队,团队成员人数至少应≥5 人。项目团队人员须具备较",
-            "quote": "(五)团队要求为满足本项目实施需要,并确保项目按质、按量、按时及有序进行,供应商应成立一个完善和稳定的项目团队,团队成员人数至少应≥5 人。项目团队人员须具备较高专业素质和相关工作能力及经验,确保在项目周期内实施人员的稳定性,项目核心人员不发生变动。",
+            "summary": "★(五)团队要求为满足本项目实施需要,并确保项目按质、按量、按时及有序进行,供应商应成立一个完善和稳定的项目团队,团队成员人数至少应≥5 人。项目团队人员须具备",
+            "quote": "★(五)团队要求为满足本项目实施需要,并确保项目按质、按量、按时及有序进行,供应商应成立一个完善和稳定的项目团队,团队成员人数至少应≥5 人。项目团队人员须具备较高专业素质和相关工作能力及经验,确保在项目周期内实施人员的稳定性,项目核心人员不发生变动。",
             "pages": [
               34
             ],
@@ -7886,6 +7886,762 @@
             "clause_id": "TB-0279",
             "block": "rejection",
             "label": "废标项",
+            "summary": "★(一)整体策划与全流程执行",
+            "quote": "★(一)整体策划与全流程执行",
+            "pages": [
+              33
+            ],
+            "page": 33,
+            "printed_page": 33,
+            "printed_pages": [
+              33
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第33页",
+              "index": 33,
+              "pages": [
+                33
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0280",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "1、围绕2026 年八闽美食嘉年华暨鼓楼区海鲜美食消费季活动主题,完成整体方案细化、流程设计、环节串联、时间节点管控。",
+            "quote": "1、围绕2026 年八闽美食嘉年华暨鼓楼区海鲜美食消费季活动主题,完成整体方案细化、流程设计、环节串联、时间节点管控。",
+            "pages": [
+              33
+            ],
+            "page": 33,
+            "printed_page": 33,
+            "printed_pages": [
+              33
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第33页",
+              "index": 33,
+              "pages": [
+                33
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0281",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "2、负责启动仪式全流程执行:场地对接、舞台搭建、氛围布置、流程编排、 主持、视频播放、领导致辞、签约环节、启动仪式等。",
+            "quote": "2、负责启动仪式全流程执行:场地对接、舞台搭建、氛围布置、流程编排、 主持、视频播放、领导致辞、签约环节、启动仪式等。",
+            "pages": [
+              33
+            ],
+            "page": 33,
+            "printed_page": 33,
+            "printed_pages": [
+              33
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第33页",
+              "index": 33,
+              "pages": [
+                33
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0282",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "3、确保活动安全、有序、合规,符合政府活动规范及安保消防等要求。",
+            "quote": "3、确保活动安全、有序、合规,符合政府活动规范及安保消防等要求。",
+            "pages": [
+              33
+            ],
+            "page": 33,
+            "printed_page": 33,
+            "printed_pages": [
+              33
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第33页",
+              "index": 33,
+              "pages": [
+                33
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0283",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "4、供应商负责沟通协调落实鼓楼辖区内重点商圈、相关企业活动场地资源, 所选场地须适配本项目各功能分区、活动场景布设及现场运营各项使用需求,满足活动开展的空间、用",
+            "quote": "4、供应商负责沟通协调落实鼓楼辖区内重点商圈、相关企业活动场地资源, 所选场地须适配本项目各功能分区、活动场景布设及现场运营各项使用需求,满足活动开展的空间、用电、通行、安全等配套条件。",
+            "pages": [
+              33
+            ],
+            "page": 33,
+            "printed_page": 33,
+            "printed_pages": [
+              33
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第33页",
+              "index": 33,
+              "pages": [
+                33
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0284",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(二)鼓楼限定品海宴",
+            "quote": "(二)鼓楼限定品海宴",
+            "pages": [
+              33
+            ],
+            "page": 33,
+            "printed_page": 33,
+            "printed_pages": [
+              33
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第33页",
+              "index": 33,
+              "pages": [
+                33
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0285",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "★1、提供鼓楼限定品海宴整体策划、设计方案,包括品牌定位、菜品设计等。",
+            "quote": "★1、提供鼓楼限定品海宴整体策划、设计方案,包括品牌定位、菜品设计等。",
+            "pages": [
+              33
+            ],
+            "page": 33,
+            "printed_page": 33,
+            "printed_pages": [
+              33
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第33页",
+              "index": 33,
+              "pages": [
+                33
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0286",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "★2、负责鼓楼限定品海宴全流程组织实施工作,涵盖闽菜厨师团队统筹配置(含主厨、帮厨、传菜上菜人员)、宴席菜品研发优化、食材遴选采购管控、 现场烹饪烹制出品、宴席",
+            "quote": "★2、负责鼓楼限定品海宴全流程组织实施工作,涵盖闽菜厨师团队统筹配置(含主厨、帮厨、传菜上菜人员)、宴席菜品研发优化、食材遴选采购管控、 现场烹饪烹制出品、宴席产品宣发与席位售卖预订(拥有专属线上平台)、现场餐食服务运营等全链条工作。",
+            "pages": [
+              33
+            ],
+            "page": 33,
+            "printed_page": 33,
+            "printed_pages": [
+              33
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第33页",
+              "index": 33,
+              "pages": [
+                33
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0287",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "★3、宴席现场活动为期3 天,每日现场宴席接待规模不少于30 桌(每桌 10 人),需统筹做好席位调度、餐食出品及现场服务保障工作,确保宴席连续稳定开展。",
+            "quote": "★3、宴席现场活动为期3 天,每日现场宴席接待规模不少于30 桌(每桌 10 人),需统筹做好席位调度、餐食出品及现场服务保障工作,确保宴席连续稳定开展。",
+            "pages": [
+              33
+            ],
+            "page": 33,
+            "printed_page": 33,
+            "printed_pages": [
+              33
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第33页",
+              "index": 33,
+              "pages": [
+                33
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0288",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "序号：1 参数性质：★ 类型：交付时间 要求：自合同签订之日起60 日",
+            "quote": "序号：1 参数性质：★ 类型：交付时间 要求：自合同签订之日起60 日",
+            "pages": [
+              34
+            ],
+            "page": 34,
+            "printed_page": 34,
+            "printed_pages": [
+              34
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第34页",
+              "index": 34,
+              "pages": [
+                34
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0289",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "序号：2 参数性质：★ 类型：交付地点 要求：采购人指定地点",
+            "quote": "序号：2 参数性质：★ 类型：交付地点 要求：采购人指定地点",
+            "pages": [
+              34
+            ],
+            "page": 34,
+            "printed_page": 34,
+            "printed_pages": [
+              34
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第34页",
+              "index": 34,
+              "pages": [
+                34
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0290",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "序号：3 参数性质：★ 类型：交货条件 要求：验收合格",
+            "quote": "序号：3 参数性质：★ 类型：交货条件 要求：验收合格",
+            "pages": [
+              34
+            ],
+            "page": 34,
+            "printed_page": 34,
+            "printed_pages": [
+              34
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第34页",
+              "index": 34,
+              "pages": [
+                34
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0291",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "序号：5 参数性质：★ 类型：履约验收方<br>式 要求：1、期次1,说明:符合竞争性磋商文件,响<br>应文件要求及国家行业标准进行验收",
+            "quote": "序号：5 参数性质：★ 类型：履约验收方<br>式 要求：1、期次1,说明:符合竞争性磋商文件,响<br>应文件要求及国家行业标准进行验收",
+            "pages": [
+              34
+            ],
+            "page": 34,
+            "printed_page": 34,
+            "printed_pages": [
+              34
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第34页",
+              "index": 34,
+              "pages": [
+                34
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0292",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "序号：6 参数性质：★ 类型：合同支付方<br>式 要求：整体项目验收合格后,采购人收到成交供应<br>商提交的等额增值税普通发票等完整付款资<br>料,达到付",
+            "quote": "序号：6 参数性质：★ 类型：合同支付方<br>式 要求：整体项目验收合格后,采购人收到成交供应<br>商提交的等额增值税普通发票等完整付款资<br>料,达到付款条件起30 日内,支付所有款项。",
+            "pages": [
+              34
+            ],
+            "page": 34,
+            "printed_page": 34,
+            "printed_pages": [
+              34
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第34页",
+              "index": 34,
+              "pages": [
+                34
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0293",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "序号：7 参数性质：★ 类型：履约保证金 要求：不缴纳",
+            "quote": "序号：7 参数性质：★ 类型：履约保证金 要求：不缴纳",
+            "pages": [
+              34
+            ],
+            "page": 34,
+            "printed_page": 34,
+            "printed_pages": [
+              34
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第34页",
+              "index": 34,
+              "pages": [
+                34
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0294",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "★1、邀请鼓楼辖区内超市、闽菜餐饮企业开展海鲜预制菜、渔品伴手礼现场展售(不少于20 家);落实现场试吃、烹饪演示、扫码线上下单配送到家等环节。",
+            "quote": "★1、邀请鼓楼辖区内超市、闽菜餐饮企业开展海鲜预制菜、渔品伴手礼现场展售(不少于20 家);落实现场试吃、烹饪演示、扫码线上下单配送到家等环节。",
+            "pages": [
+              34
+            ],
+            "page": 34,
+            "printed_page": 34,
+            "printed_pages": [
+              34
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第34页",
+              "index": 34,
+              "pages": [
+                34
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0295",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "★1、严格对标项目宣传排期,统筹微信推文、短视频制作输出,完成活动预告、攻略推文、宴席预告、活动现场视频、活动回顾等内容产出。",
+            "quote": "★1、严格对标项目宣传排期,统筹微信推文、短视频制作输出,完成活动预告、攻略推文、宴席预告、活动现场视频、活动回顾等内容产出。",
+            "pages": [
+              34
+            ],
+            "page": 34,
+            "printed_page": 34,
+            "printed_pages": [
+              34
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第34页",
+              "index": 34,
+              "pages": [
+                34
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0296",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "★5、在采购人所在地市级及以上主流媒体,于活动期间开展专题宣传,不少于三期。",
+            "quote": "★5、在采购人所在地市级及以上主流媒体,于活动期间开展专题宣传,不少于三期。",
+            "pages": [
+              34
+            ],
+            "page": 34,
+            "printed_page": 34,
+            "printed_pages": [
+              34
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第34页",
+              "index": 34,
+              "pages": [
+                34
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0297",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "★(五)团队要求为满足本项目实施需要,并确保项目按质、按量、按时及有序进行,供应商应成立一个完善和稳定的项目团队,团队成员人数至少应≥5 人。项目团队人员须具备",
+            "quote": "★(五)团队要求为满足本项目实施需要,并确保项目按质、按量、按时及有序进行,供应商应成立一个完善和稳定的项目团队,团队成员人数至少应≥5 人。项目团队人员须具备较高专业素质和相关工作能力及经验,确保在项目周期内实施人员的稳定性,项目核心人员不发生变动。",
+            "pages": [
+              34
+            ],
+            "page": 34,
+            "printed_page": 34,
+            "printed_pages": [
+              34
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第34页",
+              "index": 34,
+              "pages": [
+                34
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0298",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "★ 交付时间自合同签订之日起60 日 2",
+            "quote": "★ 交付时间自合同签订之日起60 日 2",
+            "pages": [
+              34
+            ],
+            "page": 34,
+            "printed_page": 34,
+            "printed_pages": [
+              34
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第34页",
+              "index": 34,
+              "pages": [
+                34
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0299",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "★ 交付地点采购人指定地点 3",
+            "quote": "★ 交付地点采购人指定地点 3",
+            "pages": [
+              34
+            ],
+            "page": 34,
+            "printed_page": 34,
+            "printed_pages": [
+              34
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第34页",
+              "index": 34,
+              "pages": [
+                34
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0300",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "★ 交货条件验收合格 4 是否邀请投标人验收不邀请投标人验收 5",
+            "quote": "★ 交货条件验收合格 4 是否邀请投标人验收不邀请投标人验收 5",
+            "pages": [
+              34
+            ],
+            "page": 34,
+            "printed_page": 34,
+            "printed_pages": [
+              34
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第34页",
+              "index": 34,
+              "pages": [
+                34
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0301",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "★ 履约验收方式",
+            "quote": "★ 履约验收方式",
+            "pages": [
+              34
+            ],
+            "page": 34,
+            "printed_page": 34,
+            "printed_pages": [
+              34
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第34页",
+              "index": 34,
+              "pages": [
+                34
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0302",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "1、期次1,说明:符合竞争性磋商文件,响应文件要求及国家行业标准进行验收 6",
+            "quote": "1、期次1,说明:符合竞争性磋商文件,响应文件要求及国家行业标准进行验收 6",
+            "pages": [
+              34
+            ],
+            "page": 34,
+            "printed_page": 34,
+            "printed_pages": [
+              34
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第34页",
+              "index": 34,
+              "pages": [
+                34
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0303",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "★ 合同支付方式整体项目验收合格后,采购人收到成交供应商提交的等额增值税普通发票等完整付款资料,达到付款条件起30 日内,支付所有款项。",
+            "quote": "★ 合同支付方式整体项目验收合格后,采购人收到成交供应商提交的等额增值税普通发票等完整付款资料,达到付款条件起30 日内,支付所有款项。",
+            "pages": [
+              34
+            ],
+            "page": 34,
+            "printed_page": 34,
+            "printed_pages": [
+              34
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第34页",
+              "index": 34,
+              "pages": [
+                34
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0304",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "★ 履约保证金不缴纳",
+            "quote": "★ 履约保证金不缴纳",
+            "pages": [
+              34
+            ],
+            "page": 34,
+            "printed_page": 34,
+            "printed_pages": [
+              34
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第34页",
+              "index": 34,
+              "pages": [
+                34
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0305",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "★其他商务要求:",
+            "quote": "★其他商务要求:",
+            "pages": [
+              34
+            ],
+            "page": 34,
+            "printed_page": 34,
+            "printed_pages": [
+              34
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第34页",
+              "index": 34,
+              "pages": [
+                34
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-gl-fzsc339-cuoshang-202609.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0306",
+            "block": "rejection",
+            "label": "废标项",
             "summary": "(3)乙方不按合同约定履约的,甲方可以解除采购合同,并对乙方已缴纳的履约保证金作“不予退还”处理。同时,乙方须按以下约定向甲方支付违约金:",
             "quote": "(3)乙方不按合同约定履约的,甲方可以解除采购合同,并对乙方已缴纳的履约保证金作“不予退还”处理。同时,乙方须按以下约定向甲方支付违约金:",
             "pages": [
@@ -7911,7 +8667,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0280",
+            "clause_id": "TB-0307",
             "block": "rejection",
             "label": "废标项",
             "summary": "(4)其他违约情形",
@@ -7939,7 +8695,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0281",
+            "clause_id": "TB-0308",
             "block": "rejection",
             "label": "废标项",
             "summary": "十四、不可抗力事件处理本条款中的不可抗力指不能预见、不能避免、不能克服的客观情况,包括但不限于:自然灾害如地震、台风、洪水、火灾及政府行为、法律规定或其适用的变",
@@ -7967,7 +8723,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0282",
+            "clause_id": "TB-0309",
             "block": "rejection",
             "label": "废标项",
             "summary": "十五、解决争议的方法",
@@ -7995,7 +8751,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0283",
+            "clause_id": "TB-0310",
             "block": "rejection",
             "label": "废标项",
             "summary": "4、我方已经按照磋商文件要求提交磋商保证金,磋商保证金有效期与响应文件有效期一致,我方如果发生任何竞争性磋商文件中所述不予退还磋商保证金的情况,则我方的磋商保证",
@@ -8023,7 +8779,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0284",
+            "clause_id": "TB-0311",
             "block": "rejection",
             "label": "废标项",
             "summary": "1、我方已知晓竞争性磋商文件要求并认真审核自身情况,在此郑重声明, 我方具备并满足下列各项条款的规定。本声明如有虚假或不实之处,我方将失去合格供应商资格且我方的",
@@ -8051,7 +8807,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0285",
+            "clause_id": "TB-0312",
             "block": "rejection",
             "label": "废标项",
             "summary": "(1)具有独立承担民事责任的能力",
@@ -8079,7 +8835,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0286",
+            "clause_id": "TB-0313",
             "block": "rejection",
             "label": "废标项",
             "summary": "(2)具有良好的商业信誉和健全的财务会计制度",
@@ -8107,7 +8863,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0287",
+            "clause_id": "TB-0314",
             "block": "rejection",
             "label": "废标项",
             "summary": "(3)具有履行合同所必需的设备和专业技术能力",
@@ -8135,7 +8891,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0288",
+            "clause_id": "TB-0315",
             "block": "rejection",
             "label": "废标项",
             "summary": "(4)有依法缴纳税收和社会保障资金的良好记录",
@@ -8163,7 +8919,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0289",
+            "clause_id": "TB-0316",
             "block": "rejection",
             "label": "废标项",
             "summary": "(5)参加政府采购活动前三年内,在经营活动中没有重大违法记录",
@@ -8191,7 +8947,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0290",
+            "clause_id": "TB-0317",
             "block": "rejection",
             "label": "废标项",
             "summary": "(6)法律、行政法规规定的其他条件。",
@@ -8219,7 +8975,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0291",
+            "clause_id": "TB-0318",
             "block": "rejection",
             "label": "废标项",
             "summary": "2、经查询,供应商参加本项目采购活动(响应文件递交截止时间)前三年内被列入失信被执行人名单、重大税收违法案件当事人名单、政府采购严重违法失信行为记录名单及其他重",
@@ -8247,7 +9003,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0292",
+            "clause_id": "TB-0319",
             "block": "rejection",
             "label": "废标项",
             "summary": "(1)竞争性磋商文件(含技术和服务要求等)规定的各相关条款要求,如果供应商在响应文件中没有以书面方式对竞争性磋商文件规定的各项要求和条款提出不满足或不响应或负偏",
@@ -8275,7 +9031,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0293",
+            "clause_id": "TB-0320",
             "block": "rejection",
             "label": "废标项",
             "summary": "(1)竞争性磋商文件(含技术和服务要求等)规定的各相关条款要求,如果供应商在响应文件中没有以书面方式对竞争性磋商文件规定的各项要求和条款提出不满足或不响应或负偏",
@@ -8303,7 +9059,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0294",
+            "clause_id": "TB-0321",
             "block": "rejection",
             "label": "废标项",
             "summary": "2、供应商须按磋商文件中明确的所属行业填列,多品目项目中须按上表要求逐条填列,否则,其提供的中小企业声明将被判定为无效声明函,由此造成的后果由供应商自行承担(涉",

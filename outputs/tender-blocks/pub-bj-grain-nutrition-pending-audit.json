@@ -31,8 +31,8 @@
   "footer_in_quotes": 0,
   "bare_page_in_quotes": 0,
   "counts": {
-    "total": 191,
-    "with_real_page": 191,
+    "total": 204,
+    "with_real_page": 204,
     "without_page": 0,
     "by_block": {
       "qualification": {
@@ -52,8 +52,8 @@
       },
       "rejection": {
         "label": "废标项",
-        "cited": 50,
-        "items": 50
+        "cited": 63,
+        "items": 63
       }
     }
   },
@@ -4056,6 +4056,174 @@
             "clause_id": "TB-0142",
             "block": "rejection",
             "label": "废标项",
+            "summary": "*3.1.",
+            "quote": "*3.1.",
+            "pages": [
+              11
+            ],
+            "page": 11,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第11页",
+              "index": 11,
+              "pages": [
+                11
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0143",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "5、*3.5.",
+            "quote": "5、*3.5.",
+            "pages": [
+              11
+            ],
+            "page": 11,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第11页",
+              "index": 11,
+              "pages": [
+                11
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0144",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "3、*3.5.4 ;品目02:*3.1.",
+            "quote": "3、*3.5.4 ;品目02:*3.1.",
+            "pages": [
+              11
+            ],
+            "page": 11,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第11页",
+              "index": 11,
+              "pages": [
+                11
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0145",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "1、*3.2.2.1 品目 03:*3.1;品目04:*3.6.1;品目05:*3.1.5;品目06:",
+            "quote": "1、*3.2.2.1 品目 03:*3.1;品目04:*3.6.1;品目05:*3.1.5;品目06:",
+            "pages": [
+              11
+            ],
+            "page": 11,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第11页",
+              "index": 11,
+              "pages": [
+                11
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0146",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "*3.1.2.",
+            "quote": "*3.1.2.",
+            "pages": [
+              11
+            ],
+            "page": 11,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第11页",
+              "index": 11,
+              "pages": [
+                11
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0147",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "1、*3.1.3.1",
+            "quote": "1、*3.1.3.1",
+            "pages": [
+              11
+            ],
+            "page": 11,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第11页",
+              "index": 11,
+              "pages": [
+                11
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0148",
+            "block": "rejection",
+            "label": "废标项",
             "summary": "1.3.5 若投标人须知资料表中写明专门面向中小企业采购的,如投标人为非中小企业,其投标将作为无效投标被拒绝。",
             "quote": "1.3.5 若投标人须知资料表中写明专门面向中小企业采购的,如投标人为非中小企业,其投标将作为无效投标被拒绝。",
             "pages": [
@@ -4081,7 +4249,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0143",
+            "clause_id": "TB-0149",
             "block": "rejection",
             "label": "废标项",
             "summary": "若投标须知前附表中未写明允许采购进口产品,如投标人所投产品为进口产品,其投标将被认定为投标无效。",
@@ -4109,7 +4277,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0144",
+            "clause_id": "TB-0150",
             "block": "rejection",
             "label": "废标项",
             "summary": "1.4.7 以联合体形式参加政府采购活动的,联合体各方不得再单独参加或者与其他投标人另外组成联合体参加本项目投标,否则相关投标将作为无效投标被拒绝。",
@@ -4137,7 +4305,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0145",
+            "clause_id": "TB-0151",
             "block": "rejection",
             "label": "废标项",
             "summary": "1.5 单位负责人为同一人或者存在直接控股、管理关系的不同投标人,其投标将作为无效投标被否决。",
@@ -4165,7 +4333,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0146",
+            "clause_id": "TB-0152",
             "block": "rejection",
             "label": "废标项",
             "summary": "1.6 为本项目提供整体设计、规范编制或者项目管理、监理、检测等服务的投标人,其投标将作为无效投标被否决。",
@@ -4193,7 +4361,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0147",
+            "clause_id": "TB-0153",
             "block": "rejection",
             "label": "废标项",
             "summary": "1.7 投标人在投标过程中不得向采购人提供、给予任何有价值的物品,影响其正常决策行为。一经发现,其投标将作为无效投标被否决。",
@@ -4221,7 +4389,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0148",
+            "clause_id": "TB-0154",
             "block": "rejection",
             "label": "废标项",
             "summary": "1.8.5.6 关于节能、环保的政策要求投标人所投产品如被列入财政部与国家主管部门颁发的《节能产品政府采购品目清单》或《环境标志产品政府采购品目清单》,应提供国",
@@ -4249,7 +4417,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0149",
+            "clause_id": "TB-0155",
             "block": "rejection",
             "label": "废标项",
             "summary": "2.3 投标人报价超过招标文件规定的预算金额或者分项、分包最高限价的, 其投标将作为无效投标被否决。",
@@ -4277,7 +4445,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0150",
+            "clause_id": "TB-0156",
             "block": "rejection",
             "label": "废标项",
             "summary": "5.2 投标人应认真阅读招标文件所有的事项、格式、条款和技术规范等。如投标人没有按照招标文件要求提交全部资料,或者投标文件没有对招标文件在各方面都做出实质性响应",
@@ -4305,7 +4473,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0151",
+            "clause_id": "TB-0157",
             "block": "rejection",
             "label": "废标项",
             "summary": "8.1 投标人可对招标文件其中一包或几包进行投标,除非在投标人须知资料表中另有规定。投标人对所投分包招标文件中所列的所有服务内容进行投标,如仅响应一包中的部分服",
@@ -4333,7 +4501,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0152",
+            "clause_id": "TB-0158",
             "block": "rejection",
             "label": "废标项",
             "summary": "11.1 所有投标均以人民币报价。投标人的投标报价应遵守《中华人民共和国价格法》。同时,根据《中华人民共和国政府采购法》第二条的规定,为保证公平竞争,如有服务需",
@@ -4364,7 +4532,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0153",
+            "clause_id": "TB-0159",
             "block": "rejection",
             "label": "废标项",
             "summary": "11.3 投标人所报的各分项投标报价在合同履行过程中是固定不变的,不得以任何理由予以变更。任何包含价格调整要求的投标,将被认为是无效投标而被拒绝。",
@@ -4392,7 +4560,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0154",
+            "clause_id": "TB-0160",
             "block": "rejection",
             "label": "废标项",
             "summary": "下列任何情况发生,投标保证金不予退还:",
@@ -4420,7 +4588,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0155",
+            "clause_id": "TB-0161",
             "block": "rejection",
             "label": "废标项",
             "summary": "(1)在投标有效期内,投标人撤销投标的;",
@@ -4448,7 +4616,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0156",
+            "clause_id": "TB-0162",
             "block": "rejection",
             "label": "废标项",
             "summary": "(2)中标人不按本须知第30 条的规定与采购人签订合同的;",
@@ -4476,7 +4644,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0157",
+            "clause_id": "TB-0163",
             "block": "rejection",
             "label": "废标项",
             "summary": "(3)中标人不按本须知第31 条的规定提交履约保证金的;",
@@ -4504,7 +4672,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0158",
+            "clause_id": "TB-0164",
             "block": "rejection",
             "label": "废标项",
             "summary": "(4)中标人不按本须知第32 条的规定缴纳中标服务费;",
@@ -4532,7 +4700,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0159",
+            "clause_id": "TB-0165",
             "block": "rejection",
             "label": "废标项",
             "summary": "(5)存在的串通投标情形的;",
@@ -4560,7 +4728,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0160",
+            "clause_id": "TB-0166",
             "block": "rejection",
             "label": "废标项",
             "summary": "(6)存在向采购人、代理机构或评标专家行贿事实的。",
@@ -4588,7 +4756,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0161",
+            "clause_id": "TB-0167",
             "block": "rejection",
             "label": "废标项",
             "summary": "12.4 投标人没有根据本须知12.1 和第12.3 条规定提交投标保证金的,将被视为无效投标被拒绝。",
@@ -4616,7 +4784,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0162",
+            "clause_id": "TB-0168",
             "block": "rejection",
             "label": "废标项",
             "summary": "13.1 投标应在规定的提交投标文件截止之日起,按照投标人须知资料表中规定时间内保持有效。投标有效期不满足要求的投标,将被视为无效投标被拒绝。",
@@ -4644,7 +4812,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0163",
+            "clause_id": "TB-0169",
             "block": "rejection",
             "label": "废标项",
             "summary": "14.3 所有投标文件采用不可拆装的胶订方式装订,否则将被视为无效投标被拒绝。",
@@ -4672,7 +4840,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0164",
+            "clause_id": "TB-0170",
             "block": "rejection",
             "label": "废标项",
             "summary": "15.4 如果投标人未按上述要求密封,或者资格证明文件密封装订在其他投标文件中,其投标将作为无效投标被否决。",
@@ -4700,7 +4868,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0165",
+            "clause_id": "TB-0171",
             "block": "rejection",
             "label": "废标项",
             "summary": "同时出现两种以上不一致的,按照前款规定的顺序修正。修正后的报价按照第20.2 条的规定经投标人确认后产生约束力。投标人不确认的, 将被视为无效投标被拒绝。",
@@ -4728,7 +4896,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0166",
+            "clause_id": "TB-0172",
             "block": "rejection",
             "label": "废标项",
             "summary": "20.4 采购人或采购代理机构将在开标前一个工作日至投标截止后一小时期间查询投标人的信用记录,投标人存在不良信用记录的,其投标将被作为无效投标被拒绝。",
@@ -4756,7 +4924,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0167",
+            "clause_id": "TB-0173",
             "block": "rejection",
             "label": "废标项",
             "summary": "以联合体形式参加投标的,联合体任何成员存在以上不良信用记录的, 联合体投标将被作为无效投标被拒绝。",
@@ -4784,7 +4952,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0168",
+            "clause_id": "TB-0174",
             "block": "rejection",
             "label": "废标项",
             "summary": "22.1 在比较与评价之前,根据本须知的规定,评标委员会要审查每份投标文件是否实质上响应了招标文件的要求。实质上响应的投标应该是与招标文件要求的全部条款、条件和",
@@ -4812,7 +4980,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0169",
+            "clause_id": "TB-0175",
             "block": "rejection",
             "label": "废标项",
             "summary": "22.2 实质上没有响应招标文件要求的投标将被作为无效投标被拒绝。投标人不得通过修正或撤销不符合要求的偏离或保留从而使其投标成为实",
@@ -4840,7 +5008,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0170",
+            "clause_id": "TB-0176",
             "block": "rejection",
             "label": "废标项",
             "summary": "质上响应的投标。如发现下列情况之一的,其投标将被作为无效投标被拒绝:",
@@ -4868,7 +5036,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0171",
+            "clause_id": "TB-0177",
             "block": "rejection",
             "label": "废标项",
             "summary": "(1)未按招标文件规定的形式和金额交纳投标保证金的;",
@@ -4896,7 +5064,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0172",
+            "clause_id": "TB-0178",
             "block": "rejection",
             "label": "废标项",
             "summary": "(2)未按照招标文件规定要求签署、盖章的;",
@@ -4924,7 +5092,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0173",
+            "clause_id": "TB-0179",
             "block": "rejection",
             "label": "废标项",
             "summary": "(3)未满足招标文件中技术条款的实质性要求;",
@@ -4952,7 +5120,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0174",
+            "clause_id": "TB-0180",
             "block": "rejection",
             "label": "废标项",
             "summary": "(4)与其他投标人串通投标,或者与招标人串通投标妨碍其他投标人竞争行为,损害采购人或者其他投标人合法权益的;",
@@ -4980,7 +5148,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0175",
+            "clause_id": "TB-0181",
             "block": "rejection",
             "label": "废标项",
             "summary": "(5)属于招标文件规定的其他无效投标情形;",
@@ -5008,7 +5176,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0176",
+            "clause_id": "TB-0182",
             "block": "rejection",
             "label": "废标项",
             "summary": "(6)评标委员会认为投标人的报价明显低于其他通过符合性检查投标人的报价,有可能影响履约的,且投标人未按照规定证明其报价合理性的;",
@@ -5036,7 +5204,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0177",
+            "clause_id": "TB-0183",
             "block": "rejection",
             "label": "废标项",
             "summary": "(7)投标文件含有采购人不能接受的附加条件的;",
@@ -5064,7 +5232,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0178",
+            "clause_id": "TB-0184",
             "block": "rejection",
             "label": "废标项",
             "summary": "(8)不符合法规和招标文件中规定的其他实质性要求的。",
@@ -5092,7 +5260,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0179",
+            "clause_id": "TB-0185",
             "block": "rejection",
             "label": "废标项",
             "summary": "出现下列情形之一,将导致项目废标即本项目的所有投标被拒绝:",
@@ -5120,7 +5288,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0180",
+            "clause_id": "TB-0186",
             "block": "rejection",
             "label": "废标项",
             "summary": "(1)符合专业条件的投标人或者对招标文件做实质性响应的投标人不足三家;",
@@ -5148,7 +5316,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0181",
+            "clause_id": "TB-0187",
             "block": "rejection",
             "label": "废标项",
             "summary": "(2)出现影响采购公正的违法、违规行为的;",
@@ -5176,7 +5344,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0182",
+            "clause_id": "TB-0188",
             "block": "rejection",
             "label": "废标项",
             "summary": "(3)投标人的报价均超过了采购预算,采购人不能支付的;",
@@ -5204,7 +5372,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0183",
+            "clause_id": "TB-0189",
             "block": "rejection",
             "label": "废标项",
             "summary": "(4)因重大变故,采购任务取消的。",
@@ -5232,7 +5400,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0184",
+            "clause_id": "TB-0190",
             "block": "rejection",
             "label": "废标项",
             "summary": "25.3 投标人试图影响采购人、采购代理机构和评标委员会的任何活动,将导致其投标被拒绝,并承担相应的法律责任。",
@@ -5260,7 +5428,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0185",
+            "clause_id": "TB-0191",
             "block": "rejection",
             "label": "废标项",
             "summary": "3.如果不提供详细分项报价将视为没有实质性响应招标文件。",
@@ -5288,7 +5456,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0186",
+            "clause_id": "TB-0192",
             "block": "rejection",
             "label": "废标项",
             "summary": "技术参数 *不满足废标项,#为重点项目,其余技术参数均为一般项。",
@@ -5316,7 +5484,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0187",
+            "clause_id": "TB-0193",
             "block": "rejection",
             "label": "废标项",
             "summary": "*3.1.5 短波红外成像传感器实际物理像素(不允许另做差分计算):≥ 640*1200;",
@@ -5344,7 +5512,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0188",
+            "clause_id": "TB-0194",
             "block": "rejection",
             "label": "废标项",
             "summary": "*3.5.3 光谱成像数据一体化自动畸变校正精度:≥99.5%。",
@@ -5372,7 +5540,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0189",
+            "clause_id": "TB-0195",
             "block": "rejection",
             "label": "废标项",
             "summary": "*3.5.4 自动化采集试验箱具备温度监测预警功能:实时显示短波红外成像传感器实际制冷温度,范围0-100°C,具备控制阀成像传感器不达到制冷温度不开放采集功能",
@@ -5400,7 +5568,203 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0190",
+            "clause_id": "TB-0196",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "*3.1.1 频带宽度:0.1-4.5THz;",
+            "quote": "*3.1.1 频带宽度:0.1-4.5THz;",
+            "pages": [
+              98
+            ],
+            "page": 98,
+            "printed_page": 98,
+            "printed_pages": [
+              98
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第98页",
+              "index": 98,
+              "pages": [
+                98
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0197",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "*3.2.2.1 时域延迟长度:0-300ps;",
+            "quote": "*3.2.2.1 时域延迟长度:0-300ps;",
+            "pages": [
+              99
+            ],
+            "page": 99,
+            "printed_page": 99,
+            "printed_pages": [
+              99
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第99页",
+              "index": 99,
+              "pages": [
+                99
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0198",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "*3.1 具备多个独立反应模块:≥3 个反应模块,每个模块可以独立控制,设备可运行≥3 个完全独立的反应程序;",
+            "quote": "*3.1 具备多个独立反应模块:≥3 个反应模块,每个模块可以独立控制,设备可运行≥3 个完全独立的反应程序;",
+            "pages": [
+              102
+            ],
+            "page": 102,
+            "printed_page": 102,
+            "printed_pages": [
+              102
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第102页",
+              "index": 102,
+              "pages": [
+                102
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0199",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "*3.6.1 具备独立的自动进样器和自动收集器,独立运行,各配有1 套机械臂或样品传送盘和1 个清洗工作台,对进样针和收集针的内外壁进行自动清洗;",
+            "quote": "*3.6.1 具备独立的自动进样器和自动收集器,独立运行,各配有1 套机械臂或样品传送盘和1 个清洗工作台,对进样针和收集针的内外壁进行自动清洗;",
+            "pages": [
+              105
+            ],
+            "page": 105,
+            "printed_page": 105,
+            "printed_pages": [
+              105
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第105页",
+              "index": 105,
+              "pages": [
+                105
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0200",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "*3.1.5 具备对样品的完善粒和不完善粒的分拣功能;",
+            "quote": "*3.1.5 具备对样品的完善粒和不完善粒的分拣功能;",
+            "pages": [
+              107
+            ],
+            "page": 107,
+            "printed_page": 107,
+            "printed_pages": [
+              107
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第107页",
+              "index": 107,
+              "pages": [
+                107
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0201",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "*3.1.2.1 监测波长范围:200-700 nm,在线监测通道数≥3 个;氘灯+钨灯组合光源或氙灯光源;",
+            "quote": "*3.1.2.1 监测波长范围:200-700 nm,在线监测通道数≥3 个;氘灯+钨灯组合光源或氙灯光源;",
+            "pages": [
+              110
+            ],
+            "page": 110,
+            "printed_page": 110,
+            "printed_pages": [
+              110
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第110页",
+              "index": 110,
+              "pages": [
+                110
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0202",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "*3.1.3.1 光源为氙灯;波长范围:200-600 nm;",
+            "quote": "*3.1.3.1 光源为氙灯;波长范围:200-600 nm;",
+            "pages": [
+              110
+            ],
+            "page": 110,
+            "printed_page": 110,
+            "printed_pages": [
+              110
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第110页",
+              "index": 110,
+              "pages": [
+                110
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-grain-nutrition-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0203",
             "block": "rejection",
             "label": "废标项",
             "summary": "评审委员会依据专业经验,参考同类项目中标(成交)价格、类似产品市场价格水平、行业人工费用标准、国家有关部门指导行业协会发布的行业平均成本等情况,对报价合理性进行",
@@ -5428,7 +5792,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0191",
+            "clause_id": "TB-0204",
             "block": "rejection",
             "label": "废标项",
             "summary": "每提供一个业绩得0.5 分,满分3 分。若无则不得分。(投标人须提供有效的投标产品业绩证明材料:合同不得遮挡且销售业绩合同中必须至少包含合同双方印章、签字、货物",

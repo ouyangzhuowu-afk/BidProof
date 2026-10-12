@@ -25,10 +25,10 @@
     "mismatches": []
   },
   "footer_in_quotes": 0,
-  "bare_page_in_quotes": 1,
+  "bare_page_in_quotes": 2,
   "counts": {
-    "total": 194,
-    "with_real_page": 194,
+    "total": 206,
+    "with_real_page": 206,
     "without_page": 0,
     "by_block": {
       "qualification": {
@@ -48,8 +48,8 @@
       },
       "rejection": {
         "label": "废标项",
-        "cited": 63,
-        "items": 63
+        "cited": 75,
+        "items": 75
       }
     }
   },
@@ -3794,286 +3794,6 @@
             "clause_id": "TB-0133",
             "block": "rejection",
             "label": "废标项",
-            "summary": "3.收款单位:内蒙古自治区机械设备成套有限责任公司开户银行:中国银行内蒙古自治区分行营业部账号:1540 0205 7353 行号:1041 9101 4056",
-            "quote": "3.收款单位:内蒙古自治区机械设备成套有限责任公司开户银行:中国银行内蒙古自治区分行营业部账号:1540 0205 7353 行号:1041 9101 4056 14 投标文件签字、盖章要求投标文件的正本需打印或用不褪色墨水书写,并由法定代表人或经其正式授权的代表签字。授权代表要以书面形式出具证明,其《法人授权委托书》除应附在投标文件中外,还需单独提交一份,在递交投标文件时,同授权代表身份证一同出示, 以证明合法投标身份。投标文件中的任何行间重要的插字、涂改和增删,必须由法定代表人或经其正式授权的代表在旁边签字才有效。盖章:投标单位公章。",
-            "pages": [
-              7
-            ],
-            "page": 7,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第7页",
-              "index": 7,
-              "pages": [
-                7
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0134",
-            "block": "rejection",
-            "label": "废标项",
-            "summary": "(1)投标文件应采用胶装,正、副本分别牢固装订成册。投标文件的副本可采用正本的复印件,正副本不一致时以正本为准,电子版与纸质版不一致时以纸质为准。",
-            "quote": "(1)投标文件应采用胶装,正、副本分别牢固装订成册。投标文件的副本可采用正本的复印件,正副本不一致时以正本为准,电子版与纸质版不一致时以纸质为准。",
-            "pages": [
-              7
-            ],
-            "page": 7,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第7页",
-              "index": 7,
-              "pages": [
-                7
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0135",
-            "block": "rejection",
-            "label": "废标项",
-            "summary": "(2)投标人应将开标一览表一份包封提交,并在封套上标明 “开标一览表”。",
-            "quote": "(2)投标人应将开标一览表一份包封提交,并在封套上标明 “开标一览表”。",
-            "pages": [
-              7
-            ],
-            "page": 7,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第7页",
-              "index": 7,
-              "pages": [
-                7
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0136",
-            "block": "rejection",
-            "label": "废标项",
-            "summary": "(3)投标文件正本和副本分别单独密封,并在信封上标明“正本”、“副本”字样。",
-            "quote": "(3)投标文件正本和副本分别单独密封,并在信封上标明“正本”、“副本”字样。",
-            "pages": [
-              7
-            ],
-            "page": 7,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第7页",
-              "index": 7,
-              "pages": [
-                7
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0137",
-            "block": "rejection",
-            "label": "废标项",
-            "summary": "(4)电子文档以U盘形式单独密封,并标明“电子文件字样”。",
-            "quote": "(4)电子文档以U盘形式单独密封,并标明“电子文件字样”。",
-            "pages": [
-              7
-            ],
-            "page": 7,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第7页",
-              "index": 7,
-              "pages": [
-                7
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0138",
-            "block": "rejection",
-            "label": "废标项",
-            "summary": "(5)封口处加盖投标人印章或密封章。",
-            "quote": "(5)封口处加盖投标人印章或密封章。",
-            "pages": [
-              7
-            ],
-            "page": 7,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第7页",
-              "index": 7,
-              "pages": [
-                7
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0139",
-            "block": "rejection",
-            "label": "废标项",
-            "summary": "(2)项目名称:",
-            "quote": "(2)项目名称:",
-            "pages": [
-              7
-            ],
-            "page": 7,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第7页",
-              "index": 7,
-              "pages": [
-                7
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0140",
-            "block": "rejection",
-            "label": "废标项",
-            "summary": "(3)项目编号:",
-            "quote": "(3)项目编号:",
-            "pages": [
-              7
-            ],
-            "page": 7,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第7页",
-              "index": 7,
-              "pages": [
-                7
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0141",
-            "block": "rejection",
-            "label": "废标项",
-            "summary": "(4)投标人名称:",
-            "quote": "(4)投标人名称:",
-            "pages": [
-              7
-            ],
-            "page": 7,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第7页",
-              "index": 7,
-              "pages": [
-                7
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0142",
-            "block": "rejection",
-            "label": "废标项",
-            "summary": "(5)年月日时前不得启封。",
-            "quote": "(5)年月日时前不得启封。",
-            "pages": [
-              7
-            ],
-            "page": 7,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第7页",
-              "index": 7,
-              "pages": [
-                7
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0143",
-            "block": "rejection",
-            "label": "废标项",
             "summary": "17 有效投标人家数符合专业条件的投标人或者对招标文件作实质性响应的投标人不足三家的,应予废标;投标人不足三家的,不得开标;合格投标人不足三家的,不得评标。",
             "quote": "17 有效投标人家数符合专业条件的投标人或者对招标文件作实质性响应的投标人不足三家的,应予废标;投标人不足三家的,不得开标;合格投标人不足三家的,不得评标。",
             "pages": [
@@ -4099,7 +3819,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0144",
+            "clause_id": "TB-0134",
             "block": "rejection",
             "label": "废标项",
             "summary": "1.3.2 有下列情形之一的,投标保证金将不予退还:",
@@ -4127,7 +3847,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0145",
+            "clause_id": "TB-0135",
             "block": "rejection",
             "label": "废标项",
             "summary": "(1)中标后,无正当理由放弃中标资格的;",
@@ -4155,7 +3875,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0146",
+            "clause_id": "TB-0136",
             "block": "rejection",
             "label": "废标项",
             "summary": "(2)中标后,无正当理由不与采购人签订合同的;",
@@ -4183,7 +3903,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0147",
+            "clause_id": "TB-0137",
             "block": "rejection",
             "label": "废标项",
             "summary": "(3)在签订合同时,向采购人提出附加条件的;",
@@ -4211,7 +3931,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0148",
+            "clause_id": "TB-0138",
             "block": "rejection",
             "label": "废标项",
             "summary": "(4)不按照招标文件要求提交履约保证金的;",
@@ -4239,7 +3959,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0149",
+            "clause_id": "TB-0139",
             "block": "rejection",
             "label": "废标项",
             "summary": "(5)在签订合同时,投标人要求修改、补充和撤销投标文件的实质性内容的;",
@@ -4267,7 +3987,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0150",
+            "clause_id": "TB-0140",
             "block": "rejection",
             "label": "废标项",
             "summary": "(6)投标文件中提供虚假材料的;",
@@ -4295,7 +4015,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0151",
+            "clause_id": "TB-0141",
             "block": "rejection",
             "label": "废标项",
             "summary": "(7)与采购人、其他投标人或者采购代理机构恶意串通的;",
@@ -4323,7 +4043,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0152",
+            "clause_id": "TB-0142",
             "block": "rejection",
             "label": "废标项",
             "summary": "(8)投标人在提交投标文件截止时间后,撤回投标文件的;",
@@ -4351,7 +4071,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0153",
+            "clause_id": "TB-0143",
             "block": "rejection",
             "label": "废标项",
             "summary": "(9)法律法规和招标文件规定的其他情形。",
@@ -4379,7 +4099,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0154",
+            "clause_id": "TB-0144",
             "block": "rejection",
             "label": "废标项",
             "summary": "7.1 所有文件使用的语言文字为简体中文。专用术语使用外文的,应附有简体中文注释,否则视为无效。",
@@ -4407,7 +4127,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0155",
+            "clause_id": "TB-0145",
             "block": "rejection",
             "label": "废标项",
             "summary": "同时出现两种以上不一致的,按照前款规定的顺序修正。修正后的报价投标人应当采用书面形式,并加盖公章,或者由法定代表人或其授权的代表签字确认后产生约束力,但不得超出",
@@ -4435,7 +4155,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0156",
+            "clause_id": "TB-0146",
             "block": "rejection",
             "label": "废标项",
             "summary": "2.2 资格审查中有任意一项未通过的,审查结果为未通过,未通过资格审查的投标人按无效投标处理。",
@@ -4463,7 +4183,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0157",
+            "clause_id": "TB-0147",
             "block": "rejection",
             "label": "废标项",
             "summary": "项目“废标”后,采购代理机构将在内蒙古招标投标公共服务平台、呼和浩特海关官网上发布“废标公告”。",
@@ -4491,7 +4211,626 @@
             "audit_status": "pending_audit"
           },
           {
+            "clause_id": "TB-0148",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "★1、要求至少设一名项目经理驻场服务,承担区域消防安全责任。重点时间、重要环节能够亲自到现场落实各项安全生产责任。将安全责任传导到本公司全员,做好人员管理。工作",
+            "quote": "★1、要求至少设一名项目经理驻场服务,承担区域消防安全责任。重点时间、重要环节能够亲自到现场落实各项安全生产责任。将安全责任传导到本公司全员,做好人员管理。工作时间与委托方一致,法定节假日、休息日必要时间能够随时在岗。",
+            "pages": [
+              18
+            ],
+            "page": 18,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第18页",
+              "index": 18,
+              "pages": [
+                18
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0149",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "★2、建立覆盖全物理区域无死角隐患排查、报告、整改制度。建立监控、保安、各机房等重点安全区域的安全巡查台账制度。设立巡查打卡设备,确保安全检查落实到位,隐患及时",
+            "quote": "★2、建立覆盖全物理区域无死角隐患排查、报告、整改制度。建立监控、保安、各机房等重点安全区域的安全巡查台账制度。设立巡查打卡设备,确保安全检查落实到位,隐患及时发现, 提前预警。",
+            "pages": [
+              18
+            ],
+            "page": 18,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第18页",
+              "index": 18,
+              "pages": [
+                18
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0150",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "★3、设立各岗位安全员,及时处理安全问题。",
+            "quote": "★3、设立各岗位安全员,及时处理安全问题。",
+            "pages": [
+              18
+            ],
+            "page": 18,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第18页",
+              "index": 18,
+              "pages": [
+                18
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0151",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "★人员要求:安保岗位24 小时值班服务,保安人员持证上岗每班次不少于2 人。",
+            "quote": "★人员要求:安保岗位24 小时值班服务,保安人员持证上岗每班次不少于2 人。",
+            "pages": [
+              18
+            ],
+            "page": 18,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第18页",
+              "index": 18,
+              "pages": [
+                18
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0152",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "★2、中控室24 小时持证人员值班服务、微型消防站维护服务、全方位每日安全巡查服务(包含确定安全责任人、登记巡查台账等)。",
+            "quote": "★2、中控室24 小时持证人员值班服务、微型消防站维护服务、全方位每日安全巡查服务(包含确定安全责任人、登记巡查台账等)。",
+            "pages": [
+              18
+            ],
+            "page": 18,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第18页",
+              "index": 18,
+              "pages": [
+                18
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0153",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "★人员要求:中控员需持有消防设施操作员职业技能培训证书初级以上(等同于建(构)筑物消防员初级以上),熟练掌握各类消防设施设备的操作,每班次不少于2 人。",
+            "quote": "★人员要求:中控员需持有消防设施操作员职业技能培训证书初级以上(等同于建(构)筑物消防员初级以上),熟练掌握各类消防设施设备的操作,每班次不少于2 人。",
+            "pages": [
+              18
+            ],
+            "page": 18,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第18页",
+              "index": 18,
+              "pages": [
+                18
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0154",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "★2、配备专门水暖工至少1 名,能处理日常水暖维修维护。",
+            "quote": "★2、配备专门水暖工至少1 名,能处理日常水暖维修维护。",
+            "pages": [
+              19
+            ],
+            "page": 19,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第19页",
+              "index": 19,
+              "pages": [
+                19
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0155",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "★2、配备专门电工至少1 名,具有高压电工证,处理日常电路维修维护,并负责区域内1~2 台备用发电机维保及运转。",
+            "quote": "★2、配备专门电工至少1 名,具有高压电工证,处理日常电路维修维护,并负责区域内1~2 台备用发电机维保及运转。",
+            "pages": [
+              19
+            ],
+            "page": 19,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第19页",
+              "index": 19,
+              "pages": [
+                19
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0156",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "★主要包括落实委托单位节约型机关建设过程中各项工作要求。",
+            "quote": "★主要包括落实委托单位节约型机关建设过程中各项工作要求。",
+            "pages": [
+              19
+            ],
+            "page": 19,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第19页",
+              "index": 19,
+              "pages": [
+                19
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0157",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "★(十三)人员配置要求本项目服务期内服务人员最低16 人。(项目经理1 人、财务1 人、门岗保安2 人、院内巡逻保安员1 人、消防中控员4 人、工程维修(电工)",
+            "quote": "★(十三)人员配置要求本项目服务期内服务人员最低16 人。(项目经理1 人、财务1 人、门岗保安2 人、院内巡逻保安员1 人、消防中控员4 人、工程维修(电工)1 人、工程维修(水暖工)1 人、保洁员4 人、 院内保洁1 人)。",
+            "pages": [
+              19
+            ],
+            "page": 19,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第19页",
+              "index": 19,
+              "pages": [
+                19
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
             "clause_id": "TB-0158",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "★3.食品留样安全要求。",
+            "quote": "★3.食品留样安全要求。",
+            "pages": [
+              20
+            ],
+            "page": 20,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第20页",
+              "index": 20,
+              "pages": [
+                20
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0159",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "★6.食品安全。",
+            "quote": "★6.食品安全。",
+            "pages": [
+              21
+            ],
+            "page": 21,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第21页",
+              "index": 21,
+              "pages": [
+                21
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0160",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "★7.人员配置要求本项目服务期内服务人员最低5 人。(厨师长1 人、炒灶师傅1 人、面点师傅1 人、食品安全管理员1 人、餐厅服务员1 人)。中标后,中标单位需",
+            "quote": "★7.人员配置要求本项目服务期内服务人员最低5 人。(厨师长1 人、炒灶师傅1 人、面点师傅1 人、食品安全管理员1 人、餐厅服务员1 人)。中标后,中标单位需提前10 日将入场人员名单报采购方,入场人员必须与投标文件配备人员一致,不得弄虚作假。若未按报送时间报送名单或进场后与投标文件配备人员不一致,采购方有权终止合同;6 个月以内不允许调整管理人员及主要岗位人员, 如有违反采购方有权终止合同。",
+            "pages": [
+              21
+            ],
+            "page": 21,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第21页",
+              "index": 21,
+              "pages": [
+                21
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0161",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "★通用要求:",
+            "quote": "★通用要求:",
+            "pages": [
+              21
+            ],
+            "page": 21,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第21页",
+              "index": 21,
+              "pages": [
+                21
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0162",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(一)安全生产要求。本着压实安全责任、细化安全举措原则,可签订补充协议方式明确责任划分。",
+            "quote": "(一)安全生产要求。本着压实安全责任、细化安全举措原则,可签订补充协议方式明确责任划分。",
+            "pages": [
+              21
+            ],
+            "page": 21,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第21页",
+              "index": 21,
+              "pages": [
+                21
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0163",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(二)档案管理要求。对于工程图纸、消防档案、维保档案、监控录像等档案有妥善保管、按期移交责任。",
+            "quote": "(二)档案管理要求。对于工程图纸、消防档案、维保档案、监控录像等档案有妥善保管、按期移交责任。",
+            "pages": [
+              21
+            ],
+            "page": 21,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第21页",
+              "index": 21,
+              "pages": [
+                21
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0164",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(三)爱护设备要求。对于采购方设备设施,要认真清点、妥善保管、正确使用,尽可能延长使用寿命。",
+            "quote": "(三)爱护设备要求。对于采购方设备设施,要认真清点、妥善保管、正确使用,尽可能延长使用寿命。",
+            "pages": [
+              21
+            ],
+            "page": 21,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第21页",
+              "index": 21,
+              "pages": [
+                21
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0165",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(四)根据采购方的实际情况,制定可行的增值服务措施。不限于列出拟投入的物品或设施设备或其他服务计划。",
+            "quote": "(四)根据采购方的实际情况,制定可行的增值服务措施。不限于列出拟投入的物品或设施设备或其他服务计划。",
+            "pages": [
+              21
+            ],
+            "page": 21,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第21页",
+              "index": 21,
+              "pages": [
+                21
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0166",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(五)中标单位服务人员工资及保险要求采购方支付的服务费含有聘用人员的工资、五险和雇主责任险,采购方与中标单位签订合同后, 中标单位必须严格按照《劳动法》《劳动合",
+            "quote": "(五)中标单位服务人员工资及保险要求采购方支付的服务费含有聘用人员的工资、五险和雇主责任险,采购方与中标单位签订合同后, 中标单位必须严格按照《劳动法》《劳动合同法》相关条款,聘用人员工资不得低于内蒙古自治区最低工资标准,按时足额给服务人员缴纳五险和雇主责任险,若发现未按时足额缴纳,结算服务费时采购方将未缴纳部分全额扣回,因未缴纳五险,服务人员发生意外事故或与中标单位发生纠纷,中标单位将承担全部责任,若给采购方带来负面影响或造成严重后果,采购方将21 会追究中标单位的相关法律责任。",
+            "pages": [
+              21,
+              22
+            ],
+            "page": 21,
+            "printed_page": null,
+            "printed_pages": [
+              null,
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第21-22页",
+              "index": 21,
+              "pages": [
+                21,
+                22
+              ]
+            },
+            "detection": "cross_page",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0167",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(六)保密要求。要严格按照采购方的规定执行保密纪律,未经允许不得随意拍摄、录制视频向外界发布,若遇突发情况要及时上报采购方,因服务人员随意提供采购方的相关信息造",
+            "quote": "(六)保密要求。要严格按照采购方的规定执行保密纪律,未经允许不得随意拍摄、录制视频向外界发布,若遇突发情况要及时上报采购方,因服务人员随意提供采购方的相关信息造成严重后果,采购方将会追究中标单位的法律责任。",
+            "pages": [
+              22
+            ],
+            "page": 22,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第22页",
+              "index": 22,
+              "pages": [
+                22
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0168",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(七)考核要求",
+            "quote": "(七)考核要求",
+            "pages": [
+              22
+            ],
+            "page": 22,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第22页",
+              "index": 22,
+              "pages": [
+                22
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0169",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "1.签订合同后,双方认真履行合同的各项条款,采购方每个月根据服务要求标准进行考核,依据考核结果进行结算。当月考核不合格,需制定改进计划,限期整改,采购方可视情形",
+            "quote": "1.签订合同后,双方认真履行合同的各项条款,采购方每个月根据服务要求标准进行考核,依据考核结果进行结算。当月考核不合格,需制定改进计划,限期整改,采购方可视情形扣除一定比例的服务费用,累计3 个月考核不合格,终止合同。",
+            "pages": [
+              22
+            ],
+            "page": 22,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第22页",
+              "index": 22,
+              "pages": [
+                22
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nm-saihan-customs-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0170",
             "block": "rejection",
             "label": "废标项",
             "summary": "4.1 标“★”条款为实质性条款,供应商不能出现任何负偏离,否则按无效响应处理。签订合同时, 中标人需向采购方出具相关人员证书,否则其中标结果无效。",
@@ -4519,7 +4858,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0159",
+            "clause_id": "TB-0171",
             "block": "rejection",
             "label": "废标项",
             "summary": "4.2 供应商必须在分项报价中分别报出物业管理服务费与食堂委托运营服务费且不能超过分项预算, 否则视为无效投标。",
@@ -4547,7 +4886,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0160",
+            "clause_id": "TB-0172",
             "block": "rejection",
             "label": "废标项",
             "summary": "5.有下列情形之一的,视为投标人串通投标,其投标无效:",
@@ -4575,7 +4914,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0161",
+            "clause_id": "TB-0173",
             "block": "rejection",
             "label": "废标项",
             "summary": "(1)不同投标人的投标文件由同一单位或者个人编制,包括但不限于不同投标人上传的投标文件项目内部识别码一致的情形;",
@@ -4603,7 +4942,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0162",
+            "clause_id": "TB-0174",
             "block": "rejection",
             "label": "废标项",
             "summary": "(2)不同投标人委托同一单位或者个人办理投标事宜;",
@@ -4631,7 +4970,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0163",
+            "clause_id": "TB-0175",
             "block": "rejection",
             "label": "废标项",
             "summary": "(3)不同投标人的投标文件载明的项目管理成员或者联系人员为同一人;",
@@ -4659,7 +4998,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0164",
+            "clause_id": "TB-0176",
             "block": "rejection",
             "label": "废标项",
             "summary": "(4)不同投标人的投标文件异常一致或者投标报价呈规律性差异;",
@@ -4687,7 +5026,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0165",
+            "clause_id": "TB-0177",
             "block": "rejection",
             "label": "废标项",
             "summary": "(5)不同投标人的投标文件相互混装;",
@@ -4715,7 +5054,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0166",
+            "clause_id": "TB-0178",
             "block": "rejection",
             "label": "废标项",
             "summary": "(6)不同投标人的投标保证金从同一单位或个人的账户转出。",
@@ -4743,7 +5082,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0167",
+            "clause_id": "TB-0179",
             "block": "rejection",
             "label": "废标项",
             "summary": "6.有下列情形之一的,属于恶意串通投标,其投标无效,并追究法律责任:",
@@ -4771,7 +5110,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0168",
+            "clause_id": "TB-0180",
             "block": "rejection",
             "label": "废标项",
             "summary": "(1)投标人直接或者间接从采购人或者采购代理机构处获得其他投标人的相关情况并修改其投标文件;",
@@ -4799,7 +5138,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0169",
+            "clause_id": "TB-0181",
             "block": "rejection",
             "label": "废标项",
             "summary": "(2)投标人按照采购人或者采购代理机构的授意撤换、修改投标文件;",
@@ -4827,7 +5166,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0170",
+            "clause_id": "TB-0182",
             "block": "rejection",
             "label": "废标项",
             "summary": "(3)投标人之间协商报价、技术方案等投标文件的实质性内容;",
@@ -4855,7 +5194,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0171",
+            "clause_id": "TB-0183",
             "block": "rejection",
             "label": "废标项",
             "summary": "(4)属于同一集团、协会、商会等组织成员的投标人按照该组织要求协同参加政府采购活动;",
@@ -4883,7 +5222,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0172",
+            "clause_id": "TB-0184",
             "block": "rejection",
             "label": "废标项",
             "summary": "(5)投标人之间事先约定由某一特定投标人中标、成交;",
@@ -4911,7 +5250,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0173",
+            "clause_id": "TB-0185",
             "block": "rejection",
             "label": "废标项",
             "summary": "(6)投标人之间商定部分投标人放弃参加政府采购活动或者放弃中标、成交;",
@@ -4939,7 +5278,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0174",
+            "clause_id": "TB-0186",
             "block": "rejection",
             "label": "废标项",
             "summary": "(7)投标人与采购人或者采购代理机构之间、投标人相互之间,为谋求特定投标人中标、成交或者排斥其他投标人的其他串通行为。",
@@ -4967,7 +5306,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0175",
+            "clause_id": "TB-0187",
             "block": "rejection",
             "label": "废标项",
             "summary": "7.投标无效的情形投标人存在下列情况之一的,投标无效:",
@@ -4995,7 +5334,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0176",
+            "clause_id": "TB-0188",
             "block": "rejection",
             "label": "废标项",
             "summary": "(1)未按照招标文件的规定提交投标保证金的;",
@@ -5023,7 +5362,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0177",
+            "clause_id": "TB-0189",
             "block": "rejection",
             "label": "废标项",
             "summary": "(2)投标文件未按招标文件要求签署、盖章的;",
@@ -5051,7 +5390,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0178",
+            "clause_id": "TB-0190",
             "block": "rejection",
             "label": "废标项",
             "summary": "(3)不具备招标文件中规定的资格要求的;",
@@ -5079,7 +5418,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0179",
+            "clause_id": "TB-0191",
             "block": "rejection",
             "label": "废标项",
             "summary": "(4)报价超过招标文件中规定的预算金额或者最高限价的;",
@@ -5107,7 +5446,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0180",
+            "clause_id": "TB-0192",
             "block": "rejection",
             "label": "废标项",
             "summary": "(5)投标文件含有采购人不能接受的附加条件的;",
@@ -5135,7 +5474,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0181",
+            "clause_id": "TB-0193",
             "block": "rejection",
             "label": "废标项",
             "summary": "(6)法律、法规和招标文件规定的其他无效情形。",
@@ -5163,7 +5502,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0182",
+            "clause_id": "TB-0194",
             "block": "rejection",
             "label": "废标项",
             "summary": "8.废标的情形出现下列情形之一的,应予以废标。",
@@ -5191,7 +5530,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0183",
+            "clause_id": "TB-0195",
             "block": "rejection",
             "label": "废标项",
             "summary": "(1)符合专业条件的投标人或者对招标文件作实质响应的投标人不足3 家;或参与竞争的核心产品品牌不足3 个的;",
@@ -5219,7 +5558,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0184",
+            "clause_id": "TB-0196",
             "block": "rejection",
             "label": "废标项",
             "summary": "(2)出现影响采购公正的违法、违规行为的;",
@@ -5247,7 +5586,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0185",
+            "clause_id": "TB-0197",
             "block": "rejection",
             "label": "废标项",
             "summary": "(3)投标人的报价均超过了采购预算的;",
@@ -5275,7 +5614,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0186",
+            "clause_id": "TB-0198",
             "block": "rejection",
             "label": "废标项",
             "summary": "(4)因重大变故,采购任务取消的。",
@@ -5303,7 +5642,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0187",
+            "clause_id": "TB-0199",
             "block": "rejection",
             "label": "废标项",
             "summary": "9.定标评标委员会按照招标文件确定的评标方法、步骤、标准,对投标文件进行评审。评标结束后,采购人在评标报告确定的中标候选人名单中按顺序确定中标人。",
@@ -5331,7 +5670,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0188",
+            "clause_id": "TB-0200",
             "block": "rejection",
             "label": "废标项",
             "summary": "二、落实政府采购政策",
@@ -5359,7 +5698,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0189",
+            "clause_id": "TB-0201",
             "block": "rejection",
             "label": "废标项",
             "summary": "1.节约能源、保护环境采购的产品属于品目清单范围的,将依据国家确定的认证机构出具的、处于有效期之内的节能产品、环境标志产品认证证书,对获得证书的产品实施政府优先",
@@ -5387,7 +5726,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0190",
+            "clause_id": "TB-0202",
             "block": "rejection",
             "label": "废标项",
             "summary": "1.2 符合性审查中有任意一项未通过的,审查结果为未通过。投标人未通过符合性审查的,投标无效。",
@@ -5415,7 +5754,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0191",
+            "clause_id": "TB-0203",
             "block": "rejection",
             "label": "废标项",
             "summary": "投标有效期是否符合招标文件要求其他要求招标文件要求的其他无效投标情形;围标、串标和法律法规规定的其它无效投标条款。",
@@ -5443,7 +5782,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0192",
+            "clause_id": "TB-0204",
             "block": "rejection",
             "label": "废标项",
             "summary": "2.投标报价审查评标委员会认为投标人的报价明显低于其他通过符合性审查投标人的报价,有可能影响产品质量或者不能诚信履约的,应当要求其在评标现场合理的时间内提供书面",
@@ -5471,7 +5810,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0193",
+            "clause_id": "TB-0205",
             "block": "rejection",
             "label": "废标项",
             "summary": "4.相同品牌审查(本项目为服务不适用) 采用最低评标价法的采购项目,提供相同品牌产品的不同投标人参加同一合同项下投标的,以其中通过资格审查、符合性审查且报价最低",
@@ -5502,7 +5841,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0194",
+            "clause_id": "TB-0206",
             "block": "rejection",
             "label": "废标项",
             "summary": "评审委员会依据专业经验,参考同类项目中标(成交)价格、类似产品市场价格水平、行业人工费用标准、国家有关部门指导行业协会发布的行业平均成本等情况,对报价合理性进行",
