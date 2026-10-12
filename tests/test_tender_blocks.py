@@ -1059,3 +1059,83 @@ def test_a_blank_deviation_form_is_not_rejection():
     assert "未按招标文件要求填写偏离表的，投标无效。" in rejection
     assert "未加盖公章" in rejection
     assert all(item["status"] == "NEEDS_REVIEW" for item in found["rejection"])
+
+
+def test_substantive_marker_lines_themselves_enter_rejection():
+    starred = _blocks(
+        extract_tender_blocks(
+            [
+                _page(1, "★1、项目经理须驻场并承担消防责任。\n★人员要求：保安每班不少于两人。"),
+                _page(2, "标“★”的条款为实质性条款，不满足的按无效响应处理。"),
+                _page(3, "普通保洁每日一次。"),
+            ],
+            filename="marker-substantive.pdf",
+        )
+    )
+    rejection = starred["rejection"]
+    quotes = _quotes(rejection)
+
+    assert any("项目经理须驻场" in item["quote"] and "实质性条款" not in item["quote"] for item in rejection)
+    assert any("保安每班不少于两人" in item["quote"] and "实质性条款" not in item["quote"] for item in rejection)
+    assert "普通保洁" not in quotes
+    assert all(item["status"] == "NEEDS_REVIEW" for item in rejection)
+
+    asterisks = _blocks(
+        extract_tender_blocks(
+            [
+                _page(1, "*4.2 质保期不少于两年。"),
+                _page(2, "带“*”的条款为实质性要求，未满足的按无效处理。"),
+            ],
+            filename="marker-asterisk.pdf",
+        )
+    )
+    asterisk_rejection = asterisks["rejection"]
+
+    assert any("*4.2 质保期" in item["quote"] and "实质性要求" not in item["quote"] for item in asterisk_rejection)
+    assert all(item["status"] == "NEEDS_REVIEW" for item in asterisk_rejection)
+
+
+def test_binding_blanks_and_bond_accounts_stay_out_of_rejection():
+    found = _blocks(
+        extract_tender_blocks(
+            [
+                _page(
+                    1,
+                    "有下列情形之一的，投标无效：\n"
+                    "（1）未加盖公章的；\n"
+                    "（2）项目名称：\n"
+                    "（3）项目编号：\n"
+                    "（4）投标人名称：",
+                ),
+                _page(
+                    2,
+                    "有下列情形之一的，投标无效：\n"
+                    "（1）投标文件应采用胶装，正本与副本分别密封；\n"
+                    "（2）封口处加盖密封章；\n"
+                    "（3）年月日时前不得启封。",
+                ),
+                _page(
+                    3,
+                    "有下列情形之一的，投标无效：\n"
+                    "（1）收款单位：某代理机构。开户银行：城市银行。账号：100200300。",
+                ),
+                _page(4, "未按招标文件要求填写偏离表的，投标无效。"),
+                _page(5, "未按要求密封的，投标无效。"),
+            ],
+            filename="filing-noise.pdf",
+        )
+    )
+    rejection = _quotes(found["rejection"])
+
+    assert "未加盖公章" in rejection
+    assert "项目名称" not in rejection
+    assert "项目编号" not in rejection
+    assert "投标人名称" not in rejection
+    assert "胶装" not in rejection
+    assert "密封章" not in rejection
+    assert "不得启封" not in rejection
+    assert "账号" not in rejection
+    assert "开户银行" not in rejection
+    assert "未按招标文件要求填写偏离表的，投标无效。" in rejection
+    assert "未按要求密封的，投标无效。" in rejection
+    assert all(item["status"] == "NEEDS_REVIEW" for item in found["rejection"])

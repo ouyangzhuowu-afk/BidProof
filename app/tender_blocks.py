@@ -183,8 +183,12 @@ _FRONT_PREFIX = re.compile(
 )
 _TOC_LINE = re.compile(r"[\.．·…]{4,}\s*\d+\s*$")
 _EMAIL = re.compile(r"@|邮箱|电子邮箱|电子邮件")
-# 文中声明某一类记号表示否决，才把带这个记号的条款收进废标。# 号不在此类。
-_MARKER_REJECTION = re.compile(r"废标项|废标|投标无效|投标被拒绝")
+# 文中声明某一类记号表示否决或实质性要求，才把带这个记号的条款收进废标。# 号不在此类。
+_MARKER_REJECTION = re.compile(
+    r"废标项|废标|实质性条款|实质性要求|"
+    r"投标无效|投标被拒绝|无效响应|无效投标|"
+    r"按无效|视为无效|作无效|无效"
+)
 _DECL_ASTERISK = re.compile(
     r"标注\s*[“\"'「『（(]?\s*[*＊]\s*[”\"'」』）)]?"
     r"|[“\"'「『（(]\s*[*＊]\s*[”\"'」』）)]\s*号?"
@@ -194,7 +198,8 @@ _DECL_ASTERISK = re.compile(
 _DECL_STAR = re.compile(
     r"标注\s*[“\"'「『（(]?\s*[★☆]\s*[”\"'」』）)]?"
     r"|[“\"'「『（(]\s*[★☆]\s*[”\"'」』）)]"
-    r"|[★☆]\s*(?:号|的条款|为|表示)"
+    r"|[★☆]\s*(?:号|的条款|条款|为|表示)"
+    r"|标\s*[“\"'「『]?\s*[★☆]"
 )
 _ASTERISK_CLAUSE = re.compile(r"^[*＊]\s*\d+(?:\.\d+)*(?!\d)")
 _STAR_CLAUSE = re.compile(
@@ -286,6 +291,10 @@ def extract_tender_blocks(pages: list[dict[str, Any]], filename: str | None = No
         if inherits:
             blocks |= _inherited_blocks(text, carried)
         marked = _carries_rejection_marker(text, markers, clause.get("cells"))
+        if marked and not _deviation_template(text):
+            blocks.add("rejection")
+        if (_deviation_template(text) or _rejection_noise(text)) and not marked:
+            blocks.discard("rejection")
         if _no_action_fragment(text) and not inherits and not _opens_item_list(text) and not marked:
             blocks = set()
         if (
@@ -460,7 +469,7 @@ def _can_continue(pending: dict[str, Any], event: dict[str, Any]) -> bool:
     if _closed_text(pending["text"]):
         return False
     nxt = event["text"]
-    if _REJECTION_LEAD.search(nxt) or _is_section_heading(nxt):
+    if _REJECTION_LEAD.search(nxt) or _is_section_heading(nxt) or _marker_line(nxt):
         return False
     if "，" not in pending["text"] and len(_compact(pending["text"])) <= 24 and len(_compact(nxt)) > 8:
         return False
@@ -495,7 +504,8 @@ def _classify(
     collusion = _collusion(text)
     template = _deviation_template(text)
     not_a_rejection = _definition_note(text) or _invalidates_unofficial_material(text)
-    if list_mode == "suppress" or leave_out or not_a_rejection or template:
+    noise = _rejection_noise(text) and not _carries_rejection_marker(text, markers)
+    if list_mode == "suppress" or leave_out or not_a_rejection or template or noise:
         pass
     elif (
         collusion
@@ -560,9 +570,9 @@ def _classify_row(
     if _collusion(text):
         blocks.add("rejection")
         blocks.discard("materials")
-    if not _deviation_template(text) and _carries_rejection_marker(text, markers, cells):
+    if not _deviation_template(text) and not _rejection_noise(text) and _carries_rejection_marker(text, markers, cells):
         blocks.add("rejection")
-    if _deviation_template(text):
+    if _deviation_template(text) or _rejection_noise(text):
         blocks.discard("rejection")
     if explicit_keep:
         blocks.discard("rejection")
@@ -700,6 +710,12 @@ def _carries_rejection_marker(
     return "star" in markers and _STAR_CLAUSE.match(stripped) is not None
 
 
+def _marker_line(text: str) -> bool:
+    """A line that opens with a star or an asterisk clause number is its own clause."""
+    stripped = text.lstrip()
+    return _STAR_CLAUSE.match(stripped) is not None or _ASTERISK_CLAUSE.match(stripped) is not None
+
+
 def _cell_carries_marker(cell: str, markers: frozenset[str]) -> bool:
     compact = _compact(cell)
     if not compact:
@@ -720,6 +736,39 @@ def _deviation_template(text: str) -> bool:
             return True
         return bool(re.search(r"正偏离", text) and re.search(r"负偏离|无偏离", text))
     return _FORM_BLANK.search(text) is not None and re.search(r"未选择|应进行选择", text) is not None
+
+
+def _blank_label(text: str) -> bool:
+    """An empty name or number cell on a form is not a rejection item."""
+    compact = _compact(text)
+    compact = re.sub(r"^[（(]?\d+[）)、.．]*", "", compact)
+    compact = re.sub(r"^[一二三四五六七八九十]+、", "", compact)
+    return re.fullmatch(r"(?:项目名称|项目编号|投标人名称|供应商名称|采购人名称)[:：]?[_＿]*", compact) is not None
+
+
+def _packaging_instruction(text: str) -> bool:
+    """How to bind or seal the file. A missed seal that the text itself rejects still counts."""
+    if re.search(r"未(?:按|按规定|按要求)?(?:规定|要求)?(?:密封|装订)|未密封|未装订", text):
+        return False
+    if re.search(r"装订|胶装|包封|启封|密封章", text):
+        return True
+    return bool(re.search(r"密封", text) and re.search(r"分别|标明|信封|封套|封口", text))
+
+
+def _bond_account_line(text: str) -> bool:
+    """A payee account for the bid bond is payment routing, not a rejection item."""
+    if not re.search(r"账号|帐号|开户银行|开户行|收款账户|收款帐户|收款单位", text):
+        return False
+    return re.search(r"保证金|收款|户名|账户|帐户|银行", text) is not None
+
+
+def _rejection_noise(text: str) -> bool:
+    """Form blanks, binding instructions, and bond-account lines stay out of 废标."""
+    if _REJECTION_OUTCOME.search(text) and not _negated(text):
+        return False
+    if _blank_label(text) or _deviation_template(text):
+        return True
+    return _packaging_instruction(text) or _bond_account_line(text)
 
 
 def _lead_kind(text: str) -> str | None:
@@ -1017,7 +1066,7 @@ def _inherited_blocks(text: str, carried: set[str]) -> set[str]:
     if _refund_procedure(text):
         extra.discard("materials")
         extra.discard("rejection")
-    if _deviation_template(text):
+    if _deviation_template(text) or _rejection_noise(text):
         extra.discard("rejection")
     return extra
 
@@ -1558,14 +1607,19 @@ def _explode_items(text: str) -> list[tuple[str, str]]:
         return [(kind, text)]
     pieces: list[tuple[str, str]] = []
     lead = text[: marks[0].start()].strip()
-    if lead:
+    marker_only = bool(lead) and re.fullmatch(r"[★☆*＊]+", re.sub(r"\s+", "", lead)) is not None
+    if lead and not marker_only:
         pieces.append(("paragraph" if not _ITEM_START.match(lead) else "item", lead))
     bounds = [*marks, None]
     for index, mark in enumerate(marks):
         end = bounds[index + 1].start() if bounds[index + 1] is not None else len(text)
         chunk = text[mark.start():end].strip()
-        if chunk:
-            pieces.append(("item", chunk))
+        if index == 0 and marker_only and chunk:
+            chunk = f"{lead}{chunk}"
+        if not chunk:
+            continue
+        kind = "paragraph" if _marker_line(chunk) else "item"
+        pieces.append((kind, chunk))
     return pieces
 
 
@@ -1623,6 +1677,8 @@ def _split_prose(
             else:
                 absorb(line)
             continue
+        if _marker_line(line) and buffer:
+            flush()
         if re.match(r"^注\s*[:：]", line) and buffer:
             flush()
         if _is_section_heading(line):
