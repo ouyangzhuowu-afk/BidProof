@@ -821,6 +821,34 @@ def _rejection_column_label(text: str) -> bool:
     return rest == ""
 
 
+def _empty_rejection_heading(text: str) -> bool:
+    """A title that only names other invalidity situations, with no concrete condition."""
+    compact = _compact(text)
+    compact = re.sub(r"^(?:第)?\d+(?:[.．]\d+)*[.．、]?", "", compact)
+    compact = re.sub(r"^[（(]?\d+[）)、]?", "", compact)
+    return (
+        re.fullmatch(
+            r"其他(?:投标无效情形|无效投标情形|作废标处理的情形|废标处理的情形)"
+            r"(?:如下)?[:：]?(?:[/／]|无|空白|—|_|-)*[。.]?",
+            compact,
+        )
+        is not None
+    )
+
+
+_FORMAT_INVALIDITY = re.compile(
+    r"未(?:提供|填写|提交)即(?:认定|视为|作为|按)(?:为)?(?:无效投标|投标无效|无效|废标)"
+)
+
+
+def _format_invalidity_note(text: str) -> bool:
+    """A form note that says a blank counts as invalid, rather than one concrete miss."""
+    if _FORMAT_INVALIDITY.search(text) is None:
+        return False
+    stripped = _FORMAT_INVALIDITY.sub("", text)
+    return _REJECTION_OUTCOME.search(stripped) is None
+
+
 def _rejection_mention_only(text: str) -> bool:
     """Contents lines, later notices, and column labels mention 废标 without stating a condition."""
     return (
@@ -828,6 +856,8 @@ def _rejection_mention_only(text: str) -> bool:
         or _section_title_only(text)
         or _post_rejection_notice(text)
         or _rejection_column_label(text)
+        or _empty_rejection_heading(text)
+        or _format_invalidity_note(text)
     )
 
 
@@ -1673,20 +1703,60 @@ def _page_edge_skips(lines: list[str], page_number: int | None) -> set[int]:
 
 
 _DECIMAL_CHILD_MARK = re.compile(r"(?<![\d.．])\d+(?:[.．]\d+){2,}(?!\d)")
+_PLAIN_ORDINAL_LINE = re.compile(r"^\d{1,2}(?!\d)(?![.．、)）])\s+[\u3400-\u9fff]")
+_PLAIN_ORDINAL_MARK = re.compile(
+    r"(?:(?<=[：:；;。])|(?<=序号内容)|(?<=序号))\s*(\d{1,2})(?!\d)(?![.．、)）])\s+(?=[\u3400-\u9fff])"
+)
+
+
+class _Mark:
+    def __init__(self, start: int) -> None:
+        self._start = start
+
+    def start(self) -> int:
+        return self._start
+
+
+def _plain_ordinal_line(line: str) -> bool:
+    return _PLAIN_ORDINAL_LINE.match(line) is not None
+
+
+def _text_opens_rejection_list(text: str) -> bool:
+    return bool(text) and _opens_item_list(text) and re.search(r"废标|无效|否决", text) is not None
+
+
+def _plain_ordinal_marks(text: str) -> list[_Mark]:
+    """Bare 1, 2, 3 after a rejection lead. Decimal numbers such as 21.1.1 are not these."""
+    marks: list[_Mark] = []
+    expect = 1
+    for match in _PLAIN_ORDINAL_MARK.finditer(text):
+        number = int(match.group(1))
+        if number != expect or expect > 30:
+            continue
+        if match.start(1) <= 0:
+            continue
+        marks.append(_Mark(match.start(1)))
+        expect += 1
+    return marks
 
 
 def _explode_items(text: str) -> list[tuple[str, str]]:
     """Numbered sub-items written on one line each become their own clause."""
-    marks = [match for match in _INLINE_MARK.finditer(text) if match.start() > 0]
-    if _opens_item_list(text) and re.search(r"废标|无效|否决", text):
-        occupied = [match for match in marks]
+    marks: list[_Mark] = [_Mark(match.start()) for match in _INLINE_MARK.finditer(text) if match.start() > 0]
+    if _text_opens_rejection_list(text):
+        occupied = [mark.start() for mark in marks]
         for match in _DECIMAL_CHILD_MARK.finditer(text):
-            if match.start() <= 0:
+            if match.start() <= 0 or any(start <= match.start() < start + 1 for start in occupied):
                 continue
-            if any(mark.start() <= match.start() < mark.end() for mark in occupied):
+            if any(abs(match.start() - start) < 2 for start in occupied):
                 continue
-            marks.append(match)
-        marks.sort(key=lambda match: match.start())
+            marks.append(_Mark(match.start()))
+            occupied.append(match.start())
+        for mark in _plain_ordinal_marks(text):
+            if any(abs(mark.start() - start) < 2 for start in occupied):
+                continue
+            marks.append(mark)
+        marks.sort(key=lambda mark: mark.start())
     if not marks:
         kind = "item" if _ITEM_START.match(text) else "paragraph"
         return [(kind, text)]
@@ -1726,6 +1796,8 @@ def _split_prose(
             joined = _join_wrapped(buffer)
             if buffer_kind == "heading":
                 pieces.append((buffer_kind, joined))
+            elif buffer_kind == "item" and _plain_ordinal_line(joined):
+                pieces.append(("item", joined))
             else:
                 pieces.extend(_explode_items(joined))
         buffer_kind = ""
@@ -1770,6 +1842,23 @@ def _split_prose(
             flush()
         if re.match(r"^注\s*[:：]", line) and buffer:
             flush()
+        if _plain_ordinal_line(line) and (
+            _text_opens_rejection_list(_join_wrapped(buffer) if buffer else "")
+            or (
+                not buffer
+                and bool(pieces)
+                and (
+                    _plain_ordinal_line(pieces[-1][1])
+                    or _text_opens_rejection_list(pieces[-1][1])
+                )
+            )
+        ):
+            flush()
+            buffer_kind = "item"
+            buffer.append(line)
+            if line.endswith(_CLOSED) or _sentence_end(line):
+                flush()
+            continue
         if _is_section_heading(line):
             flush()
             pieces.append(("heading", line))

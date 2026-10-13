@@ -1186,3 +1186,49 @@ def test_contents_notices_and_decimal_children_follow_the_rejection_lead():
     assert len(deposit) == 1 and deposit[0]["page"] == 5 and "牵头方" not in deposit[0]["quote"]
     assert len(consortium) == 1 and consortium[0]["page"] == 5 and "到账" not in consortium[0]["quote"]
     assert all(item["status"] == "NEEDS_REVIEW" for item in rejection)
+
+
+def test_empty_titles_and_plain_ordinals_follow_the_rejection_lead():
+    found = _blocks(
+        extract_tender_blocks(
+            [
+                _page(1, "22.其他投标无效情形:"),
+                _page(2, "1.8 其他作废标处理的情形：/。"),
+                _page(3, "注：本表未提供即认定为无效投标。"),
+                _page(4, "未按清单封样的，应予废标。"),
+                _page(4, "未提供营业执照复印件的，投标无效。"),
+                _page(
+                    5,
+                    "出现下列情形之一的，投标无效：\n"
+                    "1 报价超过最高限价的；\n"
+                    "2 授权书未签字的；\n"
+                    "3 样品未送达的。",
+                ),
+                _page(
+                    6,
+                    "评审时出现下列情形之一的，按无效投标处理：序号内容 "
+                    "1 总价超过控制价的；2 文件未盖章的。",
+                ),
+            ],
+            filename="ordinal-children.pdf",
+        )
+    )
+    rejection = found["rejection"]
+    quotes = _quotes(rejection)
+
+    assert all("其他投标无效情形:" not in quote and "其他投标无效情形：" not in quote for quote in quotes)
+    assert "其他作废标处理的情形" not in quotes
+    assert "未提供即认定为无效投标" not in quotes
+    assert "未按清单封样的，应予废标。" in quotes
+    assert "未提供营业执照复印件的，投标无效。" in quotes
+    limited = [item for item in rejection if "最高限价" in item["quote"]]
+    unsigned = [item for item in rejection if "授权书未签字" in item["quote"]]
+    sample = [item for item in rejection if "样品未送达" in item["quote"]]
+    assert len(limited) == 1 and limited[0]["page"] == 5 and "授权书" not in limited[0]["quote"]
+    assert len(unsigned) == 1 and unsigned[0]["page"] == 5 and "最高限价" not in unsigned[0]["quote"]
+    assert len(sample) == 1 and sample[0]["page"] == 5 and "最高限价" not in sample[0]["quote"]
+    capped = [item for item in rejection if "控制价" in item["quote"]]
+    sealed = [item for item in rejection if "文件未盖章" in item["quote"]]
+    assert len(capped) == 1 and capped[0]["page"] == 6 and "文件未盖章" not in capped[0]["quote"]
+    assert len(sealed) == 1 and sealed[0]["page"] == 6 and "控制价" not in sealed[0]["quote"]
+    assert all(item["status"] == "NEEDS_REVIEW" for item in rejection)
