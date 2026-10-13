@@ -64,7 +64,8 @@ _NEGATED_REJECTION = re.compile(
     r"|不视为无效"
 )
 _REJECTION_LEAD = re.compile(
-    r"有下列|出现下列|存在下列|下列情况之一|下列情形之一|以下情况之一|以下情形之一|属无效|应予(以)?废标"
+    r"有下列|出现下列|存在下列|下列情况之一|下列情形之一|以下情况之一|以下情形之一|"
+    r"属无效|应予(以)?废标|作废标处理"
 )
 _ITEM_START = re.compile(
     r"^\s*(?:"
@@ -257,7 +258,7 @@ def extract_tender_blocks(pages: list[dict[str, Any]], filename: str | None = No
     section: str | None = None
     list_mode: str | None = None
     carried: set[str] = set()
-    stem: int | None = None
+    stem: tuple[int, ...] | None = None
     for clause in clauses:
         if clause["kind"] == "heading":
             found = _section_of(clause["text"])
@@ -281,6 +282,8 @@ def extract_tender_blocks(pages: list[dict[str, Any]], filename: str | None = No
             lead = None
         if lead == "rejection" or _non_refund_list(text):
             list_mode = "rejection"
+            if _number_path(text) is None:
+                stem = None
         elif lead == "suppress":
             list_mode = "suppress"
         elif _materials_lead(text):
@@ -293,7 +296,7 @@ def extract_tender_blocks(pages: list[dict[str, Any]], filename: str | None = No
         marked = _carries_rejection_marker(text, markers, clause.get("cells"))
         if marked and not _deviation_template(text):
             blocks.add("rejection")
-        if (_deviation_template(text) or _rejection_noise(text)) and not marked:
+        if (_deviation_template(text) or _rejection_noise(text) or _rejection_mention_only(text)) and not marked:
             blocks.discard("rejection")
         if _no_action_fragment(text) and not inherits and not _opens_item_list(text) and not marked:
             blocks = set()
@@ -505,7 +508,8 @@ def _classify(
     template = _deviation_template(text)
     not_a_rejection = _definition_note(text) or _invalidates_unofficial_material(text)
     noise = _rejection_noise(text) and not _carries_rejection_marker(text, markers)
-    if list_mode == "suppress" or leave_out or not_a_rejection or template or noise:
+    mention = _rejection_mention_only(text) and not _carries_rejection_marker(text, markers)
+    if list_mode == "suppress" or leave_out or not_a_rejection or template or noise or mention:
         pass
     elif (
         collusion
@@ -572,7 +576,7 @@ def _classify_row(
         blocks.discard("materials")
     if not _deviation_template(text) and not _rejection_noise(text) and _carries_rejection_marker(text, markers, cells):
         blocks.add("rejection")
-    if _deviation_template(text) or _rejection_noise(text):
+    if _deviation_template(text) or _rejection_noise(text) or _rejection_mention_only(text):
         blocks.discard("rejection")
     if explicit_keep:
         blocks.discard("rejection")
@@ -584,7 +588,12 @@ def _classify_row(
 
 
 def _is_rejection(text: str) -> bool:
-    if _definition_note(text) or _invalidates_unofficial_material(text) or _deviation_template(text):
+    if (
+        _definition_note(text)
+        or _invalidates_unofficial_material(text)
+        or _deviation_template(text)
+        or _rejection_mention_only(text)
+    ):
         return False
     if _document_rejected(text) or _collusion(text) or _non_refund_situation(text) or _reprocurement_bar(text):
         return True
@@ -769,6 +778,57 @@ def _rejection_noise(text: str) -> bool:
     if _blank_label(text) or _deviation_template(text):
         return True
     return _packaging_instruction(text) or _bond_account_line(text)
+
+
+def _dotted_contents(text: str) -> bool:
+    """A contents line ends in a dotted leader and a page number."""
+    return _TOC_LINE.search(text) is not None
+
+
+def _section_title_only(text: str) -> bool:
+    """A heading that only names the rejection section is not a condition."""
+    compact = _compact(text)
+    compact = re.sub(r"^(?:第)?\d+(?:[.．]\d+)*[.．、]?", "", compact)
+    compact = re.sub(r"^第[一二三四五六七八九十\d]+[章节条]", "", compact)
+    compact = re.sub(r"^[一二三四五六七八九十]+[、.．]", "", compact)
+    return re.fullmatch(r"(?:废标|废标项|无效投标|投标无效|否决投标|无效响应)", compact) is not None
+
+
+def _post_rejection_notice(text: str) -> bool:
+    """What the buyer does after a rejection is procedure, not the condition itself."""
+    if re.search(r"废标后|否决后|被废标|作出废标|废标决定|废标理由", text) is None:
+        return False
+    if re.search(r"通知|告知|公告|公示", text) is None:
+        return False
+    stripped = re.sub(r"废标后|废标理由|废标决定|作出废标|被废标|否决后", "", text)
+    if _REJECTION_OUTCOME.search(stripped):
+        return False
+    return re.search(r"否则|未按|有下列|出现下列|应予|作废标", text) is None
+
+
+def _rejection_column_label(text: str) -> bool:
+    """A blank header or a form column name that only says 废标 is not a condition."""
+    compact = _compact(re.sub(r"Col\d+：", "", text))
+    compact = re.sub(r"\d+", "", compact)
+    if len(compact) > 24 or re.search(r"废标|无效|否决", compact) is None:
+        return False
+    rest = re.sub(
+        r"序号|栏目|项目|内容|说明|条款|情形|处理|是否|"
+        r"废标项|废标情形|无效情形|否决情形|无效投标|否决投标|废标|无效|否决",
+        "",
+        compact,
+    )
+    return rest == ""
+
+
+def _rejection_mention_only(text: str) -> bool:
+    """Contents lines, later notices, and column labels mention 废标 without stating a condition."""
+    return (
+        _dotted_contents(text)
+        or _section_title_only(text)
+        or _post_rejection_notice(text)
+        or _rejection_column_label(text)
+    )
 
 
 def _lead_kind(text: str) -> str | None:
@@ -963,24 +1023,37 @@ def _is_child_item(text: str) -> bool:
     return _CHILD_ITEM.match(text) is not None
 
 
-def _lead_stem(text: str) -> int | None:
-    """The major number of a list lead such as 「3.」。 A decimal child 「3.1」 has no stem of its own."""
-    if re.match(r"^\s*\d+[.．]\d", text):
-        return None
-    match = re.match(r"^\s*(\d+)[.．、]", text)
+def _number_path(text: str) -> tuple[int, ...] | None:
+    """The dotted clause number at the start, such as 9, 9.4, or 9.4.1."""
+    match = re.match(r"^\s*(\d+(?:[.．]\d+)*)", text)
     if match is None:
         return None
-    return int(match.group(1))
+    return tuple(int(part) for part in re.split(r"[.．]", match.group(1)))
 
 
-def _continues_stem(text: str, stem: int | None) -> bool:
-    match = re.match(r"^\s*(\d+)[.．]\d", text)
-    return bool(match and stem is not None and int(match.group(1)) == stem)
+def _lead_stem(text: str) -> tuple[int, ...] | None:
+    """Number prefix of a list lead. A child such as 「3.1」 does not replace 「3」."""
+    path = _number_path(text)
+    if path is None:
+        return None
+    if len(path) > 1 and not _opens_item_list(text):
+        return None
+    return path
 
 
-def _ends_open_list(text: str, stem: int | None = None) -> bool:
+def _continues_stem(text: str, stem: tuple[int, ...] | None) -> bool:
+    path = _number_path(text)
+    if path is None or stem is None or len(path) <= len(stem):
+        return False
+    return path[: len(stem)] == stem
+
+
+def _ends_open_list(text: str, stem: tuple[int, ...] | None = None) -> bool:
     """A new numbered section ends the list. A decimal child of the open stem does not."""
     if _continues_stem(text, stem):
+        return False
+    path = _number_path(text)
+    if stem is None and path is not None and len(path) >= 3 and _ITEM_START.match(text):
         return False
     if _is_child_item(text) or not _ITEM_START.match(text):
         return False
@@ -1066,7 +1139,7 @@ def _inherited_blocks(text: str, carried: set[str]) -> set[str]:
     if _refund_procedure(text):
         extra.discard("materials")
         extra.discard("rejection")
-    if _deviation_template(text) or _rejection_noise(text):
+    if _deviation_template(text) or _rejection_noise(text) or _rejection_mention_only(text):
         extra.discard("rejection")
     return extra
 
@@ -1599,9 +1672,21 @@ def _page_edge_skips(lines: list[str], page_number: int | None) -> set[int]:
     return skip
 
 
+_DECIMAL_CHILD_MARK = re.compile(r"(?<![\d.．])\d+(?:[.．]\d+){2,}(?!\d)")
+
+
 def _explode_items(text: str) -> list[tuple[str, str]]:
     """Numbered sub-items written on one line each become their own clause."""
     marks = [match for match in _INLINE_MARK.finditer(text) if match.start() > 0]
+    if _opens_item_list(text) and re.search(r"废标|无效|否决", text):
+        occupied = [match for match in marks]
+        for match in _DECIMAL_CHILD_MARK.finditer(text):
+            if match.start() <= 0:
+                continue
+            if any(mark.start() <= match.start() < mark.end() for mark in occupied):
+                continue
+            marks.append(match)
+        marks.sort(key=lambda match: match.start())
     if not marks:
         kind = "item" if _ITEM_START.match(text) else "paragraph"
         return [(kind, text)]
@@ -1667,6 +1752,10 @@ def _split_prose(
             continue
         line = _strip_footer(line)
         if not line or line in banners:
+            continue
+        if _dotted_contents(line):
+            flush()
+            pieces.append(("paragraph", line))
             continue
         if _score_fragment(line) or _score_only_line(line):
             # A fragment joins the sentence before it. A bare score on the next page stays separate

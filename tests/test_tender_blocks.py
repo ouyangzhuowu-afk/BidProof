@@ -1139,3 +1139,50 @@ def test_binding_blanks_and_bond_accounts_stay_out_of_rejection():
     assert "未按招标文件要求填写偏离表的，投标无效。" in rejection
     assert "未按要求密封的，投标无效。" in rejection
     assert all(item["status"] == "NEEDS_REVIEW" for item in found["rejection"])
+
+
+def test_contents_notices_and_decimal_children_follow_the_rejection_lead():
+    found = _blocks(
+        extract_tender_blocks(
+            [
+                _page(
+                    1,
+                    "3 文件获取………………5\n"
+                    "8 废标………………12\n"
+                    "样品未送达的，应予废标。",
+                ),
+                _page(2, "废标后，采购人应当把处理理由书面告知每一个投标人。"),
+                _page(3, "序号 废标情形 处理\n是否废标"),
+                _page(
+                    4,
+                    "9.4\n"
+                    "有下列情形之一的，作废标处理：\n"
+                    "9.4.1 样品未按清单封样的；\n"
+                    "9.4.2 授权书缺少法定代表人签字的。",
+                ),
+                _page(
+                    5,
+                    "下列情形作废标处理：2.3.1 保证金未在截止时间前到账的；2.3.2 联合体协议未指定牵头方的。",
+                ),
+            ],
+            filename="contents-and-children.pdf",
+        )
+    )
+    rejection = found["rejection"]
+    quotes = _quotes(rejection)
+
+    assert "文件获取" not in quotes
+    assert "………………12" not in quotes
+    assert "书面告知" not in quotes
+    assert "废标情形" not in quotes
+    assert "是否废标" not in quotes
+    assert "样品未送达的，应予废标。" in quotes
+    sealed = [item for item in rejection if "封样" in item["quote"]]
+    signed = [item for item in rejection if "法定代表人" in item["quote"]]
+    assert len(sealed) == 1 and sealed[0]["page"] == 4 and "法定代表人" not in sealed[0]["quote"]
+    assert len(signed) == 1 and signed[0]["page"] == 4 and "封样" not in signed[0]["quote"]
+    deposit = [item for item in rejection if "到账" in item["quote"]]
+    consortium = [item for item in rejection if "牵头方" in item["quote"]]
+    assert len(deposit) == 1 and deposit[0]["page"] == 5 and "牵头方" not in deposit[0]["quote"]
+    assert len(consortium) == 1 and consortium[0]["page"] == 5 and "到账" not in consortium[0]["quote"]
+    assert all(item["status"] == "NEEDS_REVIEW" for item in rejection)
