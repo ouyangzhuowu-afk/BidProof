@@ -27,8 +27,8 @@
   "footer_in_quotes": 0,
   "bare_page_in_quotes": 0,
   "counts": {
-    "total": 146,
-    "with_real_page": 146,
+    "total": 152,
+    "with_real_page": 152,
     "without_page": 0,
     "by_block": {
       "qualification": {
@@ -48,8 +48,8 @@
       },
       "rejection": {
         "label": "废标项",
-        "cited": 32,
-        "items": 32
+        "cited": 38,
+        "items": 38
       }
     }
   },
@@ -4121,6 +4121,174 @@
             "clause_id": "TB-0145",
             "block": "rejection",
             "label": "废标项",
+            "summary": "3 出现两个或两个以上投标方案的(招标文件中要求提供备选方案的除外);",
+            "quote": "3 出现两个或两个以上投标方案的(招标文件中要求提供备选方案的除外);",
+            "pages": [
+              32
+            ],
+            "page": 32,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第32页",
+              "index": 32,
+              "pages": [
+                32
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nx-pengyang-forest-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0146",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "4 投标有效期不足的;",
+            "quote": "4 投标有效期不足的;",
+            "pages": [
+              32
+            ],
+            "page": 32,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第32页",
+              "index": 32,
+              "pages": [
+                32
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nx-pengyang-forest-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0147",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "5 响应文件中附有采购人不能接受条件;",
+            "quote": "5 响应文件中附有采购人不能接受条件;",
+            "pages": [
+              32
+            ],
+            "page": 32,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第32页",
+              "index": 32,
+              "pages": [
+                32
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nx-pengyang-forest-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0148",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "6 不满足招标文件商务、技术实质性要求;",
+            "quote": "6 不满足招标文件商务、技术实质性要求;",
+            "pages": [
+              32
+            ],
+            "page": 32,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第32页",
+              "index": 32,
+              "pages": [
+                32
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nx-pengyang-forest-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0149",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "7 出现招标文件规定的其他无效投标条款;",
+            "quote": "7 出现招标文件规定的其他无效投标条款;",
+            "pages": [
+              32
+            ],
+            "page": 32,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第32页",
+              "index": 32,
+              "pages": [
+                32
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nx-pengyang-forest-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0150",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "8 出现不同供应商投标文件机器制作码一致的情况;",
+            "quote": "8 出现不同供应商投标文件机器制作码一致的情况;",
+            "pages": [
+              32
+            ],
+            "page": 32,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第32页",
+              "index": 32,
+              "pages": [
+                32
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nx-pengyang-forest-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0151",
+            "block": "rejection",
+            "label": "废标项",
             "summary": "评标委员会认为投标供应商的报价明显低于其他通过符合性审查投标供应商的报价,有可能影响产品质量或者不能诚信履约的,应当要求其在评标现场合理的时间内提供书面说明,必",
             "quote": "评标委员会认为投标供应商的报价明显低于其他通过符合性审查投标供应商的报价,有可能影响产品质量或者不能诚信履约的,应当要求其在评标现场合理的时间内提供书面说明,必要时提交相关证明材料;投标供应商不能证明其报价合理性的,评标委员会应当将其作为无效投标处理。",
             "pages": [
@@ -4146,7 +4314,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0146",
+            "clause_id": "TB-0152",
             "block": "rejection",
             "label": "废标项",
             "summary": "注2:投标供应商应谨慎在投标文件中提出附加条件,如提出的附加条件采购人无法接受, 其投标将被认定为无效投标。",

@@ -27,8 +27,8 @@
   "footer_in_quotes": 0,
   "bare_page_in_quotes": 0,
   "counts": {
-    "total": 264,
-    "with_real_page": 264,
+    "total": 256,
+    "with_real_page": 256,
     "without_page": 0,
     "by_block": {
       "qualification": {
@@ -43,8 +43,8 @@
       },
       "materials": {
         "label": "要交的材料",
-        "cited": 93,
-        "items": 93
+        "cited": 85,
+        "items": 85
       },
       "rejection": {
         "label": "废标项",
@@ -2019,34 +2019,6 @@
             "clause_id": "TB-0070",
             "block": "materials",
             "label": "要交的材料",
-            "summary": "7.1供应商和代理机构就采购活动过程中交换的文件和来往信函均使用中文。",
-            "quote": "7.1供应商和代理机构就采购活动过程中交换的文件和来往信函均使用中文。",
-            "pages": [
-              19
-            ],
-            "page": 19,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第19页",
-              "index": 19,
-              "pages": [
-                19
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0071",
-            "block": "materials",
-            "label": "要交的材料",
             "summary": "8.响应文件组成响应文件由三部分组成,包括商务文件、技术文件、资格资质证明文件。",
             "quote": "8.响应文件组成响应文件由三部分组成,包括商务文件、技术文件、资格资质证明文件。",
             "pages": [
@@ -2072,7 +2044,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0072",
+            "clause_id": "TB-0071",
             "block": "materials",
             "label": "要交的材料",
             "summary": "8.1 商务文件",
@@ -2100,7 +2072,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0073",
+            "clause_id": "TB-0072",
             "block": "materials",
             "label": "要交的材料",
             "summary": "(1)报价函;",
@@ -2128,7 +2100,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0074",
+            "clause_id": "TB-0073",
             "block": "materials",
             "label": "要交的材料",
             "summary": "(2)法定代表人授权委托书;",
@@ -2156,7 +2128,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0075",
+            "clause_id": "TB-0074",
             "block": "materials",
             "label": "要交的材料",
             "summary": "(3)首轮报价一览表;",
@@ -2184,7 +2156,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0076",
+            "clause_id": "TB-0075",
             "block": "materials",
             "label": "要交的材料",
             "summary": "(4)已标价工程量清单;",
@@ -2212,7 +2184,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0077",
+            "clause_id": "TB-0076",
             "block": "materials",
             "label": "要交的材料",
             "summary": "(5)综合单价分析表;",
@@ -2240,7 +2212,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0078",
+            "clause_id": "TB-0077",
             "block": "materials",
             "label": "要交的材料",
             "summary": "(6)主要设备/材料表;",
@@ -2268,7 +2240,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0079",
+            "clause_id": "TB-0078",
             "block": "materials",
             "label": "要交的材料",
             "summary": "(7)供应商基本情况表;",
@@ -2296,7 +2268,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0080",
+            "clause_id": "TB-0079",
             "block": "materials",
             "label": "要交的材料",
             "summary": "(8)业绩一览表;",
@@ -2324,7 +2296,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0081",
+            "clause_id": "TB-0080",
             "block": "materials",
             "label": "要交的材料",
             "summary": "(9)正在施工的和新承接的项目情况表;",
@@ -2352,7 +2324,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0082",
+            "clause_id": "TB-0081",
             "block": "materials",
             "label": "要交的材料",
             "summary": "(10)商务偏离表;",
@@ -2380,7 +2352,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0083",
+            "clause_id": "TB-0082",
             "block": "materials",
             "label": "要交的材料",
             "summary": "(11)优惠条件及合理化建议;",
@@ -2408,7 +2380,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0084",
+            "clause_id": "TB-0083",
             "block": "materials",
             "label": "要交的材料",
             "summary": "(12)供应商认为需要加以说明的其他内容。",
@@ -2436,7 +2408,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0085",
+            "clause_id": "TB-0084",
             "block": "materials",
             "label": "要交的材料",
             "summary": "8.2 技术文件",
@@ -2464,7 +2436,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0086",
+            "clause_id": "TB-0085",
             "block": "materials",
             "label": "要交的材料",
             "summary": "(1)施工组织设计;",
@@ -2492,7 +2464,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0087",
+            "clause_id": "TB-0086",
             "block": "materials",
             "label": "要交的材料",
             "summary": "1)施工方案及技术措施;",
@@ -2520,7 +2492,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0088",
+            "clause_id": "TB-0087",
             "block": "materials",
             "label": "要交的材料",
             "summary": "2)质量保证措施;",
@@ -2548,7 +2520,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0089",
+            "clause_id": "TB-0088",
             "block": "materials",
             "label": "要交的材料",
             "summary": "3)施工现场总平面布置(施工总平面图,绘出现场临时设施布置图表并附文字说明,说明临时设施、加工车间、现场办公、设备及仓储、供电、供水、卫生、生活、 道路、消防等",
@@ -2576,7 +2548,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0090",
+            "clause_id": "TB-0089",
             "block": "materials",
             "label": "要交的材料",
             "summary": "4)施工机械设备及劳动力安排计划(包括保障进度计划需要的主要施工机械设备、劳动力需求计划及保证措施、材料设备进场计划及其他保证措施等);",
@@ -2607,7 +2579,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0091",
+            "clause_id": "TB-0090",
             "block": "materials",
             "label": "要交的材料",
             "summary": "5)施工文明措施计划;",
@@ -2635,7 +2607,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0092",
+            "clause_id": "TB-0091",
             "block": "materials",
             "label": "要交的材料",
             "summary": "6)安全保障措施(包含但不限于高空、登高作业安全防护措施、对危险性较大的工程、安装安全围栏警示牌保护措施、现场施工安全、施工现场周边人员安全保护方案等);",
@@ -2663,7 +2635,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0093",
+            "clause_id": "TB-0092",
             "block": "materials",
             "label": "要交的材料",
             "summary": "7)减少噪音、降低环境污染、地下管线及其他地上地下设施的保护加固措施;",
@@ -2691,7 +2663,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0094",
+            "clause_id": "TB-0093",
             "block": "materials",
             "label": "要交的材料",
             "summary": "8)成品保护方案;",
@@ -2719,7 +2691,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0095",
+            "clause_id": "TB-0094",
             "block": "materials",
             "label": "要交的材料",
             "summary": "9)任何可能的紧急情况的处理措施、预案以及抵抗风险(包括工程施工过程中可能遇到的各种风险);",
@@ -2747,7 +2719,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0096",
+            "clause_id": "TB-0095",
             "block": "materials",
             "label": "要交的材料",
             "summary": "10)磋商文件规定的其他内容。",
@@ -2775,7 +2747,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0097",
+            "clause_id": "TB-0096",
             "block": "materials",
             "label": "要交的材料",
             "summary": "(2)合理化建议及相关优惠承诺和应急措施(如有);",
@@ -2803,7 +2775,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0098",
+            "clause_id": "TB-0097",
             "block": "materials",
             "label": "要交的材料",
             "summary": "(3)技术要求偏离表;",
@@ -2831,7 +2803,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0099",
+            "clause_id": "TB-0098",
             "block": "materials",
             "label": "要交的材料",
             "summary": "(4)供应商认为需要提供的其他材料或说明。",
@@ -2859,35 +2831,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0100",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "8.3 资格、资质证明文件:",
-            "quote": "8.3 资格、资质证明文件:",
-            "pages": [
-              20
-            ],
-            "page": 20,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第20页",
-              "index": 20,
-              "pages": [
-                20
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0101",
+            "clause_id": "TB-0099",
             "block": "materials",
             "label": "要交的材料",
             "summary": "(1)按《政府采购法实施条例》第十七条的规定,应提供的基本资格条件证明材料,详见供应商须知前附表;",
@@ -2915,7 +2859,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0102",
+            "clause_id": "TB-0100",
             "block": "materials",
             "label": "要交的材料",
             "summary": "(2)符合本项目要求的资质条件证明材料,详见供应商须知前附表;",
@@ -2943,7 +2887,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0103",
+            "clause_id": "TB-0101",
             "block": "materials",
             "label": "要交的材料",
             "summary": "(3)供应商认为需要提交的其他相关证明文件。",
@@ -2971,91 +2915,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0104",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "10.2 本次竞争性磋商过程中,各合格供应商均有再次报价的机会,再次报价时, 原则上在首次响应文件中的首轮报价的基础上进行整体浮动(已标价工程量清单中的各清单子",
-            "quote": "10.2 本次竞争性磋商过程中,各合格供应商均有再次报价的机会,再次报价时, 原则上在首次响应文件中的首轮报价的基础上进行整体浮动(已标价工程量清单中的各清单子项单价、合价均按同比例调整,但增值税税率、暂列金、暂估价、以及有要求的措施费费率除外)。除非磋商小组对本项目技术要求(含工程量清单项)有变更,否则不允许修改调整所投报的工程量清单项、清单描述及工程量、工程材料(设备)品牌规格、施工组织设计和项目管理机构。",
-            "pages": [
-              21
-            ],
-            "page": 21,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第21页",
-              "index": 21,
-              "pages": [
-                21
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0105",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "10.9 本项目总报价中应包含设备材料进场检测检验费(如有)、竣工验收费(如有)、竞争性磋商采购代理服务费,但不需单独列项。",
-            "quote": "10.9 本项目总报价中应包含设备材料进场检测检验费(如有)、竣工验收费(如有)、竞争性磋商采购代理服务费,但不需单独列项。",
-            "pages": [
-              22
-            ],
-            "page": 22,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第22页",
-              "index": 22,
-              "pages": [
-                22
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0106",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "11.2 响应文件应用不褪色的材料打印或复印(A4 幅面)。",
-            "quote": "11.2 响应文件应用不褪色的材料打印或复印(A4 幅面)。",
-            "pages": [
-              22
-            ],
-            "page": 22,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第22页",
-              "index": 22,
-              "pages": [
-                22
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0107",
+            "clause_id": "TB-0102",
             "block": "materials",
             "label": "要交的材料",
             "summary": "20.5 磋商会议仪式后,磋商小组视情可能会安排(或委托工作人员)核验供应商相关证明材料,核验内容详见供应商须知前附表。",
@@ -3083,7 +2943,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0108",
+            "clause_id": "TB-0103",
             "block": "materials",
             "label": "要交的材料",
             "summary": "评审委员会启动异常低价投标(响应)审查后,属于前述第1 项至第4 项情形的,应当要求相关供应商在评审现场合理的时间内对投标(响应)价格作出解释,提供项目具体成本",
@@ -3111,35 +2971,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0109",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "(1)响应文件中首轮报价一览表(报价表)内容与响应文件中相应内容不一致的,以首轮报价一览表(报价表)为准;",
-            "quote": "(1)响应文件中首轮报价一览表(报价表)内容与响应文件中相应内容不一致的,以首轮报价一览表(报价表)为准;",
-            "pages": [
-              28
-            ],
-            "page": 28,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第28页",
-              "index": 28,
-              "pages": [
-                28
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0110",
+            "clause_id": "TB-0104",
             "block": "materials",
             "label": "要交的材料",
             "summary": "29.1.4 依据《财政部工业和信息化部关于印发<政府采购促进中小企业发展管理办法>的通知》(财库〔2020〕46 号)规定,中型、小型和微型企业参与的须提供《",
@@ -3167,35 +2999,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0111",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "29.1.7中标、成交供应商享受本办法规定的中小企业扶持政策的,采购人、采购代理机构应当随中标、成交结果公开中标、成交供应商的《中小企业声明函》。供应商提供声明",
-            "quote": "29.1.7中标、成交供应商享受本办法规定的中小企业扶持政策的,采购人、采购代理机构应当随中标、成交结果公开中标、成交供应商的《中小企业声明函》。供应商提供声明函内容不实的,属于提供虚假材料谋取中标、成交,依照《中华人民共和国政府采购法》等国家有关规定追究相应责任。",
-            "pages": [
-              30
-            ],
-            "page": 30,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第30页",
-              "index": 30,
-              "pages": [
-                30
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0112",
+            "clause_id": "TB-0105",
             "block": "materials",
             "label": "要交的材料",
             "summary": "2)参加政府采购活动的监狱企业应当在响应文件中提供监狱企业证明复印件,否则不予认定。监狱企业证明须由省级以上监狱管理局、戒毒管理局(含新疆生产建设兵团)出具。",
@@ -3223,7 +3027,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0113",
+            "clause_id": "TB-0106",
             "block": "materials",
             "label": "要交的材料",
             "summary": "残疾人福利性单位的评标价格=最后报价×(1—扣除比例); 供应商属于享受政府采购支持政策的“残疾人福利性单位”的,需提供《残疾人福利性单位声明函》(格式见磋商文",
@@ -3251,35 +3055,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0114",
-            "block": "materials",
-            "label": "要交的材料",
-            "summary": "(3)本项目中如涉及国家强制性产品认证证书(CCC 认证证书)、电信设备进网许可证、无线电发射设备核准证等市场准入类资质的,应严格执行国家相关法律法规的要求。",
-            "quote": "(3)本项目中如涉及国家强制性产品认证证书(CCC 认证证书)、电信设备进网许可证、无线电发射设备核准证等市场准入类资质的,应严格执行国家相关法律法规的要求。",
-            "pages": [
-              33
-            ],
-            "page": 33,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第33页",
-              "index": 33,
-              "pages": [
-                33
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-sd-eq-yard-cuoshang-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0115",
+            "clause_id": "TB-0107",
             "block": "materials",
             "label": "要交的材料",
             "summary": "33.5 依据《政府采购质疑和投诉办法》(财政部令第94 号),供应商可以委托代理人进行质疑和投诉。其授权委托书应当载明代理人的姓名或者名称、代理事项、 具体权",
@@ -3307,7 +3083,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0116",
+            "clause_id": "TB-0108",
             "block": "materials",
             "label": "要交的材料",
             "summary": "(1)供应商的姓名或者名称、地址、邮编、联系人及联系电话;",
@@ -3335,7 +3111,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0117",
+            "clause_id": "TB-0109",
             "block": "materials",
             "label": "要交的材料",
             "summary": "(2)质疑项目的名称、编号;",
@@ -3363,7 +3139,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0118",
+            "clause_id": "TB-0110",
             "block": "materials",
             "label": "要交的材料",
             "summary": "(4)事实依据;",
@@ -3391,7 +3167,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0119",
+            "clause_id": "TB-0111",
             "block": "materials",
             "label": "要交的材料",
             "summary": "(5)必要的法律依据;",
@@ -3419,7 +3195,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0120",
+            "clause_id": "TB-0112",
             "block": "materials",
             "label": "要交的材料",
             "summary": "供应商为自然人的,应当由本人签字;供应商为法人或者其他组织的,应当由法定代表人、主要负责人,或者其授权代表签字或者盖章,并加盖公章。",
@@ -3447,7 +3223,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0121",
+            "clause_id": "TB-0113",
             "block": "materials",
             "label": "要交的材料",
             "summary": "报价<br>部分<br>25<br>分：商务<br>部分<br>5 分 总报价评<br>审：同类业绩 20：3 以满足磋商文件要求且最终报价最低的价格为评审基准",
@@ -3475,7 +3251,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0122",
+            "clause_id": "TB-0114",
             "block": "materials",
             "label": "要交的材料",
             "summary": "报价<br>部分<br>25<br>分：商务<br>部分<br>5 分 总报价评<br>审：项目负责<br>人业绩 20：2 以满足磋商文件要求且最终报价最低的",
@@ -3503,7 +3279,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0123",
+            "clause_id": "TB-0115",
             "block": "materials",
             "label": "要交的材料",
             "summary": "同类业绩 3 2023 年1 月1 日至今(以合同签订时间为准)完成类似工程项目业绩1 项得1 分,最多得3 分(需提供合同关键页复印件并加盖公章)。",
@@ -3531,7 +3307,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0124",
+            "clause_id": "TB-0116",
             "block": "materials",
             "label": "要交的材料",
             "summary": "〈政府采购支持绿色建材促进建筑品质提升政策项目实施指南〉的通知》(财办库 〔2023〕52 号)要求,明确为必选类、或采购文件已定为必须提供的可选类绿色建材的,",
@@ -3559,7 +3335,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0125",
+            "clause_id": "TB-0117",
             "block": "materials",
             "label": "要交的材料",
             "summary": "(六)本合同附件在合同订立及履行过程中形成的与合同有关的文件、有关工程的洽商、变更等书面协议或文件均构成合同文件组成部分。",
@@ -3587,7 +3363,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0126",
+            "clause_id": "TB-0118",
             "block": "materials",
             "label": "要交的材料",
             "summary": "所有材料、构配件、设备须合格、环保、耐用,优先选用成熟稳定、抗老化、耐腐蚀、 抗震性能良好的产品,进场须提供合格证、检测报告、备案证明,经采购人验收合格后方可使",
@@ -3615,7 +3391,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0127",
+            "clause_id": "TB-0119",
             "block": "materials",
             "label": "要交的材料",
             "summary": "5、进场材料须提供合格证及产品检验报告。",
@@ -3643,7 +3419,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0128",
+            "clause_id": "TB-0120",
             "block": "materials",
             "label": "要交的材料",
             "summary": "(附法定代表人身份证明复印件) (附授权代理人身份证明复印件) 单位名称(盖章): 法定代表人签字或盖章: 授权代理人签字: 年月日",
@@ -3671,7 +3447,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0129",
+            "clause_id": "TB-0121",
             "block": "materials",
             "label": "要交的材料",
             "summary": "格式六、业绩一览表业绩一览表项目名称: 项目编号: 合同名称工程名称采购人名称竣工时间合同金额联系人联系电话说明:请在此表后附合同或其他相关证明材料。具体要求详",
@@ -3699,7 +3475,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0130",
+            "clause_id": "TB-0122",
             "block": "materials",
             "label": "要交的材料",
             "summary": "格式八、落实政府采购政策相关证明材料(如有)",
@@ -3727,7 +3503,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0131",
+            "clause_id": "TB-0123",
             "block": "materials",
             "label": "要交的材料",
             "summary": "2、不符合相应条件的供应商无需提供。",
@@ -3755,7 +3531,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0132",
+            "clause_id": "TB-0124",
             "block": "materials",
             "label": "要交的材料",
             "summary": "注:不符合相应条件的供应商无需提供。",
@@ -3783,7 +3559,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0133",
+            "clause_id": "TB-0125",
             "block": "materials",
             "label": "要交的材料",
             "summary": "1.所报产品属于绿色产品的,按规定格式逐项填写,附绿色产品认证证书(如为绿色建材则按要求在供货时提供相关证明材料),否则不享受扶持政策。",
@@ -3811,7 +3587,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0134",
+            "clause_id": "TB-0126",
             "block": "materials",
             "label": "要交的材料",
             "summary": "1、法人或者其他组织的营业执照等证明文件",
@@ -3839,7 +3615,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0135",
+            "clause_id": "TB-0127",
             "block": "materials",
             "label": "要交的材料",
             "summary": "2、资质证书、安全生产许可证;",
@@ -3867,7 +3643,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0136",
+            "clause_id": "TB-0128",
             "block": "materials",
             "label": "要交的材料",
             "summary": "3、项目负责人的建造师注册证书、安全考核合格证书(B 证);",
@@ -3895,7 +3671,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0137",
+            "clause_id": "TB-0129",
             "block": "materials",
             "label": "要交的材料",
             "summary": "4、具有良好的商业信誉和健全的财务会计制度的证明材料;",
@@ -3923,7 +3699,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0138",
+            "clause_id": "TB-0130",
             "block": "materials",
             "label": "要交的材料",
             "summary": "5、具有依法缴纳税收和社会保障资金的良好记录的证明材料;",
@@ -3951,7 +3727,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0139",
+            "clause_id": "TB-0131",
             "block": "materials",
             "label": "要交的材料",
             "summary": "6、参加政府采购活动前3 年内在经营活动中没有重大违法记录的书面声明或信用承诺函参加政府采购活动前三年内,在经营活动中没有重大违法记录的书面声明 (采购人名称)",
@@ -3979,7 +3755,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0140",
+            "clause_id": "TB-0132",
             "block": "materials",
             "label": "要交的材料",
             "summary": "7、供应商不存在关联关系声明单位负责人不为同一人或者不存在直接控股、管理关系的书面声明供应商应当如实披露与本单位存在下列关联关系的单位名称,如无,请填写“无”:",
@@ -4007,7 +3783,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0141",
+            "clause_id": "TB-0133",
             "block": "materials",
             "label": "要交的材料",
             "summary": "(1)与供应商单位负责人为同一人的其他单位;",
@@ -4035,7 +3811,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0142",
+            "clause_id": "TB-0134",
             "block": "materials",
             "label": "要交的材料",
             "summary": "(2)与供应商存在直接控股、管理关系的其他单位:",
@@ -4063,7 +3839,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0143",
+            "clause_id": "TB-0135",
             "block": "materials",
             "label": "要交的材料",
             "summary": "9、符合本项目特殊资格要求的证明材料",
@@ -4091,7 +3867,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0144",
+            "clause_id": "TB-0136",
             "block": "materials",
             "label": "要交的材料",
             "summary": "4)施工机械设备及劳动力安排计划(包括保障进度计划需要的主要施工机械设备、劳动力需求计划及保证措施、材料设备进场计划及其他保证措施等);",
@@ -4124,7 +3900,7 @@
         "label": "废标项",
         "items": [
           {
-            "clause_id": "TB-0145",
+            "clause_id": "TB-0137",
             "block": "rejection",
             "label": "废标项",
             "summary": "重要提示: 本采购文件中,标注有“★”或“☆”的条款,为本采购文件中的实质性条款,且属于在磋商过程中不会变动的内容。供应商未实质性响应的,将按无效报价处理。",
@@ -4152,7 +3928,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0146",
+            "clause_id": "TB-0138",
             "block": "rejection",
             "label": "废标项",
             "summary": "磋商报价超过预算金额或最高限价的,按无效报价处理。",
@@ -4180,7 +3956,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0147",
+            "clause_id": "TB-0139",
             "block": "rejection",
             "label": "废标项",
             "summary": "★合格的供应商: 合格供应商指符合本项目竞争性磋商公告中规定的资格条件,并通过了磋商小组对其响应文件的资格审查。",
@@ -4208,7 +3984,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0148",
+            "clause_id": "TB-0140",
             "block": "rejection",
             "label": "废标项",
             "summary": "其中,通过“信用中国”网站、中国政府采购网查询失信被执行人名单、重大税收违法失信主体名单、政府采购严重违法失信行为记录名单的时间:递交首次响应文件截止时间当日。",
@@ -4239,7 +4015,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0149",
+            "clause_id": "TB-0141",
             "block": "rejection",
             "label": "废标项",
             "summary": "★1)本项目合同形式:□总价合同 ☑单价合同 □成本加酬金合同;",
@@ -4267,7 +4043,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0150",
+            "clause_id": "TB-0142",
             "block": "rejection",
             "label": "废标项",
             "summary": "序号：14 内 容：★报价有效期:自首次响应文件递交截止之日起90 日历天",
@@ -4295,7 +4071,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0151",
+            "clause_id": "TB-0143",
             "block": "rejection",
             "label": "废标项",
             "summary": "1)磋商保证金以网银或电汇方式提交的,磋商保证金到账截止时间为递交首次响应文件截止时间,逾期到账的,将被视为“未按本竞争性磋商文件提交磋商保证金”,其响应文件无",
@@ -4323,7 +4099,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0152",
+            "clause_id": "TB-0144",
             "block": "rejection",
             "label": "废标项",
             "summary": "2)磋商保证金须从供应商单位账户转出;未按规定提交磋商保证金的供应商,其响应文件无效;",
@@ -4351,7 +4127,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0153",
+            "clause_id": "TB-0145",
             "block": "rejection",
             "label": "废标项",
             "summary": "★报价有效期:自首次响应文件递交截止之日起90 日历天首次响应文件的递交 15 首次响应文件递交截止时间:详见竞争性磋商公告。",
@@ -4379,7 +4155,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0154",
+            "clause_id": "TB-0146",
             "block": "rejection",
             "label": "废标项",
             "summary": "首次响应文件递交地点:详见竞争性磋商公告截止时间后送达的响应文件为无效文件,采购人、采购代理机构应当拒收。",
@@ -4407,7 +4183,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0155",
+            "clause_id": "TB-0147",
             "block": "rejection",
             "label": "废标项",
             "summary": "序号：27 内 容：★所报产品属于《节能产品政府采购品目清单》内政府强制采购产品的,须<br>在响应文件中提供该产品有效的《国家节能产品认证证书》复印件并加盖供",
@@ -4435,7 +4211,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0156",
+            "clause_id": "TB-0148",
             "block": "rejection",
             "label": "废标项",
             "summary": "★10.3 供应商各轮报价(首轮报价、再次报价、最后报价)均不得超过采购预算或最高限价,否则响应无效。",
@@ -4463,7 +4239,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0157",
+            "clause_id": "TB-0149",
             "block": "rejection",
             "label": "废标项",
             "summary": "★10.4 措施项目清单中的安全生产、环境保护、文明施工、临时设施措施费的报价应满足国家及省相关部门规定,各轮报价中总报价对应费率均不得低于工程适用 《山东省建",
@@ -4491,7 +4267,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0158",
+            "clause_id": "TB-0150",
             "block": "rejection",
             "label": "废标项",
             "summary": "★10.5 供应商应按工程量清单中提供的暂列金额、专业工程暂估价金额准确填报在总报价内,各轮报价均不得修改或竞争,否则响应无效。",
@@ -4519,7 +4295,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0159",
+            "clause_id": "TB-0151",
             "block": "rejection",
             "label": "废标项",
             "summary": "本工程增值税率执行9%,各轮报价均不得修改或竞争,否则响应无效。",
@@ -4547,7 +4323,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0160",
+            "clause_id": "TB-0152",
             "block": "rejection",
             "label": "废标项",
             "summary": "★10.6 报价文件不得改变工程量清单(含修正内容)的项目编码、项目名称、特征描述(分部分项工程项目清单)、计量单位、工程量、工作内容(措施项目清单) 等已标明",
@@ -4578,7 +4354,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0161",
+            "clause_id": "TB-0153",
             "block": "rejection",
             "label": "废标项",
             "summary": "★10.7 供应商应在响应文件提交时完整提交与已标价工程量清单中综合单价及合价一致的费用构成明细表,相关表格应符合本招标文件提供的“分部分项工程项目清单综合单价",
@@ -4606,7 +4382,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0162",
+            "clause_id": "TB-0154",
             "block": "rejection",
             "label": "废标项",
             "summary": "★12.1 首次响应文件应加盖供应商公章(不得使用其他形式如带有“专用章”等字样的印章)并经法定代表人或其委托代理人签署(签字或加盖人名章),由委托代理人签字的",
@@ -4634,7 +4410,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0163",
+            "clause_id": "TB-0155",
             "block": "rejection",
             "label": "废标项",
             "summary": "15.1★供应商应按前附表的规定提交磋商保证金,作为其响应文件的一部分。",
@@ -4662,7 +4438,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0164",
+            "clause_id": "TB-0156",
             "block": "rejection",
             "label": "废标项",
             "summary": "15.2 供应商有下列情形之一的,磋商保证金不予退还,采购人和代理机构有权依法向其提出索赔,供应商应当赔偿因此给采购人造成的全部损失:",
@@ -4690,7 +4466,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0165",
+            "clause_id": "TB-0157",
             "block": "rejection",
             "label": "废标项",
             "summary": "1)供应商在提交响应文件截止时间后撤销响应文件的;",
@@ -4718,7 +4494,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0166",
+            "clause_id": "TB-0158",
             "block": "rejection",
             "label": "废标项",
             "summary": "2)供应商在响应文件中提供虚假材料的;",
@@ -4746,7 +4522,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0167",
+            "clause_id": "TB-0159",
             "block": "rejection",
             "label": "废标项",
             "summary": "3)除因不可抗力或磋商文件认可的情形以外,成交供应商不与采购人签订合同的;",
@@ -4774,7 +4550,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0168",
+            "clause_id": "TB-0160",
             "block": "rejection",
             "label": "废标项",
             "summary": "4)供应商与采购人、其他供应商或者采购代理机构恶意串通的;",
@@ -4802,7 +4578,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0169",
+            "clause_id": "TB-0161",
             "block": "rejection",
             "label": "废标项",
             "summary": "5)法律法规和采购文件规定的其他情形。",
@@ -4830,7 +4606,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0170",
+            "clause_id": "TB-0162",
             "block": "rejection",
             "label": "废标项",
             "summary": "15.5 磋商保证金的退还:",
@@ -4858,7 +4634,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0171",
+            "clause_id": "TB-0163",
             "block": "rejection",
             "label": "废标项",
             "summary": "1)未成交供应商的磋商保证金,在成交通知书发出后5 个工作日内退还;",
@@ -4886,7 +4662,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0172",
+            "clause_id": "TB-0164",
             "block": "rejection",
             "label": "废标项",
             "summary": "2)成交供应商的磋商保证金在签订合同后5 个工作日内予以退还。",
@@ -4914,7 +4690,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0173",
+            "clause_id": "TB-0165",
             "block": "rejection",
             "label": "废标项",
             "summary": "16.1 本项目报价有效期见供应商须知前附表。★报价函的有效期比本须知规定的有效期短的,将被视为非实质性响应,采购人有权拒绝。",
@@ -4942,7 +4718,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0174",
+            "clause_id": "TB-0166",
             "block": "rejection",
             "label": "废标项",
             "summary": "18.1 本项目只接受现场递交书面形式的响应文件,其他形式的不予接收。",
@@ -4970,7 +4746,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0175",
+            "clause_id": "TB-0167",
             "block": "rejection",
             "label": "废标项",
             "summary": "★24.5 如出现下列情形之一的,视为对竞争性磋商文件没有做出实质性响应,按照无效响应文件处理:",
@@ -5001,7 +4777,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0176",
+            "clause_id": "TB-0168",
             "block": "rejection",
             "label": "废标项",
             "summary": "1)未按采购文件规定要求签署、盖章的;",
@@ -5029,7 +4805,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0177",
+            "clause_id": "TB-0169",
             "block": "rejection",
             "label": "废标项",
             "summary": "2)未按规定交纳磋商保证金的;",
@@ -5057,7 +4833,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0178",
+            "clause_id": "TB-0170",
             "block": "rejection",
             "label": "废标项",
             "summary": "3)本项目要求中伴随有产品供货时,所投报产品未明确注明允许投报进口产品而投报进口产品的;",
@@ -5085,7 +4861,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0179",
+            "clause_id": "TB-0171",
             "block": "rejection",
             "label": "废标项",
             "summary": "4)首轮报价超过采购预算或最高限价的;",
@@ -5113,7 +4889,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0180",
+            "clause_id": "TB-0172",
             "block": "rejection",
             "label": "废标项",
             "summary": "5)在首次响应文件中,未响应标注有“★”或“☆”的,在磋商过程中不会实质性变动的条款;",
@@ -5141,7 +4917,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0181",
+            "clause_id": "TB-0173",
             "block": "rejection",
             "label": "废标项",
             "summary": "6)应提供而未提供政府强制采购节能产品的;",
@@ -5169,7 +4945,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0182",
+            "clause_id": "TB-0174",
             "block": "rejection",
             "label": "废标项",
             "summary": "7)存在串通报价等违反政府采购公平竞争行为的;",
@@ -5197,7 +4973,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0183",
+            "clause_id": "TB-0175",
             "block": "rejection",
             "label": "废标项",
             "summary": "8)以他人名义报价或者在响应文件中提供虚假材料的;",
@@ -5225,7 +5001,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0184",
+            "clause_id": "TB-0176",
             "block": "rejection",
             "label": "废标项",
             "summary": "9)法律法规和采购文件规定的其他情形。",
@@ -5253,7 +5029,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0185",
+            "clause_id": "TB-0177",
             "block": "rejection",
             "label": "废标项",
             "summary": "★24.6 磋商小组确定为非实质性响应的响应文件为无效响应文件,供应商不能通过修正或撤销响应文件中的不符之处而使其成为实质性响应的响应文件。",
@@ -5281,7 +5057,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0186",
+            "clause_id": "TB-0178",
             "block": "rejection",
             "label": "废标项",
             "summary": "★投标(响应)供应商不能提供书面说明、证明材料,或者提供的书面说明、证明材料不能证明其报价合理性的,评审委员会应当将其作为无效投标(响应)处理。",
@@ -5309,7 +5085,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0187",
+            "clause_id": "TB-0179",
             "block": "rejection",
             "label": "废标项",
             "summary": "★供应商所投同一个包中,两个或以上单独密封的首轮报价一览表不一致的,视为投报多个方案,除非竞争性磋商文件明确规定接受备选方案外,均按未实质性响应磋商文件处理。",
@@ -5337,7 +5113,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0188",
+            "clause_id": "TB-0180",
             "block": "rejection",
             "label": "废标项",
             "summary": "★磋商小组应要求供应商法定代表人或其委托代理人对修正后的报价签字确认, 供应商不确认的,其响应无效。",
@@ -5365,7 +5141,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0189",
+            "clause_id": "TB-0181",
             "block": "rejection",
             "label": "废标项",
             "summary": "供应商有义务以书面形式对其响应文件中含义不明确、同类问题表述不一致或有明显文字和计算错误的内容进行澄清和说明,但澄清和说明的内容不得超出响应文件的范围或改变响应",
@@ -5393,7 +5169,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0190",
+            "clause_id": "TB-0182",
             "block": "rejection",
             "label": "废标项",
             "summary": "29.4 节能环保产品优惠办法工程内容中如伴随有工程材料或工程设备供货时,所报工程材料或工程设备属于节能环保产品的,执行政府采购优惠政策;供应商所报设备(产品)",
@@ -5421,7 +5197,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0191",
+            "clause_id": "TB-0183",
             "block": "rejection",
             "label": "废标项",
             "summary": "★30.违法违规情形供应商出现《中华人民共和国政府采购法实施条例》《政府采购货物和服务招标投标管理办法》等规定的串通投标或影响采购的违法行为,其报价无效。采购人",
@@ -5452,7 +5228,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0192",
+            "clause_id": "TB-0184",
             "block": "rejection",
             "label": "废标项",
             "summary": "30.1 参照《政府采购货物和服务招标投标管理办法》,有下列情形之一的,视为投标人串通报价,其报价无效:",
@@ -5480,7 +5256,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0193",
+            "clause_id": "TB-0185",
             "block": "rejection",
             "label": "废标项",
             "summary": "(一)不同供应商的响应文件由同一单位或者个人编制;",
@@ -5508,7 +5284,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0194",
+            "clause_id": "TB-0186",
             "block": "rejection",
             "label": "废标项",
             "summary": "(二)不同供应商委托同一单位或者个人办理响应事宜;",
@@ -5536,7 +5312,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0195",
+            "clause_id": "TB-0187",
             "block": "rejection",
             "label": "废标项",
             "summary": "(三)不同供应商的响应文件载明的项目管理成员或者联系人员为同一人;",
@@ -5564,7 +5340,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0196",
+            "clause_id": "TB-0188",
             "block": "rejection",
             "label": "废标项",
             "summary": "(四)不同供应商的响应文件异常一致或者各轮报价呈规律性差异;",
@@ -5592,7 +5368,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0197",
+            "clause_id": "TB-0189",
             "block": "rejection",
             "label": "废标项",
             "summary": "(五)不同供应商的响应文件相互混装;",
@@ -5620,7 +5396,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0198",
+            "clause_id": "TB-0190",
             "block": "rejection",
             "label": "废标项",
             "summary": "(六)不同供应商的磋商保证金从同一单位或者个人的账户转出。",
@@ -5648,7 +5424,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0199",
+            "clause_id": "TB-0191",
             "block": "rejection",
             "label": "废标项",
             "summary": "30.2 除法律法规规定的情形外,评审过程中发现存在以下情形之一的,相关供应商的报价无效:",
@@ -5676,7 +5452,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0200",
+            "clause_id": "TB-0192",
             "block": "rejection",
             "label": "废标项",
             "summary": "(一)不同供应商的电子投标(响应)文件上传计算机的网卡MAC 地址、CPU 序列号和硬盘序列号等硬件信息相同的(如采用电子标);",
@@ -5704,7 +5480,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0201",
+            "clause_id": "TB-0193",
             "block": "rejection",
             "label": "废标项",
             "summary": "(二)不同供应商的电子投标(响应)文件由同一电子设备编制、打印加密或者上传;",
@@ -5732,7 +5508,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0202",
+            "clause_id": "TB-0194",
             "block": "rejection",
             "label": "废标项",
             "summary": "(三)不同供应商的投标(响应)文件联系人为同一人或不同联系人的联系电话一致的;",
@@ -5760,7 +5536,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0203",
+            "clause_id": "TB-0195",
             "block": "rejection",
             "label": "废标项",
             "summary": "(四)不同供应商的投标(响应)文件的内容存在两处以上细节错误一致,且无法合理解释的;",
@@ -5788,7 +5564,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0204",
+            "clause_id": "TB-0196",
             "block": "rejection",
             "label": "废标项",
             "summary": "(五)不同供应商的法定代表人、委托代理人、项目经理、项目负责人等由同一个单位缴纳社会保险或者领取报酬的;",
@@ -5816,7 +5592,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0205",
+            "clause_id": "TB-0197",
             "block": "rejection",
             "label": "废标项",
             "summary": "(六)不同供应商投标(响应)文件中法定代表人或者负责人由同一人签字的;",
@@ -5844,7 +5620,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0206",
+            "clause_id": "TB-0198",
             "block": "rejection",
             "label": "废标项",
             "summary": "(七)其它经认定可能涉嫌串通的情形。",
@@ -5872,7 +5648,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0207",
+            "clause_id": "TB-0199",
             "block": "rejection",
             "label": "废标项",
             "summary": "注:时间以合同具体签订日期为准,供应商须将类似项目业绩的合同关键页复印件加盖单位公章后制作在响应文件中,否则视为无效业绩不得分。分包合同、补充合同不计分。",
@@ -5900,7 +5676,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0208",
+            "clause_id": "TB-0200",
             "block": "rejection",
             "label": "废标项",
             "summary": "(1)供应商须将类似项目业绩的合同关键页复印件加盖单位公章后制作在响应文件中,否则视为无效业绩不得",
@@ -5928,7 +5704,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0209",
+            "clause_id": "TB-0201",
             "block": "rejection",
             "label": "废标项",
             "summary": "如供应商提供的产品属于《环境标志产品政府采购品目清单》(《财政部生态环境部关于印发环境标志产品政府采购品目清单的通知》(财库〔2019〕18 号))、 《节能产",
@@ -5956,7 +5732,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0210",
+            "clause_id": "TB-0202",
             "block": "rejection",
             "label": "废标项",
             "summary": "2.供应商的响应报价应涵盖本工程的全部范围、工作内容,以及完整、合格地履行合同所需的全部金额。报价不得高于项目预算(或最高限价),否则其响应无效。",
@@ -5984,7 +5760,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0211",
+            "clause_id": "TB-0203",
             "block": "rejection",
             "label": "废标项",
             "summary": "3.供应商应当在接收竞争性磋商文件后,在供应商须知前附表中规定时间内根据竞争性磋商文件说明的工程特点及合同要求复查竞争性磋商文件中计划工期的可行性及其风险与影响",
@@ -6012,7 +5788,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0212",
+            "clause_id": "TB-0204",
             "block": "rejection",
             "label": "废标项",
             "summary": "6. 报价文件不得改变工程量清单(含修正内容)的项目编码、项目名称、特征描述(分部分项工程项目清单)、计量单位、工程量、工作内容(措施项目清单)等已标明条件,也",
@@ -6040,7 +5816,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0213",
+            "clause_id": "TB-0205",
             "block": "rejection",
             "label": "废标项",
             "summary": "(6)措施项目清单中的安全生产、环境保护、文明施工、临时设施措施费的报价应满足国家及省相关部门规定,总报价对应费率不得低于工程适用《山东省建设工程费用项目组成及",
@@ -6071,7 +5847,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0214",
+            "clause_id": "TB-0206",
             "block": "rejection",
             "label": "废标项",
             "summary": "17.供应商应按工程量清单中提供的暂列金额、专业工程暂估价金额,准确填报在相应总报价内,不得修改或竞争,否则响应无效。",
@@ -6099,7 +5875,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0215",
+            "clause_id": "TB-0207",
             "block": "rejection",
             "label": "废标项",
             "summary": "本工程实行一般计税法/简易计税法,增值税税率执行9%,不得竞争报价,否则,响应无效。",
@@ -6127,7 +5903,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0216",
+            "clause_id": "TB-0208",
             "block": "rejection",
             "label": "废标项",
             "summary": "22..供应商应在响应文件提交时完整提交与已标价工程量清单中综合单价及合价一致的费用构成明细表,相关表格应符合本竞争性磋商文件提供的“分部分项工程项目清单综合单",
@@ -6155,7 +5931,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0217",
+            "clause_id": "TB-0209",
             "block": "rejection",
             "label": "废标项",
             "summary": "★2、如所报产品为政府强制采购节能产品,按规定格式逐项填写,提供《国家节能产品认证证书》,否则按无效报价处理。",
@@ -6183,7 +5959,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0218",
+            "clause_id": "TB-0210",
             "block": "rejection",
             "label": "废标项",
             "summary": "Col1：1 ——摘自《节能产品政府采购品目清单》(财：A020101 计<br>算机设备 Col3：★A02010104<br>台式计算机 财库〔2019〕1",
@@ -6211,7 +5987,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0219",
+            "clause_id": "TB-0211",
             "block": "rejection",
             "label": "废标项",
             "summary": "Col1：1 ——摘自《节能产品政府采购品目清单》(财：A020101 计<br>算机设备 Col3：★A02010105<br>便携式计算机<br> 财库〔2",
@@ -6239,7 +6015,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0220",
+            "clause_id": "TB-0212",
             "block": "rejection",
             "label": "废标项",
             "summary": "Col1：1 ——摘自《节能产品政府采购品目清单》(财：A020101 计<br>算机设备 Col3：★A02010107<br>平板式微型计<br>算机 财库",
@@ -6267,7 +6043,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0221",
+            "clause_id": "TB-0213",
             "block": "rejection",
             "label": "废标项",
             "summary": "Col1：2 ——摘自《节能产品政府采购品目清单》(财：A020106 输<br>入输出设备 Col3：A02010601 打<br>印设备 Col4：★A02",
@@ -6295,7 +6071,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0222",
+            "clause_id": "TB-0214",
             "block": "rejection",
             "label": "废标项",
             "summary": "Col1：2 ——摘自《节能产品政府采购品目清单》(财：A020106 输<br>入输出设备 Col3：A02010601 打<br>印设备 Col4：★A02",
@@ -6323,7 +6099,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0223",
+            "clause_id": "TB-0215",
             "block": "rejection",
             "label": "废标项",
             "summary": "Col1：2 ——摘自《节能产品政府采购品目清单》(财：A020106 输<br>入输出设备 Col3：A02010604 显<br>示设备 Col4：★A02",
@@ -6351,7 +6127,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0224",
+            "clause_id": "TB-0216",
             "block": "rejection",
             "label": "废标项",
             "summary": "Col1：6 ——摘自《节能产品政府采购品目清单》(财：A020523 制<br>冷空调设备 Col3：★A02052301<br>制冷压缩机 Col4：冷水机",
@@ -6379,7 +6155,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0225",
+            "clause_id": "TB-0217",
             "block": "rejection",
             "label": "废标项",
             "summary": "Col1：6 ——摘自《节能产品政府采购品目清单》(财：A020523 制<br>冷空调设备 Col3：★A02052301<br>制冷压缩机 Col4：水源热",
@@ -6407,7 +6183,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0226",
+            "clause_id": "TB-0218",
             "block": "rejection",
             "label": "废标项",
             "summary": "Col1：6 ——摘自《节能产品政府采购品目清单》(财：A020523 制<br>冷空调设备 Col3：★A02052305<br>空调机组 Col4：溴化锂吸",
@@ -6435,7 +6211,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0227",
+            "clause_id": "TB-0219",
             "block": "rejection",
             "label": "废标项",
             "summary": "Col1：6 ——摘自《节能产品政府采购品目清单》(财：A020523 制<br>冷空调设备 Col3：★A02052305<br>空调机组 Col4：多联式空",
@@ -6463,7 +6239,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0228",
+            "clause_id": "TB-0220",
             "block": "rejection",
             "label": "废标项",
             "summary": "Col1：6 ——摘自《节能产品政府采购品目清单》(财：A020523 制<br>冷空调设备 Col3：★A02052305<br>空调机组 Col4：单元式空",
@@ -6491,7 +6267,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0229",
+            "clause_id": "TB-0221",
             "block": "rejection",
             "label": "废标项",
             "summary": "★A02010104 台式计算机 《微型计算机能效限定值及能效等级》 (GB28380)",
@@ -6519,7 +6295,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0230",
+            "clause_id": "TB-0222",
             "block": "rejection",
             "label": "废标项",
             "summary": "★A02010105 便携式计算机 《微型计算机能效限定值及能效等级》 (GB28380)",
@@ -6547,7 +6323,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0231",
+            "clause_id": "TB-0223",
             "block": "rejection",
             "label": "废标项",
             "summary": "★A02010107 平板式微型计算机 《微型计算机能效限定值及能效等级》 (GB28380) 2 A020106 输入输出设备 A02010601 打印设备",
@@ -6575,7 +6351,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0232",
+            "clause_id": "TB-0224",
             "block": "rejection",
             "label": "废标项",
             "summary": "★A0201060102 激光打印机 《复印机、打印机和传真机能效限定值及能效等级》(GB 21521)",
@@ -6603,7 +6379,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0233",
+            "clause_id": "TB-0225",
             "block": "rejection",
             "label": "废标项",
             "summary": "★A0201060104 针式打印机 《复印机、打印机和传真机能效限定值及能效等级》(GB 21521) A02010604 显示设备",
@@ -6631,7 +6407,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0234",
+            "clause_id": "TB-0226",
             "block": "rejection",
             "label": "废标项",
             "summary": "★A0201060401 液晶显示器 《计算机显示器能效限定值及能效等级》(GB 21520) 6 A020523 制冷空调设备",
@@ -6659,7 +6435,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0235",
+            "clause_id": "TB-0227",
             "block": "rejection",
             "label": "废标项",
             "summary": "★A02052301 制冷压缩机冷水机组 《冷水机组能效限定值及能效等级》 (GB 19577),《低环境温度空气源热泵(冷水)机组能效限定值及能效等级》(GB",
@@ -6687,7 +6463,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0236",
+            "clause_id": "TB-0228",
             "block": "rejection",
             "label": "废标项",
             "summary": "★A02052305 空调机组溴化锂吸收式冷水机 《溴化锂吸收式冷水机组能效限定值及能效等级》(GB 29540) 多联式空调(热泵)机组( 制冷量>14000",
@@ -6715,7 +6491,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0237",
+            "clause_id": "TB-0229",
             "block": "rejection",
             "label": "废标项",
             "summary": "品目<br>序号：★A02052309<br>专用制冷、空<br>调设备 名称：机房空调 Col3：《单元式空气调节机能效限定值及能效<br>等级》(GB 19",
@@ -6743,7 +6519,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0238",
+            "clause_id": "TB-0230",
             "block": "rejection",
             "label": "废标项",
             "summary": "品目<br>序号：9 名称：★A020609<br>镇流器 Col3：管型荧光灯镇<br>流器 依据的标准：《管形荧光灯镇流器能效限定值及能效<br>等级》(G",
@@ -6771,7 +6547,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0239",
+            "clause_id": "TB-0231",
             "block": "rejection",
             "label": "废标项",
             "summary": "品目<br>序号：10 名称：A020618 生<br>活<br>用电器 Col3：★A0206180203<br>空调机 Col4：房间空气调节器 依据的标准",
@@ -6799,7 +6575,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0240",
+            "clause_id": "TB-0232",
             "block": "rejection",
             "label": "废标项",
             "summary": "品目<br>序号：10 名称：A020618 生<br>活<br>用电器 Col3：★A0206180203<br>空调机 Col4：多联式空调(热<br>泵)",
@@ -6827,7 +6603,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0241",
+            "clause_id": "TB-0233",
             "block": "rejection",
             "label": "废标项",
             "summary": "品目<br>序号：10 名称：A020618 生<br>活<br>用电器 Col3：★A0206180203<br>空调机 Col4：单元式空气调节<br>机(",
@@ -6855,7 +6631,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0242",
+            "clause_id": "TB-0234",
             "block": "rejection",
             "label": "废标项",
             "summary": "品目<br>序号：10 名称：A020618 生<br>活<br>用电器 Col3：A02061808 热<br>水器 Col4：★电热水器 依据的标准：《储水",
@@ -6883,7 +6659,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0243",
+            "clause_id": "TB-0235",
             "block": "rejection",
             "label": "废标项",
             "summary": "品目<br>序号：11 名称：A020619 照<br>明设备 Col3：★普通照明用<br>双端荧光灯<br> 依据的标准：《普通照明用双端荧光灯能效限定值及",
@@ -6911,7 +6687,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0244",
+            "clause_id": "TB-0236",
             "block": "rejection",
             "label": "废标项",
             "summary": "品目<br>序号：12 名称：★A020910<br>电视设备 Col3：A02091001 普<br>通电视设备<br>(电视机) 依据的标准：《平板电视能效",
@@ -6939,7 +6715,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0245",
+            "clause_id": "TB-0237",
             "block": "rejection",
             "label": "废标项",
             "summary": "品目<br>序号：13 名称：★A020911<br>视频设备 Col3：A02091107 视<br>频监控设备 Col4：监视器 依据的标准：以射频信号为主",
@@ -6967,7 +6743,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0246",
+            "clause_id": "TB-0238",
             "block": "rejection",
             "label": "废标项",
             "summary": "品目<br>序号：15 名称：★A060805<br>便器 Col3：坐便器 依据的标准：《坐便器水效限定值及水效等级》(GB<br>25502)",
@@ -6995,7 +6771,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0247",
+            "clause_id": "TB-0239",
             "block": "rejection",
             "label": "废标项",
             "summary": "品目<br>序号：15 名称：★A060805<br>便器 Col3：蹲便器 依据的标准：《蹲便器用水效率限定值及用水效率等<br>级》(GB 30717)",
@@ -7023,7 +6799,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0248",
+            "clause_id": "TB-0240",
             "block": "rejection",
             "label": "废标项",
             "summary": "品目<br>序号：15 名称：★A060805<br>便器 Col3：小便器 依据的标准：《小便器用水效率限定值及用水效率等<br>级》(GB 28377)",
@@ -7051,7 +6827,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0249",
+            "clause_id": "TB-0241",
             "block": "rejection",
             "label": "废标项",
             "summary": "★A02052309 专用制冷、空调设备机房空调 《单元式空气调节机能效限定值及能效等级》(GB 19576) 9",
@@ -7079,7 +6855,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0250",
+            "clause_id": "TB-0242",
             "block": "rejection",
             "label": "废标项",
             "summary": "★A020609 镇流器管型荧光灯镇流器 《管形荧光灯镇流器能效限定值及能效等级》(GB 17896) 10 A020618 生活用电器",
@@ -7107,7 +6883,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0251",
+            "clause_id": "TB-0243",
             "block": "rejection",
             "label": "废标项",
             "summary": "★A0206180203 空调机房间空气调节器 《转速可控型房间空气调节器能效限定值及能效等级》(GB 21455-2013),待2019 年修订发布后,按《房",
@@ -7135,7 +6911,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0252",
+            "clause_id": "TB-0244",
             "block": "rejection",
             "label": "废标项",
             "summary": "★电热水器 《储水式电热水器能效限定值及能效等级》(GB 21519) 11 A020619 照明设备",
@@ -7163,7 +6939,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0253",
+            "clause_id": "TB-0245",
             "block": "rejection",
             "label": "废标项",
             "summary": "★普通照明用双端荧光灯 《普通照明用双端荧光灯能效限定值及能效等级》(GB 19043) 12",
@@ -7191,7 +6967,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0254",
+            "clause_id": "TB-0246",
             "block": "rejection",
             "label": "废标项",
             "summary": "★A020910 电视设备 A02091001 普通电视设备 (电视机) 《平板电视能效限定值及能效等级》 (GB 24850) 13",
@@ -7219,7 +6995,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0255",
+            "clause_id": "TB-0247",
             "block": "rejection",
             "label": "废标项",
             "summary": "★A020911 视频设备 A02091107 视频监控设备监视器以射频信号为主要信号输入的监视器应符合《平板电视能效限定值及能效等级》(GB 24850),以",
@@ -7247,7 +7023,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0256",
+            "clause_id": "TB-0248",
             "block": "rejection",
             "label": "废标项",
             "summary": "★A060805 便器坐便器 《坐便器水效限定值及水效等级》(GB",
@@ -7275,7 +7051,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0257",
+            "clause_id": "TB-0249",
             "block": "rejection",
             "label": "废标项",
             "summary": "25502) 蹲便器 《蹲便器用水效率限定值及用水效率等级》(GB 30717) 小便器 《小便器用水效率限定值及用水效率等级》(GB 28377)",
@@ -7303,7 +7079,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0258",
+            "clause_id": "TB-0250",
             "block": "rejection",
             "label": "废标项",
             "summary": "品目<br>序号：16<br> 名称：★A060806<br>水嘴<br> 依据的标准：《水嘴用水效率限定值及用水效<br>率等级》(GB 25501)<br>",
@@ -7331,7 +7107,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0259",
+            "clause_id": "TB-0251",
             "block": "rejection",
             "label": "废标项",
             "summary": "★A060806 水嘴 《水嘴用水效率限定值及用水效率等级》(GB 25501)注:",
@@ -7359,7 +7135,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0260",
+            "clause_id": "TB-0252",
             "block": "rejection",
             "label": "废标项",
             "summary": "1.节能产品认证应依据相关国家标准的最新版本,依据国家标准中二级能效(水效)指标。",
@@ -7387,7 +7163,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0261",
+            "clause_id": "TB-0253",
             "block": "rejection",
             "label": "废标项",
             "summary": "2.上述产品中认证标准发生变更的,依据原认证标准获得的、仍在有效期内的认证证书可使用至2019 年6 月1 日。",
@@ -7415,7 +7191,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0262",
+            "clause_id": "TB-0254",
             "block": "rejection",
             "label": "废标项",
             "summary": "3.以“★”标注的为政府强制采购产品。",
@@ -7443,7 +7219,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0263",
+            "clause_id": "TB-0255",
             "block": "rejection",
             "label": "废标项",
             "summary": "1.如不提供本声明函,将作无效报价处理。",
@@ -7471,7 +7247,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0264",
+            "clause_id": "TB-0256",
             "block": "rejection",
             "label": "废标项",
             "summary": "1.如不提供本声明函,将作无效报价处理。",
