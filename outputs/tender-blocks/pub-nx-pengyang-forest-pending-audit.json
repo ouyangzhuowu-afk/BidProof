@@ -27,8 +27,8 @@
   "footer_in_quotes": 0,
   "bare_page_in_quotes": 0,
   "counts": {
-    "total": 147,
-    "with_real_page": 147,
+    "total": 146,
+    "with_real_page": 146,
     "without_page": 0,
     "by_block": {
       "qualification": {
@@ -48,8 +48,8 @@
       },
       "rejection": {
         "label": "废标项",
-        "cited": 33,
-        "items": 33
+        "cited": 32,
+        "items": 32
       }
     }
   },
@@ -3393,34 +3393,6 @@
             "clause_id": "TB-0119",
             "block": "rejection",
             "label": "废标项",
-            "summary": "1.8 其他投标无效情形:/。",
-            "quote": "1.8 其他投标无效情形:/。",
-            "pages": [
-              13
-            ],
-            "page": 13,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第13页",
-              "index": 13,
-              "pages": [
-                13
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-nx-pengyang-forest-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0120",
-            "block": "rejection",
-            "label": "废标项",
             "summary": "2.2 投标供应商报价超过招标文件规定的预算金额或者最高限价的, 其投标将被认定为投标无效。",
             "quote": "2.2 投标供应商报价超过招标文件规定的预算金额或者最高限价的, 其投标将被认定为投标无效。",
             "pages": [
@@ -3446,7 +3418,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0121",
+            "clause_id": "TB-0120",
             "block": "rejection",
             "label": "废标项",
             "summary": "7.1 投标供应商应认真阅读招标文件所有的事项、格式、条款和技术规范等。如投标供应商没有按照招标文件要求提交全部资料,或者投标文件没有对招标文件的实质性要求做出",
@@ -3474,7 +3446,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0122",
+            "clause_id": "TB-0121",
             "block": "rejection",
             "label": "废标项",
             "summary": "8.1 投标供应商应当对招标文件中所列的所有内容进行投标,如仅响应部分内容,其投标将被认定为投标无效。",
@@ -3502,7 +3474,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0123",
+            "clause_id": "TB-0122",
             "block": "rejection",
             "label": "废标项",
             "summary": "11.3 投标供应商所报的价格明细在合同履行过程中是固定不变的, 不得以任何理由予以变更。任何包含价格调整要求的投标,其投标将被认定为投标无效。",
@@ -3530,7 +3502,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0124",
+            "clause_id": "TB-0123",
             "block": "rejection",
             "label": "废标项",
             "summary": "12.2 投标供应商未在规定时间内缴纳保证金或保证金数额不足以及未按招标文件规定交纳保证金的,其投标将被认定为投标无效。",
@@ -3558,7 +3530,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0125",
+            "clause_id": "TB-0124",
             "block": "rejection",
             "label": "废标项",
             "summary": "13.1 投标应在供应商须知前附表中规定时间内保持有效。投标有效期不满足要求的投标,其投标将被认定为投标无效。",
@@ -3586,7 +3558,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0126",
+            "clause_id": "TB-0125",
             "block": "rejection",
             "label": "废标项",
             "summary": "未按招标文件要求签署和盖章的投标文件,其投标将被认定为投标无效。",
@@ -3614,7 +3586,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0127",
+            "clause_id": "TB-0126",
             "block": "rejection",
             "label": "废标项",
             "summary": "19.2.1 投标供应商在中国政府采购网(www.ccgp.gov.cn)被列入政府采购严重违法失信行为记录名单,或在“信用中国”网站 (www.creditc",
@@ -3642,7 +3614,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0128",
+            "clause_id": "TB-0127",
             "block": "rejection",
             "label": "废标项",
             "summary": "以联合体形式参加投标的,联合体任何成员存在以上不良信用记录的,联合体投标将被认定为投标无效。",
@@ -3670,7 +3642,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0129",
+            "clause_id": "TB-0128",
             "block": "rejection",
             "label": "废标项",
             "summary": "21.1 如发现下列情况之一的,其投标将被认定为投标无效:",
@@ -3698,7 +3670,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0130",
+            "clause_id": "TB-0129",
             "block": "rejection",
             "label": "废标项",
             "summary": "21.1.1 未按照招标文件规定要求签署、盖章的;",
@@ -3726,7 +3698,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0131",
+            "clause_id": "TB-0130",
             "block": "rejection",
             "label": "废标项",
             "summary": "21.1.2 未满足招标文件中的实质性要求;",
@@ -3754,7 +3726,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0132",
+            "clause_id": "TB-0131",
             "block": "rejection",
             "label": "废标项",
             "summary": "21.1.3 属于串通投标,或者依法被视为串通投标;",
@@ -3782,7 +3754,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0133",
+            "clause_id": "TB-0132",
             "block": "rejection",
             "label": "废标项",
             "summary": "21.1.4 评标委员会认为投标供应商的报价明显低于其他通过符合性审查投标供应商的报价,有可能影响履约的,且投标供应商未按照规定证明其报价合理性的;",
@@ -3810,7 +3782,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0134",
+            "clause_id": "TB-0133",
             "block": "rejection",
             "label": "废标项",
             "summary": "21.1.5 投标文件含有采购人不能接受的附加条件的;",
@@ -3838,7 +3810,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0135",
+            "clause_id": "TB-0134",
             "block": "rejection",
             "label": "废标项",
             "summary": "21.1.6 属于招标文件规定的其他投标无效情形;",
@@ -3866,7 +3838,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0136",
+            "clause_id": "TB-0135",
             "block": "rejection",
             "label": "废标项",
             "summary": "21.1.7 不符合政府采购法律法规和招标文件中规定的其他实质性要求的。",
@@ -3894,35 +3866,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0137",
-            "block": "rejection",
-            "label": "废标项",
-            "summary": "22.其他投标无效情形:",
-            "quote": "22.其他投标无效情形:",
-            "pages": [
-              22
-            ],
-            "page": 22,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第22页",
-              "index": 22,
-              "pages": [
-                22
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-nx-pengyang-forest-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0138",
+            "clause_id": "TB-0136",
             "block": "rejection",
             "label": "废标项",
             "summary": "24.1 出现下列情形之一,将导致项目废标:",
@@ -3950,7 +3894,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0139",
+            "clause_id": "TB-0137",
             "block": "rejection",
             "label": "废标项",
             "summary": "24.1.1 符合专业条件的供应商或者对招标文件做实质性响应的供应商不足三家;",
@@ -3978,7 +3922,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0140",
+            "clause_id": "TB-0138",
             "block": "rejection",
             "label": "废标项",
             "summary": "24.1.2 出现影响采购公正的违法、违规行为的;",
@@ -4006,7 +3950,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0141",
+            "clause_id": "TB-0139",
             "block": "rejection",
             "label": "废标项",
             "summary": "24.1.3 投标供应商的报价均超过了采购预算,采购人不能支付的;",
@@ -4034,7 +3978,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0142",
+            "clause_id": "TB-0140",
             "block": "rejection",
             "label": "废标项",
             "summary": "24.1.4 因重大变故,采购任务取消的。",
@@ -4062,7 +4006,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0143",
+            "clause_id": "TB-0141",
             "block": "rejection",
             "label": "废标项",
             "summary": "4、报价说明:供应商投标报价中应包含完成本次项目的一切有关费用,包括项目服务过程中所涉及到的运输费、材料费、人工费、服务费、保险费等全部费用。供应商投标报价不得",
@@ -4090,11 +4034,67 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0144",
+            "clause_id": "TB-0142",
             "block": "rejection",
             "label": "废标项",
             "summary": "二、符合性审查工作评标委员会开展符合性审查:符合性审查是指依据招标文件的规定,从商务和技术角度对投标文件的有效性和完整性进行审查,以确定是否对招标文件的实质性要",
-            "quote": "二、符合性审查工作评标委员会开展符合性审查:符合性审查是指依据招标文件的规定,从商务和技术角度对投标文件的有效性和完整性进行审查,以确定是否对招标文件的实质性要求做出响应。对符合资格的投标供应商的投标文件进行符合性审查,以确定其是否满足招标文件的实质性要求。符合性审查出现下列情形之一的投标按照无效投标处理: (此部分内容需固化到交易系统专家评审环节,对某家投标供应商作无效投标处理时选择以下相应选项,对已标记为无效投标的供应商由交易系统同步至政府采购管理系统) 序号内容 1 投标总报价超过项目(分包)预算金额或最高限价的; 2 未按照招标文件规定要求签署、盖章;",
+            "quote": "二、符合性审查工作评标委员会开展符合性审查:符合性审查是指依据招标文件的规定,从商务和技术角度对投标文件的有效性和完整性进行审查,以确定是否对招标文件的实质性要求做出响应。对符合资格的投标供应商的投标文件进行符合性审查,以确定其是否满足招标文件的实质性要求。符合性审查出现下列情形之一的投标按照无效投标处理: (此部分内容需固化到交易系统专家评审环节,对某家投标供应商作无效投标处理时选择以下相应选项,对已标记为无效投标的供应商由交易系统同步至政府采购管理系统) 序号内容",
+            "pages": [
+              31
+            ],
+            "page": 31,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第31页",
+              "index": 31,
+              "pages": [
+                31
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nx-pengyang-forest-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0143",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "1 投标总报价超过项目(分包)预算金额或最高限价的;",
+            "quote": "1 投标总报价超过项目(分包)预算金额或最高限价的;",
+            "pages": [
+              31
+            ],
+            "page": 31,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第31页",
+              "index": 31,
+              "pages": [
+                31
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-nx-pengyang-forest-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0144",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "2 未按照招标文件规定要求签署、盖章;",
+            "quote": "2 未按照招标文件规定要求签署、盖章;",
             "pages": [
               31
             ],
@@ -4166,34 +4166,6 @@
               "index": 75,
               "pages": [
                 75
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-nx-pengyang-forest-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0147",
-            "block": "rejection",
-            "label": "废标项",
-            "summary": "注:本模块包括招标文件中其他(未提供即认定为无效投标)的条款。",
-            "quote": "注:本模块包括招标文件中其他(未提供即认定为无效投标)的条款。",
-            "pages": [
-              76
-            ],
-            "page": 76,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第76页",
-              "index": 76,
-              "pages": [
-                76
               ]
             },
             "detection": "clause",
