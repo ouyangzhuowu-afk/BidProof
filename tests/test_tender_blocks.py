@@ -1232,3 +1232,104 @@ def test_empty_titles_and_plain_ordinals_follow_the_rejection_lead():
     assert len(capped) == 1 and capped[0]["page"] == 6 and "文件未盖章" not in capped[0]["quote"]
     assert len(sealed) == 1 and sealed[0]["page"] == 6 and "控制价" not in sealed[0]["quote"]
     assert all(item["status"] == "NEEDS_REVIEW" for item in rejection)
+
+
+def test_format_asides_declarations_and_continued_ordinals_stay_in_rejection():
+    found = _blocks(
+        extract_tender_blocks(
+            [
+                _page(1, "（委托时必须提供，否则作无效投标处理）"),
+                _page(1, "未按清单封样的，应予废标。"),
+                _page(
+                    2,
+                    "一、我方承诺无下列禁止的情形：\n"
+                    "1.报价函缺少骑缝章的；\n"
+                    "2.样品没有随文件递交的。\n"
+                    "三、后续说明不在此列。",
+                ),
+                _page(
+                    3,
+                    "2.1 出现下列情形之一的，投标无效：\n"
+                    "（1）报价超过控制价的；\n"
+                    "（2）文件缺少公章的；\n"
+                    "（3）漏项未报价；投标人未作唯一报价；\n"
+                    "未作唯一总价的；存在选择性报价的（允许备选的除外）；\n"
+                    "（4）修正后报价未被确认的；\n"
+                    "（5）属于第3条第（2）项情形的。",
+                ),
+                _page(
+                    4,
+                    "出现下列情形之一的，投标无效：\n"
+                    "1 总价超过预算的；\n"
+                    "2 授权书未签署的；",
+                ),
+                _page(
+                    5,
+                    "3\n样品未按期送达的；\n"
+                    "4\n密封已经破损的；\n"
+                    "5\n保证金没有到账的；\n"
+                    "6\n联合体没有签字的；\n"
+                    "7\n属于文件规定的其他无效投标情形；\n"
+                    "8\n两家文件制作码相同的。\n"
+                    "三、后续程序另行规定。",
+                    tables=[
+                        {
+                            "header": ["3", "样品未按期送达的；"],
+                            "rows": [
+                                ["4", "密封已经破损的；"],
+                                ["5", "保证金没有到账的；"],
+                                ["6", "联合体没有签字的；"],
+                                ["7", "属于文件规定的其他无效投标情形；"],
+                                ["8", "两家文件制作码相同的。"],
+                            ],
+                        }
+                    ],
+                ),
+                _page(
+                    6,
+                    "出现下列情形之一的，投标无效："
+                    "3 履约期限不足的； 4 偏离表空白的； 5 报价大小写不一致的； "
+                    "6 资格证明过期的； 7 技术方案缺页的； 8 服务方案未签字的。",
+                ),
+            ],
+            filename="aside-and-ordinals.pdf",
+        )
+    )
+    rejection = found["rejection"]
+    quotes = _quotes(rejection)
+
+    assert "委托时必须提供" not in quotes
+    assert "未按清单封样的，应予废标。" in quotes
+    assert "我方承诺无下列禁止的情形" not in quotes
+    assert "后续说明不在此列" not in quotes
+    assert any(item["page"] == 2 and "报价函缺少骑缝章" in item["quote"] for item in rejection)
+    assert any(item["page"] == 2 and "样品没有随文件递交" in item["quote"] for item in rejection)
+    revised = [item for item in rejection if "修正后报价未被确认" in item["quote"]]
+    cited = [item for item in rejection if "条第" in item["quote"]]
+    assert len(revised) == 1 and revised[0]["page"] == 3 and "条第" not in revised[0]["quote"]
+    assert len(cited) == 1 and cited[0]["page"] == 3 and "（2）项" in cited[0]["quote"]
+    assert "未作唯一总价" in quotes
+    labels = {
+        "总价超过预算": 4,
+        "授权书未签署": 4,
+        "样品未按期送达": 5,
+        "密封已经破损": 5,
+        "保证金没有到账": 5,
+        "联合体没有签字": 5,
+        "其他无效投标情形": 5,
+        "制作码相同": 5,
+        "履约期限不足": 6,
+        "偏离表空白": 6,
+        "报价大小写不一致": 6,
+        "资格证明过期": 6,
+        "技术方案缺页": 6,
+        "服务方案未签字": 6,
+    }
+    for label, page in labels.items():
+        matched = [item for item in rejection if label in item["quote"]]
+        assert len(matched) == 1, label
+        assert matched[0]["page"] == page
+        assert matched[0]["status"] == "NEEDS_REVIEW"
+        others = [name for name in labels if name != label]
+        assert not any(name in matched[0]["quote"] for name in others)
+    assert "后续程序另行规定" not in quotes

@@ -288,6 +288,12 @@ def extract_tender_blocks(pages: list[dict[str, Any]], filename: str | None = No
             list_mode = "suppress"
         elif _materials_lead(text):
             list_mode = "materials"
+        elif _declaration_list_heading(text):
+            list_mode = "rejection"
+        elif list_mode == "rejection" and _closes_rejection_run(text):
+            list_mode = None
+            carried = set()
+            stem = None
         scoped_mode = list_mode if clause["kind"] == "item" else None
         blocks = _classify(clause, section, scoped_mode, markers)
         inherits = clause["kind"] == "item" and bool(carried) and not _ends_open_list(text, stem)
@@ -313,7 +319,12 @@ def extract_tender_blocks(pages: list[dict[str, Any]], filename: str | None = No
             found_stem = _lead_stem(text)
             if found_stem is not None:
                 stem = found_stem
-        elif _list_aside(text):
+        elif _list_aside(text) or (
+            clause["kind"] == "table_row"
+            and list_mode == "rejection"
+            and "scoring" not in blocks
+            and _ordinal_row(text)
+        ):
             pass
         elif clause["kind"] != "item" and not _bundle_label(text):
             carried = set()
@@ -389,6 +400,7 @@ def sanitize_tender_blocks(payload: dict[str, Any]) -> dict[str, Any]:
 
 def _events(pages: list[dict[str, Any]], banners: set[str] | None = None) -> list[dict[str, Any]]:
     events: list[dict[str, Any]] = []
+    rejection_open = False
     index = 0
     while index < len(pages):
         office, consumed = _office_table(pages, index)
@@ -407,8 +419,10 @@ def _events(pages: list[dict[str, Any]], banners: set[str] | None = None) -> lis
         if not structured:
             text = _consume_flat_tables(text, pages_on, locator, events)
         page_number = pages_on[0] if len(pages_on) == 1 else None
-        for kind, piece in _split_prose(text, banners or set(), page_number):
+        pieces = _split_prose(text, banners or set(), page_number, rejection_open)
+        for kind, piece in pieces:
             events.append(_event(kind, piece, pages_on, locator, None, None))
+            rejection_open = _remember_rejection_run(piece, rejection_open)
         index += 1
     return events
 
@@ -849,6 +863,36 @@ def _format_invalidity_note(text: str) -> bool:
     return _REJECTION_OUTCOME.search(stripped) is None
 
 
+def _parenthetical_format_aside(text: str) -> bool:
+    """A parenthetical form note with no numbered condition of its own."""
+    compact = _compact(text)
+    compact = re.sub(r"^(?:注[:：])?(?:\d+[.．、])?", "", compact)
+    return (
+        re.fullmatch(
+            r"[（(][^（）()]{0,40}(?:必须提供|须提供|应当提供|未提供|委托时)"
+            r"[^（）()]{0,24}(?:无效投标|投标无效|作无效|无效|废标)[^（）()]{0,8}[）)]",
+            compact,
+        )
+        is not None
+    )
+
+
+_DECLARATION_LIST_HEADING = re.compile(
+    r"^(?:[一二三四五六七八九十]+[、.．])?"
+    r"(?:我方|本公司|投标人|供应商)?(?:特此|郑重)?(?:承诺|声明|保证)"
+    r"(?:无|没有|不存在)?"
+    r"(?:下列|以下|如下).{0,24}(?:情形|情况|行为)?[:：]?$"
+)
+
+
+def _declaration_list_heading(text: str) -> bool:
+    """A promise that only introduces the following list, with no condition of its own."""
+    compact = _compact(text)
+    if _REJECTION_OUTCOME.search(compact):
+        return False
+    return _DECLARATION_LIST_HEADING.fullmatch(compact) is not None
+
+
 def _rejection_mention_only(text: str) -> bool:
     """Contents lines, later notices, and column labels mention 废标 without stating a condition."""
     return (
@@ -858,6 +902,8 @@ def _rejection_mention_only(text: str) -> bool:
         or _rejection_column_label(text)
         or _empty_rejection_heading(text)
         or _format_invalidity_note(text)
+        or _parenthetical_format_aside(text)
+        or _declaration_list_heading(text)
     )
 
 
@@ -1725,25 +1771,85 @@ def _text_opens_rejection_list(text: str) -> bool:
     return bool(text) and _opens_item_list(text) and re.search(r"废标|无效|否决", text) is not None
 
 
-def _plain_ordinal_marks(text: str) -> list[_Mark]:
-    """Bare 1, 2, 3 after a rejection lead. Decimal numbers such as 21.1.1 are not these."""
-    marks: list[_Mark] = []
-    expect = 1
+_BARE_ORDINAL_LINE = re.compile(r"^\d{1,2}$")
+
+
+def _bare_ordinal_line(line: str) -> bool:
+    return _BARE_ORDINAL_LINE.fullmatch(line.strip()) is not None
+
+
+def _citation_paren(text: str, start: int, end: int) -> bool:
+    """「第5条第（2）项」 is a cross-reference, not a new list item."""
+    if re.match(r"\s*[项款]", text[end:end + 3]) is None:
+        return False
+    return re.search(r"第|条", text[max(0, start - 8):start]) is not None
+
+
+def _closes_rejection_run(text: str) -> bool:
+    """A new Chinese-numeral section ends a plain-ordinal rejection list."""
+    if _text_opens_rejection_list(text) or _opens_item_list(text):
+        return False
+    if _CHAPTER_LINE.match(text):
+        return True
+    return re.match(r"^\s*[一二三四五六七八九十]+[、.．]", text) is not None
+
+
+def _ordinal_row(text: str) -> bool:
+    """A table row whose first cell is a plain ordinal, including a continued table."""
+    if _PLAIN_ORDINAL_LINE.match(text):
+        return True
+    return re.match(r"^(?:序号[:：])?\d{1,2}(?:[:：]|$)", _compact(text)) is not None
+
+
+def _plain_ordinal_run(text: str) -> list[tuple[int, int]]:
+    """Contiguous bare ordinals. A run may start at 3 when the list continues."""
+    found: list[tuple[int, int]] = []
+    start_match = _PLAIN_ORDINAL_LINE.match(text)
+    if start_match:
+        number = int(re.match(r"\d{1,2}", text).group(0))
+        if 1 <= number <= 30:
+            found.append((number, 0))
     for match in _PLAIN_ORDINAL_MARK.finditer(text):
         number = int(match.group(1))
-        if number != expect or expect > 30:
+        if not 1 <= number <= 30:
             continue
-        if match.start(1) <= 0:
+        position = match.start(1)
+        if found and abs(position - found[-1][1]) < 2:
             continue
-        marks.append(_Mark(match.start(1)))
-        expect += 1
-    return marks
+        found.append((number, position))
+    best: list[tuple[int, int]] = []
+    run: list[tuple[int, int]] = []
+    for item in found:
+        if run and item[0] == run[-1][0] + 1:
+            run.append(item)
+            continue
+        if len(run) > len(best):
+            best = run
+        run = [item]
+    if len(run) > len(best):
+        best = run
+    return best
 
 
-def _explode_items(text: str) -> list[tuple[str, str]]:
+def _plain_ordinal_marks(text: str, *, continuation: bool = False) -> list[_Mark]:
+    """Bare 1, 2, 3 after a rejection lead. Decimal numbers such as 21.1.1 are not these."""
+    best = _plain_ordinal_run(text)
+    opens = _text_opens_rejection_list(text)
+    if opens and best and best[0][0] == 1:
+        return [_Mark(position) for _number, position in best]
+    if (opens or continuation) and len(best) >= 2:
+        return [_Mark(position) for _number, position in best]
+    return []
+
+
+def _explode_items(text: str, *, continuation: bool = False) -> list[tuple[str, str]]:
     """Numbered sub-items written on one line each become their own clause."""
-    marks: list[_Mark] = [_Mark(match.start()) for match in _INLINE_MARK.finditer(text) if match.start() > 0]
-    if _text_opens_rejection_list(text):
+    marks: list[_Mark] = []
+    for match in _INLINE_MARK.finditer(text):
+        if match.start() <= 0 or _citation_paren(text, match.start(), match.end()):
+            continue
+        marks.append(_Mark(match.start()))
+    if _text_opens_rejection_list(text) or continuation:
         occupied = [mark.start() for mark in marks]
         for match in _DECIMAL_CHILD_MARK.finditer(text):
             if match.start() <= 0 or any(start <= match.start() < start + 1 for start in occupied):
@@ -1752,7 +1858,7 @@ def _explode_items(text: str) -> list[tuple[str, str]]:
                 continue
             marks.append(_Mark(match.start()))
             occupied.append(match.start())
-        for mark in _plain_ordinal_marks(text):
+        for mark in _plain_ordinal_marks(text, continuation=continuation):
             if any(abs(mark.start() - start) < 2 for start in occupied):
                 continue
             marks.append(mark)
@@ -1778,10 +1884,19 @@ def _explode_items(text: str) -> list[tuple[str, str]]:
     return pieces
 
 
+def _remember_rejection_run(text: str, open_run: bool) -> bool:
+    if _text_opens_rejection_list(text):
+        return True
+    if _closes_rejection_run(text):
+        return False
+    return open_run
+
+
 def _split_prose(
     text: str,
     banners: set[str] | None = None,
     page_number: int | None = None,
+    rejection_open: bool = False,
 ) -> list[tuple[str, str]]:
     banners = banners or set()
     raw_lines = text.splitlines()
@@ -1789,17 +1904,21 @@ def _split_prose(
     pieces: list[tuple[str, str]] = []
     buffer_kind = ""
     buffer: list[str] = []
+    open_run = rejection_open
 
     def flush() -> None:
-        nonlocal buffer_kind, buffer
+        nonlocal buffer_kind, buffer, open_run
         if buffer:
             joined = _join_wrapped(buffer)
             if buffer_kind == "heading":
-                pieces.append((buffer_kind, joined))
+                emitted = [(buffer_kind, joined)]
             elif buffer_kind == "item" and _plain_ordinal_line(joined):
-                pieces.append(("item", joined))
+                emitted = [("item", joined)]
             else:
-                pieces.extend(_explode_items(joined))
+                emitted = _explode_items(joined, continuation=open_run)
+            for kind, piece in emitted:
+                pieces.append((kind, piece))
+                open_run = _remember_rejection_run(piece, open_run)
         buffer_kind = ""
         buffer = []
 
@@ -1842,8 +1961,36 @@ def _split_prose(
             flush()
         if re.match(r"^注\s*[:：]", line) and buffer:
             flush()
+        if open_run and _bare_ordinal_line(line):
+            flush()
+            buffer_kind = "item"
+            buffer.append(line)
+            continue
+        if buffer and len(buffer) == 1 and _bare_ordinal_line(buffer[0]):
+            buffer.append(line)
+            if line.endswith(_CLOSED) or _sentence_end(line):
+                flush()
+            continue
+        if (
+            open_run
+            and not buffer
+            and pieces
+            and pieces[-1][0] == "item"
+            and pieces[-1][1].rstrip().endswith(("；", ";"))
+            and not _ITEM_START.match(line)
+            and not _bare_ordinal_line(line)
+            and not _plain_ordinal_line(line)
+            and not _is_section_heading(line)
+            and not _closes_rejection_run(line)
+        ):
+            kind, previous = pieces[-1]
+            merged = _join_wrapped([previous, line])
+            pieces[-1] = (kind, merged)
+            open_run = _remember_rejection_run(merged, open_run)
+            continue
         if _plain_ordinal_line(line) and (
-            _text_opens_rejection_list(_join_wrapped(buffer) if buffer else "")
+            open_run
+            or _text_opens_rejection_list(_join_wrapped(buffer) if buffer else "")
             or (
                 not buffer
                 and bool(pieces)
