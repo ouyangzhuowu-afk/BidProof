@@ -1,0 +1,5313 @@
+{
+  "audit_status": "pending_audit",
+  "product_pass": false,
+  "test_material_only": true,
+  "source_url": "https://gdj.beijing.gov.cn/zwxx/tzgg2/202608/P020260820570458579037.pdf",
+  "title": "首都广电新型智库项目（第二包：出版制作）（第二次招标）公开招标文件",
+  "project_number": "11000026210200173514-XM001",
+  "buyer": "北京新视听发展中心（北京音像资料馆）（北京市）",
+  "local_path": "work/public-eval/tender-blocks/pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+  "sha256": "c15227ead72f1d6aed4f38014aaf0b57b2633cf3125dbcf2fc663a717c7e20c8",
+  "pdf_page_count": 98,
+  "printed_page_offset": null,
+  "printed_page_total": null,
+  "ocr": "not_used",
+  "footer_check": {
+    "checked_pages": 98,
+    "pages_with_footer": 0,
+    "printed_page_offset": null,
+    "printed_page_total": null,
+    "printed_total_consistent": false,
+    "printed_totals_seen": [],
+    "offsets_seen": [],
+    "compared_with": "printed_total",
+    "mismatch_count": 0,
+    "mismatches": []
+  },
+  "footer_in_quotes": 0,
+  "bare_page_in_quotes": 2,
+  "counts": {
+    "total": 186,
+    "with_real_page": 186,
+    "without_page": 0,
+    "by_block": {
+      "qualification": {
+        "label": "资格要求",
+        "cited": 35,
+        "items": 35
+      },
+      "scoring": {
+        "label": "评分要求",
+        "cited": 28,
+        "items": 28
+      },
+      "materials": {
+        "label": "要交的材料",
+        "cited": 81,
+        "items": 81
+      },
+      "rejection": {
+        "label": "废标项",
+        "cited": 42,
+        "items": 42
+      }
+    }
+  },
+  "structural_checks": {
+    "product_pass_false": true,
+    "audit_status_pending": true,
+    "no_pass_status": true,
+    "cited_labels_use_pdf_page": true,
+    "page_index_matches_order": true,
+    "ocr_not_used": true
+  },
+  "extraction": {
+    "audit_status": "pending_audit",
+    "product_pass": false,
+    "printed_page_offset": null,
+    "printed_page_total": null,
+    "blocks": {
+      "qualification": {
+        "label": "资格要求",
+        "items": [
+          {
+            "clause_id": "TB-0001",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "二、申请人的资格要求(须同时满足)",
+            "quote": "二、申请人的资格要求(须同时满足)",
+            "pages": [
+              6
+            ],
+            "page": 6,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第6页",
+              "index": 6,
+              "pages": [
+                6
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0002",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "1.满足《中华人民共和国政府采购法》第二十二条规定;",
+            "quote": "1.满足《中华人民共和国政府采购法》第二十二条规定;",
+            "pages": [
+              6
+            ],
+            "page": 6,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第6页",
+              "index": 6,
+              "pages": [
+                6
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0003",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "2.落实政府采购政策需满足的资格要求:",
+            "quote": "2.落实政府采购政策需满足的资格要求:",
+            "pages": [
+              6
+            ],
+            "page": 6,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第6页",
+              "index": 6,
+              "pages": [
+                6
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0004",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "2.1 中小企业政策 □本项目不专门面向中小企业预留采购份额。",
+            "quote": "2.1 中小企业政策 □本项目不专门面向中小企业预留采购份额。",
+            "pages": [
+              6
+            ],
+            "page": 6,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第6页",
+              "index": 6,
+              "pages": [
+                6
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0005",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "3.本项目的特定资格要求:",
+            "quote": "3.本项目的特定资格要求:",
+            "pages": [
+              6
+            ],
+            "page": 6,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第6页",
+              "index": 6,
+              "pages": [
+                6
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0006",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "3.1 本项目是否属于政府购买服务:",
+            "quote": "3.1 本项目是否属于政府购买服务:",
+            "pages": [
+              6
+            ],
+            "page": 6,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第6页",
+              "index": 6,
+              "pages": [
+                6
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0007",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "3.2 其他特定资格要求:",
+            "quote": "3.2 其他特定资格要求:",
+            "pages": [
+              7
+            ],
+            "page": 7,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第7页",
+              "index": 7,
+              "pages": [
+                7
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0008",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "3.2.1 投标人必须在北京市政府采购电子交易平台(http://zbcg- bjzc.zhongcy.com/bjczj-portal-site/index.",
+            "quote": "3.2.1 投标人必须在北京市政府采购电子交易平台(http://zbcg- bjzc.zhongcy.com/bjczj-portal-site/index.html#/home)线上领取标书,未经北京市政府采购电子交易平台线上领取标书的潜在投标人均无资格参加本次投标;",
+            "pages": [
+              7
+            ],
+            "page": 7,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第7页",
+              "index": 7,
+              "pages": [
+                7
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0009",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "3.2.2 只有在法律上和财务上独立、合法运作并独立于采购人和采购代理机构之外的投标人才能参加投标;",
+            "quote": "3.2.2 只有在法律上和财务上独立、合法运作并独立于采购人和采购代理机构之外的投标人才能参加投标;",
+            "pages": [
+              7
+            ],
+            "page": 7,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第7页",
+              "index": 7,
+              "pages": [
+                7
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0010",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "3.2.3 被“信用中国”网站列入失信被执行人和重大税收违法失信主体的不得参与本项目的政府采购活动。被“中国政府采购网”网站列入政府采购严重违法失信行为记录名单",
+            "quote": "3.2.3 被“信用中国”网站列入失信被执行人和重大税收违法失信主体的不得参与本项目的政府采购活动。被“中国政府采购网”网站列入政府采购严重违法失信行为记录名单(处罚期限尚未届满的),不得参与本项目的政府采购活动。",
+            "pages": [
+              7
+            ],
+            "page": 7,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第7页",
+              "index": 7,
+              "pages": [
+                7
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0011",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "3.2.4 单位负责人为同一人或者存在直接控股、管理关系的不同供应商,不得参加同一合同项下的政府采购活动。除单一来源采购项目外,为采购项目提供整体设计 、规范编",
+            "quote": "3.2.4 单位负责人为同一人或者存在直接控股、管理关系的不同供应商,不得参加同一合同项下的政府采购活动。除单一来源采购项目外,为采购项目提供整体设计 、规范编制或者项目管理、监理、检测等服务的供应商,不得再参加该采购项目的其他采购活动。",
+            "pages": [
+              7
+            ],
+            "page": 7,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第7页",
+              "index": 7,
+              "pages": [
+                7
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0012",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "1.时间:2026年7月27日至 2026 年7月31日,每天上午8:30至12:00,下午12:00至 16:30(北京时间,法定节假日除外)。",
+            "quote": "1.时间:2026年7月27日至 2026 年7月31日,每天上午8:30至12:00,下午12:00至 16:30(北京时间,法定节假日除外)。",
+            "pages": [
+              7
+            ],
+            "page": 7,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第7页",
+              "index": 7,
+              "pages": [
+                7
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0013",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "2.地点:北京市政府采购电子交易平台",
+            "quote": "2.地点:北京市政府采购电子交易平台",
+            "pages": [
+              7
+            ],
+            "page": 7,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第7页",
+              "index": 7,
+              "pages": [
+                7
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0014",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "3.方式:供应商使用CA数字证书或电子营业执照登录北京市政府采购电子交易平台 (http://zbcg-bjzc.zhongcy.com/bjczj-porta",
+            "quote": "3.方式:供应商使用CA数字证书或电子营业执照登录北京市政府采购电子交易平台 (http://zbcg-bjzc.zhongcy.com/bjczj-portal-site/index.html#/home)获取电子版招标文件。",
+            "pages": [
+              7
+            ],
+            "page": 7,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第7页",
+              "index": 7,
+              "pages": [
+                7
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0015",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "四、提交投标文件截止时间、开标时间和地点投标截止时间、开标时间:2026年8月17日13点30 分(北京时间)。",
+            "quote": "四、提交投标文件截止时间、开标时间和地点投标截止时间、开标时间:2026年8月17日13点30 分(北京时间)。",
+            "pages": [
+              7
+            ],
+            "page": 7,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第7页",
+              "index": 7,
+              "pages": [
+                7
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0016",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "20.2 评审专家须符合《财政部关于在政府采购活动中查询及使用信用记录有关问题的通知》(财库〔2016〕125 号)的规定。依法自行选定评审专家的,采购人和采购",
+            "quote": "20.2 评审专家须符合《财政部关于在政府采购活动中查询及使用信用记录有关问题的通知》(财库〔2016〕125 号)的规定。依法自行选定评审专家的,采购人和采购代理机构将查询有关信用记录,对具有行贿、受贿、欺诈等不良信用记录的人员,拒绝其参与政府采购活动。",
+            "pages": [
+              26
+            ],
+            "page": 26,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第26页",
+              "index": 26,
+              "pages": [
+                26
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0017",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "23.2 中标通知书对采购人和中标供应商均具有法律效力。中标通知书发出后,采购人改变中标结果的,或者中标供应商放弃中标项目的,应当依法承担法律责任。",
+            "quote": "23.2 中标通知书对采购人和中标供应商均具有法律效力。中标通知书发出后,采购人改变中标结果的,或者中标供应商放弃中标项目的,应当依法承担法律责任。",
+            "pages": [
+              27
+            ],
+            "page": 27,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第27页",
+              "index": 27,
+              "pages": [
+                27
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0018",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "序号审查因素审查内容格式要求 1 满足《中华人民共和国政府采购法》第二十二条规定具体规定见第一章《投标邀请》 1-1 营业执照等证明文件投标人为企业(包括合伙企",
+            "quote": "序号审查因素审查内容格式要求 1 满足《中华人民共和国政府采购法》第二十二条规定具体规定见第一章《投标邀请》 1-1 营业执照等证明文件投标人为企业(包括合伙企业)的,应提供有效的 “营业执照 ”; 投标人为事业单位的,应提供有效的“事业单位法人证书”; 投标人是非企业机构的,应提供有效的 “执业许可证”、“登记证书”等证明文件; 投标人是个体工商户的,应提供有效的“个体工商户营业执照”; 投标人是自然人的,应提供有效的自然人身份证明。",
+            "pages": [
+              30
+            ],
+            "page": 30,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第30页",
+              "index": 30,
+              "pages": [
+                30
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0019",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "序号：3-1 审查因素：本项目对于联合<br>体的要求( 本项<br>目不适用) 审查内容：<br>1、如本项目接受联合体投标,且投标人为联<br>合体时必须提",
+            "quote": "序号：3-1 审查因素：本项目对于联合<br>体的要求( 本项<br>目不适用) 审查内容：<br>1、如本项目接受联合体投标,且投标人为联<br>合体时必须提供《联合协议》,明确各方拟承<br>担的工作和责任 ,并指定联合体牵头人 ,<br>授权其代表所有联合体成员负责本项目投标<br>和合同实施阶段的牵头 、协调工作 。该联<br>合协议应当作为投标文件的组成部分 ,与<br>投标文件其他内容同时递交。<br>2 、联合体各成员单位均须提供本表中序<br>号 1-1、1-2 的证明文件。联合体各成员单<br>位均 应满足本表 3-2 项规定。<br>3 、本表序号 3-3 项规定的其他特定资格<br>要 求中的每一小项要求 ,联合体各方中至<br>少应当有一方符合本表中其他资格要求并提<br>供证明文件。 格式要求：<br>提供《联合协<br>议》原件的电<br>子件<br>格式见《投",
+            "pages": [
+              33
+            ],
+            "page": 33,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第33页",
+              "index": 33,
+              "pages": [
+                33
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0020",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "格式见《投标文件格式》 2-2 其它落实政府采购政策的资格要求如有,见第一章《投标邀请》 提供证明文件的电子件或电子证照 3 本项目的特定资格要求如有,见第一章",
+            "quote": "格式见《投标文件格式》 2-2 其它落实政府采购政策的资格要求如有,见第一章《投标邀请》 提供证明文件的电子件或电子证照 3 本项目的特定资格要求如有,见第一章《投标邀请》 3-1 本项目对于联合体的要求( 本项目不适用)",
+            "pages": [
+              33
+            ],
+            "page": 33,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第33页",
+              "index": 33,
+              "pages": [
+                33
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0021",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "序号：4、联合体中有同类资质的供应商按照联合体<br>分工承担相同工作的,应当按照资质等级较<br>低的供应商确定资质等级。<br>5、以联合体形式参加政府采购",
+            "quote": "序号：4、联合体中有同类资质的供应商按照联合体<br>分工承担相同工作的,应当按照资质等级较<br>低的供应商确定资质等级。<br>5、以联合体形式参加政府采购活动的,联合<br>体各方不得再单独参加或者与其他供应商另<br>外组成联合体参加同一合同项下的政府采购<br>活动。<br>6、若联合体中任一成员单位中途退出,则该<br>联合体的投标无效。<br>7、本项目不接受联合体投标时,投标人不得<br>为联合体。 审查因素：<br> <br>",
+            "pages": [
+              34
+            ],
+            "page": 34,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第34页",
+              "index": 34,
+              "pages": [
+                34
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0022",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "序号：3-3 审查因素：其他特定资格要<br>求 审查内容：1 只有在法律上和财务上独立、合法运作并独<br>立于采购人和采购代理机构之外的投标人才能<br>参",
+            "quote": "序号：3-3 审查因素：其他特定资格要<br>求 审查内容：1 只有在法律上和财务上独立、合法运作并独<br>立于采购人和采购代理机构之外的投标人才能<br>参加投标; 格式要求：格式见《投标<br>文件格式》<br>“1-2投标人<br>资格声明书<br>”",
+            "pages": [
+              34
+            ],
+            "page": 34,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第34页",
+              "index": 34,
+              "pages": [
+                34
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0023",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "序号：3-3 审查因素：其他特定资格要<br>求 审查内容：<br>2 单位负责人为同一人或者存在直接控股、<br>管理关系的不同供应商,不得参加同一合同<br",
+            "quote": "序号：3-3 审查因素：其他特定资格要<br>求 审查内容：<br>2 单位负责人为同一人或者存在直接控股、<br>管理关系的不同供应商,不得参加同一合同<br>项下的政府采购活动。 格式要求：格式见《投标<br>文件格式》<br>“1-2投标人<br>资格声明书<br>”",
+            "pages": [
+              34
+            ],
+            "page": 34,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第34页",
+              "index": 34,
+              "pages": [
+                34
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0024",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "序号：3-3 审查因素：其他特定资格要<br>求 审查内容：3 除单一来源采购项目外,为采购项目提供<br>整体设计、规范编制或者项目管理、监理、<br>检测等",
+            "quote": "序号：3-3 审查因素：其他特定资格要<br>求 审查内容：3 除单一来源采购项目外,为采购项目提供<br>整体设计、规范编制或者项目管理、监理、<br>检测等服务的供应商,不得再参加该采购项<br>目的其他采购活动。 格式要求：格式见《投标<br>文件格式》<br>“1-2投标人<br>资格声明书<br>”",
+            "pages": [
+              34
+            ],
+            "page": 34,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第34页",
+              "index": 34,
+              "pages": [
+                34
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0025",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "格式见《投标文件格式》 “1-2 投标人资格声明书 ” 3-3 其他特定资格要求 1 只有在法律上和财务上独立、合法运作并独立于采购人和采购代理机构之外的投标人",
+            "quote": "格式见《投标文件格式》 “1-2 投标人资格声明书 ” 3-3 其他特定资格要求 1 只有在法律上和财务上独立、合法运作并独立于采购人和采购代理机构之外的投标人才能参加投标; 格式见《投标文件格式》 “1-2投标人资格声明书 ” 2 单位负责人为同一人或者存在直接控股、 管理关系的不同供应商,不得参加同一合同项下的政府采购活动。",
+            "pages": [
+              34
+            ],
+            "page": 34,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第34页",
+              "index": 34,
+              "pages": [
+                34
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0026",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "格式见《投标文件格式》 “1-2投标人资格声明书 ” 3 除单一来源采购项目外,为采购项目提供整体设计、规范编制或者项目管理、监理、 检测等服务的供应商,不得再",
+            "quote": "格式见《投标文件格式》 “1-2投标人资格声明书 ” 3 除单一来源采购项目外,为采购项目提供整体设计、规范编制或者项目管理、监理、 检测等服务的供应商,不得再参加该采购项目的其他采购活动。",
+            "pages": [
+              34
+            ],
+            "page": 34,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第34页",
+              "index": 34,
+              "pages": [
+                34
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0027",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "3.甲方及其工作人员不得收受可能影响正常执行公务的礼品、礼金、消费卡和有价证券、股权、其他金融产品等财物,不得收受其他明显超出正常礼尚往来的财物;不得在乙方报销",
+            "quote": "3.甲方及其工作人员不得收受可能影响正常执行公务的礼品、礼金、消费卡和有价证券、股权、其他金融产品等财物,不得收受其他明显超出正常礼尚往来的财物;不得在乙方报销应由本单位或个人支付的费用;不得以参与项目实施为名,接受乙方从该项目中支取的劳务报酬;不得参加乙方安排的可能影响公正执行公务的宴请或者旅游、健身、娱乐等活动。",
+            "pages": [
+              55
+            ],
+            "page": 55,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第55页",
+              "index": 55,
+              "pages": [
+                55
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0028",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "65 1 满足《中华人民共和国政府采购法》第二十二条规定 1-1 营业执照等证明文件",
+            "quote": "65 1 满足《中华人民共和国政府采购法》第二十二条规定 1-1 营业执照等证明文件",
+            "pages": [
+              65
+            ],
+            "page": 65,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第65页",
+              "index": 65,
+              "pages": [
+                65
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0029",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "(一)具有良好的商业信誉和健全的财务会计制度;",
+            "quote": "(一)具有良好的商业信誉和健全的财务会计制度;",
+            "pages": [
+              66
+            ],
+            "page": 66,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第66页",
+              "index": 66,
+              "pages": [
+                66
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0030",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "(二)具有履行合同所必需的设备和专业技术能力;",
+            "quote": "(二)具有履行合同所必需的设备和专业技术能力;",
+            "pages": [
+              66
+            ],
+            "page": 66,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第66页",
+              "index": 66,
+              "pages": [
+                66
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0031",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "(1)如本项目(包)不专门面向中小企业预留采购份额 ,资格证明文件部分无需提供 《中小企业声明函》或《残疾人福利性单位声明函》或由省级以上监狱管理局、戒毒管理局",
+            "quote": "(1)如本项目(包)不专门面向中小企业预留采购份额 ,资格证明文件部分无需提供 《中小企业声明函》或《残疾人福利性单位声明函》或由省级以上监狱管理局、戒毒管理局(含新疆生产建设兵团)出具的属于监狱企业的证明文件;供应商如具有上述证明文件,建议在商务技术文件中提供。",
+            "pages": [
+              67
+            ],
+            "page": 67,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第67页",
+              "index": 67,
+              "pages": [
+                67
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0032",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "注: 如本招标文件《投标人须知资料表》载明本项目分包承担主体应具备的相应资质条件, 则投标人须在本表中列明分包承担主体的资质等级,并后附资质证书电子件,否则投标",
+            "quote": "注: 如本招标文件《投标人须知资料表》载明本项目分包承担主体应具备的相应资质条件, 则投标人须在本表中列明分包承担主体的资质等级,并后附资质证书电子件,否则投标无效。",
+            "pages": [
+              72
+            ],
+            "page": 72,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第72页",
+              "index": 72,
+              "pages": [
+                72
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0033",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "九、 以联合体形式参加政府采购活动的,联合体各方不得再单独参加或者与其他供应商另外组成联合体参加同一合同项下的政府采购活动。",
+            "quote": "九、 以联合体形式参加政府采购活动的,联合体各方不得再单独参加或者与其他供应商另外组成联合体参加同一合同项下的政府采购活动。",
+            "pages": [
+              75
+            ],
+            "page": 75,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第75页",
+              "index": 75,
+              "pages": [
+                75
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0034",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "3.2.4 单位负责人为同一人或者存在直接控股、管理关系的不同供应商,不得参加同一合同项下的政府采购活动。除单一来源采购项目外,为采购项目提供整体设计、规范编制",
+            "quote": "3.2.4 单位负责人为同一人或者存在直接控股、管理关系的不同供应商,不得参加同一合同项下的政府采购活动。除单一来源采购项目外,为采购项目提供整体设计、规范编制或者项目管理、监理、检测等服务的供应商,不得再参加该采购项目的其他采购活动。",
+            "pages": [
+              77
+            ],
+            "page": 77,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第77页",
+              "index": 77,
+              "pages": [
+                77
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0035",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "2.如本招标文件《投标人须知资料表》载明本项目分包承担主体应具备的相应资质条件, 则投标人须在本表中列明分包承担主体的资质等级,并后附资质证书电子件,否则投标无",
+            "quote": "2.如本招标文件《投标人须知资料表》载明本项目分包承担主体应具备的相应资质条件, 则投标人须在本表中列明分包承担主体的资质等级,并后附资质证书电子件,否则投标无效。",
+            "pages": [
+              95
+            ],
+            "page": 95,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第95页",
+              "index": 95,
+              "pages": [
+                95
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          }
+        ]
+      },
+      "scoring": {
+        "label": "评分要求",
+        "items": [
+          {
+            "clause_id": "TB-0036",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "Col1：1 Col2：商务<br>部分 二、评分标准：业绩 Col4：10 Col5：投标人提供近3年(2023年1月1日至今)(以合同签订时间<br>为准)",
+            "quote": "Col1：1 Col2：商务<br>部分 二、评分标准：业绩 Col4：10 Col5：投标人提供近3年(2023年1月1日至今)(以合同签订时间<br>为准),完成的类似项目的有效案例证明材料,提供一个<br>合同得2分,满分10分。<br>注:<br>有效业绩证明材料:至少包含合同首尾页、签字盖章页、<br>合同主要内容、合同签订时间等关键页的复印件,并加盖<br>投标人公章。",
+            "pages": [
+              44
+            ],
+            "page": 44,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第44页",
+              "index": 44,
+              "pages": [
+                44
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0037",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "Col1：2 Col2：服务<br>部分 二、评分标准：项目总<br>体实施<br>方案 Col4：8 Col5：根据项目服务内容与各项要求,制定总体实施方案,",
+            "quote": "Col1：2 Col2：服务<br>部分 二、评分标准：项目总<br>体实施<br>方案 Col4：8 Col5：根据项目服务内容与各项要求,制定总体实施方案,包括<br>重点难点分析,相关政策,进度安排,人员调配,质量保<br>障等。<br>(1)对以上内容进行了全面、详细的阐述,能正确理解项<br>目需求,思路清晰,有具体措施描述且满足采购需求,得8<br>分;<br>(2)对以上内容进行了全面阐述,但并未贴合项目实际情<br>况进行详细论述,或方案中未包含具体实施细节及措施得6<br>分;<br>(3)对以上内容进行响应,但不能够完全满足采购需求,<br>得4分;<br>(4)对以上内容虽进行阐述,但未针对采购需求进行分析<br>,或仅为对采购需求的简单复制,得2分;<br>(5)对以上内容未进行阐述或完全不满足采购需求,得0<br>分。",
+            "pages": [
+              44
+            ],
+            "page": 44,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第44页",
+              "index": 44,
+              "pages": [
+                44
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0038",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "Col1：2 Col2：服务<br>部分 二、评分标准：封面设<br>计 Col4：8 Col5：根据项目服务内容与各项要求,做好《蓝皮书》、《大事<br>记》",
+            "quote": "Col1：2 Col2：服务<br>部分 二、评分标准：封面设<br>计 Col4：8 Col5：根据项目服务内容与各项要求,做好《蓝皮书》、《大事<br>记》的封面设计: <br>(1)对方案内容进行了详细的阐述,能正确理解项目需求<br>,思路清晰,完全满足采购需求,得8分;<br>(2)对方案内容虽进行阐述,但并未贴合项目实际情况进<br>行详细论述,或方案中未包含具体实施细节及措施,得6分<br>; <br>(3)对方案内容虽进行阐述,但与采购需求存在偏差,得<br>3分;<br>(4)对方案内容未针对采购需求进行阐述或仅为对采购需<br>求的简单复制,得1分;<br>对方案内容未进行任何阐述或不满足采购需求,得0分。",
+            "pages": [
+              44
+            ],
+            "page": 44,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第44页",
+              "index": 44,
+              "pages": [
+                44
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0039",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "44 二、评分标准序号评分因素评价指标和分值 1 商务部分业绩 10 投标人提供近3年(2023年1月1日至今)(以合同签订时间为准),完成的类似项目的有效案例",
+            "quote": "44 二、评分标准序号评分因素评价指标和分值 1 商务部分业绩 10 投标人提供近3年(2023年1月1日至今)(以合同签订时间为准),完成的类似项目的有效案例证明材料,提供一个合同得2分,满分10分。",
+            "pages": [
+              44
+            ],
+            "page": 44,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第44页",
+              "index": 44,
+              "pages": [
+                44
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0040",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "Col1：审校 Col2：8 内文排<br>版：根据项目服务内容与各项要求,做好《蓝皮书》、《大事<br>记》的审校工作:<br>对方案内容进行了详细的阐述,能",
+            "quote": "Col1：审校 Col2：8 内文排<br>版：根据项目服务内容与各项要求,做好《蓝皮书》、《大事<br>记》的审校工作:<br>对方案内容进行了详细的阐述,能正确理解项目需求,思<br>路清晰,完全满足采购需求,得8分;<br>对方案内容虽进行阐述,但并未贴合项目实际情况进行详<br>细论述,或方案中未包含具体实施细节及措施,得6分;<br>对方案内容虽进行阐述,但与采购需求存在偏差,得3分;<br>对方案内容未针对采购需求进行阐述或仅为对采购需求的<br>简单复制,得1分;<br>对方案内容未进行任何阐述或不满足采购需求,得0分。",
+            "pages": [
+              45
+            ],
+            "page": 45,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第45页",
+              "index": 45,
+              "pages": [
+                45
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0041",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "Col1：成果报<br>告制作<br>与出版<br>服务 Col2：8 内文排<br>版：根据项目服务内容与各项要求,做好《蓝皮书》、《大事<br>记》的成果报",
+            "quote": "Col1：成果报<br>告制作<br>与出版<br>服务 Col2：8 内文排<br>版：根据项目服务内容与各项要求,做好《蓝皮书》、《大事<br>记》的成果报告制作与出版服务工作<br>对方案内容进行了详细的阐述,能正确理解项目需求,思<br>路清晰,完全满足采购需求,得8分;<br>对方案内容虽进行阐述,但并未贴合项目实际情况进行详<br>细论述,或方案中未包含具体实施细节及措施,得6分;<br>对方案内容虽进行阐述,但与采购需求存在偏差,得3分;<br>对方案内容未针对采购需求进行阐述或仅为对采购需求的<br>简单复制,得1分;<br>对方案内容未进行任何阐述或不满足采购需求,得0分。",
+            "pages": [
+              45
+            ],
+            "page": 45,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第45页",
+              "index": 45,
+              "pages": [
+                45
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0042",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "Col1：《北京<br>微短剧<br>研究报<br>告》封<br>面设计<br>制作、<br>排版及<br>印刷服<br>务 Col2：8 内文排<br>版：根",
+            "quote": "Col1：《北京<br>微短剧<br>研究报<br>告》封<br>面设计<br>制作、<br>排版及<br>印刷服<br>务 Col2：8 内文排<br>版：根据项目服务内容与各项要求,做好《北京微短剧研究报<br>告》封面设计制作、排版及印刷服务工作<br>对方案内容进行了详细的阐述,能正确理解项目需求,思<br>路清晰,完全满足采购需求,得8分;<br>对方案内容虽进行阐述,但并未贴合项目实际情况进行详<br>细论述,或方案中未包含具体实施细节及措施,得6分;<br>对方案内容虽进行阐述,但与采购需求存在偏差,得3分;<br>对方案内容未针对采购需求进行阐述或仅为对采购需求的<br>简单复制,得1分;<br>对方案内容未进行任何阐述或不满足采购需求,得0分。",
+            "pages": [
+              45
+            ],
+            "page": 45,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第45页",
+              "index": 45,
+              "pages": [
+                45
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0043",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "45 内文排版 8 根据项目服务内容与各项要求,做好《蓝皮书》、《大事记》的排版: 对方案内容进行了详细的阐述,能正确理解项目需求,思路清晰,完全满足采购需求,",
+            "quote": "45 内文排版 8 根据项目服务内容与各项要求,做好《蓝皮书》、《大事记》的排版: 对方案内容进行了详细的阐述,能正确理解项目需求,思路清晰,完全满足采购需求,得8分; 对方案内容虽进行阐述,但并未贴合项目实际情况进行详细论述,或方案中未包含具体实施细节及措施,得6分; 对方案内容虽进行阐述,但与采购需求存在偏差,得3分; 对方案内容未针对采购需求进行阐述或仅为对采购需求的简单复制,得1分; 对方案内容未进行任何阐述或不满足采购需求,得0分。",
+            "pages": [
+              45
+            ],
+            "page": 45,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第45页",
+              "index": 45,
+              "pages": [
+                45
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0044",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "审校 8 根据项目服务内容与各项要求,做好《蓝皮书》、《大事记》的审校工作: 对方案内容进行了详细的阐述,能正确理解项目需求,思路清晰,完全满足采购需求,得8分",
+            "quote": "审校 8 根据项目服务内容与各项要求,做好《蓝皮书》、《大事记》的审校工作: 对方案内容进行了详细的阐述,能正确理解项目需求,思路清晰,完全满足采购需求,得8分; 对方案内容虽进行阐述,但并未贴合项目实际情况进行详细论述,或方案中未包含具体实施细节及措施,得6分; 对方案内容虽进行阐述,但与采购需求存在偏差,得3分; 对方案内容未针对采购需求进行阐述或仅为对采购需求的简单复制,得1分; 对方案内容未进行任何阐述或不满足采购需求,得0分。",
+            "pages": [
+              45
+            ],
+            "page": 45,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第45页",
+              "index": 45,
+              "pages": [
+                45
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0045",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "成果报告制作与出版服务 8 根据项目服务内容与各项要求,做好《蓝皮书》、《大事记》的成果报告制作与出版服务工作对方案内容进行了详细的阐述,能正确理解项目需求,思",
+            "quote": "成果报告制作与出版服务 8 根据项目服务内容与各项要求,做好《蓝皮书》、《大事记》的成果报告制作与出版服务工作对方案内容进行了详细的阐述,能正确理解项目需求,思路清晰,完全满足采购需求,得8分; 对方案内容虽进行阐述,但并未贴合项目实际情况进行详细论述,或方案中未包含具体实施细节及措施,得6分; 对方案内容虽进行阐述,但与采购需求存在偏差,得3分; 对方案内容未针对采购需求进行阐述或仅为对采购需求的简单复制,得1分; 对方案内容未进行任何阐述或不满足采购需求,得0分。",
+            "pages": [
+              45
+            ],
+            "page": 45,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第45页",
+              "index": 45,
+              "pages": [
+                45
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0046",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "《北京微短剧研究报告》封面设计制作、 排版及印刷服务 8 根据项目服务内容与各项要求,做好《北京微短剧研究报告》封面设计制作、排版及印刷服务工作对方案内容进行了",
+            "quote": "《北京微短剧研究报告》封面设计制作、 排版及印刷服务 8 根据项目服务内容与各项要求,做好《北京微短剧研究报告》封面设计制作、排版及印刷服务工作对方案内容进行了详细的阐述,能正确理解项目需求,思路清晰,完全满足采购需求,得8分; 对方案内容虽进行阐述,但并未贴合项目实际情况进行详细论述,或方案中未包含具体实施细节及措施,得6分; 对方案内容虽进行阐述,但与采购需求存在偏差,得3分; 对方案内容未针对采购需求进行阐述或仅为对采购需求的简单复制,得1分; 对方案内容未进行任何阐述或不满足采购需求,得0分。",
+            "pages": [
+              45
+            ],
+            "page": 45,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第45页",
+              "index": 45,
+              "pages": [
+                45
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0047",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "Col1：保密和<br>版权保<br>护方案 Col2：4 质量保<br>障方案：对方案内容进行了详细的阐述,能正确理解项目需求,思<br>路清晰,完全满足采购",
+            "quote": "Col1：保密和<br>版权保<br>护方案 Col2：4 质量保<br>障方案：对方案内容进行了详细的阐述,能正确理解项目需求,思<br>路清晰,完全满足采购需求,得4分;<br>对方案内容虽进行阐述,但并未贴合项目实际情况进行详<br>细论述,或方案中未包含具体实施细节及措施,得3分;<br>对方案内容虽进行阐述,但与采购需求存在偏差,得2分;<br>对方案内容未针对采购需求进行阐述或仅为对采购需求的<br>简单复制,得1分;<br>对方案内容未进行任何阐述或不满足采购需求,得0分。",
+            "pages": [
+              46
+            ],
+            "page": 46,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第46页",
+              "index": 46,
+              "pages": [
+                46
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0048",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "Col1：印刷能<br>力 Col2：2 质量保<br>障方案：供应商提供印前、印刷、装订及相关的配套设备证明材料<br>,若供应商不具备印刷能力,需提供合作印",
+            "quote": "Col1：印刷能<br>力 Col2：2 质量保<br>障方案：供应商提供印前、印刷、装订及相关的配套设备证明材料<br>,若供应商不具备印刷能力,需提供合作印刷企业的相关<br>能力证明材料,并提供合作合同复印件。<br>满足上述要求得2分,否则得0分。",
+            "pages": [
+              46
+            ],
+            "page": 46,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第46页",
+              "index": 46,
+              "pages": [
+                46
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0049",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "Col1：服务响<br>应与承<br>诺 Col2：4 质量保<br>障方案：根据本项目服务内容与各项要求,响应及时,承诺全面,<br>方案完整,有具体实施方法",
+            "quote": "Col1：服务响<br>应与承<br>诺 Col2：4 质量保<br>障方案：根据本项目服务内容与各项要求,响应及时,承诺全面,<br>方案完整,有具体实施方法描述,得4分;<br>对服务的响应与承诺方案满足采购需求,但没有具体实施<br>方法描述或承诺不全面,得2分;<br>对服务的响应与承诺不满足采购需求的要求,存在较大偏<br>差,得1分;<br>本项未应答或完全不满足采购需求,得0分。",
+            "pages": [
+              46
+            ],
+            "page": 46,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第46页",
+              "index": 46,
+              "pages": [
+                46
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0050",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "46 质量保障方案 4 对方案内容进行了详细的阐述,能正确理解项目需求,思路清晰,完全满足采购需求,得4分; 对方案内容虽进行阐述,但并未贴合项目实际情况进行详",
+            "quote": "46 质量保障方案 4 对方案内容进行了详细的阐述,能正确理解项目需求,思路清晰,完全满足采购需求,得4分; 对方案内容虽进行阐述,但并未贴合项目实际情况进行详细论述,或方案中未包含具体实施细节及措施,得3分; 对方案内容虽进行阐述,但与采购需求存在偏差,得2分; 对方案内容未针对采购需求进行阐述或仅为对采购需求的简单复制,得1分; 对方案内容未进行任何阐述或不满足采购需求,得0分。",
+            "pages": [
+              46
+            ],
+            "page": 46,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第46页",
+              "index": 46,
+              "pages": [
+                46
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0051",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "保密和版权保护方案 4 对方案内容进行了详细的阐述,能正确理解项目需求,思路清晰,完全满足采购需求,得4分; 对方案内容虽进行阐述,但并未贴合项目实际情况进行详",
+            "quote": "保密和版权保护方案 4 对方案内容进行了详细的阐述,能正确理解项目需求,思路清晰,完全满足采购需求,得4分; 对方案内容虽进行阐述,但并未贴合项目实际情况进行详细论述,或方案中未包含具体实施细节及措施,得3分; 对方案内容虽进行阐述,但与采购需求存在偏差,得2分; 对方案内容未针对采购需求进行阐述或仅为对采购需求的简单复制,得1分; 对方案内容未进行任何阐述或不满足采购需求,得0分。",
+            "pages": [
+              46
+            ],
+            "page": 46,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第46页",
+              "index": 46,
+              "pages": [
+                46
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0052",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "满足上述要求得2分,否则得0分。",
+            "quote": "满足上述要求得2分,否则得0分。",
+            "pages": [
+              46
+            ],
+            "page": 46,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第46页",
+              "index": 46,
+              "pages": [
+                46
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0053",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "服务响应与承诺 4 根据本项目服务内容与各项要求,响应及时,承诺全面, 方案完整,有具体实施方法描述,得4分; 对服务的响应与承诺方案满足采购需求,但没有具体实",
+            "quote": "服务响应与承诺 4 根据本项目服务内容与各项要求,响应及时,承诺全面, 方案完整,有具体实施方法描述,得4分; 对服务的响应与承诺方案满足采购需求,但没有具体实施方法描述或承诺不全面,得2分; 对服务的响应与承诺不满足采购需求的要求,存在较大偏差,得1分; 本项未应答或完全不满足采购需求,得0分。",
+            "pages": [
+              46
+            ],
+            "page": 46,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第46页",
+              "index": 46,
+              "pages": [
+                46
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0054",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "Col1：3 Col2：价格<br>(10<br>分) 项目团<br>队：评标基准价=满足招标文件要求且最低的评标价格<br>投标人的有效价格得分=(评标基准价",
+            "quote": "Col1：3 Col2：价格<br>(10<br>分) 项目团<br>队：评标基准价=满足招标文件要求且最低的评标价格<br>投标人的有效价格得分=(评标基准价/评标价格)×10 18：评标基准价=满足招标文件要求且最低的评标价格<br>投标人的有效价格得分=(评标基准价/评标价格)×10 1.项目负责人(4分):<br>了解《蓝皮书》、《大事记》编纂方式和特点,具有5年及<br>以上图书编辑经验,具备项目统筹管理能力,得2分,否则<br>得0分;<br>具有出版专业正高级职称,得2分,否则得0分。<br>2.项目团队人员配置(6分):(团队人员少于6人,本“<br>项目团队人员”不得分。)<br>(1)根据项目服务内容配置服务团队,团队人员配备充足<br>,岗位种类齐全、职责分工明确,人员搭配针对本项目组<br>建,得6分;<br>(2)根据项目服务内容配置服务团队,团队人员配备充足<b",
+            "pages": [
+              47
+            ],
+            "page": 47,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第47页",
+              "index": 47,
+              "pages": [
+                47
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0055",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "Col1：合计100分 Col2：合计100分 项目团<br>队：合计100分 18：合计100分 1.项目负责人(4分):<br>了解《蓝皮书》、《大事记》编",
+            "quote": "Col1：合计100分 Col2：合计100分 项目团<br>队：合计100分 18：合计100分 1.项目负责人(4分):<br>了解《蓝皮书》、《大事记》编纂方式和特点,具有5年及<br>以上图书编辑经验,具备项目统筹管理能力,得2分,否则<br>得0分;<br>具有出版专业正高级职称,得2分,否则得0分。<br>2.项目团队人员配置(6分):(团队人员少于6人,本“<br>项目团队人员”不得分。)<br>(1)根据项目服务内容配置服务团队,团队人员配备充足<br>,岗位种类齐全、职责分工明确,人员搭配针对本项目组<br>建,得6分;<br>(2)根据项目服务内容配置服务团队,团队人员配备充足<br>,人员搭配针对本项目组建,岗位种类齐全,但未对职责<br>分工进行具体描述,得4分;<br>(3)团队人员有岗位种类描述,但人员配备不够充足,或<br>岗位种类不齐全,或未针对项目组建团队",
+            "pages": [
+              47
+            ],
+            "page": 47,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第47页",
+              "index": 47,
+              "pages": [
+                47
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0056",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "1.项目负责人(4分):",
+            "quote": "1.项目负责人(4分):",
+            "pages": [
+              47
+            ],
+            "page": 47,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第47页",
+              "index": 47,
+              "pages": [
+                47
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0057",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "(3)团队人员有岗位种类描述,但人员配备不够充足,或岗位种类不齐全,或未针对项目组建团队人员,得2分;",
+            "quote": "(3)团队人员有岗位种类描述,但人员配备不够充足,或岗位种类不齐全,或未针对项目组建团队人员,得2分;",
+            "pages": [
+              47
+            ],
+            "page": 47,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第47页",
+              "index": 47,
+              "pages": [
+                47
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0058",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "(4)未提供本项内容或完全不满足采购需求得0分。",
+            "quote": "(4)未提供本项内容或完全不满足采购需求得0分。",
+            "pages": [
+              47
+            ],
+            "page": 47,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第47页",
+              "index": 47,
+              "pages": [
+                47
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0059",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "(1)具有 5 年及以上发展报告、志书、年鉴等类似图书编辑经验,具备较强的项目统筹管理经验,2 分;不具备 ,0 分。",
+            "quote": "(1)具有 5 年及以上发展报告、志书、年鉴等类似图书编辑经验,具备较强的项目统筹管理经验,2 分;不具备 ,0 分。",
+            "pages": [
+              47
+            ],
+            "page": 47,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第47页",
+              "index": 47,
+              "pages": [
+                47
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0060",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "(2)具有出版专业副高级及以上职称,2 分;不具备,0 分。",
+            "quote": "(2)具有出版专业副高级及以上职称,2 分;不具备,0 分。",
+            "pages": [
+              47
+            ],
+            "page": 47,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第47页",
+              "index": 47,
+              "pages": [
+                47
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0061",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "(1)团队人员均具有至少3年及以上与本项目服务需求同类的业绩经验,具备编纂、排版、设计、审校等执行能力得4分;团队人员未全部具有3年及以上同类业绩经验,或缺少编",
+            "quote": "(1)团队人员均具有至少3年及以上与本项目服务需求同类的业绩经验,具备编纂、排版、设计、审校等执行能力得4分;团队人员未全部具有3年及以上同类业绩经验,或缺少编纂、排版、设计、审校等执行能力得2分;本项不响应或完全不满足要求得0分。",
+            "pages": [
+              47
+            ],
+            "page": 47,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第47页",
+              "index": 47,
+              "pages": [
+                47
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0062",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "注:须提供团队人员清单,身份证复印件、相关简历、相关专业学历证书、职称证书复印件并加盖投标人公章,不提供相关证明材料此项均不得分。",
+            "quote": "注:须提供团队人员清单,身份证复印件、相关简历、相关专业学历证书、职称证书复印件并加盖投标人公章,不提供相关证明材料此项均不得分。",
+            "pages": [
+              47
+            ],
+            "page": 47,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第47页",
+              "index": 47,
+              "pages": [
+                47
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0063",
+            "block": "scoring",
+            "label": "评分要求",
+            "summary": "1、打分保留两位小数。小数点后第三位四舍五入。",
+            "quote": "1、打分保留两位小数。小数点后第三位四舍五入。",
+            "pages": [
+              47
+            ],
+            "page": 47,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第47页",
+              "index": 47,
+              "pages": [
+                47
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          }
+        ]
+      },
+      "materials": {
+        "label": "要交的材料",
+        "items": [
+          {
+            "clause_id": "TB-0064",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "废标 .............................................................................",
+            "quote": "废标 .................................................................................................................................................... 27第一条 合同文件组成 ....................................................................................................................................... 52一 、 资格证明文件格式 ....................................................................................",
+            "pages": [
+              3,
+              4,
+              5
+            ],
+            "page": 3,
+            "printed_page": null,
+            "printed_pages": [
+              null,
+              null,
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第3-5页",
+              "index": 3,
+              "pages": [
+                3,
+                4,
+                5
+              ]
+            },
+            "detection": "cross_page",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0065",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "一、项目基本情况",
+            "quote": "一、项目基本情况",
+            "pages": [
+              6
+            ],
+            "page": 6,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第6页",
+              "index": 6,
+              "pages": [
+                6
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0066",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "1.项目编号:11000026210200173514-XM001",
+            "quote": "1.项目编号:11000026210200173514-XM001",
+            "pages": [
+              6
+            ],
+            "page": 6,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第6页",
+              "index": 6,
+              "pages": [
+                6
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0067",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2.项目名称:首都广电新型智库项目(第二包:出版制作)",
+            "quote": "2.项目名称:首都广电新型智库项目(第二包:出版制作)",
+            "pages": [
+              6
+            ],
+            "page": 6,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第6页",
+              "index": 6,
+              "pages": [
+                6
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0068",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "3.项目预算金额:48.9万元、项目最高限价(如有):48.9万元",
+            "quote": "3.项目预算金额:48.9万元、项目最高限价(如有):48.9万元",
+            "pages": [
+              6
+            ],
+            "page": 6,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第6页",
+              "index": 6,
+              "pages": [
+                6
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0069",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "4.采购需求:",
+            "quote": "4.采购需求:",
+            "pages": [
+              6
+            ],
+            "page": 6,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第6页",
+              "index": 6,
+              "pages": [
+                6
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0070",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "10.1 投标人应当按照招标文件的要求编制投标文件。投标文件应由《资格证明文件》、《商务技术文件》两部分构成。投标文件的部分格式要求,见第七章 《投标文件格式》",
+            "quote": "10.1 投标人应当按照招标文件的要求编制投标文件。投标文件应由《资格证明文件》、《商务技术文件》两部分构成。投标文件的部分格式要求,见第七章 《投标文件格式》。",
+            "pages": [
+              22
+            ],
+            "page": 22,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第22页",
+              "index": 22,
+              "pages": [
+                22
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0071",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "序号：1-1 审查因素：营业执照等证明<br>文件 审查内容：<br>投标人为企业(包括合伙企业)的,应提供<br>有效的 “营业执照 ”;<br>投标人为事业",
+            "quote": "序号：1-1 审查因素：营业执照等证明<br>文件 审查内容：<br>投标人为企业(包括合伙企业)的,应提供<br>有效的 “营业执照 ”;<br>投标人为事业单位的,应提供有效的“事业<br>单位法人证书”;<br>投标人是非企业机构的,应提供有效的 “执<br>业许可证”、“登记证书”等证明文件;<br>投标人是个体工商户的,应提供有效的“个<br>体工商户营业执照”;<br>投标人是自然人的,应提供有效的自然人身<br>份证明。<br>分支机构参加投标的,应提供该分支机构或<br>其所属法人/其他组织的相应证明文件;同<br>时还应提供其所属法人/其他组织出具的<br>授权其参与本项目的授权书(格式自拟 , 格式要求：<br> <br>提供证明文<br>件的电子件<br>或电子证照",
+            "pages": [
+              30
+            ],
+            "page": 30,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第30页",
+              "index": 30,
+              "pages": [
+                30
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0072",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "序号审查因素审查内容格式要求 1 满足《中华人民共和国政府采购法》第二十二条规定具体规定见第一章《投标邀请》 1-1 营业执照等证明文件投标人为企业(包括合伙企",
+            "quote": "序号审查因素审查内容格式要求 1 满足《中华人民共和国政府采购法》第二十二条规定具体规定见第一章《投标邀请》 1-1 营业执照等证明文件投标人为企业(包括合伙企业)的,应提供有效的 “营业执照 ”; 投标人为事业单位的,应提供有效的“事业单位法人证书”; 投标人是非企业机构的,应提供有效的 “执业许可证”、“登记证书”等证明文件; 投标人是个体工商户的,应提供有效的“个体工商户营业执照”; 投标人是自然人的,应提供有效的自然人身份证明。",
+            "pages": [
+              30
+            ],
+            "page": 30,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第30页",
+              "index": 30,
+              "pages": [
+                30
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0073",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "分支机构参加投标的,应提供该分支机构或其所属法人/其他组织的相应证明文件;同时还应提供其所属法人/其他组织出具的授权其参与本项目的授权书(格式自拟 , 提供证明",
+            "quote": "分支机构参加投标的,应提供该分支机构或其所属法人/其他组织的相应证明文件;同时还应提供其所属法人/其他组织出具的授权其参与本项目的授权书(格式自拟 , 提供证明文件的电子件或电子证照",
+            "pages": [
+              30
+            ],
+            "page": 30,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第30页",
+              "index": 30,
+              "pages": [
+                30
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0074",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "31 序号审查因素审查内容格式要求须加盖其所属法人/其他组织的公章);对于银行、保险、石油石化、电力、电信等行业的分支机构 ,可以提供上述授权,也可以提供其所属",
+            "quote": "31 序号审查因素审查内容格式要求须加盖其所属法人/其他组织的公章);对于银行、保险、石油石化、电力、电信等行业的分支机构 ,可以提供上述授权,也可以提供其所属法人/其他组织的有关文件或制度等能够证明授权其独立开展业务的证明材料。",
+            "pages": [
+              31
+            ],
+            "page": 31,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第31页",
+              "index": 31,
+              "pages": [
+                31
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0075",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "序号：2-1-<br>1 审查因素：中小企业证明文<br>件 审查内容：<br>当本项目(包)涉及预留份额专门面向中小<br>企业采购,此时建议在《资格证明文件",
+            "quote": "序号：2-1-<br>1 审查因素：中小企业证明文<br>件 审查内容：<br>当本项目(包)涉及预留份额专门面向中小<br>企业采购,此时建议在《资格证明文件》中<br>提供。<br>1、投标人单独投标的,应提供《中小企业声<br>明函》或《残疾人福利性单位声明函》或由<br>省级以上监狱管理局、戒毒管理局(含新疆<br>生产建设兵团)出具的属于监狱企业的证明<br>文件。<br>2、如招标文件要求以联合体形式参加或者要<br>求合同分包的,且投标人为联合体或拟进行<br>合同分包的,则联合体中的中小企业 、签<br>订分包意向协议的中小企业具体情况须在《<br>中小企业声明函》或《残疾人福利性单位声<br>明 函》或由省级以上监狱管理局 、戒毒管<br>理局(含新疆生产建设兵团)出具的属于监<br>狱企 业的证明文件中如实填报,且满足招<br>标文件关于预留份额的要求。 格式要求：<b",
+            "pages": [
+              32
+            ],
+            "page": 32,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第32页",
+              "index": 32,
+              "pages": [
+                32
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0076",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "32 序号审查因素审查内容格式要求 2-1 中小企业政策证明文件具体要求见第一章《投标邀请》 2-1- 1 中小企业证明文件当本项目(包)涉及预留份额专门面向中",
+            "quote": "32 序号审查因素审查内容格式要求 2-1 中小企业政策证明文件具体要求见第一章《投标邀请》 2-1- 1 中小企业证明文件当本项目(包)涉及预留份额专门面向中小企业采购,此时建议在《资格证明文件》中提供。",
+            "pages": [
+              32
+            ],
+            "page": 32,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第32页",
+              "index": 32,
+              "pages": [
+                32
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0077",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "序号：2-1-<br>2 审查因素：拟分包情况说<br>明及分包意向协<br>议(本项目不适<br>用) 审查内容：如本项目(包)要求通过分包措施预留部分<br",
+            "quote": "序号：2-1-<br>2 审查因素：拟分包情况说<br>明及分包意向协<br>议(本项目不适<br>用) 审查内容：如本项目(包)要求通过分包措施预留部分<br>采购份额面向中小企业采购、且投标人因落<br>实政府采购政策拟进行分包的,必须提供;<br>否则无须提供。<br>对于预留份额专门面向中小企业采购的项目<br>(包),组成联合体或者接受分包合同的中小<br>企业与联合体内其他企业 、分包企业之间<br>不 得存在直接控股、管理关系。 格式要求：<br> <br> <br> <br>格式见《投标<br>文件格式》",
+            "pages": [
+              33
+            ],
+            "page": 33,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第33页",
+              "index": 33,
+              "pages": [
+                33
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0078",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "序号：3-1 审查因素：本项目对于联合<br>体的要求( 本项<br>目不适用) 审查内容：<br>1、如本项目接受联合体投标,且投标人为联<br>合体时必须提",
+            "quote": "序号：3-1 审查因素：本项目对于联合<br>体的要求( 本项<br>目不适用) 审查内容：<br>1、如本项目接受联合体投标,且投标人为联<br>合体时必须提供《联合协议》,明确各方拟承<br>担的工作和责任 ,并指定联合体牵头人 ,<br>授权其代表所有联合体成员负责本项目投标<br>和合同实施阶段的牵头 、协调工作 。该联<br>合协议应当作为投标文件的组成部分 ,与<br>投标文件其他内容同时递交。<br>2 、联合体各成员单位均须提供本表中序<br>号 1-1、1-2 的证明文件。联合体各成员单<br>位均 应满足本表 3-2 项规定。<br>3 、本表序号 3-3 项规定的其他特定资格<br>要 求中的每一小项要求 ,联合体各方中至<br>少应当有一方符合本表中其他资格要求并提<br>供证明文件。 格式要求：<br>提供《联合协<br>议》原件的电<br>子件<br>格式见《投",
+            "pages": [
+              33
+            ],
+            "page": 33,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第33页",
+              "index": 33,
+              "pages": [
+                33
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0079",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "序号审查因素审查内容格式要求 2-1- 2 拟分包情况说明及分包意向协议(本项目不适用) 如本项目(包)要求通过分包措施预留部分采购份额面向中小企业采购、且投标",
+            "quote": "序号审查因素审查内容格式要求 2-1- 2 拟分包情况说明及分包意向协议(本项目不适用) 如本项目(包)要求通过分包措施预留部分采购份额面向中小企业采购、且投标人因落实政府采购政策拟进行分包的,必须提供; 否则无须提供。",
+            "pages": [
+              33
+            ],
+            "page": 33,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第33页",
+              "index": 33,
+              "pages": [
+                33
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0080",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "序号：5 审查因素：获取招标文件 审查内容：在规定期限内通过北京市政府采购电子交易<br>平台获取所参与包的招标文件。<br>注:如本项目接受联合体,且供应商为",
+            "quote": "序号：5 审查因素：获取招标文件 审查内容：在规定期限内通过北京市政府采购电子交易<br>平台获取所参与包的招标文件。<br>注:如本项目接受联合体,且供应商为联合<br>体时,联合体中任一成员获取文件即视为满<br>足要求。 格式要求：<br> <br>招标代理机构<br>提供证明材料<br>,投标人无须<br>提供。",
+            "pages": [
+              35
+            ],
+            "page": 35,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第35页",
+              "index": 35,
+              "pages": [
+                35
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0081",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "Col1：8 Col2：拟分包情况说<br>明(如有) 符合性审查要求：如本项目(包)非因“落实政府采购政策”亦允许分包,且<br>供应商拟进行分包时,必须提供",
+            "quote": "Col1：8 Col2：拟分包情况说<br>明(如有) 符合性审查要求：如本项目(包)非因“落实政府采购政策”亦允许分包,且<br>供应商拟进行分包时,必须提供;否则无须提供;",
+            "pages": [
+              36
+            ],
+            "page": 36,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第36页",
+              "index": 36,
+              "pages": [
+                36
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0082",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "★号条款响应投标文件满足招标文件第五章《采购需求》中★号条款要求的; 8 拟分包情况说明(如有) 如本项目(包)非因“落实政府采购政策”亦允许分包,且供应商拟进",
+            "quote": "★号条款响应投标文件满足招标文件第五章《采购需求》中★号条款要求的; 8 拟分包情况说明(如有) 如本项目(包)非因“落实政府采购政策”亦允许分包,且供应商拟进行分包时,必须提供;否则无须提供; 9 分包其他要求 (如有) 分包履行的内容、金额或者比例未超出《投标人须知资料表 》中的规定;",
+            "pages": [
+              36
+            ],
+            "page": 36,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第36页",
+              "index": 36,
+              "pages": [
+                36
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0083",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "1)采购的产品若属于《节能产品政府采购品目清单》范围中政府强制采购产品,则投标人所报产品必须获得国家确定的认证机构出具的、处于有效期之内的节能产品认证证书;",
+            "quote": "1)采购的产品若属于《节能产品政府采购品目清单》范围中政府强制采购产品,则投标人所报产品必须获得国家确定的认证机构出具的、处于有效期之内的节能产品认证证书;",
+            "pages": [
+              37
+            ],
+            "page": 37,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第37页",
+              "index": 37,
+              "pages": [
+                37
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0084",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2)所投产品属于列入《网络关键设备和网络安全专用产品目录》的网络安全专用产品时,应当按照《信息安全技术网络安全专用产品安全技术要求》等相关国家标准的强制性要求,",
+            "quote": "2)所投产品属于列入《网络关键设备和网络安全专用产品目录》的网络安全专用产品时,应当按照《信息安全技术网络安全专用产品安全技术要求》等相关国家标准的强制性要求,由具备资格的机构安全认证合格或者安全检测符合要求 ;(如该产品已经获得公安部颁发的计算机信息系统安全专用产品销售许可证,且在有效期内,亦视为符合要求)",
+            "pages": [
+              37
+            ],
+            "page": 37,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第37页",
+              "index": 37,
+              "pages": [
+                37
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0085",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "3)项目中涉及涂料、胶黏剂、油墨、清洗剂等挥发性有机物产品,且属于强制性标准的,供应商应执行符合本市和国家的VOCs 含量限制标准。",
+            "quote": "3)项目中涉及涂料、胶黏剂、油墨、清洗剂等挥发性有机物产品,且属于强制性标准的,供应商应执行符合本市和国家的VOCs 含量限制标准。",
+            "pages": [
+              37
+            ],
+            "page": 37,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第37页",
+              "index": 37,
+              "pages": [
+                37
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0086",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(一)不同投标人的投标文件由同一单",
+            "quote": "(一)不同投标人的投标文件由同一单",
+            "pages": [
+              37
+            ],
+            "page": 37,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第37页",
+              "index": 37,
+              "pages": [
+                37
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0087",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2.1 评标过程中,评标委员会将以书面形式要求投标人对其投标文件中含义不明确 、同类问题表述不一致或者有明显文字和计算错误的内容,作出必要的澄清、说明或者补正。",
+            "quote": "2.1 评标过程中,评标委员会将以书面形式要求投标人对其投标文件中含义不明确 、同类问题表述不一致或者有明显文字和计算错误的内容,作出必要的澄清、说明或者补正。投标人的澄清、说明或者补正应当采用书面形式,并加盖公章,或者由法定代表人(若投标人为事业单位或其他组织或分支机构,可为单位负责人)或其授权的代表签字。投标人的澄清、说明或者补正不得超出投标文件的范围或者改变投标文件的实质性内容。澄清文件将作为投标文件内容的一部分。",
+            "pages": [
+              39
+            ],
+            "page": 39,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第39页",
+              "index": 39,
+              "pages": [
+                39
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0088",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(4)项情形的,应当要求相关供应商在评审现场合理的时间内对投标(响应)价格作出解释,提供项目具体成本测算等与报价合理性相关的书面说明及必要的证明材料,包括但不限",
+            "quote": "(4)项情形的,应当要求相关供应商在评审现场合理的时间内对投标(响应)价格作出解释,提供项目具体成本测算等与报价合理性相关的书面说明及必要的证明材料,包括但不限于原材料成本、人工成本、制造费用等,给予相关供应商的合理时间一般不少于30分钟。其中,属于第(3)项情形,供应商已随投标(响应)文件一并提交相关书面说明及必要的证明材料的,在评审现场可不再重复提交。",
+            "pages": [
+              39
+            ],
+            "page": 39,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第39页",
+              "index": 39,
+              "pages": [
+                39
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0089",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2.2.4 上述投标(响应)报价指按照本章2.4修正后的报价。",
+            "quote": "2.2.4 上述投标(响应)报价指按照本章2.4修正后的报价。",
+            "pages": [
+              40
+            ],
+            "page": 40,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第40页",
+              "index": 40,
+              "pages": [
+                40
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0090",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "Col1：1 Col2：商务<br>部分 二、评分标准：业绩 Col4：10 Col5：投标人提供近3年(2023年1月1日至今)(以合同签订时间<br>为准)",
+            "quote": "Col1：1 Col2：商务<br>部分 二、评分标准：业绩 Col4：10 Col5：投标人提供近3年(2023年1月1日至今)(以合同签订时间<br>为准),完成的类似项目的有效案例证明材料,提供一个<br>合同得2分,满分10分。<br>注:<br>有效业绩证明材料:至少包含合同首尾页、签字盖章页、<br>合同主要内容、合同签订时间等关键页的复印件,并加盖<br>投标人公章。",
+            "pages": [
+              44
+            ],
+            "page": 44,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第44页",
+              "index": 44,
+              "pages": [
+                44
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0091",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "44 二、评分标准序号评分因素评价指标和分值 1 商务部分业绩 10 投标人提供近3年(2023年1月1日至今)(以合同签订时间为准),完成的类似项目的有效案例",
+            "quote": "44 二、评分标准序号评分因素评价指标和分值 1 商务部分业绩 10 投标人提供近3年(2023年1月1日至今)(以合同签订时间为准),完成的类似项目的有效案例证明材料,提供一个合同得2分,满分10分。",
+            "pages": [
+              44
+            ],
+            "page": 44,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第44页",
+              "index": 44,
+              "pages": [
+                44
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0092",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "Col1：印刷能<br>力 Col2：2 质量保<br>障方案：供应商提供印前、印刷、装订及相关的配套设备证明材料<br>,若供应商不具备印刷能力,需提供合作印",
+            "quote": "Col1：印刷能<br>力 Col2：2 质量保<br>障方案：供应商提供印前、印刷、装订及相关的配套设备证明材料<br>,若供应商不具备印刷能力,需提供合作印刷企业的相关<br>能力证明材料,并提供合作合同复印件。<br>满足上述要求得2分,否则得0分。",
+            "pages": [
+              46
+            ],
+            "page": 46,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第46页",
+              "index": 46,
+              "pages": [
+                46
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0093",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "印刷能力 2 供应商提供印前、印刷、装订及相关的配套设备证明材料 ,若供应商不具备印刷能力,需提供合作印刷企业的相关能力证明材料,并提供合作合同复印件。",
+            "quote": "印刷能力 2 供应商提供印前、印刷、装订及相关的配套设备证明材料 ,若供应商不具备印刷能力,需提供合作印刷企业的相关能力证明材料,并提供合作合同复印件。",
+            "pages": [
+              46
+            ],
+            "page": 46,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第46页",
+              "index": 46,
+              "pages": [
+                46
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0094",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "Col1：3 Col2：价格<br>(10<br>分) 项目团<br>队：评标基准价=满足招标文件要求且最低的评标价格<br>投标人的有效价格得分=(评标基准价",
+            "quote": "Col1：3 Col2：价格<br>(10<br>分) 项目团<br>队：评标基准价=满足招标文件要求且最低的评标价格<br>投标人的有效价格得分=(评标基准价/评标价格)×10 18：评标基准价=满足招标文件要求且最低的评标价格<br>投标人的有效价格得分=(评标基准价/评标价格)×10 1.项目负责人(4分):<br>了解《蓝皮书》、《大事记》编纂方式和特点,具有5年及<br>以上图书编辑经验,具备项目统筹管理能力,得2分,否则<br>得0分;<br>具有出版专业正高级职称,得2分,否则得0分。<br>2.项目团队人员配置(6分):(团队人员少于6人,本“<br>项目团队人员”不得分。)<br>(1)根据项目服务内容配置服务团队,团队人员配备充足<br>,岗位种类齐全、职责分工明确,人员搭配针对本项目组<br>建,得6分;<br>(2)根据项目服务内容配置服务团队,团队人员配备充足<b",
+            "pages": [
+              47
+            ],
+            "page": 47,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第47页",
+              "index": 47,
+              "pages": [
+                47
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0095",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "Col1：合计100分 Col2：合计100分 项目团<br>队：合计100分 18：合计100分 1.项目负责人(4分):<br>了解《蓝皮书》、《大事记》编",
+            "quote": "Col1：合计100分 Col2：合计100分 项目团<br>队：合计100分 18：合计100分 1.项目负责人(4分):<br>了解《蓝皮书》、《大事记》编纂方式和特点,具有5年及<br>以上图书编辑经验,具备项目统筹管理能力,得2分,否则<br>得0分;<br>具有出版专业正高级职称,得2分,否则得0分。<br>2.项目团队人员配置(6分):(团队人员少于6人,本“<br>项目团队人员”不得分。)<br>(1)根据项目服务内容配置服务团队,团队人员配备充足<br>,岗位种类齐全、职责分工明确,人员搭配针对本项目组<br>建,得6分;<br>(2)根据项目服务内容配置服务团队,团队人员配备充足<br>,人员搭配针对本项目组建,岗位种类齐全,但未对职责<br>分工进行具体描述,得4分;<br>(3)团队人员有岗位种类描述,但人员配备不够充足,或<br>岗位种类不齐全,或未针对项目组建团队",
+            "pages": [
+              47
+            ],
+            "page": 47,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第47页",
+              "index": 47,
+              "pages": [
+                47
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0096",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "注:须提供团队人员清单,身份证复印件、相关简历、相关专业学历证书、职称证书复印件并加盖投标人公章,不提供相关证明材料此项均不得分。",
+            "quote": "注:须提供团队人员清单,身份证复印件、相关简历、相关专业学历证书、职称证书复印件并加盖投标人公章,不提供相关证明材料此项均不得分。",
+            "pages": [
+              47
+            ],
+            "page": 47,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第47页",
+              "index": 47,
+              "pages": [
+                47
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0097",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "10.供应商需具备齐备印前、印刷、装订及相关的配套设备,设备材料先进 ,印刷的加工流程科学合理。(若供应商不具备印刷能力,需提供合作印刷企业的相关能力证明材料,",
+            "quote": "10.供应商需具备齐备印前、印刷、装订及相关的配套设备,设备材料先进 ,印刷的加工流程科学合理。(若供应商不具备印刷能力,需提供合作印刷企业的相关能力证明材料,并提供合作合同复印件并加盖单位公章)",
+            "pages": [
+              49
+            ],
+            "page": 49,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第49页",
+              "index": 49,
+              "pages": [
+                49
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0098",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2.责任编辑具有出版专业副高级及以上职称,具有5年及以上发展报告、志书、年鉴等类似图书编辑经验并提供相关业绩证明材料,具备较强的项目统筹管理能力。",
+            "quote": "2.责任编辑具有出版专业副高级及以上职称,具有5年及以上发展报告、志书、年鉴等类似图书编辑经验并提供相关业绩证明材料,具备较强的项目统筹管理能力。",
+            "pages": [
+              50
+            ],
+            "page": 50,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第50页",
+              "index": 50,
+              "pages": [
+                50
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0099",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2.“乙方”系指根据合同规定向甲方提供服务的具有法人资格的实体;即中标人。",
+            "quote": "2.“乙方”系指根据合同规定向甲方提供服务的具有法人资格的实体;即中标人。",
+            "pages": [
+              52
+            ],
+            "page": 52,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第52页",
+              "index": 52,
+              "pages": [
+                52
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0100",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "3.“合同”系指甲乙双方签署的,合同格式中载明的甲乙双方所达成的约定,包括构成合同的所有附件、附录和构成合同的所有文件。",
+            "quote": "3.“合同”系指甲乙双方签署的,合同格式中载明的甲乙双方所达成的约定,包括构成合同的所有附件、附录和构成合同的所有文件。",
+            "pages": [
+              52
+            ],
+            "page": 52,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第52页",
+              "index": 52,
+              "pages": [
+                52
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0101",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "4.“服务”系指乙方根据合同规定须向甲方提供的全部服务。",
+            "quote": "4.“服务”系指乙方根据合同规定须向甲方提供的全部服务。",
+            "pages": [
+              52
+            ],
+            "page": 52,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第52页",
+              "index": 52,
+              "pages": [
+                52
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0102",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "1.服务内容:本示范文本所列服务事项仅为参考表述,业务处室应当结合项目需求书(或采购需求)、成交结果及项目实际,将服务内容、服务要求、 验收标准和验收程序在本条",
+            "quote": "1.服务内容:本示范文本所列服务事项仅为参考表述,业务处室应当结合项目需求书(或采购需求)、成交结果及项目实际,将服务内容、服务要求、 验收标准和验收程序在本条或者附件中逐项细化列明,不得直接照搬示例或者仅写“详见招标文件/项目需求书”。乙方应当按照本合同约定及中标/成交时对项目实施方式、人员配置、服务保障等作出的承诺提供服务。服务内容可包括方案策划、组织实施、技术支持、会务保障、宣传推广、成果报告、培训、 运维保障等,具体由业务处室根据项目实际调整;相关明细、表格、清单、实施方案、承诺性文件不宜列入正文的,应作为本合同附件。",
+            "pages": [
+              52
+            ],
+            "page": 52,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第52页",
+              "index": 52,
+              "pages": [
+                52
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0103",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2.服务期限:自 年 月 日起至 年 月 日止。",
+            "quote": "2.服务期限:自 年 月 日起至 年 月 日止。",
+            "pages": [
+              53
+            ],
+            "page": 53,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第53页",
+              "index": 53,
+              "pages": [
+                53
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0104",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "3.服务地点:______(业务处室根据项目实际填写)。",
+            "quote": "3.服务地点:______(业务处室根据项目实际填写)。",
+            "pages": [
+              53
+            ],
+            "page": 53,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第53页",
+              "index": 53,
+              "pages": [
+                53
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0105",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "1.乙方作为甲方选定的服务商,必须根据甲方要求,承担在投标文件中向甲方承诺的服务范围内的相关工作。",
+            "quote": "1.乙方作为甲方选定的服务商,必须根据甲方要求,承担在投标文件中向甲方承诺的服务范围内的相关工作。",
+            "pages": [
+              53
+            ],
+            "page": 53,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第53页",
+              "index": 53,
+              "pages": [
+                53
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0106",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2.任何情况下,未经甲方书面同意,乙方不得向第三方转让甲方在本合同中授予乙方的权限,不得超越甲方授权范围。否则甲方有权取消乙方的中标人资格。",
+            "quote": "2.任何情况下,未经甲方书面同意,乙方不得向第三方转让甲方在本合同中授予乙方的权限,不得超越甲方授权范围。否则甲方有权取消乙方的中标人资格。",
+            "pages": [
+              53
+            ],
+            "page": 53,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第53页",
+              "index": 53,
+              "pages": [
+                53
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0107",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "1.本合同成交金额为人民币_____元(大写:_____),具体以验收结算金额为准。",
+            "quote": "1.本合同成交金额为人民币_____元(大写:_____),具体以验收结算金额为准。",
+            "pages": [
+              53
+            ],
+            "page": 53,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第53页",
+              "index": 53,
+              "pages": [
+                53
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0108",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2.本合同的付款方式为:(■分期付款/□一次性支付,任选其一) 分期付款:本合同生效且款项拨付至甲方账户后10个工作日内,甲方向乙方支付成交金额的80_%作为合",
+            "quote": "2.本合同的付款方式为:(■分期付款/□一次性支付,任选其一) 分期付款:本合同生效且款项拨付至甲方账户后10个工作日内,甲方向乙方支付成交金额的80_%作为合同首款,即人民币 元(大写: )。项目完成后10日内,乙方向甲方提出验收申请。甲方验收合格后10个工作日内, 按验收结算金额扣除已付款项后的余额向乙方支付合同尾款,人民币 元( 大写: )。",
+            "pages": [
+              53
+            ],
+            "page": 53,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第53页",
+              "index": 53,
+              "pages": [
+                53
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0109",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "1.本合同所称不可抗力是指不能预见、不能避免并不能克服的客观情况, 包括但不限于战争、严重火灾、水灾、台风和地震、法规政策的变更以及其他双方书面同意属于不可抗力",
+            "quote": "1.本合同所称不可抗力是指不能预见、不能避免并不能克服的客观情况, 包括但不限于战争、严重火灾、水灾、台风和地震、法规政策的变更以及其他双方书面同意属于不可抗力的情形。",
+            "pages": [
+              56
+            ],
+            "page": 56,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第56页",
+              "index": 56,
+              "pages": [
+                56
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0110",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2.受不可抗力影响的一方应在不可抗力发生后,以最快的方式在最短的时间内通知另一方,并在不可抗力发生后10日内,将有关部门出具的证明文件直接送达或邮寄另一方。",
+            "quote": "2.受不可抗力影响的一方应在不可抗力发生后,以最快的方式在最短的时间内通知另一方,并在不可抗力发生后10日内,将有关部门出具的证明文件直接送达或邮寄另一方。",
+            "pages": [
+              56
+            ],
+            "page": 56,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第56页",
+              "index": 56,
+              "pages": [
+                56
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0111",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "3.当不可抗力事件发生时,执行合同的期限可相应延长,不视为任何一方违约。如果延长期限后合同仍不能履行的,双方均有权终止本合同。若合同终止,双方互不承担违约责任。",
+            "quote": "3.当不可抗力事件发生时,执行合同的期限可相应延长,不视为任何一方违约。如果延长期限后合同仍不能履行的,双方均有权终止本合同。若合同终止,双方互不承担违约责任。但因一方迟延履行导致不可抗力的,不能免除责任。",
+            "pages": [
+              56
+            ],
+            "page": 56,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第56页",
+              "index": 56,
+              "pages": [
+                56
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0112",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2.在执行本合同过程中,双方如若发生争议,应先协商解决,协商达成一致意见,须以书面形式并加盖公章确认方可有效;协商不成时,任何一方均有权将争议提交至甲方所在地有",
+            "quote": "2.在执行本合同过程中,双方如若发生争议,应先协商解决,协商达成一致意见,须以书面形式并加盖公章确认方可有效;协商不成时,任何一方均有权将争议提交至甲方所在地有管辖权的人民法院通过诉讼方式解决。",
+            "pages": [
+              57
+            ],
+            "page": 57,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第57页",
+              "index": 57,
+              "pages": [
+                57
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0113",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "1.本合同经双方法定代表人或授权代表签字加盖公章后生效。签字日期不一致的,以最后签字日期为本合同生效日期。双方在加盖有效印章时务必加盖骑缝章。",
+            "quote": "1.本合同经双方法定代表人或授权代表签字加盖公章后生效。签字日期不一致的,以最后签字日期为本合同生效日期。双方在加盖有效印章时务必加盖骑缝章。",
+            "pages": [
+              57
+            ],
+            "page": 57,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第57页",
+              "index": 57,
+              "pages": [
+                57
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0114",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "1.严格遵守《中华人民共和国保守国家秘密法》等有关保密内容的法律和法规的相关规定。",
+            "quote": "1.严格遵守《中华人民共和国保守国家秘密法》等有关保密内容的法律和法规的相关规定。",
+            "pages": [
+              60
+            ],
+            "page": 60,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第60页",
+              "index": 60,
+              "pages": [
+                60
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0115",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2.承诺建立信息保密制度并采取不低于保护其自有保密信息所采用的一切保密措施保护保密信息。",
+            "quote": "2.承诺建立信息保密制度并采取不低于保护其自有保密信息所采用的一切保密措施保护保密信息。",
+            "pages": [
+              60
+            ],
+            "page": 60,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第60页",
+              "index": 60,
+              "pages": [
+                60
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0116",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "3.接收方欲将保密信息向其顾客、子公司、第三方承包商或者其他任何第三方( 下称“第三方”)披露时,其必须首先取得信息披露方事先的书面同意,且必须与该第三方签订与",
+            "quote": "3.接收方欲将保密信息向其顾客、子公司、第三方承包商或者其他任何第三方( 下称“第三方”)披露时,其必须首先取得信息披露方事先的书面同意,且必须与该第三方签订与本协议所包含的条款和条件相一致的有效保密协议,接收方同意对由其雇员或者第三方实施的对保密信息的未经授权的使用或者对本协议的任何形式的违反承担连带责任。",
+            "pages": [
+              60
+            ],
+            "page": 60,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第60页",
+              "index": 60,
+              "pages": [
+                60
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0117",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "4.接收方承诺在保密期限内,接收方将不会为任何与本协议规定不符的目的自己或允许他人使用保密信息的全部或任何部分。",
+            "quote": "4.接收方承诺在保密期限内,接收方将不会为任何与本协议规定不符的目的自己或允许他人使用保密信息的全部或任何部分。",
+            "pages": [
+              60
+            ],
+            "page": 60,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第60页",
+              "index": 60,
+              "pages": [
+                60
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0118",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "5.未经披露方事先书面许可,不能将保密信息的全部或部分进行复制或仿造或带出工作地点。",
+            "quote": "5.未经披露方事先书面许可,不能将保密信息的全部或部分进行复制或仿造或带出工作地点。",
+            "pages": [
+              60
+            ],
+            "page": 60,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第60页",
+              "index": 60,
+              "pages": [
+                60
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0119",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "6.接收方仅能向有知悉必要的接收方人员披露保密信息。一经发现对保密信息的任何未经授权的披露或者接收方及其人员违反本协议时,接收方应立即书面通知披露方,并采取措施",
+            "quote": "6.接收方仅能向有知悉必要的接收方人员披露保密信息。一经发现对保密信息的任何未经授权的披露或者接收方及其人员违反本协议时,接收方应立即书面通知披露方,并采取措施防止进一步未经授权而使用保密信息或者进一步泄露保密信息。",
+            "pages": [
+              60
+            ],
+            "page": 60,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第60页",
+              "index": 60,
+              "pages": [
+                60
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0120",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "7.接收方不得对任何披露方提供的任何软件或硬件进行反编译、反汇编及逆向工程。",
+            "quote": "7.接收方不得对任何披露方提供的任何软件或硬件进行反编译、反汇编及逆向工程。",
+            "pages": [
+              60
+            ],
+            "page": 60,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第60页",
+              "index": 60,
+              "pages": [
+                60
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0121",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "8.在所有授权的复制品上,接收方都要附上与原件上一致的保密提示信息。",
+            "quote": "8.在所有授权的复制品上,接收方都要附上与原件上一致的保密提示信息。",
+            "pages": [
+              60
+            ],
+            "page": 60,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第60页",
+              "index": 60,
+              "pages": [
+                60
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0122",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "9.法律法规所要求或者根据有管辖权的司法机构、政府机构及监管机构的命令或要求而应披露的情形下,接收方须及时通知披露方,且尽其最大努力获得保护性命令或以其他方式防",
+            "quote": "9.法律法规所要求或者根据有管辖权的司法机构、政府机构及监管机构的命令或要求而应披露的情形下,接收方须及时通知披露方,且尽其最大努力获得保护性命令或以其他方式防止此信息的公开。",
+            "pages": [
+              61
+            ],
+            "page": 61,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第61页",
+              "index": 61,
+              "pages": [
+                61
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0123",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "1.接收方在披露之前已拥有、并在披露前经接收方文件或记录表明接收方没有任何保密义务的信息。",
+            "quote": "1.接收方在披露之前已拥有、并在披露前经接收方文件或记录表明接收方没有任何保密义务的信息。",
+            "pages": [
+              61
+            ],
+            "page": 61,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第61页",
+              "index": 61,
+              "pages": [
+                61
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0124",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2.披露方提供的在披露方将其交予接收方时已进入公有领域的信息。",
+            "quote": "2.披露方提供的在披露方将其交予接收方时已进入公有领域的信息。",
+            "pages": [
+              61
+            ],
+            "page": 61,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第61页",
+              "index": 61,
+              "pages": [
+                61
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0125",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "3.由不负保密义务的第三方合法提供的信息。",
+            "quote": "3.由不负保密义务的第三方合法提供的信息。",
+            "pages": [
+              61
+            ],
+            "page": 61,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第61页",
+              "index": 61,
+              "pages": [
+                61
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0126",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "4.披露方书面同意对外发布的信息。",
+            "quote": "4.披露方书面同意对外发布的信息。",
+            "pages": [
+              61
+            ],
+            "page": 61,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第61页",
+              "index": 61,
+              "pages": [
+                61
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0127",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "第五条 信息返还保密信息应始终为披露方所拥有的财产。任何时候,只要收到保密信息披露方的书面要求,接收方应立即归还全部保密信息资料和文件,包含该保密信息资料的媒介",
+            "quote": "第五条 信息返还保密信息应始终为披露方所拥有的财产。任何时候,只要收到保密信息披露方的书面要求,接收方应立即归还全部保密信息资料和文件,包含该保密信息资料的媒介及其任何或全部复印件或摘要。如果该技术资料属于不能归还的形式或已经复制或转录到其他资料或载体中,则应销毁或删除,并保证删除后无法通过技术手段进行恢复 。",
+            "pages": [
+              61
+            ],
+            "page": 61,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第61页",
+              "index": 61,
+              "pages": [
+                61
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0128",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "1.接收方应当按照披露方的指示采取有效的方法对该保密信息进行保密,所需费用由接收方承担。如因接收方原因导致保密信息泄露,则由接收方承担因泄露保密信息而导致的披露",
+            "quote": "1.接收方应当按照披露方的指示采取有效的方法对该保密信息进行保密,所需费用由接收方承担。如因接收方原因导致保密信息泄露,则由接收方承担因泄露保密信息而导致的披露方或第三方的所有损失,包括但不限于:法院诉讼的费用、律师费用 、所有损失或损害等。",
+            "pages": [
+              61
+            ],
+            "page": 61,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第61页",
+              "index": 61,
+              "pages": [
+                61
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0129",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2.如果接收方或接收方的董事、高级职员、雇员、顾问、控股公司、分支机构或关联公司违反或可能违反本协议或其与接收方签订的保密协议的规定,披露方有权要求接收方进行损",
+            "quote": "2.如果接收方或接收方的董事、高级职员、雇员、顾问、控股公司、分支机构或关联公司违反或可能违反本协议或其与接收方签订的保密协议的规定,披露方有权要求接收方进行损害赔偿。",
+            "pages": [
+              61
+            ],
+            "page": 61,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第61页",
+              "index": 61,
+              "pages": [
+                61
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0130",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "3.接收方违反本协议构成刑事犯罪的,还应依法追究刑事责任。",
+            "quote": "3.接收方违反本协议构成刑事犯罪的,还应依法追究刑事责任。",
+            "pages": [
+              61
+            ],
+            "page": 61,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第61页",
+              "index": 61,
+              "pages": [
+                61
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0131",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "1、投标人按照本部分的顺序编制投标文件(资格证明文件)、投标文件(商务技术文件),编制中涉及格式资料的,应按照本部分提供的内容和格式(所有表格的格式可扩展)填写",
+            "quote": "1、投标人按照本部分的顺序编制投标文件(资格证明文件)、投标文件(商务技术文件),编制中涉及格式资料的,应按照本部分提供的内容和格式(所有表格的格式可扩展)填写提交。",
+            "pages": [
+              63
+            ],
+            "page": 63,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第63页",
+              "index": 63,
+              "pages": [
+                63
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0132",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "64 一 、 资格证明文件格式投 标 文 件( 资 格 证 明 文 件 )封面(非实质性格式) 投 标 文 件 ( 资格证明文件 )项 目 名 称 : 项 目 ",
+            "quote": "64 一 、 资格证明文件格式投 标 文 件( 资 格 证 明 文 件 )封面(非实质性格式) 投 标 文 件 ( 资格证明文件 )项 目 名 称 : 项 目 编 号:",
+            "pages": [
+              64
+            ],
+            "page": 64,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第64页",
+              "index": 64,
+              "pages": [
+                64
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0133",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "投标人名称(加盖公章): 日期: 年 月 日说明:供应商承诺不实的,依据《政府采购法》第七十七条 “提供虚假材料谋取中标 、成交的 ”有关规定予以处理。",
+            "quote": "投标人名称(加盖公章): 日期: 年 月 日说明:供应商承诺不实的,依据《政府采购法》第七十七条 “提供虚假材料谋取中标 、成交的 ”有关规定予以处理。",
+            "pages": [
+              66
+            ],
+            "page": 66,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第66页",
+              "index": 66,
+              "pages": [
+                66
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0134",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(1)如本项目(包)不专门面向中小企业预留采购份额 ,资格证明文件部分无需提供 《中小企业声明函》或《残疾人福利性单位声明函》或由省级以上监狱管理局、戒毒管理局",
+            "quote": "(1)如本项目(包)不专门面向中小企业预留采购份额 ,资格证明文件部分无需提供 《中小企业声明函》或《残疾人福利性单位声明函》或由省级以上监狱管理局、戒毒管理局(含新疆生产建设兵团)出具的属于监狱企业的证明文件;供应商如具有上述证明文件,建议在商务技术文件中提供。",
+            "pages": [
+              67
+            ],
+            "page": 67,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第67页",
+              "index": 67,
+              "pages": [
+                67
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0135",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(2)如本项目(包)专门面向中小企业采购,投标文件中须提供《中小企业声明函》 或《残疾人福利性单位声明函》或由省级以上监狱管理局、戒毒管理局(含新疆生产建设兵团",
+            "quote": "(2)如本项目(包)专门面向中小企业采购,投标文件中须提供《中小企业声明函》 或《残疾人福利性单位声明函》或由省级以上监狱管理局、戒毒管理局(含新疆生产建设兵团)出具的属于监狱企业的证明文件,且建议在资格证明文件部分提供。",
+            "pages": [
+              67
+            ],
+            "page": 67,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第67页",
+              "index": 67,
+              "pages": [
+                67
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0136",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(3)如本项目(包)预留部分采购项目预算专门面向中小企业采购,且要求获得采购合同的供应商将采购项目中的一定比例分包给一家或者多家中小企业的,如供应商因落 实政府",
+            "quote": "(3)如本项目(包)预留部分采购项目预算专门面向中小企业采购,且要求获得采购合同的供应商将采购项目中的一定比例分包给一家或者多家中小企业的,如供应商因落 实政府采购政策拟进行分包的,投标文件中除须提供《中小企业声明函》或《残疾人福 利性单位声明函》或由省级以上监狱管理局、戒毒管理局(含新疆生产建设兵团 )出具的属于监狱企业的证明文件,还须同时提供《拟分包情况说明》及《分包意向协议》,且建议在资格证明文件部分提供。",
+            "pages": [
+              67
+            ],
+            "page": 67,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第67页",
+              "index": 67,
+              "pages": [
+                67
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0137",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "(4)如本项目(包)预留部分采购项目预算专门面向中小企业采购,且要求供应商以联合体形式参加采购活动 ,如供应商为联合体的,投标文件中除须提供《中小企业声明函》或",
+            "quote": "(4)如本项目(包)预留部分采购项目预算专门面向中小企业采购,且要求供应商以联合体形式参加采购活动 ,如供应商为联合体的,投标文件中除须提供《中小企业声明函》或《残疾人福利性单位声明函》或由省级以上监狱管理局、戒毒管理局(含新疆生 产建设兵团)出具的属于监狱企业的证明文件 ,还须同时提供《联合协议》;上述文件建议在资格证明文件部分提供。",
+            "pages": [
+              67
+            ],
+            "page": 67,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第67页",
+              "index": 67,
+              "pages": [
+                67
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0138",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "投标人无须提供证明资料,由代理机构提供。",
+            "quote": "投标人无须提供证明资料,由代理机构提供。",
+            "pages": [
+              77
+            ],
+            "page": 77,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第77页",
+              "index": 77,
+              "pages": [
+                77
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0139",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2.若投标文件中签字之处均为法定代表人(单位负责人)本人签署,则可不提供本《 授权委托书》,但须提供《法定代表人(单位负责人)身份证明》;否则,不需要提供 《法",
+            "quote": "2.若投标文件中签字之处均为法定代表人(单位负责人)本人签署,则可不提供本《 授权委托书》,但须提供《法定代表人(单位负责人)身份证明》;否则,不需要提供 《法定代表人(单位负责人)身份证明》。",
+            "pages": [
+              82
+            ],
+            "page": 82,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第82页",
+              "index": 82,
+              "pages": [
+                82
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0140",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "投标人名称(加盖公章): 法定代表人(单位负责人)(签字或签章):",
+            "quote": "投标人名称(加盖公章): 法定代表人(单位负责人)(签字或签章):",
+            "pages": [
+              83
+            ],
+            "page": 83,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第83页",
+              "index": 83,
+              "pages": [
+                83
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0141",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2. 单一产品采购无须提供本承诺函;供应商提供产品全部为本国产品,且提供了《关于符合本国产品标准的声明函》时,无须提供本承诺函。",
+            "quote": "2. 单一产品采购无须提供本承诺函;供应商提供产品全部为本国产品,且提供了《关于符合本国产品标准的声明函》时,无须提供本承诺函。",
+            "pages": [
+              90
+            ],
+            "page": 90,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第90页",
+              "index": 90,
+              "pages": [
+                90
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0142",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "3. 当采购项目或单个采购包中含有多种产品,且供应商提供的产品同时包含本国产品及非本国产品,则供应商除需提供《关于符合本国产品标准的声明函》外,还需提供本承诺函",
+            "quote": "3. 当采购项目或单个采购包中含有多种产品,且供应商提供的产品同时包含本国产品及非本国产品,则供应商除需提供《关于符合本国产品标准的声明函》外,还需提供本承诺函;否则,不享受价格评审优惠。",
+            "pages": [
+              90
+            ],
+            "page": 90,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第90页",
+              "index": 90,
+              "pages": [
+                90
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0143",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "3.投标人“为落实政府采购政策 ”而向中小企业分包时请仔细阅读资格证明文件格式2-1中说明,并建议按要求在资格证明文件中提供相关全部文件;投标人非 “为落实政府",
+            "quote": "3.投标人“为落实政府采购政策 ”而向中小企业分包时请仔细阅读资格证明文件格式2-1中说明,并建议按要求在资格证明文件中提供相关全部文件;投标人非 “为落实政府采购政策 ”而向中小企业分包时,建议在本册提供。",
+            "pages": [
+              95
+            ],
+            "page": 95,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第95页",
+              "index": 95,
+              "pages": [
+                95
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0144",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2.投标人满足《政府采购促进中小企业发展管理办法》(财库〔2020〕46号)第九条有关规定,拟享受中小企业政策优惠措施的,仍需提供本协议,否则不予认可;",
+            "quote": "2.投标人满足《政府采购促进中小企业发展管理办法》(财库〔2020〕46号)第九条有关规定,拟享受中小企业政策优惠措施的,仍需提供本协议,否则不予认可;",
+            "pages": [
+              96
+            ],
+            "page": 96,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第96页",
+              "index": 96,
+              "pages": [
+                96
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          }
+        ]
+      },
+      "rejection": {
+        "label": "废标项",
+        "items": [
+          {
+            "clause_id": "TB-0145",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "12.8.2 投标保证金可以不予退还的其他情形: ■无 □有,具体情形: 。",
+            "quote": "12.8.2 投标保证金可以不予退还的其他情形: ■无 □有,具体情形: 。",
+            "pages": [
+              11
+            ],
+            "page": 11,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第11页",
+              "index": 11,
+              "pages": [
+                11
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0146",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "5.4.3 如本项目采购产品属于实施政府强制采购品目清单范围的节能产品, 则投标人所报产品必须获得国家确定的认证机构出具的、处于有效期之内的节能产品认证证书,否",
+            "quote": "5.4.3 如本项目采购产品属于实施政府强制采购品目清单范围的节能产品, 则投标人所报产品必须获得国家确定的认证机构出具的、处于有效期之内的节能产品认证证书,否则投标无效;",
+            "pages": [
+              19
+            ],
+            "page": 19,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第19页",
+              "index": 19,
+              "pages": [
+                19
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0147",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "5.7.1 为全面推进本市挥发性有机物(VOCs)治理,贯彻落实挥发性有机物污染治理专项行动有关要求,相关规定依据《北京市财政局北京市生态环境局关于政府采购推广",
+            "quote": "5.7.1 为全面推进本市挥发性有机物(VOCs)治理,贯彻落实挥发性有机物污染治理专项行动有关要求,相关规定依据《北京市财政局北京市生态环境局关于政府采购推广使用低挥发性有机化合物(VOCs) 有关事项的通知》(京财采购〔2020〕2381 号)。本项目中涉及涂料、胶黏剂、油墨、清洗剂等挥发性有机物产品的,属于强制性标准的,供应商应执行符合本市和国家的VOCs 含量限制标准(具体标准见第五章《采购需求》),否则投标无效;属于推荐性标准的, 优先采购,具体见第四章《评标程序、评标方法和评标标准》。",
+            "pages": [
+              20
+            ],
+            "page": 20,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第20页",
+              "index": 20,
+              "pages": [
+                20
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0148",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "7.2 投标人应认真阅读招标文件的全部内容。投标人应按照招标文件要求提交投标文件并保证所提供的全部资料的真实性,并对招标文件做出实质性响应, 否则投标无效。",
+            "quote": "7.2 投标人应认真阅读招标文件的全部内容。投标人应按照招标文件要求提交投标文件并保证所提供的全部资料的真实性,并对招标文件做出实质性响应, 否则投标无效。",
+            "pages": [
+              21
+            ],
+            "page": 21,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第21页",
+              "index": 21,
+              "pages": [
+                21
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0149",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "9.1 本项目如划分采购包,投标人可以对本项目的其中一个采购包进行投标,也22 可同时对多个采购包进行投标。投标人应当对所投采购包对应第五章《采购需求》所列的全",
+            "quote": "9.1 本项目如划分采购包,投标人可以对本项目的其中一个采购包进行投标,也22 可同时对多个采购包进行投标。投标人应当对所投采购包对应第五章《采购需求》所列的全部内容进行投标,不得将一个采购包中的内容拆分投标,否则其对该采购包的投标将被认定为无效投标。",
+            "pages": [
+              21,
+              22
+            ],
+            "page": 21,
+            "printed_page": null,
+            "printed_pages": [
+              null,
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第21-22页",
+              "index": 21,
+              "pages": [
+                21,
+                22
+              ]
+            },
+            "detection": "cross_page",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0150",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "10.2 对于招标文件中标记了“实质性格式”文件的,投标人不得改变格式中给定的文字所表达的含义,不得删减格式中的实质性内容,不得自行添加与格式中给定的文字内容相",
+            "quote": "10.2 对于招标文件中标记了“实质性格式”文件的,投标人不得改变格式中给定的文字所表达的含义,不得删减格式中的实质性内容,不得自行添加与格式中给定的文字内容相矛盾的内容,不得对应当填写的空格不填写或不实质性响应,否则投标无效。未标记“实质性格式”的文件和招标文件未提供格式的内容,可由投标人自行编写。",
+            "pages": [
+              22
+            ],
+            "page": 22,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第22页",
+              "index": 22,
+              "pages": [
+                22
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0151",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "11.4 投标人不能提供任何有选择性或可调整的报价(招标文件另有规定的除外), 否则其投标无效。",
+            "quote": "11.4 投标人不能提供任何有选择性或可调整的报价(招标文件另有规定的除外), 否则其投标无效。",
+            "pages": [
+              23
+            ],
+            "page": 23,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第23页",
+              "index": 23,
+              "pages": [
+                23
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0152",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "12.3 投标保证金到账(保函提交)截止时间同投标截止时间。以支票、汇票、本票、网上银行支付等形式提交投标保证金的,应在投标截止时间前到账;以金融机构、担保机构",
+            "quote": "12.3 投标保证金到账(保函提交)截止时间同投标截止时间。以支票、汇票、本票、网上银行支付等形式提交投标保证金的,应在投标截止时间前到账;以金融机构、担保机构出具的纸质保函等形式提交投标保证金的,应在投标截止时间前将原件提交至采购代理机构;以电子保函形式提交投标保证金的, 应在投标截止时间前通过北京市政府采购电子交易平台完成电子保函在线办理。未按上述要求缴纳投标保证金的,其投标无效。",
+            "pages": [
+              23
+            ],
+            "page": 23,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第23页",
+              "index": 23,
+              "pages": [
+                23
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0153",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "12.8 有下列情形之一的,采购人或采购代理机构可以不予退还投标保证金:",
+            "quote": "12.8 有下列情形之一的,采购人或采购代理机构可以不予退还投标保证金:",
+            "pages": [
+              24
+            ],
+            "page": 24,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第24页",
+              "index": 24,
+              "pages": [
+                24
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0154",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "12.8.1 投标有效期内投标人撤销投标文件的;",
+            "quote": "12.8.1 投标有效期内投标人撤销投标文件的;",
+            "pages": [
+              24
+            ],
+            "page": 24,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第24页",
+              "index": 24,
+              "pages": [
+                24
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0155",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "12.8.2 《投标人须知资料表》中规定的其他情形。",
+            "quote": "12.8.2 《投标人须知资料表》中规定的其他情形。",
+            "pages": [
+              24
+            ],
+            "page": 24,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第24页",
+              "index": 24,
+              "pages": [
+                24
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0156",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "13.1 投标文件应在本招标文件《投标人须知资料表》中规定的投标有效期内保持有效,投标有效期少于招标文件规定期限的,其投标无效。",
+            "quote": "13.1 投标文件应在本招标文件《投标人须知资料表》中规定的投标有效期内保持有效,投标有效期少于招标文件规定期限的,其投标无效。",
+            "pages": [
+              24
+            ],
+            "page": 24,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第24页",
+              "index": 24,
+              "pages": [
+                24
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0157",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "18.2 本项目开标使用北京市政府采购电子交易平台。投标人应在《投标人须知资料表》规定的时间内对投标文件进行解密,因非系统原因导致的解密失败, 视为投标无效。",
+            "quote": "18.2 本项目开标使用北京市政府采购电子交易平台。投标人应在《投标人须知资料表》规定的时间内对投标文件进行解密,因非系统原因导致的解密失败, 视为投标无效。",
+            "pages": [
+              25
+            ],
+            "page": 25,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第25页",
+              "index": 25,
+              "pages": [
+                25
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0158",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "24.1 在招标采购中,出现下列情形之一的,应予废标:",
+            "quote": "24.1 在招标采购中,出现下列情形之一的,应予废标:",
+            "pages": [
+              27
+            ],
+            "page": 27,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第27页",
+              "index": 27,
+              "pages": [
+                27
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0159",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "24.1.1 符合专业条件的供应商或者对招标文件作实质响应的供应商不足三家的;",
+            "quote": "24.1.1 符合专业条件的供应商或者对招标文件作实质响应的供应商不足三家的;",
+            "pages": [
+              27
+            ],
+            "page": 27,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第27页",
+              "index": 27,
+              "pages": [
+                27
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0160",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "24.1.2 出现影响采购公正的违法、违规行为的;",
+            "quote": "24.1.2 出现影响采购公正的违法、违规行为的;",
+            "pages": [
+              27
+            ],
+            "page": 27,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第27页",
+              "index": 27,
+              "pages": [
+                27
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0161",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "24.1.3 投标人的报价均超过了采购预算,采购人不能支付的;",
+            "quote": "24.1.3 投标人的报价均超过了采购预算,采购人不能支付的;",
+            "pages": [
+              27
+            ],
+            "page": 27,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第27页",
+              "index": 27,
+              "pages": [
+                27
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0162",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "24.1.4 因重大变故,采购任务取消的。",
+            "quote": "24.1.4 因重大变故,采购任务取消的。",
+            "pages": [
+              27
+            ],
+            "page": 27,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第27页",
+              "index": 27,
+              "pages": [
+                27
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0163",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "25.5 采购人允许采用分包方式履行合同的,中标人可以依法在中标后将中标项目的非主体、非关键性工作采取分包方式履行合同。本项目的非主体、非关键性工作是否允许分包",
+            "quote": "25.5 采购人允许采用分包方式履行合同的,中标人可以依法在中标后将中标项目的非主体、非关键性工作采取分包方式履行合同。本项目的非主体、非关键性工作是否允许分包,见《投标人须知资料表》。政府采购合同分包履行的, 应当在投标文件中载明分包承担主体,分包承担主体应当具备相应资质条件且不得再次分包,否则投标无效。中标人就采购项目和分包项目向采购人负",
+            "pages": [
+              27
+            ],
+            "page": 27,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第27页",
+              "index": 27,
+              "pages": [
+                27
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0164",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "3 投标人《资格证明文件》有任何一项不符合《资格审查要求》的,资格审查不合格, 其投标无效。",
+            "quote": "3 投标人《资格证明文件》有任何一项不符合《资格审查要求》的,资格审查不合格, 其投标无效。",
+            "pages": [
+              30
+            ],
+            "page": 30,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第30页",
+              "index": 30,
+              "pages": [
+                30
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0165",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "6、若联合体中任一成员单位中途退出,则该联合体的投标无效。",
+            "quote": "6、若联合体中任一成员单位中途退出,则该联合体的投标无效。",
+            "pages": [
+              34
+            ],
+            "page": 34,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第34页",
+              "index": 34,
+              "pages": [
+                34
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0166",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "Col1：7 Col2：★号条款响应 符合性审查要求：投标文件满足招标文件第五章《采购需求》中★号条款要求<br>的;",
+            "quote": "Col1：7 Col2：★号条款响应 符合性审查要求：投标文件满足招标文件第五章《采购需求》中★号条款要求<br>的;",
+            "pages": [
+              36
+            ],
+            "page": 36,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第36页",
+              "index": 36,
+              "pages": [
+                36
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0167",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "投标人《商务技术文件》有任何一项不符合《符合性审查要求》要求的,投标无效。",
+            "quote": "投标人《商务技术文件》有任何一项不符合《符合性审查要求》要求的,投标无效。",
+            "pages": [
+              36
+            ],
+            "page": 36,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第36页",
+              "index": 36,
+              "pages": [
+                36
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0168",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "★号条款响应投标文件满足招标文件第五章《采购需求》中★号条款要求的; 8 拟分包情况说明(如有) 如本项目(包)非因“落实政府采购政策”亦允许分包,且供应商拟进",
+            "quote": "★号条款响应投标文件满足招标文件第五章《采购需求》中★号条款要求的; 8 拟分包情况说明(如有) 如本项目(包)非因“落实政府采购政策”亦允许分包,且供应商拟进行分包时,必须提供;否则无须提供; 9 分包其他要求 (如有) 分包履行的内容、金额或者比例未超出《投标人须知资料表 》中的规定;",
+            "pages": [
+              36
+            ],
+            "page": 36,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第36页",
+              "index": 36,
+              "pages": [
+                36
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0169",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "Col1：位或者个人编制;(二)不同投标人委托同一单位或者个人<br>办理投标事宜;(三)不同投标人的投标文件载明的项目管<br>理成员或者联系人员为同一人;(",
+            "quote": "Col1：位或者个人编制;(二)不同投标人委托同一单位或者个人<br>办理投标事宜;(三)不同投标人的投标文件载明的项目管<br>理成员或者联系人员为同一人;(四)不同投标人的投标文<br>件异常一致或者投标报价呈规律性差异;(五)不同投标人<br>的投标文件相互混装;(六)不同投标人的投标保证金从同<br>一单位或者个人的账户转出;",
+            "pages": [
+              38
+            ],
+            "page": 38,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第38页",
+              "index": 38,
+              "pages": [
+                38
+              ]
+            },
+            "detection": "table",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0170",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(五)不同投标人的投标文件相互混装;",
+            "quote": "(五)不同投标人的投标文件相互混装;",
+            "pages": [
+              38
+            ],
+            "page": 38,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第38页",
+              "index": 38,
+              "pages": [
+                38
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0171",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(六)不同投标人的投标保证金从同一单位或者个人的账户转出; 16 附加条件投标文件未含有采购人不能接受的附加条件的; 17 其他无效情形投标人、投标文件不存在不",
+            "quote": "(六)不同投标人的投标保证金从同一单位或者个人的账户转出; 16 附加条件投标文件未含有采购人不能接受的附加条件的; 17 其他无效情形投标人、投标文件不存在不符合法律、法规和招标文件规定的其他无效情形。",
+            "pages": [
+              38
+            ],
+            "page": 38,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第38页",
+              "index": 38,
+              "pages": [
+                38
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0172",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "2.2.3 评审委员会依据专业经验,参考同类项目中标(成交)价格、类似产品市场价格水平、行业人工费用标准、国家有关部门指导行业协会发布的行业平均成本等情况,对报",
+            "quote": "2.2.3 评审委员会依据专业经验,参考同类项目中标(成交)价格、类似产品市场价格水平、行业人工费用标准、国家有关部门指导行业协会发布的行业平均成本等情况,对报价合理性进行判断。投标(响应)供应商不能提供书面说明、证明材料,或者40 提供的书面说明、证明材料不能证明其报价合理性的,评审委员会应当将其作为无效投标(响应)处理。",
+            "pages": [
+              39,
+              40
+            ],
+            "page": 39,
+            "printed_page": null,
+            "printed_pages": [
+              null,
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第39-40页",
+              "index": 39,
+              "pages": [
+                39,
+                40
+              ]
+            },
+            "detection": "cross_page",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0173",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "2.3 投标报价须包含招标文件全部内容,如分项报价表有缺漏视为已含在其他各项报价中,将不对投标总价进行调整。评标委员会有权要求投标人在评标现场合理的时间内对此进",
+            "quote": "2.3 投标报价须包含招标文件全部内容,如分项报价表有缺漏视为已含在其他各项报价中,将不对投标总价进行调整。评标委员会有权要求投标人在评标现场合理的时间内对此进行书面确认,投标人不确认的,视为将一个采购包中的内容拆分投标,其投标无效。",
+            "pages": [
+              40
+            ],
+            "page": 40,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第40页",
+              "index": 40,
+              "pages": [
+                40
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0174",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "2.4.8 修正后的报价经投标人书面确认后产生约束力,投标人不确认的,其投标无效。",
+            "quote": "2.4.8 修正后的报价经投标人书面确认后产生约束力,投标人不确认的,其投标无效。",
+            "pages": [
+              40
+            ],
+            "page": 40,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第40页",
+              "index": 40,
+              "pages": [
+                40
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0175",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "3.2.2 采用最低评标价法时,提供相同品牌产品(单一产品或核心产品品牌相同 )的不同投标人参加同一合同项下投标的,以其中通过资格审查、符合性审查且报价最低的参",
+            "quote": "3.2.2 采用最低评标价法时,提供相同品牌产品(单一产品或核心产品品牌相同 )的不同投标人参加同一合同项下投标的,以其中通过资格审查、符合性审查且报价最低的参加评标;报价相同的,由采购人或者采购人委托评标委员会按照下述方法确定一个参加评标的投标人,其他投标无效。",
+            "pages": [
+              42
+            ],
+            "page": 42,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第42页",
+              "index": 42,
+              "pages": [
+                42
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0176",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "注:★条款为实质性条款,供应商在响应文件中未响应★条款,将导致响应被否决。",
+            "quote": "注:★条款为实质性条款,供应商在响应文件中未响应★条款,将导致响应被否决。",
+            "pages": [
+              48
+            ],
+            "page": 48,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第48页",
+              "index": 48,
+              "pages": [
+                48
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0177",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "2、对于招标文件中标记了“实质性格式”文件的,投标人不得改变格式中给定的文字所表达的含义,不得删减格式中的实质性内容,不得自行添加与格式中给定的文字内容相矛盾的",
+            "quote": "2、对于招标文件中标记了“实质性格式”文件的,投标人不得改变格式中给定的文字所表达的含义,不得删减格式中的实质性内容,不得自行添加与格式中给定的文字内容相矛盾的内容,不得对应当填写的空格不填写或不实质性响应,否则投标无效。未标记“实质性格式 ”的文件和招标文件未提供格式的内容,可由投标人自行编写。",
+            "pages": [
+              63
+            ],
+            "page": 63,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第63页",
+              "index": 63,
+              "pages": [
+                63
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0178",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "(七)与我单位存在“单位负责人为同一人或者存在直接控股、管理关系” 的其他法人单位信息如下(如有,不论其是否参加同一合同项下的政府采购活动均须填写,如没有,在表",
+            "quote": "(七)与我单位存在“单位负责人为同一人或者存在直接控股、管理关系” 的其他法人单位信息如下(如有,不论其是否参加同一合同项下的政府采购活动均须填写,如没有,在表中填写“无”,若表中无任何信息,投标无效): 序号单位名称相互关系 1 2 ... 上述声明真实有效 ,否则我方负全部责任。",
+            "pages": [
+              66
+            ],
+            "page": 66,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第66页",
+              "index": 66,
+              "pages": [
+                66
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0179",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "注: 如本招标文件《投标人须知资料表》载明本项目分包承担主体应具备的相应资质条件, 则投标人须在本表中列明分包承担主体的资质等级,并后附资质证书电子件,否则投标",
+            "quote": "注: 如本招标文件《投标人须知资料表》载明本项目分包承担主体应具备的相应资质条件, 则投标人须在本表中列明分包承担主体的资质等级,并后附资质证书电子件,否则投标无效。",
+            "pages": [
+              72
+            ],
+            "page": 72,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第72页",
+              "index": 72,
+              "pages": [
+                72
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0180",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "注: 本协议仅在投标人 “为落实政府采购政策 ”而向中小企业分包时必须提供,否则投标无效;且投标人须与所有拟分包单位分别签订《分包意向协议》,每单位签订一份,并",
+            "quote": "注: 本协议仅在投标人 “为落实政府采购政策 ”而向中小企业分包时必须提供,否则投标无效;且投标人须与所有拟分包单位分别签订《分包意向协议》,每单位签订一份,并在投标文件中提交全部协议原件的电子件,否则投标无效。",
+            "pages": [
+              73
+            ],
+            "page": 73,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第73页",
+              "index": 73,
+              "pages": [
+                73
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0181",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "1.如本项目(包)接受供应商以联合体形式参加采购活动,且供应商以联合体形式参与时,须提供《联合协议》,否则投标无效。",
+            "quote": "1.如本项目(包)接受供应商以联合体形式参加采购活动,且供应商以联合体形式参与时,须提供《联合协议》,否则投标无效。",
+            "pages": [
+              76
+            ],
+            "page": 76,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第76页",
+              "index": 76,
+              "pages": [
+                76
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0182",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "2.如果不提供分项报价将视为没有实质性响应招标文件。",
+            "quote": "2.如果不提供分项报价将视为没有实质性响应招标文件。",
+            "pages": [
+              85
+            ],
+            "page": 85,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第85页",
+              "index": 85,
+              "pages": [
+                85
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0183",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "1. 对招标文件中的所有商务、技术要求,除本表所列明的所有偏离外,均视作供应商已对之理解和响应。此表中若无任何文字说明,且未对偏离情况勾选的,投标无效。",
+            "quote": "1. 对招标文件中的所有商务、技术要求,除本表所列明的所有偏离外,均视作供应商已对之理解和响应。此表中若无任何文字说明,且未对偏离情况勾选的,投标无效。",
+            "pages": [
+              88
+            ],
+            "page": 88,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第88页",
+              "index": 88,
+              "pages": [
+                88
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0184",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "1.如本项目(包)允许分包,且投标人拟进行分包时,必须提供;如未提供,或提供了但未填写分包承担主体名称、拟分包合同内容、拟分包合同金额,投标无效。",
+            "quote": "1.如本项目(包)允许分包,且投标人拟进行分包时,必须提供;如未提供,或提供了但未填写分包承担主体名称、拟分包合同内容、拟分包合同金额,投标无效。",
+            "pages": [
+              95
+            ],
+            "page": 95,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第95页",
+              "index": 95,
+              "pages": [
+                95
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0185",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "2.如本招标文件《投标人须知资料表》载明本项目分包承担主体应具备的相应资质条件, 则投标人须在本表中列明分包承担主体的资质等级,并后附资质证书电子件,否则投标无",
+            "quote": "2.如本招标文件《投标人须知资料表》载明本项目分包承担主体应具备的相应资质条件, 则投标人须在本表中列明分包承担主体的资质等级,并后附资质证书电子件,否则投标无效。",
+            "pages": [
+              95
+            ],
+            "page": 95,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第95页",
+              "index": 95,
+              "pages": [
+                95
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0186",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "1.投标人“为落实政府采购政策 ”而向中小企业分包时必须提供,否则投标无效;且建议按照采购文件要求在资格证明文件部分提供;",
+            "quote": "1.投标人“为落实政府采购政策 ”而向中小企业分包时必须提供,否则投标无效;且建议按照采购文件要求在资格证明文件部分提供;",
+            "pages": [
+              96
+            ],
+            "page": 96,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第96页",
+              "index": 96,
+              "pages": [
+                96
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          }
+        ]
+      }
+    },
+    "uncited": []
+  }
+}
