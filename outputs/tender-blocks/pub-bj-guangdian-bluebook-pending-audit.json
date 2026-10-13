@@ -27,14 +27,14 @@
   "footer_in_quotes": 0,
   "bare_page_in_quotes": 3,
   "counts": {
-    "total": 176,
-    "with_real_page": 176,
+    "total": 188,
+    "with_real_page": 188,
     "without_page": 0,
     "by_block": {
       "qualification": {
         "label": "资格要求",
-        "cited": 30,
-        "items": 30
+        "cited": 37,
+        "items": 37
       },
       "scoring": {
         "label": "评分要求",
@@ -43,13 +43,13 @@
       },
       "materials": {
         "label": "要交的材料",
-        "cited": 80,
-        "items": 80
+        "cited": 81,
+        "items": 81
       },
       "rejection": {
         "label": "废标项",
-        "cited": 38,
-        "items": 38
+        "cited": 42,
+        "items": 42
       }
     }
   },
@@ -72,37 +72,6 @@
         "items": [
           {
             "clause_id": "TB-0001",
-            "block": "qualification",
-            "label": "资格要求",
-            "summary": "一 、 资格证明文件格式 ...................................................................",
-            "quote": "一 、 资格证明文件格式 ........................................................................................................................... 64 1 满足《中华人民共和国政府采购法》第二十二条规定 ................................................................ 65 1-1 营业执照等证明文件 ......................................................................................................................... 65 1-2 投标人资格声明书 ..............",
-            "pages": [
-              4,
-              5
-            ],
-            "page": 4,
-            "printed_page": null,
-            "printed_pages": [
-              null,
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第4-5页",
-              "index": 4,
-              "pages": [
-                4,
-                5
-              ]
-            },
-            "detection": "cross_page",
-            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0002",
             "block": "qualification",
             "label": "资格要求",
             "summary": "二、申请人的资格要求(须同时满足)",
@@ -130,7 +99,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0003",
+            "clause_id": "TB-0002",
             "block": "qualification",
             "label": "资格要求",
             "summary": "1.满足《中华人民共和国政府采购法》第二十二条规定;",
@@ -158,7 +127,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0004",
+            "clause_id": "TB-0003",
             "block": "qualification",
             "label": "资格要求",
             "summary": "2.落实政府采购政策需满足的资格要求:",
@@ -186,7 +155,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0005",
+            "clause_id": "TB-0004",
             "block": "qualification",
             "label": "资格要求",
             "summary": "2.1 中小企业政策 □本项目不专门面向中小企业预留采购份额。",
@@ -214,7 +183,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0006",
+            "clause_id": "TB-0005",
             "block": "qualification",
             "label": "资格要求",
             "summary": "3.本项目的特定资格要求:",
@@ -242,7 +211,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0007",
+            "clause_id": "TB-0006",
             "block": "qualification",
             "label": "资格要求",
             "summary": "3.1 本项目是否属于政府购买服务:",
@@ -270,7 +239,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0008",
+            "clause_id": "TB-0007",
             "block": "qualification",
             "label": "资格要求",
             "summary": "3.2 其他特定资格要求:",
@@ -298,7 +267,91 @@
             "audit_status": "pending_audit"
           },
           {
+            "clause_id": "TB-0008",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "3.2.1 投标人必须在北京市政府采购电子交易平台(http://zbcg- bjzc.zhongcy.com/bjczj-portal-site/index.",
+            "quote": "3.2.1 投标人必须在北京市政府采购电子交易平台(http://zbcg- bjzc.zhongcy.com/bjczj-portal-site/index.html#/home)线上领取标书,未经北京市政府采购电子交易平台线上领取标书的潜在投标人均无资格参加本次投标;",
+            "pages": [
+              7
+            ],
+            "page": 7,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第7页",
+              "index": 7,
+              "pages": [
+                7
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
             "clause_id": "TB-0009",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "3.2.2 只有在法律上和财务上独立、合法运作并独立于采购人和采购代理机构之外的投标人才能参加投标;",
+            "quote": "3.2.2 只有在法律上和财务上独立、合法运作并独立于采购人和采购代理机构之外的投标人才能参加投标;",
+            "pages": [
+              7
+            ],
+            "page": 7,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第7页",
+              "index": 7,
+              "pages": [
+                7
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0010",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "3.2.3 被“信用中国”网站列入失信被执行人和重大税收违法失信主体的不得参与本项目的政府采购活动。被“中国政府采购网”网站列入政府采购严重违法失信行为记录名单",
+            "quote": "3.2.3 被“信用中国”网站列入失信被执行人和重大税收违法失信主体的不得参与本项目的政府采购活动。被“中国政府采购网”网站列入政府采购严重违法失信行为记录名单(处罚期限尚未届满的),不得参与本项目的政府采购活动。",
+            "pages": [
+              7
+            ],
+            "page": 7,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第7页",
+              "index": 7,
+              "pages": [
+                7
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0011",
             "block": "qualification",
             "label": "资格要求",
             "summary": "3.2.4 单位负责人为同一人或者存在直接控股、管理关系的不同供应商,不得参加同一合同项下的政府采购活动。除单一来源采购项目外,为采购项目提供整体设计 、规范编",
@@ -326,7 +379,119 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0010",
+            "clause_id": "TB-0012",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "1.时间:2026年7月27日至 2026 年7月31日,每天上午8:30至12:00,下午12:00至 16:30(北京时间,法定节假日除外)。",
+            "quote": "1.时间:2026年7月27日至 2026 年7月31日,每天上午8:30至12:00,下午12:00至 16:30(北京时间,法定节假日除外)。",
+            "pages": [
+              7
+            ],
+            "page": 7,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第7页",
+              "index": 7,
+              "pages": [
+                7
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0013",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "2.地点:北京市政府采购电子交易平台",
+            "quote": "2.地点:北京市政府采购电子交易平台",
+            "pages": [
+              7
+            ],
+            "page": 7,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第7页",
+              "index": 7,
+              "pages": [
+                7
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0014",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "3.方式:供应商使用CA数字证书或电子营业执照登录北京市政府采购电子交易平台 (http://zbcg-bjzc.zhongcy.com/bjczj-porta",
+            "quote": "3.方式:供应商使用CA数字证书或电子营业执照登录北京市政府采购电子交易平台 (http://zbcg-bjzc.zhongcy.com/bjczj-portal-site/index.html#/home)获取电子版招标文件。",
+            "pages": [
+              7
+            ],
+            "page": 7,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第7页",
+              "index": 7,
+              "pages": [
+                7
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0015",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "四、提交投标文件截止时间、开标时间和地点投标截止时间、开标时间:2026年8月17日13点30 分(北京时间)。",
+            "quote": "四、提交投标文件截止时间、开标时间和地点投标截止时间、开标时间:2026年8月17日13点30 分(北京时间)。",
+            "pages": [
+              7
+            ],
+            "page": 7,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第7页",
+              "index": 7,
+              "pages": [
+                7
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0016",
             "block": "qualification",
             "label": "资格要求",
             "summary": "20.2 评审专家须符合《财政部关于在政府采购活动中查询及使用信用记录有关问题的通知》(财库〔2016〕125 号)的规定。依法自行选定评审专家的,采购人和采购",
@@ -354,7 +519,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0011",
+            "clause_id": "TB-0017",
             "block": "qualification",
             "label": "资格要求",
             "summary": "23.2 中标通知书对采购人和中标供应商均具有法律效力。中标通知书发出后,采购人改变中标结果的,或者中标供应商放弃中标项目的,应当依法承担法律责任。",
@@ -382,7 +547,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0012",
+            "clause_id": "TB-0018",
             "block": "qualification",
             "label": "资格要求",
             "summary": "一、资格审查程序 1 开标结束后,采购人或采购代理机构将根据《资格审查要求》中的规定,对投标人进行资格审查,并形成资格审查结果。",
@@ -410,7 +575,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0013",
+            "clause_id": "TB-0019",
             "block": "qualification",
             "label": "资格要求",
             "summary": "序号审查因素审查内容格式要求 1 满足《中华人民共和国政府采购法》第二十二条规定具体规定见第一章《投标邀请》 1-1 营业执照等证明文件投标人为企业(包括合伙企",
@@ -438,7 +603,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0014",
+            "clause_id": "TB-0020",
             "block": "qualification",
             "label": "资格要求",
             "summary": "序号：3-1 审查因素：本项目对于联合<br>体的要求( 本项<br>目不适用) 审查内容：<br>1、如本项目接受联合体投标,且投标人为联<br>合体时必须提",
@@ -466,7 +631,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0015",
+            "clause_id": "TB-0021",
             "block": "qualification",
             "label": "资格要求",
             "summary": "格式见《投标文件格式》 2-2 其它落实政府采购政策的资格要求如有,见第一章《投标邀请》 提供证明文件的电子件或电子证照 3 本项目的特定资格要求如有,见第一章",
@@ -494,7 +659,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0016",
+            "clause_id": "TB-0022",
             "block": "qualification",
             "label": "资格要求",
             "summary": "序号：4、联合体中有同类资质的供应商按照联合体<br>分工承担相同工作的,应当按照资质等级较<br>低的供应商确定资质等级。<br>5、以联合体形式参加政府采购",
@@ -522,7 +687,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0017",
+            "clause_id": "TB-0023",
             "block": "qualification",
             "label": "资格要求",
             "summary": "序号：3-3 审查因素：其他特定资格要<br>求 审查内容：1 只有在法律上和财务上独立、合法运作并独<br>立于采购人和采购代理机构之外的投标人才能<br>参",
@@ -550,7 +715,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0018",
+            "clause_id": "TB-0024",
             "block": "qualification",
             "label": "资格要求",
             "summary": "序号：3-3 审查因素：其他特定资格要<br>求 审查内容：<br>2 单位负责人为同一人或者存在直接控股、<br>管理关系的不同供应商,不得参加同一合同<br",
@@ -578,7 +743,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0019",
+            "clause_id": "TB-0025",
             "block": "qualification",
             "label": "资格要求",
             "summary": "序号：3-3 审查因素：其他特定资格要<br>求 审查内容：3 除单一来源采购项目外,为采购项目提供<br>整体设计、规范编制或者项目管理、监理、<br>检测等",
@@ -606,7 +771,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0020",
+            "clause_id": "TB-0026",
             "block": "qualification",
             "label": "资格要求",
             "summary": "格式见《投标文件格式》 “1-2 投标人资格声明书 ” 3-3 其他特定资格要求 1 只有在法律上和财务上独立、合法运作并独立于采购人和采购代理机构之外的投标人",
@@ -634,7 +799,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0021",
+            "clause_id": "TB-0027",
             "block": "qualification",
             "label": "资格要求",
             "summary": "格式见《投标文件格式》 “1-2投标人资格声明书 ” 3 除单一来源采购项目外,为采购项目提供整体设计、规范编制或者项目管理、监理、 检测等服务的供应商,不得再",
@@ -662,7 +827,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0022",
+            "clause_id": "TB-0028",
             "block": "qualification",
             "label": "资格要求",
             "summary": "3.甲方及其工作人员不得收受可能影响正常执行公务的礼品、礼金、消费卡和有价证券、股权、其他金融产品等财物,不得收受其他明显超出正常礼尚往来的财物;不得在乙方报销",
@@ -690,7 +855,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0023",
+            "clause_id": "TB-0029",
             "block": "qualification",
             "label": "资格要求",
             "summary": "65 1 满足《中华人民共和国政府采购法》第二十二条规定 1-1 营业执照等证明文件",
@@ -718,7 +883,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0024",
+            "clause_id": "TB-0030",
             "block": "qualification",
             "label": "资格要求",
             "summary": "(一)具有良好的商业信誉和健全的财务会计制度;",
@@ -746,7 +911,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0025",
+            "clause_id": "TB-0031",
             "block": "qualification",
             "label": "资格要求",
             "summary": "(二)具有履行合同所必需的设备和专业技术能力;",
@@ -774,7 +939,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0026",
+            "clause_id": "TB-0032",
             "block": "qualification",
             "label": "资格要求",
             "summary": "(1)如本项目(包)不专门面向中小企业预留采购份额 ,资格证明文件部分无需提供 《中小企业声明函》或《残疾人福利性单位声明函》或由省级以上监狱管理局、戒毒管理局",
@@ -802,7 +967,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0027",
+            "clause_id": "TB-0033",
             "block": "qualification",
             "label": "资格要求",
             "summary": "注: 如本招标文件《投标人须知资料表》载明本项目分包承担主体应具备的相应资质条件, 则投标人须在本表中列明分包承担主体的资质等级,并后附资质证书电子件,否则投标",
@@ -830,7 +995,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0028",
+            "clause_id": "TB-0034",
             "block": "qualification",
             "label": "资格要求",
             "summary": "九、 以联合体形式参加政府采购活动的,联合体各方不得再单独参加或者与其他供应商另外组成联合体参加同一合同项下的政府采购活动。",
@@ -858,7 +1023,35 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0029",
+            "clause_id": "TB-0035",
+            "block": "qualification",
+            "label": "资格要求",
+            "summary": "3.2.1 投标人必须在北京市政府采购电子交易平台(http://zbcg- bjzc.zhongcy.com/bjczj-portal-site/index.",
+            "quote": "3.2.1 投标人必须在北京市政府采购电子交易平台(http://zbcg- bjzc.zhongcy.com/bjczj-portal-site/index.html#/home)线上领取标书,未经北京市政府采购电子交易平台线上领取标书的潜在投标人均无资格参加本次投标;",
+            "pages": [
+              77
+            ],
+            "page": 77,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第77页",
+              "index": 77,
+              "pages": [
+                77
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0036",
             "block": "qualification",
             "label": "资格要求",
             "summary": "3.2.4 单位负责人为同一人或者存在直接控股、管理关系的不同供应商,不得参加同一合同项下的政府采购活动。除单一来源采购项目外,为采购项目提供整体设计、规范编制",
@@ -886,7 +1079,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0030",
+            "clause_id": "TB-0037",
             "block": "qualification",
             "label": "资格要求",
             "summary": "2.如本招标文件《投标人须知资料表》载明本项目分包承担主体应具备的相应资质条件, 则投标人须在本表中列明分包承担主体的资质等级,并后附资质证书电子件,否则投标无",
@@ -919,7 +1112,7 @@
         "label": "评分要求",
         "items": [
           {
-            "clause_id": "TB-0031",
+            "clause_id": "TB-0038",
             "block": "scoring",
             "label": "评分要求",
             "summary": "Col1：1 Col2：商务<br>部分 二、评分标准：业绩 Col4：10 Col5：投标人提供近3年(2023年1月1日至今)(以合同签订时间<br>为准)",
@@ -947,7 +1140,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0032",
+            "clause_id": "TB-0039",
             "block": "scoring",
             "label": "评分要求",
             "summary": "Col1：2 Col2：服务<br>部分 二、评分标准：项目总<br>体实施<br>方案 Col4：8 Col5：根据项目服务内容与各项要求,制定总体实施方案,",
@@ -975,7 +1168,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0033",
+            "clause_id": "TB-0040",
             "block": "scoring",
             "label": "评分要求",
             "summary": "Col1：2 Col2：服务<br>部分 二、评分标准：封面设<br>计 Col4：8 Col5：根据项目服务内容与各项要求,做好《蓝皮书》、《大事<br>记》",
@@ -1003,7 +1196,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0034",
+            "clause_id": "TB-0041",
             "block": "scoring",
             "label": "评分要求",
             "summary": "二、评分标准序号评分因素评价指标和分值 1 商务部分业绩 10 投标人提供近3年(2023年1月1日至今)(以合同签订时间为准),完成的类似项目的有效案例证明材",
@@ -1031,7 +1224,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0035",
+            "clause_id": "TB-0042",
             "block": "scoring",
             "label": "评分要求",
             "summary": "Col1：审校 Col2：8 内文排<br>版：根据项目服务内容与各项要求,做好《蓝皮书》、《大事<br>记》的审校工作:<br>对方案内容进行了详细的阐述,能",
@@ -1059,7 +1252,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0036",
+            "clause_id": "TB-0043",
             "block": "scoring",
             "label": "评分要求",
             "summary": "Col1：成果报<br>告制作<br>与出版<br>服务 Col2：8 内文排<br>版：根据项目服务内容与各项要求,做好《蓝皮书》、《大事<br>记》的成果报",
@@ -1087,7 +1280,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0037",
+            "clause_id": "TB-0044",
             "block": "scoring",
             "label": "评分要求",
             "summary": "Col1：《北京<br>微短剧<br>研究报<br>告》封<br>面设计<br>制作、<br>排版及<br>印刷服<br>务 Col2：8 内文排<br>版：根",
@@ -1115,7 +1308,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0038",
+            "clause_id": "TB-0045",
             "block": "scoring",
             "label": "评分要求",
             "summary": "45 内文排版 8 根据项目服务内容与各项要求,做好《蓝皮书》、《大事记》的排版: 对方案内容进行了详细的阐述,能正确理解项目需求,思路清晰,完全满足采购需求,",
@@ -1143,7 +1336,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0039",
+            "clause_id": "TB-0046",
             "block": "scoring",
             "label": "评分要求",
             "summary": "审校 8 根据项目服务内容与各项要求,做好《蓝皮书》、《大事记》的审校工作: 对方案内容进行了详细的阐述,能正确理解项目需求,思路清晰,完全满足采购需求,得8分",
@@ -1171,7 +1364,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0040",
+            "clause_id": "TB-0047",
             "block": "scoring",
             "label": "评分要求",
             "summary": "成果报告制作与出版服务 8 根据项目服务内容与各项要求,做好《蓝皮书》、《大事记》的成果报告制作与出版服务工作对方案内容进行了详细的阐述,能正确理解项目需求,思",
@@ -1199,7 +1392,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0041",
+            "clause_id": "TB-0048",
             "block": "scoring",
             "label": "评分要求",
             "summary": "《北京微短剧研究报告》封面设计制作、 排版及印刷服务 8 根据项目服务内容与各项要求,做好《北京微短剧研究报告》封面设计制作、排版及印刷服务工作对方案内容进行了",
@@ -1227,7 +1420,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0042",
+            "clause_id": "TB-0049",
             "block": "scoring",
             "label": "评分要求",
             "summary": "Col1：保密和<br>版权保<br>护方案 Col2：4 质量保<br>障方案：对方案内容进行了详细的阐述,能正确理解项目需求,思<br>路清晰,完全满足采购",
@@ -1255,7 +1448,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0043",
+            "clause_id": "TB-0050",
             "block": "scoring",
             "label": "评分要求",
             "summary": "Col1：印刷能<br>力 Col2：2 质量保<br>障方案：供应商提供印前、印刷、装订及相关的配套设备证明材料<br>,若供应商不具备印刷能力,需提供合作印",
@@ -1283,7 +1476,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0044",
+            "clause_id": "TB-0051",
             "block": "scoring",
             "label": "评分要求",
             "summary": "Col1：服务响<br>应与承<br>诺 Col2：4 质量保<br>障方案：根据本项目服务内容与各项要求,响应及时,承诺全面,<br>方案完整,有具体实施方法",
@@ -1311,7 +1504,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0045",
+            "clause_id": "TB-0052",
             "block": "scoring",
             "label": "评分要求",
             "summary": "46 质量保障方案 4 对方案内容进行了详细的阐述,能正确理解项目需求,思路清晰,完全满足采购需求,得4分; 对方案内容虽进行阐述,但并未贴合项目实际情况进行详",
@@ -1339,7 +1532,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0046",
+            "clause_id": "TB-0053",
             "block": "scoring",
             "label": "评分要求",
             "summary": "保密和版权保护方案 4 对方案内容进行了详细的阐述,能正确理解项目需求,思路清晰,完全满足采购需求,得4分; 对方案内容虽进行阐述,但并未贴合项目实际情况进行详",
@@ -1367,7 +1560,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0047",
+            "clause_id": "TB-0054",
             "block": "scoring",
             "label": "评分要求",
             "summary": "满足上述要求得2分,否则得0分。",
@@ -1395,7 +1588,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0048",
+            "clause_id": "TB-0055",
             "block": "scoring",
             "label": "评分要求",
             "summary": "服务响应与承诺 4 根据本项目服务内容与各项要求,响应及时,承诺全面, 方案完整,有具体实施方法描述,得4分; 对服务的响应与承诺方案满足采购需求,但没有具体实",
@@ -1423,7 +1616,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0049",
+            "clause_id": "TB-0056",
             "block": "scoring",
             "label": "评分要求",
             "summary": "Col1：3 Col2：价格<br>(10<br>分) 项目团<br>队：评标基准价=满足招标文件要求且最低的评标价格<br>投标人的有效价格得分=(评标基准价",
@@ -1451,7 +1644,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0050",
+            "clause_id": "TB-0057",
             "block": "scoring",
             "label": "评分要求",
             "summary": "Col1：合计100分 Col2：合计100分 项目团<br>队：合计100分 18：合计100分 1.项目负责人(4分):<br>了解《蓝皮书》、《大事记》编",
@@ -1479,7 +1672,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0051",
+            "clause_id": "TB-0058",
             "block": "scoring",
             "label": "评分要求",
             "summary": "1.项目负责人(4分):",
@@ -1507,7 +1700,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0052",
+            "clause_id": "TB-0059",
             "block": "scoring",
             "label": "评分要求",
             "summary": "(3)团队人员有岗位种类描述,但人员配备不够充足,或岗位种类不齐全,或未针对项目组建团队人员,得2分;",
@@ -1535,7 +1728,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0053",
+            "clause_id": "TB-0060",
             "block": "scoring",
             "label": "评分要求",
             "summary": "(4)未提供本项内容或完全不满足采购需求得0分。",
@@ -1563,7 +1756,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0054",
+            "clause_id": "TB-0061",
             "block": "scoring",
             "label": "评分要求",
             "summary": "(1)具有 5 年及以上发展报告、志书、年鉴等类似图书编辑经验,具备较强的项目统筹管理经验,2 分;不具备 ,0 分。",
@@ -1591,7 +1784,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0055",
+            "clause_id": "TB-0062",
             "block": "scoring",
             "label": "评分要求",
             "summary": "(2)具有出版专业副高级及以上职称,2 分;不具备,0 分。",
@@ -1619,7 +1812,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0056",
+            "clause_id": "TB-0063",
             "block": "scoring",
             "label": "评分要求",
             "summary": "(1)团队人员均具有至少3年及以上与本项目服务需求同类的业绩经验,具备编纂、排版、设计、审校等执行能力得4分;团队人员未全部具有3年及以上同类业绩经验,或缺少编",
@@ -1647,7 +1840,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0057",
+            "clause_id": "TB-0064",
             "block": "scoring",
             "label": "评分要求",
             "summary": "注:须提供团队人员清单,身份证复印件、相关简历、相关专业学历证书、职称证书复印件并加盖投标人公章,不提供相关证明材料此项均不得分。",
@@ -1675,7 +1868,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0058",
+            "clause_id": "TB-0065",
             "block": "scoring",
             "label": "评分要求",
             "summary": "1、打分保留两位小数。小数点后第三位四舍五入。",
@@ -1708,27 +1901,30 @@
         "label": "要交的材料",
         "items": [
           {
-            "clause_id": "TB-0059",
+            "clause_id": "TB-0066",
             "block": "materials",
             "label": "要交的材料",
-            "summary": "一 、 资格证明文件格式 ...................................................................",
-            "quote": "一 、 资格证明文件格式 ........................................................................................................................... 64 1 满足《中华人民共和国政府采购法》第二十二条规定 ................................................................ 65 1-1 营业执照等证明文件 ......................................................................................................................... 65 1-2 投标人资格声明书 ..............",
+            "summary": "废标 .............................................................................",
+            "quote": "废标 .................................................................................................................................................... 27第一条 合同文件组成 ....................................................................................................................................... 52一 、 资格证明文件格式 ....................................................................................",
             "pages": [
+              3,
               4,
               5
             ],
-            "page": 4,
+            "page": 3,
             "printed_page": null,
             "printed_pages": [
+              null,
               null,
               null
             ],
             "status": "NEEDS_REVIEW",
             "locator": {
               "kind": "page",
-              "label": "PDF 第4-5页",
-              "index": 4,
+              "label": "PDF 第3-5页",
+              "index": 3,
               "pages": [
+                3,
                 4,
                 5
               ]
@@ -1739,7 +1935,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0060",
+            "clause_id": "TB-0067",
             "block": "materials",
             "label": "要交的材料",
             "summary": "10.1 投标人应当按照招标文件的要求编制投标文件。投标文件应由《资格证明文件》、《商务技术文件》两部分构成。投标文件的部分格式要求,见第七章 《投标文件格式》",
@@ -1767,7 +1963,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0061",
+            "clause_id": "TB-0068",
             "block": "materials",
             "label": "要交的材料",
             "summary": "序号：1-1 审查因素：营业执照等证明<br>文件 审查内容：<br>投标人为企业(包括合伙企业)的,应提供<br>有效的 “营业执照 ”;<br>投标人为事业",
@@ -1795,7 +1991,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0062",
+            "clause_id": "TB-0069",
             "block": "materials",
             "label": "要交的材料",
             "summary": "序号审查因素审查内容格式要求 1 满足《中华人民共和国政府采购法》第二十二条规定具体规定见第一章《投标邀请》 1-1 营业执照等证明文件投标人为企业(包括合伙企",
@@ -1823,7 +2019,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0063",
+            "clause_id": "TB-0070",
             "block": "materials",
             "label": "要交的材料",
             "summary": "分支机构参加投标的,应提供该分支机构或其所属法人/其他组织的相应证明文件;同时还应提供其所属法人/其他组织出具的授权其参与本项目的授权书(格式自拟 , 提供证明",
@@ -1851,7 +2047,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0064",
+            "clause_id": "TB-0071",
             "block": "materials",
             "label": "要交的材料",
             "summary": "31 序号审查因素审查内容格式要求须加盖其所属法人/其他组织的公章);对于银行、保险、石油石化、电力、电信等行业的分支机构 ,可以提供上述授权,也可以提供其所属",
@@ -1879,7 +2075,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0065",
+            "clause_id": "TB-0072",
             "block": "materials",
             "label": "要交的材料",
             "summary": "序号：2-1-<br>1 审查因素：中小企业证明文<br>件 审查内容：<br>当本项目(包)涉及预留份额专门面向中小<br>企业采购,此时建议在《资格证明文件",
@@ -1907,7 +2103,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0066",
+            "clause_id": "TB-0073",
             "block": "materials",
             "label": "要交的材料",
             "summary": "32 序号审查因素审查内容格式要求 2-1 中小企业政策证明文件具体要求见第一章《投标邀请》 2-1- 1 中小企业证明文件当本项目(包)涉及预留份额专门面向中",
@@ -1935,7 +2131,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0067",
+            "clause_id": "TB-0074",
             "block": "materials",
             "label": "要交的材料",
             "summary": "序号：2-1-<br>2 审查因素：拟分包情况说<br>明及分包意向协<br>议(本项目不适<br>用) 审查内容：如本项目(包)要求通过分包措施预留部分<br",
@@ -1963,7 +2159,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0068",
+            "clause_id": "TB-0075",
             "block": "materials",
             "label": "要交的材料",
             "summary": "序号：3-1 审查因素：本项目对于联合<br>体的要求( 本项<br>目不适用) 审查内容：<br>1、如本项目接受联合体投标,且投标人为联<br>合体时必须提",
@@ -1991,7 +2187,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0069",
+            "clause_id": "TB-0076",
             "block": "materials",
             "label": "要交的材料",
             "summary": "序号审查因素审查内容格式要求 2-1- 2 拟分包情况说明及分包意向协议(本项目不适用) 如本项目(包)要求通过分包措施预留部分采购份额面向中小企业采购、且投标",
@@ -2019,7 +2215,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0070",
+            "clause_id": "TB-0077",
             "block": "materials",
             "label": "要交的材料",
             "summary": "序号：5 审查因素：获取招标文件 审查内容：在规定期限内通过北京市政府采购电子交易<br>平台获取所参与包的招标文件。<br>注:如本项目接受联合体,且供应商为",
@@ -2047,7 +2243,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0071",
+            "clause_id": "TB-0078",
             "block": "materials",
             "label": "要交的材料",
             "summary": "Col1：8 Col2：拟分包情况说<br>明(如有) 符合性审查要求：如本项目(包)非因“落实政府采购政策”亦允许分包,且<br>供应商拟进行分包时,必须提供",
@@ -2075,7 +2271,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0072",
+            "clause_id": "TB-0079",
             "block": "materials",
             "label": "要交的材料",
             "summary": "★号条款响应投标文件满足招标文件第五章《采购需求》中★号条款要求的; 8 拟分包情况说明(如有) 如本项目(包)非因“落实政府采购政策”亦允许分包,且供应商拟进",
@@ -2103,7 +2299,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0073",
+            "clause_id": "TB-0080",
             "block": "materials",
             "label": "要交的材料",
             "summary": "1)采购的产品若属于《节能产品政府采购品目清单》范围中政府强制采购产品,则投标人所报产品必须获得国家确定的认证机构出具的、处于有效期之内的节能产品认证证书;",
@@ -2131,7 +2327,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0074",
+            "clause_id": "TB-0081",
             "block": "materials",
             "label": "要交的材料",
             "summary": "2)所投产品属于列入《网络关键设备和网络安全专用产品目录》的网络安全专用产品时,应当按照《信息安全技术网络安全专用产品安全技术要求》等相关国家标准的强制性要求,",
@@ -2159,7 +2355,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0075",
+            "clause_id": "TB-0082",
             "block": "materials",
             "label": "要交的材料",
             "summary": "3)项目中涉及涂料、胶黏剂、油墨、清洗剂等挥发性有机物产品,且属于强制性标准的,供应商应执行符合本市和国家的VOCs 含量限制标准。",
@@ -2187,7 +2383,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0076",
+            "clause_id": "TB-0083",
             "block": "materials",
             "label": "要交的材料",
             "summary": "(一)不同投标人的投标文件由同一单",
@@ -2215,7 +2411,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0077",
+            "clause_id": "TB-0084",
             "block": "materials",
             "label": "要交的材料",
             "summary": "2.1 评标过程中,评标委员会将以书面形式要求投标人对其投标文件中含义不明确 、同类问题表述不一致或者有明显文字和计算错误的内容,作出必要的澄清、说明或者补正。",
@@ -2243,7 +2439,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0078",
+            "clause_id": "TB-0085",
             "block": "materials",
             "label": "要交的材料",
             "summary": "(4)项情形的,应当要求相关供应商在评审现场合理的时间内对投标(响应)价格作出解释,提供项目具体成本测算等与报价合理性相关的书面说明及必要的证明材料,包括但不限",
@@ -2271,7 +2467,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0079",
+            "clause_id": "TB-0086",
             "block": "materials",
             "label": "要交的材料",
             "summary": "(3)项情形,供应商已随投标(响应)文件一并提交相关书面说明及必要的证明材料的,在评审现场可不再重复提交。",
@@ -2299,7 +2495,35 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0080",
+            "clause_id": "TB-0087",
+            "block": "materials",
+            "label": "要交的材料",
+            "summary": "2.2.4 上述投标(响应)报价指按照本章2.4修正后的报价。",
+            "quote": "2.2.4 上述投标(响应)报价指按照本章2.4修正后的报价。",
+            "pages": [
+              40
+            ],
+            "page": 40,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第40页",
+              "index": 40,
+              "pages": [
+                40
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0088",
             "block": "materials",
             "label": "要交的材料",
             "summary": "Col1：1 Col2：商务<br>部分 二、评分标准：业绩 Col4：10 Col5：投标人提供近3年(2023年1月1日至今)(以合同签订时间<br>为准)",
@@ -2327,7 +2551,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0081",
+            "clause_id": "TB-0089",
             "block": "materials",
             "label": "要交的材料",
             "summary": "二、评分标准序号评分因素评价指标和分值 1 商务部分业绩 10 投标人提供近3年(2023年1月1日至今)(以合同签订时间为准),完成的类似项目的有效案例证明材",
@@ -2355,7 +2579,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0082",
+            "clause_id": "TB-0090",
             "block": "materials",
             "label": "要交的材料",
             "summary": "Col1：印刷能<br>力 Col2：2 质量保<br>障方案：供应商提供印前、印刷、装订及相关的配套设备证明材料<br>,若供应商不具备印刷能力,需提供合作印",
@@ -2383,7 +2607,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0083",
+            "clause_id": "TB-0091",
             "block": "materials",
             "label": "要交的材料",
             "summary": "印刷能力 2 供应商提供印前、印刷、装订及相关的配套设备证明材料 ,若供应商不具备印刷能力,需提供合作印刷企业的相关能力证明材料,并提供合作合同复印件。",
@@ -2411,7 +2635,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0084",
+            "clause_id": "TB-0092",
             "block": "materials",
             "label": "要交的材料",
             "summary": "Col1：3 Col2：价格<br>(10<br>分) 项目团<br>队：评标基准价=满足招标文件要求且最低的评标价格<br>投标人的有效价格得分=(评标基准价",
@@ -2439,7 +2663,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0085",
+            "clause_id": "TB-0093",
             "block": "materials",
             "label": "要交的材料",
             "summary": "Col1：合计100分 Col2：合计100分 项目团<br>队：合计100分 18：合计100分 1.项目负责人(4分):<br>了解《蓝皮书》、《大事记》编",
@@ -2467,7 +2691,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0086",
+            "clause_id": "TB-0094",
             "block": "materials",
             "label": "要交的材料",
             "summary": "注:须提供团队人员清单,身份证复印件、相关简历、相关专业学历证书、职称证书复印件并加盖投标人公章,不提供相关证明材料此项均不得分。",
@@ -2495,7 +2719,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0087",
+            "clause_id": "TB-0095",
             "block": "materials",
             "label": "要交的材料",
             "summary": "10.供应商需具备齐备印前、印刷、装订及相关的配套设备,设备材料先进 ,印刷的加工流程科学合理。(若供应商不具备印刷能力,需提供合作印刷企业的相关能力证明材料,",
@@ -2523,7 +2747,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0088",
+            "clause_id": "TB-0096",
             "block": "materials",
             "label": "要交的材料",
             "summary": "2.责任编辑具有出版专业副高级及以上职称,具有5年及以上发展报告、志书、年鉴等类似图书编辑经验并提供相关业绩证明材料,具备较强的项目统筹管理能力。",
@@ -2551,7 +2775,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0089",
+            "clause_id": "TB-0097",
             "block": "materials",
             "label": "要交的材料",
             "summary": "2.“乙方”系指根据合同规定向甲方提供服务的具有法人资格的实体;即中标人。",
@@ -2579,7 +2803,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0090",
+            "clause_id": "TB-0098",
             "block": "materials",
             "label": "要交的材料",
             "summary": "3.“合同”系指甲乙双方签署的,合同格式中载明的甲乙双方所达成的约定,包括构成合同的所有附件、附录和构成合同的所有文件。",
@@ -2607,7 +2831,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0091",
+            "clause_id": "TB-0099",
             "block": "materials",
             "label": "要交的材料",
             "summary": "4.“服务”系指乙方根据合同规定须向甲方提供的全部服务。",
@@ -2635,7 +2859,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0092",
+            "clause_id": "TB-0100",
             "block": "materials",
             "label": "要交的材料",
             "summary": "1.服务内容:本示范文本所列服务事项仅为参考表述,业务处室应当结合项目需求书(或采购需求)、成交结果及项目实际,将服务内容、服务要求、 验收标准和验收程序在本条",
@@ -2663,7 +2887,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0093",
+            "clause_id": "TB-0101",
             "block": "materials",
             "label": "要交的材料",
             "summary": "2.服务期限:自 年 月 日起至 年 月 日止。",
@@ -2691,7 +2915,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0094",
+            "clause_id": "TB-0102",
             "block": "materials",
             "label": "要交的材料",
             "summary": "3.服务地点:______(业务处室根据项目实际填写)。",
@@ -2719,7 +2943,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0095",
+            "clause_id": "TB-0103",
             "block": "materials",
             "label": "要交的材料",
             "summary": "1.乙方作为甲方选定的服务商,必须根据甲方要求,承担在投标文件中向甲方承诺的服务范围内的相关工作。",
@@ -2747,7 +2971,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0096",
+            "clause_id": "TB-0104",
             "block": "materials",
             "label": "要交的材料",
             "summary": "2.任何情况下,未经甲方书面同意,乙方不得向第三方转让甲方在本合同中授予乙方的权限,不得超越甲方授权范围。否则甲方有权取消乙方的中标人资格。",
@@ -2775,7 +2999,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0097",
+            "clause_id": "TB-0105",
             "block": "materials",
             "label": "要交的材料",
             "summary": "1.本合同成交金额为人民币_____元(大写:_____),具体以验收结算金额为准。",
@@ -2803,7 +3027,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0098",
+            "clause_id": "TB-0106",
             "block": "materials",
             "label": "要交的材料",
             "summary": "2.本合同的付款方式为:(■分期付款/□一次性支付,任选其一) 分期付款:本合同生效且款项拨付至甲方账户后10个工作日内,甲方向乙方支付成交金额的80_%作为合",
@@ -2831,7 +3055,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0099",
+            "clause_id": "TB-0107",
             "block": "materials",
             "label": "要交的材料",
             "summary": "1.本合同所称不可抗力是指不能预见、不能避免并不能克服的客观情况, 包括但不限于战争、严重火灾、水灾、台风和地震、法规政策的变更以及其他双方书面同意属于不可抗力",
@@ -2859,7 +3083,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0100",
+            "clause_id": "TB-0108",
             "block": "materials",
             "label": "要交的材料",
             "summary": "2.受不可抗力影响的一方应在不可抗力发生后,以最快的方式在最短的时间内通知另一方,并在不可抗力发生后10日内,将有关部门出具的证明文件直接送达或邮寄另一方。",
@@ -2887,7 +3111,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0101",
+            "clause_id": "TB-0109",
             "block": "materials",
             "label": "要交的材料",
             "summary": "3.当不可抗力事件发生时,执行合同的期限可相应延长,不视为任何一方违约。如果延长期限后合同仍不能履行的,双方均有权终止本合同。若合同终止,双方互不承担违约责任。",
@@ -2915,7 +3139,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0102",
+            "clause_id": "TB-0110",
             "block": "materials",
             "label": "要交的材料",
             "summary": "3.因本合同产生争议进入诉讼程序的,双方确认本合同首部载明的联络信息同时作为司法文书送达地址。一方未依本条第2款通知变更地址,致使人民法院的法律文书无法实际送达",
@@ -2943,7 +3167,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0103",
+            "clause_id": "TB-0111",
             "block": "materials",
             "label": "要交的材料",
             "summary": "1.本合同依中华人民共和国现行法律法规(不包括香港和澳门特别行政区及台湾地区的法律法规)签署并据其解释。",
@@ -2971,7 +3195,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0104",
+            "clause_id": "TB-0112",
             "block": "materials",
             "label": "要交的材料",
             "summary": "2.在执行本合同过程中,双方如若发生争议,应先协商解决,协商达成一致意见,须以书面形式并加盖公章确认方可有效;协商不成时,任何一方均有权将争议提交至甲方所在地有",
@@ -2999,7 +3223,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0105",
+            "clause_id": "TB-0113",
             "block": "materials",
             "label": "要交的材料",
             "summary": "1.本合同经双方法定代表人或授权代表签字加盖公章后生效。签字日期不一致的,以最后签字日期为本合同生效日期。双方在加盖有效印章时务必加盖骑缝章。",
@@ -3027,7 +3251,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0106",
+            "clause_id": "TB-0114",
             "block": "materials",
             "label": "要交的材料",
             "summary": "2.本合同一式 肆 份,以中文书写,双方各执 贰 份,具有同等法律效力 。",
@@ -3055,7 +3279,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0107",
+            "clause_id": "TB-0115",
             "block": "materials",
             "label": "要交的材料",
             "summary": "3.如需修改或补充本合同内容,经协商,双方应签署书面修改或补充合同 ,并将其作为本合同的组成部分。",
@@ -3083,7 +3307,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0108",
+            "clause_id": "TB-0116",
             "block": "materials",
             "label": "要交的材料",
             "summary": "1.严格遵守《中华人民共和国保守国家秘密法》等有关保密内容的法律和法规的相关规定。",
@@ -3111,7 +3335,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0109",
+            "clause_id": "TB-0117",
             "block": "materials",
             "label": "要交的材料",
             "summary": "2.承诺建立信息保密制度并采取不低于保护其自有保密信息所采用的一切保密措施保护保密信息。",
@@ -3139,7 +3363,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0110",
+            "clause_id": "TB-0118",
             "block": "materials",
             "label": "要交的材料",
             "summary": "3.接收方欲将保密信息向其顾客、子公司、第三方承包商或者其他任何第三方( 下称“第三方”)披露时,其必须首先取得信息披露方事先的书面同意,且必须与该第三方签订与",
@@ -3167,7 +3391,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0111",
+            "clause_id": "TB-0119",
             "block": "materials",
             "label": "要交的材料",
             "summary": "4.接收方承诺在保密期限内,接收方将不会为任何与本协议规定不符的目的自己或允许他人使用保密信息的全部或任何部分。",
@@ -3195,7 +3419,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0112",
+            "clause_id": "TB-0120",
             "block": "materials",
             "label": "要交的材料",
             "summary": "5.未经披露方事先书面许可,不能将保密信息的全部或部分进行复制或仿造或带出工作地点。",
@@ -3223,7 +3447,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0113",
+            "clause_id": "TB-0121",
             "block": "materials",
             "label": "要交的材料",
             "summary": "6.接收方仅能向有知悉必要的接收方人员披露保密信息。一经发现对保密信息的任何未经授权的披露或者接收方及其人员违反本协议时,接收方应立即书面通知披露方,并采取措施",
@@ -3251,7 +3475,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0114",
+            "clause_id": "TB-0122",
             "block": "materials",
             "label": "要交的材料",
             "summary": "7.接收方不得对任何披露方提供的任何软件或硬件进行反编译、反汇编及逆向工程。",
@@ -3279,7 +3503,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0115",
+            "clause_id": "TB-0123",
             "block": "materials",
             "label": "要交的材料",
             "summary": "8.在所有授权的复制品上,接收方都要附上与原件上一致的保密提示信息。",
@@ -3307,7 +3531,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0116",
+            "clause_id": "TB-0124",
             "block": "materials",
             "label": "要交的材料",
             "summary": "9.法律法规所要求或者根据有管辖权的司法机构、政府机构及监管机构的命令或要求而应披露的情形下,接收方须及时通知披露方,且尽其最大努力获得保护性命令或以其他方式防",
@@ -3335,7 +3559,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0117",
+            "clause_id": "TB-0125",
             "block": "materials",
             "label": "要交的材料",
             "summary": "1.接收方在披露之前已拥有、并在披露前经接收方文件或记录表明接收方没有任何保密义务的信息。",
@@ -3363,7 +3587,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0118",
+            "clause_id": "TB-0126",
             "block": "materials",
             "label": "要交的材料",
             "summary": "2.披露方提供的在披露方将其交予接收方时已进入公有领域的信息。",
@@ -3391,7 +3615,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0119",
+            "clause_id": "TB-0127",
             "block": "materials",
             "label": "要交的材料",
             "summary": "3.由不负保密义务的第三方合法提供的信息。",
@@ -3419,7 +3643,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0120",
+            "clause_id": "TB-0128",
             "block": "materials",
             "label": "要交的材料",
             "summary": "4.披露方书面同意对外发布的信息。",
@@ -3447,7 +3671,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0121",
+            "clause_id": "TB-0129",
             "block": "materials",
             "label": "要交的材料",
             "summary": "第五条 信息返还保密信息应始终为披露方所拥有的财产。任何时候,只要收到保密信息披露方的书面要求,接收方应立即归还全部保密信息资料和文件,包含该保密信息资料的媒介",
@@ -3475,7 +3699,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0122",
+            "clause_id": "TB-0130",
             "block": "materials",
             "label": "要交的材料",
             "summary": "1.接收方应当按照披露方的指示采取有效的方法对该保密信息进行保密,所需费用由接收方承担。如因接收方原因导致保密信息泄露,则由接收方承担因泄露保密信息而导致的披露",
@@ -3503,7 +3727,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0123",
+            "clause_id": "TB-0131",
             "block": "materials",
             "label": "要交的材料",
             "summary": "2.如果接收方或接收方的董事、高级职员、雇员、顾问、控股公司、分支机构或关联公司违反或可能违反本协议或其与接收方签订的保密协议的规定,披露方有权要求接收方进行损",
@@ -3531,7 +3755,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0124",
+            "clause_id": "TB-0132",
             "block": "materials",
             "label": "要交的材料",
             "summary": "3.接收方违反本协议构成刑事犯罪的,还应依法追究刑事责任。",
@@ -3559,7 +3783,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0125",
+            "clause_id": "TB-0133",
             "block": "materials",
             "label": "要交的材料",
             "summary": "1、投标人按照本部分的顺序编制投标文件(资格证明文件)、投标文件(商务技术文件),编制中涉及格式资料的,应按照本部分提供的内容和格式(所有表格的格式可扩展)填写",
@@ -3587,7 +3811,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0126",
+            "clause_id": "TB-0134",
             "block": "materials",
             "label": "要交的材料",
             "summary": "64 一 、 资格证明文件格式投 标 文 件( 资 格 证 明 文 件 )封面(非实质性格式) 投 标 文 件 ( 资格证明文件 )项 目 名 称 : 项 目 ",
@@ -3615,7 +3839,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0127",
+            "clause_id": "TB-0135",
             "block": "materials",
             "label": "要交的材料",
             "summary": "投标人名称(加盖公章): 日期: 年 月 日说明:供应商承诺不实的,依据《政府采购法》第七十七条 “提供虚假材料谋取中标 、成交的 ”有关规定予以处理。",
@@ -3643,7 +3867,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0128",
+            "clause_id": "TB-0136",
             "block": "materials",
             "label": "要交的材料",
             "summary": "(1)如本项目(包)不专门面向中小企业预留采购份额 ,资格证明文件部分无需提供 《中小企业声明函》或《残疾人福利性单位声明函》或由省级以上监狱管理局、戒毒管理局",
@@ -3671,7 +3895,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0129",
+            "clause_id": "TB-0137",
             "block": "materials",
             "label": "要交的材料",
             "summary": "(2)如本项目(包)专门面向中小企业采购,投标文件中须提供《中小企业声明函》 或《残疾人福利性单位声明函》或由省级以上监狱管理局、戒毒管理局(含新疆生产建设兵团",
@@ -3699,7 +3923,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0130",
+            "clause_id": "TB-0138",
             "block": "materials",
             "label": "要交的材料",
             "summary": "(3)如本项目(包)预留部分采购项目预算专门面向中小企业采购,且要求获得采购合同的供应商将采购项目中的一定比例分包给一家或者多家中小企业的,如供应商因落 实政府",
@@ -3727,7 +3951,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0131",
+            "clause_id": "TB-0139",
             "block": "materials",
             "label": "要交的材料",
             "summary": "(4)如本项目(包)预留部分采购项目预算专门面向中小企业采购,且要求供应商以联合体形式参加采购活动 ,如供应商为联合体的,投标文件中除须提供《中小企业声明函》或",
@@ -3755,7 +3979,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0132",
+            "clause_id": "TB-0140",
             "block": "materials",
             "label": "要交的材料",
             "summary": "投标人无须提供证明资料,由代理机构提供。",
@@ -3783,7 +4007,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0133",
+            "clause_id": "TB-0141",
             "block": "materials",
             "label": "要交的材料",
             "summary": "2.若投标文件中签字之处均为法定代表人(单位负责人)本人签署,则可不提供本《 授权委托书》,但须提供《法定代表人(单位负责人)身份证明》;否则,不需要提供 《法",
@@ -3811,7 +4035,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0134",
+            "clause_id": "TB-0142",
             "block": "materials",
             "label": "要交的材料",
             "summary": "投标人名称(加盖公章): 法定代表人(单位负责人)(签字或签章):",
@@ -3839,7 +4063,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0135",
+            "clause_id": "TB-0143",
             "block": "materials",
             "label": "要交的材料",
             "summary": "2. 单一产品采购无须提供本承诺函;供应商提供产品全部为本国产品,且提供了《关于符合本国产品标准的声明函》时,无须提供本承诺函。",
@@ -3867,7 +4091,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0136",
+            "clause_id": "TB-0144",
             "block": "materials",
             "label": "要交的材料",
             "summary": "3. 当采购项目或单个采购包中含有多种产品,且供应商提供的产品同时包含本国产品及非本国产品,则供应商除需提供《关于符合本国产品标准的声明函》外,还需提供本承诺函",
@@ -3895,7 +4119,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0137",
+            "clause_id": "TB-0145",
             "block": "materials",
             "label": "要交的材料",
             "summary": "3.投标人“为落实政府采购政策 ”而向中小企业分包时请仔细阅读资格证明文件格式2-1中说明,并建议按要求在资格证明文件中提供相关全部文件;投标人非 “为落实政府",
@@ -3923,7 +4147,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0138",
+            "clause_id": "TB-0146",
             "block": "materials",
             "label": "要交的材料",
             "summary": "2.投标人满足《政府采购促进中小企业发展管理办法》(财库〔2020〕46号)第九条有关规定,拟享受中小企业政策优惠措施的,仍需提供本协议,否则不予认可;",
@@ -3956,35 +4180,7 @@
         "label": "废标项",
         "items": [
           {
-            "clause_id": "TB-0139",
-            "block": "rejection",
-            "label": "废标项",
-            "summary": "18 开标 ..........................................................................",
-            "quote": "18 开标 .................................................................................................................................................... 25 19 资格审查 .......................................................................................................................................... 26 20 评标委员会 ...................................................................................................................................... 26 21 评标程序、评标方法和评标标准 ............................................................................................. 26 六 确定中标 ................................................................................................................................................ 26 22 确定中标人 ...................................................................................................................................... 26 23 中标公告与中标通知书 ............................................................................................................... 26 24 废标",
-            "pages": [
-              3
-            ],
-            "page": 3,
-            "printed_page": null,
-            "printed_pages": [
-              null
-            ],
-            "status": "NEEDS_REVIEW",
-            "locator": {
-              "kind": "page",
-              "label": "PDF 第3页",
-              "index": 3,
-              "pages": [
-                3
-              ]
-            },
-            "detection": "clause",
-            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
-            "uncited_reason": null,
-            "audit_status": "pending_audit"
-          },
-          {
-            "clause_id": "TB-0140",
+            "clause_id": "TB-0147",
             "block": "rejection",
             "label": "废标项",
             "summary": "12.8.2 投标保证金可以不予退还的其他情形: ■无 □有,具体情形: 。",
@@ -4012,7 +4208,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0141",
+            "clause_id": "TB-0148",
             "block": "rejection",
             "label": "废标项",
             "summary": "5.4.3 如本项目采购产品属于实施政府强制采购品目清单范围的节能产品, 则投标人所报产品必须获得国家确定的认证机构出具的、处于有效期之内的节能产品认证证书,否",
@@ -4040,7 +4236,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0142",
+            "clause_id": "TB-0149",
             "block": "rejection",
             "label": "废标项",
             "summary": "5.7.1 为全面推进本市挥发性有机物(VOCs)治理,贯彻落实挥发性有机物污染治理专项行动有关要求,相关规定依据《北京市财政局北京市生态环境局关于政府采购推广",
@@ -4068,7 +4264,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0143",
+            "clause_id": "TB-0150",
             "block": "rejection",
             "label": "废标项",
             "summary": "7.2 投标人应认真阅读招标文件的全部内容。投标人应按照招标文件要求提交投标文件并保证所提供的全部资料的真实性,并对招标文件做出实质性响应, 否则投标无效。",
@@ -4096,7 +4292,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0144",
+            "clause_id": "TB-0151",
             "block": "rejection",
             "label": "废标项",
             "summary": "9.1 本项目如划分采购包,投标人可以对本项目的其中一个采购包进行投标,也22 可同时对多个采购包进行投标。投标人应当对所投采购包对应第五章《采购需求》所列的全",
@@ -4127,7 +4323,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0145",
+            "clause_id": "TB-0152",
             "block": "rejection",
             "label": "废标项",
             "summary": "10.2 对于招标文件中标记了“实质性格式”文件的,投标人不得改变格式中给定的文字所表达的含义,不得删减格式中的实质性内容,不得自行添加与格式中给定的文字内容相",
@@ -4155,7 +4351,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0146",
+            "clause_id": "TB-0153",
             "block": "rejection",
             "label": "废标项",
             "summary": "11.4 投标人不能提供任何有选择性或可调整的报价(招标文件另有规定的除外), 否则其投标无效。",
@@ -4183,7 +4379,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0147",
+            "clause_id": "TB-0154",
             "block": "rejection",
             "label": "废标项",
             "summary": "12.3 投标保证金到账(保函提交)截止时间同投标截止时间。以支票、汇票、本票、网上银行支付等形式提交投标保证金的,应在投标截止时间前到账;以金融机构、担保机构",
@@ -4211,7 +4407,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0148",
+            "clause_id": "TB-0155",
             "block": "rejection",
             "label": "废标项",
             "summary": "12.8 有下列情形之一的,采购人或采购代理机构可以不予退还投标保证金:",
@@ -4239,7 +4435,63 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0149",
+            "clause_id": "TB-0156",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "12.8.1 投标有效期内投标人撤销投标文件的;",
+            "quote": "12.8.1 投标有效期内投标人撤销投标文件的;",
+            "pages": [
+              24
+            ],
+            "page": 24,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第24页",
+              "index": 24,
+              "pages": [
+                24
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0157",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "12.8.2 《投标人须知资料表》中规定的其他情形。",
+            "quote": "12.8.2 《投标人须知资料表》中规定的其他情形。",
+            "pages": [
+              24
+            ],
+            "page": 24,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第24页",
+              "index": 24,
+              "pages": [
+                24
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0158",
             "block": "rejection",
             "label": "废标项",
             "summary": "13.1 投标文件应在本招标文件《投标人须知资料表》中规定的投标有效期内保持有效,投标有效期少于招标文件规定期限的,其投标无效。",
@@ -4267,7 +4519,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0150",
+            "clause_id": "TB-0159",
             "block": "rejection",
             "label": "废标项",
             "summary": "18.2 本项目开标使用北京市政府采购电子交易平台。投标人应在《投标人须知资料表》规定的时间内对投标文件进行解密,因非系统原因导致的解密失败, 视为投标无效。",
@@ -4295,7 +4547,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0151",
+            "clause_id": "TB-0160",
             "block": "rejection",
             "label": "废标项",
             "summary": "24.1 在招标采购中,出现下列情形之一的,应予废标:",
@@ -4323,11 +4575,11 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0152",
+            "clause_id": "TB-0161",
             "block": "rejection",
             "label": "废标项",
-            "summary": "24.2 废标后,采购人将废标理由书面通知所有投标人。",
-            "quote": "24.2 废标后,采购人将废标理由书面通知所有投标人。",
+            "summary": "24.1.1 符合专业条件的供应商或者对招标文件作实质响应的供应商不足三家的;",
+            "quote": "24.1.1 符合专业条件的供应商或者对招标文件作实质响应的供应商不足三家的;",
             "pages": [
               27
             ],
@@ -4351,7 +4603,91 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0153",
+            "clause_id": "TB-0162",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "24.1.2 出现影响采购公正的违法、违规行为的;",
+            "quote": "24.1.2 出现影响采购公正的违法、违规行为的;",
+            "pages": [
+              27
+            ],
+            "page": 27,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第27页",
+              "index": 27,
+              "pages": [
+                27
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0163",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "24.1.3 投标人的报价均超过了采购预算,采购人不能支付的;",
+            "quote": "24.1.3 投标人的报价均超过了采购预算,采购人不能支付的;",
+            "pages": [
+              27
+            ],
+            "page": 27,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第27页",
+              "index": 27,
+              "pages": [
+                27
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0164",
+            "block": "rejection",
+            "label": "废标项",
+            "summary": "24.1.4 因重大变故,采购任务取消的。",
+            "quote": "24.1.4 因重大变故,采购任务取消的。",
+            "pages": [
+              27
+            ],
+            "page": 27,
+            "printed_page": null,
+            "printed_pages": [
+              null
+            ],
+            "status": "NEEDS_REVIEW",
+            "locator": {
+              "kind": "page",
+              "label": "PDF 第27页",
+              "index": 27,
+              "pages": [
+                27
+              ]
+            },
+            "detection": "clause",
+            "filename": "pub-bj-guangdian-bluebook-zhaobiao-2026.pdf",
+            "uncited_reason": null,
+            "audit_status": "pending_audit"
+          },
+          {
+            "clause_id": "TB-0165",
             "block": "rejection",
             "label": "废标项",
             "summary": "25.5 采购人允许采用分包方式履行合同的,中标人可以依法在中标后将中标项目的非主体、非关键性工作采取分包方式履行合同。本项目的非主体、非关键性工作是否允许分包",
@@ -4382,7 +4718,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0154",
+            "clause_id": "TB-0166",
             "block": "rejection",
             "label": "废标项",
             "summary": "3 投标人《资格证明文件》有任何一项不符合《资格审查要求》的,资格审查不合格, 其投标无效。",
@@ -4410,7 +4746,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0155",
+            "clause_id": "TB-0167",
             "block": "rejection",
             "label": "废标项",
             "summary": "6、若联合体中任一成员单位中途退出,则该联合体的投标无效。",
@@ -4438,7 +4774,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0156",
+            "clause_id": "TB-0168",
             "block": "rejection",
             "label": "废标项",
             "summary": "Col1：7 Col2：★号条款响应 符合性审查要求：投标文件满足招标文件第五章《采购需求》中★号条款要求<br>的;",
@@ -4466,7 +4802,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0157",
+            "clause_id": "TB-0169",
             "block": "rejection",
             "label": "废标项",
             "summary": "投标人《商务技术文件》有任何一项不符合《符合性审查要求》要求的,投标无效。",
@@ -4494,7 +4830,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0158",
+            "clause_id": "TB-0170",
             "block": "rejection",
             "label": "废标项",
             "summary": "★号条款响应投标文件满足招标文件第五章《采购需求》中★号条款要求的; 8 拟分包情况说明(如有) 如本项目(包)非因“落实政府采购政策”亦允许分包,且供应商拟进",
@@ -4522,7 +4858,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0159",
+            "clause_id": "TB-0171",
             "block": "rejection",
             "label": "废标项",
             "summary": "Col1：位或者个人编制;(二)不同投标人委托同一单位或者个人<br>办理投标事宜;(三)不同投标人的投标文件载明的项目管<br>理成员或者联系人员为同一人;(",
@@ -4550,7 +4886,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0160",
+            "clause_id": "TB-0172",
             "block": "rejection",
             "label": "废标项",
             "summary": "(五)不同投标人的投标文件相互混装;",
@@ -4578,7 +4914,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0161",
+            "clause_id": "TB-0173",
             "block": "rejection",
             "label": "废标项",
             "summary": "(六)不同投标人的投标保证金从同一单位或者个人的账户转出; 16 附加条件投标文件未含有采购人不能接受的附加条件的; 17 其他无效情形投标人、投标文件不存在不",
@@ -4606,7 +4942,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0162",
+            "clause_id": "TB-0174",
             "block": "rejection",
             "label": "废标项",
             "summary": "2.2.3 评审委员会依据专业经验,参考同类项目中标(成交)价格、类似产品市场价格水平、行业人工费用标准、国家有关部门指导行业协会发布的行业平均成本等情况,对报",
@@ -4637,7 +4973,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0163",
+            "clause_id": "TB-0175",
             "block": "rejection",
             "label": "废标项",
             "summary": "2.3 投标报价须包含招标文件全部内容,如分项报价表有缺漏视为已含在其他各项报价中,将不对投标总价进行调整。评标委员会有权要求投标人在评标现场合理的时间内对此进",
@@ -4665,7 +5001,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0164",
+            "clause_id": "TB-0176",
             "block": "rejection",
             "label": "废标项",
             "summary": "2.4.8 修正后的报价经投标人书面确认后产生约束力,投标人不确认的,其投标无效。",
@@ -4693,7 +5029,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0165",
+            "clause_id": "TB-0177",
             "block": "rejection",
             "label": "废标项",
             "summary": "3.2.2 采用最低评标价法时,提供相同品牌产品(单一产品或核心产品品牌相同 )的不同投标人参加同一合同项下投标的,以其中通过资格审查、符合性审查且报价最低的参",
@@ -4721,7 +5057,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0166",
+            "clause_id": "TB-0178",
             "block": "rejection",
             "label": "废标项",
             "summary": "注:★条款为实质性条款,供应商在响应文件中未响应★条款,将导致响应被否决。",
@@ -4749,7 +5085,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0167",
+            "clause_id": "TB-0179",
             "block": "rejection",
             "label": "废标项",
             "summary": "2、对于招标文件中标记了“实质性格式”文件的,投标人不得改变格式中给定的文字所表达的含义,不得删减格式中的实质性内容,不得自行添加与格式中给定的文字内容相矛盾的",
@@ -4777,7 +5113,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0168",
+            "clause_id": "TB-0180",
             "block": "rejection",
             "label": "废标项",
             "summary": "(七)与我单位存在“单位负责人为同一人或者存在直接控股、管理关系” 的其他法人单位信息如下(如有,不论其是否参加同一合同项下的政府采购活动均须填写,如没有,在表",
@@ -4805,7 +5141,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0169",
+            "clause_id": "TB-0181",
             "block": "rejection",
             "label": "废标项",
             "summary": "注: 如本招标文件《投标人须知资料表》载明本项目分包承担主体应具备的相应资质条件, 则投标人须在本表中列明分包承担主体的资质等级,并后附资质证书电子件,否则投标",
@@ -4833,7 +5169,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0170",
+            "clause_id": "TB-0182",
             "block": "rejection",
             "label": "废标项",
             "summary": "注: 本协议仅在投标人 “为落实政府采购政策 ”而向中小企业分包时必须提供,否则投标无效;且投标人须与所有拟分包单位分别签订《分包意向协议》,每单位签订一份,并",
@@ -4861,7 +5197,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0171",
+            "clause_id": "TB-0183",
             "block": "rejection",
             "label": "废标项",
             "summary": "1.如本项目(包)接受供应商以联合体形式参加采购活动,且供应商以联合体形式参与时,须提供《联合协议》,否则投标无效。",
@@ -4889,7 +5225,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0172",
+            "clause_id": "TB-0184",
             "block": "rejection",
             "label": "废标项",
             "summary": "2.如果不提供分项报价将视为没有实质性响应招标文件。",
@@ -4917,7 +5253,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0173",
+            "clause_id": "TB-0185",
             "block": "rejection",
             "label": "废标项",
             "summary": "1. 对招标文件中的所有商务、技术要求,除本表所列明的所有偏离外,均视作供应商已对之理解和响应。此表中若无任何文字说明,且未对偏离情况勾选的,投标无效。",
@@ -4945,7 +5281,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0174",
+            "clause_id": "TB-0186",
             "block": "rejection",
             "label": "废标项",
             "summary": "1.如本项目(包)允许分包,且投标人拟进行分包时,必须提供;如未提供,或提供了但未填写分包承担主体名称、拟分包合同内容、拟分包合同金额,投标无效。",
@@ -4973,7 +5309,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0175",
+            "clause_id": "TB-0187",
             "block": "rejection",
             "label": "废标项",
             "summary": "2.如本招标文件《投标人须知资料表》载明本项目分包承担主体应具备的相应资质条件, 则投标人须在本表中列明分包承担主体的资质等级,并后附资质证书电子件,否则投标无",
@@ -5001,7 +5337,7 @@
             "audit_status": "pending_audit"
           },
           {
-            "clause_id": "TB-0176",
+            "clause_id": "TB-0188",
             "block": "rejection",
             "label": "废标项",
             "summary": "1.投标人“为落实政府采购政策 ”而向中小企业分包时必须提供,否则投标无效;且建议按照采购文件要求在资格证明文件部分提供;",
